@@ -1,17 +1,35 @@
 .LinkContainer {
     float: right;
-    padding-top: 40px;
+    padding-top: 70px;
     padding-right: 10px;
 }
 
 .LinkContainer a {
-    padding: 10px;
+    padding: 15px;
+    Font-Family: Lato;
+    Font-Style: Black;
+    Font-Size: 20px;
+    font-weight: bold;
+    color: #3F8500;
 }
 
 .LinkContainer button {
     padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 33px;
+    Font-Family: Lato;
+    Font-Style: Black;
+    Font-Size: 20px;
+    font-weight: bold;
+    background-color: #FFFFFF;
 }
 
 .LinkContainer .donate {
-    margin-right: 15px;
+    margin-right: 25px;
+    color: #3F8500;
+}
+
+.LinkContainer .signup {
+    color: #3A7CCA;
 }

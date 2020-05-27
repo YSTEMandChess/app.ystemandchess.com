@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { PlayComponent } from './pages/play/play.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

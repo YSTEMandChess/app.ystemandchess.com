@@ -1,16 +1,15 @@
-.container {
+.cont {
     width: 100%;
+    padding: 30px;
     margin: 0;
-    display:inline-block;
-
-    .jitsi {
-        width: 450px;
-        height: 360px;
-        display: inline-block;
-    }
+    border: 0;
     .lichess {
-        height: auto;
-        width: 900px;
-        display: inline-block;
+        width: 70%;
+        height: 700px;
+    }
+    .jitsi {
+        width: 30%;
+        height: 300px;
+        padding: 2px;
     }
 }

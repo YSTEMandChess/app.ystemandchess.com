@@ -1,8 +1,16 @@
 .container {
-    height: 100%;
-    
+    width: 100%;
+    margin: 0;
+    display:inline-block;
+
     .jitsi {
-        height: 100px;
-        height: 100px;
+        width: 450px;
+        height: 360px;
+        display: inline-block;
+    }
+    .lichess {
+        height: auto;
+        width: 900px;
+        display: inline-block;
     }
 }

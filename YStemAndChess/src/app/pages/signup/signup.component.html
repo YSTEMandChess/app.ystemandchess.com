@@ -1,15 +1,28 @@
 <html>
     <app-header></app-header> 
     <body>
-        <div class="signupForm">
-            <h2>Sign up</h2>
-            <li><input type="text" placeholder="First name"></li>
-            <li><input type="text" placeholder="Last name"></li>
-            <li><input type="text" placeholder="Username"></li>
-            <li><input type="text" placeholder="Password"></li>
-            <li><input type="text" placeholder="Re-type password"></li>
-            <button type="submit" routerLink="/login">Sign up</button>
-        </div>
+        <form>
+            <div class="signupForm">
+                <h2>Sign up</h2>
+                <div class="errorMessages">
+                    <h3>{{firstNameError}}</h3>
+                    <h3>{{lastNameError}}</h3>
+                    <h3>{{emailError}}</h3>
+                    <h3>{{userNameError}}</h3>
+                    <h3>{{passwordError}}</h3>
+                    <h3>{{retypePasswordError}}</h3>
+                </div>
+
+                <li><input type="text" placeholder="First name" id="firstName" (blur)="firstNameVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="text" placeholder="Last name" id="lastName" (blur)="lastNameVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="text" placeholder="Email" id="email" (blur)="emailVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="text" placeholder="Username" id="username" (blur)="usernameVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="password" placeholder="Password" id="password" (blur)="passwordVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="password" placeholder="Re-type password" id="retypedPassword" (blur)="retypePasswordVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="checkbox" id="checkbox" (click)="checkIfValidAccount()"><a>I accept the terms and conditions</a></li>
+                <button type="submit" [routerLink]="[link]">Sign up</button>
+            </div>
+        </form>
     </body>
     <app-footer></app-footer>
 </html>

@@ -1,22 +1,21 @@
 body {
     margin: 0 auto;
     text-align: center;
-    padding-top: 150px;
+    padding-top: 75px;
 }
 
 body a {
     padding-left: 10px;
-    //font-size: 1vw;
 }
 
-// body h2 {
-//     font-size: 2vw;
-// }
+//errror message
+h3 {
+    color: red;
+}
 
 input {
     margin: 20px;
     padding: 15px 32px;
-    //font-size: 1.3vw;
     font-size: 20px;
     font-family: 'Gotham-Bold';
     background-color: white; 
@@ -35,6 +34,4 @@ input {
     margin: 10px;
 }
 
-// .input-container button {
-//     font-size: 1vw;
-// }
+

@@ -6,7 +6,6 @@ use \Firebase\JWT\JWT;
 // Random Key. Needs to be Changed Later
 $key = "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C";
 
-
 // Get all parameters for creating/validating user
 $username = htmlspecialchars_decode($_GET["username"]);
 $password = htmlspecialchars_decode($_GET["password"]);
@@ -49,11 +48,80 @@ if ($reason == "create") {
 
 
 function createUser($username, $password, $firstName, $lastName, $role) {
-    
+    // MONGO DB LOGIN
+    $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+    // Select the user collection
+    $collection = $client->ystem->users;
+
+    if(isTaken($username, $collection)) {
+        echo "This username has been taken. Please choose another.";
+        return;
+    };
+    $hashPass = hash("sha384",$password);
+
+    $collection->insertOne([
+        'username' => $username,
+        'password' => $hashPass,
+        'firstName' => $firstName,
+        'lastName' => $lastName,
+        'role' => $role,
+        'accountCreatedAt' => time()
+    ]);
+
+    $payload = array(
+        'username' => $username,
+        'password' => $hashPass,
+        'firstName' => $firstName,
+        'lastName' => $lastName,
+        'role' => $role,
+        'iat' => time(),
+        'eat' => strtotime("+30 days")
+    );
+
+    $jwt = JWT::encode($payload, $key, 'HS256');
+    echo $jwt;
 }
 
 function verifyUser($username, $password) {
+    // MONGO DB LOGIN
+    $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+    // Select the user collection
 
+    $hashPass = hash("sha384",$password);
+
+    $collection = $client->ystem->users;
+    $document = $collection->findOne(['username' => $username]);
+    if($document['password'] == $hashPass) {
+        $payload = array(
+            'username' => $username,
+            'password' => $hashPass,
+            'firstName' => $document['firstName'],
+            'lastName' => $document['lastName'],
+            'role' => $document['role'],
+            'iat' => time(),
+            'eat' => strtotime("+30 days")
+        );
+    
+        $jwt = JWT::encode($payload, $key, 'HS256');
+        echo $jwt;
+    } else {
+        echo "The username or password is inccorect.";
+    }
+    
+}
+// Account
+//uUmrCVqTypLPq1Hi DB Password
+// Username: userAdmin
+
+// venanop608@prowerl.com DB Email
+
+function isTaken($username, $collection) {
+    $document = $collection->findOne(['username' => $username]);
+    if(is_null($document)) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 ?>

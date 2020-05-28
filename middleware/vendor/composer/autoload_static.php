@@ -6,7 +6,15 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit82bac953a4c1c81dfd7be7cac8179da1
 {
+    public static $files = array (
+        '3a37ebac017bc098e9a86b35401e7a68' => __DIR__ . '/..' . '/mongodb/mongodb/src/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'MongoDB\\' => 8,
+        ),
         'F' => 
         array (
             'Firebase\\JWT\\' => 13,
@@ -14,6 +22,10 @@ class ComposerStaticInit82bac953a4c1c81dfd7be7cac8179da1
     );
 
     public static $prefixDirsPsr4 = array (
+        'MongoDB\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mongodb/mongodb/src',
+        ),
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',

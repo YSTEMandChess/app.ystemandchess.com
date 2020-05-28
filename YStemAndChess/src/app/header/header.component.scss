@@ -1,10 +1,18 @@
-.LinkContainer {
+header img {
+    width: 35%;
+    height: auto;
+    margin: 0 auto;
+}
+header .LinkContainer {
     float: right;
+    width: 60%;
+    text-align: center;
+    height: auto;
     padding-top: 70px;
     padding-right: 10px;
 }
 
-.LinkContainer a {
+header .LinkContainer a {
     padding: 15px;
     Font-Family: Lato;
     Font-Style: Black;
@@ -13,7 +21,7 @@
     color: #3F8500;
 }
 
-.LinkContainer button {
+header .LinkContainer button {
     padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
@@ -25,42 +33,11 @@
     background-color: #FFFFFF;
 }
 
-.LinkContainer .donate {
-    margin-right: 15px;
-}
-
-.LinkContainer {
-    float: right;
-    padding-top: 70px;
-    padding-right: 10px;
-}
-
-.LinkContainer a {
-    padding: 15px;
-    Font-Family: Lato;
-    Font-Style: Black;
-    Font-Size: 20px;
-    font-weight: bold;
-    color: #3F8500;
-}
-
-.LinkContainer button {
-    padding: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-    border-radius: 33px;
-    Font-Family: Lato;
-    Font-Style: Black;
-    Font-Size: 20px;
-    font-weight: bold;
-    background-color: #FFFFFF;
-}
-
-.LinkContainer .donate {
+header .LinkContainer .donate {
     margin-right: 25px;
     color: #3F8500;
 }
 
-.LinkContainer .signup {
+header .LinkContainer .login {
     color: #3A7CCA;
 }

@@ -1,10 +1,18 @@
-body .input-container {
+body {
     margin: 0 auto;
     text-align: center;
+    padding-top: 150px;
+}
+
+body a {
+    padding-left: 10px;
+}
+
+.input-container li {
+    list-style: none;
 }
 
 .input-container input {
-    display: block;
     padding-left: 20px;
     padding-right: 20px;
     margin: 10px;

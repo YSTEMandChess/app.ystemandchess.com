@@ -3,13 +3,25 @@
         <link ref="stylesheet" text="text/scss" href="styles.scss">
         <link ref="stylesheet" text="text/scss" href="header.component.scss">
             <img src="../../assets/images/YStemLogo.png" alt="YStemAndChessLogo">
-        <div class="LinkContainer">
-            <a routerLink="">PLAY</a>
-            <a>BE A MENTOR</a>
-            <a>PROGRAMS</a>
-            <a>CONTACT</a>
-            <button class="donate">DONATE</button>
-            <button class="login" routerLink="/login">LOGIN</button>
-        </div>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="">PLAY</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">BE A MENTOR</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PROGRAMS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="donate" href="#">DONATE</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="login" routerLink="/login">LOGIN</button>
+                </li>
+            </ul>
     </header>
 </html>

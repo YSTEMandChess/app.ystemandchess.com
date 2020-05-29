@@ -1,4 +1,7 @@
 <?php 
+// Allow Cross Origin Requests (other ips can request data)
+header("Access-Control-Allow-Origin: *");
+
 // Load the JWT library
 require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;

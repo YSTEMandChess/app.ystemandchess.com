@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { createAotUrlResolver } from '@angular/compiler';
 
 @Component({
   selector: 'app-signup',
@@ -115,16 +116,10 @@ export class SignupComponent implements OnInit {
 
   private SendToDataBase() {
     var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
-    let url = "http://127.0.0.1:8000";
-    let data = new FormData();
-    data.append('firstName', firstName);
-
-    this.http.post(url, data).subscribe(
+    let value = this.http.get("http://127.0.0.1:8000", {responseType: 'text'}).subscribe(
       response => console.log(response),
       err => console.log(err)
     );
+    console.log(value);
   }
-
-
-
 }

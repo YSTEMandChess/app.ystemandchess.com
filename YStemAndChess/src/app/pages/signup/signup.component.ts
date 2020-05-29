@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
   passwordError = "";
   retypePasswordError = "";
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -103,10 +104,23 @@ export class SignupComponent implements OnInit {
   checkIfValidAccount() {
     if(this.firstNameFlag === true && this.lastNameFlag === true && this.emailFlag === true
       && this.userNameFlag === true && this.passwordFlag === true && this.retypeFlag === true) {
+        this.SendToDataBase();
         this.link = "/login";
       } else {
         this.link = null;
       }
+  }
+
+  private SendToDataBase() {
+    var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
+    let url = "http://127.0.0.1:8000";
+    let data = new FormData();
+    data.append('firstName', firstName);
+
+    this.http.post(url, data).subscribe(
+      response => console.log(response),
+      err => console.log(err)
+    );
   }
 
 

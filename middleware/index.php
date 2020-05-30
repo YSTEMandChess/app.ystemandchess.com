@@ -81,7 +81,7 @@ function createUser($username, $password, $firstName, $lastName, $role) {
         'eat' => strtotime("+30 days")
     );
 
-    $jwt = JWT::encode($payload, $key, 'HS256');
+    $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
     echo $jwt;
 }
 
@@ -105,7 +105,7 @@ function verifyUser($username, $password) {
             'eat' => strtotime("+30 days")
         );
     
-        $jwt = JWT::encode($payload, $key, 'HS256');
+        $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
         echo $jwt;
     } else {
         echo "The username or password is inccorect.";

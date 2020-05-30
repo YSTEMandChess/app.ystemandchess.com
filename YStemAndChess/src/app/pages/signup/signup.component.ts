@@ -116,6 +116,10 @@ export class SignupComponent implements OnInit {
 
   private SendToDataBase() {
     var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
+    var lastName = (<HTMLInputElement>document.getElementById("lastName")).value;
+    var email = (<HTMLInputElement>document.getElementById("email")).value;
+    var password = (<HTMLInputElement>document.getElementById("password")).value;
+    var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
     let value = this.http.get("http://127.0.0.1:8000", {responseType: 'text'}).subscribe(
       response => console.log(response),
       err => console.log(err)

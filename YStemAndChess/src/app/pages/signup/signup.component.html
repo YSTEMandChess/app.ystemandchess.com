@@ -19,6 +19,12 @@
                 <li><input type="text" placeholder="Username" id="username" (blur)="usernameVerification()" (blur)="checkIfValidAccount()"></li>
                 <li><input type="password" placeholder="Password" id="password" (blur)="passwordVerification()" (blur)="checkIfValidAccount()"></li>
                 <li><input type="password" placeholder="Re-type password" id="retypedPassword" (blur)="retypePasswordVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><p>Select Account type</p></li>
+                <li><select name="account type" id="types">
+                    <option value="student">Student</option>
+                    <option value="mentor">Mentor</option>
+                    </select>
+                </li>
                 <li><input type="checkbox" id="checkbox" (click)="checkIfValidAccount()"><a>I accept the terms and conditions</a></li>
                 <button type="submit" [routerLink]="[link]">Sign up</button>
             </div>

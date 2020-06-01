@@ -54,14 +54,21 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  emailVerification() {
-    var email = (<HTMLInputElement>document.getElementById("email")).value;
+  emailVerification(email: any) {
+    
+    //allows this function to be tested in signup.component.spec.ts
+    if(email == event) {
+      email = (<HTMLInputElement>document.getElementById('email')).value;
+    }
+
     if(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/.test(email)) {
       this.emailFlag = true;
       this.emailError = "";
+      return true;
     } else {
       this.emailFlag = false;
       this.emailError = "Invalid Email"
+      return false;
     }
   }
 

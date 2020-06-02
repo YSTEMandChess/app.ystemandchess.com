@@ -33,12 +33,14 @@ export class SignupComponent implements OnInit {
   firstNameVerification(firstName: any) {
     firstName = this.allowTesting(firstName, 'firstName');
 
-    if(firstName.length == 0) {
-      this.firstNameFlag = false;
-      this.firstNameError = "Invalid First Name"
-    } else {
+    if(/^[A-Za-z]{2,15}$/.test(firstName)) {
       this.firstNameFlag = true;
-      this.firstNameError = "";
+      this.firstNameError = ""
+      return true;
+    } else {
+      this.firstNameFlag = false;
+      this.firstNameError = "Invalid First Name";
+      return false;
     }
   }
 
@@ -136,11 +138,8 @@ export class SignupComponent implements OnInit {
     Allows a fake instance of the user input to be used for test classes
   */
   private allowTesting(userParameter, HtmlId) {
-    if(userParameter == event) {
-      return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
-    } else {
-      return userParameter;
-    }
+    if(userParameter == event) return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    return userParameter;
   }
 }
 

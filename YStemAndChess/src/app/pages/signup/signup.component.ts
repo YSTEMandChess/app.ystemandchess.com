@@ -30,8 +30,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  firstNameVerification() {
-    var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
+  firstNameVerification(firstName: any) {
+    firstName = this.allowTesting(firstName, 'firstName');
 
     if(firstName.length == 0) {
       this.firstNameFlag = false;
@@ -42,9 +42,10 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  lastNameVerification() {
-    var lastName = (<HTMLInputElement>document.getElementById("lastName")).value;
+  lastNameVerification(lastName: any) {
 
+    lastName = this.allowTesting(lastName, 'lastName');
+    
     if(lastName.length == 0) {
       this.lastNameFlag = false;
       this.lastNameError = "Invalid Last Name"
@@ -56,10 +57,7 @@ export class SignupComponent implements OnInit {
 
   emailVerification(email: any) {
     
-    //allows this function to be tested in signup.component.spec.ts
-    if(email == event) {
-      email = (<HTMLInputElement>document.getElementById('email')).value;
-    }
+    email = this.allowTesting(email, 'email');
 
     if(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/.test(email)) {
       this.emailFlag = true;
@@ -72,8 +70,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  usernameVerification() {
-    var username = (<HTMLInputElement>document.getElementById("username")).value;
+  usernameVerification(username: any) {
+    username = this.allowTesting(username, 'username');
     
     if(username.length < 2 || /[\^$.|?*+(){}]/.test("username")) {
       //check username against database
@@ -85,8 +83,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  passwordVerification() {
-    var password = (<HTMLInputElement>document.getElementById("password")).value;
+  passwordVerification(password: any) {
+    password = this.allowTesting(password, 'password');
 
     if(password.length < 8) {
       this.passwordFlag = false;
@@ -98,9 +96,9 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  retypePasswordVerification() {
-    var retypedPassword = (<HTMLInputElement>document.getElementById("retypedPassword")).value;
-    var password = (<HTMLInputElement>document.getElementById("password")).value;
+  retypePasswordVerification(retypedPassword: any, password: any) {
+    retypedPassword = this.allowTesting(retypedPassword, 'retypedPassword');
+    password = this.allowTesting(password, 'password');
 
     if(retypedPassword === password) {
       this.retypeFlag = true;
@@ -133,4 +131,16 @@ export class SignupComponent implements OnInit {
     );
     console.log(value);
   }
+
+  /*
+    Allows a fake instance of the user input to be used for test classes
+  */
+  private allowTesting(userParameter, HtmlId) {
+    if(userParameter == event) {
+      return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    } else {
+      return userParameter;
+    }
+  }
 }
+

@@ -188,6 +188,98 @@ describe('Last Name Verification', () => {
   });
 });
 
+describe('Username Verification', () => {
+  let http: HttpClient;
+  let signup: SignupComponent = new SignupComponent(http);
+
+  //false tests
+  it('no input should be false', () => {
+    const result = signup.usernameVerification("");
+    expect(result).toBe(false);
+  });
+
+  it('a space should be false', () => {
+    const result = signup.usernameVerification(" ");
+    expect(result).toBe(false);
+  });
+
+  it('a lot of spaces should be false', () => {
+    const result = signup.usernameVerification("                                                       ");
+    expect(result).toBe(false);
+  });
+
+  it('space in the middle of a username should be false', () => {
+    const result = signup.usernameVerification("ben jamin");
+    expect(result).toBe(false);
+  });
+
+  it('numbers should be false', () => {
+    const result = signup.usernameVerification("123");
+    expect(result).toBe(false);
+  });
+
+  it('numbers and then username should be false', () => {
+    const result = signup.usernameVerification("123larry");
+    expect(result).toBe(false);
+  });
+
+  it('special characters should be false', () => {
+    const result = signup.usernameVerification("!@");
+    expect(result).toBe(false);
+  });
+
+  it('special characters and then username should be false', () => {
+    const result = signup.usernameVerification("!@larry");
+    expect(result).toBe(false);
+  });
+
+  it('long username should be false', () => {
+    const result = signup.usernameVerification("abcdefghijklmnopqrstuvxxyz");
+    expect(result).toBe(false);
+  });
+
+  it('username length of 1 should be false', () => {
+    const result = signup.usernameVerification("a");
+    expect(result).toBe(false);
+  });
+
+  it('username length of 16 should be false', () => {
+    const result = signup.usernameVerification("aaaaaaaaaaaaaaaa");
+    expect(result).toBe(false);
+  });
+
+  //true tests
+  it('username with numbers in between should be true', () => {
+    const result = signup.usernameVerification("dev1n");
+    expect(result).toBe(true);
+  });
+
+  it('username with numbers after should be true', () => {
+    const result = signup.usernameVerification("devin123");
+    expect(result).toBe(true);
+  });
+
+  it('username with special characters in between should be true', () => {
+    const result = signup.usernameVerification("dev!n");
+    expect(result).toBe(true);
+  });
+
+  it('username with special characters after should be true', () => {
+    const result = signup.usernameVerification("devin!!!");
+    expect(result).toBe(true);
+  });
+
+  it('username length of 2 should be true', () => {
+    const result = signup.usernameVerification("Dj");
+    expect(result).toBe(true);
+  });
+
+  it('username length of 15 should be true', () => {
+    const result = signup.usernameVerification("bbbbbbbbbbbbbbb");
+    expect(result).toBe(true);
+  });
+});
+
 describe('Email Verification', () => {
   let http: HttpClient;
   let signup: SignupComponent = new SignupComponent(http);

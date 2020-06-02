@@ -77,13 +77,15 @@ export class SignupComponent implements OnInit {
   usernameVerification(username: any) {
     username = this.allowTesting(username, 'username');
     
-    if(username.length < 2 || /[\^$.|?*+(){}]/.test("username")) {
+    if(/^[a-zA-Z](\S){1,14}$/.test(username)) {
       //check username against database
+      this.userNameFlag= true;
+      this.userNameError = "";
+      return true;
+    } else {
       this.userNameFlag= false;
       this.userNameError = "Invalid Username";
-    } else {
-      this.userNameFlag= true;
-      this.userNameError = ""
+      return false;
     }
   }
 

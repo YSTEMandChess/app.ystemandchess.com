@@ -338,6 +338,90 @@ describe('Email Verification', () => {
   });
 });
 
+describe('Password Input Verification', () => {
+  let http: HttpClient;
+  let signup: SignupComponent = new SignupComponent(http);
+
+  //false tests
+  it('password length 1 should be false', () => {
+    const result = signup.passwordVerification('a');
+    expect(result).toBe(false);
+  });
+
+  it('password length 2 should be false', () => {
+    const result = signup.passwordVerification('aa');
+    expect(result).toBe(false);
+  });
+
+  it('password length 3 should be false', () => {
+    const result = signup.passwordVerification('aaa');
+    expect(result).toBe(false);
+  });
+
+  it('password length 4 should be false', () => {
+    const result = signup.passwordVerification('aaaa');
+    expect(result).toBe(false);
+  });
+
+  it('password length 5 should be false', () => {
+    const result = signup.passwordVerification('aaaaa');
+    expect(result).toBe(false);
+  });
+
+  it('password length 6 should be false', () => {
+    const result = signup.passwordVerification('aaaaaa');
+    expect(result).toBe(false);
+  });
+
+  it('password length 7 should be false', () => {
+    const result = signup.passwordVerification('aaaaaaa');
+    expect(result).toBe(false);
+  });
+
+  //true tests
+
+  it('password length 8 should be true', () => {
+    const result = signup.passwordVerification('bbbbbbbb');
+    expect(result).toBe(true);
+  });
+
+  it('long password length should be true', () => {
+    const result = signup.passwordVerification('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb' +
+    'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+    expect(result).toBe(true);
+  });
+
+  it('password with only special characters should be true', () => {
+    const result = signup.passwordVerification('!~@#$%^&');
+    expect(result).toBe(true);
+  });
+
+  it('password with only capitol letters should be true', () => {
+    const result = signup.passwordVerification('ABCDFGHE');
+    expect(result).toBe(true);
+  });
+
+  it('password with only lower case letters should be true', () => {
+    const result = signup.passwordVerification('absdcfgh');
+    expect(result).toBe(true);
+  });
+
+  it('password with special characters and capitol letters should be true', () => {
+    const result = signup.passwordVerification('PASS!WORD');
+    expect(result).toBe(true);
+  });
+
+  it('password with special characters and capitol letters should be true', () => {
+    const result = signup.passwordVerification('passwor!');
+    expect(result).toBe(true);
+  });
+
+  it('password with mix of characters should be true', () => {
+    const result = signup.passwordVerification('Pass!W&*d');
+    expect(result).toBe(true);
+  });
+});
+
 describe('SignupComponent', () => {
   let http: HttpClient;
   let component: SignupComponent = new SignupComponent(http);

@@ -95,10 +95,12 @@ export class SignupComponent implements OnInit {
     if(password.length < 8) {
       this.passwordFlag = false;
       this.passwordError = "Invalid Password"
+      return false;
     } else {
       //verify password with username
       this.passwordFlag = true;
       this.passwordError = "";
+      return true;
     }
   }
 

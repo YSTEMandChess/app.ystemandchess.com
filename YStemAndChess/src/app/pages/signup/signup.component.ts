@@ -48,12 +48,14 @@ export class SignupComponent implements OnInit {
 
     lastName = this.allowTesting(lastName, 'lastName');
     
-    if(lastName.length == 0) {
-      this.lastNameFlag = false;
-      this.lastNameError = "Invalid Last Name"
-    } else {
+    if(/^[A-Za-z]{2,15}$/.test(lastName)) {
       this.lastNameFlag = true;
-      this.lastNameError = "";
+      this.lastNameError = ""
+      return true;
+    } else {
+      this.lastNameFlag = false;
+      this.lastNameError = "Invalid Last Name";
+      return false;
     }
   }
 

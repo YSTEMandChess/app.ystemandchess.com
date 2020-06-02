@@ -111,9 +111,11 @@ export class SignupComponent implements OnInit {
     if(retypedPassword === password) {
       this.retypeFlag = true;
       this.retypePasswordError = "";
+      return true;
     } else {
       this.retypeFlag = false;
       this.retypePasswordError = "Passwords do not match"
+      return false;
     }
   }
 

@@ -422,6 +422,23 @@ describe('Password Input Verification', () => {
   });
 });
 
+describe('Retype Password Verification', () => {
+  let http: HttpClient;
+  let signup: SignupComponent = new SignupComponent(http);
+
+  //false tests
+  it('passwords that are not the same should be false', () => {
+    const result = signup.retypePasswordVerification('password', 'password!');
+    expect(result).toBe(false);
+  });
+
+  //true tests
+  it('passwords the same should be true', () => {
+    const result = signup.retypePasswordVerification('password', 'password');
+    expect(result).toBe(true);
+  });
+});
+
 describe('SignupComponent', () => {
   let http: HttpClient;
   let component: SignupComponent = new SignupComponent(http);

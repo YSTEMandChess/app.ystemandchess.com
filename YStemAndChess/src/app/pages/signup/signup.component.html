@@ -13,12 +13,12 @@
                     <h3>{{passwordError}}</h3>
                     <h3>{{retypePasswordError}}</h3>
                 </div>
-                <li><input type="text" placeholder="First name" id="firstName" (blur)="firstNameVerification()" (blur)="checkIfValidAccount()"></li>
-                <li><input type="text" placeholder="Last name" id="lastName" (blur)="lastNameVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="text" placeholder="First name" id="firstName" (blur)="firstNameVerification($event)" (blur)="checkIfValidAccount()"></li>
+                <li><input type="text" placeholder="Last name" id="lastName" (blur)="lastNameVerification($event)" (blur)="checkIfValidAccount()"></li>
                 <li><input type="text" placeholder="Email" id="email" (blur)="emailVerification($event)" (blur)="checkIfValidAccount()"></li>
-                <li><input type="text" placeholder="Username" id="username" (blur)="usernameVerification()" (blur)="checkIfValidAccount()"></li>
-                <li><input type="password" placeholder="Password" id="password" (blur)="passwordVerification()" (blur)="checkIfValidAccount()"></li>
-                <li><input type="password" placeholder="Re-type password" id="retypedPassword" (blur)="retypePasswordVerification()" (blur)="checkIfValidAccount()"></li>
+                <li><input type="text" placeholder="Username" id="username" (blur)="usernameVerification($event)" (blur)="checkIfValidAccount()"></li>
+                <li><input type="password" placeholder="Password" id="password" (blur)="passwordVerification($event)" (blur)="checkIfValidAccount()"></li>
+                <li><input type="password" placeholder="Re-type password" id="retypedPassword" (blur)="retypePasswordVerification($event, $event)" (blur)="checkIfValidAccount()"></li>
                 <li><p>Select Account Type</p></li>
                 <li><select name="account type" id="types">
                     <option value="student">Student</option>

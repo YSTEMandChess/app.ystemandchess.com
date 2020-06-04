@@ -135,11 +135,13 @@ export class SignupComponent implements OnInit {
     var email = (<HTMLInputElement>document.getElementById("email")).value;
     var password = (<HTMLInputElement>document.getElementById("password")).value;
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
-    let value = this.http.get("http://127.0.0.1:8000", {responseType: 'text'}).subscribe(
+    const url = 'https://stackoverflow.com/questions/46406097/angular-errorform-submission-canceled-because-the-form-is-not-connected/';
+    let data = new FormData();
+    data.append(firstName, 'firstName');
+    this.http.get(url).subscribe(
       response => console.log(response),
       err => console.log(err)
     );
-    console.log(value);
   }
 
   /*

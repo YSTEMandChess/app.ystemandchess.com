@@ -1,0 +1,33 @@
+body {
+    padding-top: 50px;
+}
+
+.our-mission {
+    width: 819px;
+    height: auto;
+    background-color: #51AA00;
+    border-radius: 33px;
+
+    .our-mission-header {
+        float: right;
+        color: #FFFFFF;
+    }
+
+    .our-mission-header h3 {
+        padding-right: 110px;
+        padding-top: 10px;
+        font-style: bold;
+        font-weight: 900;
+    }
+
+    .our-mission-statement {
+        float: right;
+        padding-top: 50px;
+        
+        font-style: bold;
+        font-size: 22px;
+        font-weight: 500;
+        color: black;
+    }
+}
+

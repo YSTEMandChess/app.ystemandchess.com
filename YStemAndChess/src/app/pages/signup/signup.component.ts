@@ -135,7 +135,7 @@ export class SignupComponent implements OnInit {
     var email = (<HTMLInputElement>document.getElementById("email")).value;
     var password = (<HTMLInputElement>document.getElementById("password")).value;
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
-    let value = this.http.get("http://127.0.0.1:8000", {responseType: 'text'}).subscribe(
+    let value = this.http.get("http://middleware:8000", {responseType: 'text'}).subscribe(
       response => console.log(response),
       err => console.log(err)
     );

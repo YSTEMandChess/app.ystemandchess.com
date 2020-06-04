@@ -143,6 +143,9 @@ export class SignupComponent implements OnInit {
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
     let url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}`;
     this.httpGetAsync(url, (response) => {
+      if(response == "This username has been taken. Please choose another.") {
+        this.link = "signup";
+      }
       console.log(response);
     })
   }

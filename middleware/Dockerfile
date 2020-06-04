@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY / .
 
 # Install mongo extention
-RUN apt-get update && apt-get install -y openssl libssl-dev libcurl4-openssl-dev
+RUN apt-get update && apt-get install -y openssl libssl-dev libcurl4-openssl-dev php-mongodb
 # Install and setup mongo
 RUN pecl install mongodb
 # This touch command may not be neccicary, but idk.

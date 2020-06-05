@@ -1,33 +1,166 @@
 body {
-    padding-top: 50px;
+    padding-top:50px;
+    background-color: #E5E5E5;
+    padding-bottom:300px;
 }
 
-.our-mission {
-    width: 819px;
-    height: auto;
-    background-color: #51AA00;
+//clears floats once they are no longer needed
+#clear {
+    clear:both;
+}
+
+//our mission container
+.our-mission-container {
+    position:relative;
+    float:left;
+    overflow: hidden;
+    margin-left:53px;
+    width:55%;
+    min-height:481px;
+    background-color:#51AA00;
+    border-radius:33px;
+
+    .our-mission-image img {
+        float:left;
+        width:50%;
+        height:auto;
+        margin:0;
+    }
+
+    .our-mission-statement-header h3 {
+        float:right;
+        width:35%;
+        margin-top:35px;
+        margin-right:80px;
+        overflow: hidden;
+        font-family: Lato;
+        font-style:bold;
+        font-weight:900;
+        font-size:42px;
+        line-height: 49px;
+        letter-spacing:0.07em;
+        color:#fff;
+    }
+
+    .our-mission-statement-paragraph p {
+        float:right;
+        width:35%;
+        margin-right:80px;
+        margin-top:10px;
+        overflow: hidden;
+        font-family:Roboto;
+        font-style:normal;
+        font-weight:700;
+        font-size:22px;
+        line-height:117.1%;
+        letter-spacing:0.01em;
+        color:#fff;
+    }
+}
+
+//play container
+.play-container {
+    position:relative;
+    float:right;
+    overflow: hidden;
+    margin-right: 77px;
+    width: 30%;
+    min-height: 484px;
+    border-radius:33px;
+    background-color:#3A7CCA;
+
+    #play-container-header1 h3 {
+        margin-top:35px;
+        margin-left:75px;
+        font-family:Lato;
+        font-style:bold;
+        font-weight:900;
+        font-size:42px;
+        line-height: 117.1%;
+        letter-spacing:0.07em;
+        color:#fff;
+    }
+
+    #play-container-header2 h4 {
+        margin-top:10px;
+        margin-left:75px;
+        font-family:Roboto;
+        font-style:bold;
+        font-weight:900;
+        font-size:30px;
+        line-height:117.1%;
+        letter-spacing: 0.01em;
+        color:#fff;
+    }
+
+    #play-container-paragraph p {
+        margin-top:10px;
+        margin-left: 75px;
+        width:66%;
+        font-family:Roboto;
+        font-style:bold;
+        font-weight:700;
+        font-size:22px;
+        line-height:117.1%;
+        letter-spacing:0.01em;
+        color:#fff;
+    }
+
+    #play-container-links {
+        margin-top:100px;
+        margin-left:75px;
+    }
+
+    #play-container-links a {
+        margin-right:30px;
+        font-family:Roboto;
+        font-style:bold;
+        font-weight:700;
+        font-size:25px;
+        line-height:117.1%;
+        letter-spacing:0.01em;
+        text-decoration-line: underline;
+        color:#fff;
+    }
+
+    #play-container-links button {
+        padding:15px;
+        font-family:Roboto;
+        font-style:bold;
+        font-weight:bold;
+        font-size:28px;
+        line-height: 117.1%;
+        letter-spacing:0.01em;
+        border-radius: 33px;
+        color:#3A7CCA;
+        background-color: #fff;
+    }
+}
+
+.become-a-mentor-container {
+    position:relative;
+    margin:0 auto;
+    margin-top: 75px;
+    width:95%;
+    min-height:652px;
     border-radius: 33px;
+    background-color: #FDD005;
+}
 
-    .our-mission-header {
-        float: right;
-        color: #FFFFFF;
-    }
+.opening-minds-container {
+    position:relative;
+    margin:0 auto;
+    margin-top:75px;
+    width:95%;
+    min-height:882px;
+    border-radius:33px;
+    background-color: #FF8503;
+}
 
-    .our-mission-header h3 {
-        padding-right: 110px;
-        padding-top: 10px;
-        font-style: bold;
-        font-weight: 900;
-    }
-
-    .our-mission-statement {
-        float: right;
-        padding-top: 50px;
-        
-        font-style: bold;
-        font-size: 22px;
-        font-weight: 500;
-        color: black;
+//edit this later
+@media(width:600px) {
+    body {
+        float:none;
     }
 }
 

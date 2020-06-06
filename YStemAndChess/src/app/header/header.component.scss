@@ -1,52 +1,59 @@
 header {
+    display:table;
     width: 100%;
     height: auto;
     margin: 0;
     border: 0;
-    background-color: #D4DDE0;
+    background-color: rgb(213, 220, 223);
 
-    img {
-        width: 35%;
-        height: auto;
+    #header-img img {
+        width:100%;
+        height:auto;
+        overflow: hidden;
+        box-sizing: border-box;
     }
 
-    img:hover {
-        cursor: pointer;
+    #header-links {
+        display:table-cell;
+        text-align: right;
+        width:70%;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+    #header-links a {
+        padding-left: 1.3%;
+        padding-right:1.3%;
+        Font-Family: Lato;
+        Font-Style: Black;
+        Font-Size: 1.5vw; //125%
+        font-weight: bold;
+        color: #3F8500;
+    }
+
+    #header-links button {
+        padding-left: 3%; //30px
+        padding-right: 3%; //30px
+        padding-top:1%;
+        padding-bottom:1%;
+        border-radius: 33px; //33px
+        Font-Family: Lato;
+        Font-Style: Black;
+        Font-Size: 1.5vw;
+        font-weight: bold;
+        background-color: #FFFFFF;
+    }
+
+    #donate {
+        margin-right: 2.5%;
+        color: #3F8500;
+    }
+
+    #login {
+        color: #3A7CCA; 
     }
 }
 
-a {
-    Font-Family: Lato;
-    Font-Style: Black;
-    Font-Size: 20px;
-    font-weight: bold;
-    color: #3F8500;
-}
-
-a:hover {
-    color: blue;
-}
-
-button {
-    padding-left: 30px;
-    padding-right: 30px;
-    border-radius: 33px;
-    Font-Family: Lato;
-    Font-Style: Black;
-    Font-Size: 20px;
-    font-weight: bold;
-    background-color: #FFFFFF;
-}
-
-button:hover {
-    border-color: blue;;
-}
-
-#donate {
-    margin-right: 25px;
-    color: #3F8500;
-}
-
-#login {
-    color: #3A7CCA; 
+#clear {
+    clear:both;
 }

@@ -1,7 +1,7 @@
 body {
-    padding-top:50px;
+    padding-top:1.878%; //50px
     background-color: #E5E5E5;
-    padding-bottom:300px;
+    padding-bottom:11.2656%; //300px
 }
 
 //clears floats once they are no longer needed
@@ -14,109 +14,115 @@ body {
     position:relative;
     float:left;
     overflow: hidden;
-    margin-left:53px;
+    margin-left:4.86%; //53px
     width:55%;
-    min-height:481px;
+    height:108.079%; //481px
     background-color:#51AA00;
-    border-radius:33px;
+    border-radius:33px; //33px
+    box-sizing: border-box;
 
     .our-mission-image img {
         float:left;
         width:50%;
-        height:auto;
+        height:auto; //108.079%
         margin:0;
+        box-sizing: border-box;
     }
 
     .our-mission-statement-header h3 {
         float:right;
         width:35%;
-        margin-top:35px;
-        margin-right:80px;
+        height:auto;
+        margin-top:1%; //35px
+        margin-right:10.5%; //80px
         overflow: hidden;
         font-family: Lato;
         font-style:bold;
         font-weight:900;
-        font-size:42px;
-        line-height: 49px;
+        font-size:3vw;   //42px //262.5%
+        line-height: 250%; 
         letter-spacing:0.07em;
         color:#fff;
+        box-sizing: border-box;
     }
 
     .our-mission-statement-paragraph p {
         float:right;
         width:35%;
-        margin-right:80px;
-        margin-top:10px;
+        height:auto;
+        margin-right:10.5%; //80px;
+        margin-top:1.20%; //10px
         overflow: hidden;
         font-family:Roboto;
         font-style:normal;
         font-weight:700;
-        font-size:22px;
+        font-size:1.4vw; // 137.5%
         line-height:117.1%;
         letter-spacing:0.01em;
         color:#fff;
+        box-sizing: border-box;
     }
 }
 
 //play container
 .play-container {
-    position:relative;
     float:right;
     overflow: hidden;
-    margin-right: 77px;
+    margin-right: 4.86%; //77px
     width: 30%;
-    min-height: 484px;
+    height:108.079%;
     border-radius:33px;
     background-color:#3A7CCA;
 
     #play-container-header1 h3 {
-        margin-top:35px;
-        margin-left:75px;
+        margin-top:8.5%; //35px;
+        margin-left:16.5%; //75px
         font-family:Lato;
         font-style:bold;
         font-weight:900;
-        font-size:42px;
+        font-size:3vw;
         line-height: 117.1%;
         letter-spacing:0.07em;
         color:#fff;
     }
 
     #play-container-header2 h4 {
-        margin-top:10px;
-        margin-left:75px;
+        margin-top:9.8%; //45 px
+        margin-left:16.5%; //75px
         font-family:Roboto;
         font-style:bold;
         font-weight:900;
-        font-size:30px;
+        font-size:2vw;
         line-height:117.1%;
         letter-spacing: 0.01em;
         color:#fff;
     }
 
     #play-container-paragraph p {
-        margin-top:10px;
-        margin-left: 75px;
+        margin-top:9.8%; //45px
+        margin-left: 16.5%; //75px
         width:66%;
         font-family:Roboto;
         font-style:bold;
         font-weight:700;
-        font-size:22px;
+        font-size:1.4vw; //22px
         line-height:117.1%;
         letter-spacing:0.01em;
         color:#fff;
     }
 
     #play-container-links {
-        margin-top:100px;
-        margin-left:75px;
+        margin-top:10%; //100px
+        margin-left:16.5%; //75px
+        padding-bottom: 12%;
     }
 
     #play-container-links a {
-        margin-right:30px;
+        margin-right:8%; //30px
         font-family:Roboto;
         font-style:bold;
         font-weight:700;
-        font-size:25px;
+        font-size:1.7vw; //25px
         line-height:117.1%;
         letter-spacing:0.01em;
         text-decoration-line: underline;
@@ -124,11 +130,11 @@ body {
     }
 
     #play-container-links button {
-        padding:15px;
+        padding:4%; //15px
         font-family:Roboto;
         font-style:bold;
         font-weight:bold;
-        font-size:28px;
+        font-size:1.8vw; //28px
         line-height: 117.1%;
         letter-spacing:0.01em;
         border-radius: 33px;

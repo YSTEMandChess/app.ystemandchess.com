@@ -225,9 +225,58 @@ body {
     margin:0 auto;
     margin-top:5%; //75px
     width:95%;
-    min-height:882px;
+    height:auto; //882px
     border-radius:33px;
     background-color: #FF8503;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    #opening-minds-img {
+        float:right;
+        width:39.5%;
+        height:auto;
+        box-sizing: border-box;
+    }
+
+    #opening-minds-img img {
+        width:100%;
+        height:auto;
+        border-bottom-right-radius: 33px;
+        border-top-right-radius: 33px;
+    }
+
+    #opening-minds-header {
+        float:left;
+        margin-top:6%;
+        margin-left:10.5%;
+    }
+
+    #opening-minds-header h3 {
+        font-family:Lato;
+        font-style:bold; //normal
+        font-weight:900;
+        font-size:2.75vw; //42px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color:#fff;
+    }
+
+    #opening-minds-statement {
+        float:left;
+        width:41.3%;
+        margin-top:2%;
+        margin-left:10.5%;
+    }
+
+    #opening-minds-statement p {
+        font-family: Roboto;
+        font-style:bold; //normal
+        font-weight: 700; //500
+        font-size:1.4vw; //22px
+        line-height: 130%;
+        letter-spacing: 0.02em;
+        color:#fff;
+    }
 }
 
 //edit this later

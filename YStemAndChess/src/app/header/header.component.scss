@@ -13,6 +13,10 @@ header {
         box-sizing: border-box;
     }
 
+    #header-img img:hover {
+        cursor: pointer;
+    }
+
     #header-links {
         display:table-cell;
         text-align: right;

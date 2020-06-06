@@ -73,7 +73,6 @@ function createUser($username, $password, $firstName, $lastName, $role) {
 
     $payload = array(
         'username' => $username,
-        'password' => $hashPass,
         'firstName' => $firstName,
         'lastName' => $lastName,
         'role' => $role,
@@ -97,7 +96,6 @@ function verifyUser($username, $password) {
     if($document['password'] == $hashPass) {
         $payload = array(
             'username' => $username,
-            'password' => $hashPass,
             'firstName' => $document['firstName'],
             'lastName' => $document['lastName'],
             'role' => $document['role'],

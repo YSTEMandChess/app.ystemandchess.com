@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private http: HttpClient
-    ) { }
+  ) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
   firstNameVerification(firstName: any) {
     firstName = this.allowTesting(firstName, 'firstName');
 
-    if(/^[A-Za-z]{2,15}$/.test(firstName)) {
+    if (/^[A-Za-z]{2,15}$/.test(firstName)) {
       this.firstNameFlag = true;
       this.firstNameError = ""
       return true;
@@ -47,8 +47,8 @@ export class SignupComponent implements OnInit {
   lastNameVerification(lastName: any) {
 
     lastName = this.allowTesting(lastName, 'lastName');
-    
-    if(/^[A-Za-z]{2,15}$/.test(lastName)) {
+
+    if (/^[A-Za-z]{2,15}$/.test(lastName)) {
       this.lastNameFlag = true;
       this.lastNameError = ""
       return true;
@@ -60,10 +60,10 @@ export class SignupComponent implements OnInit {
   }
 
   emailVerification(email: any) {
-    
+
     email = this.allowTesting(email, 'email');
 
-    if(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/.test(email)) {
+    if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/.test(email)) {
       this.emailFlag = true;
       this.emailError = "";
       return true;
@@ -76,14 +76,14 @@ export class SignupComponent implements OnInit {
 
   usernameVerification(username: any) {
     username = this.allowTesting(username, 'username');
-    
-    if(/^[a-zA-Z](\S){1,14}$/.test(username)) {
+
+    if (/^[a-zA-Z](\S){1,14}$/.test(username)) {
       //check username against database
-      this.userNameFlag= true;
+      this.userNameFlag = true;
       this.userNameError = "";
       return true;
     } else {
-      this.userNameFlag= false;
+      this.userNameFlag = false;
       this.userNameError = "Invalid Username";
       return false;
     }
@@ -92,7 +92,7 @@ export class SignupComponent implements OnInit {
   passwordVerification(password: any) {
     password = this.allowTesting(password, 'password');
 
-    if(password.length < 8) {
+    if (password.length < 8) {
       this.passwordFlag = false;
       this.passwordError = "Invalid Password"
       return false;
@@ -108,7 +108,7 @@ export class SignupComponent implements OnInit {
     retypedPassword = this.allowTesting(retypedPassword, 'retypedPassword');
     password = this.allowTesting(password, 'password');
 
-    if(retypedPassword === password) {
+    if (retypedPassword === password) {
       this.retypeFlag = true;
       this.retypePasswordError = "";
       return true;
@@ -120,36 +120,53 @@ export class SignupComponent implements OnInit {
   }
 
   checkIfValidAccount() {
-    if(this.firstNameFlag === true && this.lastNameFlag === true && this.emailFlag === true
+    if (this.firstNameFlag === true && this.lastNameFlag === true && this.emailFlag === true
       && this.userNameFlag === true && this.passwordFlag === true && this.retypeFlag === true) {
-        this.SendToDataBase();
-        this.link = "/login";
-      } else {
-        this.link = null;
-      }
+      this.link = "/login";
+      return true;
+    } else {
+      this.link = null;
+      return false;
+    }
   }
 
-  private SendToDataBase() {
+  SendToDataBase() {
+
+    if(!this.checkIfValidAccount()) {
+      return;
+    }
     var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
     var lastName = (<HTMLInputElement>document.getElementById("lastName")).value;
     var email = (<HTMLInputElement>document.getElementById("email")).value;
     var password = (<HTMLInputElement>document.getElementById("password")).value;
+    var username = (<HTMLInputElement>document.getElementById("username")).value;
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
-    const url = 'https://stackoverflow.com/questions/46406097/angular-errorform-submission-canceled-because-the-form-is-not-connected/';
-    let data = new FormData();
-    data.append(firstName, 'firstName');
-    this.http.get(url).subscribe(
-      response => console.log(response),
-      err => console.log(err)
-    );
+    let url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}`;
+    this.httpGetAsync(url, (response) => {
+      if(response == "This username has been taken. Please choose another.") {
+        this.link = "signup";
+      }
+      console.log(response);
+    })
   }
 
   /*
     Allows a fake instance of the user input to be used for test classes
   */
   private allowTesting(userParameter, HtmlId) {
-    if(userParameter == event) return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    if (userParameter == event) return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
     return userParameter;
   }
+
+  private httpGetAsync(theUrl, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+  }
 }
+
 

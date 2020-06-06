@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   private passwordFlag = false;
   loginError = "";
 
-  constructor() { }
+  constructor(private cookie: CookieService) { }
 
   ngOnInit(): void {
   }
@@ -41,10 +42,35 @@ export class LoginComponent implements OnInit {
 
   verifyUser() {
     if(this.usernameFlag == true && this.passwordFlag == true) {
-      this.link = "";
+      this.verifyInDataBase();
     } else {
       this.link = "/login";
     }
+  }
+
+  verifyInDataBase() {
+    var username = (<HTMLInputElement>document.getElementById('username')).value;
+    var password = (<HTMLInputElement>document.getElementById('password')).value;
+    let url = `http://127.0.0.1:8000/?reason=verify&username=${username}&password=${password}`;
+    this.httpGetAsync(url, (response) => {
+      if(response == "The username or password is incorrect.") {
+        this.link = "/login";
+      } else {
+        this.cookie.set("login", response, 1);
+        this.link = "";
+      }
+      console.log(response);
+    })
+  }
+
+  private httpGetAsync(theUrl, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
   }
 
   errorMessages() {

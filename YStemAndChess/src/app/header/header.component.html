@@ -1,27 +1,34 @@
-<html> 
-    <header>
-        <link ref="stylesheet" text="text/scss" href="styles.scss">
-        <link ref="stylesheet" text="text/scss" href="header.component.scss">
-            <img src="../../assets/images/Logo/YStemLogo.png" alt="YStemAndChessLogo">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="">PLAY</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">BE A MENTOR</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">PROGRAMS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">CONTACT</a>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" id="donate" href="#">DONATE</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" id="login" routerLink="/login">LOGIN</button>
-                </li>
-            </ul>
-    </header>
-</html>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+        <img src="../../assets/images/Logo/YStemLogo.png" alt="logo" width="308px" height="109px">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link hvr-underline-from-left" href="#">Play</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hvr-underline-from-left" href="#">Be A Mentor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hvr-underline-from-left" href="#">Programs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hvr-underline-from-left" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="btn btn-lg donate hvr-fade-1" tabindex="-1" role="button" aria-disabled="true">Donate</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="btn btn-lg login hvr-fade-2" tabindex="-1" role="button" aria-disabled="true">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>

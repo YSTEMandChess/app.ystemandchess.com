@@ -1,0 +1,45 @@
+html {
+    background-color: #E5E5E5;
+}
+body {
+    background-color: #E5E5E5; 
+}
+
+#clear {
+    clear:both;
+}
+
+#difference-container {
+    position:relative;
+    margin:0 auto;
+    margin-top:5%;
+    width: 92.5%;
+    height: auto; //768 px
+    overflow: hidden;
+    background-color: #fdd005;
+    border-radius: 33px;
+    box-sizing: border-box;
+
+    #difference-image img {
+        float:left;
+        overflow: hidden;
+        width:42.45%;
+        height:auto;
+        border-bottom-left-radius: 33px;
+        border-top-left-radius: 33px;
+    }
+
+    #difference-header h4 {
+        float:right;
+        overflow:hidden;
+        margin-top:3%;
+        margin-right:23%;
+        width:30%;
+        font-family:Lato;
+        font-style:normal;
+        font-weight:900;
+        font-size:2.9vw; //42px
+        line-height:117.1%;
+        letter-spacing:0.01eml
+    }
+}

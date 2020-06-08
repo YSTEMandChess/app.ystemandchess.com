@@ -25,6 +25,7 @@ body {
         overflow: hidden;
         width:42.45%;
         height:auto;
+        box-sizing: border-box;
         border-bottom-left-radius: 33px;
         border-top-left-radius: 33px;
     }
@@ -35,11 +36,70 @@ body {
         margin-top:3%;
         margin-right:23%;
         width:30%;
-        font-family:Lato;
+        height:auto;
+        font-family:'Lato';
         font-style:normal;
         font-weight:900;
         font-size:2.9vw; //42px
         line-height:117.1%;
-        letter-spacing:0.01eml
+        letter-spacing:0.01em;
+        box-sizing: border-box;
+    }
+
+    #difference-statement p {
+        float:right;
+        overflow: hidden;
+        width:42%;
+        height:auto;
+        margin-right:11%;
+        margin-top:3%;
+        font-family:'Roboto';
+        font-style:normal;
+        font-weight:600; //500
+        font-size:1.4vw; //22px
+        line-height: 130%;
+        letter-spacing: 0.02em;
+        color:#4f4f4f;
+        box-sizing: border-box;
+    }
+
+    #difference-toApply h5 {
+        float:right;
+        overflow: hidden;
+        width:40%;
+        height:auto;
+        margin-right: 13%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.4vw;
+        line-height: 130%;
+        letter-spacing: 0.02em;
+        color:#4f4f4f;
+        box-sizing: border-box;
+    }
+
+    #difference-button button {
+        float:right;
+        overflow: hidden;
+        padding:1.1%; //15px
+        margin-right:39%;
+        height:auto;
+        font-family:'Roboto';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.8vw; //28px
+        line-height: 117.1%; //33px
+        letter-spacing: 0.01em;
+        background-color: #fff;
+        color:#3A7CCA;
+        border-radius: 33px;
+        box-sizing: border-box;
+    }
+
+    #difference-button button:hover {
+        color:#fff;
+        background-color:#3A7CCA ;
     }
 }
+

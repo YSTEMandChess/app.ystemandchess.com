@@ -103,3 +103,48 @@ body {
     }
 }
 
+#locations-container {
+    width:92.5%;
+    position:relative;
+    margin:0 auto;
+    margin-top:5%;
+    width: 92.5%;
+    height: auto; //484 px
+    overflow: hidden;
+    background-color: #51AA00;
+    border-radius: 33px;
+    box-sizing: border-box;
+
+    #locations-image img {
+        float:right;
+        width:50%;
+        height:auto;
+    }
+
+    #locations-header h3 {
+        float:left;
+        margin-top:3%;
+        margin-left:7%;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 42px; //42px
+        line-height: 117.1%; //49 px
+        letter-spacing: 0.07em;
+        color: #FFFFFF;
+    }
+
+    #locations-statement p {
+        float:left;
+        width:38%;
+        margin-top:1%;
+        margin-left:7%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.4vw; //22px
+        line-height: 117.1%; //26px
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+}

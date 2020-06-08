@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { arr } from "../globals";
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,7 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(arr);
   }
 
 }

@@ -2,6 +2,7 @@ html {
     background-color: #E5E5E5;
 }
 body {
+    padding-bottom:11.2656%;
     background-color: #E5E5E5; 
 }
 
@@ -146,5 +147,76 @@ body {
         line-height: 117.1%; //26px
         letter-spacing: 0.01em;
         color: #FFFFFF;
+    }
+}
+
+#become-mentor-container {
+    position:relative;
+    width:92.5%;
+    margin:0 auto;
+    margin-top:5%;
+    width: 92.5%;
+    height: auto; //511 px
+    overflow: hidden;
+    background-color: #ff8503;
+    border-radius: 33px;
+    box-sizing: border-box;
+    
+    #become-mentor-image img {
+        float:left;
+        width:27%;
+        height:auto;
+        padding-bottom: 5%;
+        margin-top:3.7%;
+        margin-left:9%;
+        border-radius: 100%;
+    }
+
+    #become-mentor-header h3 {
+        float:right;
+        margin-top:3%;
+        margin-right:30%;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 3vw; //42px
+        line-height: 117.1%; //49px
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+
+    #become-mentor-statement p {
+        float:right;
+        width:48%;
+        height:auto;
+        margin-top:2%;
+        margin-right:8%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.4vw; //22px
+        line-height: 130%; //29px
+        letter-spacing: 0.02em;
+        color: #FFFFFF;
+    }
+
+    #become-mentor-button button {
+        float:right;
+        margin-right: 42.3%;
+        padding:1%; //15px
+        font-family:'Roboto';
+        font-style:bold;
+        font-weight:bold;
+        font-size:1.8vw; //28px
+        line-height: 117.1%;
+        letter-spacing:0.01em;
+        border-radius: 33px;
+        color:#3A7CCA;
+        background-color: #fff;
+    }
+
+    #become-mentor-button button:hover {
+        color:#fff;
+        background-color: #3A7CCA;
     }
 }

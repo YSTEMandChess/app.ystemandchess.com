@@ -366,79 +366,55 @@ body {
     }
     
     #become-a-mentor-container {
-        // display:table;
-        // margin:0 auto;
-        // margin-top: 5%; //75px
-        // width:95%;
-        // height:38%; //652px
-        // padding-bottom: 8%;
-        // border-radius: 33px;
-        // background-color: #FDD005;
+        width:90%;
+        height:auto; //652px
     
         #become-a-mentor-img {
-            // float:left;
-            // width:30%;
-            // height:auto;
-            // margin-top:6.3%;
-            // margin-left:8%;
-            // box-sizing: border-box;
+            margin:0 auto;
+            width:60%;
+            height:auto;
         }
     
         #become-a-mentor-img img {
-            // width:110%;
-            // height:auto;
-            // margin:0;
-            // border-radius:100%;
+            margin-top:3%;
+            margin-left:28%;
         }
     
         #become-a-mentor-header1 {
-            // float:right;
-            // margin-right:30%;
-            // margin-top:6.3%;
+            margin:0 auto;
+            width:100%;
         }
     
         #become-a-mentor-header1 h3 {
-            // font-family:Lato;
-            // font-style:normal; 
-            // font-weight:900;
-            // font-size:2.75vw; //42px;
-            // line-height: 117.1%;
-            // letter-spacing: 0.01em;
-            // color:#4f4f4f;
+            margin:auto;
+            text-align: center;
+            font-size:7.1vw; //42px;
         }
     
         #become-a-mentor-header2 {
-            // float:right;
-            // margin-right:17.8%;
-            // margin-top:0.5%;
+            margin: 0 auto;
+            margin-top:3%;
+            width: 100%;
         }
     
         #become-a-mentor-header2 h4 {
-            // font-family:Roboto;
-            // font-style: bold; //normal
-            // font-weight:700; //500
-            // font-size:2.15vw; //33px
-            // line-height: 117.1%;
-            // letter-spacing: 0.01em;
-            // color:#4f4f4f;
+            margin: auto;
+            text-align: center;
+            font-size:6vw; //33px
         }
     
         #become-a-mentor-statement {
-            // float:right;
-            // width: 42%;
-            // height:auto;
-            // margin-top:3%;
-            // margin-right:10%;
+            margin: 0 auto;
+            margin-top: 3%;
+            margin-right:5%;
+            width: 90%;
+            height:auto;
         }
     
         #become-a-mentor-statement p {
-            // font-family:Roboto;
-            // font-style:bold; //normal
-            // font-weight:700; //500
-            // font-size:1.4vw; //22px
-            // line-height: 130%;
-            // letter-spacing: 0.02em;
-            // color:#4f4f4f;
+            margin: auto;
+            text-align: center;
+            font-size:5.1vw; //22px
         }
     }
     

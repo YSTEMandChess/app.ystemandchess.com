@@ -1,4 +1,6 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
+import { setPermissionLevel} from "../globals";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookie: CookieService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    var pLevel = await setPermissionLevel(this.cookie);
+    console.log(pLevel);
   }
 
 }

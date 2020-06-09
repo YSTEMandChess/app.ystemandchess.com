@@ -210,7 +210,7 @@ body {
         width: 42%;
         height:auto;
         margin-top:3%;
-        margin-right:10%;
+        margin-right:11%;
     }
 
     #become-a-mentor-statement p {
@@ -238,21 +238,22 @@ body {
     #opening-minds-img {
         float:right;
         width:39.5%;
-        height:auto;
+        height: auto;
         box-sizing: border-box;
     }
 
     #opening-minds-img img {
         width:100%;
-        height:auto;
+        height:575px;
         border-bottom-right-radius: 33px;
         border-top-right-radius: 33px;
     }
 
     #opening-minds-header {
         float:left;
-        margin-top:6%;
+        margin-top:5%;
         margin-left:10.5%;
+        margin-bottom: 3%;
     }
 
     #opening-minds-header h3 {
@@ -265,21 +266,14 @@ body {
         color:#fff;
     }
 
-    #opening-minds-statement {
-        float:left;
-        width:41.3%;
-        margin-top:2%;
-        margin-left:10.5%;
+    #opening-minds-video {
+        margin-left:8.7%;
     }
 
-    #opening-minds-statement p {
-        font-family: 'Roboto';
-        font-style:bold; //normal
-        font-weight: 700; //500
-        font-size:1.4vw; //22px
-        line-height: 130%;
-        letter-spacing: 0.02em;
-        color:#fff;
+    #opening-minds-video iframe {
+        width: 45%; //560px
+        height:315px; //315px
+        border-radius: 33px;
     }
 }
 
@@ -419,15 +413,8 @@ body {
     }
     
     #opening-minds-container {
-        // position:relative;
-        // margin:0 auto;
-        // margin-top:5%; //75px
-        // width:95%;
-        // height:auto; //882px
-        // border-radius:33px;
-        // background-color: #FF8503;
-        // overflow: hidden;
-        // box-sizing: border-box;
+        width:90%;
+        height:auto; //882px
     
         #opening-minds-img {
             // float:right;
@@ -456,23 +443,6 @@ body {
             // font-size:2.75vw; //42px
             // line-height: 117.1%;
             // letter-spacing: 0.01em;
-            // color:#fff;
-        }
-    
-        #opening-minds-statement {
-            // float:left;
-            // width:41.3%;
-            // margin-top:2%;
-            // margin-left:10.5%;
-        }
-    
-        #opening-minds-statement p {
-            // font-family: Roboto;
-            // font-style:bold; //normal
-            // font-weight: 700; //500
-            // font-size:1.4vw; //22px
-            // line-height: 130%;
-            // letter-spacing: 0.02em;
             // color:#fff;
         }
     }   

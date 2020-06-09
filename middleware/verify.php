@@ -7,7 +7,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 // Random Key. Needs to be Changed Later
-$key = "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C";
+//$key = "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C";
 
 // Get all parameters for creating/validating user
 $jwt = htmlspecialchars_decode($_GET["jwt"]); 
@@ -18,7 +18,7 @@ if(empty($jwt)) {
 }
 
 try{
-    $decoded = JWT::decode($jwt, $key, array('HS256'));
+    $decoded = JWT::decode($jwt, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", array('HS512'));
     if($decoded->eat < time()) {
         throw new Exception("Error Processing Request", 1);
     }

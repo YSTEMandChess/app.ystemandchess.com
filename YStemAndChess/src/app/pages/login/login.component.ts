@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
-  link = null;
+  link = "/";
   private usernameFlag = false;
   private passwordFlag = false;
   loginError = "";
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   usernameVerification() {
     var username = (<HTMLInputElement>document.getElementById("username")).value;
 
-    if(username.length > 2) {
+    if (username.length > 2) {
       //check username against database
       this.usernameFlag = true;
     } else {
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   passwordVerification() {
     var password = (<HTMLInputElement>document.getElementById("password")).value;
 
-    if(password.length < 8) {
+    if (password.length < 8) {
       this.passwordFlag = false;
     } else {
       //check password against username in database
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   }
 
   verifyUser() {
-    if(this.usernameFlag == true && this.passwordFlag == true) {
+    if (this.usernameFlag == true && this.passwordFlag == true) {
       this.verifyInDataBase();
     } else {
       this.link = "/login";
@@ -53,11 +53,12 @@ export class LoginComponent implements OnInit {
     var password = (<HTMLInputElement>document.getElementById('password')).value;
     let url = `http://127.0.0.1:8000/?reason=verify&username=${username}&password=${password}`;
     this.httpGetAsync(url, (response) => {
-      if(response == "The username or password is incorrect.") {
-        this.link = "/login";
+      if (response == "The username or password is incorrect.") {
+        console.log("Don't RedirectMe");
       } else {
         this.cookie.set("login", response, 1);
-        this.link = "";
+        console.log("Log. Redirect");
+        window.location.pathname = "";
       }
       console.log(response);
     })
@@ -74,7 +75,7 @@ export class LoginComponent implements OnInit {
   }
 
   errorMessages() {
-    if(this.passwordFlag == false || this.usernameFlag == false) {
+    if (this.passwordFlag == false || this.usernameFlag == false) {
       this.loginError = "Invalid username or password"
     } else {
       this.loginError = "";

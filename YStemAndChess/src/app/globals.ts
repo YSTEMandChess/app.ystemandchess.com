@@ -20,8 +20,6 @@ async function setPermissionLevel(cookie: CookieService) {
         console.log("User not logged in.");
         return {"error": "User is not logged in"}
     }
-    
-    
 }
 
 export { setPermissionLevel, information};

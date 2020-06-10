@@ -2,13 +2,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from "../globals";
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
   public username = "Owen Oertell";
   public logged = false;
 

@@ -21,10 +21,23 @@
                 <a class="nav-link hvr-underline-from-left" href="#">Contact</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="btn btn-lg donate hvr-fade-1" tabindex="-1" role="button" aria-disabled="true">Donate</a>
+                <a href="#" class="btn btn-lg donate hvr-fade-1" tabindex="-1" role="button"
+                    aria-disabled="true">Donate</a>
             </li>
-            <li class="nav-item">
-                <a class="btn btn-lg login hvr-fade-2" tabindex="-1" role="button" aria-disabled="true" routerLink="/login">Login</a>
+            <li class='nav-item' *ngIf="!logged">
+                <a href='/login' class='btn btn-lg login hvr-fade-2' tabindex='-1' role='button'
+                    aria-disabled='true'>Login</a>
+            </li>
+            <li class='nav-item' *ngIf="logged">
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-lg dropdown-toggle login hvr-fade-2" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{username}}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" (click)="logout()">Logout</a>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>

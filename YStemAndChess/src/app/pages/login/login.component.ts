@@ -54,10 +54,11 @@ export class LoginComponent implements OnInit {
     let url = `http://127.0.0.1:8000/?reason=verify&username=${username}&password=${password}`;
     this.httpGetAsync(url, (response) => {
       if (response == "The username or password is incorrect.") {
-        console.log("Don't RedirectMe");
+        //console.log("Don't RedirectMe");
+        this.loginError = "Username or Password is incorrect";
       } else {
         this.cookie.set("login", response, 1);
-        console.log("Log. Redirect");
+        //console.log("Log. Redirect");
         window.location.pathname = "";
       }
       console.log(response);
@@ -81,5 +82,4 @@ export class LoginComponent implements OnInit {
       this.loginError = "";
     }
   }
-
 }

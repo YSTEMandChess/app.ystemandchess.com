@@ -1,6 +1,7 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
-import { setPermissionLevel} from "../globals";
+import { setPermissionLevel } from "../globals";
+
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,74 @@ import { setPermissionLevel} from "../globals";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  public username = "Owen Oertell";
+  public logged = false;
 
-  constructor(private cookie: CookieService) {}
+  constructor(private cookie: CookieService) { }
 
   async ngOnInit() {
-    var pLevel = await setPermissionLevel(this.cookie);
-    console.log(pLevel);
+    let pLevel = "nLogged";
+    let uInfo = await setPermissionLevel(this.cookie);
+    if(uInfo['error']==undefined) {
+      this.logged=true;
+      pLevel=uInfo["role"];
+      this.username=uInfo["username"];
+    }
+    
+
+    // Disallowed extentions for each of the types of accounts
+    const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/student", "/mentor"];
+    const notAllowedExtsStudent: String[] = ["/parent", "/mentor", "/signin", "/login"];
+    const notAllowedExtsParent: String[] = ["/student", "/mentor", "/signin", "/login"];
+    const notAllowedExtsMentor: String[] = ["/student", "/parent", "/signin", "/login"];
+    const notAllowedExtsAdmin: String[] = ["/signin", "/login"];
+
+    let pageExt = window.location.pathname;
+
+    switch (pLevel) {
+      case "student":
+        notAllowedExtsStudent.forEach(element => {
+          if(pageExt == element) {
+            window.location.pathname = "/";
+          }
+        });
+        break;
+      case "parent":
+        notAllowedExtsParent.forEach(element => {
+          if(pageExt == element) {
+            window.location.pathname = "/";
+          }
+        });
+        break;
+      case "mentor":
+        notAllowedExtsMentor.forEach(element => {
+          if(pageExt == element) {
+            window.location.pathname = "/";
+          }
+        });
+        break;
+      case "admin":
+        notAllowedExtsAdmin.forEach(element => {
+          if(pageExt == element) {
+            window.location.pathname = "/";
+          }
+        });
+        break;
+      default:
+        notAllowedExtsNotLoggedIn.forEach(element => {
+          if(pageExt == element) {
+            window.location.pathname = "/";
+          }
+        });
+        break;
+    }
+
+    
+  }
+
+  public logout() {
+    this.cookie.delete("login");
+    window.location.reload();
   }
 
 }

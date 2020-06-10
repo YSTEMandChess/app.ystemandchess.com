@@ -111,3 +111,24 @@
     background-color: #3A7CCA;
     color: white;
 }
+
+.dropdown-menu {
+    border-radius: 30px;
+}
+
+.dropdown-item {
+    border-radius: 30px;
+    background: none;
+    text-align: center;
+}
+
+.btn-secondary {
+    border: none;
+}
+
+.disp {
+    display: block;
+}
+.dontdisp {
+    display: none;
+}

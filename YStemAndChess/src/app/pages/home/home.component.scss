@@ -1,6 +1,5 @@
 body {
     padding-top:1.878%; //50px
-    //padding-bottom:40%; //300px
 }
 
 //clears floats once they are no longer needed
@@ -18,7 +17,6 @@ body {
     height:auto; //481px
     background-color:#51AA00;
     border-radius:33px; //33px
-    //box-sizing: border-box;
 
     #our-mission-image img {
         float:left;
@@ -124,11 +122,10 @@ body {
         font-size:1.7vw; //25px
         line-height:117.1%;
         letter-spacing:0.01em;
-        text-decoration-line: underline;
         color:#fff;
     }
 
-    #play-container-links a:active {
+    #play-container-links a:hover {
         text-decoration: underline;
     }
 
@@ -503,6 +500,10 @@ body {
     
         #play-container-links a {
             font-size:5vw; //25px
+        }
+
+        #play-container-links a:active {
+            text-decoration: underline;
         }
     
         #play-container-links button {

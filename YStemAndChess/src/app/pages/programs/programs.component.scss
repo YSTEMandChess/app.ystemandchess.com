@@ -9,9 +9,6 @@ body {
 
 #our-programs-container {
     display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    //flex-wrap: wrap;
     width:90%;
     height:auto;
     margin-left: 5%;
@@ -19,7 +16,7 @@ body {
     background-color: #3A7CCA;
 
     #our-programs-image {
-        width:60%;
+        flex:7.5;
         height:auto;
     }
 
@@ -30,11 +27,16 @@ body {
         border-top-left-radius: 33px;
     }
 
-    #our-programs-header {
+    #our-programs-statement {
+        flex:9.5;
+        padding-top:3%;
         margin-left:5%;
     }
 
-    #our-programs-header h3 {
+    #our-programs-statement h3 {
+        width:50%;
+        padding-bottom: 1.5%;
+        height:auto;
         font-family: 'Lato';
         font-style: normal;
         font-weight: 900;
@@ -44,8 +46,9 @@ body {
         color: #FFFFFF;
     }
 
-    #our-programs-header h4 {
+    #our-programs-statement h4 {
         width:80%;
+        padding-bottom:1.5%;
         height:auto;
         font-family: 'Roboto';
         font-style: normal;
@@ -54,5 +57,35 @@ body {
         line-height: 130%;
         letter-spacing: 0.02em;
         color: #FFFFFF;
+    }
+
+    #our-programs-statement p {
+        width:85%;
+        padding-bottom:5%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.4vw; //22px
+        line-height: 130%;
+        letter-spacing: 0.02em;
+        color: #FFFFFF;
+    }
+
+    #our-programs-statement button {
+        padding:1.1%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.8vw; //28px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        border-radius: 33px;
+        color: #3A7CCA;
+        background-color: #fff;
+    }
+
+    #our-programs-statement button:hover {
+        color:#fff;
+        background-color: #3A7CCA;
     }
 }

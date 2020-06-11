@@ -89,3 +89,64 @@ body {
         background-color: #3A7CCA;
     }
 }
+
+#cost-container {
+    margin-top:5%;
+    margin-left:5%;
+    display:flex;
+    width:45%;
+    height:auto;
+    border-radius: 33px;
+    background-color: #FF8503;
+
+    #cost-statement h3 {
+        width:60%;
+        padding-left:5%;
+        padding-top:5%;
+        height:auto;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 2.7vw; //42px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+
+    #cost-statement h4 {
+        padding-left:5%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.7vw; //26px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+    
+    #cost-statement p {
+        width:86%;
+        height:auto;
+        padding-left:5%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.4vw; //22px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+
+    #cost-statement ul {
+        padding-left:7%;
+        margin-bottom:10%;
+        list-style: disc;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.4vw; //22px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+}

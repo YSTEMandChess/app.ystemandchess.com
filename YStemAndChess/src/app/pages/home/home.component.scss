@@ -1,6 +1,6 @@
 body {
     padding-top:1.878%; //50px
-    padding-bottom:11.2656%; //300px
+    //padding-bottom:40%; //300px
 }
 
 //clears floats once they are no longer needed
@@ -13,7 +13,7 @@ body {
     position:relative;
     float:left;
     overflow: hidden;
-    margin-left:4.86%; //53px
+    margin-left:3%; //53px
     width:55%;
     height:auto; //481px
     background-color:#51AA00;
@@ -66,7 +66,7 @@ body {
 #play-container {
     float:right;
     overflow: hidden;
-    margin-right: 4.86%; //77px
+    margin-right: 3%; //77px
     width: 30%;
     height:108.079%;
     border-radius:33px;

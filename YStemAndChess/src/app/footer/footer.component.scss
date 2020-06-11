@@ -1,30 +1,172 @@
+* {
+    box-sizing: border-box;
+}
+#clear {
+    clear:both;
+}
+
 html {
-    background-color: #fff;
-}
-h3 {
-    font-family: Lato;
-    font-style: bold;
-    font-size: 33px;  
+    position: relative;
+    height:100%;
 }
 
-.partners {
-    text-align: center;
-    font-family: Lato;
-    font-style: bold;
-    font-size: 33px;
+footer {
+    display:flex;
+    flex-wrap: wrap;
+    margin-top:10%;
+    position: relative;
+    height:100%;
+    border-top: solid;
+    border-color: black;
 }
 
-.partners img {
-    padding-left: 10px;
+.main-container {
+    display:flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top:0%;
+    bottom:0%;
+    width:100%;
+    height:auto;
+    border-top: solid;
+    border-color: black;
+
+    .partners-container {
+        justify-content: flex-end;
+        text-align: center;
+        //float:left;
+        width:70%;
+        height:auto;
+        padding-top:2%;
+
+        h3 {
+            margin-right: 2.5%;
+            font-family: 'Lato';
+            font-size: 33px;
+            font-weight: 900;
+            font-style: normal;
+            line-height: 142.1%;
+            letter-spacing: 0.01em;
+            color:black;
+        }
+
+        img {
+            padding-left:10%;
+        }
+    }
+
+    .sponsors-container {
+        text-align: center;
+        background-color: #f1f1f1;
+        width:30%;
+        height:250px; //30vh
+        padding-top:2%;
+
+        h3 {
+            font-family: 'Lato';
+            font-size: 33px;
+            font-weight: 900;
+            font-style: normal;
+            line-height: 142.1%;
+            letter-spacing: 0.01em;
+            color:black;  
+        }
+    }
+
+    .contact-container {
+        width:100%;
+        height:250px; //30vh
+        background-color: black;
+
+        #left-side {
+            float:left;
+            width:30%;
+            padding-top: 2%;
+
+            p {
+                padding-top:2%;
+                padding-left: 10%;
+                font-family: 'Lato';
+                font-size: 22px;
+                font-weight: 500;
+                line-height: 142.1%;
+                letter-spacing: 0.01em;
+                text-transform: uppercase;
+                color: #F5F5F5;
+            }
+        }
+
+        #right-side {
+            float:right;
+            width:40%;
+            height:auto;
+            padding-top: 7%;
+
+            img {
+                padding-left: 5%;
+            }
+
+            img:hover {
+                cursor: pointer;
+            }
+        }
+
+    }
 }
 
-.sponors {
-    text-align: center;
-    font-family: Lato;
-    font-style: bold;
-    font-size: 33px;
+@media screen and (max-width:969px) {
+    .main-container {
+        .partners-container {
+            width:50%;
+        }
+
+        .sponsors-container {
+            width: 50%;
+        }
+    }
 }
 
-.sponsors h3 {
-    padding-bottom: 25px;
+//links and contact
+@media screen and (max-width:688px) {
+    .main-container {
+        .contact-container {
+            height:350px;
+
+            #left-side {
+                width:100%;
+            }
+
+            #right-side {
+                width:100%;
+                padding-left: 4.3%;
+
+                img {
+                    margin-right:0%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width:606px) {
+    .main-container {
+        .sponsors-container {
+            height:330px;
+        }
+    }
+}
+
+
+@media screen and (max-width:525px) {
+    .main-container {
+
+        .partners-container {
+            width:100%;
+        }
+
+        .sponsors-container {
+            width:100%;
+            height:200px;
+        }
+    }
 }

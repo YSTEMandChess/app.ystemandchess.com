@@ -11,6 +11,24 @@
     text-transform: uppercase;
 }
 
+//login button spacing from header border 
+@media only screen and (max-width:1175px) {
+    .nav-item {
+        font-size:15px;
+        margin-left:10px;
+        margin-right:10px;
+    }
+
+    .donate {
+        font-size:15px;
+    }
+
+    .login {
+        font-size:15px;
+    }
+}
+
+//buttom spacing in button nav bar
 @media only screen and (max-width:1000px) {
     .nav-item {
         margin-top:15px;
@@ -133,7 +151,7 @@
 }
 
 .disp {
-    display: block;
+    //display: block;
 }
 .dontdisp {
     display: none;

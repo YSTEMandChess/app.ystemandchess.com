@@ -14,6 +14,7 @@ h3 {
 }
 
 input {
+    outline-style: none;
     margin: 20px;
     padding: 15px 32px;
     font-size: 22px;
@@ -37,6 +38,7 @@ input {
 }
 
 .input-container button {
+    outline-style:none;
     padding-left:2%; //15px
     padding-right:2%;
     font-family: 'Roboto';

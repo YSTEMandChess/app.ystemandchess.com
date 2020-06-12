@@ -1,5 +1,7 @@
 <html>
     <app-header></app-header> 
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <meta charset="utf-8">
     <body>
         <form>
@@ -21,8 +23,10 @@
                 <li><input type="password" placeholder="Re-type password" id="retypedPassword" (blur)="retypePasswordVerification($event, $event)" (blur)="checkIfValidAccount()"></li>
                 <li><p>Select Account Type</p></li>
                 <li><select name="account type" id="types">
-                    <option value="student">Student</option>
-                    <option value="mentor">Mentor</option>
+                        <option value=""></option>
+                        <option value="student">Student</option>
+                        <option value="mentor">Mentor</option>
+                        <option value="parent">Parent</option>
                     </select>
                 </li>
 

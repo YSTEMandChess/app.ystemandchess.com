@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component';
+import { StudentComponent } from './pages/student/student.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    BeAMentorComponent
+    BeAMentorComponent,
+    StudentComponent
   ],
   imports: [
     BrowserModule,

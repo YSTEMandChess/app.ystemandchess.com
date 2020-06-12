@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component';
+import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { StudentComponent } from './pages/student/student.component';
     FooterComponent,
     HomeComponent,
     BeAMentorComponent,
+    ProgramsComponent,
     StudentComponent
   ],
   imports: [

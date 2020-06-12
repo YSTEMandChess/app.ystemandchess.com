@@ -6,6 +6,7 @@ import { PlayComponent } from './pages/play/play.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component'; 
+import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'be-amentor', component: BeAMentorComponent},
-  {path: 'student', component: StudentComponent},
+  {path: 'programs', component: ProgramsComponent},
+  {path: 'student', component: StudentComponent}
 ];
 
 @NgModule({

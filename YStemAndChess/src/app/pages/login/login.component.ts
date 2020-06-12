@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -59,7 +59,23 @@ export class LoginComponent implements OnInit {
       } else {
         this.cookie.set("login", response, 1);
         //console.log("Log. Redirect");
-        window.location.pathname = "";
+        let payload = JSON.parse(atob(response.split(".")[1]));
+        switch (payload["role"]) {
+          case "student":
+            window.location.pathname = "/student";
+            break;
+          case "parent":
+            window.location.pathname = "/parent";
+            break;
+          case "mentor":
+            window.location.pathname = "/mentor";
+            break;
+          case "admin":
+            window.location.pathname = "/admin";
+            break;
+          default:
+            window.location.pathname = "";
+        }
       }
       console.log(response);
     })

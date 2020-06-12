@@ -11,18 +11,19 @@ import { setPermissionLevel } from "../globals";
 export class HeaderComponent implements OnInit {
   public username = "Owen Oertell";
   public logged = false;
+  public playLink = "/play-nolog";
 
   constructor(private cookie: CookieService) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
     let uInfo = await setPermissionLevel(this.cookie);
-    if(uInfo['error']==undefined) {
-      this.logged=true;
-      pLevel=uInfo["role"];
-      this.username=uInfo["username"];
+    if (uInfo['error'] == undefined) {
+      this.logged = true;
+      pLevel = uInfo["role"];
+      this.username = uInfo["username"];
     }
-    
+
 
     // Disallowed extentions for each of the types of accounts
     const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/student", "/mentor"];
@@ -35,43 +36,45 @@ export class HeaderComponent implements OnInit {
 
     switch (pLevel) {
       case "student":
+        this.playLink="/student";
         notAllowedExtsStudent.forEach(element => {
-          if(pageExt == element) {
-            window.location.pathname = "/";
+          if (pageExt == element) {
+            window.location.pathname = "/student";
           }
         });
         break;
       case "parent":
+        this.playLink="/parent";
         notAllowedExtsParent.forEach(element => {
-          if(pageExt == element) {
-            window.location.pathname = "/";
+          if (pageExt == element) {
+            window.location.pathname = "/parent";
           }
         });
         break;
       case "mentor":
+        this.playLink="/mentor";
         notAllowedExtsMentor.forEach(element => {
-          if(pageExt == element) {
-            window.location.pathname = "/";
+          if (pageExt == element) {
+            window.location.pathname = "/mentor";
           }
         });
         break;
       case "admin":
+        this.playLink="/admin";
         notAllowedExtsAdmin.forEach(element => {
-          if(pageExt == element) {
-            window.location.pathname = "/";
+          if (pageExt == element) {
+            window.location.pathname = "/admin";
           }
         });
         break;
-      default:
+      case "nLogged":
         notAllowedExtsNotLoggedIn.forEach(element => {
-          if(pageExt == element) {
+          if (pageExt == element) {
             window.location.pathname = "/";
           }
         });
         break;
     }
-
-    
   }
 
   public logout() {

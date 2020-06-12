@@ -16,8 +16,10 @@ h3 {
 input {
     margin: 20px;
     padding: 15px 32px;
-    font-size: 20px;
-    font-family: 'Gotham-Bold';
+    font-size: 22px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-family: normal;
     background-color: white; 
     color: black; 
     border: 3px solid #D64309;
@@ -32,6 +34,23 @@ input {
     padding-left: 20px;
     padding-right: 20px;
     margin: 10px;
+}
+
+.input-container button {
+    padding-left:2%; //15px
+    padding-right:2%;
+    font-family: 'Roboto';
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    background-color: #fff;
+    color:#3A7CCA;
+    border-radius: 33px;
+}
+
+.input-container button:hover {
+    background-color: #3A7CCA;
+    color: #fff;
 }
 
 

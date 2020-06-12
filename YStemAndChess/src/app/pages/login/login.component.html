@@ -1,6 +1,7 @@
 <html>
 <app-header></app-header>
-
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
 <body>
     <h2>Login</h2>
     <h3>{{loginError}}</h3>
@@ -8,7 +9,7 @@
 
         <li><input type="text" placeholder="username" id="username" (blur)="usernameVerification()"></li>
         <li><input type="password" placeholder="password" id="password" (blur)="passwordVerification()"></li>
-        <button type="submit" (click)="errorMessages()" (click)="verifyUser()">ENTER</button>
+        <button type="submit" (click)="errorMessages()" (click)="verifyUser()">Enter</button>
         <a routerLink="/signup">Create new account</a>
 
     </div>

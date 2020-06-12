@@ -73,6 +73,7 @@ body {
 
     #our-programs-statement button {
         padding:1.1%;
+        margin-bottom:7%;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: bold;
@@ -186,5 +187,179 @@ body {
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
+    }
+}
+
+//scale font and image
+@media screen and (max-width:950px) {
+    #our-programs-container {
+
+        #our-programs-image img {
+            height:100%;
+        }
+
+        #our-programs-statement h3 {
+            font-size: 3.5vw; //42px
+        }
+    
+        #our-programs-statement h4 {
+            font-size: 2.2vw; //22px
+        }
+    
+        #our-programs-statement p {
+            font-size: 2.2vw; //22px
+        }
+    
+        #our-programs-statement button {
+            font-size: 2.6vw; //28px
+        }
+    }
+
+    #cost-container {
+    
+        #cost-statement h3 {
+            font-size: 3.5vw; //42px
+        }
+    
+        #cost-statement h4 {
+            font-size: 2.5vw; //26px
+        }
+        
+        #cost-statement p {
+            font-size: 2.2vw; //22px
+        }
+    
+        #cost-statement ul {
+            font-size: 2.2vw; //22px
+        }
+    }
+    
+    #helping-container {
+    
+        #helping-statement h3 {
+            font-size: 2.7vw; //30px
+        }
+    
+        #helping-statement p {
+            font-size: 2.2vw; //22px
+        }
+    }
+}
+
+//mobile view
+@media screen and (max-width:766px) {
+    #our-programs-container {
+        flex-direction: column;
+    
+        #our-programs-image img {
+            border-top-right-radius: 33px;
+            border-top-left-radius: 33px;
+            border-bottom-left-radius: 0px ;
+        }
+    
+        #our-programs-statement h3 {
+            font-size: 4.3vw; //42px
+        }
+    
+        #our-programs-statement h4 {
+            font-size: 3vw; //22px
+        }
+    
+        #our-programs-statement p {
+            font-size: 3vw; //22px
+        }
+    
+        #our-programs-statement button {
+            font-size: 3.2vw; //28px
+        }
+    }
+
+    #cost-container {
+        margin-top:5%;
+        margin-left:5%;
+        width:90%;
+    
+        #cost-statement h3 {
+            font-size: 3.5vw; //42px
+        }
+    
+        #cost-statement h4 {
+            font-size: 2.5vw; //26px
+        }
+        
+        #cost-statement p {
+            font-size: 3vw; //22px
+        }
+    
+        #cost-statement ul {
+            font-size: 3vw; //22px
+        }
+    }
+    
+    #helping-container {
+        margin-top:5%;
+        margin-left:5%;
+        width:90%;
+        height:auto;
+    
+        #helping-statement h3 {
+            font-size: 3.5vw; //30px
+        }
+    
+        #helping-statement p {
+            font-size: 3vw; //22px
+        }
+    }
+
+    @media screen and (max-width:535px) {
+
+        #our-programs-container {
+        
+            #our-programs-statement h3 {
+                font-size: 5.1vw; //42px
+            }
+        
+            #our-programs-statement h4 {
+                font-size: 3.8vw; //22px
+            }
+        
+            #our-programs-statement p {
+                font-size: 3.8vw; //22px
+            }
+        
+            #our-programs-statement button {
+                font-size: 4vw; //28px
+            }
+        }
+
+        #cost-container {
+        
+            #cost-statement h3 {
+                font-size: 4.3vw; //42px
+            }
+        
+            #cost-statement h4 {
+                font-size: 3.3vw; //26px
+            }
+            
+            #cost-statement p {
+                font-size: 3.8vw; //22px
+            }
+        
+            #cost-statement ul {
+                font-size: 3.8vw; //22px
+            }
+        }
+
+        #helping-container {
+        
+            #helping-statement h3 {
+                font-size: 4.3vw; //30px
+            }
+        
+            #helping-statement p {
+                font-size: 3.8vw; //22px
+            }
+        }
     }
 }

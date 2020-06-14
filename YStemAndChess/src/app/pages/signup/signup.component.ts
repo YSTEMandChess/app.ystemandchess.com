@@ -22,6 +22,8 @@ export class SignupComponent implements OnInit {
   passwordError = "";
   retypePasswordError = "";
 
+  studentAccountFlag: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -127,6 +129,17 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  checkTypeOfAccount() {
+    var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
+    if(accountType == "Student") {
+      this.studentAccountFlag = true;
+    } else {
+      this.studentAccountFlag = false;
+    }
+    
+    return this.studentAccountFlag;
+  }
+
   SendToDataBase() {
 
     if (!this.checkIfValidAccount()) {
@@ -138,7 +151,16 @@ export class SignupComponent implements OnInit {
     var password = (<HTMLInputElement>document.getElementById("password")).value;
     var username = (<HTMLInputElement>document.getElementById("username")).value;
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
-    let url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}`;
+    
+    let url = "";
+
+    if(accountType == 'Student') {
+      var parentEmail = (<HTMLInputElement>document.getElementById('parentEmail')).value;
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&parentEmail=${parentEmail}`;
+    } else {
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}`;
+    }
+    
     this.httpGetAsync(url, (response) => {
       if (response == "This username has been taken. Please choose another.") {
         this.link = "signup";

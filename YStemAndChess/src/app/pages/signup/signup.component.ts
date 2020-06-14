@@ -158,7 +158,7 @@ export class SignupComponent implements OnInit {
       var parentEmail = (<HTMLInputElement>document.getElementById('parentEmail')).value;
       url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&parentEmail=${parentEmail}`;
     } else {
-      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}`;
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&email=${email}`;
     }
     
     this.httpGetAsync(url, (response) => {

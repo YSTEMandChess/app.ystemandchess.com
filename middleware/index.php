@@ -15,6 +15,8 @@ $password = htmlspecialchars_decode($_GET["password"]);
 $firstName = htmlspecialchars_decode($_GET["first"]);
 $lastName = htmlspecialchars_decode($_GET["last"]);
 $reason = htmlspecialchars_decode($_GET["reason"]);
+$email = htmlspecialchars_decode($_GET["email"]);
+//$parentEmail = htmlspecialchars_decode($_GET["parentEmail"]);
 //$jwt = htmlspecialchars_decode($_GET["jwt"]); May not be needed if this file only is going to be handing out JWT tokens / Validating users.
 $role = htmlspecialchars_decode($_GET["role"]); // Role of the person: student, mentor, parent
 
@@ -22,11 +24,11 @@ $role = htmlspecialchars_decode($_GET["role"]); // Role of the person: student, 
 
 // Create. The user has not been created and will be.
 if ($reason == "create") {
-    if (!$username || !$password || !$firstName || !$lastName || !$role) {
+    if (!$username || !$password || !$firstName || !$lastName || !$email || !$role) {
         echo "Not all of the parameters were found. Please ensure that you pass: username, password, first, last, and role as well.";
         return;
     }
-    createUser($username, $password, $firstName, $lastName, $role);
+    createUser($username, $password, $firstName, $lastName, $email, $role);
 
 // Verify. The user claims to be already in the system. Making sure that they are who they claim to be. Checking their username and password
 } else if ($reason == "verify") {
@@ -50,16 +52,22 @@ if ($reason == "create") {
 
 
 
-function createUser($username, $password, $firstName, $lastName, $role) {
+function createUser($username, $password, $firstName, $lastName, $email, $role) {
     // MONGO DB LOGIN
     $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
     // Select the user collection
     $collection = $client->ystem->users;
 
-    if(isTaken($username, $collection)) {
+    if(isTakenUsername($username, $collection)) {
         echo "This username has been taken. Please choose another.";
         return;
     };
+    
+    if($role=='student' && !isParentEmail($email, $collection)) {
+        echo "This email is not a parents email, cannot create student account.";
+        return;
+    }
+
     $hashPass = hash("sha384",$password);
 
     $collection->insertOne([
@@ -67,6 +75,7 @@ function createUser($username, $password, $firstName, $lastName, $role) {
         'password' => $hashPass,
         'firstName' => $firstName,
         'lastName' => $lastName,
+        'email' => $email,
         'role' => $role,
         'accountCreatedAt' => time()
     ]);
@@ -75,6 +84,7 @@ function createUser($username, $password, $firstName, $lastName, $role) {
         'username' => $username,
         'firstName' => $firstName,
         'lastName' => $lastName,
+        'email' => $email,
         'role' => $role,
         'iat' => time(),
         'eat' => strtotime("+30 days")
@@ -99,6 +109,7 @@ function verifyUser($username, $password) {
             'firstName' => $document['firstName'],
             'lastName' => $document['lastName'],
             'role' => $document['role'],
+            'email' => $document['email'],
             'iat' => time(),
             'eat' => strtotime("+30 days")
         );
@@ -116,7 +127,7 @@ function verifyUser($username, $password) {
 
 // venanop608@prowerl.com DB Email
 
-function isTaken($username, $collection) {
+function isTakenUsername($username, $collection) {
     $document = $collection->findOne(['username' => $username]);
     if(is_null($document)) {
         return false;
@@ -125,4 +136,13 @@ function isTaken($username, $collection) {
     }
 }
 
+
+function isParentEmail($parentEmail, $collection) {
+    $document = $collection->findOne(['email' => $parentEmail, 'role' => 'parent']); 
+    if(is_null($document)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 ?>

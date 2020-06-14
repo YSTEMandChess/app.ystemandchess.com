@@ -12,7 +12,7 @@
                 <a class="nav-link hvr-underline-from-left" href="{{playLink}}">Play</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link hvr-underline-from-left" href="/be-amentor">Be A Mentor</a>
+                <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>
@@ -25,7 +25,7 @@
                     aria-disabled="true">Donate</a>
             </li>
             <li class='nav-item' *ngIf="!logged">
-                <a href='/login' class='btn btn-lg login hvr-fade-2' tabindex='-1' role='button'
+                <a routerLink='/login' id="login" class='btn btn-lg login hvr-fade-2' tabindex='-1' role='button'
                     aria-disabled='true'>Login</a>
             </li>
             <li class='nav-item' *ngIf="logged">

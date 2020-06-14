@@ -1,6 +1,6 @@
 .nav-item {
-    margin-left: 15px;
-    margin-right: 15px; 
+    margin-left: 15px; //15px
+    margin-right: 15px; //15px
 
     font-family: 'Lato';
 
@@ -9,6 +9,30 @@
     font-size: 20px;
     letter-spacing: 0.01em;
     text-transform: uppercase;
+}
+
+//login button spacing from header border 
+@media only screen and (max-width:1175px) {
+    .nav-item {
+        font-size:15px;
+        margin-left:10px;
+        margin-right:10px;
+    }
+
+    .donate {
+        font-size:15px;
+    }
+
+    .login {
+        font-size:15px;
+    }
+}
+
+//buttom spacing in button nav bar
+@media only screen and (max-width:1000px) {
+    .nav-item {
+        margin-top:15px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -127,7 +151,7 @@
 }
 
 .disp {
-    display: block;
+    //display: block;
 }
 .dontdisp {
     display: none;

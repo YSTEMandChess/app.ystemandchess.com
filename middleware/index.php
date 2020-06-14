@@ -16,6 +16,7 @@ $firstName = htmlspecialchars_decode($_GET["first"]);
 $lastName = htmlspecialchars_decode($_GET["last"]);
 $reason = htmlspecialchars_decode($_GET["reason"]);
 $email = htmlspecialchars_decode($_GET["email"]);
+$parentEmail = htmlspecialchars_decode($_GET["parentEmail"]);
 //$parentEmail = htmlspecialchars_decode($_GET["parentEmail"]);
 //$jwt = htmlspecialchars_decode($_GET["jwt"]); May not be needed if this file only is going to be handing out JWT tokens / Validating users.
 $role = htmlspecialchars_decode($_GET["role"]); // Role of the person: student, mentor, parent
@@ -24,9 +25,12 @@ $role = htmlspecialchars_decode($_GET["role"]); // Role of the person: student, 
 
 // Create. The user has not been created and will be.
 if ($reason == "create") {
-    if (!$username || !$password || !$firstName || !$lastName || !$email || !$role) {
+    if (!$username || !$password || !$firstName || !$lastName || !$role) {
         echo "Not all of the parameters were found. Please ensure that you pass: username, password, first, last, and role as well.";
         return;
+    }
+    if($role == 'student') {
+        $email=$parentEmail;
     }
     createUser($username, $password, $firstName, $lastName, $email, $role);
 

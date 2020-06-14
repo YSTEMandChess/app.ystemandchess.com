@@ -22,13 +22,17 @@
                 <li><input type="password" placeholder="Password" id="password" (blur)="passwordVerification($event)" (blur)="checkIfValidAccount()"></li>
                 <li><input type="password" placeholder="Re-type password" id="retypedPassword" (blur)="retypePasswordVerification($event, $event)" (blur)="checkIfValidAccount()"></li>
                 <li><p>Select Account Type</p></li>
-                <li><select name="account type" id="types">
+                <li><select name="account type" id="types" (click)="checkTypeOfAccount()">
                         <option value=""></option>
-                        <option value="student">Student</option>
-                        <option value="mentor">Mentor</option>
-                        <option value="parent">Parent</option>
+                        <option value="Student">Student</option>
+                        <option value="Mentor">Mentor</option>
+                        <option value="Parent">Parent</option>
                     </select>
                 </li>
+                
+                <div *ngIf="checkTypeOfAccount()">
+                    <li><input type="text" placeholder="Parents Email" id="parentEmail" (blur)="emailVerification($event)" (blur)="checkIfValidAccount()"></li>
+                </div>
 
                 <li><input type="checkbox" id="checkbox" (blur)="checkIfValidAccount()"><a>I accept the terms and conditions</a></li>
                 <button type="submit" [routerLink]="[link]" (click)="SendToDataBase()">Sign up</button>

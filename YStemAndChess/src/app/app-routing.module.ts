@@ -11,7 +11,7 @@ import { StudentComponent } from './pages/student/student.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'play', component: PlayComponent},
+  //{path: 'play', component: PlayComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'be-amentor', component: BeAMentorComponent},

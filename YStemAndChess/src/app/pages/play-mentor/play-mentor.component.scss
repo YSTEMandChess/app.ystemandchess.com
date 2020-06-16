@@ -1,0 +1,200 @@
+body {
+    padding-top:2%; //50px
+}
+
+//clears floats once they are no longer needed
+#clear {
+    clear:both;
+}
+
+#welcome-container {
+    width:45%;
+    height:auto;
+    margin-left: 5%;
+
+    #welcome-header {
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        h3 {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 2.15vw; //33px
+            line-height: 117.1%;
+            text-align: center;
+            letter-spacing: 0.01em;
+            color: #3A7CCA;
+        }
+
+        h4 {
+            margin-top:1.5%;
+            margin-left:7%;
+            font-family: 'Lato';
+            font-size: 1.4vw; //22px
+            line-height: 117.1%;
+            text-align: center;
+            letter-spacing: 0.01em;
+            color: #FF8503;
+        }
+    }
+
+    #welcome-statement {
+
+        p {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1.55vw; //24px
+            line-height: 125.1%;
+            letter-spacing: 0.02em;
+            color: #4F4F4F;
+        }
+    }
+}
+
+#mentor-container {
+    margin-top: 10%;
+    width:90%;
+    height: auto;
+    margin-left: 5%;
+    border-radius:33px;
+    background-color: #E1E7ED;
+
+    #top {
+        display:flex;
+        justify-content: flex-end;
+        padding-top:2%;
+        padding-bottom:2%;
+
+        .turn-indicator {
+            width:28px;
+            height:28px;
+            margin-right:1%;
+            border-radius: 100%;
+            background-color: #fff;
+        }
+
+        //will change in future to which
+        //players turn it is
+        .turn-indicator:hover {
+            background-color: #4F4F4F;
+        }
+
+        p {
+            margin-right:3%;
+            font-family: 'Lato';
+            font-size: 1.4vw; //2px
+            line-height: 142.1%;
+            letter-spacing: 0.01em;
+            color: #000000; 
+        }
+
+        button {
+            outline-style: none;
+            margin-right:3%;
+            padding-right:2%;
+            padding-left:2%;
+            border-radius: 33px;
+            font-family: 'Lato';
+            font-size: 1.4vw;
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            color:#fff;
+            background-color: #3A7CCA;
+        }
+
+        button:hover {
+            background-color: #fff;
+            color:#3A7CCA;
+        }
+    }
+
+    #lichess-board {
+        overflow: hidden;
+        iframe {
+            overflow: hidden;
+            border:0;
+            width:100%;
+            height:80vh; //80vh
+        }
+    }
+
+    #bottom {
+        padding-top:2%;
+        padding-bottom:2%;
+
+        #flip-board {
+            outline-style: none;
+            margin-left:3%;
+            padding-top:1%;
+            padding-bottom:1%;
+            padding-left: 3%;
+            padding-right:3%;
+            border-radius: 33px;
+            font-family: 'Lato';
+            font-weight: 900;
+            font-size: 1.4vw; //22px
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            color: #000000;
+            background-color: #F2C94C;
+
+            //push new game button away
+            margin-right:47.4%;
+        }
+
+        #flip-board:hover {
+            color:#F2C94C;
+            background-color: #000;
+        }
+
+        #new-game {
+            outline-style: none;
+            padding-top: 1%;
+            padding-bottom:1%;
+            padding-left: 2%;
+            padding-right:2%;
+            font-family: 'Lato';
+            font-weight: 900;
+            font-size: 1.4vw; //22px
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            border-radius: 33px;
+            color: #FFF;
+            background-color: #FF8503;
+
+            //push lesson prep button away
+            margin-right:5%;
+        }
+
+        #new-game:hover {
+            color:#FF8503;
+            background-color: #fff;
+        }
+
+        #lesson-prep {
+            outline-style: none;
+            padding-top: 1%;
+            padding-bottom:1%;
+            padding-left: 3.5%;
+            padding-right:3.5%;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 1.4vw; //22px
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            border-radius: 33px;
+            color: #fff;
+            background-color: #3A7CCA;
+        }
+
+        #lesson-prep:hover {
+            color:#3A7CCA;
+            background-color: #fff;
+        }
+    }
+}
+

@@ -1,0 +1,43 @@
+body {
+    padding-top:2%; //50px
+}
+
+//clears floats once they are no longer needed
+#clear {
+    clear:both;
+}
+
+#welcome-container {
+    width:35%;
+    height:auto;
+    margin-left: 5%;
+
+    #welcome-header {
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        h3 {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 33px; //33px
+            line-height: 117.1%;
+            text-align: center;
+            letter-spacing: 0.01em;
+            color: #3A7CCA;
+        }
+
+        h4 {
+            margin-top:2%;
+            margin-left:7%;
+            font-family: 'Lato';
+            font-size: 22px; //22px
+            line-height: 117.1%;
+            text-align: center;
+            letter-spacing: 0.01em;
+            color: #FF8503;
+        }
+    }
+}
+

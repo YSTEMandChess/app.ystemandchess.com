@@ -8,7 +8,7 @@ body {
 }
 
 #welcome-container {
-    width:35%;
+    width:45%;
     height:auto;
     margin-left: 5%;
 
@@ -21,7 +21,7 @@ body {
             font-family: 'Lato';
             font-style: normal;
             font-weight: 900;
-            font-size: 33px; //33px
+            font-size: 2.15vw; //33px
             line-height: 117.1%;
             text-align: center;
             letter-spacing: 0.01em;
@@ -32,11 +32,24 @@ body {
             margin-top:2%;
             margin-left:7%;
             font-family: 'Lato';
-            font-size: 22px; //22px
+            font-size: 1.4vw; //22px
             line-height: 117.1%;
             text-align: center;
             letter-spacing: 0.01em;
             color: #FF8503;
+        }
+    }
+
+    #welcome-statement {
+
+        p {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1.55vw; //24px
+            line-height: 125.1%;
+            letter-spacing: 0.02em;
+            color: #4F4F4F;
         }
     }
 }

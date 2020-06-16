@@ -1,0 +1,74 @@
+.benifits {
+    background: #3F8500;
+    float: right;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    font-family: 'Lato';
+    border: #3F8500 1px solid;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.benifits:hover {
+    
+    color: #3F8500;
+    background-color: white;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+
+.prog {
+    background-color: #C4C4C4;
+    padding: 15px;
+    font-size: 26px;
+}
+
+.row {
+    .col-sm {
+        border: #C4C4C4 solid 2px;
+        background-color: #E5E5E5;
+        padding: 20px;
+        letter-spacing: 0.01em;
+        h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+}
+
+.cont {
+    margin-top: 60px;
+    background-color: #C4C4C4;
+    border: #C4C4C4 solid 2px;
+}
+
+.recordsLink {
+    padding: 15px;
+    text-align: center;
+    font-weight: 500;
+
+}
+
+.nobac {
+    background-color: #C4C4C4 !important;
+    padding: 0px !important;
+}
+
+.recordsLink {
+    border: #C4C4C4 solid 2px;
+    background-color: #E5E5E5;
+}
+
+.faqs {
+    h2, h3 {
+        font-weight: 600;
+    }
+    .faq {
+        margin-top: 20px;
+        padding: 10px;
+    }
+}

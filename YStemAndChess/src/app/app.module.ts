@@ -15,6 +15,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component';
 import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
+import { ParentComponent } from './pages/parent/parent.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { StudentComponent } from './pages/student/student.component';
     HomeComponent,
     BeAMentorComponent,
     ProgramsComponent,
-    StudentComponent
+    StudentComponent,
+    ParentComponent
   ],
   imports: [
     BrowserModule,

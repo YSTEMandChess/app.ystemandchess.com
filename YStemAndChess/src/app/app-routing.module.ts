@@ -1,3 +1,4 @@
+import { ParentComponent } from './pages/parent/parent.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'be-amentor', component: BeAMentorComponent},
   {path: 'programs', component: ProgramsComponent},
-  {path: 'student', component: StudentComponent}
+  {path: 'student', component: StudentComponent},
+  {path: 'parent', component: ParentComponent}
 ];
 
 @NgModule({

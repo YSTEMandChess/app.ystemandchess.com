@@ -54,3 +54,60 @@ body {
     }
 }
 
+#mentor-container {
+    margin-top: 10%;
+    width:90%;
+    height: 800px;
+    margin-left: 5%;
+    border-radius:33px;
+    background-color: #E1E7ED;
+
+    #top {
+        display:flex;
+        justify-content: flex-end;
+        padding-top:2%;
+
+        .turn-indicator {
+            width:28px;
+            height:28px;
+            margin-right:1%;
+            border-radius: 100%;
+            background-color: #fff;
+        }
+
+        //will change in future to which
+        //players turn it is
+        .turn-indicator:hover {
+            background-color: #4F4F4F;
+        }
+
+        p {
+            margin-right:3%;
+            font-family: 'Lato';
+            font-size: 1.4vw; //2px
+            line-height: 142.1%;
+            letter-spacing: 0.01em;
+            color: #000000; 
+        }
+
+        button {
+            outline-style: none;
+            margin-right:3%;
+            padding-right:2%;
+            padding-left:2%;
+            border-radius: 33px;
+            font-family: 'Lato';
+            font-size: 1.4vw;
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            color:#fff;
+            background-color: #3A7CCA;
+        }
+
+        button:hover {
+            background-color: #fff;
+            color:#3A7CCA;
+        }
+    }
+}
+

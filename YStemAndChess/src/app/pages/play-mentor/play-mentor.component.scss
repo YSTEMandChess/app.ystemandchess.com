@@ -29,7 +29,7 @@ body {
         }
 
         h4 {
-            margin-top:2%;
+            margin-top:1.5%;
             margin-left:7%;
             font-family: 'Lato';
             font-size: 1.4vw; //22px
@@ -57,7 +57,7 @@ body {
 #mentor-container {
     margin-top: 10%;
     width:90%;
-    height: 800px;
+    height: auto;
     margin-left: 5%;
     border-radius:33px;
     background-color: #E1E7ED;
@@ -66,6 +66,7 @@ body {
         display:flex;
         justify-content: flex-end;
         padding-top:2%;
+        padding-bottom:2%;
 
         .turn-indicator {
             width:28px;
@@ -107,6 +108,82 @@ body {
         button:hover {
             background-color: #fff;
             color:#3A7CCA;
+        }
+    }
+
+    #bottom {
+        padding-top:2%;
+        padding-bottom:2%;
+
+        #flip-board {
+            outline-style: none;
+            margin-left:3%;
+            padding-top:1%;
+            padding-bottom:1%;
+            padding-left: 3%;
+            padding-right:3%;
+            border-radius: 33px;
+            font-family: 'Lato';
+            font-weight: 900;
+            font-size: 1.4vw; //22px
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            color: #000000;
+            background-color: #F2C94C;
+
+            //push new game button away
+            margin-right:47.4%;
+        }
+
+        #flip-board:hover {
+            color:#F2C94C;
+            background-color: #000;
+        }
+
+        #new-game {
+            outline-style: none;
+            padding-top: 1%;
+            padding-bottom:1%;
+            padding-left: 2%;
+            padding-right:2%;
+            font-family: 'Lato';
+            font-weight: 900;
+            font-size: 1.4vw; //22px
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            border-radius: 33px;
+            color: #FFF;
+            background-color: #FF8503;
+
+            //push lesson prep button away
+            margin-right:5%;
+        }
+
+        #new-game:hover {
+            color:#FF8503;
+            background-color: #fff;
+        }
+
+        #lesson-prep {
+            outline-style: none;
+            padding-top: 1%;
+            padding-bottom:1%;
+            padding-left: 3.5%;
+            padding-right:3.5%;
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 22px;
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            border-radius: 33px;
+            color: #fff;
+            background-color: #3A7CCA;
+        }
+
+        #lesson-prep:hover {
+            color:#3A7CCA;
+            background-color: #fff;
         }
     }
 }

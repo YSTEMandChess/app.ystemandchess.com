@@ -16,6 +16,7 @@ import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component';
 import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
 import { ParentComponent } from './pages/parent/parent.component';
+import { PlayMentorComponent } from './pages/play-mentor/play-mentor.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ParentComponent } from './pages/parent/parent.component';
     BeAMentorComponent,
     ProgramsComponent,
     StudentComponent,
-    ParentComponent
+    ParentComponent,
+    PlayMentorComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component'; 
 import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
+import { PlayMentorComponent} from './pages/play-mentor/play-mentor.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'be-amentor', component: BeAMentorComponent},
   {path: 'programs', component: ProgramsComponent},
   {path: 'student', component: StudentComponent},
-  {path: 'parent', component: ParentComponent}
+  {path: 'parent', component: ParentComponent},
+  {path: 'play-mentor', component: PlayMentorComponent}
 ];
 
 @NgModule({

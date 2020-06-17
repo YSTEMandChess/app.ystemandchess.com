@@ -68,6 +68,7 @@ export class HeaderComponent implements OnInit {
         });
         break;
       case "nLogged":
+        this.playLink = "/play";
         notAllowedExtsNotLoggedIn.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/";

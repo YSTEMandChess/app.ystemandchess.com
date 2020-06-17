@@ -1,3 +1,4 @@
+import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { ParentComponent } from './pages/parent/parent.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'programs', component: ProgramsComponent},
   {path: 'student', component: StudentComponent},
   {path: 'parent', component: ParentComponent},
-  {path: 'play-mentor', component: PlayMentorComponent}
+  {path: 'play-mentor', component: PlayMentorComponent},
+  {path: 'play-nolog', component: PlayNologComponent}
 ];
 
 @NgModule({

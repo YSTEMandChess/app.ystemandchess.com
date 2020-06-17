@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
             window.location.pathname = "/parent";
             break;
           case "mentor":
-            window.location.pathname = "/mentor";
+            window.location.pathname = "/play-mentor";
             break;
           case "admin":
             window.location.pathname = "/admin";

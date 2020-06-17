@@ -131,7 +131,7 @@ export class SignupComponent implements OnInit {
 
   checkTypeOfAccount() {
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
-    if(accountType == "Student") {
+    if(accountType == "student") {
       this.studentAccountFlag = true;
     } else {
       this.studentAccountFlag = false;
@@ -154,7 +154,7 @@ export class SignupComponent implements OnInit {
     
     let url = "";
 
-    if(accountType == 'Student') {
+    if(accountType == 'student') {
       var parentEmail = (<HTMLInputElement>document.getElementById('parentEmail')).value;
       url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&parentEmail=${parentEmail}`;
     } else {

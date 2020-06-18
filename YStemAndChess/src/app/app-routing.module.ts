@@ -11,6 +11,7 @@ import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component';
 import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
 import { PlayMentorComponent} from './pages/play-mentor/play-mentor.component';
+import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component'
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'student', component: StudentComponent},
   {path: 'parent', component: ParentComponent},
   {path: 'play-mentor', component: PlayMentorComponent},
+  {path: 'mentor-dashboard', component: MentorDashboardComponent},
   {path: 'play-nolog', component: PlayNologComponent}
 ];
 

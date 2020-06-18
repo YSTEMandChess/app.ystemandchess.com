@@ -19,6 +19,7 @@ import { ParentComponent } from './pages/parent/parent.component';
 import { PlayMentorComponent } from './pages/play-mentor/play-mentor.component';
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashbo
     ParentComponent,
     PlayMentorComponent,
     PlayNologComponent,
-    MentorDashboardComponent
+    MentorDashboardComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

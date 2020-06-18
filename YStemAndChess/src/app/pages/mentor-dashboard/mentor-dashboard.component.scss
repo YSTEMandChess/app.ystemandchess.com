@@ -1,0 +1,86 @@
+body {
+    padding-top:5%; //50px
+}
+
+//clears floats once they are no longer needed
+#clear {
+    clear:both;
+}
+
+.stats-container {
+    width: 90%;
+    height: auto; //auto later
+    margin-left: 5%;
+    padding-bottom:5%;
+    border-radius: 33px;
+    background-color: #E1E7ED;
+
+    #row-names {
+        display:flex;
+        flex-direction: row;
+        padding-top:5%;
+        padding-left:2.5%;
+            p {
+            padding-right:27.4%;
+            font-family: 'Lato';
+            font-size: 32px; //42px
+            font-style: normal;
+            font-weight: 900;
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+        }
+    }
+
+    .row-values {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width:95%;
+        margin-left: 2.5%;
+        border-bottom-style: solid;
+        border-bottom-width: thick;
+
+        #student-name {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:25%;
+            height:150px;
+            background-color: #fff;
+
+            p {
+                font-family: 'Roboto';
+                font-size: 2.3vw; //33px
+                font-weight: 700;
+                font-style: normal;
+                line-height: 117.1%;
+                letter-spacing: 0.01em;
+            }
+        }
+
+        #student-progress {
+            width:25%;
+            height:150px;
+            overflow: hidden;
+            background-color: #fff;
+
+            img {
+                width: 100%;    
+                height:auto;
+            }
+        }
+
+        #graph {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:25%;
+            height:150px;
+            background-color: #fff;
+
+            img { //graph image for now
+                width:100%;
+            }
+        }
+    }
+}

@@ -12,12 +12,12 @@
                 <p>Student</p>
                 <p>Progress</p>
             </div>
-            <div class="row-values">
+            <div *ngFor="let student of STUDENTS" class="row-values">
                 <div id="student-name">
-                    <p>Anna C.</p>
+                    <p>{{student.name}}</p>
                 </div>
                 <div id="student-progress">
-
+                    <img src="../../../assets/images/bargraph.png" alt="bar graph">
                 </div>
                 <div id="graph">
                     <img src="../../../assets/images/Vector 2.3.png" alt="vector">

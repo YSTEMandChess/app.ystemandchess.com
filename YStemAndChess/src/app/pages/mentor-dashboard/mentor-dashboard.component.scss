@@ -9,8 +9,9 @@ body {
 
 .stats-container {
     width: 90%;
-    height: 800px; //auto later
+    height: auto; //auto later
     margin-left: 5%;
+    padding-bottom:5%;
     border-radius: 33px;
     background-color: #E1E7ED;
 
@@ -60,7 +61,13 @@ body {
         #student-progress {
             width:25%;
             height:150px;
+            overflow: hidden;
             background-color: #fff;
+
+            img {
+                width: 100%;    
+                height:auto;
+            }
         }
 
         #graph {

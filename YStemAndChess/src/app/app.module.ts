@@ -18,6 +18,7 @@ import { StudentComponent } from './pages/student/student.component';
 import { ParentComponent } from './pages/parent/parent.component';
 import { PlayMentorComponent } from './pages/play-mentor/play-mentor.component';
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
+import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
     StudentComponent,
     ParentComponent,
     PlayMentorComponent,
-    PlayNologComponent
+    PlayNologComponent,
+    MentorDashboardComponent
   ],
   imports: [
     BrowserModule,

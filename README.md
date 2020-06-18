@@ -8,5 +8,9 @@
 - ~~Not Logged In Play Page~~
 - Parent Stat Page
 
+## Pages to Make in the Future
+- Full Contact page
+
+
 ## Future
 Make directions for building and all of the pages + give graphic of program stucture.

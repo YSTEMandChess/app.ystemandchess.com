@@ -6,7 +6,7 @@
 - ~~Admin Dashboard [Last]~~
 - Donate Page
 - ~~Not Logged In Play Page~~
-- Parent Stat Page
+- ~~Parent Stat Page~~
 
 ## Pages to Make in the Future
 - Full Contact page

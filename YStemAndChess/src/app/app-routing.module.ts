@@ -11,6 +11,7 @@ import { BeAMentorComponent } from './pages/be-amentor/be-amentor.component';
 import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
 import { PlayMentorComponent} from './pages/play-mentor/play-mentor.component';
+import { DonateComponent} from './pages/donate/donate.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'be-amentor', component: BeAMentorComponent},
   {path: 'programs', component: ProgramsComponent},
+  {path: 'donate', component: DonateComponent},
   {path: 'student', component: StudentComponent},
   {path: 'parent', component: ParentComponent},
   {path: 'play-mentor', component: PlayMentorComponent},

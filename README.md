@@ -1,7 +1,7 @@
 # Frontend Repo for YStem and Chess Website
 ## Pages to Make
 - ~~Mentor Dashboard~~
-- Contact Page
+- ~~Contact Page~~
 - Request A Mentor Page ?
 - Admin Dashboard [Last]
 - Donate Page

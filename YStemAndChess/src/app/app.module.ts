@@ -19,6 +19,8 @@ import { ParentComponent } from './pages/parent/parent.component';
 import { PlayMentorComponent } from './pages/play-mentor/play-mentor.component';
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { DonateComponent } from './pages/donate/donate.component';
+import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { DonateComponent } from './pages/donate/donate.component';
     PlayMentorComponent,
     PlayNologComponent,
     DonateComponent
+    MentorDashboardComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

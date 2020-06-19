@@ -26,9 +26,9 @@ export class HeaderComponent implements OnInit {
 
 
     // Disallowed extentions for each of the types of accounts
-    const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/student", "/play-mentor"];
-    const notAllowedExtsStudent: String[] = ["/parent", "/play-mentor", "/signin", "/login"];
-    const notAllowedExtsParent: String[] = ["/student", "/play-mentor", "/signin", "/login"];
+    const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/student", "/play-mentor", "/mentor-dashboard", "/admin"];
+    const notAllowedExtsStudent: String[] = ["/parent", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin"];
+    const notAllowedExtsParent: String[] = ["/student", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin"];
     const notAllowedExtsMentor: String[] = ["/student", "/parent", "/signin", "/login"];
     const notAllowedExtsAdmin: String[] = ["/signin", "/login"];
 

@@ -163,18 +163,10 @@ export class SignupComponent implements OnInit {
     
     this.httpGetAsync(url, (response) => {
       if (response == "This username has been taken. Please choose another.") {
-        this.link = "signup";
+        this.link = "/signup";
       }
       console.log(response);
     })
-  }
-
-  /*
-    Allows a fake instance of the user input to be used for test classes
-  */
-  private allowTesting(userParameter, HtmlId) {
-    if (userParameter == event) return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
-    return userParameter;
   }
 
   private httpGetAsync(theUrl, callback) {
@@ -185,6 +177,14 @@ export class SignupComponent implements OnInit {
     }
     xmlHttp.open("GET", theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
+  }
+
+  /*
+    Allows a fake instance of the user input to be used for test classes
+  */
+  private allowTesting(userParameter, HtmlId) {
+    if (userParameter == event) return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    return userParameter;
   }
 }
 

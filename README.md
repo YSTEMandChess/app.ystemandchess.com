@@ -14,3 +14,5 @@
 
 ## Future
 Make directions for building and all of the pages + give graphic of program stucture.
+
+## Communication between Backend and Frontend

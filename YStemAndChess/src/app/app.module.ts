@@ -37,7 +37,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     ParentComponent,
     PlayMentorComponent,
     PlayNologComponent,
-    DonateComponent
+    DonateComponent,
     MentorDashboardComponent,
     AdminComponent
   ],

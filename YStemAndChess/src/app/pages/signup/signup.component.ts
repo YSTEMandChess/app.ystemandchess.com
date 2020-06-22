@@ -232,13 +232,12 @@ export class SignupComponent implements OnInit {
 
   private addStudentToArray(click, index) {
     var studentFirstName = (<HTMLInputElement>document.getElementById("studentFirstName"+index)).value;
-    var studentLastName = (<HTMLInputElement>document.getElementById("studentLastName")).value;
-    var studentUserName = (<HTMLInputElement>document.getElementById("studentUsername")).value;
-    var studentPasssword = (<HTMLInputElement>document.getElementById("studentPassword")).value;
+    var studentLastName = (<HTMLInputElement>document.getElementById("studentLastName"+index)).value;
+    var studentUserName = (<HTMLInputElement>document.getElementById("studentUsername"+index)).value;
+    var studentPasssword = (<HTMLInputElement>document.getElementById("studentPassword"+index)).value;
 
     let student = {first: studentFirstName, last: studentLastName, username: studentUserName, passsword: studentPasssword};
-    let obj = JSON.stringify(student);
-    return obj;
+    return student;
   }
 
   checkIfParent() {
@@ -304,7 +303,7 @@ export class SignupComponent implements OnInit {
       var students = JSON.stringify(this.newStudents);
       url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
     } else {
-      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&email=${email}`;
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
     }
     
     this.httpGetAsync(url, (response) => {

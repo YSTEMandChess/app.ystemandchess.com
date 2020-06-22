@@ -43,10 +43,10 @@
                             </div>
                             <button type="button" class="x" (click)="removeNewStudent($event, i)">X</button>
                             <li><input type="text" placeholder="Students first name" id="studentFirstName{{i}}" (blur)="checkIfValidStudentAccount($event, i)"></li>
-                            <li><input type="text" placeholder="Students last name " id="studentLastName" (blur)="studentLastNameVerification($event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
-                            <li><input type="text" placeholder="Student username" id="studentUsername" (blur)="studentUsernameVerification($event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
-                            <li><input type="password" placeholder="Student password" id="studentPassword" (blur)="studentPasswordVerification($event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
-                            <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword" (blur)="studentRetypePasswordVerification($event, $event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
+                            <li><input type="text" placeholder="Students last name " id="studentLastName{{i}}" (blur)="studentLastNameVerification($event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
+                            <li><input type="text" placeholder="Student username" id="studentUsername{{i}}" (blur)="studentUsernameVerification($event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
+                            <li><input type="password" placeholder="Student password" id="studentPassword{{i}}" (blur)="studentPasswordVerification($event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
+                            <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword{{i}}" (blur)="studentRetypePasswordVerification($event, $event)" (blur)="checkIfValidStudentAccount($event, i)"></li>
                             <button type="button" class="x" (click)="addNewStudent($event)">+</button>
                         </div>
                     </div>

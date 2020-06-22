@@ -23,7 +23,7 @@ $collection->remove(['username' => $credentials->username]);
 
 if ($credentials->role == "student") {
     $collection->updateOne(['username' => $credentials->parentUsername],[
-        '$push' =>
+        '$pull' =>
             [
                 'children' => $username
             ]

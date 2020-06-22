@@ -23,8 +23,13 @@ export class SignupComponent implements OnInit {
   retypePasswordError = "";
 
   parentAccountFlag: boolean = false;
-  newStudents = new Array();
+  numStudents = new Array();
+  newStudents: String[][] = [];
   newStudentFlag = false;
+  studentFirstNameError = "";
+  studentLastNameError = "";
+  studentPasswordError = "";
+  studentRetypePasswordError = "";
 
   constructor() { }
 
@@ -131,6 +136,30 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  checkIfValidStudentAccount() {
+    if(this.firstNameFlag === true && this.lastNameFlag === true && this.userNameFlag === true 
+      && this.passwordFlag === true && this.retypeFlag === true) {
+        this.link="/login";
+        this.newStudents.push(this.addStudentToArray());
+        console.log(this.newStudents);
+      } else {
+        this.link = null;
+      }
+  }
+
+  private addStudentToArray() {
+    var studentFirstName = (<HTMLInputElement>document.getElementById("studentFirstName")).value;
+    var studentLastName = (<HTMLInputElement>document.getElementById("studentLastName")).value;
+    var studentPasssword = (<HTMLInputElement>document.getElementById("studentPassword")).value;
+
+    let student = new Array();
+    student.push(studentFirstName);
+    student.push(studentLastName);
+    student.push(studentPasssword);
+
+    return student;
+  }
+
   checkIfParent() {
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
     if(accountType == "parent") {
@@ -146,28 +175,32 @@ export class SignupComponent implements OnInit {
     if(create == event) {
       this.newStudentFlag = true;
       document.getElementById("create").style.display = "none";
-      this.newStudents.push("new");
+      this.numStudents.push("new");
     }
   }
 
   removeNewStudent(click) {
     if(click == event) {
-      if(this.newStudents.length == 1){
+      if(this.numStudents.length == 1){
         this.newStudentFlag = false;
+        this.numStudents.splice(0, 1);
         this.newStudents.splice(0, 1);
         document.getElementById("create").style.display = "inline";
       } else {
+        this.numStudents.splice(0, 1);
         this.newStudents.splice(0, 1);
       }
     }
   }
 
   addNewStudent(click) {
-    this.newStudents.push("new");
+    if(click == event) {
+      this.numStudents.push("new");
+    }
   }
 
   students() {
-    return this.newStudents;
+    return this.numStudents;
   }
 
   SendToDataBase() {
@@ -184,9 +217,8 @@ export class SignupComponent implements OnInit {
     
     let url = "";
 
-    if(accountType == 'student') {
-      var parentEmail = (<HTMLInputElement>document.getElementById('parentEmail')).value;
-      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&parentEmail=${parentEmail}`;
+    if(accountType == 'parent' && this.newStudentFlag == true) {
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&students=${this.newStudents}`;
     } else {
       url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&email=${email}`;
     }

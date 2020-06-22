@@ -31,14 +31,15 @@
                 
                 <div *ngIf="checkIfParent()">
                     <button type="button" id ="create" (click)="checkIfCreateNewStudent($event)">Create Student?</button>
-                    <div *ngIf="newStudentFlag">
-                        <div *ngFor="let student of students()" id="newStudent">
+                    <div *ngIf="newStudentFlag" id="{{numStudents.length}}">
+                        <div *ngFor="let student of students(); let i = index" id="newStudent">
+                            <h3>{{i}}</h3>
                             <button type="button" class="x" (click)="removeNewStudent($event)">X</button>
-                            <li><input type="text" placeholder="Students first name" id="studentFirstName" (blur)="firstNameVerification($event)"></li>
-                            <li><input type="text" placeholder="Students last name " id="studentLastName" (blur)="lastNameVerification($event)"></li>
-                            <li><input type="text" placeholder="Student username" id="studentUsername" (blur)="usernameVerification($event)"></li>
-                            <li><input type="password" placeholder="Student password" id="studentPassword" (blur)="passwordVerification($event)"></li>
-                            <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword" (blur)="retypePasswordVerification($event, $event)"></li>
+                            <li><input type="text" placeholder="Students first name" id="studentFirstName" (blur)="firstNameVerification($event)" (blur)="checkIfValidStudentAccount()"></li>
+                            <li><input type="text" placeholder="Students last name " id="studentLastName" (blur)="lastNameVerification($event)" (blur)="checkIfValidStudentAccount()"></li>
+                            <li><input type="text" placeholder="Student username" id="studentUsername" (blur)="usernameVerification($event)" (blur)="checkIfValidStudentAccount()"></li>
+                            <li><input type="password" placeholder="Student password" id="studentPassword" (blur)="passwordVerification($event)" (blur)="checkIfValidStudentAccount()"></li>
+                            <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword" (blur)="retypePasswordVerification($event, $event)" (blur)="checkIfValidStudentAccount()"></li>
                             <button type="button" class="x" (click)="addNewStudent($event)">+</button>
                         </div>
                     </div>

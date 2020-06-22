@@ -26,8 +26,14 @@ export class SignupComponent implements OnInit {
   numStudents = new Array();
   newStudents: String[][] = [];
   newStudentFlag = false;
+  studentFirstNameFlag = false;
+  studentLastNameFlag = false;
+  studentUserNameFlag = false;
+  studentPasswordFlag = false;
+  studentRetypeFlag = false;
   studentFirstNameError = "";
   studentLastNameError = "";
+  studentUserNameError = "";
   studentPasswordError = "";
   studentRetypePasswordError = "";
 
@@ -50,6 +56,18 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  studentFirstNameVerification(firstName: any) {
+    if (/^[A-Za-z]{2,15}$/.test(firstName)) {
+      this.studentFirstNameFlag = true;
+      this.studentFirstNameError = ""
+      return true;
+    } else {
+      this.studentFirstNameFlag = false;
+      this.studentFirstNameError = "Invalid First Name";
+      return false;
+    }
+  }
+
   lastNameVerification(lastName: any) {
 
     lastName = this.allowTesting(lastName, 'lastName');
@@ -61,6 +79,21 @@ export class SignupComponent implements OnInit {
     } else {
       this.lastNameFlag = false;
       this.lastNameError = "Invalid Last Name";
+      return false;
+    }
+  }
+
+  studentLastNameVerification(lastName: any) {
+
+    lastName = this.allowTesting(lastName, 'lastName');
+
+    if (/^[A-Za-z]{2,15}$/.test(lastName)) {
+      this.studentLastNameFlag = true;
+      this.studentLastNameError = ""
+      return true;
+    } else {
+      this.studentLastNameFlag = false;
+      this.studentLastNameError = "Invalid Last Name";
       return false;
     }
   }
@@ -95,6 +128,21 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  studentUsernameVerification(username: any) {
+    username = this.allowTesting(username, 'username');
+
+    if (/^[a-zA-Z](\S){1,14}$/.test(username)) {
+      //check username against database
+      this.studentUserNameFlag = true;
+      this.studentUserNameError = "";
+      return true;
+    } else {
+      this.studentUserNameFlag = false;
+      this.studentUserNameError = "Invalid Username";
+      return false;
+    }
+  }
+
   passwordVerification(password: any) {
     password = this.allowTesting(password, 'password');
 
@@ -106,6 +154,21 @@ export class SignupComponent implements OnInit {
       //verify password with username
       this.passwordFlag = true;
       this.passwordError = "";
+      return true;
+    }
+  }
+
+  studentPasswordVerification(password: any) {
+    password = this.allowTesting(password, 'password');
+
+    if (password.length < 8) {
+      this.studentPasswordFlag = false;
+      this.studentPasswordError = "Invalid Password"
+      return false;
+    } else {
+      //verify password with username
+      this.studentPasswordFlag = true;
+      this.studentPasswordError = "";
       return true;
     }
   }
@@ -125,6 +188,21 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  studentRetypePasswordVerification(retypedPassword: any, password: any) {
+    retypedPassword = this.allowTesting(retypedPassword, 'retypedPassword');
+    password = this.allowTesting(password, 'password');
+
+    if (retypedPassword === password) {
+      this.studentRetypeFlag = true;
+      this.studentRetypePasswordError = "";
+      return true;
+    } else {
+      this.studentRetypeFlag = false;
+      this.studentRetypePasswordError = "Passwords do not match"
+      return false;
+    }
+  }
+
   checkIfValidAccount() {
     if (this.firstNameFlag === true && this.lastNameFlag === true && this.emailFlag === true
       && this.userNameFlag === true && this.passwordFlag === true && this.retypeFlag === true) {
@@ -136,19 +214,24 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  checkIfValidStudentAccount() {
-    if(this.firstNameFlag === true && this.lastNameFlag === true && this.userNameFlag === true 
-      && this.passwordFlag === true && this.retypeFlag === true) {
+  checkIfValidStudentAccount(click, index) {
+    if(this.studentLastNameFlag === true && this.studentUserNameFlag === true 
+      && this.studentPasswordFlag === true && this.studentRetypeFlag === true) {
         this.link="/login";
-        this.newStudents.push(this.addStudentToArray());
+        this.newStudents.push(this.addStudentToArray(click, index));
         console.log(this.newStudents);
+        //set them all to false for future students
+        this.studentFirstNameFlag = false;
+        this.studentLastNameFlag = false;
+        this.studentPasswordFlag = false;
+        this.studentRetypeFlag = false;
       } else {
         this.link = null;
       }
   }
 
-  private addStudentToArray() {
-    var studentFirstName = (<HTMLInputElement>document.getElementById("studentFirstName")).value;
+  private addStudentToArray(click, index) {
+    var studentFirstName = (<HTMLInputElement>document.getElementById("studentFirstName"+index)).value;
     var studentLastName = (<HTMLInputElement>document.getElementById("studentLastName")).value;
     var studentPasssword = (<HTMLInputElement>document.getElementById("studentPassword")).value;
 
@@ -179,18 +262,20 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  removeNewStudent(click) {
+  removeNewStudent(click, index) {
+    console.log(index);
     if(click == event) {
       if(this.numStudents.length == 1){
         this.newStudentFlag = false;
         this.numStudents.splice(0, 1);
-        this.newStudents.splice(0, 1);
+        this.newStudents.splice(0,1);
         document.getElementById("create").style.display = "inline";
       } else {
         this.numStudents.splice(0, 1);
-        this.newStudents.splice(0, 1);
+        this.newStudents.splice(index, index+1);
       }
     }
+    console.log(this.newStudents);
   }
 
   addNewStudent(click) {

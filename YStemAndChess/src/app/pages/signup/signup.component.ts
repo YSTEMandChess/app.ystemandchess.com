@@ -301,8 +301,8 @@ export class SignupComponent implements OnInit {
     let url = "";
 
     if(accountType == 'parent' && this.newStudentFlag == true) {
-      
-      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${this.newStudents}`;
+      var students = JSON.stringify(this.newStudents);
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
     } else {
       url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&email=${email}`;
     }

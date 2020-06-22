@@ -22,7 +22,9 @@ export class SignupComponent implements OnInit {
   passwordError = "";
   retypePasswordError = "";
 
-  studentAccountFlag: boolean = false;
+  parentAccountFlag: boolean = false;
+  newStudents = new Array();
+  newStudentFlag = false;
 
   constructor() { }
 
@@ -129,15 +131,43 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  checkTypeOfAccount() {
+  checkIfParent() {
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
-    if(accountType == "student") {
-      this.studentAccountFlag = true;
+    if(accountType == "parent") {
+      this.parentAccountFlag = true;
     } else {
-      this.studentAccountFlag = false;
+      this.parentAccountFlag = false;
     }
     
-    return this.studentAccountFlag;
+    return this.parentAccountFlag;
+  }
+
+  checkIfCreateNewStudent(create) {
+    if(create == event) {
+      this.newStudentFlag = true;
+      document.getElementById("create").style.display = "none";
+      this.newStudents.push("new");
+    }
+  }
+
+  removeNewStudent(click) {
+    if(click == event) {
+      if(this.newStudents.length == 1){
+        this.newStudentFlag = false;
+        this.newStudents.splice(0, 1);
+        document.getElementById("create").style.display = "inline";
+      } else {
+        this.newStudents.splice(0, 1);
+      }
+    }
+  }
+
+  addNewStudent(click) {
+    this.newStudents.push("new");
+  }
+
+  students() {
+    return this.newStudents;
   }
 
   SendToDataBase() {

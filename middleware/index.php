@@ -16,8 +16,8 @@ $firstName = htmlspecialchars_decode($_GET["first"]);
 $lastName = htmlspecialchars_decode($_GET["last"]);
 $reason = htmlspecialchars_decode($_GET["reason"]);
 $email = htmlspecialchars_decode($_GET["email"]);
-$parentEmail = htmlspecialchars_decode($_GET["parentEmail"]);
-//$parentEmail = htmlspecialchars_decode($_GET["parentEmail"]);
+$students = htmlspecialchars_decode($_GET["students"]);
+$parentUsername = htmlspecialchars_decode($_GET["parentUsername"]);
 //$jwt = htmlspecialchars_decode($_GET["jwt"]); May not be needed if this file only is going to be handing out JWT tokens / Validating users.
 $role = htmlspecialchars_decode($_GET["role"]); // Role of the person: student, mentor, parent
 
@@ -29,11 +29,7 @@ if ($reason == "create") {
         echo "Not all of the parameters were found. Please ensure that you pass: username, password, first, last, and role as well.";
         return;
     }
-    if($role == 'student') {
-        $email=$parentEmail;
-    }
-    createUser($username, $password, $firstName, $lastName, $email, $role);
-
+    createUser($username, $password, $firstName, $lastName, $email, $role, $students, $parentUsername);
 // Verify. The user claims to be already in the system. Making sure that they are who they claim to be. Checking their username and password
 } else if ($reason == "verify") {
     if (!$username || !$password) {
@@ -56,7 +52,7 @@ if ($reason == "create") {
 
 
 
-function createUser($username, $password, $firstName, $lastName, $email, $role) {
+function createUser($username, $password, $firstName, $lastName, $email, $role, $students, $parentUsername) {
     // MONGO DB LOGIN
     $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
     // Select the user collection
@@ -66,23 +62,88 @@ function createUser($username, $password, $firstName, $lastName, $email, $role) 
         echo "This username has been taken. Please choose another.";
         return;
     };
-    
-    if($role=='student' && !isParentEmail($email, $collection)) {
-        echo "This email is not a parents email, cannot create student account.";
-        return;
-    }
 
     $hashPass = hash("sha384",$password);
 
-    $collection->insertOne([
-        'username' => $username,
-        'password' => $hashPass,
-        'firstName' => $firstName,
-        'lastName' => $lastName,
-        'email' => $email,
-        'role' => $role,
-        'accountCreatedAt' => time()
-    ]);
+    if($role == 'parent') {
+        // They are a parent, will need to create a different document
+        try {
+            $studentInfo = json_decode($students);
+        } catch(Exception $e) {
+            echo "Error decoding json.\n";
+            return;
+        }
+        
+        for($i=0; $i<count($studentInfo); $i++) {
+            if(isTakenUsername($studentInfo[$i]->username, $collection)) {
+                echo "Student ";
+                echo $i;
+                echo "username has been taken. Please choose another.";
+                return;
+            };
+        }
+
+        $sUsernames = [];
+        for($i=0; $i<count($studentInfo); $i++) {
+            $studentUsername = $studentInfo[$i]->username;
+            $studentFirst = $studentInfo[$i]->first;
+            $studentLast = $studentInfo[$i]->last;
+            $studentPassword = hash("sha384",$studentInfo[$i]->password);
+            array_push($sUsernames, $studentUsername);
+            // insert all students into the collection
+            $collection->insertOne([
+                'username' => $studentUsername,
+                'password' => $studentPassword,
+                'firstName' => $studentFirst,
+                'lastName' => $studentLast,
+                'parentUsername' => $parentUsername,
+                'role' => 'student',
+                'accountCreatedAt' => time()
+            ]);
+        }
+        // Create the parent account
+        $collection->insertOne([
+            'username' => $username,
+            'password' => $hashPass,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'role' => $role,
+            'children' => $sUsernames,
+            'accountCreatedAt' => time()
+        ]);
+        
+    } else if($role == 'student') {
+        // If they are a student, then we will need to add a link to the parent.
+        $collection->insertOne([
+            'username' => $username,
+            'password' => $hashPass,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'role' => $role,
+            'accountCreatedAt' => time()
+        ]);
+        // Now find the parent and update their children.
+        $collection->updateOne(['username' => $parentUsername],[
+            '$push' =>
+                [
+                    'children' => $username
+                ]
+            ]
+        );
+        
+    } else {
+        $collection->insertOne([
+            'username' => $username,
+            'password' => $hashPass,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'role' => $role,
+            'accountCreatedAt' => time()
+        ]);
+    }
 
     $payload = array(
         'username' => $username,
@@ -108,16 +169,28 @@ function verifyUser($username, $password) {
     $collection = $client->ystem->users;
     $document = $collection->findOne(['username' => $username]);
     if($document['password'] == $hashPass) {
-        $payload = array(
-            'username' => $username,
-            'firstName' => $document['firstName'],
-            'lastName' => $document['lastName'],
-            'role' => $document['role'],
-            'email' => $document['email'],
-            'iat' => time(),
-            'eat' => strtotime("+30 days")
-        );
-    
+        if($document['role'] == 'student') {
+            $payload = array(
+                'username' => $username,
+                'firstName' => $document['firstName'],
+                'lastName' => $document['lastName'],
+                'role' => $document['role'],
+                'email' => $document['email'],
+                'parentUsername' => $document['parentUsername'],
+                'iat' => time(),
+                'eat' => strtotime("+30 days")
+            );
+        } else {
+            $payload = array(
+                'username' => $username,
+                'firstName' => $document['firstName'],
+                'lastName' => $document['lastName'],
+                'role' => $document['role'],
+                'email' => $document['email'],
+                'iat' => time(),
+                'eat' => strtotime("+30 days")
+            );
+        }
         $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
         echo $jwt;
     } else {
@@ -140,13 +213,4 @@ function isTakenUsername($username, $collection) {
     }
 }
 
-
-function isParentEmail($parentEmail, $collection) {
-    $document = $collection->findOne(['email' => $parentEmail, 'role' => 'parent']); 
-    if(is_null($document)) {
-        return false;
-    } else {
-        return true;
-    }
-}
 ?>

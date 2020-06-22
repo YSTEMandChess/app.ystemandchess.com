@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
 
   parentAccountFlag: boolean = false;
   numStudents = new Array();
-  newStudents: String[][] = [];
+  newStudents: any[] = [];
   newStudentFlag = false;
   studentFirstNameFlag = false;
   studentLastNameFlag = false;
@@ -233,12 +233,10 @@ export class SignupComponent implements OnInit {
   private addStudentToArray(click, index) {
     var studentFirstName = (<HTMLInputElement>document.getElementById("studentFirstName"+index)).value;
     var studentLastName = (<HTMLInputElement>document.getElementById("studentLastName")).value;
+    var studentUserName = (<HTMLInputElement>document.getElementById("studentUsername")).value;
     var studentPasssword = (<HTMLInputElement>document.getElementById("studentPassword")).value;
 
-    let student = new Array();
-    student.push(studentFirstName);
-    student.push(studentLastName);
-    student.push(studentPasssword);
+    let student = {first: studentFirstName, last: studentLastName, username: studentUserName, passsword: studentPasssword};
 
     return student;
   }
@@ -303,9 +301,9 @@ export class SignupComponent implements OnInit {
     let url = "";
 
     if(accountType == 'parent' && this.newStudentFlag == true) {
-      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&students=${this.newStudents}`;
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${this.newStudents}`;
     } else {
-      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=${accountType}&email=${email}`;
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&email=${email}`;
     }
     
     this.httpGetAsync(url, (response) => {

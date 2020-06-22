@@ -96,6 +96,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
                 'password' => $studentPassword,
                 'firstName' => $studentFirst,
                 'lastName' => $studentLast,
+                'parentUsername' => $parentUsername,
                 'role' => 'student',
                 'accountCreatedAt' => time()
             ]);
@@ -168,16 +169,28 @@ function verifyUser($username, $password) {
     $collection = $client->ystem->users;
     $document = $collection->findOne(['username' => $username]);
     if($document['password'] == $hashPass) {
-        $payload = array(
-            'username' => $username,
-            'firstName' => $document['firstName'],
-            'lastName' => $document['lastName'],
-            'role' => $document['role'],
-            'email' => $document['email'],
-            'iat' => time(),
-            'eat' => strtotime("+30 days")
-        );
-    
+        if($document['role'] == 'student') {
+            $payload = array(
+                'username' => $username,
+                'firstName' => $document['firstName'],
+                'lastName' => $document['lastName'],
+                'role' => $document['role'],
+                'email' => $document['email'],
+                'parentUsername' => $document['parentUsername'],
+                'iat' => time(),
+                'eat' => strtotime("+30 days")
+            );
+        } else {
+            $payload = array(
+                'username' => $username,
+                'firstName' => $document['firstName'],
+                'lastName' => $document['lastName'],
+                'role' => $document['role'],
+                'email' => $document['email'],
+                'iat' => time(),
+                'eat' => strtotime("+30 days")
+            );
+        }
         $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
         echo $jwt;
     } else {

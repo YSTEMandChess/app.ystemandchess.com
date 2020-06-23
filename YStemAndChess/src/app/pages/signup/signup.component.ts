@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { createAotUrlResolver } from '@angular/compiler';
+import { isString } from 'util';
 
 @Component({
   selector: 'app-signup',
@@ -56,10 +57,12 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentFirstNameVerification(firstName: any) {
+  studentFirstNameVerification(firstName: any, index: any) {
+    firstName = this.allowTesting(firstName, "studentFirstName"+index);
+
     if (/^[A-Za-z]{2,15}$/.test(firstName)) {
       this.studentFirstNameFlag = true;
-      this.studentFirstNameError = ""
+      this.studentFirstNameError = "";
       return true;
     } else {
       this.studentFirstNameFlag = false;
@@ -83,9 +86,9 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentLastNameVerification(lastName: any) {
+  studentLastNameVerification(lastName: any, index: any) {
 
-    lastName = this.allowTesting(lastName, 'lastName');
+    lastName = this.allowTesting(lastName, "studentLastName"+index);
 
     if (/^[A-Za-z]{2,15}$/.test(lastName)) {
       this.studentLastNameFlag = true;
@@ -128,8 +131,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentUsernameVerification(username: any) {
-    username = this.allowTesting(username, 'username');
+  studentUsernameVerification(username: any, index: any) {
+    username = this.allowTesting(username, 'studentUsername'+index);
 
     if (/^[a-zA-Z](\S){1,14}$/.test(username)) {
       //check username against database
@@ -158,8 +161,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentPasswordVerification(password: any) {
-    password = this.allowTesting(password, 'password');
+  studentPasswordVerification(password: any, index: any) {
+    password = this.allowTesting(password, 'studentPassword'+index);
 
     if (password.length < 8) {
       this.studentPasswordFlag = false;
@@ -188,9 +191,9 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentRetypePasswordVerification(retypedPassword: any, password: any) {
-    retypedPassword = this.allowTesting(retypedPassword, 'retypedPassword');
-    password = this.allowTesting(password, 'password');
+  studentRetypePasswordVerification(retypedPassword: any, password:any, index: any) {
+    retypedPassword = this.allowTesting(retypedPassword, 'studentRetypedPassword'+index);
+    password = this.allowTesting(password, 'studentPassword'+index);
 
     if (retypedPassword === password) {
       this.studentRetypeFlag = true;
@@ -215,7 +218,7 @@ export class SignupComponent implements OnInit {
   }
 
   checkIfValidStudentAccount(click, index) {
-    if(this.studentLastNameFlag === true && this.studentUserNameFlag === true 
+    if(this.studentFirstNameFlag === true && this.studentLastNameFlag === true && this.studentUserNameFlag === true 
       && this.studentPasswordFlag === true && this.studentRetypeFlag === true) {
         this.link="/login";
         this.newStudents.push(this.addStudentToArray(click, index));
@@ -223,6 +226,7 @@ export class SignupComponent implements OnInit {
         //set them all to false for future students
         this.studentFirstNameFlag = false;
         this.studentLastNameFlag = false;
+        this.studentUserNameFlag = false;
         this.studentPasswordFlag = false;
         this.studentRetypeFlag = false;
       } else {
@@ -328,7 +332,9 @@ export class SignupComponent implements OnInit {
     Allows a fake instance of the user input to be used for test classes
   */
   private allowTesting(userParameter, HtmlId) {
-    if (userParameter == event) return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    if (userParameter == event) {
+      return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    }
     return userParameter;
   }
 }

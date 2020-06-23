@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { createAotUrlResolver } from '@angular/compiler';
 import { isString } from 'util';
+import{ HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -35,7 +36,7 @@ export class SignupComponent implements OnInit {
   private numNewStudents = 0;
   private numStudentsDeleted = 0;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -271,19 +272,16 @@ export class SignupComponent implements OnInit {
         this.newStudentFlag = false;
         this.numStudents = [];
         this.numNewStudents = 0;
-        this.numStudentsDeleted = 0;
         this.newStudents = [];
         document.getElementById("create").style.display = "inline";
         return;
       } else {
         document.getElementById("newStudent"+index).style.display = "none";
-
-        this.newStudents.splice(index-this.numStudentsDeleted, (index-this.numStudentsDeleted)+1);
+        this.newStudents[index] = null;
       }
     }
     console.log(this.newStudents);
     this.numNewStudents--;
-    this.numStudentsDeleted++;
   }
 
   addNewStudent(click, index) {
@@ -295,6 +293,19 @@ export class SignupComponent implements OnInit {
 
   students() {
     return this.numStudents;
+  }
+
+  clearNulls(arr) {
+    let newarr = [];
+    let index = 0;
+      while(index < arr.length) {
+        if(arr[index] != null) {
+          newarr.push(arr[index]);
+        }
+        console.log(index);
+        index++;
+      }
+    return newarr;
   }
 
   SendToDataBase() {
@@ -312,6 +323,8 @@ export class SignupComponent implements OnInit {
     let url = "";
 
     if(accountType == 'parent' && this.newStudentFlag == true) {
+      this.newStudents = this.clearNulls(this.newStudents);
+      console.log(this.newStudents);
       var students = JSON.stringify(this.newStudents);
       url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
     } else {

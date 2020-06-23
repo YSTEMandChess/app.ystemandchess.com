@@ -439,6 +439,57 @@ describe('Retype Password Verification', () => {
   });
 });
 
+describe('Clear nulls in array verification', () => {
+  let http: HttpClient;
+  let signup: SignupComponent = new SignupComponent(http);
+
+  //true tests
+
+  //array size 2
+  it('null at beginning', () => {
+    let arr = [null, 1];
+    const result = signup.clearNulls(arr);
+    expect(result).toEqual([1]);
+  });
+
+  it('null at end', () => {
+    let arr = [1, null];
+    const result = signup.clearNulls(arr);
+    expect(result).toEqual([1]);
+  });
+
+  //array size 3
+  it('null in middle', () => {
+    let arr = [1, null, 2];
+    const result = signup.clearNulls(arr);
+    expect(result).toEqual([1,2]);
+  });
+
+  it('null in beginning', () => {
+    let arr = [null, 1, 2];
+    const result = signup.clearNulls(arr);
+    expect(result).toEqual([1,2]);
+  });
+
+  it('null at end', () => {
+    let arr = [1, 2, null];
+    const result = signup.clearNulls(arr);
+    expect(result).toEqual([1,2]);
+  });
+
+  it('first two null', () => {
+    let arr = [null, null, 1];
+    const result = signup.clearNulls(arr);
+    expect(result).toEqual([1]);
+  });
+
+  it('last two null', () => {
+    let arr = [1, null, null];
+    const result = signup.clearNulls(arr);
+    expect(result).toEqual([1]);
+  });
+});
+
 describe('SignupComponent', () => {
   let http: HttpClient;
   let component: SignupComponent = new SignupComponent(http);

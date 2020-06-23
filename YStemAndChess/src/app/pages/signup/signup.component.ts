@@ -37,6 +37,7 @@ export class SignupComponent implements OnInit {
   studentUserNameError = "";
   studentPasswordError = "";
   studentRetypePasswordError = "";
+  private numNewStudents = 0;
 
   constructor() { }
 
@@ -62,11 +63,11 @@ export class SignupComponent implements OnInit {
 
     if (/^[A-Za-z]{2,15}$/.test(firstName)) {
       this.studentFirstNameFlag = true;
-      this.studentFirstNameError = "";
+      document.getElementById("errorFirstName"+index).innerHTML = "";
       return true;
     } else {
       this.studentFirstNameFlag = false;
-      this.studentFirstNameError = "Invalid First Name";
+      document.getElementById("errorFirstName"+index).innerHTML = "Invalid First Name";
       return false;
     }
   }
@@ -92,11 +93,11 @@ export class SignupComponent implements OnInit {
 
     if (/^[A-Za-z]{2,15}$/.test(lastName)) {
       this.studentLastNameFlag = true;
-      this.studentLastNameError = ""
+      document.getElementById("errorLastName"+index).innerHTML="";
       return true;
     } else {
       this.studentLastNameFlag = false;
-      this.studentLastNameError = "Invalid Last Name";
+      document.getElementById("errorLastName"+index).innerHTML="Invalid Last Name";
       return false;
     }
   }
@@ -138,10 +139,11 @@ export class SignupComponent implements OnInit {
       //check username against database
       this.studentUserNameFlag = true;
       this.studentUserNameError = "";
+      document.getElementById("errorUsername"+index).innerHTML = "";
       return true;
     } else {
       this.studentUserNameFlag = false;
-      this.studentUserNameError = "Invalid Username";
+      document.getElementById("errorUsername"+index).innerHTML = "Invalid Username";
       return false;
     }
   }
@@ -166,12 +168,12 @@ export class SignupComponent implements OnInit {
 
     if (password.length < 8) {
       this.studentPasswordFlag = false;
-      this.studentPasswordError = "Invalid Password"
+      document.getElementById("errorPassword"+index).innerHTML="Invalid Password";
       return false;
     } else {
       //verify password with username
       this.studentPasswordFlag = true;
-      this.studentPasswordError = "";
+      document.getElementById("errorPassword"+index).innerHTML="";
       return true;
     }
   }
@@ -197,11 +199,11 @@ export class SignupComponent implements OnInit {
 
     if (retypedPassword === password) {
       this.studentRetypeFlag = true;
-      this.studentRetypePasswordError = "";
+      document.getElementById("errorRetype"+index).innerHTML="";
       return true;
     } else {
       this.studentRetypeFlag = false;
-      this.studentRetypePasswordError = "Passwords do not match"
+      document.getElementById("errorRetype"+index).innerHTML="Passwords do not match";
       return false;
     }
   }
@@ -229,6 +231,7 @@ export class SignupComponent implements OnInit {
         this.studentUserNameFlag = false;
         this.studentPasswordFlag = false;
         this.studentRetypeFlag = false;
+        document.getElementById("error"+index).style.display ="none";
       } else {
         this.link = null;
       }
@@ -260,29 +263,32 @@ export class SignupComponent implements OnInit {
       this.newStudentFlag = true;
       document.getElementById("create").style.display = "none";
       this.numStudents.push("new");
+      this.numNewStudents++;
     }
   }
 
   removeNewStudent(click, index) {
     console.log(index);
     if(click == event) {
-      if(this.numStudents.length == 1){
+      if(this.numNewStudents == 1){
         this.newStudentFlag = false;
-        this.numStudents.splice(0, 1);
+        this.numStudents.splice(0,1);
         this.newStudents.splice(0,1);
         document.getElementById("create").style.display = "inline";
       } else {
-        this.numStudents.splice(0, 1);
+        document.getElementById("newStudent"+index).style.display = "none";
         this.newStudents.splice(index, index+1);
       }
     }
     console.log(this.newStudents);
+    this.numNewStudents--;
   }
 
   addNewStudent(click) {
     if(click == event) {
       this.numStudents.push("new");
     }
+    this.numNewStudents++;
   }
 
   students() {

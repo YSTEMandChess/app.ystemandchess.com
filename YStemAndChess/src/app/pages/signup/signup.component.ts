@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { createAotUrlResolver } from '@angular/compiler';
+import { isString } from 'util';
+import{ HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -26,18 +28,15 @@ export class SignupComponent implements OnInit {
   numStudents = new Array();
   newStudents: any[] = [];
   newStudentFlag = false;
-  studentFirstNameFlag = false;
-  studentLastNameFlag = false;
-  studentUserNameFlag = false;
-  studentPasswordFlag = false;
-  studentRetypeFlag = false;
-  studentFirstNameError = "";
-  studentLastNameError = "";
-  studentUserNameError = "";
-  studentPasswordError = "";
-  studentRetypePasswordError = "";
+  private studentFirstNameFlag = false;
+  private studentLastNameFlag = false;
+  private studentUserNameFlag = false;
+  private studentPasswordFlag = false;
+  private studentRetypeFlag = false;
+  private numNewStudents = 0;
+  private numStudentsDeleted = 0;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -56,14 +55,16 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentFirstNameVerification(firstName: any) {
+  studentFirstNameVerification(firstName: any, index: any) {
+    firstName = this.allowTesting(firstName, "studentFirstName"+index);
+
     if (/^[A-Za-z]{2,15}$/.test(firstName)) {
       this.studentFirstNameFlag = true;
-      this.studentFirstNameError = ""
+      document.getElementById("errorFirstName"+index).innerHTML = "";
       return true;
     } else {
       this.studentFirstNameFlag = false;
-      this.studentFirstNameError = "Invalid First Name";
+      document.getElementById("errorFirstName"+index).innerHTML = "Invalid First Name";
       return false;
     }
   }
@@ -83,17 +84,17 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentLastNameVerification(lastName: any) {
+  studentLastNameVerification(lastName: any, index: any) {
 
-    lastName = this.allowTesting(lastName, 'lastName');
+    lastName = this.allowTesting(lastName, "studentLastName"+index);
 
     if (/^[A-Za-z]{2,15}$/.test(lastName)) {
       this.studentLastNameFlag = true;
-      this.studentLastNameError = ""
+      document.getElementById("errorLastName"+index).innerHTML="";
       return true;
     } else {
       this.studentLastNameFlag = false;
-      this.studentLastNameError = "Invalid Last Name";
+      document.getElementById("errorLastName"+index).innerHTML="Invalid Last Name";
       return false;
     }
   }
@@ -128,17 +129,17 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentUsernameVerification(username: any) {
-    username = this.allowTesting(username, 'username');
+  studentUsernameVerification(username: any, index: any) {
+    username = this.allowTesting(username, 'studentUsername'+index);
 
     if (/^[a-zA-Z](\S){1,14}$/.test(username)) {
       //check username against database
       this.studentUserNameFlag = true;
-      this.studentUserNameError = "";
+      document.getElementById("errorUsername"+index).innerHTML = "";
       return true;
     } else {
       this.studentUserNameFlag = false;
-      this.studentUserNameError = "Invalid Username";
+      document.getElementById("errorUsername"+index).innerHTML = "Invalid Username";
       return false;
     }
   }
@@ -158,17 +159,17 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentPasswordVerification(password: any) {
-    password = this.allowTesting(password, 'password');
+  studentPasswordVerification(password: any, index: any) {
+    password = this.allowTesting(password, 'studentPassword'+index);
 
     if (password.length < 8) {
       this.studentPasswordFlag = false;
-      this.studentPasswordError = "Invalid Password"
+      document.getElementById("errorPassword"+index).innerHTML="Invalid Password";
       return false;
     } else {
       //verify password with username
       this.studentPasswordFlag = true;
-      this.studentPasswordError = "";
+      document.getElementById("errorPassword"+index).innerHTML="";
       return true;
     }
   }
@@ -188,17 +189,17 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentRetypePasswordVerification(retypedPassword: any, password: any) {
-    retypedPassword = this.allowTesting(retypedPassword, 'retypedPassword');
-    password = this.allowTesting(password, 'password');
+  studentRetypePasswordVerification(retypedPassword: any, password:any, index: any) {
+    retypedPassword = this.allowTesting(retypedPassword, 'studentRetypedPassword'+index);
+    password = this.allowTesting(password, 'studentPassword'+index);
 
     if (retypedPassword === password) {
       this.studentRetypeFlag = true;
-      this.studentRetypePasswordError = "";
+      document.getElementById("errorRetype"+index).innerHTML="";
       return true;
     } else {
       this.studentRetypeFlag = false;
-      this.studentRetypePasswordError = "Passwords do not match"
+      document.getElementById("errorRetype"+index).innerHTML="Passwords do not match";
       return false;
     }
   }
@@ -215,19 +216,24 @@ export class SignupComponent implements OnInit {
   }
 
   checkIfValidStudentAccount(click, index) {
-    if(this.studentLastNameFlag === true && this.studentUserNameFlag === true 
+    if(this.studentFirstNameFlag === true && this.studentLastNameFlag === true && this.studentUserNameFlag === true 
       && this.studentPasswordFlag === true && this.studentRetypeFlag === true) {
         this.link="/login";
         this.newStudents.push(this.addStudentToArray(click, index));
         console.log(this.newStudents);
         //set them all to false for future students
-        this.studentFirstNameFlag = false;
-        this.studentLastNameFlag = false;
-        this.studentPasswordFlag = false;
-        this.studentRetypeFlag = false;
+        this.resetStudentFlags();
       } else {
         this.link = null;
       }
+  }
+
+  private resetStudentFlags() {
+    this.studentFirstNameFlag = false;
+    this.studentLastNameFlag = false;
+    this.studentUserNameFlag = false;
+    this.studentPasswordFlag = false;
+    this.studentRetypeFlag = false;
   }
 
   private addStudentToArray(click, index) {
@@ -255,34 +261,51 @@ export class SignupComponent implements OnInit {
     if(create == event) {
       this.newStudentFlag = true;
       document.getElementById("create").style.display = "none";
-      this.numStudents.push("new");
+      this.numStudents.push(0);
+      this.numNewStudents++;
     }
   }
 
   removeNewStudent(click, index) {
-    console.log(index);
     if(click == event) {
-      if(this.numStudents.length == 1){
+      if(this.numNewStudents == 1){
         this.newStudentFlag = false;
-        this.numStudents.splice(0, 1);
-        this.newStudents.splice(0,1);
+        this.numStudents = [];
+        this.numNewStudents = 0;
+        this.newStudents = [];
         document.getElementById("create").style.display = "inline";
+        return;
       } else {
-        this.numStudents.splice(0, 1);
-        this.newStudents.splice(index, index+1);
+        document.getElementById("newStudent"+index).style.display = "none";
+        this.newStudents[index] = null;
       }
     }
     console.log(this.newStudents);
+    this.numNewStudents--;
   }
 
-  addNewStudent(click) {
+  addNewStudent(click, index) {
     if(click == event) {
-      this.numStudents.push("new");
+      this.numStudents.push(index);
     }
+    this.numNewStudents++;
   }
 
   students() {
     return this.numStudents;
+  }
+
+  clearNulls(arr) {
+    let newarr = [];
+    let index = 0;
+      while(index < arr.length) {
+        if(arr[index] != null) {
+          newarr.push(arr[index]);
+        }
+        console.log(index);
+        index++;
+      }
+    return newarr;
   }
 
   SendToDataBase() {
@@ -300,6 +323,8 @@ export class SignupComponent implements OnInit {
     let url = "";
 
     if(accountType == 'parent' && this.newStudentFlag == true) {
+      this.newStudents = this.clearNulls(this.newStudents);
+      console.log(this.newStudents);
       var students = JSON.stringify(this.newStudents);
       url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
     } else {
@@ -328,7 +353,9 @@ export class SignupComponent implements OnInit {
     Allows a fake instance of the user input to be used for test classes
   */
   private allowTesting(userParameter, HtmlId) {
-    if (userParameter == event) return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    if (userParameter == event) {
+      return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
+    }
     return userParameter;
   }
 }

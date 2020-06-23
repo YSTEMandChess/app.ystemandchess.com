@@ -14,6 +14,7 @@ import { DonateComponent} from './pages/donate/donate.component';
 import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { ParentComponent } from './pages/parent/parent.component';
+import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'donate', component: DonateComponent},
   {path: 'student', component: StudentComponent},
   {path: 'parent', component: ParentComponent},
+  {path: 'parent-add-student', component: ParentAddStudentComponent},
   {path: 'play-mentor', component: PlayMentorComponent},
   {path: 'mentor-dashboard', component: MentorDashboardComponent},
   {path: 'play-nolog', component: PlayNologComponent},

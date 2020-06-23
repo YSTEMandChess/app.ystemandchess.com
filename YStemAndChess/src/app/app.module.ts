@@ -21,6 +21,7 @@ import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { DonateComponent } from './pages/donate/donate.component';
 import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     PlayNologComponent,
     DonateComponent,
     MentorDashboardComponent,
-    AdminComponent
+    AdminComponent,
+    ParentAddStudentComponent
   ],
   imports: [
     BrowserModule,

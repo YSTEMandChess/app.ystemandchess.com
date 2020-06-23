@@ -34,11 +34,11 @@
                     <div *ngIf="newStudentFlag" id="{{numStudents.length}}">
                         <div *ngFor="let student of students(); let i = index" id="newStudent{{i}}">
                             <div id="error{{i}}" class="errorMessages">
-                                <h3 id="errorFirstName{{i}}">{{studentFirstNameError}}</h3>
-                                <h3 id="errorLastName{{i}}">{{studentLastNameError}}</h3>
-                                <h3 id="errorUsername{{i}}">{{studentUserNameError}}</h3>
-                                <h3 id="errorPassword{{i}}">{{studentPasswordError}}</h3>
-                                <h3 id="errorRetype{{i}}">{{studentRetypePasswordError}}</h3>
+                                <h3 id="errorFirstName{{i}}"></h3>
+                                <h3 id="errorLastName{{i}}"></h3>
+                                <h3 id="errorUsername{{i}}"></h3>
+                                <h3 id="errorPassword{{i}}"></h3>
+                                <h3 id="errorRetype{{i}}"></h3>
                             </div>
                             <button type="button" class="x" (click)="removeNewStudent($event, i)">X</button>
                             <li><input type="text" placeholder="Students first name" id="studentFirstName{{i}}" (blur)="studentFirstNameVerification($event, i)" (blur)="checkIfValidStudentAccount($event, i)"></li>
@@ -46,7 +46,7 @@
                             <li><input type="text" placeholder="Student username" id="studentUsername{{i}}" (blur)="studentUsernameVerification($event, i)" (blur)="checkIfValidStudentAccount($event, i)"></li>
                             <li><input type="password" placeholder="Student password" id="studentPassword{{i}}" (blur)="studentPasswordVerification($event, i)" (blur)="checkIfValidStudentAccount($event, i)"></li>
                             <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword{{i}}" (blur)="studentRetypePasswordVerification($event, $event, i)" (blur)="checkIfValidStudentAccount($event, i)"></li>
-                            <button type="button" class="x" (click)="addNewStudent($event)">+</button>
+                            <button type="button" class="x" (click)="addNewStudent($event, i)">+</button>
                         </div>
                     </div>
                 </div>

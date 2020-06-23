@@ -27,17 +27,13 @@ export class SignupComponent implements OnInit {
   numStudents = new Array();
   newStudents: any[] = [];
   newStudentFlag = false;
-  studentFirstNameFlag = false;
-  studentLastNameFlag = false;
-  studentUserNameFlag = false;
-  studentPasswordFlag = false;
-  studentRetypeFlag = false;
-  studentFirstNameError = "";
-  studentLastNameError = "";
-  studentUserNameError = "";
-  studentPasswordError = "";
-  studentRetypePasswordError = "";
+  private studentFirstNameFlag = false;
+  private studentLastNameFlag = false;
+  private studentUserNameFlag = false;
+  private studentPasswordFlag = false;
+  private studentRetypeFlag = false;
   private numNewStudents = 0;
+  private numStudentsDeleted = 0;
 
   constructor() { }
 
@@ -138,7 +134,6 @@ export class SignupComponent implements OnInit {
     if (/^[a-zA-Z](\S){1,14}$/.test(username)) {
       //check username against database
       this.studentUserNameFlag = true;
-      this.studentUserNameError = "";
       document.getElementById("errorUsername"+index).innerHTML = "";
       return true;
     } else {
@@ -226,15 +221,18 @@ export class SignupComponent implements OnInit {
         this.newStudents.push(this.addStudentToArray(click, index));
         console.log(this.newStudents);
         //set them all to false for future students
-        this.studentFirstNameFlag = false;
-        this.studentLastNameFlag = false;
-        this.studentUserNameFlag = false;
-        this.studentPasswordFlag = false;
-        this.studentRetypeFlag = false;
-        document.getElementById("error"+index).style.display ="none";
+        this.resetStudentFlags();
       } else {
         this.link = null;
       }
+  }
+
+  private resetStudentFlags() {
+    this.studentFirstNameFlag = false;
+    this.studentLastNameFlag = false;
+    this.studentUserNameFlag = false;
+    this.studentPasswordFlag = false;
+    this.studentRetypeFlag = false;
   }
 
   private addStudentToArray(click, index) {
@@ -262,31 +260,35 @@ export class SignupComponent implements OnInit {
     if(create == event) {
       this.newStudentFlag = true;
       document.getElementById("create").style.display = "none";
-      this.numStudents.push("new");
+      this.numStudents.push(0);
       this.numNewStudents++;
     }
   }
 
   removeNewStudent(click, index) {
-    console.log(index);
     if(click == event) {
       if(this.numNewStudents == 1){
         this.newStudentFlag = false;
-        this.numStudents.splice(0,1);
-        this.newStudents.splice(0,1);
+        this.numStudents = [];
+        this.numNewStudents = 0;
+        this.numStudentsDeleted = 0;
+        this.newStudents = [];
         document.getElementById("create").style.display = "inline";
+        return;
       } else {
         document.getElementById("newStudent"+index).style.display = "none";
-        this.newStudents.splice(index, index+1);
+
+        this.newStudents.splice(index-this.numStudentsDeleted, (index-this.numStudentsDeleted)+1);
       }
     }
     console.log(this.newStudents);
     this.numNewStudents--;
+    this.numStudentsDeleted++;
   }
 
-  addNewStudent(click) {
+  addNewStudent(click, index) {
     if(click == event) {
-      this.numStudents.push("new");
+      this.numStudents.push(index);
     }
     this.numNewStudents++;
   }

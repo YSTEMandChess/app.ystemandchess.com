@@ -2,46 +2,50 @@ import { Component, OnInit } from '@angular/core';
 import { createAotUrlResolver } from '@angular/compiler';
 import { isString } from 'util';
 import{ HttpClient } from '@angular/common/http';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
+
 export class SignupComponent implements OnInit {
 
-  link = null;
-  private firstNameFlag = false;
-  private lastNameFlag = false;
-  private emailFlag = false;
-  private userNameFlag = false;
-  private passwordFlag = false;
-  private retypeFlag = false;
-  firstNameError = "";
-  lastNameError = "";
-  emailError = "";
-  userNameError = "";
-  passwordError = "";
-  retypePasswordError = "";
+  //account with no students
+  link: string = null;
+  private firstNameFlag: boolean = false;
+  private lastNameFlag: boolean = false;
+  private emailFlag: boolean = false;
+  private userNameFlag: boolean = false;
+  private passwordFlag: boolean = false;
+  private retypeFlag: boolean = false;
+  firstNameError: string = "";
+  lastNameError: string = "";
+  emailError: string = "";
+  userNameError: string = "";
+  passwordError: string = "";
+  retypePasswordError: string = "";
 
-  parentAccountFlag: boolean = false;
+  //parent account with students
+  private parentAccountFlag: boolean = false;
   numStudents = new Array();
-  newStudents: any[] = [];
-  newStudentFlag = false;
-  private studentFirstNameFlag = false;
-  private studentLastNameFlag = false;
-  private studentUserNameFlag = false;
-  private studentPasswordFlag = false;
-  private studentRetypeFlag = false;
-  private numNewStudents = 0;
-  private numStudentsDeleted = 0;
+  private newStudents: Student[] = [];
+  newStudentFlag: boolean = false;
+  private studentFirstNameFlag: boolean = false;
+  private studentLastNameFlag: boolean = false;
+  private studentUserNameFlag: boolean = false;
+  private studentPasswordFlag: boolean = false;
+  private studentRetypeFlag: boolean = false;
+  private numNewStudents: number = 0;
 
+  //http is for testing
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  firstNameVerification(firstName: any) {
+  firstNameVerification(firstName: any): boolean {
     firstName = this.allowTesting(firstName, 'firstName');
 
     if (/^[A-Za-z]{2,15}$/.test(firstName)) {
@@ -55,7 +59,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentFirstNameVerification(firstName: any, index: any) {
+  studentFirstNameVerification(firstName: any, index: any): boolean {
     firstName = this.allowTesting(firstName, "studentFirstName"+index);
 
     if (/^[A-Za-z]{2,15}$/.test(firstName)) {
@@ -69,7 +73,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  lastNameVerification(lastName: any) {
+  lastNameVerification(lastName: any): boolean {
 
     lastName = this.allowTesting(lastName, 'lastName');
 
@@ -84,7 +88,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentLastNameVerification(lastName: any, index: any) {
+  studentLastNameVerification(lastName: any, index: any): boolean {
 
     lastName = this.allowTesting(lastName, "studentLastName"+index);
 
@@ -99,7 +103,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  emailVerification(email: any) {
+  emailVerification(email: any) : boolean{
 
     email = this.allowTesting(email, 'email');
 
@@ -114,7 +118,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  usernameVerification(username: any) {
+  usernameVerification(username: any): boolean {
     username = this.allowTesting(username, 'username');
 
     if (/^[a-zA-Z](\S){1,14}$/.test(username)) {
@@ -129,7 +133,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentUsernameVerification(username: any, index: any) {
+  studentUsernameVerification(username: any, index: any): boolean {
     username = this.allowTesting(username, 'studentUsername'+index);
 
     if (/^[a-zA-Z](\S){1,14}$/.test(username)) {
@@ -144,7 +148,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  passwordVerification(password: any) {
+  passwordVerification(password: any): boolean {
     password = this.allowTesting(password, 'password');
 
     if (password.length < 8) {
@@ -159,7 +163,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentPasswordVerification(password: any, index: any) {
+  studentPasswordVerification(password: any, index: any): boolean {
     password = this.allowTesting(password, 'studentPassword'+index);
 
     if (password.length < 8) {
@@ -174,7 +178,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  retypePasswordVerification(retypedPassword: any, password: any) {
+  retypePasswordVerification(retypedPassword: any, password: any): boolean {
     retypedPassword = this.allowTesting(retypedPassword, 'retypedPassword');
     password = this.allowTesting(password, 'password');
 
@@ -189,7 +193,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  studentRetypePasswordVerification(retypedPassword: any, password:any, index: any) {
+  studentRetypePasswordVerification(retypedPassword: any, password:any, index: any): boolean {
     retypedPassword = this.allowTesting(retypedPassword, 'studentRetypedPassword'+index);
     password = this.allowTesting(password, 'studentPassword'+index);
 
@@ -204,7 +208,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  checkIfValidAccount() {
+  checkIfValidAccount(): boolean {
     if (this.firstNameFlag === true && this.lastNameFlag === true && this.emailFlag === true
       && this.userNameFlag === true && this.passwordFlag === true && this.retypeFlag === true) {
       this.link = "/login";
@@ -215,7 +219,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  checkIfValidStudentAccount(click, index) {
+  ifValidStudentAccount(click, index): void {
     if(this.studentFirstNameFlag === true && this.studentLastNameFlag === true && this.studentUserNameFlag === true 
       && this.studentPasswordFlag === true && this.studentRetypeFlag === true) {
         this.link="/login";
@@ -228,7 +232,7 @@ export class SignupComponent implements OnInit {
       }
   }
 
-  private resetStudentFlags() {
+  private resetStudentFlags(): void {
     this.studentFirstNameFlag = false;
     this.studentLastNameFlag = false;
     this.studentUserNameFlag = false;
@@ -236,17 +240,17 @@ export class SignupComponent implements OnInit {
     this.studentRetypeFlag = false;
   }
 
-  private addStudentToArray(click, index) {
+  private addStudentToArray(click, index): Student {
     var studentFirstName = (<HTMLInputElement>document.getElementById("studentFirstName"+index)).value;
     var studentLastName = (<HTMLInputElement>document.getElementById("studentLastName"+index)).value;
     var studentUserName = (<HTMLInputElement>document.getElementById("studentUsername"+index)).value;
     var studentPasssword = (<HTMLInputElement>document.getElementById("studentPassword"+index)).value;
 
-    let student = {first: studentFirstName, last: studentLastName, username: studentUserName, passsword: studentPasssword};
+    let student: Student = {first: studentFirstName, last: studentLastName, username: studentUserName, password: studentPasssword};
     return student;
   }
 
-  checkIfParent() {
+  checkIfParent(): boolean {
     var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
     if(accountType == "parent") {
       this.parentAccountFlag = true;
@@ -257,23 +261,23 @@ export class SignupComponent implements OnInit {
     return this.parentAccountFlag;
   }
 
-  checkIfCreateNewStudent(create) {
+  checkIfCreateNewStudent(create): void {
     if(create == event) {
       this.newStudentFlag = true;
-      document.getElementById("create").style.display = "none";
+      document.getElementById("create").style.display = "none"; //hide create student button
       this.numStudents.push(0);
       this.numNewStudents++;
     }
   }
 
-  removeNewStudent(click, index) {
+  removeNewStudent(click, index): void {
     if(click == event) {
       if(this.numNewStudents == 1){
         this.newStudentFlag = false;
         this.numStudents = [];
         this.numNewStudents = 0;
         this.newStudents = [];
-        document.getElementById("create").style.display = "inline";
+        document.getElementById("create").style.display = "inline"; //show create student button
         return;
       } else {
         document.getElementById("newStudent"+index).style.display = "none";
@@ -284,7 +288,7 @@ export class SignupComponent implements OnInit {
     this.numNewStudents--;
   }
 
-  addNewStudent(click, index) {
+  addNewStudentForm(click, index): void {
     if(click == event) {
       this.numStudents.push(index);
     }
@@ -295,7 +299,7 @@ export class SignupComponent implements OnInit {
     return this.numStudents;
   }
 
-  clearNulls(arr) {
+  clearNulls(arr: any[]) {
     let newarr = [];
     let index = 0;
       while(index < arr.length) {
@@ -308,21 +312,22 @@ export class SignupComponent implements OnInit {
     return newarr;
   }
 
-  SendToDataBase() {
+  SendToDataBase(): void {
 
+    //account not valid
     if (!this.checkIfValidAccount()) {
       return;
     }
-    var firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
-    var lastName = (<HTMLInputElement>document.getElementById("lastName")).value;
-    var email = (<HTMLInputElement>document.getElementById("email")).value;
-    var password = (<HTMLInputElement>document.getElementById("password")).value;
-    var username = (<HTMLInputElement>document.getElementById("username")).value;
-    var accountType = (<HTMLSelectElement>document.getElementById("types")).value;
+    var firstName: string = (<HTMLInputElement>document.getElementById("firstName")).value;
+    var lastName: string = (<HTMLInputElement>document.getElementById("lastName")).value;
+    var email: string = (<HTMLInputElement>document.getElementById("email")).value;
+    var password: string = (<HTMLInputElement>document.getElementById("password")).value;
+    var username: string = (<HTMLInputElement>document.getElementById("username")).value;
+    var accountType: string = (<HTMLSelectElement>document.getElementById("types")).value;
     
-    let url = "";
+    let url: string = "";
 
-    if(accountType == 'parent' && this.newStudentFlag == true) {
+    if(accountType === 'parent' && this.newStudentFlag === true) {
       this.newStudents = this.clearNulls(this.newStudents);
       console.log(this.newStudents);
       var students = JSON.stringify(this.newStudents);
@@ -339,25 +344,32 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  private httpGetAsync(theUrl, callback) {
+  private httpGetAsync(theUrl: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
   }
 
   /*
-    Allows a fake instance of the user input to be used for test classes
+    Allows a fake instance of the user input to be used for test class
   */
-  private allowTesting(userParameter, HtmlId) {
+  private allowTesting(userParameter: any, HtmlId: any) {
     if (userParameter == event) {
       return userParameter = (<HTMLInputElement>document.getElementById(HtmlId)).value;
     }
     return userParameter;
   }
+}
+
+export interface Student {
+  first: string;
+  last: string;
+  username: string;
+  password: string;
 }
 
 

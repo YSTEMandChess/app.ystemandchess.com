@@ -1,0 +1,6 @@
+To Test Person Creation
+http://localhost:8000/?reason=create&first=John&last=Doe4&password=223&username=CreativeityRules&role=parent&email=john@doe.net&students=[%20{%20%22first%22:%20%22john%22,%20%22last%22:%20%22doe22%22,%20%22username%22:%20%22bigTom%22,%20%22password%22:%20%22123123123%22%20},%20{%20%22first%22:%20%22john3%22,%20%22last%22:%20%22doe22%22,%20%22username%22:%20%22bigTom2%22,%20%22password%22:%20%22123123123%22%20},%20{%20%22first%22:%20%22john4%22,%20%22last%22:%20%22doe22%22,%20%22username%22:%20%22bigTom3%22,%20%22password%22:%20%22123123123%22%20}%20]
+
+To Test Person
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6InRlc3QxIiwiZmlyc3ROYW1lIjoiVGVzdCIsImxhc3ROYW1lIjoiVGVzdCIsInJvbGUiOiJwYXJlbnQiLCJlbWFpbCI6InRlc3RAdGVzdC5uZXQiLCJpYXQiOjE1OTI5Mzk1MTIsImVhdCI6MTU5NTUzMTUxMn0.DwZyjhye0cOv0bz0Rh0r2v5lwZBB4-aLlokBPxi7VBC2oK9xcFZzpPIwRTh9peluQasqdJ7YMj40i9eAEAyiYA

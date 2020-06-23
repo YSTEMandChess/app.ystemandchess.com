@@ -96,7 +96,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
                 'password' => $studentPassword,
                 'firstName' => $studentFirst,
                 'lastName' => $studentLast,
-                'parentUsername' => $parentUsername,
+                'parentUsername' => $username,
                 'role' => 'student',
                 'accountCreatedAt' => time()
             ]);

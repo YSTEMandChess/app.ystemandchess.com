@@ -22,7 +22,7 @@
                 <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword{{i}}" (blur)="studentRetypePasswordVerification($event, $event, i)" (blur)="ifValidStudentAccount(i)"></li>
                 <button type="button" class="x" (click)="addNewStudentForm($event, i)">+</button>
             </div>
-            <button type="submit" [routerLink]="[link]" (click)="SendToDataBase(i)">Sign up</button>
+            <button type="submit" [routerLink]="[link]" (click)="SendToDataBase()">Sign up</button>
         </div>
     </body>
     <footer>

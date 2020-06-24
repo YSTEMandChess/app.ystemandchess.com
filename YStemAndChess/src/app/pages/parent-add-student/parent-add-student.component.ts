@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ParentAddStudentComponent implements OnInit {
 
   link: string = null;
-  private parentAccountFlag: boolean = false;
+  private studentIndex: number = 0;
   numStudents = new Array();
   private newStudents: Student[] = [];
   newStudentFlag: boolean = false;
@@ -101,6 +101,7 @@ export class ParentAddStudentComponent implements OnInit {
   }
 
   ifValidStudentAccount(index): boolean {
+    this.studentIndex = index;
     if(this.studentFirstNameFlag === true && this.studentLastNameFlag === true && this.studentUserNameFlag === true 
       && this.studentPasswordFlag === true && this.studentRetypeFlag === true) {
         this.link="/login";
@@ -175,10 +176,9 @@ export class ParentAddStudentComponent implements OnInit {
     return newarr;
   }
 
-  SendToDataBase(index): void {
-
-    //account not valid
-    if (this.ifValidStudentAccount(index)) {
+  SendToDataBase(): void {
+    console.log(this.studentIndex);
+    if (this.ifValidStudentAccount(this.studentIndex)) {
       return;
     }
     var firstName: string = (<HTMLInputElement>document.getElementById("firstName")).value;

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { setPermissionLevel } from "../../globals";
+import { HeaderComponent } from '../../header/header.component'
 
 @Component({
   selector: 'app-parent-add-student',
@@ -12,6 +15,9 @@ export class ParentAddStudentComponent implements OnInit {
   numStudents = new Array();
   private newStudents: Student[] = [];
   newStudentFlag: boolean = false;
+  private logged;
+  private username;
+  private parentUser: string = "";
   private studentFirstNameFlag: boolean = false;
   private studentLastNameFlag: boolean = false;
   private studentUserNameFlag: boolean = false;
@@ -19,11 +25,19 @@ export class ParentAddStudentComponent implements OnInit {
   private studentRetypeFlag: boolean = false;
   numNewStudents: number = 0;
 
-  constructor() { }
+  constructor(private cookie: CookieService,
+    private head: HeaderComponent) {} 
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.numStudents.push(0);
     this.numNewStudents++;
+    let pLevel = "nLogged";
+    let uInfo = await setPermissionLevel(this.cookie);
+    if (uInfo['error'] == undefined) {
+      this.logged = true;
+      pLevel = uInfo["role"];
+      this.username = uInfo["username"];
+    }
   }
 
   studentFirstNameVerification(firstName: any, index: any): boolean {
@@ -186,16 +200,16 @@ export class ParentAddStudentComponent implements OnInit {
     let url: string = "";
 
     this.newStudents = this.clearNulls(this.newStudents);
-    console.log(this.newStudents);
-    //var students = JSON.stringify(this.newStudents);
     let index = 0;
+    this.parentUser = this.username;
+    
     while(index < this.newStudents.length){
       let firstName: string = this.newStudents[index].first;
       let lastName: string = this.newStudents[index].last;
       let userName: string = this.newStudents[index].username;
       let password: string = this.newStudents[index].password;
 
-      url = `http://127.0.0.1:8000/?reason=create&parentUsername=parent&first=${firstName}&last=${lastName}&username=${userName}&password=${password}&role=student`;
+      url = `http://127.0.0.1:8000/?reason=create&parentUsername=${this.parentUser}&first=${firstName}&last=${lastName}&username=${userName}&password=${password}&role=student`;
       
       this.httpGetAsync(url, (response) => {
         if (response == "This username has been taken. Please choose another.") {
@@ -223,6 +237,11 @@ export class ParentAddStudentComponent implements OnInit {
     }
     return userParameter;
   }
+
+  // private async getParentUserName() {
+  //   let uInfo = await setPermissionLevel(this.cookie);
+  //   this.parentUser = uInfo["username"];
+  // }
 }
 
 export interface Student {

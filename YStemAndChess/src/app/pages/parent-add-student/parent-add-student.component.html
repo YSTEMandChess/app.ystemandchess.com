@@ -1,1 +1,31 @@
-<p>parent-add-student works!</p>
+<html>
+    <header>
+        <app-header></app-header>
+    </header>
+    <body>
+        <div class="signupForm">
+            <div *ngFor="let student of students(); let i = index" id="newStudent{{i}}">
+                <div id="error{{i}}" class="errorMessages">
+                    <h3 id="errorFirstName{{i}}"></h3>
+                    <h3 id="errorLastName{{i}}"></h3>
+                    <h3 id="errorUsername{{i}}"></h3>
+                    <h3 id="errorPassword{{i}}"></h3>
+                    <h3 id="errorRetype{{i}}"></h3>
+                </div>
+                <div *ngIf="numNewStudents > 1">
+                    <button type="button" class="x" (click)="removeNewStudent($event, i)">X</button>
+                </div>
+                <li><input type="text" placeholder="Students first name" id="studentFirstName{{i}}" (blur)="studentFirstNameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
+                <li><input type="text" placeholder="Students last name " id="studentLastName{{i}}" (blur)="studentLastNameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
+                <li><input type="text" placeholder="Student username" id="studentUsername{{i}}" (blur)="studentUsernameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
+                <li><input type="password" placeholder="Student password" id="studentPassword{{i}}" (blur)="studentPasswordVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
+                <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword{{i}}" (blur)="studentRetypePasswordVerification($event, $event, i)" (blur)="ifValidStudentAccount(i)"></li>
+                <button type="button" class="x" (click)="addNewStudentForm($event, i)">+</button>
+            </div>
+            <button type="submit" [routerLink]="[link]" (click)="SendToDataBase(i)">Sign up</button>
+        </div>
+    </body>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

@@ -1,0 +1,60 @@
+body {
+    margin: 0 auto;
+    padding-top:5%;
+    text-align: center;
+}
+
+.signupForm h2 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 900;
+}
+
+.signupForm input {
+    margin: 20px;
+    padding: 15px 32px;
+    background-color: white; 
+    color: black; 
+    border: 3px solid #D64309;
+    border-radius: 8px;
+    outline-style: none;
+}
+
+.signupForm li {
+    list-style: none;
+    font-family: 'Roboto';
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.signupForm button {
+    outline-style:none;
+    padding-left:2%; //15px
+    padding-right:2%;
+    font-family: 'Roboto';
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    background-color: #fff;
+    color:#3A7CCA;
+    border-radius: 33px;
+}
+
+.signupForm button:hover {
+    background-color: #3A7CCA;
+    color: #fff;
+}
+
+.errorMessages {
+    color: red;
+}
+
+#create {
+    margin-top:2%;
+}
+
+.x {
+    margin-top: 2%;
+    margin-left:235px;
+}

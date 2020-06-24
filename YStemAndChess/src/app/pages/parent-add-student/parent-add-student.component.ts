@@ -191,7 +191,7 @@ export class ParentAddStudentComponent implements OnInit {
     this.newStudents = this.clearNulls(this.newStudents);
     console.log(this.newStudents);
     var students = JSON.stringify(this.newStudents);
-    url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=student&students=${students}`;
+    url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=parent&students=${students}`;
     
     this.httpGetAsync(url, (response) => {
       if (response == "This username has been taken. Please choose another.") {

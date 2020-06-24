@@ -9,12 +9,28 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ParentComponent implements OnInit {
 
-  username;
-  logged;
+  username: string;
+  private logged: boolean;
+  students :string[] = [];
 
   constructor(private cookie: CookieService) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.getUsername();
+    this.getStudents();
+  }
+
+  getStudents() {
+    let url = `http://127.0.0.1:8000/getInfo.php/?credentials=${this.cookie.get("login")}`;
+    this.httpGetAsync(url,(response) => {
+      if (response == "This username has been taken. Please choose another.") {
+        alert("username has been taken")
+      }
+      alert(JSON.stringify(response));
+    })
+  }
+
+  private async getUsername() {
     let pLevel = "nLogged";
     let uInfo = await setPermissionLevel(this.cookie);
     if (uInfo['error'] == undefined) {
@@ -22,6 +38,16 @@ export class ParentComponent implements OnInit {
       pLevel = uInfo["role"];
       this.username = uInfo["username"];
     }
+  }
+
+  private httpGetAsync(theUrl: string, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
   }
 
 }

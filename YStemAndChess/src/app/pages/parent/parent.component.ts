@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { setPermissionLevel } from "../../globals";
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-parent',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
-  constructor() { }
+  username;
+  logged;
 
-  ngOnInit(): void {
+  constructor(private cookie: CookieService) { }
+
+  async ngOnInit() {
+    let pLevel = "nLogged";
+    let uInfo = await setPermissionLevel(this.cookie);
+    if (uInfo['error'] == undefined) {
+      this.logged = true;
+      pLevel = uInfo["role"];
+      this.username = uInfo["username"];
+    }
   }
 
 }

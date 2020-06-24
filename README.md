@@ -32,6 +32,6 @@ Make directions for building and all of the pages + give graphic of program stuc
   - If using Jitsi, given a filename, download it from the dropbox database / add filelink to mongodb (Do Parents need to watch this as well?)
 - Scripts for Signing Up and Loggin in.
 - Script to create new meeting given 2 jwts. Create jitsi meeting / create lichess game / pair opponents.
-- Given a JWT of a parent, return data of the student(s)
+- ~~Given a JWT of a parent, return data of the student(s)~~
 - Given a JWT and Query, return all matches of students and mentors. [Admin page]
 - Given a JWT, return all data regarding students of that mentor ?

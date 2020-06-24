@@ -195,7 +195,7 @@ export class ParentAddStudentComponent implements OnInit {
       let userName: string = this.newStudents[index].username;
       let password: string = this.newStudents[index].password;
 
-      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&username=${userName}&password=${password}&role=student`;
+      url = `http://127.0.0.1:8000/?reason=create&parentUsername=parent&first=${firstName}&last=${lastName}&username=${userName}&password=${password}&role=student`;
       
       this.httpGetAsync(url, (response) => {
         if (response == "This username has been taken. Please choose another.") {

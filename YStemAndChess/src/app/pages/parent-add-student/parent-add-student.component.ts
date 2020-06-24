@@ -176,22 +176,19 @@ export class ParentAddStudentComponent implements OnInit {
     return newarr;
   }
 
-  SendToDataBase(): void {
+  async SendToDataBase() {
     console.log(this.studentIndex);
+    console.log(this.newStudents);
     if (this.ifValidStudentAccount(this.studentIndex)) {
       return;
     }
-    var firstName: string = (<HTMLInputElement>document.getElementById("firstName")).value;
-    var lastName: string = (<HTMLInputElement>document.getElementById("lastName")).value;
-    var password: string = (<HTMLInputElement>document.getElementById("password")).value;
-    var username: string = (<HTMLInputElement>document.getElementById("username")).value;
     
     let url: string = "";
 
     this.newStudents = this.clearNulls(this.newStudents);
     console.log(this.newStudents);
     var students = JSON.stringify(this.newStudents);
-    url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&password=${password}&username=${username}&role=parent&students=${students}`;
+    url = `http://127.0.0.1:8000/?reason=create&role=parent&students=${students}`;
     
     this.httpGetAsync(url, (response) => {
       if (response == "This username has been taken. Please choose another.") {

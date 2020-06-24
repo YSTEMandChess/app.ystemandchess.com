@@ -16,7 +16,7 @@ export class ParentAddStudentComponent implements OnInit {
   private newStudents: Student[] = [];
   newStudentFlag: boolean = false;
   private logged;
-  private username;
+  username;
   private parentUser: string = "";
   private studentFirstNameFlag: boolean = false;
   private studentLastNameFlag: boolean = false;

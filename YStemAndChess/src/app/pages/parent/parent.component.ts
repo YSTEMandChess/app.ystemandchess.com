@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { setPermissionLevel } from "../../globals";
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-parent',
@@ -7,9 +9,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
-  constructor() { }
+  username: string;
+  private logged: boolean;
+  students :string[] = [];
 
-  ngOnInit(): void {
+  constructor(private cookie: CookieService) { }
+
+  ngOnInit() {
+    this.getUsername();
+    this.getStudents();
+  }
+
+  getStudents() {
+    let url = `http://127.0.0.1:8000/getInfo.php/?credentials=${this.cookie.get("login")}`;
+    this.httpGetAsync(url,(response) => {
+      if (response == "This username has been taken. Please choose another.") {
+        alert("username has been taken")
+      }
+      let i = 0;
+      let data = JSON.parse(response);
+      let key: any;
+      console.log(data);
+      for(key in data) {
+        if(data[key].username === this.username) {
+          let student;
+          for(student in data[key].children) {
+            this.students.push(data[key].children[student]);
+          }
+          console.log(this.students);
+        }
+      }
+    })
+  }
+
+  private async getUsername() {
+    let pLevel = "nLogged";
+    let uInfo = await setPermissionLevel(this.cookie);
+    if (uInfo['error'] == undefined) {
+      this.logged = true;
+      pLevel = uInfo["role"];
+      this.username = uInfo["username"];
+    }
+  }
+
+  private httpGetAsync(theUrl: string, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
   }
 
 }

@@ -17,7 +17,7 @@ Make directions for building and all of the pages + give graphic of program stuc
 
 1. Is mentor and player paring going to be static?
 2. Send mentor accounts to waiting collection and use other script to approve.
-
+3. Allow people to delete accounts / update info about themselves.
 
 ## Communication between Backend and Frontend
 - 2 Collections.

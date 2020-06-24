@@ -203,6 +203,7 @@ export class ParentAddStudentComponent implements OnInit {
         }
         console.log(response);
       })
+      index++;
     }
   }
 

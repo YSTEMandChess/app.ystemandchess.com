@@ -17,26 +17,28 @@
         </div>
     </div>
 </div>
-<div class="container cont">
-    <div class="row prog">
-        Emily's Progress
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <h2>Hours Played</h2>
+<div *ngFor="let student of students">
+    <div class="container cont">
+        <div class="row prog">
+            {{student}} Progress
         </div>
-        <div class="col-sm">
-            <h2>Progress</h2>
-        </div>
-        <div class="col-sm nobac">
-            <div class="recordsLink">
-                Recorded Games
+        <div class="row">
+            <div class="col-sm">
+                <h2>Hours Played</h2>
             </div>
-            <div class="recordsLink">
-                Recorded Lessons
+            <div class="col-sm">
+                <h2>Progress</h2>
             </div>
-            <div class="recordsLink">
-                Messages
+            <div class="col-sm nobac">
+                <div class="recordsLink">
+                    Recorded Games
+                </div>
+                <div class="recordsLink">
+                    Recorded Lessons
+                </div>
+                <div class="recordsLink">
+                    Messages
+                </div>
             </div>
         </div>
     </div>

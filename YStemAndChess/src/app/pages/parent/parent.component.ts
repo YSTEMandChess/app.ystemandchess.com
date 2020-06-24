@@ -26,7 +26,19 @@ export class ParentComponent implements OnInit {
       if (response == "This username has been taken. Please choose another.") {
         alert("username has been taken")
       }
-      alert(JSON.stringify(response));
+      let i = 0;
+      let data = JSON.parse(response);
+      let key: any;
+      console.log(data);
+      for(key in data) {
+        if(data[key].username === this.username) {
+          let student;
+          for(student in data[key].children) {
+            this.students.push(data[key].children[student]);
+          }
+          console.log(this.students);
+        }
+      }
     })
   }
 

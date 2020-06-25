@@ -22,19 +22,12 @@ if($credentials->role == "mentor") {
     echo "Please be either a student or a mentor.";
     return;
 }
-if(!is_null($collection->findOne(['username'=>$credentials->username]))) {
-    echo "Person already waiting for game.";
+if(is_null($collection->findOne(['username'=>$credentials->username]))) {
+    echo "Person is now waiting for a match.";
     return;
 }
-$collection->insertOne([
-    'username' => $credentials->username,
-    'firstName' => $credentials->firstName,
-    'lastName' => $credentials->lastName,
-    'requestedGameAt' => time()
-]);
+$collection->deleteOne(['username'=>$credentials->username]);
 
-echo "Person Added Sucessfully.";
-return "Person Added Sucessfully";
-
-
+echo "Person Removed Sucessfully.";
+return "Person Removed Sucessfully";
 ?>

@@ -43,12 +43,10 @@ for($i=0; $i<$smallerArraySize; $i++) {
         'mentorUsername' => $sortedMentorArray[$i]->username,
         'mentorFirstName' => $sortedMentorArray[$i]->firstName,
         'mentorLastName' => $sortedMentorArray[$i]->lastName,
+        'MeetingInitialized' => false,
         'CurrentlyOngoing' => true,
         'meetingStartTime' => time()
     ]);
-    
-    include "startMeeting.php";
-
     // Now delete the waiting status of the mentor and the student.
     $waitingMentorCollection->deleteOne(['username' => $sortedMentorArray[$i]->username]);
     $waitingStudentsCollection->deleteOne(['username' => $sortedStudentsArray[$i]->username]);

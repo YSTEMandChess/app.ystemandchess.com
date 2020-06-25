@@ -35,7 +35,7 @@ Make directions for building and all of the pages + give graphic of program stuc
 - ~~Given a JWT of a parent, return data of the student(s)~~
 - Given a JWT and Query, return all matches of students and mentors. [Admin page]
 - Given a JWT, return all data regarding students of that mentor ?
-1. No longer am looking for match. JWT.
-2. End Meeting Script that sets Ongoing = false: JWT.
+1. ~~No longer am looking for match. JWT.~~
+2. ~~End Meeting Script that sets Ongoing = false: JWT.~~
 3. Check if meeting exists function and returns meeting info. [Create Actual Meeting in Lichess]
 

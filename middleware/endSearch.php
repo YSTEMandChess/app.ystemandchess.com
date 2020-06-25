@@ -23,7 +23,7 @@ if($credentials->role == "mentor") {
     return;
 }
 if(is_null($collection->findOne(['username'=>$credentials->username]))) {
-    echo "Person is now waiting for a match.";
+    echo "Person is not waiting for a match.";
     return;
 }
 $collection->deleteOne(['username'=>$credentials->username]);

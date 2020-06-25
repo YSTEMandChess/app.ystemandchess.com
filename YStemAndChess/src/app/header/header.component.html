@@ -13,7 +13,12 @@
             </li>
             <li class="nav-item">
                 <div *ngIf="role === 'mentor' || role === 'student'">
-                    <a class="nav-link hvr-underline-from-left" (click)="findGame()">Find a Game</a>
+                    <a class="nav-link hvr-underline-from-left" (click)="openModal('find-game')" (click)="findGame()">Find a Game</a>
+                    <jw-modal id="find-game">
+                        <h1>Finding a game please wait</h1>
+                        <div class="loader"></div>
+                        <button (click)="closeModal('find-game');">X</button>
+                    </jw-modal>
                 </div>
                 <div *ngIf="role !== 'mentor' && role !== 'student'">
                     <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>

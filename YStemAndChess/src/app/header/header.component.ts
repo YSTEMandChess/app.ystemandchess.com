@@ -2,6 +2,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from "../globals";
 import { allowedNodeEnvironmentFlags } from 'process';
+import { ModalService } from '../_modal';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class HeaderComponent implements OnInit {
   public logged = false;
   public playLink = "/play-nolog";
 
-  constructor(private cookie: CookieService) { }
+  constructor(private cookie: CookieService,
+    private modalService: ModalService) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -79,6 +81,14 @@ export class HeaderComponent implements OnInit {
         });
         break;
     }
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
   }
 
   public findGame() {

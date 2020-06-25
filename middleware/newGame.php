@@ -8,6 +8,10 @@ use \Firebase\JWT\JWT;
 
 $jwt = htmlspecialchars_decode($_GET["jwt"]);
 $credentials = json_decode(include "verifyNoEcho.php");
+if($credentials == "Error: 405. This key has been tampered with or is out of date." || $credentials == "Error: 406. Please Provide a JSON Web Token.") {
+    echo $credentials;
+    return $credentials;
+}
 $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
 // They are a mentor, so add them to the mentor list
 if($credentials->role == "mentor") {

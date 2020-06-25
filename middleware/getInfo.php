@@ -18,12 +18,13 @@ if($credentials == "Error: 405. This key has been tampered with or is out of dat
 $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
     // Select the user collection
 $collection = $client->ystem->users;
+$userDoc = $collection->findOne(["username" => $credentials->username]);
 
-$cursor = $collection->find(["parentUsername" => $credentials->username]);
-//var_dump($cursor);
-$arrayList = [];
-foreach ($cursor as $document) {
-    array_push($arrayList, $document);
+$childArr = [];
+foreach ($userDoc["children"] as $childUsername) {
+    $child = $collection->findOne(["username" => $childUsername]);
+    array_push($childArr, $child);
 }
-echo json_encode($arrayList);
+
+echo json_encode($childArr);
 ?>

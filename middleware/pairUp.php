@@ -52,7 +52,7 @@ for($i=0; $i<$smallerArraySize; $i++) {
     // Now delete the waiting status of the mentor and the student.
     $waitingMentorCollection->deleteOne(['username' => $sortedMentorArray[$i]->username]);
     $waitingStudentsCollection->deleteOne(['username' => $sortedStudentsArray[$i]->username]);
-    echo "Sucessfully Paired " .  $sortedMentorArray[$i]->username . " and " .  $sortedStudentsArray[$i]->username;
+    echo "Sucessfully Paired " .  $sortedMentorArray[$i]->username . " and " .  $sortedStudentsArray[$i]->username . "\n";
 } 
 
 ?>

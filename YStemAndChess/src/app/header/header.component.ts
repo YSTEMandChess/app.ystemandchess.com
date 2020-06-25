@@ -1,6 +1,7 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from "../globals";
+import { allowedNodeEnvironmentFlags } from 'process';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { setPermissionLevel } from "../globals";
 })
 export class HeaderComponent implements OnInit {
   public username = "Owen Oertell";
+  public role = "";
   public logged = false;
   public playLink = "/play-nolog";
 
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit {
       this.logged = true;
       pLevel = uInfo["role"];
       this.username = uInfo["username"];
+      this.role = uInfo["role"];
     }
 
 
@@ -76,6 +79,23 @@ export class HeaderComponent implements OnInit {
         });
         break;
     }
+  }
+
+  public findGame() {
+    let url = `http://127.0.0.1:8000/newGame.php/?jwt=${this.cookie.get("login")}`;
+    this.httpGetAsync(url, (response) => {
+      console.log(response);
+    });
+  }
+
+  private httpGetAsync(theUrl: string, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
   }
 
   public logout() {

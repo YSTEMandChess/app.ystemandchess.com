@@ -12,7 +12,12 @@
                 <a class="nav-link hvr-underline-from-left" href="{{playLink}}">Play</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>
+                <div *ngIf="role === 'mentor' || role === 'student'">
+                    <a class="nav-link hvr-underline-from-left" (click)="findGame()">Find a Game</a>
+                </div>
+                <div *ngIf="role !== 'mentor' && role !== 'student'">
+                    <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>

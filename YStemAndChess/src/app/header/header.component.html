@@ -41,7 +41,9 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" (click)="logout()">Logout</a>
-                        <a class="dropdown-item" routerLink="/parent-add-student">Add Student</a>
+                        <div *ngIf="role === 'parent'">
+                            <a class="dropdown-item" routerLink="/parent-add-student">Add Student</a>
+                        </div>
                     </div>
                 </div>
             </li>

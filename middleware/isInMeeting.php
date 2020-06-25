@@ -13,20 +13,20 @@ if($credentials == "Error: 405. This key has been tampered with or is out of dat
     return $credentials;
 }
 $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
-// They are a mentor, so add them to the mentor list
 $collection = $client->ystem->meetings;
+
 if($credentials->role == "mentor") {
-    $searchFor = "mentorUsername";
-} else if ($credentials->role == "student") {
-    $searchFor = "studentUsername";
+    $keyQuery = "mentorUsername";
+} else if($credentials->role == "student") {
+    $keyQuery = "studentUsername";
+} else {
+    echo "Please be either a student or a mentor.";
+    return;
 }
-$collection->updateOne([$searchFor => $credentials->username],[
-    '$set' =>
-        [
-            'CurrentlyOngoing' => false
-        ]
-    ]
-);
-echo "Meeting Status Updated Sucessfully.";
-return "Meeting Status Updated Sucessfully.";
+$document = $collection->findOne([$keyQuery => $credentials->username, "CurrentlyOngoing" => true]);
+if(is_null($document)) {
+    echo "There are no current meetings with this user.";
+    return;
+}
+echo json_encode($document);
 ?>

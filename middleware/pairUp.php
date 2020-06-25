@@ -43,7 +43,6 @@ for($i=0; $i<$smallerArraySize; $i++) {
         'mentorUsername' => $sortedMentorArray[$i]->username,
         'mentorFirstName' => $sortedMentorArray[$i]->firstName,
         'mentorLastName' => $sortedMentorArray[$i]->lastName,
-        'MeetingInitialized' => false,
         'CurrentlyOngoing' => true,
         'meetingStartTime' => time()
     ]);

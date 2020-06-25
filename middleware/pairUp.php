@@ -36,7 +36,7 @@ if(count($sortedMentorArray) > count($sortedStudentsArray)) {
 for($i=0; $i<$smallerArraySize; $i++) {
     $meetingCollection->insertOne([
         // MeetingID is the studentsusername and then the mentors username shoved against each other
-        'meetingID' => $sortedStudentsArray[$i]->username . $sortedStudentsMentor[$i]->username,
+        'meetingID' => $sortedStudentsArray[$i]->username . $sortedStudentsArray[$i]->username,
         'studentUsername' => $sortedStudentsArray[$i]->username,
         'studentFirstName' => $sortedStudentsArray[$i]->firstName,
         'studentLastName' => $sortedStudentsArray[$i]->lastName,
@@ -46,6 +46,7 @@ for($i=0; $i<$smallerArraySize; $i++) {
         'CurrentlyOngoing' => true,
         'meetingStartTime' => time()
     ]);
+
     // Now delete the waiting status of the mentor and the student.
     $waitingMentorCollection->deleteOne(['username' => $sortedMentorArray[$i]->username]);
     $waitingStudentsCollection->deleteOne(['username' => $sortedStudentsArray[$i]->username]);

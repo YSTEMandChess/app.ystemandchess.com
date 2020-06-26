@@ -109,7 +109,6 @@ export class HeaderComponent implements OnInit {
         url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
         let meeting = setInterval( () => {
           if(this.gameFound(url) === true || this.endFlag === true) {
-            alert("Meeting created");
             this.endFlag = false;
             this.closeModal("find-game");
             clearInterval(meeting);

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from "../globals";
 import { allowedNodeEnvironmentFlags } from 'process';
 import { ModalService } from '../_modal';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 
 @Component({
@@ -11,12 +12,13 @@ import { ModalService } from '../_modal';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public username = "Owen Oertell";
+  public username = "";
   public role = "";
   public logged = false;
   private foundFlag = false;
   private endFlag = false;
   public playLink = "/play-nolog";
+  public inMatch = false;
 
   constructor(private cookie: CookieService,
     private modalService: ModalService) { }
@@ -75,7 +77,7 @@ export class HeaderComponent implements OnInit {
         });
         break;
       case "nLogged":
-        this.playLink = "/play";
+        this.playLink = "/play-nolog";
         notAllowedExtsNotLoggedIn.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/";
@@ -83,6 +85,18 @@ export class HeaderComponent implements OnInit {
         });
         break;
     }
+
+    // Check to see if they are currently in a game, or not.
+    let url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
+    this.httpGetAsync(url, (response) => {
+      // They are currently in a meeting. So set it up.
+      if(response == "There are no current meetings with this user." || pLevel=="nLogged") {
+        this.inMatch = false;
+      } else {
+        this.inMatch = true;
+      }
+    });
+
   }
 
   openModal(id: string) {
@@ -111,7 +125,9 @@ export class HeaderComponent implements OnInit {
           if(this.gameFound(url) === true || this.endFlag === true) {
             this.endFlag = false;
             this.closeModal("find-game");
+            // GAME FOUND.
             clearInterval(meeting);
+            location.reload();
           }
         }, 200)
       }      

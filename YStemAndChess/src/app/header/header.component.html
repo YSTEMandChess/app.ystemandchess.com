@@ -12,7 +12,7 @@
                 <a class="nav-link hvr-underline-from-left" href="{{playLink}}">Play</a>
             </li>
             <li class="nav-item">
-                <div *ngIf="role === 'mentor' || role === 'student'">
+                <div *ngIf="(role === 'mentor' || role === 'student') && !inMatch">
                     <a class="nav-link hvr-underline-from-left" (click)="openModal('find-game')" (click)="findGame()">Find a Game</a>
                     <jw-modal id="find-game">
                         <h1>Finding a game please wait</h1>
@@ -23,6 +23,12 @@
                 <div *ngIf="role !== 'mentor' && role !== 'student'">
                     <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>
                 </div>
+                <div *ngIf="inMatch">
+                    <a class="nav-link hvr-underline-from-left" href="">Leave Meeting</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>

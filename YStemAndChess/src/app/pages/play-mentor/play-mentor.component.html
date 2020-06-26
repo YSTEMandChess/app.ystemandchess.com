@@ -1,39 +1,40 @@
 <html>
-    <header>
-        <app-header></app-header>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    </header>
+<header>
+    <app-header></app-header>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+</header>
 
-    <body>
-        <!-- start of welcome container  -->
-        <div id="welcome-container">
-            <div id="welcome-header">
-                <h3> Welcome Robert </h3>
-                <h4> Not Robert? &#9658;</h4>
-            </div>
-            <div id="welcome-statement">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing 
-                    elit. Eligendi enim incidunt excepturi assumenda quod
-                    accusantium inventore, dignissimos ad, cumque labore, 
-                    perspiciatis at architecto quisquam delectus. Rerum 
-                    aspernatur ea accusamus officiis!
-                </p>
-            </div>
+<body>
+    <!-- start of welcome container  -->
+    <div id="welcome-container">
+        <div id="welcome-header">
+            <h3> Welcome Robert </h3>
+            <h4> Not Robert? &#9658;</h4>
         </div>
-        <!-- end of welcome container -->
+        <div id="welcome-statement">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Eligendi enim incidunt excepturi assumenda quod
+                accusantium inventore, dignissimos ad, cumque labore,
+                perspiciatis at architecto quisquam delectus. Rerum
+                aspernatur ea accusamus officiis!
+            </p>
+        </div>
+    </div>
+    <!-- end of welcome container -->
 
-        <!-- start of mentor-container -->
-        <div id="mentor-container">
-            <div id="top">
+    <!-- start of mentor-container -->
+    <div id="mentor-container">
+        <div id="top"></div>
+            <!-- 
                 <div class="turn-indicator">
-                    <!-- turn indicator -->
+                    
                 </div>
                 <p>Emily Cob</p>
                 
                 <div class="turn-indicator">
-                    <!-- turn indicator -->
+
                 </div>
                 <p>Robert</p>
 
@@ -42,16 +43,19 @@
             <div id="lichess-board">
                 <iframe src="http://localhost:9663/" allowfullscreen></iframe>
             </div>
+        -->
+            <app-play></app-play>
             <div id="bottom">
-                <button type="button" id="flip-board"> Flip Board</button> 
+                <button type="button" id="flip-board"> Flip Board</button>
                 <button type="button" id="new-game"> New Game</button>
                 <button type="button" id="lesson-prep"> Lesson Prep</button>
             </div>
         </div>
         <!-- end of mentor container -->
-    </body>
+</body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+<footer>
+    <app-footer></app-footer>
+</footer>
+
 </html>

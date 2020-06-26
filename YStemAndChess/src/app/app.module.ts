@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CookieService } from 'ngx-cookie-service';
+import { ModalModule } from './_modal/modal.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,7 +48,8 @@ import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientTestingModule
+    HttpClientTestingModule,
+    ModalModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

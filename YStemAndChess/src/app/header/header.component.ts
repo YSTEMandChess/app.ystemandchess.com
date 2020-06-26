@@ -2,6 +2,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from "../globals";
 import { allowedNodeEnvironmentFlags } from 'process';
+import { ModalService } from '../_modal';
 
 
 @Component({
@@ -13,9 +14,12 @@ export class HeaderComponent implements OnInit {
   public username = "Owen Oertell";
   public role = "";
   public logged = false;
+  private foundFlag = false;
+  private endFlag = false;
   public playLink = "/play-nolog";
 
-  constructor(private cookie: CookieService) { }
+  constructor(private cookie: CookieService,
+    private modalService: ModalService) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -81,11 +85,52 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
+  }
+
+  public removeFromWaiting() {
+    let url = `http://127.0.0.1:8000/endSearch.php/?jwt=${this.cookie.get("login")}`;
+    this.httpGetAsync(url, (response) => {
+      console.log(response);
+    });
+    this.endFlag = true;
+  }
+
   public findGame() {
     let url = `http://127.0.0.1:8000/newGame.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
+      if(response === 'Person Added Sucessfully.') {
+        url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
+        let meeting = setInterval( () => {
+          if(this.gameFound(url) === true || this.endFlag === true) {
+            this.endFlag = false;
+            this.closeModal("find-game");
+            clearInterval(meeting);
+          }
+        }, 200)
+      }      
     });
+  }
+
+  private gameFound(url) {
+    this.httpGetAsync(url, (response) => {
+      //console.log(response);
+      let s;
+      try {
+        s = JSON.parse(response);
+        this.foundFlag = true;
+      } catch(Error) {
+        console.log(Error.message);
+      }
+    });
+    console.log(this.foundFlag);
+    return this.foundFlag;
   }
 
   private httpGetAsync(theUrl: string, callback) {

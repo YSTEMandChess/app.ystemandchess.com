@@ -21,25 +21,18 @@ export class ParentComponent implements OnInit {
   }
 
   getStudents() {
-    let url = `http://127.0.0.1:8000/getInfo.php/?credentials=${this.cookie.get("login")}`;
+    let url = `http://127.0.0.1:8000/getInfo.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url,(response) => {
       if (response == "This username has been taken. Please choose another.") {
         alert("username has been taken")
       }
-      let i = 0;
       let data = JSON.parse(response);
       let key: any;
-      console.log(data);
       for(key in data) {
-        if(data[key].username === this.username) {
-          let student;
-          for(student in data[key].children) {
-            this.students.push(data[key].children[student]);
-          }
-          console.log(this.students);
-        }
+        let student = data[key].username;
+        this.students.push(student);
       }
-    })
+    });
   }
 
   private async getUsername() {

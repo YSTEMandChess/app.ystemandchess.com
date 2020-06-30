@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  // Lets remove the one below this comment (PlayComponent) when we go into production
   {path: 'play', component: PlayComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},

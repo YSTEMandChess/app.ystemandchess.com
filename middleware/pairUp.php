@@ -36,7 +36,8 @@ if(count($sortedMentorArray) > count($sortedStudentsArray)) {
 for($i=0; $i<$smallerArraySize; $i++) {
     $meetingCollection->insertOne([
         // MeetingID is the studentsusername and then the mentors username shoved against each other
-        'meetingID' => $sortedStudentsArray[$i]->username . $sortedStudentsArray[$i]->username,
+        'meetingID' => uniqid(20),
+        'password' => uniqid(20),
         'studentUsername' => $sortedStudentsArray[$i]->username,
         'studentFirstName' => $sortedStudentsArray[$i]->firstName,
         'studentLastName' => $sortedStudentsArray[$i]->lastName,
@@ -53,4 +54,16 @@ for($i=0; $i<$smallerArraySize; $i++) {
     echo "Sucessfully Paired " .  $sortedMentorArray[$i]->username . " and " .  $sortedStudentsArray[$i]->username . "\n";
 } 
 
+
+function uniqidReal($length) {
+    // uniqid gives 13 chars, but you could adjust it to your needs.
+    if (function_exists("random_bytes")) {
+        $bytes = random_bytes(ceil($length / 2));
+    } elseif (function_exists("openssl_random_pseudo_bytes")) {
+        $bytes = openssl_random_pseudo_bytes(ceil($length / 2));
+    } else {
+        throw new Exception("no cryptographically secure random function available");
+    }
+    return substr(bin2hex($bytes), 0, $length);
+}
 ?>

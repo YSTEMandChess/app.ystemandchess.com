@@ -1,3 +1,4 @@
+import { SocketService } from './socket.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,7 +52,10 @@ import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add
     HttpClientTestingModule,
     ModalModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    SocketService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

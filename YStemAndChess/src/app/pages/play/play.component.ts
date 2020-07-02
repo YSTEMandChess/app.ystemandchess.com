@@ -53,4 +53,10 @@ export class PlayComponent implements OnInit {
     xmlHttp.open("POST", theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
   }
+
+  public updateBoardStateTest() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    console.log("Updating board state.");
+    this.socket.emitMessage("newState", JSON.stringify({boardState: "thisistheboardstate", username: userContent.username}));
+  }
 }

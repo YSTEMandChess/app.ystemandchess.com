@@ -43,13 +43,13 @@ io.on('connection', (socket) => {
     ongoingGames.forEach(element => {
       if (element.student.username == parsedmsg.username) {
         //pull json out of ongoing
-        element.boardState = msg.boardState;
+        element.boardState = parsedmsg.boardState;
         console.log(`student emit to mentor ${element.boardState}`)
         io.to(element.mentor.id).emit("boardState", element.boardState);
         
       } else if (element.mentor.username == parsedmsg.username) {
         console.log(`mentor emit to student ${element.boardState}`)
-        element.boardState = msg.boardState;
+        element.boardState = parsedmsg.boardState;
         io.to(element.student.id).emit("boardState", element.boardState);
       }
     });

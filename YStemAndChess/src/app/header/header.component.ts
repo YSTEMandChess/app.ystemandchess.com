@@ -1,3 +1,4 @@
+import { SocketService } from './../socket.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from "../globals";
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
   public inMatch = false;
 
   constructor(private cookie: CookieService,
-    private modalService: ModalService) { }
+    private modalService: ModalService, private soc: SocketService) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -32,6 +33,18 @@ export class HeaderComponent implements OnInit {
       this.username = uInfo["username"];
       this.role = uInfo["role"];
     }
+    if (this.role == 'student' || this.role == 'mentor') {
+      setInterval(() => {
+        let url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
+        this.httpGetAsync(url, (response) => {
+          if (response == "There are no current meetings with this user.") {
+            this.inMatch = false;
+          }
+        });
+
+      }, 10000);
+    }
+
 
 
     // Disallowed extentions for each of the types of accounts
@@ -45,7 +58,7 @@ export class HeaderComponent implements OnInit {
 
     switch (pLevel) {
       case "student":
-        this.playLink="/student";
+        this.playLink = "/student";
         notAllowedExtsStudent.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/student";
@@ -53,7 +66,7 @@ export class HeaderComponent implements OnInit {
         });
         break;
       case "parent":
-        this.playLink="/parent";
+        this.playLink = "/parent";
         notAllowedExtsParent.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/parent";
@@ -61,7 +74,7 @@ export class HeaderComponent implements OnInit {
         });
         break;
       case "mentor":
-        this.playLink="/play-mentor";
+        this.playLink = "/play-mentor";
         notAllowedExtsMentor.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/play-mentor";
@@ -69,7 +82,7 @@ export class HeaderComponent implements OnInit {
         });
         break;
       case "admin":
-        this.playLink="/admin";
+        this.playLink = "/admin";
         notAllowedExtsAdmin.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/admin";
@@ -90,7 +103,7 @@ export class HeaderComponent implements OnInit {
     let url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url, (response) => {
       // They are currently in a meeting. So set it up.
-      if(response == "There are no current meetings with this user." || pLevel=="nLogged") {
+      if (response == "There are no current meetings with this user." || pLevel == "nLogged") {
         this.inMatch = false;
       } else {
         this.inMatch = true;
@@ -104,7 +117,7 @@ export class HeaderComponent implements OnInit {
   }
 
   closeModal(id: string) {
-      this.modalService.close(id);
+    this.modalService.close(id);
   }
 
   public removeFromWaiting() {
@@ -119,10 +132,10 @@ export class HeaderComponent implements OnInit {
     let url = `http://127.0.0.1:8000/newGame.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
-      if(response === 'Person Added Sucessfully.') {
+      if (response === 'Person Added Sucessfully.') {
         url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
-        let meeting = setInterval( () => {
-          if(this.gameFound(url) === true || this.endFlag === true) {
+        let meeting = setInterval(() => {
+          if (this.gameFound(url) === true || this.endFlag === true) {
             this.endFlag = false;
             this.closeModal("find-game");
             // GAME FOUND.
@@ -130,7 +143,7 @@ export class HeaderComponent implements OnInit {
             location.reload();
           }
         }, 200)
-      }      
+      }
     });
   }
 
@@ -141,7 +154,7 @@ export class HeaderComponent implements OnInit {
       try {
         s = JSON.parse(response);
         this.foundFlag = true;
-      } catch(Error) {
+      } catch (Error) {
         console.log(Error.message);
       }
     });
@@ -162,6 +175,10 @@ export class HeaderComponent implements OnInit {
   public logout() {
     this.cookie.delete("login");
     window.location.reload();
+  }
+
+  public leaveMatch() {
+    this.httpGetAsync(`http://127.0.0.1:8000/endMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {});
   }
 
 }

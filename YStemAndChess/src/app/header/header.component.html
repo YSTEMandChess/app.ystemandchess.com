@@ -24,7 +24,7 @@
                     <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>
                 </div>
                 <div *ngIf="inMatch">
-                    <a class="nav-link hvr-underline-from-left" href="">Leave Meeting</a>
+                    <a class="nav-link hvr-underline-from-left" (click)="leaveMatch()">Leave Meeting</a>
                 </div>
             </li>
             <li class="nav-item">

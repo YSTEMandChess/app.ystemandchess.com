@@ -26,12 +26,21 @@ io.on('connection', (socket) => {
 
     if (newGame) {
       console.log(`Creating game between: ${parsedmsg.mentor} and ${parsedmsg.student}`);
-      if (parsedmsg.role == 'student') {
-        ongoingGames.push({ student: { username: parsedmsg.student, id: socket.id }, mentor: { username: parsedmsg.mentor, id: "" }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });
-      } else if (parsedmsg.role == 'mentor') {
-        ongoingGames.push({ student: { username: parsedmsg.student, id: "" }, mentor: { username: parsedmsg.mentor, id: socket.id }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });
+      let colors = []; 
+      if(Math.random()>0.5) {
+        colors = ["black", "white"];
+      } else {
+        colors = ["white", "black"];
       }
-      io.emit("boardState", "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR");
+      
+      
+      if (parsedmsg.role == 'student') {
+        ongoingGames.push({ student: { username: parsedmsg.student, id: socket.id, color: colors[0] }, mentor: { username: parsedmsg.mentor, id: "", color: colors[1] }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });
+        io.emit("boardState", JSON.stringify({boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR", color: colors[0]}));
+      } else if (parsedmsg.role == 'mentor') {
+        ongoingGames.push({ student: { username: parsedmsg.student, id: "", color: colors[0] }, mentor: { username: parsedmsg.mentor, id: socket.id, color: colors[1] }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });
+        io.emit("boardState", JSON.stringify({boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR", color: colors[1]}));
+      }
       // Set client ids,
     }
 
@@ -45,12 +54,12 @@ io.on('connection', (socket) => {
         //pull json out of ongoing
         element.boardState = parsedmsg.boardState;
         console.log(`student emit to mentor ${element.boardState}`)
-        io.to(element.mentor.id).emit("boardState", element.boardState);
+        io.to(element.mentor.id).emit("boardState", JSON.stringify({boardState: element.boardState, color: element.mentor.color}));
         
       } else if (element.mentor.username == parsedmsg.username) {
         console.log(`mentor emit to student ${element.boardState}`)
         element.boardState = parsedmsg.boardState;
-        io.to(element.student.id).emit("boardState", element.boardState);
+        io.to(element.student.id).emit("boardState", JSON.stringify({boardState: element.boardState, color: element.student.color}))
       }
     });
     // update the board state and send to the other person.

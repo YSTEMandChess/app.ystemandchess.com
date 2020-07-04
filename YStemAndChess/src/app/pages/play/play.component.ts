@@ -2,6 +2,7 @@ import { SocketService } from './../../socket.service';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
+import { InvokeFunctionExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-play',
@@ -38,7 +39,9 @@ export class PlayComponent implements OnInit {
       this.socket.emitMessage("newGame", JSON.stringify({student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role}));
 
       this.socket.listen("boardState").subscribe((data) => {
-        console.log(data);
+        console.log(`New Board State Received: ${data}`);
+        var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+        chessBoard.postMessage(data, "http://localhost");
       })
     });
 
@@ -47,14 +50,11 @@ export class PlayComponent implements OnInit {
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 
     // Listen to message from child window
-    eventer(messageEvent,function(e) {
-      try{
-        JSON.parse(e.data);
-      } catch(er) {
-        this.updateBoardStateTest(e.data);
-        console.log('parent received message!:  ',e.data);
+    eventer(messageEvent,(e) => {
+      if(typeof(e.data) !== 'object' && !e.data.includes("{")) {
+        // Means that there is the board state and whatnot
+        this.updateBoardState(e.data);
       }
-      
     },false);
 
   }
@@ -69,9 +69,9 @@ export class PlayComponent implements OnInit {
     xmlHttp.send(null);
   }
 
-  public updateBoardStateTest(data) {
+  public updateBoardState(data) {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
-    console.log(data);
+    console.log(`Sending an update: ${data}`);
     this.socket.emitMessage("newState", JSON.stringify({boardState: data, username: userContent.username}));
   }
 }

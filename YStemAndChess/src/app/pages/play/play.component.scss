@@ -6,6 +6,12 @@
     .lichess {
         width: 70%;
         height: 700px;
+
+        iframe {
+            width:100%;
+            height:80vh;
+            overflow: hidden;
+        }
     }
     .jitsi {
         width: 30%;

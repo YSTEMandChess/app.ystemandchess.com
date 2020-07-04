@@ -42,6 +42,21 @@ export class PlayComponent implements OnInit {
       })
     });
 
+    var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+    // Listen to message from child window
+    eventer(messageEvent,function(e) {
+      try{
+        JSON.parse(e.data);
+      } catch(er) {
+        this.updateBoardStateTest(e.data);
+        console.log('parent received message!:  ',e.data);
+      }
+      
+    },false);
+
   }
 
   private httpGetAsync(theUrl: string, callback) {
@@ -54,9 +69,9 @@ export class PlayComponent implements OnInit {
     xmlHttp.send(null);
   }
 
-  public updateBoardStateTest() {
+  public updateBoardStateTest(data) {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
-    console.log("Updating board state.");
-    this.socket.emitMessage("newState", JSON.stringify({boardState: "thisistheboardstate", username: userContent.username}));
+    console.log(data);
+    this.socket.emitMessage("newState", JSON.stringify({boardState: data, username: userContent.username}));
   }
 }

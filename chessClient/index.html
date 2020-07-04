@@ -6,7 +6,7 @@
   <script src="./js/chessboard-1.0.0.js"></script>
   <script src="node_modules/chess960.js/chess.min.js"></script>
 </head>
-<div id="myBoard"></div>
+<div id="myBoard" style="width: 2000;"></div>
 <script>
   // NOTE: this example uses the chess.js library:
   // https://github.com/jhlywa/chess.js
@@ -29,6 +29,9 @@
     updateStatus();
   }, false);
 
+  function flip() {
+	  board.flip();
+  }
 
   function onDragStart(source, piece, position, orientation) {
     // do not pick up pieces if the game is over
@@ -52,6 +55,9 @@
     // illegal move
     if (move === null) return 'snapback'
 
+	if(game.game_over()) {
+		console.log("game over");
+	}
     updateStatus()
     sendToParent(game.fen());
   }

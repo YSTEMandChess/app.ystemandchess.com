@@ -34,14 +34,14 @@ export class PlayComponent implements OnInit {
       api.executeCommand('subject', 'Chess Meeting');
       //api.executeCommand('startRecording');
       // Still need to lock the room. However finding the room name is technically viable as well as because it is on a closed network.
-      
 
       this.socket.emitMessage("newGame", JSON.stringify({student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role}));
 
       this.socket.listen("boardState").subscribe((data) => {
         console.log(`New Board State Received: ${data}`);
+
         var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-        chessBoard.postMessage(data, "http://localhost");
+        chessBoard.postMessage(JSON.stringify({boardState: data.boardState, color: data.color}), "http://localhost");
       })
     });
 
@@ -51,9 +51,10 @@ export class PlayComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent,(e) => {
-      if(typeof(e.data) !== 'object' && !e.data.includes("{")) {
+      if(e.origin = "http://localhost:8000") {
         // Means that there is the board state and whatnot
-        this.updateBoardState(e.data);
+        let info = JSON.parse(e.data);
+        this.updateBoardState(info);
       }
     },false);
 
@@ -69,9 +70,19 @@ export class PlayComponent implements OnInit {
     xmlHttp.send(null);
   }
 
+  public flipBoard() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    this.socket.emitMessage("flipBoard", JSON.stringify({username: userContent.username}))
+  } 
+
   public updateBoardState(data) {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
     console.log(`Sending an update: ${data}`);
-    this.socket.emitMessage("newState", JSON.stringify({boardState: data, username: userContent.username}));
+    this.socket.emitMessage("newState", JSON.stringify({boardState: data.boardState, username: userContent.username}));
+  }
+
+  public createNewGame() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    this.socket.emitMessage("createNewGame", JSON.stringify({username: userContent.username}));
   }
 }

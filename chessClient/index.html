@@ -6,16 +6,16 @@
   <script src="./js/chessboard-1.0.0.js"></script>
   <script src="node_modules/chess960.js/chess.min.js"></script>
 </head>
-<div class="myBoard"></div>
+<div id="myBoard"></div>
 <script>
   // NOTE: this example uses the chess.js library:
   // https://github.com/jhlywa/chess.js
 
   var board = null
   var game = new Chess()
-  var $status = $('#status')
-  var $fen = $('#fen')
-  var $pgn = $('#pgn')
+  //var $status = $('#status')
+  //var $fen = $('#fen')
+  //var $pgn = $('#pgn')
 
   var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
   var eventer = window[eventMethod];
@@ -94,9 +94,9 @@
       }
     }
 
-    $status.html(status)
-    $fen.html(game.fen())
-    $pgn.html(game.pgn())
+    //$status.html(status)
+    //$fen.html(game.fen())
+    //$pgn.html(game.pgn())
   }
 
   var config = {

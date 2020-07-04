@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayMentorComponent implements OnInit {
 
-  constructor(socket: SocketService, cookie: CookieService) { }
+  constructor(private socket: SocketService, private cookie: CookieService) { }
 
   ngOnInit(): void { 
   }

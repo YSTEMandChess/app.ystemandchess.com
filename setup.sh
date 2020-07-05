@@ -1,5 +1,5 @@
 #!/bin/bash
-NUMBER=10
+NUMBER=7
 
 echo "Welecome to the YStem and Chess Setup Installer"
 echo "-----------------------------------------------"
@@ -35,3 +35,4 @@ echo "(7/$NUMBER) Installing socket.io"
 sudo npm install -g socket.io > /dev/null
 echo "::Done"
 
+echo "Setup Complete"

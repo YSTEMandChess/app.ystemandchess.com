@@ -102,7 +102,7 @@ io.on('connection', (socket) => {
     // {boardState: sdlfkjsk, username: sfjdslk}
   });
   
-  socket.io('flipBoard', (msg) => {
+  socket.on('flipBoard', (msg) => {
     var parsedmsg = JSON.parse(msg);
     ongoingGames.forEach(element => {
       if (element.student.username == parsedmsg.username || element.mentor.username == parsedmsg.username) {

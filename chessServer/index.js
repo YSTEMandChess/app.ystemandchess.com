@@ -20,10 +20,10 @@ io.on('connection', (socket) => {
           color = element.student.color;
         } else if (parsedmsg.role == 'mentor') {
           element.mentor.id = socket.id;
-          element.mentor.color;
+          color = element.mentor.color;
         }
 
-        io.emit("boardState", JSON.stringify({ boardState: element.boardState, color: "test color" }));
+        io.emit("boardState", JSON.stringify({ boardState: element.boardState, color: color }));
       }
     });
 
@@ -53,6 +53,8 @@ io.on('connection', (socket) => {
     //msg contains boardstate, find boardstate
     console.log("There is a new state found. Telling the other player");
     var parsedmsg = JSON.parse(msg);
+    console.log(`The board state is: ${parsedmsg.boardState}`);
+    console.log(parsedmsg);
     ongoingGames.forEach(element => {
       if (element.student.username == parsedmsg.username) {
         //pull json out of ongoing

@@ -29,8 +29,8 @@ export class PlayComponent implements OnInit {
           email: userContent.email
         }
       };
-      const api = new JitsiMeetExternalAPI(domain, options);
-      api.executeCommand('subject', 'Chess Meeting');
+      //const api = new JitsiMeetExternalAPI(domain, options);
+      //api.executeCommand('subject', 'Chess Meeting');
       //api.executeCommand('startRecording');
       // Still need to lock the room. However finding the room name is technically viable as well as because it is on a closed network.
 
@@ -50,8 +50,9 @@ export class PlayComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent,(e) => {
-      if(e.origin == "http://localhost:3000") {
+      if(e.origin == "http://localhost") {
         // Means that there is the board state and whatnot
+        console.log("There is a new board state. Going to update!")
         let info = e.data;
         this.updateBoardState(info);
       }

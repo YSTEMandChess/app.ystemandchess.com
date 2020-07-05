@@ -14,13 +14,16 @@ io.on('connection', (socket) => {
       if (element.student.username == parsedmsg.student || element.mentor.username == parsedmsg.mentor) {
         newGame = false;
         // Set the new client id for student or mentor.
+        let color;
         if (parsedmsg.role == 'student') {
           element.student.id = socket.id;
+          color = element.student.color;
         } else if (parsedmsg.role == 'mentor') {
           element.mentor.id = socket.id;
+          element.mentor.color;
         }
 
-        io.emit("boardState", element.boardState);
+        io.emit("boardState", JSON.stringify({boardState: element.boardState, color: color}));
       }
     });
 

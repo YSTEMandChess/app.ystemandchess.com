@@ -6,7 +6,7 @@
   <script src="./js/chessboard-1.0.0.js"></script>
   <script src="node_modules/chess960.js/chess.min.js"></script>
 </head>
-<div id="myBoard" style="width: 2000;"></div>
+<div id="myBoard" style="width: 400"></div>
 <script>
   // NOTE: this example uses the chess.js library:
   // https://github.com/jhlywa/chess.js
@@ -21,11 +21,16 @@
   var eventer = window[eventMethod];
   var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 
+  var playerColor;
+
   // Listen to message from child window
   eventer(messageEvent, (e) => {
     console.log("Hey, I am going to update the board state");
-    game.load(e.data);
-    board.position(e.data);
+    let data = JSON.parse(e.data);
+    board.orientation(data.color);
+    playerColor = data.color;
+    game.load(data.boardState);
+    board.position(data.boardState);
     updateStatus();
   }, false);
 
@@ -58,6 +63,8 @@
 	if(game.game_over()) {
 		console.log("game over");
 	}
+
+  console.log("I am in drop");
     updateStatus()
     sendToParent(game.fen());
   }

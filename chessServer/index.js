@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
         element.mentor.color = colors[1];
         console.log(`student emit to mentor ${element.boardState}`)
 
-        io.emit("boardState", JSON.stringify({ boardState: element.boardState, color: element.student.color }));
+        io.to(element.student.id).emit("boardState", JSON.stringify({ boardState: element.boardState, color: element.student.color }));
         io.to(element.mentor.id).emit("boardState", JSON.stringify({ boardState: element.boardState, color: element.mentor.color }));
 
       } else if (element.mentor.username == parsedmsg.username) {
@@ -100,7 +100,7 @@ io.on('connection', (socket) => {
         element.mentor.color = colors[1];
         element.boardState = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
-        io.emit("boardState", JSON.stringify({ boardState: element.boardState, color: element.mentor.color }));
+        io.to(element.mentor.id).emit("boardState", JSON.stringify({ boardState: element.boardState, color: element.mentor.color }));
         io.to(element.student.id).emit("boardState", JSON.stringify({ boardState: element.boardState, color: element.student.color }))
       }
     });

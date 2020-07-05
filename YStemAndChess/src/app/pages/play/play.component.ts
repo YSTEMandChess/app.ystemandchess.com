@@ -39,7 +39,6 @@ export class PlayComponent implements OnInit {
       this.socket.listen("boardState").subscribe((data) => {
         let newData = JSON.parse(<string>data);
         console.log(`New Board State Received: ${data}`);
-
         var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
         chessBoard.postMessage(JSON.stringify({boardState: newData.boardState, color: newData.color}), "http://localhost");
       })
@@ -53,7 +52,7 @@ export class PlayComponent implements OnInit {
     eventer(messageEvent,(e) => {
       if(e.origin == "http://localhost:3000") {
         // Means that there is the board state and whatnot
-        let info = JSON.parse(e.data);
+        let info = e.data;
         this.updateBoardState(info);
       }
     },false);

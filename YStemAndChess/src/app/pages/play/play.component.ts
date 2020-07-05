@@ -78,7 +78,7 @@ export class PlayComponent implements OnInit {
   public updateBoardState(data) {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
     console.log(`Sending an update: ${data}`);
-    this.socket.emitMessage("newState", JSON.stringify({boardState: data.boardState, username: userContent.username}));
+    this.socket.emitMessage("newState", JSON.stringify({boardState: data, username: userContent.username}));
   }
 
   public createNewGame() {

@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
 
 
       if (parsedmsg.role == 'student') {
-        ongoingGames.push({ student: { username: parsedmsg.student, id: socket.id, color: colors[0] }, mentor: { username: parsedmsg.mentor, id: "", color: colors[1] }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });
+        ongoingGames.push({ student: { username: parsedmsg.student, id: socket.id, color: colors[0] }, mentor: { username: parsedmsg.mentor, id: "", color: colors[0] }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });
         io.emit("boardState", JSON.stringify({ boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR", color: colors[0] }));
       } else if (parsedmsg.role == 'mentor') {
         ongoingGames.push({ student: { username: parsedmsg.student, id: "", color: colors[0] }, mentor: { username: parsedmsg.mentor, id: socket.id, color: colors[1] }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });

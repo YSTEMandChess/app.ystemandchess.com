@@ -37,11 +37,11 @@ export class PlayComponent implements OnInit {
       this.socket.emitMessage("newGame", JSON.stringify({student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role}));
 
       this.socket.listen("boardState").subscribe((data) => {
-        
+        let newData = JSON.parse(<string>data);
         console.log(`New Board State Received: ${data}`);
 
         var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-        //chessBoard.postMessage(JSON.stringify({boardState: parsed.boardState, color: parsed.color}), "http://localhost");
+        chessBoard.postMessage(JSON.stringify({boardState: newData.boardState, color: newData.color}), "http://localhost");
       })
     });
 

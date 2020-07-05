@@ -75,6 +75,7 @@ io.on('connection', (socket) => {
 
   socket.on('createNewGame', (msg) => {
     //msg contains boardstate, find boardstate
+    console.log("CREATING A NEW GAME -------------------")
     let colors;
     if (Math.random() > 0.5) {
       colors = ["black", "white"];

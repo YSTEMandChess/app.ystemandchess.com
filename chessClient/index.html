@@ -23,10 +23,16 @@
 
   var playerColor;
 
+  let startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+
   // Listen to message from child window
   eventer(messageEvent, (e) => {
     console.log("Hey, I am going to update the board state");
     let data = JSON.parse(e.data);
+    console.log(data);
+    if(data.boardState == startFEN){
+      game = new Chess();
+    }
     board.orientation(data.color);
     playerColor = data.color;
     game.load(data.boardState);
@@ -42,6 +48,13 @@
     // do not pick up pieces if the game is over
     if (game.game_over()) return false
 
+    console.log(playerColor);
+    if(playerColor === "black") {
+      if(piece.search(/^w/) !== -1) return false;
+    } else if(playerColor === "white") {
+      if(piece.search(/^b/) !== -1) return false;
+    }
+    
     // only pick up pieces for the side to move
     if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
       (game.turn() === 'b' && piece.search(/^w/) !== -1)) {

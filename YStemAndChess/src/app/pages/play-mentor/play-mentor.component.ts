@@ -14,10 +14,14 @@ export class PlayMentorComponent implements OnInit {
   ngOnInit(): void { 
   }
 
-  public updateBoardState(data) {
+  public flipBoard() {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
-    console.log(`Sending an update: ${data}`);
-    this.socket.emitMessage("newState", JSON.stringify({boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", username: userContent.username}));
+    this.socket.emitMessage("flipBoard", JSON.stringify({username: userContent.username}))
+  }
+
+  public newGame() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    this.socket.emitMessage("createNewGame", JSON.stringify({username: userContent.username}));
   }
 
 }

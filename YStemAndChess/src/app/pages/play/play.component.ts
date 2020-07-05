@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 import { InvokeFunctionExpr } from '@angular/compiler';
+import { parse } from 'path';
 
 @Component({
   selector: 'app-play',
@@ -38,10 +39,11 @@ export class PlayComponent implements OnInit {
       this.socket.emitMessage("newGame", JSON.stringify({student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role}));
 
       this.socket.listen("boardState").subscribe((data) => {
+        let parsed = JSON.parse(data);
         console.log(`New Board State Received: ${data}`);
 
         var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-        chessBoard.postMessage(JSON.stringify({boardState: data.boardState, color: data.color}), "http://localhost");
+        chessBoard.postMessage(JSON.stringify({boardState: parsed.boardState, color: parsed.color}), "http://localhost");
       })
     });
 

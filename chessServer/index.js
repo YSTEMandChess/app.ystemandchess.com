@@ -86,7 +86,7 @@ io.on('connection', (socket) => {
         element.boardState = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
         element.student.color = colors[0];
         element.mentor.color = colors[1];
-        //console.log(`student emit to mentor ${element.boardState}`)
+        console.log(`student emit to mentor ${element.boardState}`)
         
         io.emit("boardState", JSON.stringify({boardState: element.boardState, color: element.student.color}));
         io.to(element.mentor.id).emit("boardState", JSON.stringify({boardState: element.boardState, color: element.mentor.color}));

@@ -1,6 +1,0 @@
-extention=mongodb.so /etc/php/7.4/cli/php.ini
-extension=mongodb.so /etc/php/7.4/cli/php.ini
-extension=mongodb.so /etc/php/7.4/cli/php.ini
-extension=mongodb /etc/php/7.4/cli/php.ini
-extension=mongodb /etc/php/7.4/cli/php.ini
-extension=mongodb.so /etc/php/7.4/cli/php.ini

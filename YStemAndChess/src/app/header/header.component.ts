@@ -5,6 +5,7 @@ import { setPermissionLevel } from "../globals";
 import { allowedNodeEnvironmentFlags } from 'process';
 import { ModalService } from '../_modal';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
   public inMatch = false;
 
   constructor(private cookie: CookieService,
-    private modalService: ModalService, private soc: SocketService) { }
+    private modalService: ModalService, private soc: SocketService,
+    private router: Router) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -135,34 +137,57 @@ export class HeaderComponent implements OnInit {
       if (response === 'Person Added Sucessfully.') {
         url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
         let meeting = setInterval(() => {
-          if (this.gameFound(url) === true || this.endFlag === true) {
+          this.gameFound(url);
+          if (this.foundFlag === true || this.endFlag === true) {
+            console.log("modal should close");
             this.endFlag = false;
+            this.foundFlag = false;
             this.closeModal("find-game");
             // GAME FOUND.
             clearInterval(meeting);
-            location.reload();
+            this.redirect(this.role);
           }
         }, 200)
       }
     });
   }
 
-  private gameFound(url) {
-    this.httpGetAsync(url, (response) => {
-      //console.log(response);
+  private async gameFound(url) {
+    await this.httpGetAsync(url, (response) => {
+      console.log(response);
+      if(response === "There are no current meetings with this user.") {
+        let url = `http://127.0.0.1:8000/pairUp.php/?jwt=${this.cookie.get("login")}`;
+        console.log("about to create game");
+        this.createGame(url);
+      }
+
       let s;
       try {
         s = JSON.parse(response);
+        console.log("I am here");
         this.foundFlag = true;
       } catch (Error) {
         console.log(Error.message);
       }
     });
-    console.log(this.foundFlag);
-    return this.foundFlag;
   }
 
-  private httpGetAsync(theUrl: string, callback) {
+  private async createGame(url) {
+    console.log("creating game");
+    await this.httpGetAsync(url, (reply) => {
+      console.log(reply);
+    }); 
+  }
+
+  private redirect(role) {
+    if(role === "student"){
+      this.router.navigate(['student']);
+    } else if(role == "mentor") {
+      this.router.navigate(['play-mentor']);
+    }
+  }
+
+  private async httpGetAsync(theUrl: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)

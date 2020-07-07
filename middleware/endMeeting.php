@@ -20,7 +20,7 @@ if($credentials->role == "mentor") {
 } else if ($credentials->role == "student") {
     $searchFor = "studentUsername";
 }
-$collection->updateOne([$searchFor => $credentials->username],[
+$collection->updateOne([$searchFor => $credentials->username, 'CurrentlyOngoing' => true],[
     '$set' =>
         [
             'CurrentlyOngoing' => false

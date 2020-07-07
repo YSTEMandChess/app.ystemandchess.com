@@ -105,7 +105,7 @@ export class HeaderComponent implements OnInit {
     let url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url, (response) => {
       // They are currently in a meeting. So set it up.
-      if (response == "There are no current meetings with this user." || pLevel == "nLogged") {
+      if (response == "There are no current meetings with this user." || pLevel == "nLogged" || "Please be either a student or a mentor.") {
         this.inMatch = false;
       } else {
         this.inMatch = true;

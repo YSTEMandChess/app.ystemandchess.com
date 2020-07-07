@@ -1,9 +1,11 @@
 # Installation of the Development Environment 
 To quick install the dev environment, use the script I have created called `setup.sh`. This should provide a good installation provided you type in your password a couple of time and are on ubuntu.
 
+&nbsp; 
+
 However if you want to do it the long way, follow along down below. (All commands are given for ubuntu/debian as this is the only development environment we use)
 
-
+&nbsp; 
 
 The first thing that you need to install is **node.js**.
 

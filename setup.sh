@@ -24,7 +24,7 @@ echo "extension=mongodb.so" | sudo tee -a $(php -i | grep "Loaded Configuration 
 echo "::Done"
 
 echo "(5/$NUMBER) Installing nodemon"
-sudo npm isntall -g nodemon > /dev/null
+sudo npm install -g nodemon > /dev/null
 echo "::Done"
 
 echo "(6/$NUMBER) Installing express"

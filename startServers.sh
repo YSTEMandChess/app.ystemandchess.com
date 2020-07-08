@@ -30,7 +30,8 @@ echo ""
 chessBoard() {
  echo "Starting Chess Client..."
  cd ./chessClient/
- sudo a2ensite /etc/apache2/sites-available/ystemandchess.conf
+ sudo rm -rf /var/www/html/*
+ sudo cp * /var/www/html/
 }
 
 frontEnd & phpServer & webSockets & chessBoard

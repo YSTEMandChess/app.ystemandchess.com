@@ -23,6 +23,7 @@ echo ""
 webSockets() {
  echo "Starting Web Sockets..."
  nodemon ./chessServer/index.js
+ cd ..
 }
 
 echo ""

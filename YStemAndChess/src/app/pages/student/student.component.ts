@@ -23,11 +23,6 @@ export class StudentComponent implements OnInit {
     this.socket.emitMessage("createNewGame", JSON.stringify({username: userContent.username}));
   }
 
-  public getName() {
-    console.log(this.username);
-    this.username;
-  }
-
   private async getUsername() {
     let pLevel = "nLogged";
     let uInfo = await setPermissionLevel(this.cookie);
@@ -35,7 +30,6 @@ export class StudentComponent implements OnInit {
       this.logged = true;
       pLevel = uInfo["role"];
       this.username = uInfo["username"];
-      console.log(uInfo["username"]);
     }
   }
 }

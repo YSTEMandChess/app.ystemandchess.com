@@ -13,12 +13,12 @@ export class PlayComponent implements OnInit {
   constructor(private cookie: CookieService, private socket: SocketService) { }
 
   ngOnInit() {
-    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
 
     this.httpGetAsync(`http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
       if(response == "There are no current meetings with this user.") {
         return;
       }
+      let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
       let responseText = JSON.parse(response);
       const domain = 'meet.jit.si';
       const options = {

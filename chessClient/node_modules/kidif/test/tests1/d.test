@@ -1,0 +1,37 @@
+This example should demonstrate the onChange and onDestroy events.
+
+===== Description
+
+The Foo widget has `onChange` and `onDestroy` events you can hook into for
+custom functionality.
+
+===== HTML
+
+<div id="fooContainer"></div>
+
+===== CSS
+
+#fooContainer {
+  background: #eee;
+  height: 400px;
+  width: 600px;
+}
+
+===== JavaScript
+
+function onChangeMyFoo(oldState, newState) {
+  // potentially modify the new state here...
+  return newState;
+}
+
+function onDestroyMyFoo(containerEl) {
+  // execute any necessary cleanup code here
+}
+
+var myFoo = Foo('fooContainer', {
+  allowFlip: true,
+  onChange: onChangeMyFoo,
+  onDestroy: onDestroyMyFoo
+});
+
+myFoo.init();

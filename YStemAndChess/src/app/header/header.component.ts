@@ -1,18 +1,15 @@
-import { SocketService } from './../socket.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Component, OnInit } from '@angular/core';
-import { setPermissionLevel } from "../globals";
-import { allowedNodeEnvironmentFlags } from 'process';
+import { Component, OnInit} from '@angular/core';
 import { ModalService } from '../_modal';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { Router } from '@angular/router';
+import { setPermissionLevel } from '../globals';
 
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent implements OnInit {
   public username = "";
   public role = "";
@@ -22,9 +19,9 @@ export class HeaderComponent implements OnInit {
   public playLink = "/play-nolog";
   public inMatch = false;
 
-  constructor(private cookie: CookieService,
-    private modalService: ModalService, private soc: SocketService,
-    private router: Router) { }
+  constructor(private cookie: CookieService, private modalService: ModalService) {
+      
+    }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -41,6 +38,8 @@ export class HeaderComponent implements OnInit {
         this.httpGetAsync(url, (response) => {
           if (response == "There are no current meetings with this user.") {
             this.inMatch = false;
+          } else {
+            this.inMatch = true;
           }
         });
 
@@ -146,6 +145,7 @@ export class HeaderComponent implements OnInit {
             // GAME FOUND.
             clearInterval(meeting);
             this.redirect(this.role);
+            this.inMatch = true;
           }
         }, 200)
       }
@@ -181,9 +181,9 @@ export class HeaderComponent implements OnInit {
 
   private redirect(role) {
     if(role === "student"){
-      this.router.navigate(['student']);
+      window.location.pathname = "/student";
     } else if(role == "mentor") {
-      this.router.navigate(['play-mentor']);
+      window.location.pathname = "/play-mentor";
     }
   }
 

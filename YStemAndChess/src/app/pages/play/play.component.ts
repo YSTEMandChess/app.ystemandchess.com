@@ -29,8 +29,8 @@ export class PlayComponent implements OnInit {
           email: userContent.email
         }
       };
-      const api = new JitsiMeetExternalAPI(domain, options);
-      api.executeCommand('subject', 'Chess Meeting');
+      //const api = new JitsiMeetExternalAPI(domain, options);
+      //api.executeCommand('subject', 'Chess Meeting');
       //api.executeCommand('startRecording');
       // Still need to lock the room. However finding the room name is technically viable as well as because it is on a closed network.
 

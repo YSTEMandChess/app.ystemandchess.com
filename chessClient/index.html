@@ -33,8 +33,8 @@
     if(data.boardState == startFEN){
       game = new Chess();
     }
-    board.orientation(data.color);
     playerColor = data.color;
+    board.orientation(playerColor);
     game.load(data.boardState);
     board.position(data.boardState);
     updateStatus();

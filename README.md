@@ -84,6 +84,7 @@ The final piece of the puzzle is to add the chess client. This is in the directo
 
 So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
-To quick run the development servers, use the script "startServers.sh" and type in your password when it asks for it. In order to generate the apache server for the chessboard correctly, the script runs a file called '/etc/apache2/sites-available/ystemandchess.conf'. You can either change the path in the script to reflect where your '.conf' file points to the chessboard or setup the 'ystemandchess.conf' at the appropriate location.
+To quick run the development servers, use the command "sh startServers.sh" and type in your password when it asks for it. This will run all the current servers needed to use the development server.
 
-
+***NOTE***
+When using the startServers.sh script, you must kill the processes manually when you CTRL+C out of development mode. CTRL+C doesn't kill all the current processes as of right now and I am currently looking into fixing it. 

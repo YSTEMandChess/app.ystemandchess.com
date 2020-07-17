@@ -11,11 +11,12 @@
                 volutpat lacus laoreet. Justo laoreet sit amet cursus sit. Facilisis gravida neque convallis a cras.
                 Quam vulputate dignissim suspendisse in est ante in.
             </p>
-            <div class="benifits">
+            <div class="benefits">
                 Benefits
             </div>
         </div>
     </div>
+    <button type="submit" (click)="deleteAccount(this.username)">Delete</button>
 </div>
 <div *ngFor="let student of students">
     <div class="container cont">
@@ -38,6 +39,9 @@
                 </div>
                 <div class="recordsLink">
                     Messages
+                </div>
+                <div class="recordsLink">
+                    <button type="submit" (click)="deleteAccount(student)">Delete</button>
                 </div>
             </div>
         </div>

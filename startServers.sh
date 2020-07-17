@@ -8,7 +8,6 @@ frontEnd() {
  echo "Starting frontend development server..."
  cd ./YStemAndChess/
  ng serve
- cd ..
 }
 
 echo ""
@@ -16,14 +15,12 @@ phpServer() {
  echo "Starting PHP Server..."
  cd ./middleware/
  php -S localhost:8000
- cd ..
 }
 
 echo ""
 webSockets() {
  echo "Starting Web Sockets..."
  nodemon ./chessServer/index.js
- cd ..
 }
 
 echo ""
@@ -32,6 +29,8 @@ chessBoard() {
  cd ./chessClient/
  sudo rm -rf /var/www/html/*
  sudo cp * /var/www/html/
+ cd ~/etc/apache2/sites-available/
+ sudo a2ensite 000-default.conf
 }
 
 frontEnd & phpServer & webSockets & chessBoard

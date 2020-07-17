@@ -9,6 +9,7 @@ sudo apt install -y nodejs > /dev/null
 echo "::Done"
 
 echo "(2/$NUMBER) Installing Angular CLI..."
+sudo apt install npm > /dev/null
 sudo npm install -g @angular/cli > /dev/null
 sudo npm install -g @angular-devkit/build-angular > /dev/null
 echo "::Done"

@@ -72,6 +72,20 @@ io.on('connection', (socket) => {
 
   });
 
+  socket.on('endGame', (msg) => {
+    console.log("REMOVING GAME FROM ARRAY");
+    var parsedmsg = JSON.parse(msg);
+    let index = 0;
+    ongoingGames.forEach(element => {
+      if(element.student.username == parsedmsg.username || element.mentor.username == parsedmsg.username) {
+        ongoingGames.splice(index, 1);
+        console.log("Game Deleted");
+      }
+      index++;
+    });
+    console.log(ongoingGames);
+  });
+
   socket.on('createNewGame', (msg) => {
     //msg contains boardstate, find boardstate
     console.log("CREATING A NEW GAME -------------------")

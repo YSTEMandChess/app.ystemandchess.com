@@ -2,6 +2,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit} from '@angular/core';
 import { ModalService } from '../_modal';
 import { setPermissionLevel } from '../globals';
+import { SocketService } from './../socket.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   public playLink = "/play-nolog";
   public inMatch = false;
 
-  constructor(private cookie: CookieService, private modalService: ModalService) {
+  constructor(private cookie: CookieService, private modalService: ModalService,
+    private socket: SocketService) {
       
     }
 
@@ -161,9 +163,8 @@ export class HeaderComponent implements OnInit {
         this.createGame(url);
       }
 
-      let s;
       try {
-        s = JSON.parse(response);
+        let s = JSON.parse(response);
         console.log("I am here");
         this.foundFlag = true;
       } catch (Error) {
@@ -198,12 +199,20 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
+    this.leaveMatch();
     this.cookie.delete("login");
     window.location.reload();
   }
 
   public leaveMatch() {
     this.httpGetAsync(`http://127.0.0.1:8000/endMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {});
+    this.endGame();
+    this.inMatch = false;
+  }
+
+  public endGame() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    this.socket.emitMessage("endGame", JSON.stringify({username: userContent.username}));
   }
 
 }

@@ -1,4 +1,5 @@
 # Installation of the Development Environment 
+**NOTE: The install script does not yet work. It is still in development**
 To quick install the dev environment, use the script I have created called `setup.sh`. This should provide a good installation provided you type in your password a couple of time and are on ubuntu.
 
 &nbsp; 

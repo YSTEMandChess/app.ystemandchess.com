@@ -25,7 +25,13 @@
         height: auto;
     }
 
-    @media(max-width:880px) {
+    @media(max-width: 1160px) {
+        #chess {
+            width:70%;
+        }
+    }
+
+    @media(max-width:956px) {
         #chess {
             margin: 0 auto;
             width:100%;

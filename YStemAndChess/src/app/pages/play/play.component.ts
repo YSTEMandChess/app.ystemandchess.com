@@ -2,6 +2,9 @@ import { SocketService } from './../../socket.service';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
+import { isFormattedError } from '@angular/compiler';
+
+declare var $: any;
 
 @Component({
   selector: 'app-play',

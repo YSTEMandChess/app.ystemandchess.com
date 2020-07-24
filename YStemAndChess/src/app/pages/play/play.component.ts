@@ -27,13 +27,13 @@ export class PlayComponent implements OnInit {
         return;
       }
       let responseText = JSON.parse(response);
+      
 
       // Code for webcam
       // -------------------------------------------------------------------------
-
       this.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
       this.client.init("6c368b93b82a4b3e9fb8e57da830f2a4", () => console.log("init sucessful"), () => console.log("init unsucessful"))
-      this.client.join(null, "10000", null, (uid) => {
+      this.client.join(null, responseText.meetingID, null, (uid) => {
         console.log("uid: " + uid);
         this.clientUID = uid;
 

@@ -22,6 +22,7 @@ if($credentials->role == "mentor") {
     echo "Please be either a student or a mentor.";
     return;
 }
+
 if(!is_null($collection->findOne(['username'=>$credentials->username]))) {
     echo "Person already waiting for game.";
     return;
@@ -36,5 +37,5 @@ $collection->insertOne([
 echo "Person Added Sucessfully.";
 return "Person Added Sucessfully";
 
-
+// Start the recording
 ?>

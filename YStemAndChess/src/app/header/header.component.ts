@@ -179,6 +179,7 @@ export class HeaderComponent implements OnInit {
 
   public leaveMatch() {
     this.httpGetAsync(`http://127.0.0.1:8000/endMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {});
+    location.reload();
   }
 
 }

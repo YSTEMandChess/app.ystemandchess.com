@@ -13,6 +13,8 @@ declare var $: any;
 })
 export class PlayComponent implements OnInit {
 
+  public gameOver: boolean = false;
+
   constructor(private cookie: CookieService, private socket: SocketService) { }
 
   ngOnInit() {
@@ -87,5 +89,11 @@ export class PlayComponent implements OnInit {
   public createNewGame() {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
     this.socket.emitMessage("createNewGame", JSON.stringify({username: userContent.username}));
+  }
+
+  public analizeBoard() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    console.log("Going to analize the board");
+    this.socket.emitMessage("analizeBoard", JSON.stringify({username: userContent.username}));
   }
 }

@@ -2,7 +2,8 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
-var ongoingGames = [];
+var ongoingGamesNum = 0;
+var ongoingGames = [[]] ;
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -88,6 +89,7 @@ io.on('connection', (socket) => {
 
   socket.on('createNewGame', (msg) => {
     //msg contains boardstate, find boardstate
+    ongoingGamesNum++;
     console.log("CREATING A NEW GAME -------------------")
     let colors;
     if (Math.random() > 0.5) {

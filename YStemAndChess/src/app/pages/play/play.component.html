@@ -1,4 +1,13 @@
-<div class="board">
-    <iframe src="http://localhost" id="chessBd"></iframe>
-</div>  
+<html>
+    <header>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    </header>
+    <div class="board">
+        <iframe src="http://localhost" id="chessBd"></iframe>
+    </div> 
+    <div *ngIf="gameOver" id="analizeButton">
+        <button type="button">Analize Game</button>
+    </div>
+</html> 
     

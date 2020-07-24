@@ -13,3 +13,24 @@
     } 
 }
 
+button {
+    outline-style: none;
+    margin-left: 18%;
+    padding-right:2%;
+    padding-left:2%;
+    padding-top:1%;
+    padding-bottom:1%;
+    border-radius: 33px;
+    font-family: 'Roboto';
+    font-size: 32px;
+    line-height: 117.1%;
+    letter-spacing: 0.01em;
+    color:#fff;
+    background-color: #3A7CCA;
+}
+
+button:hover {
+    background-color: #fff;
+    color:#3A7CCA;
+}
+

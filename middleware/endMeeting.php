@@ -12,13 +12,25 @@ if($credentials == "Error: 405. This key has been tampered with or is out of dat
     echo $credentials;
     return $credentials;
 }
+$student = "";
 $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
 // They are a mentor, so add them to the mentor list
 $collection = $client->ystem->meetings;
+$userCollection = $client->ystem->users;
 if($credentials->role == "mentor") {
     $searchFor = "mentorUsername";
+    $cursor = $collection->find( array('mentorUsername' => $credentials->username), array("studentUsername"));
+    foreach ($cursor as $doc) {
+        echo $doc['studentUsername'];
+        $student = $doc['studentUsername'];
+    }
 } else if ($credentials->role == "student") {
     $searchFor = "studentUsername";
+    $cursor = $collection->find( array($searchFor => $credentials->username));
+    foreach ($cursor as $doc) {
+        echo $doc['studentUsername'];
+        $student = $doc['studentUsername'];
+    }
 }
 $collection->updateOne([$searchFor => $credentials->username, 'CurrentlyOngoing' => true],[
     '$set' =>
@@ -27,6 +39,14 @@ $collection->updateOne([$searchFor => $credentials->username, 'CurrentlyOngoing'
         ]
     ]
 );
+echo $student;
+$userCollection->updateOne(['username' => $student], [
+    '$set' => 
+    [
+        'timePlayed' => 9
+    ]
+]);
+
 echo "Meeting Status Updated Sucessfully.";
 return "Meeting Status Updated Sucessfully.";
 ?>

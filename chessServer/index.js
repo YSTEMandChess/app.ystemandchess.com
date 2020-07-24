@@ -3,7 +3,7 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
 var ongoingGamesNum = 0;
-var ongoingGames = [[]] ;
+var ongoingGames = [] ;
 
 io.on('connection', (socket) => {
   console.log('a user connected');

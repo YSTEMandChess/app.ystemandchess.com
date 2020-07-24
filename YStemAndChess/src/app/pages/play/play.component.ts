@@ -4,8 +4,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { AgoraClient, ClientEvent, NgxAgoraService, Stream, StreamEvent } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
 
-//import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
-
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
@@ -20,12 +18,12 @@ export class PlayComponent implements OnInit {
   constructor(private cookie: CookieService, private socket: SocketService, private agoraService: NgxAgoraService) { }
 
   ngOnInit() {
-    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
 
     this.httpGetAsync(`http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
       if (response == "There are no current meetings with this user.") {
         return;
       }
+      let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
       let responseText = JSON.parse(response);
       
 
@@ -73,7 +71,8 @@ export class PlayComponent implements OnInit {
         remoteStream.play("remote_stream");
         console.log("stream-subscribed remote-uid: ", id);
       })
-
+      
+    };
 
       // --------------------------------------------------------------------------
 

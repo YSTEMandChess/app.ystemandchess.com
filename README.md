@@ -1,4 +1,5 @@
 # Installation of the Development Environment 
+**NOTE: The install script does not yet work. It is still in development**
 To quick install the dev environment, use the script I have created called `setup.sh`. This should provide a good installation provided you type in your password a couple of time and are on ubuntu.
 
 &nbsp; 
@@ -82,7 +83,9 @@ This is a websocket server though, so you cannot use a simple http request to ac
 
 The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
 
-So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /etc/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
+So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
+To quick run the development servers, use the command "sh startServers.sh" and type in your password when it asks for it. This will run all the current servers needed to use the development server.
 
-
+***NOTE***
+When using the startServers.sh script, you must kill the processes manually when you CTRL+C out of development mode. CTRL+C doesn't kill all the current processes as of right now and I am currently looking into fixing it. 

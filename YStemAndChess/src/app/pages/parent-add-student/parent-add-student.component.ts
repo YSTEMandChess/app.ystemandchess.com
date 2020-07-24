@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from "../../globals";
 import { HeaderComponent } from '../../header/header.component'
@@ -8,6 +8,7 @@ import { HeaderComponent } from '../../header/header.component'
   templateUrl: './parent-add-student.component.html',
   styleUrls: ['./parent-add-student.component.scss']
 })
+
 export class ParentAddStudentComponent implements OnInit {
 
   link: string = null;
@@ -26,7 +27,8 @@ export class ParentAddStudentComponent implements OnInit {
   numNewStudents: number = 0;
 
   constructor(private cookie: CookieService,
-    private head: HeaderComponent) {} 
+    private head: HeaderComponent
+    ) {} 
 
   async ngOnInit() {
     this.numStudents.push(0);

@@ -6,6 +6,11 @@ import { environment } from 'src/environments/environment';
 
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 
+import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
+import { isFormattedError } from '@angular/compiler';
+
+declare var $: any;
+
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
@@ -20,12 +25,12 @@ export class PlayComponent implements OnInit {
   constructor(private cookie: CookieService, private socket: SocketService, private agoraService: NgxAgoraService) { }
 
   ngOnInit() {
-    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
 
     this.httpGetAsync(`http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
       if (response == "There are no current meetings with this user.") {
         return;
       }
+      let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
       let responseText = JSON.parse(response);
       
 
@@ -73,8 +78,6 @@ export class PlayComponent implements OnInit {
         remoteStream.play("remote_stream");
         console.log("stream-subscribed remote-uid: ", id);
       })
-
-
       // --------------------------------------------------------------------------
 
       this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));

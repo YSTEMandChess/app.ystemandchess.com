@@ -20,6 +20,13 @@ if($credentials->role == "mentor") {
 } else if ($credentials->role == "student") {
     $searchFor = "studentUsername";
 }
+
+$document = $collection->findOne(['CurrentlyOngoing' => true, $searchFor => $credentials->username]);
+if(!is_null($document)) {
+    include_once "record.php";
+    $info = stopRecording($queryURL, $document->meetingID, $uid, $auth, $document->resourceId, $document->sid);
+}
+
 $collection->updateOne([$searchFor => $credentials->username, 'CurrentlyOngoing' => true],[
     '$set' =>
         [

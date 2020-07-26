@@ -2,12 +2,6 @@ import { SocketService } from './../../socket.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AgoraClient, ClientEvent, NgxAgoraService, Stream, StreamEvent } from 'ngx-agora';
-import { environment } from 'src/environments/environment';
-
-//import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
-
-import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
-import { isFormattedError } from '@angular/compiler';
 
 declare var $: any;
 
@@ -69,7 +63,6 @@ export class PlayComponent implements OnInit {
           console.log("stream-added remote-uid: ", id);
         }
         console.log("hmm, is this any good?")
-
       })
 
       this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {

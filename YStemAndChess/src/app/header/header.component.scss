@@ -11,6 +11,10 @@
     text-transform: uppercase;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 //login button spacing from header border 
 @media only screen and (max-width:1175px) {
     .nav-item {

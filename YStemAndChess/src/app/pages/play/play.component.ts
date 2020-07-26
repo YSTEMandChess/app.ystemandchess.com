@@ -2,9 +2,8 @@ import { SocketService } from './../../socket.service';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AgoraClient, ClientEvent, NgxAgoraService, Stream, StreamEvent } from 'ngx-agora';
-import { environment } from 'src/environments/environment';
 
-//import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
+declare var $: any;
 
 @Component({
   selector: 'app-play',
@@ -20,12 +19,12 @@ export class PlayComponent implements OnInit {
   constructor(private cookie: CookieService, private socket: SocketService, private agoraService: NgxAgoraService) { }
 
   ngOnInit() {
-    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
 
     this.httpGetAsync(`http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
       if (response == "There are no current meetings with this user.") {
         return;
       }
+      let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
       let responseText = JSON.parse(response);
       
 
@@ -64,7 +63,6 @@ export class PlayComponent implements OnInit {
           console.log("stream-added remote-uid: ", id);
         }
         console.log("hmm, is this any good?")
-
       })
 
       this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
@@ -73,8 +71,6 @@ export class PlayComponent implements OnInit {
         remoteStream.play("remote_stream");
         console.log("stream-subscribed remote-uid: ", id);
       })
-
-
       // --------------------------------------------------------------------------
 
       this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));

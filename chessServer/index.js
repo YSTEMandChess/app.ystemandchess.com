@@ -36,7 +36,6 @@ io.on('connection', (socket) => {
         colors = ["white", "black"];
       }
 
-
       if (parsedmsg.role == 'student') {
         ongoingGames.push({ student: { username: parsedmsg.student, id: socket.id, color: colors[0] }, mentor: { username: parsedmsg.mentor, id: "", color: colors[1] }, boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR" });
         io.emit("boardState", JSON.stringify({ boardState: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR", color: colors[0] }));
@@ -71,6 +70,20 @@ io.on('connection', (socket) => {
     // update the board state and send to the other person.
     // {boardState: sdlfkjsk, username: sfjdslk}
 
+  });
+
+  socket.on('endGame', (msg) => {
+    console.log("REMOVING GAME FROM ARRAY");
+    var parsedmsg = JSON.parse(msg);
+    let index = 0;
+    ongoingGames.forEach(element => {
+      if(element.student.username == parsedmsg.username || element.mentor.username == parsedmsg.username) {
+        ongoingGames.splice(index, 1);
+        console.log("Game Deleted");
+      }
+      index++;
+    });
+    console.log(ongoingGames);
   });
 
   socket.on('createNewGame', (msg) => {

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ParentAddStudentComponent } from './parent-add-student.component';
+import { HeaderComponent } from 'src/app/header';
 
 describe('ParentAddStudentComponent', () => {
   let component: ParentAddStudentComponent;
@@ -8,7 +9,8 @@ describe('ParentAddStudentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParentAddStudentComponent ]
+      declarations: [ ParentAddStudentComponent ],
+      providers: [ HeaderComponent ]
     })
     .compileComponents();
   }));

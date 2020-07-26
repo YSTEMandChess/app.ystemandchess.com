@@ -22,7 +22,7 @@ export class ParentComponent implements OnInit {
 
   getStudents() {
     let url = `http://127.0.0.1:8000/getInfo.php/?jwt=${this.cookie.get("login")}`;
-    this.httpGetAsync(url,(response) => {
+    this.httpGetAsync(url, "POST", (response) => {
       if (response == "This username has been taken. Please choose another.") {
         alert("username has been taken")
       }
@@ -45,13 +45,33 @@ export class ParentComponent implements OnInit {
     }
   }
 
-  private httpGetAsync(theUrl: string, callback) {
+  deleteAccount(personToDelete: string) {
+    var url : any;
+    var deleteCookie = false;
+
+    if (personToDelete === this.username) {
+      url = `http://127.0.0.1:8000/delete.php/?jwt=${this.cookie.get("login")}`;
+      deleteCookie = true;
+    }
+    else {
+      url = `http://127.0.0.1:8000/delete.php/?username=${personToDelete}`;
+    }
+
+    this.httpGetAsync(url, "DELETE", (response) => {
+      if (deleteCookie) {
+        this.cookie.delete("login");
+      }
+      window.location.reload();
+    });
+  }
+
+  private httpGetAsync(theUrl: string, httpMethod: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     }
-    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+    xmlHttp.open(httpMethod, theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
   }
 

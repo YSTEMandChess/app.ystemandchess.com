@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   public inMatch = false;
 
   constructor(private cookie: CookieService,
-    private modalService: ModalService, private soc: SocketService) { }
+    private modalService: ModalService, private socket: SocketService) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -135,31 +135,54 @@ export class HeaderComponent implements OnInit {
       if (response === 'Person Added Sucessfully.') {
         url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
         let meeting = setInterval(() => {
-          if (this.gameFound(url) === true || this.endFlag === true) {
+          this.gameFound(url);
+          if (this.foundFlag === true || this.endFlag === true) {
+            console.log("modal should close");
             this.endFlag = false;
+            this.foundFlag = false;
             this.closeModal("find-game");
             // GAME FOUND.
             clearInterval(meeting);
-            location.reload();
+            this.redirect(this.role);
+            this.inMatch = true;
           }
         }, 200)
       }
     });
   }
 
-  private gameFound(url) {
-    this.httpGetAsync(url, (response) => {
-      //console.log(response);
-      let s;
+  private async createGame(url) {
+    console.log("creating game");
+    await this.httpGetAsync(url, (reply) => {
+      console.log(reply);
+    }); 
+  }
+
+  private async gameFound(url) {
+    await this.httpGetAsync(url, (response) => {
+      console.log(response);
+      if(response === "There are no current meetings with this user.") {
+        let url = `http://127.0.0.1:8000/pairUp.php/?jwt=${this.cookie.get("login")}`;
+        console.log("about to create game");
+        this.createGame(url);
+      }
+
       try {
-        s = JSON.parse(response);
+        let s = JSON.parse(response);
+        console.log("I am here");
         this.foundFlag = true;
       } catch (Error) {
         console.log(Error.message);
       }
     });
-    console.log(this.foundFlag);
-    return this.foundFlag;
+  }
+
+  private redirect(role) {
+    if(role === "student"){
+      window.location.pathname = "/student";
+    } else if(role == "mentor") {
+      window.location.pathname = "/play-mentor";
+    }
   }
 
   private httpGetAsync(theUrl: string, callback) {
@@ -179,7 +202,13 @@ export class HeaderComponent implements OnInit {
 
   public leaveMatch() {
     this.httpGetAsync(`http://127.0.0.1:8000/endMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {});
-    location.reload();
+    this.endGame();
+    this.inMatch = false;
+  }
+
+  public endGame() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    this.socket.emitMessage("endGame", JSON.stringify({username: userContent.username}));
   }
 
 }

@@ -19,5 +19,4 @@ export class PlayNologComponent implements OnInit {
       console.log('parent received message!:  ',e.data);
     },false);
   }
-
 }

@@ -6,7 +6,7 @@
   <script src="./js/chessboard-1.0.0.js"></script>
   <script src="node_modules/chess960.js/chess.min.js"></script>
 </head>
-<div id="myBoard" style="width: 400"></div>
+<div id="myBoard" style="scrollbar-width: none; overflow:hidden; width:80%; height: auto" allowfullscreen="true" frameborder="0""></div>
 <script>
   // NOTE: this example uses the chess.js library:
   // https://github.com/jhlywa/chess.js
@@ -33,8 +33,8 @@
     if(data.boardState == startFEN){
       game = new Chess();
     }
-    board.orientation(data.color);
     playerColor = data.color;
+    board.orientation(playerColor);
     game.load(data.boardState);
     board.position(data.boardState);
     updateStatus();

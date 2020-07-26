@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from './../../socket.service';
+import { setPermissionLevel } from "../../globals";
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -8,11 +9,13 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit {
-
+  private logged: boolean;
+  username: string;
+  
   constructor(private socket: SocketService, private cookie: CookieService) { }
 
   ngOnInit(): void {
-    
+    this.getUsername();
   }
 
   public newGame() {
@@ -20,4 +23,13 @@ export class StudentComponent implements OnInit {
     this.socket.emitMessage("createNewGame", JSON.stringify({username: userContent.username}));
   }
 
+  private async getUsername() {
+    let pLevel = "nLogged";
+    let uInfo = await setPermissionLevel(this.cookie);
+    if (uInfo['error'] == undefined) {
+      this.logged = true;
+      pLevel = uInfo["role"];
+      this.username = uInfo["username"];
+    }
+  }
 }

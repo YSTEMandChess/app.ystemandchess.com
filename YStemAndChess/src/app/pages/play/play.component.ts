@@ -16,7 +16,7 @@ export class PlayComponent implements OnInit {
   private localStream: Stream;
   private client: AgoraClient;
   private clientUID;
-  private messageQueue;
+  private messageQueue = new Array();
   private isReady: boolean;
 
   constructor(private cookie: CookieService, private socket: SocketService, private agoraService: NgxAgoraService) { }
@@ -104,7 +104,10 @@ export class PlayComponent implements OnInit {
         // Means that there is the board state and whatnot
         console.log("There is a new board state. Going to update!")
         let info = e.data;
+        console.log(info);
+        console.log("I am above ready to recieve");
         if(info == "ReadyToRecieve") {
+          console.log("I work");
           this.isReady=true;
           this.sendFromQueue();
         } else {

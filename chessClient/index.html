@@ -1,6 +1,8 @@
 <html>
 
 <head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
   <link rel="stylesheet" type="text/css" href="./css/chessboard-1.0.0.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./js/chessboard-1.0.0.js"></script>
@@ -11,6 +13,8 @@
   // NOTE: this example uses the chess.js library:
   // https://github.com/jhlywa/chess.js
 
+  letParentKnow();
+  
   var board = null
   var game = new Chess()
   //var $status = $('#status')
@@ -42,6 +46,11 @@
 
   function flip() {
 	  board.flip();
+  }
+
+  function letParentKnow() {
+    parent.postMessage("ReadyToRecieve", "http://localhost:4200");
+    console.log("message sent")
   }
 
   function onDragStart(source, piece, position, orientation) {

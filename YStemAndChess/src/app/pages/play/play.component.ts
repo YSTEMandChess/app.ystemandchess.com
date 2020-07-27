@@ -16,6 +16,8 @@ export class PlayComponent implements OnInit {
   private localStream: Stream;
   private client: AgoraClient;
   private clientUID;
+  private messageQueue;
+  private isReady: boolean;
 
   constructor(private cookie: CookieService, private socket: SocketService, private agoraService: NgxAgoraService) { }
 
@@ -77,13 +79,18 @@ export class PlayComponent implements OnInit {
 
       // --------------------------------------------------------------------------
 
+      console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");
       this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));
 
       this.socket.listen("boardState").subscribe((data) => {
-        let newData = JSON.parse(<string>data);
-        console.log(`New Board State Received: ${data}`);
-        var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-        chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "http://localhost");
+        if(this.isReady) {
+          let newData = JSON.parse(<string>data);
+          console.log(`New Board State Received: ${data}`);
+          var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "http://localhost");
+        } else {
+          this.messageQueue.push(data);
+        }
       })
     });
 
@@ -97,10 +104,24 @@ export class PlayComponent implements OnInit {
         // Means that there is the board state and whatnot
         console.log("There is a new board state. Going to update!")
         let info = e.data;
-        this.updateBoardState(info);
+        if(info == "ReadyToRecieve") {
+          this.isReady=true;
+          this.sendFromQueue();
+        } else {
+          this.updateBoardState(info);
+        }
       }
     }, false);
 
+  }
+
+  private sendFromQueue() {
+    this.messageQueue.forEach(element => {
+          let newData = JSON.parse(<string>element);
+          console.log(`New Board State Received: ${element}`);
+          var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "http://localhost");
+    });
   }
 
   private httpGetAsync(theUrl: string, callback) {

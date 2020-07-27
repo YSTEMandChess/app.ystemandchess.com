@@ -23,6 +23,7 @@ io.on('connection', (socket) => {
           color = element.mentor.color;
         }
 
+        console.log("A user has requested that we make a new game. However I belive that there is a game already in progress. Sending them the new game state.");
         io.to(socket.id).emit("boardState", JSON.stringify({ boardState: element.boardState, color: color }));
       }
     });

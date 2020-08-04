@@ -76,7 +76,12 @@ export class PlayComponent implements OnInit {
         console.log("stream-subscribed remote-uid: ", id);
       })
 
-
+      this.client.on(ClientEvent.PeerLeave, (evt) => {
+        let remoteStream = evt.stream;
+        let id = remoteStream.getId();
+        remoteStream.stop();
+        console.log("hmm, is this any good?")
+      })
       // --------------------------------------------------------------------------
 
       console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");

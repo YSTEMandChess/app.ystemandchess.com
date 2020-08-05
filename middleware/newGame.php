@@ -30,7 +30,7 @@ $collection->insertOne([
     'username' => $credentials->username,
     'firstName' => $credentials->firstName,
     'lastName' => $credentials->lastName,
-    'requestedGameAt' => time()
+    'requestedGameAt' => date("h:i")
 ]);
 
 echo "Person Added Sucessfully.";

@@ -13,6 +13,7 @@ if($credentials == "Error: 405. This key has been tampered with or is out of dat
     return $credentials;
 }
 $student = "";
+$meetingStartTime = "";
 $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
 // They are a mentor, so add them to the mentor list
 $collection = $client->ystem->meetings;
@@ -24,12 +25,22 @@ if($credentials->role == "mentor") {
         echo $doc['studentUsername'];
         $student = $doc['studentUsername'];
     }
+
+    $timeCursor = $collection->find( array('mentorUsername' => $credentials->username), array("meetingStartTime"));
+    foreach ($timeCursor as $doc) {
+        $meetingStartTime = $doc['meetingStartTime'];
+    }
 } else if ($credentials->role == "student") {
     $searchFor = "studentUsername";
     $cursor = $collection->find( array($searchFor => $credentials->username));
     foreach ($cursor as $doc) {
         echo $doc['studentUsername'];
         $student = $doc['studentUsername'];
+    }
+
+    $timeCursor = $collection->find( array($searchFor => $credentials->username), array("meetingStartTime"));
+    foreach ($timeCursor as $doc) {
+        $meetingStartTime = $doc['meetingStartTime'];
     }
 }
 $collection->updateOne([$searchFor => $credentials->username, 'CurrentlyOngoing' => true],[
@@ -39,11 +50,45 @@ $collection->updateOne([$searchFor => $credentials->username, 'CurrentlyOngoing'
         ]
     ]
 );
-echo $student;
+
+$meetingEndTime = date("H:i");
+$hours = $meetingEndTime-$meetingStartTime;
+
+$startMinutes = substr($meetingStartTime, 3);
+$endMinutes = substr($meetingEndTime, 3);
+
+if(($meetingEndTime-$meetingStartTime) > 0 && $endMinutes < $startMinutes) {
+    $endMinutes = $endMinutes + 60;
+    $hours = $hours-1;
+}
+
+// minutes in meeting
+$minutes = $endMinutes - $startMinutes;
+
+//hours and minutes of meeting
+$timePlayed = $hours . ":" . ($endMinutes-$startMinutes);
+
+$totalHours = "";
+
+//get total time played by student before meeting
+$c = $userCollection->find( array("username" => $student), array("timePlayed"));
+    foreach ($c as $doc) {
+        $totalTime = $doc['timePlayed'];
+    }
+
+$totalMinutes = substr($totalTime, 6, 3); //1 hr : 20 min
+$newTotalHours = $totalTime + $hours;
+$newTotalMinutes = $totalMinutes + $minutes;
+
+if($newTotalMinutes > 59) {
+    $newTotalHours += 1;
+    $newTotalMinutes -= 60;
+}
+
 $userCollection->updateOne(['username' => $student], [
     '$set' => 
     [
-        'timePlayed' => 9
+         'timePlayed' => $newTotalHours . " hr: " . $newTotalMinutes . " min" 
     ]
 ]);
 

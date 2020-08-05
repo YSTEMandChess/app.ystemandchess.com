@@ -45,7 +45,7 @@ for($i=0; $i<$smallerArraySize; $i++) {
         'mentorFirstName' => $sortedMentorArray[$i]->firstName,
         'mentorLastName' => $sortedMentorArray[$i]->lastName,
         'CurrentlyOngoing' => true,
-        'meetingStartTime' => time()
+        'meetingStartTime' => date("H:i")
     ]);
 
     // Now delete the waiting status of the mentor and the student.

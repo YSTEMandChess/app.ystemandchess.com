@@ -20,10 +20,8 @@ export class HeaderComponent implements OnInit {
   public playLink = "/play-nolog";
   public inMatch = false;
 
-  constructor(private cookie: CookieService, private modalService: ModalService,
-    private socket: SocketService) {
-      
-    }
+  constructor(private cookie: CookieService,
+    private modalService: ModalService, private socket: SocketService) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -154,6 +152,13 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  private async createGame(url) {
+    console.log("creating game");
+    await this.httpGetAsync(url, (reply) => {
+      console.log(reply);
+    }); 
+  }
+
   private async gameFound(url) {
     await this.httpGetAsync(url, (response) => {
       console.log(response);
@@ -171,6 +176,14 @@ export class HeaderComponent implements OnInit {
         console.log(Error.message);
       }
     });
+  }
+
+  private redirect(role) {
+    if(role === "student"){
+      window.location.pathname = "/student";
+    } else if(role == "mentor") {
+      window.location.pathname = "/play-mentor";
+    }
   }
 
   private async createGame(url) {

@@ -33,11 +33,15 @@ if(count($sortedMentorArray) > count($sortedStudentsArray)) {
     $smallerArraySize = count($sortedMentorArray);
 }
 
+include "record.php";
+
 for($i=0; $i<$smallerArraySize; $i++) {
+    $meetingID = uniqid(20);
+    $rec = startRecording($queryURL, $meetingID, $uid, $auth);
     $meetingCollection->insertOne([
         // MeetingID is the studentsusername and then the mentors username shoved against each other
-        'meetingID' => uniqid(20),
-        'password' => uniqid(20),
+        'meetingID' => $meetingID,
+        'password' => uniqidReal(20),
         'studentUsername' => $sortedStudentsArray[$i]->username,
         'studentFirstName' => $sortedStudentsArray[$i]->firstName,
         'studentLastName' => $sortedStudentsArray[$i]->lastName,
@@ -46,6 +50,9 @@ for($i=0; $i<$smallerArraySize; $i++) {
         'mentorLastName' => $sortedMentorArray[$i]->lastName,
         'CurrentlyOngoing' => true,
         'meetingStartTime' => date("H:i")
+        'resourceId' => $rec[1],
+        'sid' => $rec[0],
+        'meetingStartTime' => time()
     ]);
 
     // Now delete the waiting status of the mentor and the student.

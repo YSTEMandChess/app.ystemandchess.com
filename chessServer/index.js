@@ -24,6 +24,7 @@ io.on('connection', (socket) => {
           color = element.mentor.color;
         }
 
+        console.log("A user has requested that we make a new game. However I belive that there is a game already in progress. Sending them the new game state.");
         io.to(socket.id).emit("boardState", JSON.stringify({ boardState: element.boardState, color: color }));
       }
     });
@@ -47,6 +48,20 @@ io.on('connection', (socket) => {
       // Set client ids,
     }
 
+  });
+
+  socket.on('endGame', (msg) => {
+    console.log("REMOVING GAME FROM ARRAY");
+    var parsedmsg = JSON.parse(msg);
+    let index = 0;
+    ongoingGames.forEach(element => {
+      if(element.student.username == parsedmsg.username || element.mentor.username == parsedmsg.username) {
+        ongoingGames.splice(index, 1);
+        console.log("Game Deleted");
+      }
+      index++;
+    });
+    console.log(ongoingGames);
   });
 
   socket.on('newState', (msg) => {

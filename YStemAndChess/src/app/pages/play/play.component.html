@@ -1,13 +1,14 @@
-<html>
-    <header>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    </header>
-    <div class="board">
-        <iframe src="http://localhost" id="chessBd"></iframe>
-    </div> 
-    <div *ngIf="gameOver" id="analizeButton">
-        <button type="button">Analize Game</button>
+<div class="cont">
+    <div class="row">
+        <div class="lichess">
+            <iframe src="http://localhost" id="chessBd"></iframe>
+        </div>
+        <div class="jitsi" id="local_stream">
+            <!--<iframe src="https://meet.jit.si/" class="jitsi" frameborder="0" style="position: relative; height: 100%; width: 100%;"></iframe>-->
+        </div>
+        <div class="jitsi" id="remote_stream">
+            <!--<iframe src="https://meet.jit.si/" class="jitsi" frameborder="0" style="position: relative; height: 100%; width: 100%;"></iframe>-->
+        </div>
     </div>
 </html> 
     

@@ -15,6 +15,7 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 export class HeaderComponent implements OnInit {
   public username = "";
   public role = "";
+  public link = "";
   public logged = false;
   private foundFlag = false;
   private endFlag = false;

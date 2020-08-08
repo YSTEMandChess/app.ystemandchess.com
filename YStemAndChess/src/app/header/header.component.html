@@ -23,7 +23,7 @@
                 <div *ngIf="role !== 'mentor' && role !== 'student'">
                     <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>
                 </div>
-                <div *ngIf="inMatch">
+                <div *ngIf="inMatch && role !== 'parent'">
                     <a class="nav-link hvr-underline-from-left" (click)="leaveMatch()">Leave Meeting</a>
                 </div>
             </li>

@@ -20,11 +20,10 @@ $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-
 $collection = $client->ystem->users;
 $userDoc = $collection->findOne(["username" => $credentials->username]);
 
-$childArr = [];
+$childTimes = [];
 foreach ($userDoc["children"] as $childUsername) {
-    $child = $collection->findOne(["username" => $childUsername]);
-    array_push($childArr, $child); 
+    $time = $collection->findOne(["username" => $childUsername], array("timePlayed"));
+    array_push($childTimes, $time); 
 }
 
-echo json_encode($childArr);
-?>
+echo json_encode($childTimes);

@@ -13,14 +13,14 @@
                     <h3 id="errorRetype{{i}}"></h3>
                 </div>
                 <div *ngIf="numNewStudents > 1">
-                    <button type="button" class="x" (click)="removeNewStudent($event, i)">X</button>
+                    <button type="button" id="x" class="x" (click)="removeNewStudent($event, i)">X</button>
                 </div>
                 <li><input type="text" placeholder="Students first name" id="studentFirstName{{i}}" (blur)="studentFirstNameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
                 <li><input type="text" placeholder="Students last name " id="studentLastName{{i}}" (blur)="studentLastNameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
                 <li><input type="text" placeholder="Student username" id="studentUsername{{i}}" (blur)="studentUsernameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
                 <li><input type="password" placeholder="Student password" id="studentPassword{{i}}" (blur)="studentPasswordVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
                 <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword{{i}}" (blur)="studentRetypePasswordVerification($event, $event, i)" (blur)="ifValidStudentAccount(i)"></li>
-                <button type="button" class="x" (click)="addNewStudentForm($event, i)">+</button>
+                <button type="button" id="plus{{i}}" class="x" (click)="addNewStudentForm($event, i)">+</button>
             </div>
             <button type="submit" [routerLink]="[link]" (click)="SendToDataBase()">Sign up</button>
         </div>

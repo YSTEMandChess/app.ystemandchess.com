@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">
-        <img src="../../assets/images/Logo/YStemLogo.png" alt="logo" width="308px" height="109px" routerLink="">
+    <a class="navbar-brand" href="{{link}}">
+        <img src="../../assets/images/Logo/YStemLogo.png" alt="logo" width="308px" height="109px">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
                 <div *ngIf="role !== 'mentor' && role !== 'student'">
                     <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Be A Mentor</a>
                 </div>
-                <div *ngIf="inMatch">
+                <div *ngIf="inMatch && role !== 'parent'">
                     <a class="nav-link hvr-underline-from-left" (click)="leaveMatch()">Leave Meeting</a>
                 </div>
             </li>

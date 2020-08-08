@@ -13,6 +13,7 @@
   // NOTE: this example uses the chess.js library:
   // https://github.com/jhlywa/chess.js
 
+  let flag = false;
   letParentKnow();
   
   var board = null
@@ -31,7 +32,7 @@
 
   // Listen to message from child window
   eventer(messageEvent, (e) => {
-    console.log("Hey, I am going to update the board state");
+    //console.log("Hey, I am going to update the board state");
     let data = JSON.parse(e.data);
     console.log(data);
     if(data.boardState == startFEN){
@@ -43,19 +44,25 @@
     board.position(data.boardState);
     updateStatus();
   }, false);
-
+  
   function flip() {
 	  board.flip();
   }
 
   function letParentKnow() {
-    parent.postMessage("ReadyToRecieve", "http://localhost:4200");
-    console.log("message sent")
+    if(flag === false) {
+      parent.postMessage("ReadyToRecieve", "http://localhost:4200");
+      console.log("message sent");
+    }
+    flag = true;
   }
 
   function onDragStart(source, piece, position, orientation) {
     // do not pick up pieces if the game is over
-    if (game.game_over()) return false
+    if (game.game_over()) {
+      sendGameOver();
+      return false;
+    } 
 
     console.log(playerColor);
     if(playerColor === "black") {
@@ -84,6 +91,7 @@
 
 	if(game.game_over()) {
 		console.log("game over");
+    sendGameOver();
 	}
 
   console.log("I am in drop");
@@ -103,6 +111,7 @@
 
   function updateStatus() {
     var status = ''
+    console.log("I am in status");
 
     var moveColor = 'White'
     if (game.turn() === 'b') {
@@ -112,11 +121,13 @@
     // checkmate?
     if (game.in_checkmate()) {
       status = 'Game over, ' + moveColor + ' is in checkmate.'
+      sendCheckmate();
     }
 
     // draw?
     else if (game.in_draw()) {
       status = 'Game over, drawn position'
+      sendDraw();
     }
 
     // game still on
@@ -125,13 +136,25 @@
 
       // check?
       if (game.in_check()) {
-        status += ', ' + moveColor + ' is in check'
+        status += ', ' + moveColor + ' is in check';
       }
     }
 
-    //$status.html(status)
-    //$fen.html(game.fen())
-    //$pgn.html(game.pgn())
+    // $status.html(status)
+    // $fen.html(game.fen())
+    // $pgn.html(game.pgn())
+  }
+
+  function sendGameOver() {
+    parent.postMessage("gameOver", "http://localhost:4200");
+  }
+
+  function sendDraw() {
+    parent.postMessage("draw", "http://localhost:4200");
+  }
+
+  function sendCheckmate() {
+    parent.postMessage("checkmate", "http://localhost:4200");
   }
 
   var config = {
@@ -142,6 +165,7 @@
     onSnapEnd: onSnapEnd
   }
   board = Chessboard('myBoard', config)
+  $(window).resize(board.resize);
 
   updateStatus()
 </script>

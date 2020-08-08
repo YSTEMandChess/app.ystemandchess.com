@@ -50,6 +50,13 @@ try {
     if(!is_null($document)) {
         include_once "record.php";
         $info = stopRecording($queryURL, $document->meetingID, $uid, $auth, $document->resourceId, $document->sid);
+        $collection->findOne(['CurrentlyOngoing' => true, $searchFor => $credentials->username]);
+        $videoName = json_decode($info)->serverResponse->fileList;
+
+        $userCollection->updateOne(['username' => $document->studentUsername], ['$push' => ['recordingList' => $videoName]]);
+        $userCollection->updateOne(['username' => $document->mentorUsername], ['$push' => ['recordingList' => $videoName]]);
+        $filename = $videoName;
+        include "awsGen.php";
     }
 } catch(Exception $E) {
     echo "meeting is not being recorded";

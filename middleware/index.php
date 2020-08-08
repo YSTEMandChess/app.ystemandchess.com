@@ -98,6 +98,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
                 'lastName' => $studentLast,
                 'parentUsername' => $username,
                 'role' => 'student',
+                'timePlayed' => '0 hr: 0 min',
                 'accountCreatedAt' => time()
             ]);
         }
@@ -122,6 +123,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
             'lastName' => $lastName,
             'email' => $email,
             'role' => $role,
+            'timePlayed' => '0 hr: 0 min',
             'accountCreatedAt' => time()
         ]);
         // Now find the parent and update their children.

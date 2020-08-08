@@ -99,6 +99,10 @@ export class PlayComponent implements OnInit {
       })
     });
 
+    this.socket.listen("gameOver").subscribe((data) => {
+      alert("game over ");
+    });
+
     var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
@@ -117,11 +121,11 @@ export class PlayComponent implements OnInit {
           this.isReady=true;
           this.sendFromQueue();
         } else if(info == "checkmate") {
-          alert("checkmate");
+          this.gameOverAlert();
         } else if(info == "draw") {
-          alert("draw");
+          this.gameOverAlert();
         } else if(info == "gameOver") {
-          alert("game over");
+          this.gameOverAlert();
         } else {
           this.updateBoardState(info);
         }
@@ -163,5 +167,10 @@ export class PlayComponent implements OnInit {
   public createNewGame() {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
     this.socket.emitMessage("createNewGame", JSON.stringify({ username: userContent.username }));
+  }
+
+  public gameOverAlert() {
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    this.socket.emitMessage("gameOver", JSON.stringify({username: userContent.username}));
   }
 }

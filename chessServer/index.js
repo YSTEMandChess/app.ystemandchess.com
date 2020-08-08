@@ -135,6 +135,16 @@ io.on('connection', (socket) => {
       }
     });
   });
+
+  socket.on('gameOver', (msg) => {
+    var parsedmsg = JSON.parse(msg);
+    ongoingGames.forEach(element => {
+      if (element.student.username == parsedmsg.username || element.mentor.username == parsedmsg.username) {
+        io.to(element.student.id).emit("gameOver", JSON.stringify({ boardState: element.boardState, color: element.student.color }));
+        io.to(element.mentor.id).emit("gameOver", JSON.stringify({ boardState: element.boardState, color: element.mentor.color }));
+      }
+    });
+  });
 });
 
 http.listen(3000, () => {

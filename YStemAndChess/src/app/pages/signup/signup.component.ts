@@ -281,6 +281,10 @@ export class SignupComponent implements OnInit {
         return;
       } else {
         document.getElementById("newStudent"+index).style.display = "none";
+        let previous;
+        if(index != 0) { previous = index-1; }
+        else { previous = index; }
+        document.getElementById("plus"+previous).style.display = "inline";
         this.newStudents[index] = null;
       }
     }
@@ -291,6 +295,7 @@ export class SignupComponent implements OnInit {
   addNewStudentForm(click, index): void {
     if(click == event) {
       this.numStudents.push(index);
+      document.getElementById("plus"+index).style.display = "none";
     }
     this.numNewStudents++;
   }

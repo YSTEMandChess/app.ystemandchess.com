@@ -51,7 +51,7 @@ for($i=0; $i<$smallerArraySize; $i++) {
         'CurrentlyOngoing' => true,
         'resourceId' => $rec[1],
         'sid' => $rec[0],
-        'meetingStartTime' => time()
+        'meetingStartTime' => date("H:i")
     ]);
 
     // Now delete the waiting status of the mentor and the student.

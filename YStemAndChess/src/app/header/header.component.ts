@@ -60,6 +60,7 @@ export class HeaderComponent implements OnInit {
     switch (pLevel) {
       case "student":
         this.playLink = "/student";
+        this.link = "/student";
         notAllowedExtsStudent.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/student";
@@ -68,6 +69,7 @@ export class HeaderComponent implements OnInit {
         break;
       case "parent":
         this.playLink = "/parent";
+        this.link = "/parent";
         notAllowedExtsParent.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/parent";
@@ -76,6 +78,7 @@ export class HeaderComponent implements OnInit {
         break;
       case "mentor":
         this.playLink = "/play-mentor";
+        this.link = "/play-mentor";
         notAllowedExtsMentor.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/play-mentor";
@@ -84,6 +87,7 @@ export class HeaderComponent implements OnInit {
         break;
       case "admin":
         this.playLink = "/admin";
+        this.link = "/admin";
         notAllowedExtsAdmin.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/admin";
@@ -92,6 +96,7 @@ export class HeaderComponent implements OnInit {
         break;
       case "nLogged":
         this.playLink = "/play-nolog";
+        this.link = "/";
         notAllowedExtsNotLoggedIn.forEach(element => {
           if (pageExt == element) {
             window.location.pathname = "/";

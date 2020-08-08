@@ -12,12 +12,15 @@ export class ParentComponent implements OnInit {
   username: string;
   private logged: boolean;
   students :string[] = [];
+  times :string[] = [];
 
   constructor(private cookie: CookieService) { }
 
   ngOnInit() {
     this.getUsername();
     this.getStudents();
+    this.getTimePlayedOfStudents();
+    console.log(this.times);
   }
 
   getStudents() {
@@ -31,6 +34,21 @@ export class ParentComponent implements OnInit {
       for(key in data) {
         let student = data[key].username;
         this.students.push(student);
+      }
+    });
+  }
+
+  getTimePlayedOfStudents() {
+    let url = `http://127.0.0.1:8000/studentInfo.php/?jwt=${this.cookie.get("login")}`;
+    this.httpGetAsync(url,(response) => {
+      if (response == "This username has been taken. Please choose another.") {
+        alert("username has been taken")
+      }
+      let data = JSON.parse(response);
+      let key: any;
+      for(key in data) {
+        let time = data[key].timePlayed;
+        this.times.push(time);
       }
     });
   }

@@ -10,11 +10,18 @@ class ComposerStaticInit82bac953a4c1c81dfd7be7cac8179da1
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
+        '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '3a37ebac017bc098e9a86b35401e7a68' => __DIR__ . '/..' . '/mongodb/mongodb/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+        ),
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
@@ -23,6 +30,10 @@ class ComposerStaticInit82bac953a4c1c81dfd7be7cac8179da1
         'M' => 
         array (
             'MongoDB\\' => 8,
+        ),
+        'J' => 
+        array (
+            'JmesPath\\' => 9,
         ),
         'G' => 
         array (
@@ -34,9 +45,17 @@ class ComposerStaticInit82bac953a4c1c81dfd7be7cac8179da1
         array (
             'Firebase\\JWT\\' => 13,
         ),
+        'A' => 
+        array (
+            'Aws\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -48,6 +67,10 @@ class ComposerStaticInit82bac953a4c1c81dfd7be7cac8179da1
         'MongoDB\\' => 
         array (
             0 => __DIR__ . '/..' . '/mongodb/mongodb/src',
+        ),
+        'JmesPath\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mtdowling/jmespath.php/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -64,6 +87,10 @@ class ComposerStaticInit82bac953a4c1c81dfd7be7cac8179da1
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
+        'Aws\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aws/aws-sdk-php/src',
         ),
     );
 

@@ -107,14 +107,21 @@ export class PlayComponent implements OnInit {
     eventer(messageEvent, (e) => {
       if (e.origin == "http://localhost") {
         // Means that there is the board state and whatnot
-        console.log("There is a new board state. Going to update!")
+        //console.log("There is a new board state. Going to update!")
+        console.log("this does work every time");
         let info = e.data;
-        console.log(info);
-        console.log("I am above ready to recieve");
+        console.log("I am info " + info);
+        //console.log("I am info " + info);
+        //console.log("I am above ready to recieve");
         if(info == "ReadyToRecieve") {
-          console.log("I work");
           this.isReady=true;
           this.sendFromQueue();
+        } else if(info == "checkmate") {
+          alert("checkmate");
+        } else if(info == "draw") {
+          alert("draw");
+        } else if(info == "gameOver") {
+          alert("game over");
         } else {
           this.updateBoardState(info);
         }

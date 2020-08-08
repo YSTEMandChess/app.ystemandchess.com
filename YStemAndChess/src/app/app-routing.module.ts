@@ -16,6 +16,7 @@ import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { ParentComponent } from './pages/parent/parent.component';
 import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
 import { HeaderComponent } from './header/header.component';
+import { StudentRecordingsComponent } from './pages/student-recordings/student-recordings.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -32,7 +33,8 @@ const routes: Routes = [
   {path: 'play-mentor', component: PlayMentorComponent},
   {path: 'mentor-dashboard', component: MentorDashboardComponent},
   {path: 'play-nolog', component: PlayNologComponent},
-  {path: 'admin', component: AdminComponent}
+  {path: 'admin', component: AdminComponent},
+  {path: 'student-recording', component: StudentRecordingsComponent}
 ];
 
 @NgModule({

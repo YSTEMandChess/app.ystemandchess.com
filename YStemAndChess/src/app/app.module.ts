@@ -26,6 +26,7 @@ import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashbo
 import { AdminComponent } from './pages/admin/admin.component';
 import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
 import { environment } from 'src/environments/environment';
+import { StudentRecordingsComponent } from './pages/student-recordings/student-recordings.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -49,7 +50,8 @@ const agoraConfig: AgoraConfig = {
     DonateComponent,
     MentorDashboardComponent,
     AdminComponent,
-    ParentAddStudentComponent
+    ParentAddStudentComponent,
+    StudentRecordingsComponent
   ],
   imports: [
     BrowserModule,

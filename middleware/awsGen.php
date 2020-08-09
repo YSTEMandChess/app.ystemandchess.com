@@ -42,6 +42,10 @@ if ($handle) {
         if($line[0] != '#' ) {
             $newFL = substr($line, 0, -1);
             
+            if (strstr($newFL, "amazonaws.com")) {
+                $newFL = substr((strstr(strstr($newFL, "amazonaws.com/"), ".ts", true) . ".ts") , 14);
+            }
+
             $cmd = $s3->getCommand('GetObject', [
                 'Bucket' => 'ystemandchess-meeting-recordings',
                 'Key' => $newFL
@@ -50,7 +54,6 @@ if ($handle) {
             $request = $s3->createPresignedRequest($cmd, '+604800 seconds');
             $presignedUrl = (string)$request->getUri();
             $fc .= $presignedUrl . "\n";
-            $fc .= "#" . $newFL . "\n";
         } else {
             $fc .= $line;
         }
@@ -77,5 +80,6 @@ $cmd = $s3->getCommand('GetObject', [
 $request = $s3->createPresignedRequest($cmd, '+20 minutes');
 $presignedUrl = (string)$request->getUri();
 echo ($presignedUrl)
-
+//http://localhost:8000/awsGen.php/?filename=7b793b2d5a4f8398d75f83999a92d26d_205f30267e14f67.m3u8
 ?>
+

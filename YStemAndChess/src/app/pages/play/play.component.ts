@@ -32,7 +32,7 @@ export class PlayComponent implements OnInit {
       
 
       // Code for webcam
-      // -------------------------------------------------------------------------
+      // ------------------------------------------------------------------------- 
       this.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
       this.client.init("6c368b93b82a4b3e9fb8e57da830f2a4", () => console.log("init sucessful"), () => console.log("init unsucessful"))
       this.client.join(null, responseText.meetingID, null, (uid) => {

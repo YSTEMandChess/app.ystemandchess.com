@@ -53,10 +53,8 @@ try {
         $collection->findOne(['CurrentlyOngoing' => true, $searchFor => $credentials->username]);
         $videoName = json_decode($info)->serverResponse->fileList;
 
-        $userCollection->updateOne(['username' => $document->studentUsername], ['$push' => ['recordingList' => $videoName]]);
-        $userCollection->updateOne(['username' => $document->mentorUsername], ['$push' => ['recordingList' => $videoName]]);
-        $filename = $videoName;
-        include "awsGen.php";
+        $userCollection->updateOne(['username' => $document->studentUsername], ['$push' => ['recordingList' => [ 'video' => $videoName, 'recordingDate' => date("l jS \of F Y")]]]);
+        $userCollection->updateOne(['username' => $document->mentorUsername], ['$push' => ['recordingList' => [ 'video' => $videoName, 'recordingDate' => date("l jS \of F Y")]]]);
     }
 } catch(Exception $E) {
     echo "meeting is not being recorded";

@@ -1,8 +1,6 @@
 <?php 
 
 // NEED filename
-
-
 // Allow Cross Origin Requests (other ips can request data)
 header("Access-Control-Allow-Origin: *");
 // Load the JWT library
@@ -10,6 +8,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
+
+$filename = html_entity_decode($_GET['filename']);
 
 $s3 = new Aws\S3\S3Client([
     'version' => 'latest',
@@ -50,6 +50,7 @@ if ($handle) {
             $request = $s3->createPresignedRequest($cmd, '+604800 seconds');
             $presignedUrl = (string)$request->getUri();
             $fc .= $presignedUrl . "\n";
+            $fc .= "#" . $newFL . "\n";
         } else {
             $fc .= $line;
         }
@@ -67,5 +68,14 @@ $result = $s3->putObject(array(
 ));
 
 unlink($filename);
+
+$cmd = $s3->getCommand('GetObject', [
+    'Bucket' => 'ystemandchess-meeting-recordings',
+    'Key' => $filename
+]);
+
+$request = $s3->createPresignedRequest($cmd, '+20 minutes');
+$presignedUrl = (string)$request->getUri();
+echo ($presignedUrl)
 
 ?>

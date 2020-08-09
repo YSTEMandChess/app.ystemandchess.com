@@ -18,6 +18,8 @@ export class PlayNologComponent implements OnInit {
     eventer(messageEvent,function(e) {
       console.log('parent received message!:  ',e.data);
     },false);
+
+    
   }
 
 }

@@ -23,20 +23,23 @@ export class StudentRecordingsComponent implements OnInit {
       let data = JSON.parse(response);
       let key: any;
       for(key in data) {
-        let video = data[key];
-        //let date = data[key].date;
+        let video = data[key].video;
+        let date = data[key].recordingDate;
         this.recordings.push(video);
-        // this.recordingDates.push(date);
+        this.recordingDates.push(date);
       }
     });
   } 
 
   public verify(index) {
-    if(confirm("Please click yes to download")) {
-      let url = `http://127.0.0.1:8000/awsGen.php/?filename=${this.recordings[index]}`
-    } else {
-      console.log("download not wanted");
-    }
+    console.log(index);
+    let url = `http://127.0.0.1:8000/awsGen.php/?filename=${this.recordings[index]}`;
+    this.httpGetAsync(url, (response) => {
+      let data = response;
+      if(confirm("Download now?")) {
+        window.open(data);
+      }
+    });
   }
 
   private httpGetAsync(theUrl: string, callback) {

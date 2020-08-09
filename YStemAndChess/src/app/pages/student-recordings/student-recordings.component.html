@@ -5,9 +5,11 @@
 
     <body>
         <h1>Recordings here</h1>
+        <h2>Note: we recommend using VLC media players to watch the recordings</h2>
+        <h2>Recordings will have to be downloaded again after seven days</h2>
         <div *ngFor="let record of recordings; let i = index;">
             <h1>{{recordingDates[i]}}</h1>
-            <a (click)="verify('i')"><h5>{{record}}</h5></a>
+            <a (click)="verify(i)"><h5>{{record}}</h5></a>
         </div>
     </body>
 

@@ -5,6 +5,10 @@
 
     <body>
         <h1>Recordings here</h1>
+        <div *ngFor="let record of recordings; let i = index;">
+            <h1>{{recordingDates[i]}}</h1>
+            <a (click)="verify('i')"><h5>{{record}}</h5></a>
+        </div>
     </body>
 
     <footer>

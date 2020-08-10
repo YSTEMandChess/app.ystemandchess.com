@@ -10,15 +10,19 @@ export class StudentRecordingsComponent implements OnInit {
 
   public recordings = [];
   public recordingDates = [];
+  public studentName: string = ""
 
   constructor(private cookie: CookieService) { }
 
   ngOnInit(): void {
+    if(this.cookie.check("student")) {
+      this.studentName = this.cookie.get("student");
+    }
     this.getRecordings();
   }
 
   private getRecordings() {
-    let url = `http://127.0.0.1:8000/getRecordings.php/?jwt=${this.cookie.get("login")}`;
+    let url = `http://127.0.0.1:8000/getRecordings.php/?jwt=${this.cookie.get("login")}&student=${this.studentName}`;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       let key: any;

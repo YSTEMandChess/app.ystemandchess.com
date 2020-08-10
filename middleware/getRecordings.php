@@ -8,6 +8,7 @@ use \Firebase\JWT\JWT;
 
 // Random Key. Needs to be Changed Later
 $jwt = htmlspecialchars_decode($_GET["jwt"]);
+$student = htmlspecialchars_decode($_GET["student"]);
 $credentials = json_decode(include "verifyNoEcho.php");
 
 if($credentials == "Error: 405. This key has been tampered with or is out of date." || $credentials == "Error: 406. Please Provide a JSON Web Token.") {
@@ -15,15 +16,14 @@ if($credentials == "Error: 405. This key has been tampered with or is out of dat
     return $credentials;
 }
 
-if($credentials->role != 'student') {
-    echo "only students have associated recordings";
-    return;
-}
-
 $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
     // Select the user collection
 $collection = $client->ystem->users;
-$recordingDoc = $collection->findOne(["username" => $credentials->username]);
+$recordingDoc = "";
+
+if($credentials->role == "student") { $recordingDoc = $collection->findOne(["username" => $credentials->username]); }
+else if($credentials->role == "parent") { $recordingDoc = $collection->findOne(["username" => $student]);}
+
 
 $recordings = [];
 foreach ($recordingDoc["recordingList"] as $recording) {;

@@ -53,6 +53,10 @@ export class ParentComponent implements OnInit {
     });
   }
 
+  public getStudentInfo(index) {
+    this.cookie.set("student", this.students[index]);
+  }
+
   private async getUsername() {
     let pLevel = "nLogged";
     let uInfo = await setPermissionLevel(this.cookie);

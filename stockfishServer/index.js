@@ -9,6 +9,7 @@ const url = require('url');
 http.createServer((req, res) => {
 
 
+    res.setHeader("Access-Control-Allow-Origin", "*")
     if ((url.parse(req.url, true).search) != null) {
 
 

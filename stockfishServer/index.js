@@ -7,6 +7,7 @@ const url = require('url');
 //create a server object:
 http.createServer(function (req, res) {
 
+    res.setHeader("Access-Control-Allow-Origin", "*")
     if ((url.parse(req.url, true).search) != null) {
         let params = querystring.parse((url.parse(req.url, true).search).substring(1))
 
@@ -19,6 +20,7 @@ http.createServer(function (req, res) {
         game.aiMove(params.level);
 
         let fen = game.exportFEN();
+        fen.replace('/','//')
         res.write(fen);
     }
     else {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { setPermissionLevel } from "../../globals";
 
 @Component({
   selector: 'app-student-recordings',
@@ -14,9 +15,17 @@ export class StudentRecordingsComponent implements OnInit {
 
   constructor(private cookie: CookieService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    let pLevel = "nLogged";
+    let uInfo = await setPermissionLevel(this.cookie);
+    if (uInfo['error'] == undefined) {
+      pLevel = uInfo["role"];
+      this.studentName = uInfo["username"];
+    }
     if(this.cookie.check("student")) {
       this.studentName = this.cookie.get("student");
+    } else {
+
     }
     this.getRecordings();
   }

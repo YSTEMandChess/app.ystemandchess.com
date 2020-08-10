@@ -1,3 +1,27 @@
+body {
+    
+    #notice {
+        h1 {
+            font-family: 'Roboto';
+        }
+
+        h2 {
+            font-family: 'Roboto';
+        }
+    }
+
+    #recordings {
+        margin-top: 2%;
+        h1 {
+            font-family: 'Lato';
+        }
+
+        h2 {
+            font-family: 'Lato';
+        }
+    }
+}
+
 a:hover {
     cursor: pointer;
     color: blue;

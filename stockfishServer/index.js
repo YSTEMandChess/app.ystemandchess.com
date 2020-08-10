@@ -1,28 +1,43 @@
 var http = require('http');
-const jsChess = require('js-chess-engine');
+var stockfish = require("stockfish");
+var chess = require("chess.js");
+
 const querystring = require('querystring');
 const url = require('url');
 
-
 //create a server object:
-http.createServer(function (req, res) {
+http.createServer((req, res) => {
+
 
     if ((url.parse(req.url, true).search) != null) {
+
+
+        var engine = stockfish();
+
+        engine.onmessage = function (line) {
+            if (line.substring(0, 4) == "best") {
+                let params = querystring.parse((url.parse(req.url, true).search).substring(1))
+                console.log(`Best move was found: ${line}`)
+                const game = new chess.Chess(params.fen);
+                game.move(line.split(" ")[1], { sloppy: true });
+                res.write(game.fen());
+                res.end();
+            }
+        };
+
+
         let params = querystring.parse((url.parse(req.url, true).search).substring(1))
 
         console.log(`Game notation found: ${params.fen}`);
         console.log(`Level found: ${params.level}`);
 
-        const game = new jsChess.Game(params.fen);
-
-        // get best ai move - level 2
-        game.aiMove(params.level);
-
-        let fen = game.exportFEN();
-        res.write(fen);
+        engine.postMessage("uci");
+        engine.postMessage(`position fen ${params.fen}`);
+        engine.postMessage(`go depth ${params.level}`);
     }
     else {
         res.write("Please provide all parameters");
+        res.end();
     }
-    res.end();
-}).listen(8080); //the server object listens on port 8080
+
+}).listen(8008); //the server object listens on port 8080

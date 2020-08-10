@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chess.js": "^0.11.0",
     "express": "^4.17.1",
-    "js-chess-engine": "^0.5.0"
+    "js-chess-engine": "^0.5.0",
+    "stockfish": "^10.0.2"
   }
 }

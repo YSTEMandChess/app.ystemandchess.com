@@ -30,31 +30,6 @@
         padding-bottom:2%;
         text-align: center;
 
-        #flip-board {
-            outline-style: none;
-            margin-left:3%;
-            padding-top:1%;
-            padding-bottom:1%;
-            padding-left: 3%;
-            padding-right:3%;
-            border-radius: 33px;
-            font-family: 'Lato';
-            font-weight: 900;
-            font-size: 1.4vw; //22px
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            color: #000000;
-            background-color: #F2C94C;
-
-            //push new game button away
-            margin-right:47.4%;
-        }
-
-        #flip-board:hover {
-            color:#F2C94C;
-            background-color: #000;
-        }
-
         #new-game {
             outline-style: none;
             padding-top: 1%;
@@ -63,7 +38,7 @@
             padding-right:2%;
             font-family: 'Lato';
             font-weight: 900;
-            font-size: 1.4vw; //22px
+            font-size: 22px; //22px
             line-height: 117.1%;
             letter-spacing: 0.01em;
             border-radius: 33px;

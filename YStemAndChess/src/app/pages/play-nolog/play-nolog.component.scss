@@ -9,6 +9,7 @@
     width:90%;
     height: auto;
     margin-left: 5%;
+    text-align: center;
     border-radius:33px;
     background-color: #E1E7ED;
 
@@ -18,10 +19,10 @@
         padding-top:2%;
         padding-bottom:2%;
     }
+        
 
     #lichess-board {
-        overflow: hidden;
-        width: 100%;
+        width:100%;
     }
 
     #bottom {

@@ -39,11 +39,14 @@ export class HeaderComponent implements OnInit {
         let url = `http://127.0.0.1:8000/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
         this.httpGetAsync(url, (response) => {
           if (response == "There are no current meetings with this user.") {
+            if(this.inMatch) {
+              window.location.pathname = "/";
+            }
             this.inMatch = false;
           }
         });
 
-      }, 10000);
+      }, 600);
     }
 
 
@@ -209,7 +212,6 @@ export class HeaderComponent implements OnInit {
   public leaveMatch() {
     this.httpGetAsync(`http://127.0.0.1:8000/endMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {});
     this.endGame();
-    this.inMatch = false;
   }
 
   public endGame() {

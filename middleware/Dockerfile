@@ -1,18 +1,24 @@
-FROM php
+FROM php:apache
 
-# Make sure that we are in the correct directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN echo "Docker file version v0.1"
+
+SHELL ["/bin/bash", "-c"]
+RUN ln -s ../mods-available/{expires,headers,rewrite}.load /etc/apache2/mods-enabled/
+RUN sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
+COPY php.ini /usr/local/etc/php/
+
+
+WORKDIR /var/www/html
 COPY / .
 
 # Install mongo extention
-RUN apt-get update && apt-get install -y openssl libssl-dev libcurl4-openssl-dev php-mongodb
+RUN apt-get update && apt-get install -y openssl libssl-dev libcurl4-openssl-dev
 # Install and setup mongo
 RUN pecl install mongodb
 # This touch command may not be neccicary, but idk.
-RUN touch /usr/local/etc/php/php.ini
-RUN echo "extension=mongodb.so" >>  /usr/local/etc/php/php.ini
+#RUN touch /usr/local/etc/php/php.ini
+#RUN echo "extension=mongodb.so" | tee -a $(php -i | grep "Loaded Configuration File" | awk '{print $5}') 
 
 # Run the web server.
-EXPOSE 8000
-CMD [ "/usr/local/bin/php", "-S", "0.0.0.0:8000" ]
+EXPOSE 80
+#CMD [ "/usr/local/bin/php", "-S", "0.0.0.0:8000" ]

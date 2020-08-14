@@ -25,7 +25,7 @@ export class PlayNologComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
-      if (e.origin == "http://chessClient:80") {
+      if (e.origin == "http://localhost") {
         // Means that there is the board state and whatnot
         console.log("this does work every time");
         let info = e.data;
@@ -48,7 +48,7 @@ export class PlayNologComponent implements OnInit {
             if (this.isReady) {
               console.log("sending message " + JSON.stringify({ boardState: response, color: this.color }));
               var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-              chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), "http://chessClient:80");
+              chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), "http://localhost");
             } else {
               this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
             }
@@ -62,7 +62,7 @@ export class PlayNologComponent implements OnInit {
     this.messageQueue.forEach(element => {
       console.log("sending message " + element);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-      chessBoard.postMessage(element, "http://chessClient:80");
+      chessBoard.postMessage(element, "http://localhost");
     });
   }
 
@@ -74,7 +74,7 @@ export class PlayNologComponent implements OnInit {
     if (this.isReady) {
       console.log("sending message" + this.currentFEN);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-      chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color }), "http://chessClient:80");
+      chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color }), "http://localhost");
     } else {
       this.messageQueue.push(JSON.stringify({ boardState: this.currentFEN, color: this.color }));
     }
@@ -87,7 +87,7 @@ export class PlayNologComponent implements OnInit {
         if (this.isReady) {
           console.log("sending message" + response);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), "http://chessClient:80");
+          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), "http://localhost");
         } else {
           this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
         }

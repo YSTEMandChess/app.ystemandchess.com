@@ -31,7 +31,7 @@ export class StudentRecordingsComponent implements OnInit {
   }
 
   private getRecordings() {
-    let url = `http://127.0.0.1:8000/getRecordings.php/?jwt=${this.cookie.get("login")}&student=${this.studentName}`;
+    let url = `http://middleware/getRecordings.php/?jwt=${this.cookie.get("login")}&student=${this.studentName}`;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       let key: any;
@@ -46,7 +46,7 @@ export class StudentRecordingsComponent implements OnInit {
 
   public verify(index) {
     console.log(index);
-    let url = `http://127.0.0.1:8000/awsGen.php/?filename=${this.recordings[index]}`;
+    let url = `http://middleware/awsGen.php/?filename=${this.recordings[index]}`;
     this.httpGetAsync(url, (response) => {
       let data = response;
       if(confirm("Download now?")) {

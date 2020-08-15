@@ -24,7 +24,7 @@ export class ParentComponent implements OnInit {
   }
 
   getStudents() {
-    let url = `http://127.0.0.1:8000/getInfo.php/?jwt=${this.cookie.get("login")}`;
+    let url = `http://middleware/getInfo.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url,(response) => {
       if (response == "This username has been taken. Please choose another.") {
         alert("username has been taken")
@@ -39,7 +39,7 @@ export class ParentComponent implements OnInit {
   }
 
   getTimePlayedOfStudents() {
-    let url = `http://127.0.0.1:8000/studentInfo.php/?jwt=${this.cookie.get("login")}`;
+    let url = `http://middleware/studentInfo.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url,(response) => {
       if (response == "This username has been taken. Please choose another.") {
         alert("username has been taken")

@@ -1,17 +1,17 @@
 <html>
 
 <head>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
+  <meta content="text/html;charset=utf-8""*ent-Type">
+  <meta content="utf-8""*ding">
   <link rel="stylesheet" type="text/css" href="./css/chessboard-1.0.0.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="*gleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./js/chessboard-1.0.0.js"></script>
   <script src="node_modules/chess960.js/chess.min.js"></script>
 </head>
 <div id="myBoard" frameborder="0"></div>
 <script>
   // NOTE: this example uses the chess.js library:
-  // https://github.com/jhlywa/chess.js
+  //"*om/jhlywa/chess.js
 
   let flag = false;
   letParentKnow();
@@ -51,7 +51,7 @@
 
   function letParentKnow() {
     if(flag === false) {
-      parent.postMessage("ReadyToRecieve", "http://ystemmain:80");
+      parent.postMessage("ReadyToRecieve", "*");
       console.log("message sent");
     }
     flag = true;
@@ -100,7 +100,7 @@
   }
 
   function sendToParent(fen) {
-    parent.postMessage(fen, "http://ystemmain:80");
+    parent.postMessage(fen, "*");
   }
 
   // update the board position after the piece snap
@@ -146,15 +146,15 @@
   }
 
   function sendGameOver() {
-    parent.postMessage("gameOver", "http://ystemmain:80");
+    parent.postMessage("gameOver", "*");
   }
 
   function sendDraw() {
-    parent.postMessage("draw", "http://ystemmain:80");
+    parent.postMessage("draw", "*");
   }
 
   function sendCheckmate() {
-    parent.postMessage("checkmate", "http://ystemmain:80");
+    parent.postMessage("checkmate", "*");
   }
 
   var config = {

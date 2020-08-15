@@ -25,7 +25,7 @@ export class PlayNologComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
-      if (e.origin == "http://chessClient:80") {
+      if (e.origin == "/chessClient") {
         // Means that there is the board state and whatnot
         console.log("this does work every time");
         let info = e.data;

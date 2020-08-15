@@ -1,0 +1,5 @@
+- Chess Server     [x]
+- Chess Client     [x]
+- Middleware       [ ]
+- Stockfish Server [x]
+- Y Stem Main APP  [ ] ystemmain

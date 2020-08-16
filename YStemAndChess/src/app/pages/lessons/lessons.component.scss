@@ -22,12 +22,20 @@ body {
         margin-bottom: 5%;
         border-radius: 33px;
         background-color: orange;
+
+        a{
+            color: black;
+            text-decoration: none;
+        }
     }
 
     #pawn-lessons:hover {
         cursor: pointer;
         background-color: black;
-        color: orange
+        a {
+            color: orange
+        }
+        
     }
 
     #rook-lessons {

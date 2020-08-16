@@ -1,0 +1,5 @@
+# ignore diff files
+*.diff
+
+# ignore node_modules
+node_modules/*

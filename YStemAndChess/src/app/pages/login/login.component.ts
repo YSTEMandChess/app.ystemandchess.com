@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   verifyInDataBase() {
     var username = (<HTMLInputElement>document.getElementById('username')).value;
     var password = (<HTMLInputElement>document.getElementById('password')).value;
-    let url = `http://middleware/?reason=verify&username=${username}&password=${password}`;
+    let url = `/middleware/?reason=verify&username=${username}&password=${password}`;
     this.httpGetAsync(url, (response) => {
       if (response == "The username or password is incorrect.") {
         //console.log("Don't RedirectMe");
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
             window.location.pathname = "/parent";
             break;
           case "mentor":
-            window.location.pathname = "";
+            window.location.pathname = "/play-mentor";
             break;
           case "admin":
             window.location.pathname = "/admin";

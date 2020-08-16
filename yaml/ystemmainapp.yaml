@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: ystemmain
-        image: owenoertell/ystem-testing:ystemmainv8
+        image: owenoertell/ystem-testing:ystemmainv9
       imagePullSecrets:
       - name: regcred 

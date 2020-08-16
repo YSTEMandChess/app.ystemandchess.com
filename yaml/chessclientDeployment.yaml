@@ -16,6 +16,5 @@ spec:
     spec:
       containers:
       - name: chessclient
-        image: owenoertell/ystem-testing:chessclient
-      imagePullSecrets:
-      - name: regcred 
+        image: gcr.io/ystemdeployment/chessclient
+      

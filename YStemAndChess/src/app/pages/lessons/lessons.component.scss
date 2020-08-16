@@ -1,0 +1,101 @@
+body {
+    padding-top:5%; //50px
+}
+
+//clears floats once they are no longer needed
+#clear {
+    clear:both;
+}
+
+#lessons {
+    display: flex;
+    flex-wrap: wrap;
+    font-style: 'Roboto';
+    justify-content: space-evenly;
+    overflow: hidden;
+    font-size: 33px;
+
+    #pawn-lessons {
+        text-align: center;
+        width: 30%;
+        margin-bottom: 5%;
+        border-radius: 33px;
+        background-color: orange;
+    }
+
+    #pawn-lessons:hover {
+        cursor: pointer;
+        background-color: black;
+        color: orange
+    }
+
+    #rook-lessons {
+        text-align: center;
+        width: 30%;
+        margin-bottom: 5%;
+        border-radius: 33px;
+        background-color: orange;
+    }
+
+    #rook-lessons:hover {
+        cursor: pointer;
+        background-color: black;
+        color: orange
+    }
+
+    #horse-lessons {
+        text-align: center;
+        width: 30%;
+        margin-bottom: 5%;
+        border-radius: 33px;
+        background-color: orange;
+    }
+
+    #horse-lessons:hover {
+        cursor: pointer;
+        background-color: black;
+        color: orange
+    }
+
+    #bishop-lessons {
+        text-align: center;
+        width: 30%;
+        margin-bottom: 5%;
+        border-radius: 33px;
+        background-color: orange;
+    }
+
+    #bishop-lessons:hover {
+        cursor: pointer;
+        background-color: black;
+        color: orange
+    }
+
+    #queen-lessons {
+        text-align: center;
+        width: 30%;
+        margin-bottom: 5%;
+        border-radius: 33px;
+        background-color: orange;
+    }
+
+    #queen-lessons:hover {
+        cursor: pointer;
+        background-color: black;
+        color: orange
+    }
+
+    #king-lessons {
+        text-align: center;
+        width: 30%;
+        margin-bottom: 5%;
+        border-radius: 33px;
+        background-color: orange;
+    }
+
+    #king-lessons:hover {
+        cursor: pointer;
+        background-color: black;
+        color: orange
+    }
+}

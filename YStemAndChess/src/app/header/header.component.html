@@ -28,7 +28,12 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>
+                <div *ngIf="role === 'student'">
+                    <a class="nav-link hvr-underline-from-left" href="/lessons">Lessons</a>
+                </div>
+                <div *ngIf="role !=='student'">
+                    <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link hvr-underline-from-left" href="mailto:devin@ystemandchess.com">Contact</a>

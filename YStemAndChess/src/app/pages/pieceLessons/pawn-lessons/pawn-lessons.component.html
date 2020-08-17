@@ -1,15 +1,17 @@
 <html>
-    <header>
-        <app-header></app-header>
-    </header>
+    <app-header></app-header>
 
     <body>
-        <div class="container">
-            <app-play></app-play>
+        <div id="lesson-container">
+            <div id="chess-board">
+                <app-play></app-play>
+            </div>
+            <div id="bottom"> 
+                <button type="button" id="previous">Previous &lt;</button>       
+                <button type="button" id="next">Next &gt;</button>
+            </div>
         </div>
     </body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+    <app-footer></app-footer>
 </html>

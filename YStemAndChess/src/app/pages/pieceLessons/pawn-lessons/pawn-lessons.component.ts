@@ -23,13 +23,15 @@ export class PawnLessonsComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
+      console.log("the end FEN " + this.lessonEndFEN);
       if (e.origin == "http://localhost") {
         if(this.lessonStarted == false) {
           this.getLessonsCompleted()
           this.getCurrentLesson();
           this.lessonStarted = true;
-        } else {
-
+        } 
+        if(e.data == this.lessonEndFEN) {
+          alert("Lesson " + this.displayLessonNum + " completed!");
         }
       }
     }, false);

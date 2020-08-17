@@ -14,6 +14,11 @@
   // https://github.com/jhlywa/chess.js
 
   let flag = false;
+  let lessonFlag = false;
+  let isLesson = false;
+  let lessonStarted = false;
+  let lessonBoard = "";
+
   letParentKnow();
   
   var board = null
@@ -35,14 +40,38 @@
     //console.log("Hey, I am going to update the board state");
     let data = JSON.parse(e.data);
     console.log(data);
-    if(data.boardState == startFEN){
-      game = new Chess();
+    lessonFlag = data.lessonFlag;
+    if(lessonFlag == true) { isLesson = true; }
+
+    if(isLesson == true) {
+      lessonBoard = data.boardState;
+      var lessonConfig = {
+        draggable: true,
+        position: lessonBoard,
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd
+      }
+      if(lessonStarted == false) {
+        board = Chessboard('myBoard', lessonConfig);
+        lessonStarted = true;
+        game.load(lessonBoard);
+      } else {
+        board.position(data.boardState);
+        game.load(data.boardState);
+      }
+      console.log("I am game fen " + game.fen());
+      
     }
-    playerColor = data.color;
-    board.orientation(playerColor);
-    game.load(data.boardState);
-    board.position(data.boardState);
-    updateStatus();
+    else if(data.boardState == startFEN){
+      game = new Chess();
+    } else {
+      playerColor = data.color;
+      board.orientation(playerColor);
+      game.load(data.boardState);
+      board.position(data.boardState);
+      updateStatus();
+    }
   }, false);
   
   function flip() {
@@ -51,10 +80,15 @@
 
   function letParentKnow() {
     if(flag === false) {
-      parent.postMessage("ReadyToRecieve", "http://ystemmain:80");
+      parent.postMessage("ReadyToRecieve", "http://localhost:4200");
       console.log("message sent");
     }
     flag = true;
+  }
+
+  function lessonCompleted() {
+    console.log("lesson is completed");
+    parent.postMessage("lessonCompleted", "http://localhost:4200");
   }
 
   function onDragStart(source, piece, position, orientation) {
@@ -65,16 +99,22 @@
     } 
 
     console.log(playerColor);
-    if(playerColor === "black") {
-      if(piece.search(/^w/) !== -1) return false;
-    } else if(playerColor === "white") {
-      if(piece.search(/^b/) !== -1) return false;
+    if(isLesson == false) {
+      if(playerColor === "black") {
+        if(piece.search(/^w/) !== -1) return false;
+      } else if(playerColor === "white") {
+        if(piece.search(/^b/) !== -1) return false;
+      }
     }
     
     // only pick up pieces for the side to move
-    if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
-      return false
+    console.log("I am is Lesson " + isLesson);
+    if(isLesson == false) {
+      console.log("I am in piece move validation");
+      if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+        (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+        return false
+      }
     }
   }
 
@@ -89,18 +129,21 @@
     // illegal move
     if (move === null) return 'snapback'
 
-	if(game.game_over()) {
-		console.log("game over");
-    sendGameOver();
-	}
+  if(isLesson == false) {
+    if(game.game_over()) {
+      console.log("game over");
+      sendGameOver();
+    }
+  }
 
   console.log("I am in drop");
     updateStatus()
+    console.log(game.fen());
     sendToParent(game.fen());
   }
 
   function sendToParent(fen) {
-    parent.postMessage(fen, "http://ystemmain:80");
+    parent.postMessage(fen, "http://localhost:4200");
   }
 
   // update the board position after the piece snap
@@ -146,15 +189,15 @@
   }
 
   function sendGameOver() {
-    parent.postMessage("gameOver", "http://ystemmain:80");
+    parent.postMessage("gameOver", "http://localhost:4200");
   }
 
   function sendDraw() {
-    parent.postMessage("draw", "http://ystemmain:80");
+    parent.postMessage("draw", "http://localhost:4200");
   }
 
   function sendCheckmate() {
-    parent.postMessage("checkmate", "http://ystemmain:80");
+    parent.postMessage("checkmate", "http://localhost:4200");
   }
 
   var config = {
@@ -164,8 +207,10 @@
     onDrop: onDrop,
     onSnapEnd: onSnapEnd
   }
-  board = Chessboard('myBoard', config)
-  $(window).resize(board.resize);
+  
+  if(isLesson == false) { board = Chessboard('myBoard', config); }
+  
+  //$(window).resize(board.resize);
 
   updateStatus()
 </script>

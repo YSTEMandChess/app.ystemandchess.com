@@ -54,30 +54,32 @@
     if(lessonFlag == true) { isLesson = true; }
 
     if(isLesson == true) {
+      console.log("I am isLesson " + isLesson);
       lessonBoard = data.boardState;
       lessonEnd = data.endState;
-      var lessonConfig = {
-        draggable: true,
-        position: lessonBoard,
-        onDragStart: onDragStart,
-        onDrop: onDrop,
-        onSnapEnd: onSnapEnd
-      }
+      playerColor = data.color;
       
       if(lessonStarted == false) {
+        var lessonConfig = {
+          draggable: true,
+          position: lessonBoard,
+          onDragStart: onDragStart,
+          onDrop: onDrop,
+          onSnapEnd: onSnapEnd
+        }
         board = Chessboard('myBoard', lessonConfig);
         lessonStarted = true;
         game.load(lessonBoard);
       } else {
         board.position(data.boardState);
         game.load(data.boardState);
+        updateStatus();
       }
 
-      //var endMove = "e3";
       $board.find('.square-' + endSquare)
     .addClass('highlight');
       
-      console.log("I am game fen " + game.fen());
+      //console.log("I am game fen " + game.fen());
       
     }
     else if(data.boardState == startFEN){
@@ -98,7 +100,7 @@
   function letParentKnow() {
     if(flag === false) {
       parent.postMessage("ReadyToRecieve", "http://localhost:4200");
-      console.log("message sent");
+      //console.log("message sent");
     }
     flag = true;
   }
@@ -110,29 +112,27 @@
 
   function onDragStart(source, piece, position, orientation) {
     // do not pick up pieces if the game is over
-    if (game.game_over()) {
-      sendGameOver();
-      return false;
-    } 
+    if(isLesson == false) {
+      if (game.game_over()) {
+        sendGameOver();
+        return false;
+      } 
+    }
 
     console.log(playerColor);
-    if(isLesson == false) {
       if(playerColor === "black") {
         if(piece.search(/^w/) !== -1) return false;
       } else if(playerColor === "white") {
         if(piece.search(/^b/) !== -1) return false;
       }
-    }
     
     // only pick up pieces for the side to move
     console.log("I am is Lesson " + isLesson);
-    if(isLesson == false) {
       console.log("I am in piece move validation");
       if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
         (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
         return false
       }
-    }
   }
 
   function onDrop(source, target) {
@@ -179,15 +179,18 @@
     }
 
     // checkmate?
-    if (game.in_checkmate()) {
-      status = 'Game over, ' + moveColor + ' is in checkmate.'
-      sendCheckmate();
-    }
+    if(isLesson == false){
+      if (game.in_checkmate()) {
+        status = 'Game over, ' + moveColor + ' is in checkmate.'
+        sendCheckmate();
+      }
+    
 
-    // draw?
-    else if (game.in_draw()) {
-      status = 'Game over, drawn position'
-      sendDraw();
+      // draw?
+      else if (game.in_draw()) {
+        status = 'Game over, drawn position'
+        sendDraw();
+      }
     }
 
     // game still on

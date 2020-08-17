@@ -1,4 +1,4 @@
-<?php 
+<?php
     // Allow Cross Origin Requests (other ips can request data)
     header("Access-Control-Allow-Origin: *");
     // Load the JWT library
@@ -7,6 +7,7 @@
 
     $jwt = htmlspecialchars_decode($_GET["jwt"]);
     $piece = htmlspecialchars_decode($_GET["piece"]);
+    $lessonNum = htmlspecialchars_decode($_GET["lessonNumber"]);
     $credentials = json_decode(include "verifyNoEcho.php");
 
     if($credentials == "Error: 405. This key has been tampered with or is out of date." || $credentials == "Error: 406. Please Provide a JSON Web Token.") {
@@ -15,19 +16,19 @@
     }
 
     $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
-    $collection = $client->ystem->users;
+    $collection = $client->ystem->lessons;
 
-    $userDoc = $collection->findOne(["username" => $credentials->username]);
+    $userDoc = $collection->findOne(["piece" => $piece]);
 
-    $lessonNum = 0;
-
-    $lessonArr = [];
-    foreach($userDoc["lessonsCompleted"] as $chessPiece) {
-        if(strcmp($piece, $chessPiece['piece']) == 0) {
-            $lessonArr = $chessPiece;
+    $currentLesson = [];
+    foreach($userDoc["lessons"] as $lesson) {
+        //completed lessons for students are one previous, that
+        //is why their is plus 1 to get the current lesson
+        if($lesson['lessonNumber'] == $lessonNum+1) {
+            $currentLesson = $lesson;
             break;
         }
     }
 
-    echo json_encode($lessonArr);
+    echo json_encode($currentLesson);
 ?>

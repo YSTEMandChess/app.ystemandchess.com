@@ -10,18 +10,28 @@ export class PawnLessonsComponent implements OnInit {
 
   private lessonStartFEN: string = "";
   private lessonEndFEN: string = "";
-  public lessonNum: string = "";
+  private lessonNum = "";
+  public displayLessonNum = 0;
 
   constructor(private cookie: CookieService) { }
 
   async ngOnInit() {
-    this.getLessonsCompleted();
-    this.getCurrentLesson();
+    var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+    // Listen to message from child window
+    eventer(messageEvent, (e) => {
+      if (e.origin == "http://localhost") {
+        this.getLessonsCompleted();
+        this.getCurrentLesson();
+      }
+    }, false);
   }
 
   private getLessonsCompleted() {
     let url = `http://127.0.0.1:8000/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=pawn`;
-    this.httpGetAsync(url, (response) => {
+      this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonNum = data["lessonNumber"];
     });
@@ -33,7 +43,16 @@ export class PawnLessonsComponent implements OnInit {
       let data = JSON.parse(response);
       this.lessonStartFEN = data['startFen'];
       this.lessonEndFEN = data['endFen'];
+      this.displayLessonNum = data['lessonNumber'];
+      this.sendLessonToChessBoard();
     });
+  }
+
+  private sendLessonToChessBoard() {
+    var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+    console.log("start " + this.lessonStartFEN);
+    console.log("end " + this.lessonEndFEN);
+    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true }), "http://localhost");
   }
 
   private httpGetAsync(theUrl: string, callback) {

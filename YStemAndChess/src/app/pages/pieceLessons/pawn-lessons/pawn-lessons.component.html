@@ -1,8 +1,13 @@
 <html>
-    <app-header></app-header>
-
+    <header>
+        <app-header></app-header>
+    </header>
+    
     <body>
         <div id="lesson-container">
+            <div id="top">
+                <h1>Pawn Lesson Number {{displayLessonNum}}</h1>
+            </div>
             <div id="chess-board">
                 <app-play></app-play>
             </div>
@@ -13,5 +18,7 @@
         </div>
     </body>
 
-    <app-footer></app-footer>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
 </html>

@@ -25,11 +25,11 @@ export class PawnLessonsComponent implements OnInit {
     eventer(messageEvent, (e) => {
       if (e.origin == "http://localhost") {
         if(this.lessonStarted == false) {
-          this.getLessonsCompleted();
+          this.getLessonsCompleted()
           this.getCurrentLesson();
           this.lessonStarted = true;
         } else {
-          
+
         }
       }
     }, false);

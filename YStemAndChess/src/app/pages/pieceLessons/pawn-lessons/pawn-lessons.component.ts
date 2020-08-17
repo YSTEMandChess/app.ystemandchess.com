@@ -10,6 +10,7 @@ export class PawnLessonsComponent implements OnInit {
 
   private lessonStartFEN: string = "";
   private lessonEndFEN: string = "";
+  private lessonStarted: boolean = false;
   private lessonNum = "";
   public displayLessonNum = 0;
 
@@ -23,8 +24,13 @@ export class PawnLessonsComponent implements OnInit {
     // Listen to message from child window
     eventer(messageEvent, (e) => {
       if (e.origin == "http://localhost") {
-        this.getLessonsCompleted();
-        this.getCurrentLesson();
+        if(this.lessonStarted == false) {
+          this.getLessonsCompleted();
+          this.getCurrentLesson();
+          this.lessonStarted = true;
+        } else {
+          
+        }
       }
     }, false);
   }

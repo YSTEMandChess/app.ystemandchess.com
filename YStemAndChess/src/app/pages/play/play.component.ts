@@ -117,6 +117,7 @@ export class PlayComponent implements OnInit {
         console.log("I am info " + info);
         //console.log("I am info " + info);
         //console.log("I am above ready to recieve");
+        
         if(info == "ReadyToRecieve") {
           this.isReady=true;
           this.sendFromQueue();

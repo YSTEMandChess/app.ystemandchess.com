@@ -11,6 +11,7 @@ export class PawnLessonsComponent implements OnInit {
   private lessonStartFEN: string = "";
   private lessonEndFEN: string = "";
   private lessonStarted: boolean = false;
+  private endSquare: string = "";
   private lessonNum = "";
   public displayLessonNum = 0;
 
@@ -52,6 +53,7 @@ export class PawnLessonsComponent implements OnInit {
       this.lessonStartFEN = data['startFen'];
       this.lessonEndFEN = data['endFen'];
       this.displayLessonNum = data['lessonNumber'];
+      this.endSquare = data['endSquare'];
       this.sendLessonToChessBoard();
     });
   }
@@ -60,7 +62,7 @@ export class PawnLessonsComponent implements OnInit {
     var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
     console.log("start " + this.lessonStartFEN);
     console.log("end " + this.lessonEndFEN);
-    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true }), "http://localhost");
+    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare }), "http://localhost");
   }
 
   private httpGetAsync(theUrl: string, callback) {

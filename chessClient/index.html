@@ -8,6 +8,11 @@
   <script src="./js/chessboard-1.0.0.js"></script>
   <script src="node_modules/chess960.js/chess.min.js"></script>
 </head>
+<style type="text/css">
+    .highlight {
+      box-shadow: inset 0 0 10px 10px #44b863;
+    }
+</style>
 <div id="myBoard" frameborder="0"></div>
 <script>
   // NOTE: this example uses the chess.js library:
@@ -18,6 +23,10 @@
   let isLesson = false;
   let lessonStarted = false;
   let lessonBoard = "";
+  let lessonEnd = "";
+  let endSquare = "";
+  var squareClass = 'square-55d63';
+  var $board = $('#myBoard');
 
   letParentKnow();
   
@@ -41,10 +50,12 @@
     let data = JSON.parse(e.data);
     console.log(data);
     lessonFlag = data.lessonFlag;
+    endSquare = data.endSquare;
     if(lessonFlag == true) { isLesson = true; }
 
     if(isLesson == true) {
       lessonBoard = data.boardState;
+      lessonEnd = data.endState;
       var lessonConfig = {
         draggable: true,
         position: lessonBoard,
@@ -52,6 +63,7 @@
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
       }
+      
       if(lessonStarted == false) {
         board = Chessboard('myBoard', lessonConfig);
         lessonStarted = true;
@@ -60,6 +72,11 @@
         board.position(data.boardState);
         game.load(data.boardState);
       }
+
+      //var endMove = "e3";
+      $board.find('.square-' + endSquare)
+    .addClass('highlight');
+      
       console.log("I am game fen " + game.fen());
       
     }

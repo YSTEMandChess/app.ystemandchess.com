@@ -27,8 +27,6 @@
   let endSquare = "";
   var squareClass = 'square-55d63';
   var $board = $('#myBoard');
-
-  letParentKnow();
   
   var board = null
   var game = new Chess()
@@ -44,17 +42,18 @@
 
   let startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
 
+  letParentKnow();
   // Listen to message from child window
   eventer(messageEvent, (e) => {
     //console.log("Hey, I am going to update the board state");
     let data = JSON.parse(e.data);
     console.log(data);
     lessonFlag = data.lessonFlag;
-    endSquare = data.endSquare;
     if(lessonFlag == true) { isLesson = true; }
 
     if(isLesson == true) {
       console.log("I am isLesson " + isLesson);
+      endSquare = data.endSquare;
       lessonBoard = data.boardState;
       lessonEnd = data.endState;
       playerColor = data.color;
@@ -84,13 +83,16 @@
     }
     else if(data.boardState == startFEN){
       game = new Chess();
-    } else {
+    }
+    if(isLesson == false){
+      console.log(data.boardState);
       playerColor = data.color;
       board.orientation(playerColor);
       game.load(data.boardState);
       board.position(data.boardState);
       updateStatus();
     }
+    
   }, false);
   
   function flip() {
@@ -105,10 +107,10 @@
     flag = true;
   }
 
-  function lessonCompleted() {
-    console.log("lesson is completed");
-    parent.postMessage("lessonCompleted", "http://localhost:4200");
-  }
+  // function lessonCompleted() {
+  //   console.log("lesson is completed");
+  //   parent.postMessage("lessonCompleted", "http://localhost:4200");
+  // }
 
   function onDragStart(source, piece, position, orientation) {
     // do not pick up pieces if the game is over

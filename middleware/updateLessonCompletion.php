@@ -18,7 +18,23 @@
     $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
     $collection = $client->ystem->users;
 
-    $userDoc = $collection->findOne(["username" => $credentials->username]);
+    $index = -1;
+    $cursor = $collection->find(array("username" => $credentials->username), array("lessonsCompleted"));
+    foreach($cursor as $doc) {
+        if(strcmp($doc->piece, $piece) == 0) {
+            break;
+        }
+        $index++;
+    }
 
-    
+    printf($piece);
+    printf($index);
+    printf($lessonNum);
+
+    $collection->updateOne(['username' => $credentials->username], [
+        '$set' => 
+        [
+            'lessonsCompleted.'.$index => ['piece' => $piece, 'lessonNumber' => 1+$lessonNum]
+        ]
+    ]);
 ?>

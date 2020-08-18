@@ -42,8 +42,8 @@ export class PawnLessonsComponent implements OnInit {
           this.lessonStarted = true;
         } 
         else if(e.data == this.lessonEndFEN) {
-          alert("Lesson " + this.displayLessonNum + " completed!");
           this.updateLessonCompletion();
+          alert("Lesson " + this.displayLessonNum + " completed!");
           this.nextLesson();
         } else {
           this.currentFEN = e.data;
@@ -130,7 +130,7 @@ export class PawnLessonsComponent implements OnInit {
   }
 
   private updateLessonCompletion() {
-    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=pawn&lessonNumber=${this.lessonNum}`;
+    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece='pawn'&lessonNumber=${this.lessonNum}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
     });

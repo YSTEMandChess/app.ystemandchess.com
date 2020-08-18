@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pawn-lessons',
@@ -12,7 +13,8 @@ export class PawnLessonsComponent implements OnInit {
   private lessonEndFEN: string = "";
   private lessonStarted: boolean = false;
   private endSquare: string = "";
-  private lessonNum = "";
+  private previousEndSquare: string = "";
+  private lessonNum: number = 0;
   private currentFEN = "";
   private messageQueue = new Array();
   private color = "white";
@@ -20,7 +22,7 @@ export class PawnLessonsComponent implements OnInit {
   private isReady = false;
   public displayLessonNum = 0;
 
-  constructor(private cookie: CookieService) { }
+  constructor(private cookie: CookieService, private router: Router) { }
 
   async ngOnInit() {
     var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
@@ -45,7 +47,6 @@ export class PawnLessonsComponent implements OnInit {
           this.updateLessonCompletion();
           alert("Lesson " + this.displayLessonNum + " completed!");
           await this.getLessonsCompleted();
-          window.location.reload();
         } else {
           //stockfish move
           this.currentFEN = e.data;
@@ -83,6 +84,7 @@ export class PawnLessonsComponent implements OnInit {
   private async getCurrentLesson() {
     let url = `http://127.0.0.1:8000/getLesson.php/?jwt=${this.cookie.get('login')}&piece=pawn&lessonNumber=${this.lessonNum}`;
     console.log("I am lesson Num " + this.lessonNum);
+    this.previousEndSquare = this.endSquare;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonStartFEN = data['startFen'];
@@ -157,11 +159,19 @@ export class PawnLessonsComponent implements OnInit {
     var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
     console.log("start " + this.lessonStartFEN);
     console.log("end " + this.lessonEndFEN);
-    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare, color: this.color }), "http://localhost");
+    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare, color: this.color, previousEndSquare: this.previousEndSquare}), "http://localhost");
   }
 
   public previousLesson() {
-    
+    this.lessonNum--;
+    this.previousEndSquare = this.endSquare;
+    this.getCurrentLesson();
+  }
+
+  public nextLesson() {
+    this.lessonNum++;
+    this.previousEndSquare = this.endSquare;
+    this.getCurrentLesson();
   }
 
   /**

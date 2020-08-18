@@ -43,6 +43,8 @@ export class PawnLessonsComponent implements OnInit {
         } 
         else if(e.data == this.lessonEndFEN) {
           alert("Lesson " + this.displayLessonNum + " completed!");
+          this.updateLessonCompletion();
+          this.nextLesson();
         } else {
           this.currentFEN = e.data;
           this.level = 5;
@@ -125,6 +127,17 @@ export class PawnLessonsComponent implements OnInit {
     console.log("start " + this.lessonStartFEN);
     console.log("end " + this.lessonEndFEN);
     chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare, color: this.color }), "http://localhost");
+  }
+
+  private updateLessonCompletion() {
+    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=pawn&lessonNumber=${this.lessonNum}`;
+    this.httpGetAsync(url, (response) => {
+      console.log(response);
+    });
+  }
+
+  private nextLesson() {
+    this.ngOnInit();
   }
 
   private httpGetAsync(theUrl: string, callback) {

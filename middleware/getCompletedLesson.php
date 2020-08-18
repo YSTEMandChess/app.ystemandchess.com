@@ -17,17 +17,15 @@
     $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
     $collection = $client->ystem->users;
 
-    $userDoc = $collection->findOne(["username" => $credentials->username]);
-
     $lessonNum = 0;
 
-    $lessonArr = [];
-    foreach($userDoc["lessonsCompleted"] as $chessPiece) {
-        if(strcmp($piece, $chessPiece['piece']) == 0) {
-            $lessonArr = $chessPiece;
+    $cursor = $collection->findOne(array("username" => $credentials->username), array("lessonsCompleted"));
+    foreach($cursor['lessonsCompleted'] as $chessPiece) {
+        if(strcmp($chessPiece->piece, $piece) == 0) {
+            $lessonNum = $chessPiece->lessonNumber;
             break;
         }
     }
 
-    echo json_encode($lessonArr);
+    echo json_encode($lessonNum);
 ?>

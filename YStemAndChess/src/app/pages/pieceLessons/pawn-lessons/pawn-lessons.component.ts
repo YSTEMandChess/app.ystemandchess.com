@@ -29,7 +29,7 @@ export class PawnLessonsComponent implements OnInit {
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 
     // Listen to message from child window
-    eventer(messageEvent, (e) => {
+    eventer(messageEvent, async (e) => {
       console.log("the end FEN " + this.lessonEndFEN);
       if (e.origin == "http://localhost") {
         if(e.data == "ReadyToRecieve") {
@@ -37,14 +37,13 @@ export class PawnLessonsComponent implements OnInit {
           this.sendFromQueue();
         }
         if(this.lessonStarted == false) {
-          this.getLessonsCompleted()
-          this.getCurrentLesson();
+          await this.getLessonsCompleted()
           this.lessonStarted = true;
         } 
         else if(e.data == this.lessonEndFEN) {
           this.updateLessonCompletion();
           alert("Lesson " + this.displayLessonNum + " completed!");
-          this.nextLesson();
+          await this.getLessonsCompleted();
         } else {
           this.currentFEN = e.data;
           this.level = 5;
@@ -65,21 +64,24 @@ export class PawnLessonsComponent implements OnInit {
     }, false);
   }
 
-  private getLessonsCompleted() {
+  private async getLessonsCompleted() {
     let url = `http://127.0.0.1:8000/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=pawn`;
       this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
-      this.lessonNum = data["lessonNumber"];
+      this.lessonNum = data;
+      this.getCurrentLesson();
     });
   }
 
-  private getCurrentLesson() {
-    let url = `http://127.0.0.1:8000/getLesson.php/?jwt=${this.cookie.get('login')}&piece=pawn`;
+  private async getCurrentLesson() {
+    let url = `http://127.0.0.1:8000/getLesson.php/?jwt=${this.cookie.get('login')}&piece=pawn&lessonNumber=${this.lessonNum}`;
+    console.log("I am lesson Num " + this.lessonNum);
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonStartFEN = data['startFen'];
       this.lessonEndFEN = data['endFen'];
       this.displayLessonNum = data['lessonNumber'];
+      console.log("I am display Lesson " + this.displayLessonNum)
       this.endSquare = data['endSquare'];
       this.sendLessonToChessBoard();
     });
@@ -129,8 +131,8 @@ export class PawnLessonsComponent implements OnInit {
     chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare, color: this.color }), "http://localhost");
   }
 
-  private updateLessonCompletion() {
-    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece='pawn'&lessonNumber=${this.lessonNum}`;
+  private async updateLessonCompletion() {
+    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=pawn&lessonNumber=${this.lessonNum}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
     });

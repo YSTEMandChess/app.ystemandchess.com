@@ -24,7 +24,7 @@
     foreach($userDoc["lessons"] as $lesson) {
         //completed lessons for students are one previous, that
         //is why their is plus 1 to get the current lesson
-        if($lesson['lessonNumber'] == $lessonNum+1) {
+        if($lesson['lessonNumber'] == 1+$lessonNum) {
             $currentLesson = $lesson;
             break;
         }

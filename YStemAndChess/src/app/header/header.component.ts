@@ -52,10 +52,10 @@ export class HeaderComponent implements OnInit {
 
 
     // Disallowed extentions for each of the types of accounts
-    const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/parent-add-student", "/student", "/play-mentor", "/mentor-dashboard", "/admin", "/student-recording", "/lessons"];
+    const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/parent-add-student", "/student", "/play-mentor", "/mentor-dashboard", "/admin", "/student-recording", "/lessons", "/pawn-lessons"];
     const notAllowedExtsStudent: String[] = ["/parent", "/parent-add-student", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin"];
-    const notAllowedExtsParent: String[] = ["/student", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin", "/lessons"];
-    const notAllowedExtsMentor: String[] = ["/student", "/parent", "/parent-add-student", "/signin", "/login", "/student-recording"];
+    const notAllowedExtsParent: String[] = ["/student", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin", "/lessons", "/pawn-lessons"];
+    const notAllowedExtsMentor: String[] = ["/student", "/parent", "/parent-add-student", "/signin", "/login", "/student-recording", "/lessons", "/pawn-lessons"];
     const notAllowedExtsAdmin: String[] = ["/signin", "/login"];
 
     let pageExt = window.location.pathname;

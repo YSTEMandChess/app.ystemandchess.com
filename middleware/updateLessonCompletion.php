@@ -18,17 +18,20 @@
     $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
     $collection = $client->ystem->users;
 
-    $index = -1;
-    $cursor = $collection->find(array("username" => $credentials->username), array("lessonsCompleted"));
-    foreach($cursor as $doc) {
-        if(strcmp($doc->piece, $piece) == 0) {
+    $index = 0;
+    $cursor = $collection->findOne(array("username" => $credentials->username), array("lessonsCompleted"));
+    printf("before iterations");
+    echo "<br>";
+    foreach($cursor['lessonsCompleted'] as $lesson) {
+        if(strcmp($lesson->piece, $piece) == 0) {
             break;
         }
         $index++;
     }
 
     printf($piece);
-    printf($index);
+    echo "<br>";
+    //printf($index);
     printf($lessonNum);
 
     $collection->updateOne(['username' => $credentials->username], [

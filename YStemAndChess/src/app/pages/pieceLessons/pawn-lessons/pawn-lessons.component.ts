@@ -20,6 +20,7 @@ export class PawnLessonsComponent implements OnInit {
   private color = "white";
   private level = 5; //default stockfish value
   private isReady = false;
+  private piece = this.cookie.get('piece');
   public displayLessonNum = 0;
 
   constructor(private cookie: CookieService, private router: Router) { }
@@ -70,7 +71,7 @@ export class PawnLessonsComponent implements OnInit {
    * get the last lesson completed by the student for the pawn
    */
   private async getLessonsCompleted() {
-    let url = `http://127.0.0.1:8000/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=pawn`;
+    let url = `http://127.0.0.1:8000/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}`;
       this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonNum = data;
@@ -82,7 +83,7 @@ export class PawnLessonsComponent implements OnInit {
    * get current lesson data
    */
   private async getCurrentLesson() {
-    let url = `http://127.0.0.1:8000/getLesson.php/?jwt=${this.cookie.get('login')}&piece=pawn&lessonNumber=${this.lessonNum}`;
+    let url = `http://127.0.0.1:8000/getLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
     console.log("I am lesson Num " + this.lessonNum);
     this.previousEndSquare = this.endSquare;
     this.httpGetAsync(url, (response) => {
@@ -178,7 +179,7 @@ export class PawnLessonsComponent implements OnInit {
    * update student lesson completion for database
    */
   private async updateLessonCompletion() {
-    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=pawn&lessonNumber=${this.lessonNum}`;
+    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
     });

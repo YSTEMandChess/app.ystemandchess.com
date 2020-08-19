@@ -25,6 +25,7 @@
   let lessonBoard = "";
   let lessonEnd = "";
   let endSquare = "";
+  let previousEndSquare = "";
   var squareClass = 'square-55d63';
   var $board = $('#myBoard');
   
@@ -57,6 +58,12 @@
       lessonBoard = data.boardState;
       lessonEnd = data.endState;
       playerColor = data.color;
+      previousEndSquare = data.previousEndSquare;
+
+      if(previousEndSquare !== "") {
+        $board.find('.square-' + previousEndSquare)
+        .removeClass('highlight');
+      }
       
       if(lessonStarted == false) {
         var lessonConfig = {
@@ -77,8 +84,6 @@
 
       $board.find('.square-' + endSquare)
     .addClass('highlight');
-      
-      //console.log("I am game fen " + game.fen());
       
     }
     else if(data.boardState == startFEN){
@@ -106,11 +111,6 @@
     }
     flag = true;
   }
-
-  // function lessonCompleted() {
-  //   console.log("lesson is completed");
-  //   parent.postMessage("lessonCompleted", "http://localhost:4200");
-  // }
 
   function onDragStart(source, piece, position, orientation) {
     // do not pick up pieces if the game is over
@@ -232,7 +232,7 @@
   
   if(isLesson == false) { board = Chessboard('myBoard', config); }
   
-  //$(window).resize(board.resize);
+  $(window).resize(board.resize);
 
   updateStatus()
 </script>

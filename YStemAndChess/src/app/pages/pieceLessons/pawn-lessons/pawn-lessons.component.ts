@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
-import { PipeCollector } from '@angular/compiler/src/template_parser/binding_parser';
 
 @Component({
   selector: 'app-pawn-lessons',
@@ -25,7 +23,7 @@ export class PawnLessonsComponent implements OnInit {
   public displayPiece: string = this.piece.toLocaleUpperCase();
   public displayLessonNum = 0;
 
-  constructor(private cookie: CookieService, private router: Router) { }
+  constructor(private cookie: CookieService) { }
 
   async ngOnInit() {
     var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";

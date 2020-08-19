@@ -32,6 +32,7 @@ body {
     #pawn-lessons:hover {
         cursor: pointer;
         background-color: black;
+        
         a {
             color: orange
         }
@@ -44,12 +45,22 @@ body {
         margin-bottom: 5%;
         border-radius: 33px;
         background-color: orange;
+
+        a{
+            color: black;
+            text-decoration: none;
+            
+        }
     }
 
     #rook-lessons:hover {
         cursor: pointer;
         background-color: black;
-        color: orange
+        color: orange;
+
+        a {
+            color: orange
+        }
     }
 
     #horse-lessons {
@@ -58,12 +69,21 @@ body {
         margin-bottom: 5%;
         border-radius: 33px;
         background-color: orange;
+
+        a{
+            color: black;
+            text-decoration: none;
+        }
     }
 
     #horse-lessons:hover {
         cursor: pointer;
         background-color: black;
-        color: orange
+        color: orange;
+
+        a {
+            color: orange
+        }
     }
 
     #bishop-lessons {
@@ -72,12 +92,21 @@ body {
         margin-bottom: 5%;
         border-radius: 33px;
         background-color: orange;
+
+        a{
+            color: black;
+            text-decoration: none;
+        }
     }
 
     #bishop-lessons:hover {
         cursor: pointer;
         background-color: black;
-        color: orange
+        color: orange;
+
+        a {
+            color: orange;
+        }
     }
 
     #queen-lessons {
@@ -86,12 +115,21 @@ body {
         margin-bottom: 5%;
         border-radius: 33px;
         background-color: orange;
+
+        a{
+            color: black;
+            text-decoration: none;
+        }
     }
 
     #queen-lessons:hover {
         cursor: pointer;
         background-color: black;
-        color: orange
+        color: orange;
+
+        a {
+            color: orange
+        }
     }
 
     #king-lessons {
@@ -100,11 +138,20 @@ body {
         margin-bottom: 5%;
         border-radius: 33px;
         background-color: orange;
+
+        a{
+            color: black;
+            text-decoration: none;
+        }
     }
 
     #king-lessons:hover {
         cursor: pointer;
         background-color: black;
-        color: orange
+        color: orange;
+
+        a {
+            color: orange
+        }
     }
 }

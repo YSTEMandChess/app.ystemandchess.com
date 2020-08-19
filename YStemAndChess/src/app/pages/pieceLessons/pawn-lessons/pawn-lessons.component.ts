@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { PipeCollector } from '@angular/compiler/src/template_parser/binding_parser';
 
 @Component({
   selector: 'app-pawn-lessons',
@@ -20,7 +21,8 @@ export class PawnLessonsComponent implements OnInit {
   private color = "white";
   private level = 5; //default stockfish value
   private isReady = false;
-  private piece = this.cookie.get('piece');
+  private piece: string = this.cookie.get('piece');
+  public displayPiece: string = this.piece.toLocaleUpperCase();
   public displayLessonNum = 0;
 
   constructor(private cookie: CookieService, private router: Router) { }

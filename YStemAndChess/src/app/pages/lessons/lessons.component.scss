@@ -7,6 +7,10 @@ body {
     clear:both;
 }
 
+#top {
+    text-transform: capitalize;
+}
+
 #lessons {
     display: flex;
     flex-wrap: wrap;

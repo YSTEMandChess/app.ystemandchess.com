@@ -336,9 +336,9 @@ export class SignupComponent implements OnInit {
       this.newStudents = this.clearNulls(this.newStudents);
       console.log(this.newStudents);
       var students = JSON.stringify(this.newStudents);
-      url = `/middleware/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
     } else {
-      url = `/middleware/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
+      url = `http://127.0.0.1:8000/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
     }
     
     this.httpGetAsync(url, (response) => {

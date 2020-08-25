@@ -84,5 +84,18 @@ The final piece of the puzzle is to add the chess client. This is in the directo
 
 So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /etc/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
+# Adding New Lessons
+
+Adding new Lessons to the YStem app is farily simple. All one must do is under the "lessons" collection, select the piece you wish to add a lesson for. You need to add a lesson number, start FEN, end FEN, and end square so it can be highlighted on the board. If you do not want to highlight a spot square on the board simply leave that section blank. Below is an example of input for lessons being created.
+
+
+```lessonNumber: 5
+startFEN : "rnbqkbnr/pppppppp/8/8/8/8/PPP4P/RNBQKB1R w KQkq - 0 1"
+endFEN: "rnbqkbnr/pppppppp/8/8/2P5/8/PP5P/RNBQKB1R b KQkq - 1 1"
+endSquare: "e4"```
+
+
+Once this added to the database the lesson will be generated when a user reaches that lesson number with that piece. I like to use https://lichess.org/editor to create a starting lesson FEN. From there it is easiest to get the ending lesson FEN by going to that lesson number on the YStem app and moving to the desired end position. The current FEN will be output in the browser console. The reason the end FEN cannot be achieved in other editors is becuase they do not update color and turns completed. Plus you have to see which moves Stockfish makes when you move to the end square. Stockfish will always make the same move if you do, becuase stockfish will only make the optimal move.
+
 
 

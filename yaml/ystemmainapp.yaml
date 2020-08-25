@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ystemmain
+  labels:
+    app: ystemmain
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ystemmain
+  template:
+    metadata:
+      labels:
+        app: ystemmain
+    spec:
+      containers:
+      - name: ystemmain
+        image: owenoertell/ystem-testing:ystemmainv8
+      imagePullSecrets:
+      - name: regcred 

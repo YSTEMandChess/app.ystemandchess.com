@@ -66,7 +66,7 @@ const agoraConfig: AgoraConfig = {
     HttpClientTestingModule,
     ModalModule,
     NgxAgoraModule.forRoot(agoraConfig),
-    NgxAgoraModule.forRoot({ AppID: environment.agora.appId })
+    NgxAgoraModule.forRoot({ AppID: "6c368b93b82a4b3e9fb8e57da830f2a4" })
   ],
   providers: [
     CookieService,

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stockfishserver
+  labels:
+    app: stockfishserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stockfishserver
+  template:
+    metadata:
+      labels:
+        app: stockfishserver
+    spec:
+      containers:
+      - name: stockfishserver
+        image: owenoertell/ystem-testing:chessclient
+      imagePullSecrets:
+      - name: regcred 

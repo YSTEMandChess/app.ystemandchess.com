@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: middleware
+  labels:
+    app: middleware
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: middleware
+  template:
+    metadata:
+      labels:
+        app: middleware
+    spec:
+      containers:
+      - name: middleware
+        image: owenoertell/ystem-testing:middlewarev1.2
+      imagePullSecrets:
+      - name: regcred 

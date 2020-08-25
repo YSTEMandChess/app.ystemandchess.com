@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chessserver
+  labels:
+    app: chessserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chessserver
+  template:
+    metadata:
+      labels:
+        app: chessserver
+    spec:
+      containers:
+      - name: chessserver
+        image: owenoertell/ystem-testing:chessserver
+      imagePullSecrets:
+      - name: regcred 

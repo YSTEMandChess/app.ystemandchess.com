@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chessclient
+  labels:
+    app: chessclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chessclient
+  template:
+    metadata:
+      labels:
+        app: chessclient
+    spec:
+      containers:
+      - name: chessclient
+        image: owenoertell/ystem-testing:chessclient
+      imagePullSecrets:
+      - name: regcred 

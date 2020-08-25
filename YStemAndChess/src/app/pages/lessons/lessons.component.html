@@ -1,0 +1,50 @@
+<html>
+    <header>
+        <app-header></app-header>
+    </header>
+
+    <body>
+        <!--Lessons container-->
+        <div id="lessons">
+            <div id="pawn-lessons" (click)="assignPawn()">
+                <a href="/pawn-lessons">
+                    <p>Pawn</p>
+                </a>
+            </div>
+
+            <div id="rook-lessons">
+                <a href="/pawn-lessons" (click)="assignRook()">
+                    <p>Rook</p>
+                </a>
+            </div>
+
+            <div id="bishop-lessons">
+                <a href="/pawn-lessons" (click)="assignBishop()">
+                    <p>Bishop</p>
+                </a>
+            </div>
+
+            <div id="horse-lessons" (click)="assignHorse()">
+                <a href="/pawn-lessons">
+                    <p>Horse</p>
+                </a>
+            </div>
+
+            <div id="queen-lessons" (click)="assignQueen()">
+                <a href="/pawn-lessons">
+                    <p>Queen</p>
+                </a>
+            </div>
+
+            <div id="king-lessons" (click)="assignKing()">
+                <a href="/pawn-lessons">
+                    <p>King</p>
+                </a>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

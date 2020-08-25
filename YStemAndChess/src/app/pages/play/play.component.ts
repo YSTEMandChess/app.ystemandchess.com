@@ -92,7 +92,7 @@ export class PlayComponent implements OnInit {
           let newData = JSON.parse(<string>data);
           console.log(`New Board State Received: ${data}`);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "/chessClient");
+          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "http://localhost");
         } else {
           this.messageQueue.push(data);
         }
@@ -109,7 +109,7 @@ export class PlayComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
-      if (e.origin == "/chessClient") {
+      if (e.origin == "http://localhost") {
         // Means that there is the board state and whatnot
         //console.log("There is a new board state. Going to update!")
         console.log("this does work every time");
@@ -117,6 +117,7 @@ export class PlayComponent implements OnInit {
         console.log("I am info " + info);
         //console.log("I am info " + info);
         //console.log("I am above ready to recieve");
+        
         if(info == "ReadyToRecieve") {
           this.isReady=true;
           this.sendFromQueue();
@@ -139,7 +140,7 @@ export class PlayComponent implements OnInit {
           let newData = JSON.parse(<string>element);
           console.log(`New Board State Received: ${element}`);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "/chessClient");
+          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "http://localhost");
     });
   }
 

@@ -44,7 +44,7 @@ export class PlayNologComponent implements OnInit {
           this.level = parseInt((<HTMLInputElement>document.getElementById('movesAhead')).value);
           if(this.level <= 1) this.level = 1;
           else if (this.level >= 30) this.level = 30;
-          this.httpGetAsync(`/stockfishserver/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
+          this.httpGetAsync(`http://localhost:8080/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
             if (this.isReady) {
               console.log("sending message " + JSON.stringify({ boardState: response, color: this.color }));
               var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;

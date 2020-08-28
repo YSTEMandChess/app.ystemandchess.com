@@ -1,15 +1,16 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once 'environment.php';
 
-$appID = "6c368b93b82a4b3e9fb8e57da830f2a4";
-$auth = "Basic OTE3ZTZlOTlmODgxNDEwYWI2ZjEyNmY3ZTJiMWM5MDc6NWYwMTU0MTIwMmM3NDYzNzhjZTQ3Nzg3NTljYzg4NGE=";
-$channelName = "10000";
-$uid = "123";
+$appID = $_ENV["appID"];
+$auth = $_ENV["auth"];
+$channelName = $_ENV["channel"];
+$uid = $_ENV["uid"];
 
 // AWS Information // NOTE: Changing these values will not do anything. Need to edit them i $startBody and other actual passed values.
-$accessKey = "AKIA3W5HAAMI6L45OV5X";
-$secretKey = "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";
+$accessKey = $_ENV["awsAccessKey"];
+$secretKey = $_ENV["awsSecretKey"];
 
 $vendor = 1;
 $region= 1;

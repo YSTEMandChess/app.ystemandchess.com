@@ -4,6 +4,7 @@
     // Load the JWT library
     require_once __DIR__ . '/vendor/autoload.php';
     use \Firebase\JWT\JWT;
+    require_once 'environment.php';
 
     $jwt = htmlspecialchars_decode($_GET["jwt"]);
     $piece = htmlspecialchars_decode($_GET["piece"]);
@@ -15,7 +16,7 @@
         return $credentials;
     }
 
-    $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+    $client = new MongoDB\Client($_ENV["mongoCredentials"]);
     $collection = $client->ystem->users;
 
     $index = 0;

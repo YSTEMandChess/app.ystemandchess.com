@@ -5,10 +5,10 @@ header("Access-Control-Allow-Origin: *");
 // Load the JWT library
 require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;
+require_once 'environment.php';
 
 // Random Key. Needs to be Changed Later
-$key = "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C";
-
+$key = $_ENV["indexKey"];
 // Get all parameters for creating/validating user
 $username = htmlspecialchars_decode($_GET["username"]);
 $password = htmlspecialchars_decode($_GET["password"]);
@@ -54,7 +54,7 @@ if ($reason == "create") {
 
 function createUser($username, $password, $firstName, $lastName, $email, $role, $students, $parentUsername) {
     // MONGO DB LOGIN
-    $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+    $client = new MongoDB\Client($_ENV["mongoCredentials"]);
     // Select the user collection
     $collection = $client->ystem->users;
 
@@ -160,7 +160,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
         'eat' => strtotime("+30 days")
     );
 
-    $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
+    $jwt = JWT::encode($payload, $_ENV["indexKey"], 'HS512');
     echo $jwt;
 }
 
@@ -183,7 +183,8 @@ function createLessonObject() {
 
 function verifyUser($username, $password) {
     // MONGO DB LOGIN
-    $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+    //echo $_ENV["indexKey"];
+    $client = new MongoDB\Client($_ENV["mongoCredentials"]);
     // Select the user collection
 
     $hashPass = hash("sha384",$password);
@@ -213,7 +214,7 @@ function verifyUser($username, $password) {
                 'eat' => strtotime("+30 days")
             );
         }
-        $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
+        $jwt = JWT::encode($payload, $_ENV["indexKey"], 'HS512');
         echo $jwt;
     } else {
         echo "The username or password is incorrect.";

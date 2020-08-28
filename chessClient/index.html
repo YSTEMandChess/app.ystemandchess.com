@@ -1,10 +1,10 @@
 <html>
 
 <head>
-  <!-- <meta content="text/html;charset=utf-8""*ent-Type">
-  <meta content="utf-8""*ding"> -->
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
   <link rel="stylesheet" type="text/css" href="./css/chessboard-1.0.0.css">
-  <script src="*gleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./js/chessboard-1.0.0.js"></script>
   <script src="node_modules/chess960.js/chess.min.js"></script>
 </head>
@@ -16,7 +16,9 @@
 <div id="myBoard" frameborder="0"></div>
 <script>
   // NOTE: this example uses the chess.js library:
-  //"*om/jhlywa/chess.js
+  // https://github.com/jhlywa/chess.js
+
+  require('dotenv').config('environment.env');
 
   let flag = false;
   let lessonFlag = false;
@@ -106,7 +108,7 @@
 
   function letParentKnow() {
     if(flag === false) {
-      parent.postMessage("ReadyToRecieve", "http://localhost:4200");
+      parent.postMessage("ReadyToRecieve", process.env.PARENT);
       //console.log("message sent");
     }
     flag = true;
@@ -162,7 +164,7 @@
   }
 
   function sendToParent(fen) {
-    parent.postMessage(fen, "http://localhost:4200");
+    parent.postMessage(fen, process.env.PARENT);
   }
 
   // update the board position after the piece snap
@@ -211,15 +213,15 @@
   }
 
   function sendGameOver() {
-    parent.postMessage("gameOver", "http://localhost:4200");
+    parent.postMessage("gameOver", process.env.PARENT);
   }
 
   function sendDraw() {
-    parent.postMessage("draw", "http://localhost:4200");
+    parent.postMessage("draw", process.env.PARENT);
   }
 
   function sendCheckmate() {
-    parent.postMessage("checkmate", "http://localhost:4200");
+    parent.postMessage("checkmate", process.env.PARENT);
   }
 
   var config = {

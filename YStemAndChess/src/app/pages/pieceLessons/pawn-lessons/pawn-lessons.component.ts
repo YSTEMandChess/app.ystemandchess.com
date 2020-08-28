@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-pawn-lessons',
@@ -32,7 +33,7 @@ export class PawnLessonsComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, async (e) => {
-      if (e.origin == "http://localhost") {
+      if (e.origin == environment.urls.chessClientURL) {
         //child window has loaded and can now recieve data
         if(e.data == "ReadyToRecieve") {
           this.isReady = true;
@@ -54,10 +55,10 @@ export class PawnLessonsComponent implements OnInit {
           this.level = 5;
           if(this.level <= 1) this.level = 1;
           else if (this.level >= 30) this.level = 30;
-          this.httpGetAsync(`http://127.0.0.1:8080/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
+          this.httpGetAsync(`${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
             if (this.isReady) {
               var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-              chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), "http://localhost");
+              chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
             } else {
               this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
             }
@@ -71,7 +72,7 @@ export class PawnLessonsComponent implements OnInit {
    * get the last lesson completed by the student for the pawn
    */
   private async getLessonsCompleted() {
-    let url = `http://127.0.0.1:8000/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}`;
+    let url = `${environment.urls.middlewareURL}/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}`;
       this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonNum = data;
@@ -83,7 +84,7 @@ export class PawnLessonsComponent implements OnInit {
    * get current lesson data
    */
   private async getCurrentLesson() {
-    let url = `http://127.0.0.1:8000/getLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
+    let url = `${environment.urls.middlewareURL}/getLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
     console.log("I am lesson Num " + this.lessonNum);
     this.previousEndSquare = this.endSquare;
     this.httpGetAsync(url, (response) => {
@@ -117,7 +118,7 @@ export class PawnLessonsComponent implements OnInit {
     this.messageQueue.forEach(element => {
       console.log("sending message " + element);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-      chessBoard.postMessage(element, "http://localhost");
+      chessBoard.postMessage(element, environment.urls.chessClientURL);
     });
   }
 
@@ -131,7 +132,7 @@ export class PawnLessonsComponent implements OnInit {
     if (this.isReady) {
       console.log("sending message" + this.currentFEN);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-      chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color }), "http://localhost");
+      chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color }), environment.urls.chessClientURL);
     } else {
       this.messageQueue.push(JSON.stringify({ boardState: this.currentFEN, color: this.color }));
     }
@@ -141,11 +142,11 @@ export class PawnLessonsComponent implements OnInit {
       this.color = "black";
       if(this.level <= 1) this.level = 1;
       else if (this.level >= 30) this.level = 30;
-      this.httpGetAsync(`http://127.0.0.1:8080/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
+      this.httpGetAsync(`${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
         if (this.isReady) {
           console.log("sending message" + response);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), "http://localhost");
+          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
         } else {
           this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
         }
@@ -160,7 +161,7 @@ export class PawnLessonsComponent implements OnInit {
     var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
     console.log("start " + this.lessonStartFEN);
     console.log("end " + this.lessonEndFEN);
-    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare, color: this.color, previousEndSquare: this.previousEndSquare}), "http://localhost");
+    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare, color: this.color, previousEndSquare: this.previousEndSquare}), environment.urls.chessClientURL);
   }
 
   public previousLesson() {
@@ -179,7 +180,7 @@ export class PawnLessonsComponent implements OnInit {
    * update student lesson completion for database
    */
   private async updateLessonCompletion() {
-    let url = `http://127.0.0.1:8000/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
+    let url = `${environment.urls.middlewareURL}/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
     });

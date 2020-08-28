@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-play-lesson',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayLessonComponent implements OnInit {
 
-  constructor() { }
+  public chessLessonSrc;
+
+  constructor(private sanitizer: DomSanitizer) { 
+    this.chessLessonSrc = sanitizer.bypassSecurityTrustResourceUrl(environment.urls.chessClientURL)
+  }
 
   ngOnInit(): void {
   }

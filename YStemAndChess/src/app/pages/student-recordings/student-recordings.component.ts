@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from "../../globals";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-student-recordings',
@@ -31,7 +32,7 @@ export class StudentRecordingsComponent implements OnInit {
   }
 
   private getRecordings() {
-    let url = `http://127.0.0.1:8000/getRecordings.php/?jwt=${this.cookie.get("login")}&student=${this.studentName}`;
+    let url = `${environment.urls.middlewareURL}/getRecordings.php/?jwt=${this.cookie.get("login")}&student=${this.studentName}`;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       let key: any;
@@ -46,7 +47,7 @@ export class StudentRecordingsComponent implements OnInit {
 
   public verify(index) {
     console.log(index);
-    let url = `http://127.0.0.1:8000/awsGen.php/?filename=${this.recordings[index]}`;
+    let url = `${environment.urls.middlewareURL}/awsGen.php/?filename=${this.recordings[index]}`;
     this.httpGetAsync(url, (response) => {
       let data = response;
       if(confirm("Download now?")) {

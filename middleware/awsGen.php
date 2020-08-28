@@ -5,6 +5,7 @@
 header("Access-Control-Allow-Origin: *");
 // Load the JWT library
 require_once __DIR__ . '/vendor/autoload.php';
+require_once 'environment.php';
 
 use Aws\S3\S3Client;
 use Aws\Exception\AwsException;
@@ -15,8 +16,8 @@ $s3 = new Aws\S3\S3Client([
     'version' => 'latest',
     'region' => 'us-east-2',
     'credentials' => [
-        'key'    => 'AKIA3W5HAAMI6L45OV5X',
-        'secret' => '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'
+        'key'    => $_ENV["key"],
+        'secret' => $_ENV["secret"]
     ]
 ]);
 /*

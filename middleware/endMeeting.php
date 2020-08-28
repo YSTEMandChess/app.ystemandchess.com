@@ -5,6 +5,7 @@ header("Access-Control-Allow-Origin: *");
 // Load the JWT library
 require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;
+require_once 'environment.php';
 
 $jwt = htmlspecialchars_decode($_GET["jwt"]);
 $credentials = json_decode(include "verifyNoEcho.php");
@@ -14,7 +15,7 @@ if($credentials == "Error: 405. This key has been tampered with or is out of dat
 }
 $student = "";
 $meetingStartTime = "";
-$client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+$client = new MongoDB\Client($_ENV["mongoCredentials"]);
 // They are a mentor, so add them to the mentor list
 $collection = $client->ystem->meetings;
 $userCollection = $client->ystem->users;

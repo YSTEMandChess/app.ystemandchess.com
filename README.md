@@ -52,6 +52,15 @@ This can be found using the command `php -i | grep "Loaded Configuration File" |
 
 &nbsp; 
 
+
+&nbsp
+
+Now go into the chessClient directory and run `npm i dotenv`
+
+Repeat this step in chessServer as well
+
+&nbsp
+
 Now you should be good to start developing!
 
 # Running the Development Environment

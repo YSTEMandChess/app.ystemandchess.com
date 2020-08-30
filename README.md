@@ -64,14 +64,13 @@ The frontend code is stored in the `YStemAndChess` folder. Navigate inside of th
 
 Then, run the command `ng serve`. This will start the angular developer server. It can be found by going to `http://localhost:4200`.
 
-If angular can't be found in /usr/, a possible solution is to cd into the YStemAndChess folder and install local modules with: 
-`sudo npm install express nodemon socket.io` 
-`sudo npm install @angular-devkit/build-angular`
+If angular can't be found in /usr/, a possible solution is to cd into the YStemAndChess folder and install local modules with:   
+`sudo npm install express nodemon socket.io`  
+`sudo npm install @angular-devkit/build-angular`  
 
-In the event of NGCC failing with an unhandled exception:
+In the event of NGCC failing with an unhandled exception:  
 In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
-As per:
-https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
+As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
 
 
 &nbsp; 

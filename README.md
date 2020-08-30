@@ -53,13 +53,13 @@ This can be found using the command `php -i | grep "Loaded Configuration File" |
 &nbsp; 
 
 
-&nbsp
+&nbsp;
 
 Now go into the chessClient directory and run `npm i dotenv`
 
 Repeat this step in chessServer as well
 
-&nbsp
+&nbsp;
 
 Now you should be good to start developing!
 

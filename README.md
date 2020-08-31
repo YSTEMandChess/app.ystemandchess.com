@@ -100,7 +100,7 @@ This is a websocket server though, so you cannot use a simple http request to ac
 
 The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
 
-So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /etc/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
+So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
 # Adding New Lessons
 

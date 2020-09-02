@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: chessclient
-        image: gcr.io/ystemdeployment/chessclient
+        image: gcr.io/ystemdeployment/chessclientv6
       

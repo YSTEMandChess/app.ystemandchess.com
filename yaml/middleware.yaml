@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: middleware
-        image: owenoertell/ystem-testing:middlewarev1.2
+        image: gcr.io/ystemdeployment/middleware
       imagePullSecrets:
       - name: regcred 

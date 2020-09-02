@@ -52,6 +52,15 @@ This can be found using the command `php -i | grep "Loaded Configuration File" |
 
 &nbsp; 
 
+
+&nbsp;
+
+Now go into the chessClient directory and run `npm i dotenv`
+
+Repeat this step in chessServer as well
+
+&nbsp;
+
 Now you should be good to start developing!
 
 # Running the Development Environment
@@ -63,6 +72,15 @@ Now, it is time to start running the dev environment. As a side note, all of the
 The frontend code is stored in the `YStemAndChess` folder. Navigate inside of that folder.
 
 Then, run the command `ng serve`. This will start the angular developer server. It can be found by going to `http://localhost:4200`.
+
+If angular can't be found in /usr/, a possible solution is to cd into the YStemAndChess folder and install local modules with:   
+`sudo npm install express nodemon socket.io`  
+`sudo npm install @angular-devkit/build-angular`  
+
+In the event of NGCC failing with an unhandled exception:  
+In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
+As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
+
 
 &nbsp; 
 
@@ -82,7 +100,7 @@ This is a websocket server though, so you cannot use a simple http request to ac
 
 The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
 
-So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /etc/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
+So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
 # Adding New Lessons
 

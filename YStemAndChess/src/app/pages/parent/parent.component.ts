@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from "../../globals";
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-parent',
@@ -24,7 +25,7 @@ export class ParentComponent implements OnInit {
   }
 
   getStudents() {
-    let url = `/middleware/getInfo.php/?jwt=${this.cookie.get("login")}`;
+    let url = `${environment.urls.middlewareURL}/getInfo.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url,(response) => {
       if (response == "This username has been taken. Please choose another.") {
         alert("username has been taken")
@@ -39,7 +40,7 @@ export class ParentComponent implements OnInit {
   }
 
   getTimePlayedOfStudents() {
-    let url = `/middleware/studentInfo.php/?jwt=${this.cookie.get("login")}`;
+    let url = `${environment.urls.middlewareURL}/studentInfo.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url,(response) => {
       if (response == "This username has been taken. Please choose another.") {
         alert("username has been taken")

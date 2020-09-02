@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from "../../globals";
 import { HeaderComponent } from '../../header/header.component'
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-parent-add-student',
@@ -216,7 +217,7 @@ export class ParentAddStudentComponent implements OnInit {
       let userName: string = this.newStudents[index].username;
       let password: string = this.newStudents[index].password;
 
-      url = `/middleware/?reason=create&parentUsername=${this.parentUser}&first=${firstName}&last=${lastName}&username=${userName}&password=${password}&role=student`;
+      url = `${environment.urls.middlewareURL}/?reason=create&parentUsername=${this.parentUser}&first=${firstName}&last=${lastName}&username=${userName}&password=${password}&role=student`;
       
       this.httpGetAsync(url, (response) => {
         if (response == "This username has been taken. Please choose another.") {

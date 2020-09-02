@@ -5,10 +5,10 @@ header("Access-Control-Allow-Origin: *");
 // Load the JWT library
 require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;
+require_once 'environment.php';
 
 // Random Key. Needs to be Changed Later
-$key = "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C";
-
+$key = $_ENV["indexKey"];
 // Get all parameters for creating/validating user
 $username = htmlspecialchars_decode($_GET["username"]);
 $password = htmlspecialchars_decode($_GET["password"]);
@@ -54,7 +54,7 @@ if ($reason == "create") {
 
 function createUser($username, $password, $firstName, $lastName, $email, $role, $students, $parentUsername) {
     // MONGO DB LOGIN
-    $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+    $client = new MongoDB\Client($_ENV["mongoCredentials"]);
     // Select the user collection
     $collection = $client->ystem->users;
 
@@ -89,7 +89,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
             $studentFirst = $studentInfo[$i]->first;
             $studentLast = $studentInfo[$i]->last;
             $studentPassword = hash("sha384",$studentInfo[$i]->password);
-            array_push($sUsernames, $studentUsername);
+            $lessonsCompleted = createLessonObject();
             // insert all students into the collection
             $collection->insertOne([
                 'username' => $studentUsername,
@@ -99,6 +99,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
                 'parentUsername' => $username,
                 'role' => 'student',
                 'timePlayed' => '0 hr: 0 min',
+                'lessonsCompleted' => $lessonsCompleted,
                 'accountCreatedAt' => time()
             ]);
         }
@@ -116,6 +117,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
         
     } else if($role == 'student') {
         // If they are a student, then we will need to add a link to the parent.
+        $lessonsCompleted = createLessonObject();
         $collection->insertOne([
             'username' => $username,
             'password' => $hashPass,
@@ -123,6 +125,7 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
             'lastName' => $lastName,
             'email' => $email,
             'role' => $role,
+            'lessonsCompleted' => $lessonsCompleted,
             'timePlayed' => '0 hr: 0 min',
             'accountCreatedAt' => time()
         ]);
@@ -157,13 +160,31 @@ function createUser($username, $password, $firstName, $lastName, $email, $role, 
         'eat' => strtotime("+30 days")
     );
 
-    $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
+    $jwt = JWT::encode($payload, $_ENV["indexKey"], 'HS512');
     echo $jwt;
+}
+
+function createLessonObject() {
+    $lessons = [];
+    $pawnLessonObject = (object)array('piece' => 'pawn', 'lessonNumber' => 0);
+    $rookLessonObject = (object)array('piece' => 'rook', 'lessonNumber' => 0);
+    $bishopLessonObject = (object)array('piece' => 'bishop', 'lessonNumber' => 0);
+    $kingLessonObject = (object)array('piece' => 'king', 'lessonNumber' => 0);
+    $queenLessonObject = (object)array('piece' => 'queen', 'lessonNumber' => 0);
+    $horseLessonObject = (object)array('piece' => 'horse', 'lessonNumber' => 0);
+    array_push($lessons, $horseLessonObject);
+    array_push($lessons, $queenLessonObject);
+    array_push($lessons, $kingLessonObject);
+    array_push($lessons, $bishopLessonObject);
+    array_push($lessons, $pawnLessonObject);
+    array_push($lessons, $rookLessonObject);
+    return $lessons;
 }
 
 function verifyUser($username, $password) {
     // MONGO DB LOGIN
-    $client = new MongoDB\Client('mongodb+srv://userAdmin:uUmrCVqTypLPq1Hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority');
+    //echo $_ENV["indexKey"];
+    $client = new MongoDB\Client($_ENV["mongoCredentials"]);
     // Select the user collection
 
     $hashPass = hash("sha384",$password);
@@ -193,7 +214,7 @@ function verifyUser($username, $password) {
                 'eat' => strtotime("+30 days")
             );
         }
-        $jwt = JWT::encode($payload, "4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C", 'HS512');
+        $jwt = JWT::encode($payload, $_ENV["indexKey"], 'HS512');
         echo $jwt;
     } else {
         echo "The username or password is incorrect.";

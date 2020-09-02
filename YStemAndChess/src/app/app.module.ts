@@ -27,6 +27,9 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
 import { environment } from 'src/environments/environment';
 import { StudentRecordingsComponent } from './pages/student-recordings/student-recordings.component';
+import { LessonsComponent } from './pages/lessons/lessons.component';
+import { PawnLessonsComponent } from './pages/pieceLessons/pawn-lessons/pawn-lessons.component';
+import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -51,7 +54,10 @@ const agoraConfig: AgoraConfig = {
     MentorDashboardComponent,
     AdminComponent,
     ParentAddStudentComponent,
-    StudentRecordingsComponent
+    StudentRecordingsComponent,
+    LessonsComponent,
+    PawnLessonsComponent,
+    PlayLessonComponent
   ],
   imports: [
     BrowserModule,

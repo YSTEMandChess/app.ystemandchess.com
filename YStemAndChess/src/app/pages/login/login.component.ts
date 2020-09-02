@@ -1,5 +1,6 @@
 import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
   verifyInDataBase() {
     var username = (<HTMLInputElement>document.getElementById('username')).value;
     var password = (<HTMLInputElement>document.getElementById('password')).value;
-    let url = `/middleware/?reason=verify&username=${username}&password=${password}`;
+    let url = `${environment.urls.middlewareURL}/?reason=verify&username=${username}&password=${password}`;
     this.httpGetAsync(url, (response) => {
       if (response == "The username or password is incorrect.") {
         //console.log("Don't RedirectMe");
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
             window.location.pathname = "/parent";
             break;
           case "mentor":
-            window.location.pathname = "/play-mentor";
+            window.location.pathname = "";
             break;
           case "admin":
             window.location.pathname = "/admin";

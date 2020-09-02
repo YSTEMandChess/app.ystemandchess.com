@@ -5,6 +5,7 @@ import { setPermissionLevel } from "../globals";
 import { allowedNodeEnvironmentFlags } from 'process';
 import { ModalService } from '../_modal';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -22,8 +23,8 @@ export class HeaderComponent implements OnInit {
   public playLink = "/play-nolog";
   public inMatch = false;
 
-  constructor(private cookie: CookieService,
-    private modalService: ModalService, private socket: SocketService) { }
+  constructor(private cookie: CookieService, private modalService: ModalService, 
+    private socket: SocketService) { }
 
   async ngOnInit() {
     let pLevel = "nLogged";
@@ -36,7 +37,7 @@ export class HeaderComponent implements OnInit {
     }
     if (this.role == 'student' || this.role == 'mentor') {
       setInterval(() => {
-        let url = `/middleware/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
+        let url = `${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
         //change rest
         this.httpGetAsync(url, (response) => {
           if (response == "There are no current meetings with this user.") {
@@ -53,10 +54,10 @@ export class HeaderComponent implements OnInit {
 
 
     // Disallowed extentions for each of the types of accounts
-    const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/parent-add-student", "/student", "/play-mentor", "/mentor-dashboard", "/admin", "/student-recording"];
+    const notAllowedExtsNotLoggedIn: String[] = ["/parent", "/parent-add-student", "/student", "/play-mentor", "/mentor-dashboard", "/admin", "/student-recording", "/lessons", "/pawn-lessons"];
     const notAllowedExtsStudent: String[] = ["/parent", "/parent-add-student", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin"];
-    const notAllowedExtsParent: String[] = ["/student", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin"];
-    const notAllowedExtsMentor: String[] = ["/student", "/parent", "/parent-add-student", "/signin", "/login", "/student-recording"];
+    const notAllowedExtsParent: String[] = ["/student", "/play-mentor", "/mentor-dashboard", "/signin", "/login", "/admin", "/lessons", "/pawn-lessons"];
+    const notAllowedExtsMentor: String[] = ["/student", "/parent", "/parent-add-student", "/signin", "/login", "/student-recording", "/lessons", "/pawn-lessons"];
     const notAllowedExtsAdmin: String[] = ["/signin", "/login"];
 
     let pageExt = window.location.pathname;
@@ -110,7 +111,7 @@ export class HeaderComponent implements OnInit {
     }
 
     // Check to see if they are currently in a game, or not.
-    let url = `/middleware/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
+    let url = `${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url, (response) => {
       // They are currently in a meeting. So set it up.
       if (response == "There are no current meetings with this user." || pLevel == "nLogged") {
@@ -131,7 +132,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public removeFromWaiting() {
-    let url = `/middleware/endSearch.php/?jwt=${this.cookie.get("login")}`;
+    let url = `${environment.urls.middlewareURL}/endSearch.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
     });
@@ -139,11 +140,11 @@ export class HeaderComponent implements OnInit {
   }
 
   public findGame() {
-    let url = `/middleware/newGame.php/?jwt=${this.cookie.get("login")}`;
+    let url = `${environment.urls.middlewareURL}/newGame.php/?jwt=${this.cookie.get("login")}`;
     this.httpGetAsync(url, (response) => {
       console.log(response);
       if (response === 'Person Added Sucessfully.') {
-        url = `/middleware/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
+        url = `${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`;
         let meeting = setInterval(() => {
           this.gameFound(url);
           if (this.foundFlag === true || this.endFlag === true) {
@@ -172,7 +173,7 @@ export class HeaderComponent implements OnInit {
     await this.httpGetAsync(url, (response) => {
       console.log(response);
       if(response === "There are no current meetings with this user.") {
-        let url = `/middleware/pairUp.php/?jwt=${this.cookie.get("login")}`;
+        let url = `${environment.urls.middlewareURL}/pairUp.php/?jwt=${this.cookie.get("login")}`;
         console.log("about to create game");
         this.createGame(url);
       }
@@ -211,7 +212,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public leaveMatch() {
-    this.httpGetAsync(`/middleware/endMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {});
+    this.httpGetAsync(`${environment.urls.middlewareURL}/endMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {});
     this.endGame();
   }
 

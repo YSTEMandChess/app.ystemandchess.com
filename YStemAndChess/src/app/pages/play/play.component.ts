@@ -1,8 +1,10 @@
 import { SocketService } from './../../socket.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, SecurityContext } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AgoraClient, ClientEvent, NgxAgoraService, Stream, StreamEvent } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 
@@ -18,13 +20,21 @@ export class PlayComponent implements OnInit {
   private clientUID;
   private messageQueue = new Array();
   private isReady: boolean;
+  public chessSrc;
 
-  constructor(private cookie: CookieService, private socket: SocketService, private agoraService: NgxAgoraService) { }
+  constructor(private cookie: CookieService, private socket: SocketService, 
+    private agoraService: NgxAgoraService, private sanitization: DomSanitizer) { 
+      this.chessSrc = sanitization.bypassSecurityTrustResourceUrl(environment.urls.chessClientURL);
+    }
 
   ngOnInit() {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
 
+<<<<<<< HEAD
     this.httpGetAsync(`http://middleware/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
+=======
+    this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
+>>>>>>> 3c6495f7e80dba30e99548a7cfdfdc8f2efbcb41
       if (response == "There are no current meetings with this user.") {
         return;
       }
@@ -34,7 +44,7 @@ export class PlayComponent implements OnInit {
       // Code for webcam
       // ------------------------------------------------------------------------- 
       this.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
-      this.client.init("6c368b93b82a4b3e9fb8e57da830f2a4", () => console.log("init sucessful"), () => console.log("init unsucessful"))
+      this.client.init(environment.agora.appId, () => console.log("init sucessful"), () => console.log("init unsucessful"))
       this.client.join(null, responseText.meetingID, null, (uid) => {
         console.log("uid: " + uid);
         this.clientUID = uid;
@@ -92,7 +102,7 @@ export class PlayComponent implements OnInit {
           let newData = JSON.parse(<string>data);
           console.log(`New Board State Received: ${data}`);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "/chessClient");
+          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), environment.urls.chessClientURL);
         } else {
           this.messageQueue.push(data);
         }
@@ -109,7 +119,7 @@ export class PlayComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
-      if (e.origin == "/chessClient") {
+      if (e.origin == environment.urls.chessClientURL) {
         // Means that there is the board state and whatnot
         //console.log("There is a new board state. Going to update!")
         console.log("this does work every time");
@@ -117,6 +127,7 @@ export class PlayComponent implements OnInit {
         console.log("I am info " + info);
         //console.log("I am info " + info);
         //console.log("I am above ready to recieve");
+        
         if(info == "ReadyToRecieve") {
           this.isReady=true;
           this.sendFromQueue();
@@ -139,7 +150,7 @@ export class PlayComponent implements OnInit {
           let newData = JSON.parse(<string>element);
           console.log(`New Board State Received: ${element}`);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), "/chessClient");
+          chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), environment.urls.chessClientURL);
     });
   }
 

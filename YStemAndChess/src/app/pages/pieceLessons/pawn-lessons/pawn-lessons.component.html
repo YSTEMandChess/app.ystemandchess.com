@@ -1,0 +1,24 @@
+<html>
+    <header>
+        <app-header></app-header>
+    </header>
+
+    <body>
+        <div id="lesson-container">
+            <div id="top">
+                <h1>Lesson Number {{displayLessonNum}}</h1>
+            </div>
+            <div id="chess-board">
+                <app-play-lesson></app-play-lesson>
+            </div>
+            <div id="bottom"> 
+                <button type="button" id="previous" (click)="previousLesson()">Previous &lt;</button>       
+                <button type="button" id="next" (click)="nextLesson()">Next &gt;</button>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

@@ -3,6 +3,7 @@ import { createAotUrlResolver } from '@angular/compiler';
 import { isString } from 'util';
 import{ HttpClient } from '@angular/common/http';
 import { stringify } from 'querystring';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -336,9 +337,9 @@ export class SignupComponent implements OnInit {
       this.newStudents = this.clearNulls(this.newStudents);
       console.log(this.newStudents);
       var students = JSON.stringify(this.newStudents);
-      url = `/middleware/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
+      url = `${environment.urls.middlewareURL}/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
     } else {
-      url = `/middleware/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
+      url = `${environment.urls.middlewareURL}/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
     }
     
     this.httpGetAsync(url, (response) => {

@@ -1,3 +1,4 @@
+require('dotenv').config();
 var http = require('http');
 var stockfish = require("stockfish");
 var chess = require("chess.js");
@@ -41,4 +42,5 @@ http.createServer((req, res) => {
         res.end();
     }
 
-}).listen(8080); //the server object listens on port 8080
+}).listen(process.env.PORT); //the server object listens on port 8080
+console.log("listening on *:" + process.env.PORT);

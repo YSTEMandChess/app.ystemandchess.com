@@ -8,7 +8,7 @@ async function setPermissionLevel(cookie: CookieService) {
     if (cookie.check(cookieName)) {
         var rawData;
         let cookieContents: string = cookie.get(cookieName);
-        let url = `http://${environment.urls.middlewareURL}/verify.php?jwt=${cookieContents}`;
+        let url = `${environment.urls.middlewareURL}/verify.php?jwt=${cookieContents}`;
         await fetch(url).then(response => response.text()).then(data => rawData = data.toString());
         if(rawData.includes("Error: 405. This key has been tampered with or is out of date.")) {
             cookie.delete(cookieName);

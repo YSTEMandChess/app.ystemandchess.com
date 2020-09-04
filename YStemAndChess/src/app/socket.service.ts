@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class SocketService {
   private socket;
-  private socketEndpoint = "http://52.249.251.163/chessserver";
+  private socketEndpoint = "http://52.249.251.163:8400";
 
   constructor() {
     this.socket = io(this.socketEndpoint);

@@ -51,7 +51,7 @@
 
   function letParentKnow() {
     if(flag === false) {
-      parent.postMessage("ReadyToRecieve", "http://localhost:4200");
+      parent.postMessage("ReadyToRecieve", "http://52.249.251.163");
       console.log("message sent");
     }
     flag = true;
@@ -100,7 +100,7 @@
   }
 
   function sendToParent(fen) {
-    parent.postMessage(fen, "http://localhost:4200");
+    parent.postMessage(fen, "http://52.249.251.163");
   }
 
   // update the board position after the piece snap
@@ -146,15 +146,15 @@
   }
 
   function sendGameOver() {
-    parent.postMessage("gameOver", "http://localhost:4200");
+    parent.postMessage("gameOver", "http://52.249.251.163");
   }
 
   function sendDraw() {
-    parent.postMessage("draw", "http://localhost:4200");
+    parent.postMessage("draw", "http://52.249.251.163");
   }
 
   function sendCheckmate() {
-    parent.postMessage("checkmate", "http://localhost:4200");
+    parent.postMessage("checkmate", "http://52.249.251.163");
   }
 
   var config = {

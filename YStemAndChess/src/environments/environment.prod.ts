@@ -9,7 +9,7 @@ export const environment = {
   },
   urls: {
     middlewareURL: '/middleware',
-    chessClientURL: '/chessclient',
+    chessClientURL: 'http://52.249.251.163:8500',
     stockFishURL : '/stockfishserver'
   }
 };

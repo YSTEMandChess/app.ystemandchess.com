@@ -586,7 +586,7 @@ process.umask = function() { return 0; };
   function letParentKnow() {
     if(flag === false) {
       // parent.postMessage("ReadyToRecieve", process.env.PARENT);
-      parent.postMessage("ReadyToRecieve", "http://52.249.251.163/");
+      parent.postMessage("ReadyToRecieve", process.env.PARENT);
       //console.log("message sent");
     }
     flag = true;
@@ -643,7 +643,7 @@ process.umask = function() { return 0; };
 
   function sendToParent(fen) {
     //parent.postMessage(fen, process.env.PARENT);
-    parent.postMessage(fen, "http://52.249.251.163/");
+    parent.postMessage(fen, process.env.PARENT);
   }
 
   // update the board position after the piece snap
@@ -693,17 +693,17 @@ process.umask = function() { return 0; };
 
   function sendGameOver() {
     //parent.postMessage("gameOver", process.env.PARENT);
-    parent.postMessage("gameOver", "http://52.249.251.163/");
+    parent.postMessage("gameOver", process.env.PARENT);
   }
 
   function sendDraw() {
     //parent.postMessage("draw", process.env.PARENT);
-    parent.postMessage("draw", "http://52.249.251.163/");
+    parent.postMessage("draw", process.env.PARENT);
   }
 
   function sendCheckmate() {
     //parent.postMessage("checkmate", process.env.PARENT);
-    parent.postMessage("checkmate", "http://52.249.251.163/");
+    parent.postMessage("checkmate", process.env.PARENT);
   }
 
   var config = {

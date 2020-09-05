@@ -148,8 +148,6 @@ io.on('connection', (socket) => {
   });
 });
 
-console.log(process.env);
-
 http.listen(process.env.PORT, () => {
   console.log('listening on *:' + process.env.PORT);
 });

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
   private socket;
-  private socketEndpoint = "http://52.249.251.163:8400";
+  private socketEndpoint = "http://localhost:3000"
 
   constructor() {
     this.socket = io(this.socketEndpoint);

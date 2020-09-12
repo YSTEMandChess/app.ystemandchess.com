@@ -1,7 +1,5 @@
 // NOTE: this example uses the chess.js library:
   // https://github.com/jhlywa/chess.js
-  require('dotenv').config();
-
   let flag = false;
   let lessonFlag = false;
   let isLesson = false;
@@ -89,7 +87,7 @@
 
   function letParentKnow() {
     if(flag === false) {
-       parent.postMessage("ReadyToRecieve", process.env.PARENT);
+       parent.postMessage("ReadyToRecieve", "*");
       //parent.postMessage("ReadyToRecieve", "http://localhost:4200");
       //console.log("message sent");
     }
@@ -146,7 +144,7 @@
   }
 
   function sendToParent(fen) {
-    parent.postMessage(fen, process.env.PARENT);
+    parent.postMessage(fen, "*");
     //parent.postMessage(fen, "http://localhost:4200");
   }
 
@@ -196,17 +194,17 @@
   }
 
   function sendGameOver() {
-    parent.postMessage("gameOver", process.env.PARENT);
+    parent.postMessage("gameOver", "*");
     //parent.postMessage("gameOver", "http://localhost:4200");
   }
 
   function sendDraw() {
-    parent.postMessage("draw", process.env.PARENT);
+    parent.postMessage("draw", "*");
     //parent.postMessage("draw", "http://localhost:4200");
   }
 
   function sendCheckmate() {
-    parent.postMessage("checkmate", process.env.PARENT);
+    parent.postMessage("checkmate", "*");
     //parent.postMessage("checkmate", "http://localhost:4200");
   }
 

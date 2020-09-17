@@ -8,7 +8,6 @@
 
     $jwt = htmlspecialchars_decode($_GET["jwt"]);
     $piece = htmlspecialchars_decode($_GET["piece"]);
-    $lessonNum = htmlspecialchars_decode($_GET["lessonNumber"]);
     $credentials = json_decode(include "verifyNoEcho.php");
 
     if($credentials == "Error: 405. This key has been tampered with or is out of date." || $credentials == "Error: 406. Please Provide a JSON Web Token.") {
@@ -20,16 +19,19 @@
     $collection = $client->ystem->lessons;
 
     $userDoc = $collection->findOne(["piece" => $piece]);
+    $pieceLessons = $userDoc["lessons"];
+    $totalLesson = 0;
 
-    $currentLesson = [];
-    foreach($userDoc["lessons"] as $lesson) {
+    $totalLesson = sizeof($pieceLessons);
+
+    /*foreach($userDoc["lessons"] as $lesson) {
         //completed lessons for students are one previous, that
         //is why there is plus 1 to get the current lesson
         if($lesson['lessonNumber'] == 1+$lessonNum) {
             $currentLesson = $lesson;
             break;
         }
-    }
+    }*/
 
-    echo json_encode($currentLesson);
+    echo json_encode($totalLesson);
 ?>

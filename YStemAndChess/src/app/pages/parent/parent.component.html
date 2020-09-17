@@ -1,67 +1,96 @@
-<app-header></app-header>
-<div class="container">
-    <div class="row">
-        <div class="col-8 pad">
-            <h2>Welcome {{username}}</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. In aliquam sem fringilla ut. Eget mi proin sed libero enim sed faucibus turpis.
-                Tristique senectus et netus et malesuada fames ac. Lobortis scelerisque fermentum dui faucibus. Vitae
-                congue eu consequat ac felis donec et odio. Augue ut lectus arcu bibendum. Felis eget velit aliquet
-                sagittis id consectetur purus ut faucibus. Justo eget magna fermentum iaculis eu. Tempus iaculis urna id
-                volutpat lacus laoreet. Justo laoreet sit amet cursus sit. Facilisis gravida neque convallis a cras.
-                Quam vulputate dignissim suspendisse in est ante in.
-            </p>
-            <div class="benifits">
-                Benefits
-            </div>
-        </div>
-    </div>
-</div>
-<div *ngFor="let student of students; let i = index;">
-    <div class="container cont">
-        <div class="row prog">
-            {{student}} Progress
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                <h2>Hours Played</h2>
-                <h1>{{times[i]}}</h1>
-            </div>
-            <div class="col-sm">
-                <h2>Progress</h2>
-            </div>
-            <div class="col-sm nobac">
-                <div class="recordsLink">
-                    Recorded Games
-                </div>
-                <div class="recordsLink">
-                    <a (click)="getStudentInfo(i)" href="/student-recording">Recorded Lessons</a>
-                </div>
-                <div class="recordsLink">
-                    Messages
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<html>
+    <head>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KJ979C9');
+        </script>
+        <!-- End Google Tag Manager -->
+    </head>
 
-<div class="container faqs">
-    <h2>FAQs</h2>
-    <div class="faq">
-        <h3>Q: This is a question?</h3>
-        <p> This is the answer to the question</p>
-    </div>
-    <div class="faq">
-        <h3>Q: This is a question?</h3>
-        <p> This is the answer to the question</p>
-    </div>
-    <div class="faq">
-        <h3>Q: This is a question?</h3>
-        <p> This is the answer to the question</p>
-    </div>
-    <div class="faq">
-        <h3>Q: This is a question?</h3>
-        <p> This is the answer to the question</p>
-    </div>
-</div>
-<app-footer></app-footer>
+    <header>
+        <app-header></app-header>
+    </header>
+
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-8 pad">
+                    <h2>Welcome {{username}}</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua. In aliquam sem fringilla ut. Eget mi proin sed libero enim sed faucibus turpis.
+                        Tristique senectus et netus et malesuada fames ac. Lobortis scelerisque fermentum dui faucibus. Vitae
+                        congue eu consequat ac felis donec et odio. Augue ut lectus arcu bibendum. Felis eget velit aliquet
+                        sagittis id consectetur purus ut faucibus. Justo eget magna fermentum iaculis eu. Tempus iaculis urna id
+                        volutpat lacus laoreet. Justo laoreet sit amet cursus sit. Facilisis gravida neque convallis a cras.
+                        Quam vulputate dignissim suspendisse in est ante in.
+                    </p>
+                    <div class="benifits">
+                        Benefits
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let student of students; let i = index;">
+            <div class="container cont">
+                <div class="row prog">
+                    {{student}} Progress
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <h2>Hours Played</h2>
+                        <h1>{{times[i]}}</h1>
+                    </div>
+                    <div class="col-sm">
+                        <h2>Progress</h2>
+                    </div>
+                    <div class="col-sm nobac">
+                        <div class="recordsLink">
+                            Recorded Games
+                        </div>
+                        <div class="recordsLink">
+                            <a (click)="getStudentInfo(i)" href="/student-recording">Recorded Lessons</a>
+                        </div>
+                        <div class="recordsLink">
+                            Messages
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container faqs">
+            <h2>FAQs</h2>
+            <div class="faq">
+                <h3>Q: This is a question?</h3>
+                <p> This is the answer to the question</p>
+            </div>
+            <div class="faq">
+                <h3>Q: This is a question?</h3>
+                <p> This is the answer to the question</p>
+            </div>
+            <div class="faq">
+                <h3>Q: This is a question?</h3>
+                <p> This is the answer to the question</p>
+            </div>
+            <div class="faq">
+                <h3>Q: This is a question?</h3>
+                <p> This is the answer to the question</p>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+    
+</html>

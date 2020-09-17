@@ -14,7 +14,7 @@ export class PlayNologComponent implements OnInit {
   private color: String = "white";
   private level: number = 5;
   private currentFEN: String = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-
+  private prevFEN: String = this.currentFEN;
   constructor() { }
 
   ngOnInit(): void {
@@ -29,8 +29,9 @@ export class PlayNologComponent implements OnInit {
       if (e.origin == environment.urls.chessClientURL) {
         // Means that there is the board state and whatnot
         console.log("this does work every time");
+        this.prevFEN = this.currentFEN;
         let info = e.data;
-        console.log("I am info " + info);
+        //console.log("I am info " + info);
         if (info == "ReadyToRecieve") {
           this.isReady = true;
           this.sendFromQueue();
@@ -53,7 +54,9 @@ export class PlayNologComponent implements OnInit {
             } else {
               this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
             }
+            this.currentFEN = response;
           });
+          console.log("Curr FEN: " + this.currentFEN + "     Prev FEN: " + this.prevFEN);
         }
       }
     }, false);
@@ -69,7 +72,8 @@ export class PlayNologComponent implements OnInit {
 
   public newGameInit() {
     console.log("A new game has been requested")
-    this.color = (Math.random() > 0.5) ? "white" : "black";
+    //this.color = (Math.random() > 0.5) ? "white" : "black";
+    this.color = "white";
     this.currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     
     if (this.isReady) {
@@ -84,6 +88,8 @@ export class PlayNologComponent implements OnInit {
       this.level = parseInt((<HTMLInputElement>document.getElementById('movesAhead')).value);
       if(this.level <= 1) this.level = 1;
       else if (this.level >= 30) this.level = 30;
+      
+      //Error when black is selected as the color the user will play. Also stockfish won't start
       this.httpGetAsync(`/chessclient/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
         if (this.isReady) {
           console.log("sending message" + response);
@@ -94,6 +100,12 @@ export class PlayNologComponent implements OnInit {
         }
       });
     }
+  }
+
+  public undoPrevMove() {
+    var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+    this.currentFEN = this.prevFEN;
+    chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color}), environment.urls.chessClientURL);
   }
 
   private httpGetAsync(theUrl: string, callback) {

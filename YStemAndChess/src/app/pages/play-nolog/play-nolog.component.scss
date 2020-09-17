@@ -30,7 +30,7 @@
         padding-bottom:2%;
         text-align: center;
 
-        #new-game {
+        #new-game, #undo {
             outline-style: none;
             padding-top: 1%;
             padding-bottom:1%;
@@ -46,7 +46,7 @@
             background-color: #FF8503;
         }
 
-        #new-game:hover {
+        #new-game:hover, #undo:hover {
             color:#FF8503;
             background-color: #fff;
         }

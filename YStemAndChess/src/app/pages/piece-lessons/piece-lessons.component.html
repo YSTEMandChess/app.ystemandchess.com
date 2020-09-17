@@ -15,27 +15,23 @@
     </header>
 
     <body>
-        <!-- Google Tag Manager (noscript) -->
-        <noscript>
+         <!-- Google Tag Manager (noscript) -->
+         <noscript>
             <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9"
             height="0" width="0" style="display:none;visibility:hidden"></iframe>
         </noscript>
         <!-- End Google Tag Manager (noscript) -->
-        <div class="prompt">
-            <h3>Want lessons? <a href="/signup">Sign up</a> for YStem and Chess Today!</h3>
-            <h3>Or practice down below!</h3>
-        </div>
-
-        <div id="mentor-container">
+        
+        <div id="lesson-container">
             <div id="top">
+                <h1>Lesson Number {{displayLessonNum}}</h1>
             </div>
-            <div id="lichess-board">
-                <app-play></app-play>
+            <div id="chess-board">
+                <app-play-lesson></app-play-lesson>
             </div>
-            <div id="bottom">        
-                <button type="button" id="new-game" (click)="newGameInit()"> New Game</button> 
-                <button type="button" id="undo" (click)="undoPrevMove()">Undo</button>
-                <p id="tag">The computer will think <input type="number" min="1" max="30" value="5" id="movesAhead"> moves ahead.</p>
+            <div id="bottom"> 
+                <button type="button" id="previous" (click)="previousLesson()">Previous &lt;</button>       
+                <button type="button" id="next" (click)="nextLesson()">Next &gt;</button>
             </div>
         </div>
     </body>
@@ -43,5 +39,4 @@
     <footer>
         <app-footer></app-footer>
     </footer>
-    
 </html>

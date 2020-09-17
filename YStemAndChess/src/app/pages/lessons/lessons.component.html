@@ -1,43 +1,61 @@
 <html>
+    <head>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KJ979C9');
+        </script>
+        <!-- End Google Tag Manager -->
+    </head>
+
     <header>
         <app-header></app-header>
     </header>
 
     <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
         <!--Lessons container-->
         <div id="lessons">
-            <div id="pawn-lessons" (click)="assignPawn()">
-                <a href="/pawn-lessons">
+            <div id="pawn-lessons">
+                <a href="/piece-lessons" (click)="assignPawn()">
                     <p>Pawn</p>
                 </a>
             </div>
 
             <div id="rook-lessons">
-                <a href="/pawn-lessons" (click)="assignRook()">
+                <a href="/piece-lessons" (click)="assignRook()">
                     <p>Rook</p>
                 </a>
             </div>
 
             <div id="bishop-lessons">
-                <a href="/pawn-lessons" (click)="assignBishop()">
+                <a href="/piece-lessons" (click)="assignBishop()">
                     <p>Bishop</p>
                 </a>
             </div>
 
             <div id="horse-lessons" (click)="assignHorse()">
-                <a href="/pawn-lessons">
+                <a href="/piece-lessons">
                     <p>Horse</p>
                 </a>
             </div>
 
             <div id="queen-lessons" (click)="assignQueen()">
-                <a href="/pawn-lessons">
+                <a href="/piece-lessons">
                     <p>Queen</p>
                 </a>
             </div>
 
             <div id="king-lessons" (click)="assignKing()">
-                <a href="/pawn-lessons">
+                <a href="/piece-lessons">
                     <p>King</p>
                 </a>
             </div>

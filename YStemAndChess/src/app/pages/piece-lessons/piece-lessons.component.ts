@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: 'app-pawn-lessons',
-  templateUrl: './pawn-lessons.component.html',
-  styleUrls: ['./pawn-lessons.component.scss']
+  selector: 'app-piece-lessons',
+  templateUrl: './piece-lessons.component.html',
+  styleUrls: ['./piece-lessons.component.scss']
 })
-export class PawnLessonsComponent implements OnInit {
+export class PieceLessonsComponent implements OnInit {
 
   private lessonStartFEN: string = "";
   private lessonEndFEN: string = "";
@@ -15,6 +15,7 @@ export class PawnLessonsComponent implements OnInit {
   private endSquare: string = "";
   private previousEndSquare: string = "";
   private lessonNum: number = 0;
+  private totalLessons: number = 0;
   private currentFEN = "";
   private messageQueue = new Array();
   private color = "white";
@@ -30,7 +31,7 @@ export class PawnLessonsComponent implements OnInit {
     var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-
+    this.getTotalLesson();
     // Listen to message from child window
     eventer(messageEvent, async (e) => {
       if (e.origin == environment.urls.chessClientURL) {
@@ -69,11 +70,11 @@ export class PawnLessonsComponent implements OnInit {
   }
 
   /**
-   * get the last lesson completed by the student for the pawn
+   * get the last lesson completed by the student for the current lesson piece
    */
   private async getLessonsCompleted() {
     let url = `${environment.urls.middlewareURL}/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}`;
-      this.httpGetAsync(url, (response) => {
+    this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonNum = data;
       this.getCurrentLesson();
@@ -85,7 +86,7 @@ export class PawnLessonsComponent implements OnInit {
    */
   private async getCurrentLesson() {
     let url = `${environment.urls.middlewareURL}/getLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
-    console.log("I am lesson Num " + this.lessonNum);
+    console.log("I am lesson Num " + this.lessonNum + ". Piece: " + this.piece);
     this.previousEndSquare = this.endSquare;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
@@ -99,7 +100,7 @@ export class PawnLessonsComponent implements OnInit {
   }
 
   /**
-   * checks if all lessons for the pawn have been completed
+   * checks if all lessons for the piece have been completed
    */
   private checkIfLessonsAreCompleted(): boolean {
     let completed: boolean = false;
@@ -111,6 +112,14 @@ export class PawnLessonsComponent implements OnInit {
     return completed;
   }
 
+  private async getTotalLesson() {
+    let url = `${environment.urls.middlewareURL}/getTotalPieceLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}`;
+    this.httpGetAsync(url, (response) => {
+      let data = JSON.parse(response);
+      this.totalLessons = data;
+      console.log(this.totalLessons);
+    });
+  }
   /**
    * store data for chess board before it has loaded
    */
@@ -165,15 +174,21 @@ export class PawnLessonsComponent implements OnInit {
   }
 
   public previousLesson() {
-    this.lessonNum--;
-    this.previousEndSquare = this.endSquare;
-    this.getCurrentLesson();
+    if (this.lessonNum > 0)
+    {
+      this.lessonNum--;
+      this.previousEndSquare = this.endSquare;
+      this.getCurrentLesson();
+    }
   }
 
   public nextLesson() {
-    this.lessonNum++;
-    this.previousEndSquare = this.endSquare;
-    this.getCurrentLesson();
+    if (this.lessonNum + 1 < this.totalLessons)
+    {
+      this.lessonNum++;
+      this.previousEndSquare = this.endSquare;
+      this.getCurrentLesson();
+    }
   }
 
   /**
@@ -185,6 +200,8 @@ export class PawnLessonsComponent implements OnInit {
       console.log(response);
     });
   }
+
+  
 
   /**
    * make requests to the serer
@@ -200,5 +217,6 @@ export class PawnLessonsComponent implements OnInit {
     xmlHttp.open("POST", theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
   }
+
 
 }

@@ -18,7 +18,7 @@ import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add
 import { HeaderComponent } from './header/header.component';
 import { StudentRecordingsComponent } from './pages/student-recordings/student-recordings.component';
 import { LessonsComponent } from './pages/lessons/lessons.component';
-import { PawnLessonsComponent } from './pages/pieceLessons/pawn-lessons/pawn-lessons.component';
+import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 
 const routes: Routes = [
@@ -39,7 +39,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'student-recording', component: StudentRecordingsComponent},
   {path: 'lessons', component: LessonsComponent},
-  {path: 'pawn-lessons', component: PawnLessonsComponent},
+  {path: 'piece-lessons', component: PieceLessonsComponent},
   {path: 'play-lesson', component: PlayLessonComponent}
 ];
 

@@ -99,7 +99,7 @@ This is a websocket server though, so you cannot use a simple http request to ac
 &nbsp; 
 
 Following the chess server, we need to run the stockfish server to allow players to play with an AI. This is done in the directory 'stockfishServer'.
-After navigating inside the directory, you need to run 'nodemon index.js'. This will start the stockfish server. 
+After navigating inside the directory, you need to run `nodemon index.js`. This will start the stockfish server. 
 
 &nbsp;
 

@@ -1,6 +1,7 @@
 import { SocketService } from './socket.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CookieService } from 'ngx-cookie-service';
@@ -30,6 +31,7 @@ import { StudentRecordingsComponent } from './pages/student-recordings/student-r
 import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -57,7 +59,8 @@ const agoraConfig: AgoraConfig = {
     StudentRecordingsComponent,
     LessonsComponent,
     PlayLessonComponent,
-    PieceLessonsComponent
+    PieceLessonsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ const agoraConfig: AgoraConfig = {
     HttpClientTestingModule,
     ModalModule,
     NgxAgoraModule.forRoot(agoraConfig),
-    NgxAgoraModule.forRoot({ AppID: "6c368b93b82a4b3e9fb8e57da830f2a4" })
+    NgxAgoraModule.forRoot({ AppID: "6c368b93b82a4b3e9fb8e57da830f2a4" }),
+    FormsModule
   ],
   providers: [
     CookieService,

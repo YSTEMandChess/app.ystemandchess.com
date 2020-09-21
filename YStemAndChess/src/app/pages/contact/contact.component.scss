@@ -1,0 +1,126 @@
+html{
+    position: relative;
+    background-image: url('../../../assets/images/contact/queen.jpg');
+    background-repeat: none;
+    background-size: cover;
+    height: 100%;
+}
+
+body {
+    background-color: transparent;
+}
+.form {
+    width: 450px;
+    height: auto;
+    margin: 60px;
+    margin-top: 70px;
+    padding: 25px;
+    padding-top: 28px;
+    border: 0.5px;
+    border-radius: 30px;
+    background-color: #FF8503;
+    color: white;
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    padding: 16px;
+    background-color: white;
+    border: none;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+   border-radius: 25px;
+}
+
+input:focus {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+    border-radius: 30px;
+}
+
+textarea {
+
+    padding: 16px;
+    background-color: white;
+    border: none;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+   border-radius: 30px;
+}
+
+textarea:focus {
+
+    padding: 16px;
+    background-color: white;
+    border: none;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+   border-radius: 30px;
+}
+
+button {
+    background-color: white;
+    color: #3A7CCA;
+    margin-left: 5px;
+    border-radius: 30px;
+    font-family:'Roboto';
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3A7CCA;
+    color: white;
+    margin-left: 5px;
+    border-radius: 30px;
+}
+
+label {
+    font-size: medium;
+    font-weight: bolder;
+    margin-left: 15px;
+ 
+}
+
+.help {
+    font-size: small;
+    margin-left: 15px;
+    text-align: center;
+    color:  #000000;
+}
+
+@media screen and (max-width:969px) {
+    .form {
+        position: relative;
+        width: 50%;
+        margin: 10%;
+    }
+}
+
+@media screen and (max-width:688px) {
+    .form {
+        position: relative;
+        width: 50%;
+        margin: 10%;
+    }
+}
+
+@media screen and (max-width:606px) {
+    .form {
+        position: relative;
+        width: 60%;
+        margin: 20%;
+    }
+}
+
+@media screen and (max-width:525px) {
+    .form {
+        position: relative;
+        width: 70%;
+        margin: 15%;
+    }
+}

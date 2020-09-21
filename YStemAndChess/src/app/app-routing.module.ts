@@ -20,6 +20,7 @@ import { StudentRecordingsComponent } from './pages/student-recordings/student-r
 import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -40,7 +41,8 @@ const routes: Routes = [
   {path: 'student-recording', component: StudentRecordingsComponent},
   {path: 'lessons', component: LessonsComponent},
   {path: 'piece-lessons', component: PieceLessonsComponent},
-  {path: 'play-lesson', component: PlayLessonComponent}
+  {path: 'play-lesson', component: PlayLessonComponent},
+  {path: 'contact', component: ContactComponent}
 ];
 
 @NgModule({

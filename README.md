@@ -63,6 +63,27 @@ Repeat this step in chessServer as well
 
 Now you should be good to start developing!
 
+# Quick GitHub Developer Guide
+
+***This is a quick guide on how to develop with GitHub locally.***
+
+**How to clone and have your own working branch locally:**
+1. Create your own branch from the master branch on GitHub.
+2. Clone the repo locally onto your computer, wherever you want it, using `git clone (https or ssh key)`.
+3. Create that same branch locally using `git checkout -b (branch name created from step 1)`.
+4. Begin developing!
+
+**How to Push and Pull to your GitHub repo branch:**
+1. Always pull from your branch on GitHub before working locally, using `git pull origin (branch name here)`.
+2. Begin coding and developing what you want/tasked to do. 
+3. When you are ready to push your changes to your GitHub branch, navigate to the home directory of the repo and use `git add .`. This will get all the files, in the current branch, ready for the push. This ignores all the files stated in the .gitignore.
+4. Create a commit by using the command `git commit -m "(Insert commit message here. Usually the commit message is about what changes you made to the repository)"`.
+5. Finish the push by using the command `git push origin (branch to push to here)`.
+6. Go onto the GitHub repo on the web and create a pull request to merge your branch changes with the master branch. 
+7. Merge the pull request into the master branch after consulting Alex, Benjamin, or Owen. 
+
+Congrats! You have learned the basic commands and techniques to use GitHub!
+
 # Running the Development Environment
 
 Now, it is time to start running the dev environment. As a side note, all of the development environments (except for `chessClient`) refresh when you save a file.

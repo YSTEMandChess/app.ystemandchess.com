@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 
 import { ParentAddStudentComponent } from './parent-add-student.component';
+import { HeaderComponent } from '../../header/header.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { LoginComponent } from '../login/login.component';
+import { ModalModule } from '../../_modal';
 
 describe('ParentAddStudentComponent', () => {
   let component: ParentAddStudentComponent;
@@ -8,7 +13,13 @@ describe('ParentAddStudentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ParentAddStudentComponent ]
+      declarations: [ ParentAddStudentComponent, HeaderComponent, FooterComponent, LoginComponent ],
+      imports: [ ModalModule, RouterModule.forRoot(
+        [
+          {path: 'login', component: LoginComponent},
+          {path: 'parent-add-student', component: ParentAddStudentComponent},
+        ])
+      ]
     })
     .compileComponents();
   }));

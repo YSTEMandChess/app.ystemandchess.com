@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BeAMentorComponent } from './be-amentor.component';
+import { HeaderComponent } from '../../header/header.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { ModalModule } from '../../_modal';
 
 describe('BeAMentorComponent', () => {
   let component: BeAMentorComponent;
@@ -8,7 +11,8 @@ describe('BeAMentorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BeAMentorComponent ]
+      declarations: [ BeAMentorComponent, HeaderComponent, FooterComponent ],
+      imports: [ ModalModule ]
     })
     .compileComponents();
   }));

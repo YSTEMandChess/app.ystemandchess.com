@@ -7,7 +7,6 @@ import { ModalService } from '../_modal';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { environment } from '../../environments/environment';
 
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

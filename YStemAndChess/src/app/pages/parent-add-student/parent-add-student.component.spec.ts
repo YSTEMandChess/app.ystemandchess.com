@@ -19,7 +19,8 @@ describe('ParentAddStudentComponent', () => {
           {path: 'login', component: LoginComponent},
           {path: 'parent-add-student', component: ParentAddStudentComponent},
         ])
-      ]
+      ],
+      providers: [ HeaderComponent ]
     })
     .compileComponents();
   }));

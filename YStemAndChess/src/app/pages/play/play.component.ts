@@ -1,7 +1,7 @@
 import { SocketService } from './../../socket.service';
-import { Component, OnInit, ViewEncapsulation, SecurityContext } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { AgoraClient, ClientEvent, NgxAgoraService, Stream, StreamEvent } from 'ngx-agora';
+import { AgoraClient, ClientEvent, NgxAgoraService, Stream } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -15,8 +15,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PlayComponent implements OnInit {
 
-  private localStream: Stream;
-  private client: AgoraClient;
+  // private s: NgxAgoraService
+  // private localStream: Stream;
+  // private client: AgoraClient;
   private clientUID;
   private messageQueue = new Array();
   private isReady: boolean;
@@ -24,6 +25,7 @@ export class PlayComponent implements OnInit {
 
   constructor(private cookie: CookieService, private socket: SocketService, 
     private agoraService: NgxAgoraService, private sanitization: DomSanitizer) { 
+      
       this.chessSrc = sanitization.bypassSecurityTrustResourceUrl(environment.urls.chessClientURL);
     }
 
@@ -39,55 +41,55 @@ export class PlayComponent implements OnInit {
 
       // Code for webcam
       // ------------------------------------------------------------------------- 
-      this.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
-      this.client.init(environment.agora.appId, () => console.log("init sucessful"), () => console.log("init unsucessful"))
-      this.client.join(null, responseText.meetingID, null, (uid) => {
-        console.log("uid: " + uid);
-        this.clientUID = uid;
+      // this.s.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
+      // this.s.client.init(environment.agora.appId, () => console.log("init sucessful"), () => console.log("init unsucessful"))
+      // this.s.client.join(null, responseText.meetingID, null, (uid) => {
+      //   console.log("uid: " + uid);
+      //   this.clientUID = uid;
 
-        this.localStream = this.agoraService.createStream({
-          streamID: this.clientUID,
-          audio: true,
-          video: true,
-          screen: false
-        })
+      //   this.localStream = this.agoraService.createStream({
+      //     streamID: this.clientUID,
+      //     audio: true,
+      //     video: true,
+      //     screen: false
+      //   })
 
-        this.localStream.init(() => {
-          this.localStream.play("local_stream");
-          this.client.publish(this.localStream, function (err) {
-            console.log("publish failed");
-            console.error(err);
-          })
-        }, () => console.log("THE LOCAL STREAM WANSN'T SUCESSFULL"));
-      })
+      //   this.localStream.init(() => {
+      //     this.localStream.play("local_stream");
+      //     this.client.publish(this.localStream, function (err) {
+      //       console.log("publish failed");
+      //       console.error(err);
+      //     })
+      //   }, () => console.log("THE LOCAL STREAM WANSN'T SUCESSFULL"));
+      // })
 
-      // Now the stream has been published, lets try to set up some subscribers.
-      this.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
-        let remoteStream = evt.stream;
-        let id = remoteStream.getId();
-        if (id != this.clientUID) {
-          this.client.subscribe(remoteStream, null, (err) => {
-            console.log("it appears that something has gone wrong with the subscribing.");
-          })
-          console.log("stream-added remote-uid: ", id);
-        }
-        console.log("hmm, is this any good?")
+      // // Now the stream has been published, lets try to set up some subscribers.
+      // this.s.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
+      //   let remoteStream = evt.stream;
+      //   let id = remoteStream.getId();
+      //   if (id != this.clientUID) {
+      //     this.s.client.subscribe(remoteStream, null, (err) => {
+      //       console.log("it appears that something has gone wrong with the subscribing.");
+      //     })
+      //     console.log("stream-added remote-uid: ", id);
+      //   }
+      //   console.log("hmm, is this any good?")
 
-      })
+      // })
 
-      this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
-        let remoteStream = evt.stream;
-        let id = remoteStream.getId();
-        remoteStream.play("remote_stream");
-        console.log("stream-subscribed remote-uid: ", id);
-      })
+      // this.s.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
+      //   let remoteStream = evt.stream;
+      //   let id = remoteStream.getId();
+      //   remoteStream.play("remote_stream");
+      //   console.log("stream-subscribed remote-uid: ", id);
+      // })
 
-      this.client.on(ClientEvent.PeerLeave, (evt) => {
-        let remoteStream = evt.stream;
-        let id = remoteStream.getId();
-        remoteStream.stop();
-        console.log("hmm, is this any good?")
-      })
+      // this.s.client.on(ClientEvent.PeerLeave, (evt) => {
+      //   let remoteStream = evt.stream;
+      //   let id = remoteStream.getId();
+      //   remoteStream.stop();
+      //   console.log("hmm, is this any good?")
+      // })
       // --------------------------------------------------------------------------
 
       console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");

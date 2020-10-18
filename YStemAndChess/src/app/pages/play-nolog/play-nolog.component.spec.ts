@@ -6,6 +6,9 @@ import { FooterComponent } from '../../footer/footer.component';
 import { PlayComponent } from '../play/play.component';
 import { ModalModule } from '../../_modal';
 
+import { SocketService } from './../../socket.service';
+import { CookieService } from 'ngx-cookie-service';
+
 describe('PlayNologComponent', () => {
   let component: PlayNologComponent;
   let fixture: ComponentFixture<PlayNologComponent>;
@@ -13,7 +16,8 @@ describe('PlayNologComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayNologComponent, HeaderComponent, FooterComponent, PlayComponent ],
-      imports: [ ModalModule ]
+      imports: [ ModalModule ],
+      providers: [ PlayComponent, HeaderComponent, SocketService, CookieService ]
     })
     .compileComponents();
   }));

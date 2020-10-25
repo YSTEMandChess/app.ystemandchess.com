@@ -6,22 +6,23 @@ import { environment } from 'src/environments/environment';
 
 import { SocketService } from './../../socket.service';
 import { CookieService } from 'ngx-cookie-service';
-import { AgoraClient, ClientEvent, NgxAgoraService, Stream, NgxAgoraModule } from 'ngx-agora';
-import { DomSanitizer } from '@angular/platform-browser';
-import { TestObject } from 'protractor/built/driverProviders';
+import { AgoraClient, ClientEvent, NgxAgoraService, Stream, NgxAgoraModule, AgoraConfig } from 'ngx-agora';
+import { ɵBROWSER_SANITIZATION_PROVIDERS, DomSanitizer } from '@angular/platform-browser';
+import { NgxAgoraComponent } from 'ngx-agora/lib/ngx-agora.component';
+import { env } from 'process';
 
 describe('PlayComponent', () => {
   let component: PlayComponent;
   let fixture: ComponentFixture<PlayComponent>;
-  let agora: AgoraClient;
-  let stream: Stream;
-  let client: ClientEvent;
+  const agoraConfig: AgoraConfig = {
+    AppID: environment.agora.appId
+  }
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayComponent ],
-      imports: [ NgxAgoraModule ],
-      providers: [ SocketService, CookieService, NgxAgoraService, DomSanitizer ]
+      imports: [ NgxAgoraModule.forRoot(agoraConfig) ],
+      providers: [ SocketService, CookieService, DomSanitizer, NgxAgoraService, ɵBROWSER_SANITIZATION_PROVIDERS ]
     })
     .compileComponents();
   }));

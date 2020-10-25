@@ -1,9 +1,9 @@
 import { SocketService } from './../../socket.service';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { AgoraClient, ClientEvent, NgxAgoraService, Stream } from 'ngx-agora';
+import { ClientEvent, NgxAgoraService } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
@@ -14,86 +14,86 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./play.component.scss']
 })
 export class PlayComponent implements OnInit {
-
-  // private s: NgxAgoraService
-  // private localStream: Stream;
-  // private client: AgoraClient;
+  
+  private localStream: any;
+  private client: any;
   private clientUID;
   private messageQueue = new Array();
   private isReady: boolean;
-  public chessSrc;
+  public chessSrc: SafeResourceUrl;
 
   constructor(private cookie: CookieService, private socket: SocketService, 
-    private agoraService: NgxAgoraService, private sanitization: DomSanitizer) { 
-      
+    private sanitization: DomSanitizer, private agoraService: NgxAgoraService) { 
       this.chessSrc = sanitization.bypassSecurityTrustResourceUrl(environment.urls.chessClientURL);
     }
 
   ngOnInit() {
-    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
-
-    this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
-      if (response == "There are no current meetings with this user.") {
-        return;
-      }
-      let responseText = JSON.parse(response);
+    let userContent: any = "";
+    let responseText: any = "";
+    if(this.cookie.check("login")) { 
+      userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1])); 
+      this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
+         if (response == "There are no current meetings with this user.") { return; }
+         responseText = JSON.parse(response);
+      })
+    
       
 
       // Code for webcam
       // ------------------------------------------------------------------------- 
-      // this.s.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
-      // this.s.client.init(environment.agora.appId, () => console.log("init sucessful"), () => console.log("init unsucessful"))
-      // this.s.client.join(null, responseText.meetingID, null, (uid) => {
-      //   console.log("uid: " + uid);
-      //   this.clientUID = uid;
+      this.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
+      this.client.init(environment.agora.appId, () => console.log("init sucessful"), () => console.log("init unsucessful"))
+      this.client.join(null, responseText.meetingID, null, (uid) => {
+        console.log("uid: " + uid);
+        this.clientUID = uid;
 
-      //   this.localStream = this.agoraService.createStream({
-      //     streamID: this.clientUID,
-      //     audio: true,
-      //     video: true,
-      //     screen: false
-      //   })
+        this.localStream = this.agoraService.createStream({
+          streamID: this.clientUID,
+          audio: true,
+          video: true,
+          screen: false
+        })
 
-      //   this.localStream.init(() => {
-      //     this.localStream.play("local_stream");
-      //     this.client.publish(this.localStream, function (err) {
-      //       console.log("publish failed");
-      //       console.error(err);
-      //     })
-      //   }, () => console.log("THE LOCAL STREAM WANSN'T SUCESSFULL"));
-      // })
+        this.localStream.init(() => {
+          this.localStream.play("local_stream");
+          this.client.publish(this.localStream, function (err) {
+            console.log("publish failed");
+            console.error(err);
+          })
+        }, () => console.log("THE LOCAL STREAM WANSN'T SUCESSFULL"));
+      })
 
-      // // Now the stream has been published, lets try to set up some subscribers.
-      // this.s.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
-      //   let remoteStream = evt.stream;
-      //   let id = remoteStream.getId();
-      //   if (id != this.clientUID) {
-      //     this.s.client.subscribe(remoteStream, null, (err) => {
-      //       console.log("it appears that something has gone wrong with the subscribing.");
-      //     })
-      //     console.log("stream-added remote-uid: ", id);
-      //   }
-      //   console.log("hmm, is this any good?")
+      // Now the stream has been published, lets try to set up some subscribers.
+      this.agoraService.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
+        let remoteStream = evt.stream;
+        let id = remoteStream.getId();
+        if (id != this.clientUID) {
+          this.client.subscribe(remoteStream, null, (err) => {
+            console.log("it appears that something has gone wrong with the subscribing.");
+          })
+          console.log("stream-added remote-uid: ", id);
+        }
+        console.log("hmm, is this any good?")
 
-      // })
+      })
 
-      // this.s.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
-      //   let remoteStream = evt.stream;
-      //   let id = remoteStream.getId();
-      //   remoteStream.play("remote_stream");
-      //   console.log("stream-subscribed remote-uid: ", id);
-      // })
+      this.agoraService.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
+        let remoteStream = evt.stream;
+        let id = remoteStream.getId();
+        remoteStream.play("remote_stream");
+        console.log("stream-subscribed remote-uid: ", id);
+      })
 
-      // this.s.client.on(ClientEvent.PeerLeave, (evt) => {
-      //   let remoteStream = evt.stream;
-      //   let id = remoteStream.getId();
-      //   remoteStream.stop();
-      //   console.log("hmm, is this any good?")
-      // })
+      this.agoraService.client.on(ClientEvent.PeerLeave, (evt) => {
+        let remoteStream = evt.stream;
+        let id = remoteStream.getId();
+        remoteStream.stop();
+        console.log("hmm, is this any good?")
+      })
       // --------------------------------------------------------------------------
-
-      console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");
-      this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));
+        console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");
+        this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));
+    }
 
       this.socket.listen("boardState").subscribe((data) => {
         if(this.isReady) {
@@ -104,8 +104,7 @@ export class PlayComponent implements OnInit {
         } else {
           this.messageQueue.push(data);
         }
-      })
-    });
+      });
 
     this.socket.listen("gameOver").subscribe((data) => {
       alert("game over ");
@@ -141,7 +140,7 @@ export class PlayComponent implements OnInit {
       }
     }, false);
 
-  }
+}
 
   private sendFromQueue() {
     this.messageQueue.forEach(element => {

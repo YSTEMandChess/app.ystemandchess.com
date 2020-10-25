@@ -11,7 +11,7 @@ export const environment = {
     middlewareURL: 'http://127.0.0.1:8000',
     chessClientURL: 'http://localhost',
     stockFishURL : 'http://127.0.0.1:8080',
-    chessServer : 'http://localhost:3000'
+    chessServer : 'http://127.0.0.1:3000'
   }
 };
 

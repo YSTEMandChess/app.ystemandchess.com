@@ -28,15 +28,13 @@ export class PlayComponent implements OnInit {
     }
 
   ngOnInit() {
-    let userContent: any = "";
-    let responseText: any = "";
+    let userContent;
+    let responseText;
     if(this.cookie.check("login")) { 
       userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1])); 
       this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
          if (response == "There are no current meetings with this user.") { return; }
          responseText = JSON.parse(response);
-      })
-    
       
 
       // Code for webcam
@@ -93,7 +91,6 @@ export class PlayComponent implements OnInit {
       // --------------------------------------------------------------------------
         console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");
         this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));
-    }
 
       this.socket.listen("boardState").subscribe((data) => {
         if(this.isReady) {
@@ -105,6 +102,8 @@ export class PlayComponent implements OnInit {
           this.messageQueue.push(data);
         }
       });
+    })
+  }
 
     this.socket.listen("gameOver").subscribe((data) => {
       alert("game over ");
@@ -139,7 +138,6 @@ export class PlayComponent implements OnInit {
         }
       }
     }, false);
-
 }
 
   private sendFromQueue() {

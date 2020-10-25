@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SocketService {
   private socket;
-  private socketEndpoint = "http://localhost:3000"
+  private socketEndpoint = "http://127.0.0.1:3000"
 
   constructor() {
     this.socket = io(this.socketEndpoint);

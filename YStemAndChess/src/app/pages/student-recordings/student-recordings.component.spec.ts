@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StudentRecordingsComponent } from './student-recordings.component';
+import { HeaderComponent } from '../../header/header.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { ModalModule } from '../../_modal';
 
 describe('StudentRecordingsComponent', () => {
   let component: StudentRecordingsComponent;
@@ -8,7 +11,8 @@ describe('StudentRecordingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentRecordingsComponent ]
+      declarations: [ StudentRecordingsComponent, HeaderComponent, FooterComponent ],
+      imports: [ ModalModule ]
     })
     .compileComponents();
   }));

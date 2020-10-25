@@ -1,4 +1,3 @@
-import { createAotUrlResolver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +14,7 @@ export class PlayNologComponent implements OnInit {
   private level: number = 5;
   private currentFEN: String = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
   private prevFEN: String = this.currentFEN;
+  
   constructor() { }
 
   ngOnInit(): void {

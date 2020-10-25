@@ -1,8 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule, Router } from '@angular/router';
+
 
 import { SignupComponent } from './signup.component';
+import { LoginComponent } from '../login/login.component'
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ModalModule } from '../../_modal/'
 import{ HttpClient } from '@angular/common/http';
+import { HeaderComponent } from '../../header/header.component';
+import { FooterComponent } from '../../footer/footer.component';
 
 describe('First Name Verification', () => {
   let http: HttpClient;
@@ -498,8 +504,13 @@ describe('SignupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignupComponent ],
-      imports: [ HttpClientTestingModule ]
+      declarations: [ SignupComponent, HeaderComponent, FooterComponent, LoginComponent],
+      imports: [ HttpClientTestingModule, RouterModule.forRoot(
+        [
+          {path: 'login', component: LoginComponent},
+          {path: 'signup', component: SignupComponent},
+        ]
+      ), ModalModule ],
     })
     .compileComponents();
   }));

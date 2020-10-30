@@ -339,7 +339,7 @@ describe('Email Verification', () => {
   });
 
   it('email@email.au should be true', () => {
-    const result =  signup.emailVerification("email@email.iamalongtld");
+    const result =  signup.emailVerification("email@email.au");
     expect(result).toBe(true);
   });
 });

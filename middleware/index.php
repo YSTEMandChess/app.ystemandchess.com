@@ -221,11 +221,6 @@ function verifyUser($username, $password) {
     }
     
 }
-// Account
-//uUmrCVqTypLPq1Hi DB Password
-// Username: userAdmin
-
-// venanop608@prowerl.com DB Email
 
 function isTakenUsername($username, $collection) {
     $document = $collection->findOne(['username' => $username]);

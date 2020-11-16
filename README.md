@@ -71,7 +71,7 @@ Within the src directory type `mdkir environments && cd environments`
 
 Now you need to create the two environment files within this directory with this command `touch environment.ts && touch environment.prod.ts`
 
-Now copy and paste the contents into these files with the env files given to you.
+Now copy and paste the content given into these files.
 
 **chessClient**
 

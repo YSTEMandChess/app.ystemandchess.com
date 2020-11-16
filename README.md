@@ -61,6 +61,42 @@ Repeat this step in chessServer as well
 
 &nbsp;
 
+The last step is to add the environment files to the app, which you will only be given if working for us, otherwise you will have to use your personal accounts. Below is a list of all the direcotories in root and where to place your env files for each directory.
+
+**YStemAndChess**
+
+Within the root of this directory type `cd src`
+
+Within the src directory type `mdkir environments && cd environments`
+
+Now you need to create the two environment files within this directory with this command `touch environment.ts && touch environment.prod.ts`
+
+Now copy and paste the contents into these files with the env files given to you.
+
+**chessClient**
+
+Within this directory type `touch .env`
+
+Then copy and paste the environment variables given for this component or use your own.
+
+**chessServer**
+
+Within this directory type `touch .env`
+
+Then copy and paste the environment variables given for this component or use your own.
+
+**stockfishServer**
+
+Within this directory type `touch .env`
+
+Then copy and paste the environment variables given for this component or use your own.
+
+**middleware**
+
+Within this directory type `touch environment.php`
+
+Then copy and paste the environment variables given for this component or use your own.
+
 Now you should be good to start developing!
 
 # Quick GitHub Developer Guide

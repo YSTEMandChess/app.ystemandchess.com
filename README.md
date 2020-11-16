@@ -61,7 +61,7 @@ Repeat this step in chessServer as well
 
 &nbsp;
 
-The last step is to add the environment files to the app, which you will only be given if working for us, otherwise you will have to use your personal accounts. Below is a list of all the direcotories in root and where to place your env files for each directory.
+The last step is to add environment files to the app, which you will be given if working with us, otherwise you will have to use your personal accounts. Below is a list of all the directories in root and where to place your env files for each directory.
 
 **YStemAndChess**
 

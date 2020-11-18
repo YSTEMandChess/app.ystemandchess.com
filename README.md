@@ -105,6 +105,11 @@ Now you should be good to start developing!
 
 **How to clone and have your own working branch locally:**
 1. Create your own branch from the master branch on GitHub.
+    a. Navigate to the main page of repository
+    b. Click Branch Symbol and click the branch selector menu
+    c. Type the new name for your branch
+    
+
 2. Clone the repo locally onto your computer, wherever you want it, using `git clone (https or ssh key)`.
 3. Create that same branch locally using `git checkout -b (branch name created from step 1)`.
 4. Begin developing!

@@ -15,8 +15,6 @@ The first thing that you need to install is **node.js**.
 ##### Linux
 To do this, run `sudo apt install nodejs`.
 
-&nbsp; 
-
 ##### Windows
 To do this, go download [node.js](https://nodejs.org/en/download/). 
 
@@ -43,8 +41,6 @@ Now that you are done with that, you will need to install **php**.
 
 If you don't already have it, run the command `sudo apt install php`.
 
-&nbsp; 
-
 ##### Windows
 
 Instead of php, please install apache2 [here](https://httpd.apache.org/docs/2.4/platform/windows.html).
@@ -59,8 +55,6 @@ Now we need to install **nodemon, express, and socket.io**.
 ##### Linux
 
 To do this, run the command: `sudo npm install -g express nodemon socket.io` 
-
-&nbsp; 
 
 ##### Windows
 
@@ -81,8 +75,6 @@ then you need to add the line `extension=mongodb.so` to your php.ini file.
 
 This can be found using the command `php -i | grep "Loaded Configuration File" | awk '{print $5}'`.
 
-&nbsp; 
-
 ##### Windows
 Instead of MongoDB, we need to install [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
 Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
@@ -101,6 +93,8 @@ Repeat this step in chessServer as well
 &nbsp;
 
 The last step is to add environment files to the app, which you will be given if working with us, otherwise you will have to use your personal accounts. Below is a list of all the directories in root and where to place your env files for each directory if you want to do it manually. Otherwise run the given `create_envs.sh` script from root by typing `bash create_envs.sh`
+
+###### THIS IS ONLY TESTED ON UBUNTU
 
 **YStemAndChess**
 

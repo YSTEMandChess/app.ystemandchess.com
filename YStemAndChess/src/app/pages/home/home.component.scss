@@ -64,6 +64,7 @@ body {
     margin-right: 3%; //77px
     width: 30%;
     min-height: 487px;
+    
     border-radius:33px;
     background-color:#3A7CCA;
 
@@ -96,6 +97,7 @@ body {
             font-style:bold;
             font-weight:500;
             font-size:22px;
+            line-height:117.1%;
             letter-spacing:0.01em;
         }
 
@@ -147,8 +149,7 @@ body {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    //margin:0 auto;
-    margin-top:5%; //75px
+    margin-top:5%;
     width:94%;
     margin-left:3%;
     margin-right:3%;
@@ -158,13 +159,12 @@ body {
 
     #become-a-mentor-img {
         min-width:500px;
-        //margin: 0 auto;
+        
         margin-top:5.5%;
     }
 
     #become-a-mentor-img img {
         min-width:100%;
-        //margin:0;
         border-radius:100%;
     }
 
@@ -194,9 +194,9 @@ body {
         p {
             margin-top:3%;
             font-family:'Roboto';
-            font-style:bold; //normal
-            font-weight:700; //500
-            font-size:22px; //22px
+            font-style:bold;
+            font-weight:700;
+            font-size:22px; 
             line-height: 130%;
             letter-spacing: 0.02em;
         }
@@ -204,21 +204,20 @@ body {
 }
 
 #opening-minds-container {
-    position:relative;
-    margin:0 auto;
+    display:flex;
+    flex-wrap: wrap;
+    flex-flow: row-reverse;
+    justify-content: space-between;
     margin-top:5%; //75px
-    width:95%;
-    height:auto; //882px
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
     border-radius:33px;
     background-color: #FF8503;
-    overflow: hidden;
-    box-sizing: border-box;
 
     #opening-minds-img {
-        float:right;
         width:39.5%;
         height: auto;
-        box-sizing: border-box;
     }
 
     #opening-minds-img img {
@@ -228,31 +227,28 @@ body {
         border-top-right-radius: 33px;
     }
 
-    #opening-minds-header {
-        float:left;
-        margin-top:5%;
-        margin-left:10.5%;
-        margin-bottom: 3%;
-    }
-
-    #opening-minds-header h3 {
-        font-family:'Lato';
-        font-style:bold; //normal
-        font-weight:900;
-        font-size:2.75vw; //42px
+    #opening-minds-statement {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
         line-height: 117.1%;
-        letter-spacing: 0.01em;
-        color:#fff;
-    }
+        color: white;
 
-    #opening-minds-video {
-        margin-left:8.7%;
-    }
+        h3 {
+            padding-bottom: 10%;
+            font-family:'Lato';
+            font-style:bold; //normal
+            font-weight:900;
+            font-size:42px;
+            letter-spacing: 0.01em;
+        }
 
-    #opening-minds-video iframe {
-        width: 45%; //560px
-        min-height:315px; //315px
-        border-radius: 33px;
+        iframe {
+            min-width: 45%;
+            min-height:315px; 
+            border-radius: 33px;
+        }
     }
 }
 
@@ -267,6 +263,24 @@ body {
         width: 90%;
         margin-top: 5%;
         margin-right:5%;
+        padding-bottom: 3%;
+
+        #play-statement {
+            margin-top: 5%;
+
+            h4 {
+                margin-top: 3%;
+            }
+
+            p {
+                margin-top: 3%;
+            }
+
+            #links {
+                margin-top: 6%;
+                padding-bottom: 0;
+            }
+        }
     }
 }
 
@@ -285,43 +299,6 @@ body {
         }
         
     }
-
-    #opening-minds-container {
-    
-        #opening-minds-img {
-            width:39.5%;
-            height: auto;
-        }
-    
-        #opening-minds-img img {
-            width:100%;
-            height:auto/2; //575px
-            border-bottom-right-radius: 33px;
-            border-top-right-radius: 33px;
-        }
-    
-        #opening-minds-header {
-            float:left;
-            margin-top:5%;
-            margin-left:7%;
-        }
-    
-        #opening-minds-header h3 {
-            font-size:3.5vw; //42px
-        }
-    
-        #opening-minds-video {
-            margin-left:8.7%;
-        }
-    
-        #opening-minds-video iframe {
-            margin-top: 5%;
-            width: 45%; //560px
-            min-height:315px; //315px
-            border-radius: 33px;
-        }
-    }
-
 }
 
 //mobile version
@@ -329,8 +306,8 @@ body {
     #our-mission-container {
         margin: 0 auto;
         width:90%;
-        height:auto; //481px
         margin-left:5%;
+        padding-bottom: 8%;
 
         #our-mission-image {
             width: 100%;
@@ -349,94 +326,45 @@ body {
             width: 85%;
         }
     }
-    
-    //play container
+
     #play-container {
-        margin: 0 auto;
-        width:90%;
-        height:auto; //481px
-        margin-right:5%;
-        margin-top:5%;
-    
-        #play-container-header1 h3 {
-            font-size:7.1vw;
-        }
-    
-        #play-container-header2 h4 {
-            margin-top:3.5%;
-            font-size:6.5vw;
-        }
-    
-        #play-container-paragraph p {
-            margin-top:3.5%;
-            font-size:5.1vw; //22px
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        #play-container-links {
-            margin-top:10%; //100px
-            margin-left:16.5%; //75px
-            padding-bottom: 12%;
-        }
-    
-        #play-container-links a {
-            font-size:5vw; //25px
-        }
+        #play-statement {
+            h4 {
+                margin-top: 3%;
+            }
 
-        #play-container-links a:active {
-            text-decoration: underline;
-        }
-    
-        #play-container-links button {
-            font-size:5vw; //28px
-        }
+            p {
+                margin-top: 3%;
+            }
 
-        #play-container-links button:active {
-            color:#fff;
-            background-color: #3A7CCA;
+            #links {
+                margin-top: 6%;
+                padding-bottom: 0;
+            }
         }
     }
     
-    #opening-minds-container {
-        width:90%;
-        height:auto; //882px
-    
+    #opening-minds-container {   
+        flex-wrap: wrap;
+        padding-bottom: 8%;
+
         #opening-minds-img {
-            margin: 0 auto;
             width:100%;
         }
     
         #opening-minds-img img {
-            width:100%;
+            min-width:100%;
             max-height: 350px;
             border-bottom-right-radius: 0%;
-        }
-    
-        #opening-minds-header {
-            margin: 0 auto;
-            width:100%;
-            height:auto;
-            margin-top:3%;
-            margin-bottom:3%;
-        }
-    
-        #opening-minds-header h3 {
-            margin: auto;
-            text-align: center;
-            font-size:7vw; //42px
+            border-top-left-radius: 33px;
         }
 
-        #opening-minds-video {
-            margin: 0 auto;
-            width:100%;
-            height:auto;
-            margin-left: 16%;
-            margin-bottom: 3%;
-        }
-    
-        #opening-minds-video iframe {
-            width: 70%; //560px
-            height:315px; //315px
-            border-radius: 33px;
+        #opening-minds-statement {
+            margin-top: 3%;
         }
     }   
 }

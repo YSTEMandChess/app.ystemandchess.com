@@ -26,7 +26,6 @@ export class PlayNologComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
-      if (e.origin == environment.urls.chessClientURL) {
         // Means that there is the board state and whatnot
         console.log("this does work every time");
         this.prevFEN = this.currentFEN;
@@ -58,7 +57,6 @@ export class PlayNologComponent implements OnInit {
           });
           console.log("Curr FEN: " + this.currentFEN + "     Prev FEN: " + this.prevFEN);
         }
-      }
     }, false);
   }
 

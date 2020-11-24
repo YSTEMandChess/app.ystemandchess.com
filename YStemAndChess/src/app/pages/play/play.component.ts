@@ -115,7 +115,6 @@ export class PlayComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
-      if (e.origin == environment.urls.chessClientURL) {
         // Means that there is the board state and whatnot
         //console.log("There is a new board state. Going to update!")
         console.log("this does work every time");
@@ -136,7 +135,6 @@ export class PlayComponent implements OnInit {
         } else {
           this.updateBoardState(info);
         }
-      }
     }, false);
 }
 

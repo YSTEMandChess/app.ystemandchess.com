@@ -1,5 +1,6 @@
 # Installation of the Development Environment 
-To quick install the dev environment, use the script I have created called `setup.sh`. This should provide a good installation provided you type in your password a couple of time and are on ubuntu.
+
+To quick install the dev environment, use the script I have created called `setup.sh`. This should provide a good installation provided you type in your password a couple of times.
 
 &nbsp; 
 
@@ -9,40 +10,64 @@ However if you want to do it the long way, follow along down below. (All command
 
 The first thing that you need to install is **node.js**.
 
-to do this, run `sudo apt install nodejs`.
+&nbsp; 
+
+##### Linux
+To do this, run `sudo apt install nodejs`.
+
+##### Windows
+To do this, go download [node.js](https://nodejs.org/en/download/). 
 
 &nbsp; 
 
 Now you need to install the **angular cli**.
 
-to do this, run `sudo npm install -g @angular/cli`
+##### Linux
+To do this, run `sudo npm install -g @angular/cli`
 
 and you will also need to install `sudo npm install -g @angular-devkit/build-angular`.
 
+##### Windows
+To do this, run `npm install -g @angular/cli` in **Git Bash**.
+
+***If somehow Git Bash isn't installed for you, you can download it [here](https://gitforwindows.org/)***.
 
 &nbsp; 
 
 
 Now that you are done with that, you will need to install **php**.
 
+##### Linux
+
 If you don't already have it, run the command `sudo apt install php`.
 
+##### Windows
+
+Instead of php, please install apache2 [here](https://httpd.apache.org/docs/2.4/platform/windows.html).
+Once you are done downloading the .zip file, extract it to any location you want. 
+The first step, after extracting the .zip file, is to set the environment variable for it. Add the 
+location of the `<Insert Path Here>Apache24/bin` folder to the PATH environment variable. 
 
 &nbsp; 
-
 
 Now we need to install **nodemon, express, and socket.io**.
 
+##### Linux
+
 To do this, run the command: `sudo npm install -g express nodemon socket.io` 
 
+##### Windows
+
+To do this, run the command: `npm install -g express nodemon socket.io`
+
+***If nothing shows up, continue waiting. It installs in the background and should let you know when it's complete.***
 
 &nbsp; 
 
-
 Finally, we need to install the **mongodb driver**.
 
-to do this, run the command `sudo apt install -y php-pear php-dev`
-
+##### Linux
+To do this, run the command `sudo apt install -y php-pear php-dev`
 
 then, you need to run the command `sudo pecl install mongodb`
 
@@ -50,8 +75,14 @@ then you need to add the line `extension=mongodb.so` to your php.ini file.
 
 This can be found using the command `php -i | grep "Loaded Configuration File" | awk '{print $5}'`.
 
-&nbsp; 
+##### Windows
+Instead of MongoDB, we need to install [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
+Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
 
+***If it doesn't start and asks for you to enable virtualization, follow this [guide](https://docs.docker.com/docker-for-windows/troubleshoot/) 
+for enabling virtualization. You will need to enable this in your computer's BIOS.
+&nbsp; 
+I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
 
 &nbsp;
 
@@ -62,6 +93,8 @@ Repeat this step in chessServer as well
 &nbsp;
 
 The last step is to add environment files to the app, which you will be given if working with us, otherwise you will have to use your personal accounts. Below is a list of all the directories in root and where to place your env files for each directory if you want to do it manually. Otherwise run the given `create_envs.sh` script from root by typing `bash create_envs.sh`
+
+###### THIS IS ONLY TESTED ON UBUNTU
 
 **YStemAndChess**
 
@@ -122,6 +155,7 @@ Congrats! You have learned the basic commands and techniques to use GitHub!
 
 # Running the Development Environment
 
+### Linux 
 Now, it is time to start running the dev environment. As a side note, all of the development environments (except for `chessClient`) refresh when you save a file.
 
 &nbsp; 
@@ -163,6 +197,52 @@ After navigating inside the directory, you need to run `nodemon index.js`. This 
 The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
 
 So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
+
+### Windows (Test)
+
+To begin the development server on Windows, please ensure that all services above are installed. 
+
+First, navigate to the YStemAndChess folder and use the command `npm install`. 
+After that, use `ng serve` to start the angular development server which will start on **localhost:4200**.
+
+In the event of NGCC failing with an unhandled exception:  
+In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
+As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
+
+
+&nbsp;
+
+Next, we will want to start middleware by navigating to the middleware folder. 
+To start things off, we need to create a Docker image for middleware. We accomplish 
+this by using the command `docker build -t middleware .` After creating the docker image,
+use the command `docker run -p 8000:80 middleware`. This maps port 8000 on our local system
+to port 80 in our docker container. 
+
+***You will need to rebuild this container everytime you make changes to the middleware folder.***
+
+&nbsp;
+
+Next is the chess server. This is in the directory `chessServer`. 
+
+After navigating inside of that server, you need to run `nodemon index.js`. This will start the server on port 3000.
+
+This is a websocket server though, so you cannot use a simple http request to access it.
+
+&nbsp;
+
+Following the chess server, we need to run the stockfish server to allow players to play with an AI. This is done in the directory 'stockfishServer'.
+
+After navigating inside the directory, you need to run `nodemon index.js`. This will start the stockfish server. 
+
+&nbsp;
+
+The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server. In order to do this, please use the command `cp -r * "<PATH>/Apache24/htdocs"` to copy over the files for our apache server. You will need to do this every time you make a change to the `chessClient` directory. 
+To actually run the apache server, please use the command `httpd.exe -k install -n "chessClient"` to install `chessClient` as an apache service.
+Next, we need to actually run the service which can be done with `httpd.exe -k start -n "chessClient"`.
+
+&nbsp; 
+
+**[Here](https://httpd.apache.org/docs/current/platform/windows.html) are the list of commands and functionality to using apache as a service.**
 
 # Running Tests in YStemAndChess Directory
 

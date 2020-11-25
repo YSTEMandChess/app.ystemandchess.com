@@ -207,7 +207,8 @@ After that, we can run the command `docker-compose up -d` to start all our docke
 To stop the images, use the command `docker-compose down`. 
 
 ***Important Note: You need to run the bash script everytime you make any changes to the files in any folder.
-After that, you need to run `docker-compose down` and then `docker-compose up -d` to restart the virtual machine.***
+After that, you need to run `docker-compose down` and then `docker-compose up -d` to restart the virtual machine.
+Also, make sure you run the terminal AS AN ADMINISTRATOR!!!!!!***
 
 &nbsp; 
 

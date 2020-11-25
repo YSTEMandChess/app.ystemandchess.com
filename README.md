@@ -34,7 +34,6 @@ To do this, run `npm install -g @angular/cli` in **Git Bash**.
 
 &nbsp; 
 
-
 Now that you are done with that, you will need to install **php**.
 
 ##### Linux
@@ -43,10 +42,13 @@ If you don't already have it, run the command `sudo apt install php`.
 
 ##### Windows
 
-Instead of php, please install apache2 [here](https://httpd.apache.org/docs/2.4/platform/windows.html).
-Once you are done downloading the .zip file, extract it to any location you want. 
-The first step, after extracting the .zip file, is to set the environment variable for it. Add the 
-location of the `<Insert Path Here>Apache24/bin` folder to the PATH environment variable. 
+Instead of MongoDB, we need to install [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
+Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
+
+***If it doesn't start and asks for you to enable virtualization, follow this [guide](https://docs.docker.com/docker-for-windows/troubleshoot/) 
+for enabling virtualization. You will need to enable this in your computer's BIOS.
+&nbsp; 
+I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
 
 &nbsp; 
 
@@ -76,13 +78,7 @@ then you need to add the line `extension=mongodb.so` to your php.ini file.
 This can be found using the command `php -i | grep "Loaded Configuration File" | awk '{print $5}'`.
 
 ##### Windows
-Instead of MongoDB, we need to install [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
-Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
-
-***If it doesn't start and asks for you to enable virtualization, follow this [guide](https://docs.docker.com/docker-for-windows/troubleshoot/) 
-for enabling virtualization. You will need to enable this in your computer's BIOS.
-&nbsp; 
-I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
+Skip this step. 
 
 &nbsp;
 
@@ -202,47 +198,18 @@ So, on ubuntu, in order to add such a thing, after navigating into the `chessCli
 
 To begin the development server on Windows, please ensure that all services above are installed. 
 
-First, navigate to the YStemAndChess folder and use the command `npm install`. 
-After that, use `ng serve` to start the angular development server which will start on **localhost:4200**.
+Start by building the docker images that we need to run. We can do this by using the command `bash tag_build_containers.sh`. 
 
-In the event of NGCC failing with an unhandled exception:  
-In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
-As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
+Next, we need to start the network to run our local virtual machine of docker containers. Use the command `docker network create ysc-net` to achieve this. 
 
+After that, we can run the command `docker-compose up -d` to start all our docker images. 
 
-&nbsp;
+To stop the images, use the command `docker-compose down`. 
 
-Next, we will want to start middleware by navigating to the middleware folder. 
-To start things off, we need to create a Docker image for middleware. We accomplish 
-this by using the command `docker build -t middleware .` After creating the docker image,
-use the command `docker run -p 8000:80 middleware`. This maps port 8000 on our local system
-to port 80 in our docker container. 
-
-***You will need to rebuild this container everytime you make changes to the middleware folder.***
-
-&nbsp;
-
-Next is the chess server. This is in the directory `chessServer`. 
-
-After navigating inside of that server, you need to run `nodemon index.js`. This will start the server on port 3000.
-
-This is a websocket server though, so you cannot use a simple http request to access it.
-
-&nbsp;
-
-Following the chess server, we need to run the stockfish server to allow players to play with an AI. This is done in the directory 'stockfishServer'.
-
-After navigating inside the directory, you need to run `nodemon index.js`. This will start the stockfish server. 
-
-&nbsp;
-
-The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server. In order to do this, please use the command `cp -r * "<PATH>/Apache24/htdocs"` to copy over the files for our apache server. You will need to do this every time you make a change to the `chessClient` directory. 
-To actually run the apache server, please use the command `httpd.exe -k install -n "chessClient"` to install `chessClient` as an apache service.
-Next, we need to actually run the service which can be done with `httpd.exe -k start -n "chessClient"`.
+***Important Note: You need to run the bash script everytime you make any changes to the files in any folder.
+After that, you need to run `docker-compose down` and then `docker-compose up -d` to restart the virtual machine.***
 
 &nbsp; 
-
-**[Here](https://httpd.apache.org/docs/current/platform/windows.html) are the list of commands and functionality to using apache as a service.**
 
 # Running Tests in YStemAndChess Directory
 

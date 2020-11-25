@@ -1,9 +1,9 @@
 import { SocketService } from './../../socket.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, SecurityContext } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { ClientEvent, NgxAgoraService } from 'ngx-agora';
+import { AgoraClient, ClientEvent, NgxAgoraService, Stream, StreamEvent } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
@@ -14,31 +14,31 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./play.component.scss']
 })
 export class PlayComponent implements OnInit {
-  
-  private localStream: any;
-  private client: any;
+
+  private localStream: Stream;
+  private client: AgoraClient;
   private clientUID;
   private messageQueue = new Array();
   private isReady: boolean;
-  public chessSrc: SafeResourceUrl;
+  public chessSrc;
 
-  constructor(private cookie: CookieService, private socket: SocketService, 
-    private sanitization: DomSanitizer, private agoraService: NgxAgoraService) { 
+  constructor(private cookie: CookieService, private socket: SocketService,
+    private agoraService: NgxAgoraService, private sanitization: DomSanitizer) {
       this.chessSrc = sanitization.bypassSecurityTrustResourceUrl(environment.urls.chessClientURL);
     }
 
   ngOnInit() {
-    let userContent;
-    let responseText;
-    if(this.cookie.check("login")) { 
-      userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1])); 
-      this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
-         if (response == "There are no current meetings with this user.") { return; }
-         responseText = JSON.parse(response);
-      
+    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+
+    this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
+      if (response == "There are no current meetings with this user.") {
+        return;
+      }
+      let responseText = JSON.parse(response);
+
 
       // Code for webcam
-      // ------------------------------------------------------------------------- 
+      // -------------------------------------------------------------------------
       this.client = this.agoraService.createClient({ mode: "rtc", codec: "h264" });
       this.client.init(environment.agora.appId, () => console.log("init sucessful"), () => console.log("init unsucessful"))
       this.client.join(null, responseText.meetingID, null, (uid) => {
@@ -62,7 +62,7 @@ export class PlayComponent implements OnInit {
       })
 
       // Now the stream has been published, lets try to set up some subscribers.
-      this.agoraService.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
+      this.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
         let remoteStream = evt.stream;
         let id = remoteStream.getId();
         if (id != this.clientUID) {
@@ -75,35 +75,34 @@ export class PlayComponent implements OnInit {
 
       })
 
-      this.agoraService.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
+      this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
         let remoteStream = evt.stream;
         let id = remoteStream.getId();
         remoteStream.play("remote_stream");
         console.log("stream-subscribed remote-uid: ", id);
       })
 
-      this.agoraService.client.on(ClientEvent.PeerLeave, (evt) => {
+      this.client.on(ClientEvent.PeerLeave, (evt) => {
         let remoteStream = evt.stream;
         let id = remoteStream.getId();
         remoteStream.stop();
         console.log("hmm, is this any good?")
       })
       // --------------------------------------------------------------------------
-        console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");
-        this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));
+
+      console.log("I just connected to the website. Thus, I will send a message saying that I want them to create a new game.");
+      this.socket.emitMessage("newGame", JSON.stringify({ student: responseText.studentUsername, mentor: responseText.mentorUsername, role: userContent.role }));
 
       this.socket.listen("boardState").subscribe((data) => {
         if(this.isReady) {
           let newData = JSON.parse(<string>data);
-          console.log(`New Board State Received: ${data}`);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
           chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), environment.urls.chessClientURL);
         } else {
           this.messageQueue.push(data);
         }
-      });
-    })
-  }
+      })
+    });
 
     this.socket.listen("gameOver").subscribe((data) => {
       alert("game over ");
@@ -115,14 +114,10 @@ export class PlayComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
+    if (e.origin == environment.urls.originURL) {
         // Means that there is the board state and whatnot
-        //console.log("There is a new board state. Going to update!")
-        console.log("this does work every time");
         let info = e.data;
-        console.log("I am info " + info);
-        //console.log("I am info " + info);
-        //console.log("I am above ready to recieve");
-        
+
         if(info == "ReadyToRecieve") {
           this.isReady=true;
           this.sendFromQueue();
@@ -135,13 +130,14 @@ export class PlayComponent implements OnInit {
         } else {
           this.updateBoardState(info);
         }
+      }
     }, false);
-}
+
+  }
 
   private sendFromQueue() {
     this.messageQueue.forEach(element => {
           let newData = JSON.parse(<string>element);
-          console.log(`New Board State Received: ${element}`);
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
           chessBoard.postMessage(JSON.stringify({ boardState: newData.boardState, color: newData.color }), environment.urls.chessClientURL);
     });
@@ -153,7 +149,7 @@ export class PlayComponent implements OnInit {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     }
-    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+    xmlHttp.open("POST", theUrl, true); // true for asynchronous
     xmlHttp.send(null);
   }
 
@@ -164,7 +160,6 @@ export class PlayComponent implements OnInit {
 
   public updateBoardState(data) {
     let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
-    console.log(`Sending an update: ${data}`);
     this.socket.emitMessage("newState", JSON.stringify({ boardState: data, username: userContent.username }));
   }
 

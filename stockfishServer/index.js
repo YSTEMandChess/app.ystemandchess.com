@@ -1,5 +1,5 @@
 require('dotenv').config();
-var http = require('http');
+var http = require('http').createServer(); //Create nodejs server
 var stockfish = require("stockfish");
 var chess = require("chess.js");
 
@@ -7,40 +7,30 @@ const querystring = require('querystring');
 const url = require('url');
 
 //create a server object:
-http.createServer((req, res) => {
+http.on('request', (req, res) => {
 
+    res.setHeader("Access-Control-Allow-Origin", "*"); //Set the header for stockfish
+    res.setHeader("Content-Type", "application/json");
 
-    res.setHeader("Access-Control-Allow-Origin", "*")
-    if ((url.parse(req.url, true).search) != null) {
+    engine = stockfish(); // Initialize stockfish server
 
+    let params = querystring.parse((url.parse(req.url, true).search).substring(1));
 
-        var engine = stockfish();
+    engine.onmessage = function (line) {
+       if (line.substring(0, 4) == "best") {
+          const game = new chess.Chess(params.fen);
+          game.move(line.split(" ")[1], { sloppy: true });
+          res.write(game.fen());
+          res.end();
+       }
+    };
 
-        engine.onmessage = function (line) {
-            if (line.substring(0, 4) == "best") {
-                let params = querystring.parse((url.parse(req.url, true).search).substring(1))
-                console.log(`Best move was found: ${line}`)
-                const game = new chess.Chess(params.fen);
-                game.move(line.split(" ")[1], { sloppy: true });
-                res.write(game.fen());
-                res.end();
-            }
-        };
+    engine.postMessage(`position fen ${params.fen}`);
+    engine.postMessage(`go depth ${params.level}`);
+    process.removeAllListeners();
+});
 
-
-        let params = querystring.parse((url.parse(req.url, true).search).substring(1))
-
-        console.log(`Game notation found: ${params.fen}`);
-        console.log(`Level found: ${params.level}`);
-
-        engine.postMessage("uci");
-        engine.postMessage(`position fen ${params.fen}`);
-        engine.postMessage(`go depth ${params.level}`);
-    }
-    else {
-        res.write("Please provide all parameters");
-        res.end();
-    }
-
-}).listen(process.env.PORT); //the server object listens on port 8080
-console.log("listening on *:" + process.env.PORT);
+//Listen on the requested port
+http.listen(process.env.PORT, () => {
+        console.log("listening on *:" + process.env.PORT);
+});

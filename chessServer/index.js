@@ -1,11 +1,11 @@
 require('dotenv').config();
 var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+var http = require('http').createServer(app).listen(process.env.PORT);
+var io = require('socket.io').listen(http);
 
 var ongoingGames = [];
 
-io.on('connection', (socket) => {
+io.sockets.on('connection', (socket) => {
   console.log('a user connected');
   // On the connection of a new game being found.
   socket.on('newGame', (msg) => {
@@ -146,8 +146,4 @@ io.on('connection', (socket) => {
       }
     });
   });
-});
-
-http.listen(process.env.PORT, () => {
-  console.log('listening on *:' + process.env.PORT);
 });

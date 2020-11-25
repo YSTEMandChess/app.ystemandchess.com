@@ -69,28 +69,35 @@ export class PlayNologComponent implements OnInit {
   }
 
   public newGameInit() {
-    console.log("A new game has been requested")
-    //this.color = (Math.random() > 0.5) ? "white" : "black";
-    this.color = "white";
-    this.currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    
+    this.color = (Math.random() > 0.5) ? "white" : "black";
+    if (this.color === "white") {
+        this.currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    }
+    else {
+        this.currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    }
+
     if (this.isReady) {
-      console.log("sending message" + this.currentFEN);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
       chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color }), environment.urls.chessClientURL);
     } else {
       this.messageQueue.push(JSON.stringify({ boardState: this.currentFEN, color: this.color }));
     }
-    
-    if (this.color == "black") {
+
+    if (this.color === "black") {
       this.level = parseInt((<HTMLInputElement>document.getElementById('movesAhead')).value);
       if(this.level <= 1) this.level = 1;
-      else if (this.level >= 30) this.level = 30;
-      
-      //Error when black is selected as the color the user will play. Also stockfish won't start
+      else if (this.level >= 10) this.level = 10;
       this.httpGetAsync(`/chessclient/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
         if (this.isReady) {
-          console.log("sending message" + response);
+          var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
+        } else {
+          this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
+        }
+      });
+      this.httpGetAsync(`${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
+        if (this.isReady) {
           var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
           chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
         } else {

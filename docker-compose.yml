@@ -29,8 +29,8 @@ services:
       - ysc-net
     expose:
       - "3000"
-    #volumes:
-    #  - ../chessServer:/usr/src/app
+    volumes:
+      - ./chessServer:/usr/src/app
   chessclient:
     image: chessclient
     container_name: chessclient
@@ -40,8 +40,8 @@ services:
       - ysc-net
     expose:
       - "80"
-    #volumes:
-    #  - ../chessClient:/usr/share/nginx/html
+    volumes:
+      - ./chessClient:/usr/share/nginx/html
   stockfishserver:
     image: stockfishserver
     container_name: stockfishserver
@@ -51,6 +51,8 @@ services:
       - ysc-net
     expose:
       - "8080"
+    volumes:
+      - ./stockfishserver:/usr/src/app
   middleware:
     image: middleware
     container_name: middleware
@@ -69,8 +71,8 @@ services:
       - ysc-net
     expose:
       - "80"
-    #volumes:
-    #  - ../middleware:/var/www/html
+    volumes:
+      - ./middleware:/var/www/html
   ystemandchess:
     image: ystemandchess
     container_name: ystemandchess
@@ -89,5 +91,5 @@ services:
       - stockfishserver
       - chessclient
       - chessserver
-    #volumes:
-    #  - ../YStemAndChess/dist/YStemAndChess:/usr/share/nginx/html/
+    volumes:
+      - ./YStemAndChess/dist/YStemAndChess:/usr/share/nginx/html/

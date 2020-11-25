@@ -7,10 +7,10 @@ import { environment } from 'src/environments/environment';
 })
 export class SocketService {
   private socket;
-  private socketEndpoint = "http://127.0.0.1:3000"
+  private socketEndpoint = "http://localhost/chessserver";
 
   constructor() {
-    this.socket = io(this.socketEndpoint);
+    this.socket = io();
   }
 
   public emitMessage(eventName: string, message: string) {

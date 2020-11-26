@@ -7,6 +7,93 @@ body {
     clear:both;
 }
 
+// new-mentor-container
+
+#new-mentor-container {
+    position:relative;
+    float:left;
+    overflow: hidden;
+    margin-top: 5%;
+    margin-left:3%; //53px
+    width:55%;
+    height:55%; //481px
+    // padding-bottom: 1%;
+    border-radius: 33px;
+    background-color: #FDD005;
+    
+    #new-mentor-statement {
+        float:right;
+        width: 42%;
+        height:auto;
+        margin-top:3%;
+        margin-right:4%;
+    }
+
+    #new-mentor-statement-paragraph p {
+    float:right;
+    width:35%;
+    height:auto;
+    margin-right:.5%; //80px;
+    overflow: hidden;
+    font-family:'Roboto';
+    font-style:normal;
+    font-weight:500;
+    font-size:1.4vw; // 137.5%
+    line-height:117.1%;
+    letter-spacing:0.01em;
+    color:#fff;
+    box-sizing: border-box;
+    }
+
+    #new-mentor-img {
+        float:left;
+        width:40%;
+        height:auto;
+        margin-top:6.3%;
+        margin-left:4%;
+        box-sizing: border-box;
+    }
+
+    #new-mentor-img img {
+        width:110%;
+        height:auto;
+        margin:0;
+        border-radius:100%;
+    }
+
+    #new-mentor-header1 {
+        float:right;
+        margin-right:6%;
+        margin-top:6.3%;
+    }
+
+    #new-mentor-header1 h3 {
+        font-family:'Lato';
+        font-style:normal; 
+        font-weight:900;
+        font-size:2.75vw; //42px;
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color:#4f4f4f;
+    }
+
+    #new-mentor-header2 {
+        float:right;
+        margin-right:1%;
+        margin-top:0.5%;
+    }
+
+    #new-mentor-header2 h4 {
+        font-family:'Roboto';
+        font-style: bold; //normal
+        font-weight:900; //500
+        font-size:1.60vw; //33px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color:#4f4f4f;
+    }
+}
+
 //our mission container
 #our-mission-container {
     position:relative;
@@ -58,6 +145,17 @@ body {
         color:#fff;
         box-sizing: border-box;
     }
+}
+
+#donate-box-container {
+    float:right;
+    overflow: hidden;
+    margin-top: 5%;
+    margin-left: 7%;
+    margin-right: 3%;
+    width: 30%;
+    height:108.079%;
+    border-radius:33px;
 }
 
 //play container
@@ -228,7 +326,7 @@ body {
 #opening-minds-container {
     position:relative;
     margin:0 auto;
-    margin-top:5%; //75px
+    margin-top:3%; //75px
     width:95%;
     height:auto; //882px
     border-radius:33px;
@@ -333,6 +431,53 @@ body {
     
         #play-container-links button {
             font-size:2.3vw; //28px
+        }
+    }
+
+    #new-mentor-container{
+
+        height:450px;
+        overflow: hidden;
+
+        #new-mentor-image {
+            height:auto;
+        }
+
+        #new-mentor-image img {
+            height:fit-content;
+        }
+
+        #new-mentor-statement-header h3 {
+            font-size:3vw;   //42px //262.5%
+        }
+
+        #new-mentor-statement-paragraph p {
+            font-size:2vw; // 137.5%
+        }
+    }
+    #donate-box-container{
+        height: 450px;
+    }
+
+    #our-mission-container{
+
+        height:450px;
+        overflow: hidden;
+
+        #our-mission-image {
+            height:auto;
+        }
+
+        #our-mission-image img {
+            height:fit-content;
+        }
+
+        #our-mission-statement-header h3 {
+            font-size:3vw;   //42px //262.5%
+        }
+
+        #our-mission-statement-paragraph p {
+            font-size:2vw; // 137.5%
         }
     }
 
@@ -514,6 +659,38 @@ body {
             color:#fff;
             background-color: #3A7CCA;
         }
+    }
+
+    #new-mentor-container{
+
+        width:90%;
+        height:auto; //652px
+        margin-left: 5%;
+
+        #new-mentor-image {
+            height:auto;
+        }
+
+        #new-mentor-image img {
+            height:fit-content;
+        }
+
+        #new-mentor-statement-header h3 {
+            font-size:7vw;   //42px //262.5%
+        }
+
+        #new-mentor-statement-header h4 {
+            font-size:5vw;   //42px //262.5%
+        }
+
+        #new-mentor-statement-paragraph p {
+            font-size:2vw; // 137.5%
+        }
+    }
+    #donate-box-container{
+        width: 90%;
+        height:auto; //652px
+        // margin-left: 5%;
     }
     
     #become-a-mentor-container {

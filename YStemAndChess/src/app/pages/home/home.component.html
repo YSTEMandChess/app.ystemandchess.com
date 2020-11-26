@@ -4,158 +4,13 @@
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
-        w[l] = w[l] || []; w[l].push({
-            'gtm.start':
-                new Date().getTime(), event: 'gtm.js'
-        }); var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-KJ979C9');
-
-        // donate-box widget script
-        // (function (w, d) {
-        //     'use strict';
-
-        //     if (w.DBOX_EMBEDED) return;
-        //     w.DBOX_EMBEDED = true;
-
-        //     var IFRAME_SELECTOR = 'iframe[name=donorbox]',
-        //         DATA_ATTR = 'data-donorbox-id',
-        //         UTM_PARAMS = extractUtmParams(),
-        //         notBusyWithIDs = true;
-
-        //     function extractUtmParams() {
-        //         var data = {}, queryString = w.location.href.split('?')[1];
-
-        //         if (queryString) {
-        //             var params = queryString.split('&'),
-        //                 supportedUtmParams = ['utm_source', 'utm_campaign', 'utm_medium', 'utm_term', 'utm_content'];
-
-        //             params.forEach(function (p) {
-        //                 var splitted = p.split('='), key = splitted[0], value = splitted[1];
-
-        //                 if (supportedUtmParams.indexOf(key) >= 0) data[key] = value
-        //             })
-        //         }
-
-        //         return Object.keys(data).length && data
-        //     }
-
-        //     function sendMessage(iFrame, action, msg) {
-        //         iFrame.contentWindow.postMessage({
-        //             action: action, msg: msg
-        //         }, '*')
-        //     }
-
-        //     function onloadProcessing() {
-        //         var iFrames = d.querySelectorAll(IFRAME_SELECTOR),
-        //             apr = 'allowpaymentrequest';
-
-        //         for (var i = 0; i < iFrames.length; i++) {
-        //             var iframe = iFrames[i], src = iframe.src;
-
-        //             update(iframe, i);
-
-        //             if (!iframe.hasAttribute(apr) && src.indexOf('only_don') == -1) {
-        //                 iframe.setAttribute(apr, true);
-        //                 iframe.src = src + (src.indexOf('?') > -1 ? '&' : '?') + 'a=b'
-        //             }
-        //         }
-        //     }
-
-        //     function justSendTheID(iFrame) {
-        //         sendMessage(iFrame, 'set-iframe-id', iFrame.getAttribute(DATA_ATTR))
-        //     }
-
-        //     function sendIDAndUTM(iFrame) {
-        //         justSendTheID(iFrame);
-        //         UTM_PARAMS && sendMessage(iFrame, 'set-utm-params', UTM_PARAMS)
-        //     }
-
-        //     function update(iFrame, num) {
-        //         iFrame.setAttribute(DATA_ATTR, 'DonorBox-f' + (num + 1));
-
-        //         iFrame.onload = sendIDAndUTM.bind(null, iFrame);
-        //         sendIDAndUTM(iFrame)
-        //     }
-
-        //     function tryUpdateIFramesIDs() {
-        //         var iFrames = d.querySelectorAll(IFRAME_SELECTOR),
-        //             hasIDs = d.querySelectorAll('iframe[' + DATA_ATTR + ']');
-
-        //         if (iFrames.length == hasIDs.length)
-        //             for (var i = 0; i < iFrames.length; i++)
-        //                 justSendTheID(iFrames[i]);
-        //         else
-        //             for (var i = 0; i < iFrames.length; i++)
-        //                 update(iFrames[i], i);
-        //         notBusyWithIDs = true
-        //     }
-
-        //     function findBy(dataID) {
-        //         return d.querySelector('iframe[' + DATA_ATTR + '="' + dataID + '"]')
-        //     }
-
-        //     function onMessage(e) {
-        //         var data = e.data, iFrame;
-
-        //         if (!data || typeof data != 'object' || data.from != 'dbox' || data.close) return;
-
-        //         if (data.src.indexOf('forms/color') != -1)
-        //             iFrame = d.querySelector(IFRAME_SELECTOR);
-        //         else
-        //             iFrame = findBy(data.iframeID);
-
-        //         if (!iFrame) {
-        //             if (notBusyWithIDs) {
-        //                 notBusyWithIDs = false;
-        //                 setTimeout(tryUpdateIFramesIDs, 50);
-        //             }
-        //             return
-        //         }
-
-        //         if (data.scrollIntoView) {
-        //             (iFrame.offsetTop < w.pageYOffset ||
-        //                 iFrame.offsetTop > w.pageYOffset + w.innerHeight) &&
-        //                 iFrame.scrollIntoView()
-        //         } else {
-        //             if (parseInt(data.height) > 0)
-        //                 iFrame.style.height = data.height + 3 + "px";
-
-        //             w.innerWidth < 350 && (iFrame.style.minWidth = 'initial');
-        //         }
-        //     }
-
-        //     if (d.querySelector('script[paypalExpress=true]')) {
-        //         var paypal = d.createElement('script');
-        //         paypal.src = 'https://www.paypalobjects.com/api/checkout.js';
-        //         d.head.appendChild(paypal);
-        //     }
-
-        //     w.addEventListener('message', onMessage, false);
-
-        //     d.readyState !== 'complete' ?
-        //         d.addEventListener('DOMContentLoaded', onloadProcessing) :
-        //         onloadProcessing();
-
-
-        //     // Public API
-        //     w.donorbox = w['donorbox'] = {
-        //         resizeDonationWidget: function (iFrameSelector) {
-        //             var query = iFrameSelector || IFRAME_SELECTOR, el = iFrameSelector, iframe;
-
-        //             if (el instanceof HTMLIFrameElement && el.name === 'donorbox') iframe = el;
-
-        //             iframe = iframe || d.querySelector(query);
-        //             if (!iframe) console.error(
-        //                 'donorbox.resizeDonationWidget: "' + query +
-        //                 '" is not a valid selector. Use your embedded iframe, its ID or class instead');
-
-        //             sendMessage(iframe, 'please-resize-me')
-        //         }
-        //     }
-
-        // }(window, document));
     </script>
     <!-- End Google Tag Manager -->
 </head>
@@ -200,9 +55,9 @@
 
         </div>
     </div>
-    <!-- end of our mission container -->
+    <!-- end of mission statement-->
 
-    <!-- start of play container -->
+    <!-- begining play container-->
     <div id="play-container">
         <div id="play-container-header1">
             <h3>Play</h3>
@@ -228,12 +83,45 @@
 
     <div id="clear"></div>
 
+    <!-- New Mentor Section -->
+    <div id="new-mentor-container">
+        <div id="new-mentor-img">
+            <img src="../../../assets/images/beAMentor/STEMy_Mascot.png" alt="Stemy Mascot">
+        </div>
+        <div id="new-mentor-header1">
+            <h3>Become a mentor</h3>
+        </div>
+        <div id="new-mentor-header2">
+            <h4>Interested in making a difference?</h4>
+        </div>
+        
+        <div id="new-mentor-statement">
+            <p>
+                Y STEM and Chess Inc. (YSC) is focused on resolving two
+                current social problems, by providing a unique 21st Century
+                methodology to learning called “Mastery.” The first focus is
+                on our society’s unfulfilled need for students with a firm
+                learning foundation to pursue a life in the world of STEM. The second and the primary focus of YSC is fulfilling those
+                needs, by working with the children of our socially and
+                economically underserved population, to introduce and
+                engage them in the world of STEM.
+            </p>
+
+        </div>
+    </div>
+<!--end of New Mentor Section -->
+<!-- <div id="clear"></div> -->
+        
+        <div id="donate-box-container">
+        <script src="https://donorbox.org/widget.js" paypalExpress="false"></script><iframe allowpaymentrequest="" frameborder="0" height="500px" name="donorbox" scrolling="no" seamless="seamless" src="https://donorbox.org/embed/y-stem-and-chess-inc-learning-platform" style="max-width: 480px; min-width: 240px; max-height:none!important" width="100%"></iframe>
+    </div>
+        <!-- <div id="clear"></div> -->
     <!-- start of become a mentor container -->
-    <div id="become-a-mentor-container">
+    <!-- <div id="become-a-mentor-container">
         <div id="become-a-mentor-img">
             <img src="../../../assets/images/homePage/STEMy_Mascot.png" alt="Stemy Mascot">
         </div>
-        <!-- <div id="clear"></div> -->
+        <div id="clear"></div>
         <div id="become-a-mentor-header1">
             <h3>Become a mentor</h3>
         </div>
@@ -251,7 +139,7 @@
                 economically underserved population, to introduce and
                 engage them in the world of STEM.</p>
         </div>
-    </div>
+    </div> -->
     <!-- end of become a mentor container -->
 
     <div id="clear"></div>

@@ -16,6 +16,7 @@ for enabling virtualization. You will need to enable this in your computer's BIO
 I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
 &nbsp;
 
+## Adding Environment Variables 
 Now go into the chessClient directory and run `npm i dotenv`
 
 Repeat this step in chessServer as well

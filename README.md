@@ -1,84 +1,20 @@
 # Installation of the Development Environment 
-
-To quick install the dev environment, use the script I have created called `setup.sh`. This should provide a good installation provided you type in your password a couple of times.
-
-&nbsp; 
-
-However if you want to do it the long way, follow along down below. (All commands are given for ubuntu/debian as this is the only development environment we use)
-
-&nbsp; 
-
-The first thing that you need to install is **node.js**.
-
-&nbsp; 
-
-##### Linux
-To do this, run `sudo apt install nodejs`.
-
-##### Windows
-To do this, go download [node.js](https://nodejs.org/en/download/). 
-
-&nbsp; 
-
-Now you need to install the **angular cli**.
-
-##### Linux
-To do this, run `sudo npm install -g @angular/cli`
-
-and you will also need to install `sudo npm install -g @angular-devkit/build-angular`.
-
-##### Windows
-To do this, run `npm install -g @angular/cli` in **Git Bash**.
-
-***If somehow Git Bash isn't installed for you, you can download it [here](https://gitforwindows.org/)***.
-
-&nbsp; 
-
-Now that you are done with that, you will need to install **php**.
+All you need to run our development environment is Docker. 
 
 ##### Linux
 
-If you don't already have it, run the command `sudo apt install php`.
+To install Docker, please use the command `sudo apt install docker.io`. This will install Docker onto your machine which would give you access to Docker and docker-compose.
+After the installation is complete, use the command `sudo systemctl start docker` to start Docker and `sudo systemctl enable docker` to allow Docker to start when you login to your OS. 
 
 ##### Windows
 
-Instead of MongoDB, we need to install [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
+To install Docker, click the following [link](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
 Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
 
 ***If it doesn't start and asks for you to enable virtualization, follow this [guide](https://docs.docker.com/docker-for-windows/troubleshoot/) 
 for enabling virtualization. You will need to enable this in your computer's BIOS.
 &nbsp; 
 I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
-
-&nbsp; 
-
-Now we need to install **nodemon, express, and socket.io**.
-
-##### Linux
-
-To do this, run the command: `sudo npm install -g express nodemon socket.io` 
-
-##### Windows
-
-To do this, run the command: `npm install -g express nodemon socket.io`
-
-***If nothing shows up, continue waiting. It installs in the background and should let you know when it's complete.***
-
-&nbsp; 
-
-Finally, we need to install the **mongodb driver**.
-
-##### Linux
-To do this, run the command `sudo apt install -y php-pear php-dev`
-
-then, you need to run the command `sudo pecl install mongodb`
-
-then you need to add the line `extension=mongodb.so` to your php.ini file.
-
-This can be found using the command `php -i | grep "Loaded Configuration File" | awk '{print $5}'`.
-
-##### Windows
-Skip this step. 
 
 &nbsp;
 

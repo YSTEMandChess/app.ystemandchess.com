@@ -10,12 +10,10 @@ After the installation is complete, use the command `sudo systemctl start docker
 
 To install Docker, click the following [link](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
 Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
-
 ***If it doesn't start and asks for you to enable virtualization, follow this [guide](https://docs.docker.com/docker-for-windows/troubleshoot/) 
 for enabling virtualization. You will need to enable this in your computer's BIOS.
 &nbsp; 
 I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
-
 &nbsp;
 
 Now go into the chessClient directory and run `npm i dotenv`
@@ -84,6 +82,8 @@ Now you should be good to start developing!
 7. Merge the pull request into the master branch after consulting Alex, Benjamin, or Owen. 
 
 Congrats! You have learned the basic commands and techniques to use GitHub!
+
+&nbsp; 
 
 # Running the Development Environment
 

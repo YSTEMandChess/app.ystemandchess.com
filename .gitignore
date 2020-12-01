@@ -11,7 +11,8 @@
 /node_modules
 
 #environment
-/environment
+environment.prod.ts
+environment.ts
 environment.php
 .env
 

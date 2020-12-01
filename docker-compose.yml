@@ -52,21 +52,12 @@ services:
     expose:
       - "8080"
     volumes:
-      - ./stockfishserver:/usr/src/app
+      - ./stockfishServer:/usr/src/app
   middleware:
     image: middleware
     container_name: middleware
-    environment:
-      - indexKey=4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C
-      - key=AKIA3W5HAAMIUEL5K4OK
-      - secret=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
-      - appID=6c368b93b82a4b3e9fb8e57da830f2a4
-      - mongocredentials="mongodb+srv://useradmin:uumrcvqtyplpq1hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority"
-      - auth="Basic OTE3ZTZlOTlmODgxNDEwYWI2ZjEyNmY3ZTJiMWM5MDc6NWYwMTU0MTIwMmM3NDYzNzhjZTQ3Nzg3NTljYzg4NGE="
-      - channel=100000
-      - uid=123
-      - awsAccessKey=AKIA3W5HAAMIUEL5K4OK
-      - awsSecretKey=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
+    env_file: 
+      - ./middleware/environment.php
     networks:
       - ysc-net
     expose:
@@ -76,12 +67,8 @@ services:
   ystemandchess:
     image: ystemandchess
     container_name: ystemandchess
-    environment:
-      - agora:appID=6c368b93b82a4b3e9fb8e57da830f2a4
-      - urls:middlewareURL=localhost/middleware
-      - urls:chessClientURL=localhost/chessclient
-      - urls:stockFishURL=localhost/stockfishserver
-      - urls:chessServerURL=localhost/chessserver
+    env_file: 
+      - ./YStemAndChess/src/environments/environment.prod.ts
     networks:
       - ysc-net
     expose:

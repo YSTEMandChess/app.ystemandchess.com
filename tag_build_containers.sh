@@ -16,7 +16,7 @@ do
     echo "Starting to build image for - $service"
 
     cd $service
-    imagename=`echo "$service" | awk '{ print tolower($version) }'`
+    imagename=`echo "$service" | awk '{ print tolower($0) }'`
 
     echo 'Image name to be used -' $imagename
 

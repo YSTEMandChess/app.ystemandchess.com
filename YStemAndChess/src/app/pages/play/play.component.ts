@@ -114,7 +114,7 @@ export class PlayComponent implements OnInit {
 
     // Listen to message from child window
     eventer(messageEvent, (e) => {
-    if (e.origin == environment.urls.originURL) {
+    if (e.origin == environment.urls.chessClientURL) {
         // Means that there is the board state and whatnot
         let info = e.data;
 

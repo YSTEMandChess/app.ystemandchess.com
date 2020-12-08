@@ -16,6 +16,11 @@ for enabling virtualization. You will need to enable this in your computer's BIO
 I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
 &nbsp;
 
+##### MacOS
+
+To install Docker, click the following [link](https://docs.docker.com/docker-for-mac/install/).
+Follow the steps to install Docker properly and you should be good!
+
 ## Adding Environment Variables 
 Now go into the chessClient directory and run `npm i dotenv`
 
@@ -90,7 +95,11 @@ Congrats! You have learned the basic commands and techniques to use GitHub!
 
 To begin the development servers, please follow these steps listed below.
 
-Start by building the docker images that we need to run. We can do this by using the command `bash tag_build_containers.sh`.
+Start by going into the YStemAndChess directory and running `npm i`. This will install all the packages we need to run the development environment. 
+***Make sure Angular-CLI is installed afterwards by using the `ng` command. If it is not installed, you can install it using the command `npm install -g @angular/cli`.***
+
+After installing the packages, head back out to the root of our directory using `cd ..`. We now want to build the docker images that we need to run.
+We can do this by using the command `bash tag_build_containers.sh`.
 ***If you are on Linux, use this command instead: `sudo bash tag_build_containers.sh`.***
 
 Next, we need to start the network to run our local virtual machine of docker containers. Use the command `docker network create ysc-net` to achieve this. 
@@ -101,7 +110,7 @@ After that, we can run the command `docker-compose up -d` to start all our docke
 To stop the images, use the command `docker-compose down`. 
 
 ***Important Note: You need to run the bash script everytime you make any changes to the files in any folder.
-After that, you need to run `docker-compose down` and then `docker-compose up -d` to restart the virtual machine.
+You need to run `docker-compose down`, build the docker images using `bash tag_build_containers.sh`, and then `docker-compose up -d` to restart the virtual machine.
 Also, make sure you run the terminal AS AN ADMINISTRATOR!!!!!!***
 
 &nbsp; 

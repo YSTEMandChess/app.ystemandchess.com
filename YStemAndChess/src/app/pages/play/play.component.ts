@@ -29,6 +29,7 @@ export class PlayComponent implements OnInit {
 
   ngOnInit() {
     let userContent;
+    
 
     if(this.cookie.check("login")) {
       userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));

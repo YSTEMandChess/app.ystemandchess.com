@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ngx-agora-ng-add",
+  "title": "Ngx Agora ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "appId": {
+      "type": "string",
+      "description": "The Agora.io application ID that will be used for this project.",
+      "default": "",
+      "x-prompt": {
+        "message": "Enter the Agora AppId you will be using (from your Agora project page):",
+        "type": "string"
+      }
+    },
+    "version": {
+      "type": "string",
+      "description": "The Agora.io SDK version",
+      "default": "3.0.2",
+      "x-prompt": {
+        "message": "Choose a specific Agora.io SDK version, or \"latest\" for the latest published release:",
+        "type": "list",
+        "items": [
+          {
+            "value": "latest",
+            "label": "Latest Release        [ Preview: https://www.npmjs.com/package/agora-rtc-sdk ]"
+          },
+          {
+            "value": "3.0.2",
+            "label": "3.0.2  [ Preview: https://www.npmjs.com/package/agora-rtc-sdk/v/3.0.2 ]"
+          },
+          {
+            "value": "3.0.1",
+            "label": "3.0.1  [ Preview: https://www.npmjs.com/package/agora-rtc-sdk/v/3.0.1 ]"
+          },
+          {
+            "value": "3.0.0",
+            "label": "3.0.0  [ Preview: https://www.npmjs.com/package/agora-rtc-sdk/v/3.0.0 ]"
+          },
+          {
+            "value": "2.9.0",
+            "label": "2.9.0  [ Preview: https://www.npmjs.com/package/agora-rtc-sdk/v/2.9.0 ]"
+          },
+          {
+            "value": "2.8.0",
+            "label": "2.8.0  [ Preview: https://www.npmjs.com/package/agora-rtc-sdk/v/2.8.0 ]"
+          },
+          {
+            "value": "2.7.1",
+            "label": "2.7.1  [ Preview: https://www.npmjs.com/package/agora-rtc-sdk/v/2.7.1 ]"
+          },
+          {
+            "value": "2.6.1",
+            "label": "2.6.1  [ Preview: https://www.npmjs.com/package/agora-rtc-sdk/v/2.6.1 ]"
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "appId"
+  ],
+  "additionalProperties": false
+}

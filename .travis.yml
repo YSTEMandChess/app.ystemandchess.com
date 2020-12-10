@@ -1,1 +1,16 @@
+language: node_js
+node_js:
+- "14.9.0"
+dist: trusty
+sudo: required
 
+branches:
+  only:
+  - travis
+  
+before_script:
+- cd YStemAndChess
+- npm install -g @angular/cli
+
+script:
+- npm run test-headless

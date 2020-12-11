@@ -17,4 +17,5 @@ before_script:
 - npm install -g @angular/compiler-cli
 
 script:
-- ng test --browsers ChromeHeadless
+- npm run test-headless
+- ng build --prod

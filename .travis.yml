@@ -6,6 +6,7 @@ sudo: required
 
 branches:
   only:
+  - master
   - travis
   
 before_script:

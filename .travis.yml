@@ -12,6 +12,8 @@ branches:
 before_script:
 - cd YStemAndChess
 - npm install -g @angular/cli
+- npm install -g @angular-devkit/build-angular
+- npm install -g express nodemon socket.io
 
 script:
 - ng test --browsers ChromeHeadless

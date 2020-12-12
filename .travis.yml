@@ -15,6 +15,10 @@ before_script:
 - npm install -g @angular-devkit/build-angular
 - npm install -g express nodemon socket.io
 - npm install -g @angular/compiler-cli
+- npm install -g @angular/compiler
+- npm i
+- ls
 
 script:
-- ng test --browsers ChromeHeadless
+- npm run test-headless
+- ng build --prod

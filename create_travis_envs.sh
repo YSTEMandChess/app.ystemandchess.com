@@ -29,7 +29,7 @@ printf "    production: false,\n" >> environment.prod.ts
 printf "      agora: {\n" >> environment.prod.ts
 printf "     appId: ' ',\n" >> environment.prod.ts
 printf "    },\n" >> environment.prod.ts
-printf "    urls: {\n" >> environment.prod.tss
+printf "    urls: {\n" >> environment.prod.ts
 printf "      middlewareURL: 'http://127.0.0.1:8000',\n" >> environment.prod.ts
 printf "      chessClientURL: 'http://localhost',\n" >> environment.prod.ts
 printf "      stockFishURL : 'http://127.0.0.1:8080',\n" >> environment.prod.ts

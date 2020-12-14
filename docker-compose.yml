@@ -68,7 +68,7 @@ services:
     image: ystemandchess
     container_name: ystemandchess
     env_file: 
-      - ./YStemAndChess/src/environments/environment.prod.ts
+      - ./YStemAndChess/src/environments/environment.ts
     networks:
       - ysc-net
     expose:

@@ -4,28 +4,32 @@
     padding-top: 2%;
 }
 
-#mentor-container {
-    margin-top: 2%;
-    width:90%;
-    height: auto;
-    margin-left: 5%;
-    text-align: center;
-    border-radius:33px;
-    background-color: #E1E7ED;
+#play-container {
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: row;
+     margin-top: 2%;
+//     width:100%;
+//     height: auto;
+//     //margin-left: 5%;
+//     text-align: center;
+//     border-radius:33px;
+//     //background-color: #E1E7ED;
 
-    #top {
-        display:flex;
-        justify-content: flex-end;
-        padding-top:2%;
-        padding-bottom:2%;
-    }
+//     // #top {
+//     //     display:flex;
+//     //     justify-content: flex-end;
+//     //     padding-top:2%;
+//     //     padding-bottom:2%;
+//     // }
         
 
-    #lichess-board {
-        width:100%;
-    }
+//     #lichess-board {
+//         width:100%;
+//     }
 
     #bottom {
+        margin-top: 2%;
         padding-bottom:2%;
         text-align: center;
 

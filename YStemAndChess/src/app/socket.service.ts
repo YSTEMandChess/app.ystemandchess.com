@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SocketService {
   private socket;
-  private socketEndpoint = "http://localhost/chessserver";
+  private socketEndpoint = environment.urls.chessServer;
 
   constructor() {
     this.socket = io();

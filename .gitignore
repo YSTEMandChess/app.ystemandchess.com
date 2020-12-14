@@ -11,6 +11,7 @@
 /node_modules
 
 #environment
+/environments
 environment.ts
 create_envs.sh
 

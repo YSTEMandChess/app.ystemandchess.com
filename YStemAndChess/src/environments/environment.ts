@@ -1,7 +1,7 @@
 export const environment = {
     production: false,
       agora: {
-     appId: '',
+     appId: 'I Should not be here',
     },
     urls: {
       middlewareURL: 'http://127.0.0.1:8000',

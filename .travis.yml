@@ -7,7 +7,6 @@ sudo: required
 branches:
   only:
   - master
-  - travis
   
 before_script:
 - bash create_travis_envs.sh

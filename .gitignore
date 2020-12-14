@@ -11,8 +11,11 @@
 /node_modules
 
 #environment
-/environments
+environment.prod.ts
 environment.ts
+environment.php
+.env
+environment.*
 create_envs.sh
 
 # profiling files

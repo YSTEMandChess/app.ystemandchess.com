@@ -17,7 +17,6 @@ before_script:
 - npm install -g @angular/compiler-cli
 - npm install -g @angular/compiler
 - npm i
-- ls
 
 script:
 - npm run test-headless

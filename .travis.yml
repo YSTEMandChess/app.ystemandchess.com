@@ -10,6 +10,7 @@ branches:
   - travis
   
 before_script:
+- bash create_travis_envs.sh
 - cd YStemAndChess
 - npm install -g @angular/cli
 - npm install -g @angular-devkit/build-angular

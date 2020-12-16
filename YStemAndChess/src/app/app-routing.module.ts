@@ -21,6 +21,7 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { PersonalDevelopmentComponent } from './pages/personal-development/personal-development.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -42,7 +43,8 @@ const routes: Routes = [
   {path: 'lessons', component: LessonsComponent},
   {path: 'piece-lessons', component: PieceLessonsComponent},
   {path: 'play-lesson', component: PlayLessonComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'personal-development', component: PersonalDevelopmentComponent}
 ];
 
 @NgModule({

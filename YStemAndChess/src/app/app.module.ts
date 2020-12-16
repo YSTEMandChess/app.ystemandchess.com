@@ -32,6 +32,7 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { PersonalDevelopmentComponent } from './pages/personal-development/personal-development.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -60,7 +61,8 @@ const agoraConfig: AgoraConfig = {
     LessonsComponent,
     PlayLessonComponent,
     PieceLessonsComponent,
-    ContactComponent
+    ContactComponent,
+    PersonalDevelopmentComponent
   ],
   imports: [
     BrowserModule,

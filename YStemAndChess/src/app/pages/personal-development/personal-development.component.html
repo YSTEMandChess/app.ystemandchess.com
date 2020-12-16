@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KJ979C9');
+        </script>
+        <!-- End Google Tag Manager -->
+    </head>
+
+    <header>
+        <app-header></app-header>
+    </header>
+
+    <body>
+         <!-- Google Tag Manager (noscript) -->
+         <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        
+        <div id="lesson-container">
+            <div id="top">
+                <h1>Lesson Number {{displayLessonNum}}</h1>
+            </div>
+            <div id="chess-board">
+                <app-play-lesson></app-play-lesson>
+            </div>
+            <div id="bottom"> 
+                <button type="button" id="previous" (click)="previousLesson()">Previous &lt;</button>       
+                <button type="button" id="next" (click)="nextLesson()">Next &gt;</button>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

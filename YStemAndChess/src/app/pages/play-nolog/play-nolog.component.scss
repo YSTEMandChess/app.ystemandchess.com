@@ -11,23 +11,13 @@
     margin-left: 5%;
     text-align: center;
     border-radius:33px;
-    background-color: #E1E7ED;
+    //background-color: #E1E7ED;
+    background-color: white;
 
     #top {
-        display:flex;
         justify-content: flex-end;
-        padding-top:2%;
+        padding-top:3%;
         padding-bottom:2%;
-    }
-        
-
-    #lichess-board {
-        width:100%;
-    }
-
-    #bottom {
-        padding-bottom:2%;
-        text-align: center;
 
         #new-game, #undo {
             outline-style: none;
@@ -49,6 +39,15 @@
             color:#FF8503;
             background-color: #fff;
         }
+    }
+        
+
+    #lichess-board {
+        width:100%;
+    }
+
+    #bottom {
+        padding-bottom:2%;
     }
 }
 

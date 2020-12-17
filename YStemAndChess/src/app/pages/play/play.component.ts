@@ -28,7 +28,14 @@ export class PlayComponent implements OnInit {
     }
 
   ngOnInit() {
-    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    let userContent;
+    
+    if(this.cookie.check("login")) {
+      userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
+    } else {
+      userContent = ""
+    }
+    
 
     this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
       if (response == "There are no current meetings with this user.") {

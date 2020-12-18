@@ -14,8 +14,8 @@ $waitingStudentsCollection = $client->ystem->waitingStudents;
 $meetingCollection = $client->ystem->meetings;
 
 // Get the mentors in sorted order, then get the students in sorted order.
-$sortedMentorsCursor = $waitingMentorCollection->find([],["$sort" => [requestedGameAt => 1]]);
-$sortedStudentsCursor = $waitingStudentsCollection->find([],["$sort" => [requestedGameAt => 1]]);
+$sortedMentorsCursor = $waitingMentorCollection->find([],[sort => ["requestedGameAt" => 1]]);
+$sortedStudentsCursor = $waitingStudentsCollection->find([],[sort => ["requestedGameAt" => 1]]);
 // Get first doc of both
 $sortedMentorArray = [];
 $sortedStudentsArray = [];
@@ -38,7 +38,7 @@ include "record.php";
 
 for($i=0; $i<$smallerArraySize; $i++) {
 //if ($smallerArraySize >= 1) {
-    $document = $meetingCollection->findOne(["mentorUsername" => sortedMentorArray[$i], "CurrentlyOngoing" => true]);
+    $document = $meetingCollection->findOne(["mentorUsername" => $sortedMentorArray[$i]->username, "CurrentlyOngoing" => true]);
     if(is_null($document)) {
 
         // Now delete the waiting status of the mentor and the student.

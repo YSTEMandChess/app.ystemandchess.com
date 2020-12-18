@@ -1,4 +1,4 @@
-FROM php:2.4.46-apache
+FROM php:apache
 
 RUN echo "Docker file version v0.1"
 

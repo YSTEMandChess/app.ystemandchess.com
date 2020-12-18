@@ -70,12 +70,8 @@ export class PlayNologComponent implements OnInit {
 
   public newGameInit() {
     this.color = (Math.random() > 0.5) ? "white" : "black";
-    if (this.color === "white") {
-        this.currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    }
-    else {
-        this.currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    }
+    this.currentFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    this.prevFEN = this.currentFEN;
 
     if (this.isReady) {
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
@@ -110,7 +106,27 @@ export class PlayNologComponent implements OnInit {
   public undoPrevMove() {
     var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
     this.currentFEN = this.prevFEN;
-    chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color}), environment.urls.chessClientURL);
+    if (this.color === "white")
+      chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color}), environment.urls.chessClientURL);
+    if (this.color === "black")
+    {
+      this.httpGetAsync(`/chessclient/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
+        if (this.isReady) {
+          var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
+        } else {
+          this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
+        }
+      });
+      this.httpGetAsync(`${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
+        if (this.isReady) {
+          var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
+        } else {
+          this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
+        }
+      });
+    }
   }
 
   private httpGetAsync(theUrl: string, callback) {

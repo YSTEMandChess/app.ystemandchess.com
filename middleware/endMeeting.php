@@ -97,7 +97,7 @@ $c = $userCollection->find( array("username" => $student), array("timePlayed"));
 
 $totalMinutes = substr($totalTime, 6, 3); //1 hr : 20 min
 $newTotalHours = $totalTime + $hours;
-$newTotalMinutes = $totalMinutes + $minutes;
+$newTotalMinutes = (int)$totalMinutes + $minutes;
 
 if($newTotalMinutes > 59) {
     $newTotalHours += 1;

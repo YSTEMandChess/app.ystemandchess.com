@@ -19,4 +19,4 @@ COPY / .
 
 # Run the web server.
 EXPOSE 80
-#CMD [ "/usr/local/bin/php", "-S", "0.0.0.0:8000" ]
+# CMD [ "/usr/local/bin/php", "-S", "127.0.0.1:8000" ]

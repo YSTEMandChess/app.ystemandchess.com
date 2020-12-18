@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+- "14.9.0"
+dist: trusty
+sudo: required
+
+branches:
+  only:
+  - master
+  
+before_script:
+- bash create_travis_envs.sh
+- cd YStemAndChess
+- npm install -g @angular/cli
+- npm install -g @angular-devkit/build-angular
+- npm install -g express nodemon socket.io
+- npm install -g @angular/compiler
+- npm i
+- npm install -g @angular/compiler-cli
+
+script:
+- npm run test-headless
+- ng build --prod

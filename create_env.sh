@@ -14,10 +14,11 @@ printf " agora: {\n" >> environment.ts
 printf " appId: '6c368b93b82a4b3e9fb8e57da830f2a4',\n" >> environment.ts
 printf " },\n" >> environment.ts
 printf " urls: {\n" >> environment.ts
-printf " middlewareURL: 'https://ystemandchess.com/middleware',\n" >> environment.ts
-printf " chessClientURL: 'https://ystemandchess.com/chessclient/',\n" >> environment.ts
-printf " stockFishURL : 'https://ystemandchess.com/stockfishserver',\n" >> environment.ts
-printf " }\n" >> environmentts
+printf " middlewareURL: 'http://localhost/middleware',\n" >> environment.ts
+printf " chessClientURL: 'http://localhost/chessclient/',\n" >> environment.ts
+printf " chessServer: 'http://localhost/chessserver',\n" >> environment.ts
+printf " stockFishURL : 'http://localhost/stockfishserver',\n" >> environment.ts
+printf " }\n" >> environment.ts
 printf " };\n" >> environment.ts
 
 #Creating and adding environment.prod.ts file and environment variables
@@ -30,6 +31,7 @@ printf " },\n" >> environment.prod.ts
 printf " urls: {\n" >> environment.prod.ts
 printf " middlewareURL: 'http://localhost/middleware',\n" >> environment.prod.ts
 printf " chessClientURL: 'http://localhost/chessclient/',\n" >> environment.prod.ts
+printf " chessServer: 'http://localhost/chessserver',\n" >> environment.prod.ts
 printf " stockFishURL : 'http://localhost/stockfishserver',\n" >> environment.prod.ts
 printf " }\n" >> environment.prod.ts
 printf " };\n" >> environment.prod.ts

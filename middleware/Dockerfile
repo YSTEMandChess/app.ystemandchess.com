@@ -15,8 +15,8 @@ RUN pecl install mongodb
 # This touch command may not be neccicary, but idk.
 
 WORKDIR /var/www/html
-COPY / .
+COPY / ./
 
 # Run the web server.
-EXPOSE 80
-# CMD [ "/usr/local/bin/php", "-S", "127.0.0.1:8000" ]
+EXPOSE 8000
+CMD [ "/usr/local/bin/php", "-S", "0.0.0.0:8000" ]

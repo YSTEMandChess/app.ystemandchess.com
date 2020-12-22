@@ -10,7 +10,7 @@ export class SocketService {
   private socketEndpoint = environment.urls.chessServer;
 
   constructor() {
-    this.socket = io.connect(this.socketEndpoint);
+    this.socket = io();
   }
 
   public emitMessage(eventName: string, message: string) {

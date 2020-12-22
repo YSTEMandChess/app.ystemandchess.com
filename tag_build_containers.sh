@@ -6,7 +6,7 @@
 services=(YStemAndChess chessClient chessServer middleware stockfishServer)
 
 cd YStemAndChess
-#ng build --prod
+ng build --prod
 
 cd ..
 

@@ -14,10 +14,10 @@ printf " agora: {\n" >> environment.ts
 printf " appId: '6c368b93b82a4b3e9fb8e57da830f2a4',\n" >> environment.ts
 printf " },\n" >> environment.ts
 printf " urls: {\n" >> environment.ts
-printf " middlewareURL: 'http://localhost/middleware',\n" >> environment.ts
-printf " chessClientURL: 'http://localhost/chessclient/',\n" >> environment.ts
-printf " chessServer: 'http://localhost/chessserver',\n" >> environment.ts
-printf " stockFishURL : 'http://localhost/stockfishserver',\n" >> environment.ts
+printf " middlewareURL: 'http://localhost:8000',\n" >> environment.ts
+printf " chessClientURL: 'http://localhost:4200',\n" >> environment.ts
+printf " chessServer: 'http://localhost:3000',\n" >> environment.ts
+printf " stockFishURL : 'http://localhost:8080',\n" >> environment.ts
 printf " }\n" >> environment.ts
 printf " };\n" >> environment.ts
 
@@ -29,10 +29,10 @@ printf " agora: {\n" >> environment.prod.ts
 printf " appId: '6c368b93b82a4b3e9fb8e57da830f2a4',\n" >> environment.prod.ts
 printf " },\n" >> environment.prod.ts
 printf " urls: {\n" >> environment.prod.ts
-printf " middlewareURL: 'http://localhost/middleware',\n" >> environment.prod.ts
-printf " chessClientURL: 'http://localhost/chessclient/',\n" >> environment.prod.ts
-printf " chessServer: 'http://localhost/chessserver',\n" >> environment.prod.ts
-printf " stockFishURL : 'http://localhost/stockfishserver',\n" >> environment.prod.ts
+printf " middlewareURL: 'http://localhost:8000',\n" >> environment.prod.ts
+printf " chessClientURL: 'http://localhost:4200',\n" >> environment.prod.ts
+printf " chessServer: 'http://localhost:3000',\n" >> environment.prod.ts
+printf " stockFishURL : 'http://localhost:8080',\n" >> environment.prod.ts
 printf " }\n" >> environment.prod.ts
 printf " };\n" >> environment.prod.ts
 
@@ -51,7 +51,7 @@ printf "<?php\n" >> environment.php
 printf " \$_ENV[\"indexKey\"]=\"4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C\";\n" >> environment.php
 printf " \$_ENV[\"key\"]=\"AKIA3W5HAAMI6L45OV5X\";\n" >> environment.php
 printf " \$_ENV[\"secret\"]='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';\n" >> environment.php
-printf " \$_env[\"mongoCredentials\"]='mongodb+srv://useradmin:uumrcvqtyplpq1hi@cluster0-rxbrl.mongodb.net/test?retryWrites=true&w=majority';\n" >> environment.php
+printf " \$_ENV[\"mongoCredentials\"]='mongodb+srv://userAdmin:12W50UIqrscqWcXM@cluster0-rxbrl.mongodb.net/ystem?retryWrites=true&w=majority';\n" >> environment.php
 printf " \$_ENV[\"appID\"]='6c368b93b82a4b3e9fb8e57da830f2a4';\n" >> environment.php
 printf " \$_ENV[\"auth\"]='Basic OTE3ZTZlOTlmODgxNDEwYWI2ZjEyNmY3ZTJiMWM5MDc6NWYwMTU0MTIwMmM3NDYzNzhjZTQ3Nzg3NTljYzg4NGE=';\n" >> environment.php
 printf " \$_ENV[\"channel\"]=\"10000\";\n" >> environment.php

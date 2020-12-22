@@ -17,6 +17,8 @@ COPY package*.json ./
 
 RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
 
+COPY . /usr/src/app/
+
 EXPOSE 80
 
 CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "80", "--disable-host-check", "--poll", "1"]

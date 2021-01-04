@@ -1,6 +1,8 @@
 # Installation of the Development Environment 
 All you need to run our development environment is Docker. 
 
+testing first commit
+
 ##### Linux
 
 To install Docker, please use the command `sudo apt install docker.io`. This will install Docker onto your machine which would give you access to Docker and docker-compose.

@@ -5,21 +5,6 @@ networks:
     external:
       name: ysc-net
 services:
-  nginx:
-    image: nginx:1.19.2-alpine
-    container_name: reverse-proxy-server
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    networks:
-      - ysc-net
-    ports:
-      - 80:80
-    depends_on:
-      - chessserver
-      - middleware
-      - stockfishserver
-      - chessclient
-      - ystemandchess
   chessserver:
     image: chessserver
     container_name: chessserver
@@ -27,8 +12,8 @@ services:
       - PORT=3000
     networks:
       - ysc-net
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
     volumes:
       - ./chessServer:/usr/src/app
   chessclient:
@@ -38,8 +23,8 @@ services:
       - PARENT=ystemandchess
     networks:
       - ysc-net
-    expose:
-      - "80"
+    ports:
+      - "4200:80"
     volumes:
       - ./chessClient:/usr/share/nginx/html
   stockfishserver:
@@ -49,8 +34,8 @@ services:
       - PORT=8080
     networks:
       - ysc-net
-    expose:
-      - "8080"
+    ports:
+      - "8080:8080"
     volumes:
       - ./stockfishServer:/usr/src/app
   middleware:
@@ -60,23 +45,22 @@ services:
       - ./middleware/environment.php
     networks:
       - ysc-net
-    expose:
-      - "80"
+    ports:
+      - "8000:8000"
     volumes:
       - ./middleware:/var/www/html
   ystemandchess:
     image: ystemandchess
     container_name: ystemandchess
-    env_file: 
-      - ./YStemAndChess/src/environments/environment.ts
     networks:
       - ysc-net
-    expose:
-      - "80"
+    ports:
+      - "80:80"
     depends_on:
       - middleware
       - stockfishserver
       - chessclient
       - chessserver
     volumes:
-      - ./YStemAndChess/dist/YStemAndChess:/usr/share/nginx/html/
+      - ./YStemAndChess:/usr/src/app
+      - /usr/src/app/node_modules

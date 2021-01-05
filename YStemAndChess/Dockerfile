@@ -1,10 +1,24 @@
 #Use the alpine linux nginx docker container.
-FROM nginx:alpine
+#FROM nginx:alpine
 
 # Copy the conf files into the container
-COPY default.conf /etc/nginx/conf.d/default.conf
+#COPY default.conf /etc/nginx/conf.d/default.conf
 
-COPY /dist/YStemAndChess /usr/share/nginx/html/
+#COPY /dist/YStemAndChess /usr/share/nginx/html/
 #CMD echo $"RewriteEngine On\nRewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]\nRewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d\nRewriteRule ^ - [L]\nRewriteRule ^ /index.html" > /usr/local/apache2/htdocs/
 
+#EXPOSE 80
+
+FROM node:alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
+
+COPY . /usr/src/app/
+
 EXPOSE 80
+
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "80", "--disable-host-check", "--poll", "1"]

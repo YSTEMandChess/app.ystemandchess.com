@@ -23,6 +23,7 @@ import { ParentComponent } from './pages/parent/parent.component';
 import { PlayMentorComponent } from './pages/play-mentor/play-mentor.component';
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { DonateComponent } from './pages/donate/donate.component';
+import { NewpageComponent } from './pages/new-page/newpage.component';
 import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
@@ -53,6 +54,7 @@ const agoraConfig: AgoraConfig = {
     PlayMentorComponent,
     PlayNologComponent,
     DonateComponent,
+    NewpageComponent,
     MentorDashboardComponent,
     AdminComponent,
     ParentAddStudentComponent,

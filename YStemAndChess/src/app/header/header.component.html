@@ -11,6 +11,10 @@
             <li class="nav-item">
                 <a class="nav-link hvr-underline-from-left" href="{{playLink}}">Play</a>
             </li>
+            <!-- New Page navbar link to new route-->
+            <li class="nav-item">
+                <a class="nav-link hvr-underline-from-left" href="/new-page">NEW PAGE</a>
+            </li>
             <li class="nav-item">
                 <div *ngIf="(role === 'mentor' || role === 'student') && !inMatch">
                     <a class="nav-link hvr-underline-from-left" (click)="openModal('find-game')" (click)="findGame()">Find a Game</a>

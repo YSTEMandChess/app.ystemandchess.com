@@ -101,14 +101,14 @@ body {
     background-color: #FF8503;
 
     #cost-statement h3 {
-        width:70%;
+        width:90%;
         padding-left:5%;
         padding-top:5%;
         height:auto;
         font-family: 'Lato';
         font-style: normal;
         font-weight: 900;
-        font-size: 2.7vw; //42px
+        font-size: 2.3vw; //42px
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -159,18 +159,50 @@ body {
     width:40%;
     height:auto;
     border-radius: 33px;
-    background-color: #51AA00;
+    padding-bottom: 20px;
+    background-color: #51AA00;   
+
+    #helping-statement button {
+        padding:1.1%;
+        margin-bottom:7%;
+        margin-left: 7%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.8vw; //28px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        border-radius: 33px;
+        color: #51AA00;
+        background-color: #fff;
+    }
+
+    #helping-statement button:hover {
+        color:#fff;
+        background-color: #51AA00;
+    }
 
     #helping-statement h3 {
-        padding-right:5%;
-        padding-top:5%;
+        width:70%;
         padding-left:5%;
+        padding-top:5%;
+        height:auto;
         font-family: 'Lato';
         font-style: normal;
         font-weight: 900;
-        font-size: 1.9vw; //30px
+        font-size: 2.3vw; //42px
         line-height: 117.1%;
-        letter-spacing: 0.07em;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
+    }
+    #helping-statement h4 {
+        padding-left:5%;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 1.7vw; //26px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
         color: #FFFFFF;
     }
 

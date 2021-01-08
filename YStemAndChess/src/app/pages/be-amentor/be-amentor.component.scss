@@ -6,6 +6,7 @@ body {
     clear:both;
 }
 
+
 #difference-container {
     position:relative;
     margin:0 auto;
@@ -25,7 +26,9 @@ body {
         border-bottom-left-radius: 33px;
         border-top-left-radius: 33px;
     }
-
+    #infinite{
+        font-size:3.5vw; //42px
+    }
     #difference-header h4 {
         float:right;
         overflow:hidden;
@@ -146,6 +149,7 @@ body {
 }
 
 #become-mentor-container {
+    visibility: hidden;
     position:relative;
     width:92.5%;
     margin:0 auto;

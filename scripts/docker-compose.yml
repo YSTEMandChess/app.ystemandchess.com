@@ -19,7 +19,6 @@ services:
       - middleware
       - stockfishserver
       - chessclient
-      - ystemandchess
   chessserver:
     image: chessserver
     container_name: chessserver
@@ -28,9 +27,9 @@ services:
     networks:
       - ysc-net
     expose:
-      - "3000"
+      - '3000'
     volumes:
-      - ./chessServer:/usr/src/app
+      - ../chessServer:/usr/src/app
   chessclient:
     image: chessclient
     container_name: chessclient
@@ -39,9 +38,9 @@ services:
     networks:
       - ysc-net
     expose:
-      - "80"
+      - '80'
     volumes:
-      - ./chessClient:/usr/share/nginx/html
+      - ../chessClient:/usr/share/nginx/html
   stockfishserver:
     image: stockfishserver
     container_name: stockfishserver
@@ -50,33 +49,17 @@ services:
     networks:
       - ysc-net
     expose:
-      - "8080"
+      - '8080'
     volumes:
-      - ./stockfishServer:/usr/src/app
+      - ../stockfishServer:/usr/src/app
   middleware:
     image: middleware
     container_name: middleware
-    env_file: 
-      - ./middleware/environment.php
+    env_file:
+      - ../middleware/environment.php
     networks:
       - ysc-net
     expose:
-      - "80"
+      - '80'
     volumes:
-      - ./middleware:/var/www/html
-  ystemandchess:
-    image: ystemandchess
-    container_name: ystemandchess
-    env_file: 
-      - ./YStemAndChess/src/environments/environment.ts
-    networks:
-      - ysc-net
-    expose:
-      - "80"
-    depends_on:
-      - middleware
-      - stockfishserver
-      - chessclient
-      - chessserver
-    volumes:
-      - ./YStemAndChess/dist/YStemAndChess:/usr/share/nginx/html/
+      - ../middleware:/var/www/html

@@ -13,12 +13,13 @@ services:
     networks:
       - ysc-net
     ports:
-      - 80:80
+      - '80:80'
     depends_on:
       - chessserver
       - middleware
       - stockfishserver
       - chessclient
+      - ystemandchess
   chessserver:
     image: chessserver
     container_name: chessserver
@@ -60,6 +61,23 @@ services:
     networks:
       - ysc-net
     expose:
-      - '80'
+      - '8000'
     volumes:
       - ../middleware:/var/www/html
+  ystemandchess:
+    image: ystemandchess
+    container_name: ystemandchess
+    env_file:
+      - ../YStemAndChess/src/environments/environment.ts
+    networks:
+      - ysc-net
+    ports:
+      - '80'
+    depends_on:
+      - middleware
+      - stockfishserver
+      - chessclient
+      - chessserver
+    volumes:
+      - ../YStemAndChess:/usr/src/app/
+      - /usr/src/app/node_modules

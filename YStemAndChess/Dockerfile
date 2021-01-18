@@ -11,14 +11,14 @@
 
 FROM node:alpine
 
-WORKDIR /usr/share/nginx/html
+WORKDIR /usr/src/app
 
 COPY package*.json .
 
 RUN npm install -g @angular/cli @angular-devkit/build-angular && npm install
 
-COPY . /usr/share/nginx/html
+COPY . .
 
 EXPOSE 80
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "80", "--disable-host-check", "--poll", "1"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "80", "--disable-host-check"]

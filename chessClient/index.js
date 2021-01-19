@@ -1,5 +1,3 @@
-// NOTE: this example uses the chess.js library:
-  // https://github.com/jhlywa/chess.js
   let flag = false;
   let lessonFlag = false;
   let isLesson = false;
@@ -25,7 +23,8 @@
   let startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
 
   letParentKnow();
-  // Listen to message from child window
+
+  // Listen to message from parent window
   eventer(messageEvent, (e) => {
     //console.log("Hey, I am going to update the board state");
     let data = JSON.parse(e.data);

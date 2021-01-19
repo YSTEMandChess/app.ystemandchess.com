@@ -1,4 +1,4 @@
-import { environment } from './../environments/environment.prod';
+import { environment } from './../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 
 var information;

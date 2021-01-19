@@ -201,8 +201,6 @@ export class PieceLessonsComponent implements OnInit {
     });
   }
 
-  
-
   /**
    * make requests to the serer
    * @param theUrl url to contact

@@ -29,19 +29,15 @@ export class PlayComponent implements OnInit {
 
   ngOnInit() {
     let userContent;
+    let responseText;
     
     if(this.cookie.check("login")) {
       userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
-    } else {
-      userContent = ""
-    }
-    
-
-    this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
-      if (response == "There are no current meetings with this user.") {
-        return;
-      }
-      let responseText = JSON.parse(response);
+      this.httpGetAsync(`${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get("login")}`, (response) => {
+        if (response == "There are no current meetings with this user.") {
+          return;
+        }
+      responseText = JSON.parse(response);
 
 
       // Code for webcam
@@ -110,6 +106,9 @@ export class PlayComponent implements OnInit {
         }
       })
     });
+  } else {
+    userContent = "";
+  }
 
     this.socket.listen("gameOver").subscribe((data) => {
       alert("game over ");

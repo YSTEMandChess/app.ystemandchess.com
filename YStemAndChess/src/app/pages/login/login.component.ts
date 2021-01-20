@@ -55,11 +55,9 @@ export class LoginComponent implements OnInit {
     let url = `${environment.urls.middlewareURL}/?reason=verify&username=${username}&password=${password}`;
     this.httpGetAsync(url, (response) => {
       if (response == 'The username or password is incorrect.') {
-        //console.log("Don't RedirectMe");
         this.loginError = 'Username or Password is incorrect';
       } else {
         this.cookie.set('login', response, 1);
-        //console.log("Log. Redirect");
         let payload = JSON.parse(atob(response.split('.')[1]));
         switch (payload['role']) {
           case 'student':
@@ -78,7 +76,6 @@ export class LoginComponent implements OnInit {
             window.location.pathname = '';
         }
       }
-      console.log(response);
     });
   }
 

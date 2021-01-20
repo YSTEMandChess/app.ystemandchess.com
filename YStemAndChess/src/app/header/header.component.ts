@@ -176,9 +176,7 @@ export class HeaderComponent implements OnInit {
     let url = `${
       environment.urls.middlewareURL
     }/endSearch.php/?jwt=${this.cookie.get('login')}`;
-    this.httpGetAsync(url, (response) => {
-      console.log(response);
-    });
+    this.httpGetAsync(url, (response) => {});
     this.endFlag = true;
   }
 
@@ -187,7 +185,6 @@ export class HeaderComponent implements OnInit {
       environment.urls.middlewareURL
     }/newGame.php/?jwt=${this.cookie.get('login')}`;
     this.httpGetAsync(url, (response) => {
-      console.log(response);
       if (response === 'Person Added Sucessfully.') {
         url = `${
           environment.urls.middlewareURL
@@ -195,7 +192,6 @@ export class HeaderComponent implements OnInit {
         let meeting = setInterval(() => {
           this.gameFound(url);
           if (this.foundFlag === true || this.endFlag === true) {
-            console.log('modal should close');
             this.endFlag = false;
             this.foundFlag = false;
             this.closeModal('find-game');
@@ -210,29 +206,23 @@ export class HeaderComponent implements OnInit {
   }
 
   private async createGame(url) {
-    console.log('creating game');
-    await this.httpGetAsync(url, (reply) => {
-      console.log(reply);
-    });
+    await this.httpGetAsync(url, (reply) => {});
   }
 
   private async gameFound(url) {
     await this.httpGetAsync(url, (response) => {
-      console.log(response);
       if (response === 'There are no current meetings with this user.') {
         let url = `${
           environment.urls.middlewareURL
         }/pairUp.php/?jwt=${this.cookie.get('login')}`;
-        console.log('about to create game');
         this.createGame(url);
       }
 
       try {
         let s = JSON.parse(response);
-        console.log('I am here');
         this.foundFlag = true;
       } catch (Error) {
-        console.log(Error.message);
+        console.error(Error.message);
       }
     });
   }

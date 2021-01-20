@@ -17,13 +17,6 @@ export class SocketService {
     this.socket.emit(eventName, message);
   }
 
-  // Example Implmentation of function:
-  /*
-  this.webSocket.listen("example").subscribe((data) => {
-    console.log(data);
-    // I have recieved the data here and will now do something.
-  })
-  */
   public listen(eventName: string) {
     return new Observable((subscriber) => {
       this.socket.on(eventName, (data) => {

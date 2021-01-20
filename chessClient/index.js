@@ -98,7 +98,6 @@ function onDragStart(source, piece, position, orientation) {
     }
   }
 
-  "(playerColor)
   if (playerColor === 'black') {
     if (piece.search(/^w/) !== -1) return false
   } else if (playerColor === 'white') {

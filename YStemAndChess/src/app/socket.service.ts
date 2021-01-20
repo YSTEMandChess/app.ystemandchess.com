@@ -7,10 +7,9 @@ import { environment } from 'src/environments/environment';
 })
 export class SocketService {
   private socket;
-  private socketEndpoint = environment.urls.chessServerURL;
 
   constructor() {
-    this.socket = io.connect(this.socketEndpoint);
+    this.socket = io();
   }
 
   public emitMessage(eventName: string, message: string) {

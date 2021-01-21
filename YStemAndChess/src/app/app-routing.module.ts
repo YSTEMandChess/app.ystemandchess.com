@@ -22,6 +22,8 @@ import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.compo
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
+import { PlayEditorComponent } from './pages/play-editor/play-editor.component';
+
 
 
 const routes: Routes = [
@@ -45,7 +47,9 @@ const routes: Routes = [
   {path: 'piece-lessons', component: PieceLessonsComponent},
   {path: 'play-lesson', component: PlayLessonComponent},
   {path: 'contact', component: ContactComponent},
-  {path: 'board-editor', component: BoardEditorComponent}
+  {path: 'board-editor', component: BoardEditorComponent},
+  {path: 'play-editor', component: PlayEditorComponent}
+
 ];
 
 @NgModule({

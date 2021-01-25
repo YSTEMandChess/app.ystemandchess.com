@@ -1,8 +1,6 @@
 let flag = false
 let lessonFlag = false
 let isLesson = false
-let boardEditorFlag = false
-let isBoardEditor = false
 let lessonStarted = false
 let lessonBoard = ''
 let lessonEnd = ''
@@ -36,12 +34,6 @@ eventer(
       isLesson = true
     }
 
-    boardEditorFlag = data.boardEditorFlag
-    if (boardEditorFlag == true) {
-      isBoardEditor = true;
-    }
-
-
     if (isLesson == true) {
       endSquare = data.endSquare
       lessonBoard = data.boardState
@@ -74,18 +66,7 @@ eventer(
     } else if (data.boardState == startFEN) {
       game = new Chess()
     }
-
-    if (isBoardEditor == true) {
-      var boardEditorConfig = {
-        draggable: true,
-        dropOffBoard: 'trash',
-        position: 'start',
-        sparePieces: true
-      }
-      board = Chessboard('myBoard', boardEditorConfig)
-    }
-
-    if (isLesson == false && isBoardEditor == false) {
+    if (isLesson == false) {
       playerColor = data.color
       board.orientation(playerColor)
       game.load(data.boardState)

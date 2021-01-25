@@ -24,4 +24,8 @@ export class BoardEditorComponent implements OnInit {
     this.board = ChessBoard('board', config);
   }
 
+  public flipBoard() {
+    this.board.flip();
+  }
+  
 }

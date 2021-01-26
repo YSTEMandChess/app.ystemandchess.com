@@ -1,60 +1,27 @@
 # Installation of the Development Environment 
-To quick install the dev environment, use the script I have created called `setup.sh`. This should provide a good installation provided you type in your password a couple of time and are on ubuntu.
+All you need to run our development environment is Docker. 
 
+##### Linux
+
+To install Docker, please use the command `sudo apt install docker.io`. This will install Docker onto your machine which would give you access to Docker and docker-compose.
+After the installation is complete, use the command `sudo systemctl start docker` to start Docker and `sudo systemctl enable docker` to allow Docker to start when you login to your OS. 
+
+##### Windows
+
+To install Docker, click the following [link](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
+Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
+***If it doesn't start and asks for you to enable virtualization, follow this [guide](https://docs.docker.com/docker-for-windows/troubleshoot/) 
+for enabling virtualization. You will need to enable this in your computer's BIOS.
 &nbsp; 
-
-However if you want to do it the long way, follow along down below. (All commands are given for ubuntu/debian as this is the only development environment we use)
-
-&nbsp; 
-
-The first thing that you need to install is **node.js**.
-
-to do this, run `sudo apt install nodejs`.
-
-&nbsp; 
-
-Now you need to install the **angular cli**.
-
-to do this, run `sudo npm install -g @angular/cli`
-
-and you will also need to install `sudo npm install -g @angular-devkit/build-angular`.
-
-
-&nbsp; 
-
-
-Now that you are done with that, you will need to install **php**.
-
-If you don't already have it, run the command `sudo apt install php`.
-
-
-&nbsp; 
-
-
-Now we need to install **nodemon, express, and socket.io**.
-
-To do this, run the command: `sudo npm install -g express nodemon socket.io` 
-
-
-&nbsp; 
-
-
-Finally, we need to install the **mongodb driver**.
-
-to do this, run the command `sudo apt install -y php-pear php-dev`
-
-
-then, you need to run the command `sudo pecl install mongodb`
-
-then you need to add the line `extension=mongodb.so` to your php.ini file.
-
-This can be found using the command `php -i | grep "Loaded Configuration File" | awk '{print $5}'`.
-
-&nbsp; 
-
-
+I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
 &nbsp;
 
+##### MacOS
+
+To install Docker, click the following [link](https://docs.docker.com/docker-for-mac/install/).
+Follow the steps to install Docker properly and you should be good!
+
+## Adding Environment Variables 
 Now go into the chessClient directory and run `npm i dotenv`
 
 Repeat this step in chessServer as well
@@ -62,6 +29,8 @@ Repeat this step in chessServer as well
 &nbsp;
 
 The last step is to add environment files to the app, which you will be given if working with us, otherwise you will have to use your personal accounts. Below is a list of all the directories in root and where to place your env files for each directory if you want to do it manually. Otherwise run the given `create_envs.sh` script from root by typing `bash create_envs.sh`
+
+###### THIS IS ONLY TESTED ON UBUNTU
 
 **YStemAndChess**
 
@@ -120,49 +89,29 @@ Now you should be good to start developing!
 
 Congrats! You have learned the basic commands and techniques to use GitHub!
 
+&nbsp; 
+
 # Running the Development Environment
 
-Now, it is time to start running the dev environment. As a side note, all of the development environments (except for `chessClient`) refresh when you save a file.
+To begin the development servers, please follow these steps listed below.
 
-&nbsp; 
+Start by going into the YStemAndChess directory and running `npm i`. This will install all the packages we need to run the development environment. 
+***Make sure Angular-CLI is installed afterwards by using the `ng` command. If it is not installed, you can install it using the command `npm install -g @angular/cli`.***
 
-The frontend code is stored in the `YStemAndChess` folder. Navigate inside of that folder.
+After installing the packages, head back out to the root of our directory using `cd ..` and then navigate into the scripts folder. We now want to build the docker images that we need to run.
+We can do this by using the command `bash tag_build_containers.sh`.
+***If you are on Linux, use this command instead: `sudo bash tag_build_containers.sh`.***
 
-Then, run the command `ng serve`. This will start the angular developer server. It can be found by going to `http://localhost:4200`.
+Next, we need to start the network to run our local virtual machine of docker containers. Use the command `docker network create ysc-net` to achieve this. 
+***This only needs to be run one time. After it is run, you can skip this step for all future cases.***
 
-If angular can't be found in /usr/, a possible solution is to cd into the YStemAndChess folder and install local modules with:   
-`sudo npm install express nodemon socket.io`  
-`sudo npm install @angular-devkit/build-angular`  
+After that, we can run the command `docker-compose up -d` to start all our docker images. 
 
-In the event of NGCC failing with an unhandled exception:  
-In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
-As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
+To stop the images, use the command `docker-compose down`. 
 
-
-&nbsp; 
-
-Now, we need to start the php server. It handles verification and communicates with the mongodb server. This is stored in the `middleware` folder. Navigate inside of it.
-
-Now, run the command `php -S localhost:8000`. As you may have guessed, this creates a http server on the port 8000. While you most likely will not need to directly access the server, it can be found by going to `http://localhost:8000`.
-
-&nbsp; 
-
-Next is the chess server. This is in the directory `chessServer`. 
-
-After navigating inside of that server, you need to run `nodemon index.js`. This will start the server on port 3000.
-
-This is a websocket server though, so you cannot use a simple http request to access it.
-
-&nbsp; 
-
-Following the chess server, we need to run the stockfish server to allow players to play with an AI. This is done in the directory 'stockfishServer'.
-After navigating inside the directory, you need to run `nodemon index.js`. This will start the stockfish server. 
-
-&nbsp;
-
-The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
-
-So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
+***Important Note: You need to run the bash script every time you make changes to a file and want to see them. `This only applies to changes outside of the YStemAndChess folder.` 
+You need to run `docker-compose down`, build the docker images using `bash tag_build_containers.sh`, and then `docker-compose up -d` to restart the virtual machine.
+Also, make sure you run the terminal AS AN ADMINISTRATOR!!!!!!***
 
 # Running Tests in YStemAndChess Directory
 

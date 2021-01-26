@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Allow Cross Origin Requests (other ips can request data)
 header("Access-Control-Allow-Origin: *");
 
@@ -14,8 +14,8 @@ $waitingStudentsCollection = $client->ystem->waitingStudents;
 $meetingCollection = $client->ystem->meetings;
 
 // Get the mentors in sorted order, then get the students in sorted order.
-$sortedMentorsCursor = $waitingMentorCollection->find([],["$sort" => [requestedGameAt => 1]]);
-$sortedStudentsCursor = $waitingStudentsCollection->find([],["$sort" => [requestedGameAt => 1]]);
+$sortedMentorsCursor = $waitingMentorCollection->find([],[$sort => ["requestedGameAt" => 1]]);
+$sortedStudentsCursor = $waitingStudentsCollection->find([],[$sort => ["requestedGameAt" => 1]]);
 // Get first doc of both
 $sortedMentorArray = [];
 $sortedStudentsArray = [];
@@ -37,30 +37,34 @@ if(count($sortedMentorArray) > count($sortedStudentsArray)) {
 include "record.php";
 
 for($i=0; $i<$smallerArraySize; $i++) {
-    $meetingID = uniqid(20);
-    $rec = startRecording($queryURL, $meetingID, $uid, $auth);
-    $meetingCollection->insertOne([
-        // MeetingID is the studentsusername and then the mentors username shoved against each other
-        'meetingID' => $meetingID,
-        'password' => uniqidReal(20),
-        'studentUsername' => $sortedStudentsArray[$i]->username,
-        'studentFirstName' => $sortedStudentsArray[$i]->firstName,
-        'studentLastName' => $sortedStudentsArray[$i]->lastName,
-        'mentorUsername' => $sortedMentorArray[$i]->username,
-        'mentorFirstName' => $sortedMentorArray[$i]->firstName,
-        'mentorLastName' => $sortedMentorArray[$i]->lastName,
-        'CurrentlyOngoing' => true,
-        'resourceId' => $rec[1],
-        'sid' => $rec[0],
-        'meetingStartTime' => date("H:i")
-    ]);
+//if ($smallerArraySize >= 1) {
+    $document = $meetingCollection->findOne(["mentorUsername" => $sortedMentorArray[$i]->username, "CurrentlyOngoing" => true]);
+    if(is_null($document)) {
 
-    // Now delete the waiting status of the mentor and the student.
-    $waitingMentorCollection->deleteOne(['username' => $sortedMentorArray[$i]->username]);
-    $waitingStudentsCollection->deleteOne(['username' => $sortedStudentsArray[$i]->username]);
-    echo "Sucessfully Paired " .  $sortedMentorArray[$i]->username . " and " .  $sortedStudentsArray[$i]->username . "\n";
-} 
+        // Now delete the waiting status of the mentor and the student.
+        $waitingMentorCollection->deleteOne(['username' => $sortedMentorArray[$i]->username]);
+        $waitingStudentsCollection->deleteOne(['username' => $sortedStudentsArray[$i]->username]);
+        //echo "Sucessfully Paired " .  $sortedMentorArray[$i]->username . " and " .  $sortedStudentsArray[$i]->username . "\n";
 
+        $meetingID = uniqid(20);
+        $rec = startRecording($queryURL, $meetingID, $uid, $auth);
+        $meetingCollection->insertOne([
+            // MeetingID is the studentsusername and then the mentors username shoved against each other
+            'meetingID' => $meetingID,
+            'password' => uniqidReal(20),
+            'studentUsername' => $sortedStudentsArray[$i]->username,
+            'studentFirstName' => $sortedStudentsArray[$i]->firstName,
+            'studentLastName' => $sortedStudentsArray[$i]->lastName,
+            'mentorUsername' => $sortedMentorArray[$i]->username,
+            'mentorFirstName' => $sortedMentorArray[$i]->firstName,
+            'mentorLastName' => $sortedMentorArray[$i]->lastName,
+            'CurrentlyOngoing' => true,
+            'resourceId' => $rec[1],
+            'sid' => $rec[0],
+            'meetingStartTime' => date("H:i")
+        ]);
+    }
+}
 
 function uniqidReal($length) {
     // uniqid gives 13 chars, but you could adjust it to your needs.
@@ -73,4 +77,5 @@ function uniqidReal($length) {
     }
     return substr(bin2hex($bytes), 0, $length);
 }
+
 ?>

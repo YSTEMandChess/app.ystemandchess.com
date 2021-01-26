@@ -1,3 +1,4 @@
+  
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -50,7 +51,7 @@ function postStartRecording($queryURL, $resourceID, $auth, $uid, $cname) {
 
     $newURL = $queryURL . "resourceid/" . $resourceID . "/mode/mix/start";
     // Need to change the contents of startBody in the case that tokens change and whatnot
-    $startBody = "{\"uid\":\"".$uid."\",\"cname\":\"".$cname."\",\"clientRequest\":{\"storageConfig\":{\"secretKey\":\"aMGYQKY4TBauOd\\/Bpm68BIXrbW8RUacC\\/+U1q4kz\",\"region\":1,\"accessKey\":\"AKIA3W5HAAMI6L45OV5X\",\"bucket\":\"ystemandchess-meeting-recordings\",\"vendor\":1},\"recordingConfig\":{\"audioProfile\":0,\"channelType\":0,\"maxIdleTime\":30,\"transcodingConfig\":{\"width\":1280,\"height\":720,\"fps\":15,\"bitrate\":600,\"mixedVideoLayout\":3,\"backgroundColor\":\"#000000\",\"layoutConfig\":[{\"x_axis\":0,\"y_axis\":0,\"width\":0.5,\"height\":1,\"alpha\":1,\"render_mode\":1},{\"x_axis\":0.5,\"y_axis\":0,\"width\":0.5,\"height\":1,\"alpha\":1,\"render_mode\":1}]}}}}";
+    $startBody = "{\"uid\":\"".$uid."\",\"cname\":\"".$cname."\",\"clientRequest\":{\"storageConfig\":{\"secretKey\":\"".$_ENV["awsSecretKey"]."\",\"region\":1,\"accessKey\":\"".$_ENV["awsAccessKey"]."\",\"bucket\":\"ystemandchess-meeting-recordings\",\"vendor\":1},\"recordingConfig\":{\"audioProfile\":0,\"channelType\":0,\"maxIdleTime\":30,\"transcodingConfig\":{\"width\":1280,\"height\":720,\"fps\":15,\"bitrate\":600,\"mixedVideoLayout\":3,\"backgroundColor\":\"#000000\",\"layoutConfig\":[{\"x_axis\":0,\"y_axis\":0,\"width\":0.5,\"height\":1,\"alpha\":1,\"render_mode\":1},{\"x_axis\":0.5,\"y_axis\":0,\"width\":0.5,\"height\":1,\"alpha\":1,\"render_mode\":1}]}}}}";
     //echo $startBody;
     //echo $newURL;
     $response = $client->request(
@@ -90,11 +91,3 @@ function stopRecording($queryURL, $channelName, $uid, $auth, $resourceID, $sid) 
     echo "<br>Stopping Recording: " . (($body)->serverResponse->fileList);
     return (($body));
 }
-
-//$returnInfo = startRecording($queryURL, $channelName, $uid, $auth);
-//sleep(30);
-//stopRecording($queryURL, $channelName, $uid, $auth, $returnInfo[1], $returnInfo[0])
-
-
-//cho json_encode($stopBody);
-?>

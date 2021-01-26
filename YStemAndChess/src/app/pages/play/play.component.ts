@@ -57,6 +57,8 @@ export class PlayComponent implements OnInit {
             return;
           }
           responseText = JSON.parse(response);
+          document.getElementById("local_stream").style.display = "block";
+        document.getElementById("remote_stream").style.display = "block";
 
           // Code for webcam
           // -------------------------------------------------------------------------
@@ -140,6 +142,8 @@ export class PlayComponent implements OnInit {
         }
       );
     } else {
+      document.getElementById("local_stream").style.display = "none";
+      document.getElementById("remote_stream").style.display = "none";
       userContent = '';
     }
 

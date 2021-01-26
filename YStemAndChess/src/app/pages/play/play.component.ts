@@ -57,8 +57,10 @@ export class PlayComponent implements OnInit {
             return;
           }
           responseText = JSON.parse(response);
+
+          //display web cam styling
           document.getElementById("local_stream").style.display = "block";
-        document.getElementById("remote_stream").style.display = "block";
+          document.getElementById("remote_stream").style.display = "block";
 
           // Code for webcam
           // -------------------------------------------------------------------------
@@ -142,8 +144,10 @@ export class PlayComponent implements OnInit {
         }
       );
     } else {
+      //hide web cam styling
       document.getElementById("local_stream").style.display = "none";
       document.getElementById("remote_stream").style.display = "none";
+      
       userContent = '';
     }
 

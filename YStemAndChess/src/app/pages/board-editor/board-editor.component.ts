@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardEditorComponent implements OnInit {
 
-  public board
+  private board;
+  private useAnimation:boolean = false;
 
   constructor() {     
   }
@@ -22,10 +23,19 @@ export class BoardEditorComponent implements OnInit {
       sparePieces: true
     }
     this.board = ChessBoard('board', config);
+    window.addEventListener('resize', this.board.resize);
   }
 
   public flipBoard() {
     this.board.flip();
+  }
+
+  public clearBoard() {
+    this.board.clear(this.useAnimation);
+  }
+
+  public startPosition() {
+    this.board.start(this.useAnimation);
   }
   
 }

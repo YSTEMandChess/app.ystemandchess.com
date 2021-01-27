@@ -23,9 +23,11 @@
         <!-- End Google Tag Manager (noscript) -->
         
         <div id="board-editor-container">
-            <div id="board" style="width: 400px"></div>
+            <div id="board"></div>
             <div id="bottom">
-                <button type="button" id="flip-board" (click)="flipBoard()"> Flip Board</button>       
+                <button type="button" id="flip-board" (click)="flipBoard()"> Flip Board</button>
+                <button type="button" id="clear-board" (click)="clearBoard()"> Clear Board</button>    
+                <button type="button" id="start-position" (click)="startPosition()"> Start Position</button>                        
             </div>
         </div>
 

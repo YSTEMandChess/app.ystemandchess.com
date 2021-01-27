@@ -1,12 +1,32 @@
 #board-editor-container {
     margin-top: 2%;
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
 
-   #bottom {
+    #board {
+        width: 100%;
+    }
+
+    #bottom {
        margin-top: 2%;
+       padding-left: 2%;
        padding-bottom:2%;
+       min-width: 300px;
        text-align: center;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
 
-       #flip-board, #undo {
+       button {
+           margin-top: 5%;
+       }
+
+
+       #flip-board, #start-position {
            outline-style: none;
            padding-top: 1%;
            padding-bottom:1%;
@@ -22,7 +42,7 @@
            background-color: #FF8503;
        }
 
-       #undo {
+       #clear-board {
            outline-style: none;
            padding-top: 1%;
            padding-bottom:1%;
@@ -38,25 +58,26 @@
            background-color: #51AA00;
        }
 
-       #flip-board:hover {
+       #flip-board:hover, #start-position:hover {
            transition: 0.3s;
            color:#FF8503;
            background-color: #fff;
        }
 
-       #undo:hover {
+       #clear-board:hover {
            transition: 0.3s;
            color: #51AA00;
            background-color: #FFF;
        }
    }
-       
-
-   #lichess-board {
-       width:100%;
-   }
 
    #bottom {
        padding-bottom:2%;
    }
+}
+
+@media only screen and (max-width: 800px) {
+    #board-editor-container {
+        flex-wrap: wrap;
+    }
 }

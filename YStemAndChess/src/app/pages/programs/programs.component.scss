@@ -7,17 +7,68 @@ body {
     clear:both;
 }
 
+#why-chess-container{
+    display: flex;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 33px;
+    background-color: #51AA00;
+
+    #why-chess-statement {
+        width: 95%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        padding-left: 5%;
+        h3 {
+            font-family: 'Lato';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 42px;
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+            color: #FFFFFF;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
+            li {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 22px;
+                line-height: 130%;
+                letter-spacing: 0.02em;
+                color: #FFFFFF;
+            }
+        }
+
+        p {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 22px;
+            line-height: 130%;
+            letter-spacing: 0.02em;
+            color: #FFFFFF; 
+        }
+
+        a {
+            color: darkblue
+        }
+    }
+}
+
 #our-programs-container {
     display:flex;
     width:90%;
-    height:auto;
     margin-left: 5%;
+    margin-top: 5%;
     border-radius: 33px;
     background-color: #3A7CCA;
 
     #our-programs-image {
         flex:7.5;
-        height:auto;
     }
 
     #our-programs-image img {
@@ -40,7 +91,7 @@ body {
         font-family: 'Lato';
         font-style: normal;
         font-weight: 900;
-        font-size: 2.7vw; //42px
+        font-size: 42px;
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -53,7 +104,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: bold;
-        font-size: 1.4vw; //22px
+        font-size: 22px;
         line-height: 130%;
         letter-spacing: 0.02em;
         color: #FFFFFF;
@@ -65,7 +116,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: normal;
-        font-size: 1.4vw; //22px
+        font-size: 22px;
         line-height: 130%;
         letter-spacing: 0.02em;
         color: #FFFFFF;
@@ -77,7 +128,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: bold;
-        font-size: 1.8vw; //28px
+        font-size: 32px;
         line-height: 117.1%;
         letter-spacing: 0.01em;
         border-radius: 33px;
@@ -86,6 +137,7 @@ body {
     }
 
     #our-programs-statement button:hover {
+        transition: 0.3s;
         color:#fff;
         background-color: #3A7CCA;
     }
@@ -108,7 +160,7 @@ body {
         font-family: 'Lato';
         font-style: normal;
         font-weight: 900;
-        font-size: 2.7vw; //42px
+        font-size: 42px;
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -119,7 +171,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: bold;
-        font-size: 1.7vw; //26px
+        font-size: 26px; 
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -132,7 +184,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
-        font-size: 1.4vw; //22px
+        font-size: 22px;
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -145,7 +197,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
-        font-size: 1.4vw; //22px
+        font-size: 22px;
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -168,7 +220,7 @@ body {
         font-family: 'Lato';
         font-style: normal;
         font-weight: 900;
-        font-size: 1.9vw; //30px
+        font-size: 32px;
         line-height: 117.1%;
         letter-spacing: 0.07em;
         color: #FFFFFF;
@@ -183,7 +235,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
-        font-size: 1.4vw; //22px
+        font-size: 22px;
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -191,58 +243,26 @@ body {
 }
 
 //scale font and image
-@media screen and (max-width:950px) {
+@media screen and (max-width:1475px) {
     #our-programs-container {
 
         #our-programs-image img {
             height:100%;
         }
-
-        #our-programs-statement h3 {
-            font-size: 3.5vw; //42px
-        }
-    
-        #our-programs-statement h4 {
-            font-size: 2.2vw; //22px
-        }
-    
-        #our-programs-statement p {
-            font-size: 2.2vw; //22px
-        }
-    
-        #our-programs-statement button {
-            font-size: 2.6vw; //28px
-        }
     }
+}
 
+@media screen and (max-width:1350px) {
     #cost-container {
-    
-        #cost-statement h3 {
-            font-size: 3.5vw; //42px
-        }
-    
-        #cost-statement h4 {
-            font-size: 2.5vw; //26px
-        }
-        
-        #cost-statement p {
-            font-size: 2.2vw; //22px
-        }
-    
-        #cost-statement ul {
-            font-size: 2.2vw; //22px
-        }
+        margin-top:5%;
+        margin-left:5%;
+        width:90%;
     }
     
     #helping-container {
-    
-        #helping-statement h3 {
-            font-size: 2.7vw; //30px
-        }
-    
-        #helping-statement p {
-            font-size: 2.2vw; //22px
-        }
+        margin-top:5%;
+        margin-left:5%;
+        width:90%;
     }
 }
 
@@ -255,111 +275,6 @@ body {
             border-top-right-radius: 33px;
             border-top-left-radius: 33px;
             border-bottom-left-radius: 0px ;
-        }
-    
-        #our-programs-statement h3 {
-            font-size: 4.3vw; //42px
-        }
-    
-        #our-programs-statement h4 {
-            font-size: 3vw; //22px
-        }
-    
-        #our-programs-statement p {
-            font-size: 3vw; //22px
-        }
-    
-        #our-programs-statement button {
-            font-size: 3.2vw; //28px
-        }
-    }
-
-    #cost-container {
-        margin-top:5%;
-        margin-left:5%;
-        width:90%;
-    
-        #cost-statement h3 {
-            font-size: 3.5vw; //42px
-        }
-    
-        #cost-statement h4 {
-            font-size: 2.5vw; //26px
-        }
-        
-        #cost-statement p {
-            font-size: 3vw; //22px
-        }
-    
-        #cost-statement ul {
-            font-size: 3vw; //22px
-        }
-    }
-    
-    #helping-container {
-        margin-top:5%;
-        margin-left:5%;
-        width:90%;
-        height:auto;
-    
-        #helping-statement h3 {
-            font-size: 3.5vw; //30px
-        }
-    
-        #helping-statement p {
-            font-size: 3vw; //22px
-        }
-    }
-
-    @media screen and (max-width:535px) {
-
-        #our-programs-container {
-        
-            #our-programs-statement h3 {
-                font-size: 5.1vw; //42px
-            }
-        
-            #our-programs-statement h4 {
-                font-size: 3.8vw; //22px
-            }
-        
-            #our-programs-statement p {
-                font-size: 3.8vw; //22px
-            }
-        
-            #our-programs-statement button {
-                font-size: 4vw; //28px
-            }
-        }
-
-        #cost-container {
-        
-            #cost-statement h3 {
-                font-size: 4.3vw; //42px
-            }
-        
-            #cost-statement h4 {
-                font-size: 3.3vw; //26px
-            }
-            
-            #cost-statement p {
-                font-size: 3.8vw; //22px
-            }
-        
-            #cost-statement ul {
-                font-size: 3.8vw; //22px
-            }
-        }
-
-        #helping-container {
-        
-            #helping-statement h3 {
-                font-size: 4.3vw; //30px
-            }
-        
-            #helping-statement p {
-                font-size: 3.8vw; //22px
-            }
         }
     }
 }

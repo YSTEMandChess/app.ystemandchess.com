@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WhyChessComponent } from './why-chess.component';
+import { HeaderComponent } from '../../header/header.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { ModalModule } from '../../_modal';
 
 describe('WhyChessComponent', () => {
   let component: WhyChessComponent;
@@ -8,7 +11,8 @@ describe('WhyChessComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WhyChessComponent ]
+      declarations: [ WhyChessComponent, HeaderComponent, FooterComponent ],
+      imports: [ ModalModule ]
     })
     .compileComponents();
   }));

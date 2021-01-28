@@ -1,0 +1,94 @@
+#why_chess_top_ten_wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    #why_chess_container {
+        width:40%;
+        border-radius: 33px;
+        background-color: #51AA00;
+        #why_chess {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-top: 3%;
+            padding-bottom: 3%;
+        }
+    }
+
+    #top_ten_container {
+        width: 40%;
+        border-radius: 33px;
+        background-color: #3A7CCA;
+        #top_ten {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-top: 3%;
+            padding-bottom: 3%;
+            ul {
+                padding-left: 20px;
+                list-style-type: disc;
+                li {
+                    font-family: 'Roboto';
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 22px;
+                    line-height: 130%;
+                    letter-spacing: 0.02em;
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
+}
+
+#why_chess2_container {
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 5%;
+    border-radius: 33px;
+    background-color: #FF8503;
+    #why_chess2 {
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+}
+
+p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    color: #FFFFFF; 
+}
+
+h3 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 42px;
+    line-height: 117.1%;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 1050px) {
+    #why_chess_top_ten_wrapper {
+        flex-direction: column;
+        justify-content: center;
+
+        #why_chess_container {
+            width: 90%;
+            margin-left: 5%;
+        }
+
+        #top_ten_container {
+            margin-top: 5%;
+            margin-left: 5%;
+            width: 90%;
+        }
+    }
+}

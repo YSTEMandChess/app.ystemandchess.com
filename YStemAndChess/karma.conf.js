@@ -5,6 +5,10 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    files: [
+      'https://code.jquery.com/jquery-3.5.1.min.js',
+      'node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js'
+    ],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),

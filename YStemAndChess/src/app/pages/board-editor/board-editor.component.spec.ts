@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BoardEditorComponent } from './board-editor.component';
+import { HeaderComponent } from '../../header/header.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { ModalModule } from '../../_modal';
 
 describe('BoardEditorComponent', () => {
   let component: BoardEditorComponent;
@@ -8,7 +11,8 @@ describe('BoardEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BoardEditorComponent ]
+      declarations: [ BoardEditorComponent, HeaderComponent, FooterComponent ],
+      imports: [ ModalModule ]
     })
     .compileComponents();
   }));

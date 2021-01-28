@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var ChessBoard:any;
+
 @Component({
   selector: 'app-board-editor',
   templateUrl: './board-editor.component.html',

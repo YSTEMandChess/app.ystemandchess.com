@@ -23,7 +23,6 @@ import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
-import { WhyChessComponent } from './pages/why-chess/why-chess.component'
 
 const routes: Routes = [
   {path: '', component: HomeComponent},

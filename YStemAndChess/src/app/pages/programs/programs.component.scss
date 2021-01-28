@@ -7,63 +7,10 @@ body {
     clear:both;
 }
 
-#why-chess-container{
-    display: flex;
-    width: 90%;
-    margin-left: 5%;
-    border-radius: 33px;
-    background-color: #51AA00;
-
-    #why-chess-statement {
-        width: 95%;
-        padding-top: 3%;
-        padding-bottom: 3%;
-        padding-left: 5%;
-        h3 {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 900;
-            font-size: 42px;
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            color: #FFFFFF;
-        }
-
-        ul {
-            padding-left: 20px;
-            list-style-type: disc;
-            li {
-                font-family: 'Roboto';
-                font-style: normal;
-                font-weight: normal;
-                font-size: 22px;
-                line-height: 130%;
-                letter-spacing: 0.02em;
-                color: #FFFFFF;
-            }
-        }
-
-        p {
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: normal;
-            font-size: 22px;
-            line-height: 130%;
-            letter-spacing: 0.02em;
-            color: #FFFFFF; 
-        }
-
-        a {
-            color: darkblue
-        }
-    }
-}
-
 #our-programs-container {
     display:flex;
     width:90%;
     margin-left: 5%;
-    margin-top: 5%;
     border-radius: 33px;
     background-color: #3A7CCA;
 

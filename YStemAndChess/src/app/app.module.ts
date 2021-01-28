@@ -33,6 +33,7 @@ import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
+import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -62,7 +63,8 @@ const agoraConfig: AgoraConfig = {
     PlayLessonComponent,
     PieceLessonsComponent,
     ContactComponent,
-    BoardEditorComponent
+    BoardEditorComponent,
+    WhyChessComponent
   ],
   imports: [
     BrowserModule,

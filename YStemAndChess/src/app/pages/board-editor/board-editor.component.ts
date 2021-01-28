@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'app-board-editor',
   templateUrl: './board-editor.component.html',

@@ -31,6 +31,7 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 
 const agoraConfig: AgoraConfig = {
@@ -61,6 +62,7 @@ const agoraConfig: AgoraConfig = {
     PlayLessonComponent,
     PieceLessonsComponent,
     ContactComponent,
+    BoardEditorComponent,
     WhyChessComponent
   ],
   imports: [

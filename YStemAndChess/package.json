@@ -21,6 +21,8 @@
     "@angular/platform-browser": "~9.1.11",
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
+    "@chrisoakman/chessboardjs": "^1.0.0",
+    "@types/chessboardjs": "^0.3.1",
     "agora-rtc-sdk": "^3.1.1",
     "express": "^4.17.1",
     "karma-firefox-launcher": "^2.0.0",

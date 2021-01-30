@@ -34,6 +34,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
+import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -64,7 +65,8 @@ const agoraConfig: AgoraConfig = {
     PieceLessonsComponent,
     ContactComponent,
     BoardEditorComponent,
-    WhyChessComponent
+    WhyChessComponent,
+    BoardAnalyzerComponent
   ],
   imports: [
     BrowserModule,

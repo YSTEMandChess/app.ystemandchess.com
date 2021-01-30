@@ -24,6 +24,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
+import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -80,7 +81,9 @@ const routes: Routes = [
   {path: 'play-lesson', component: PlayLessonComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'board-editor', component: BoardEditorComponent},
-  {path: 'why-chess', component: WhyChessComponent}
+  {path: 'why-chess', component: WhyChessComponent},
+  {path: 'board-analyzer', component: BoardAnalyzerComponent}
+
 ];
 
 @NgModule({

@@ -9,28 +9,39 @@ const url = require('url');
 //create a server object:
 http.on('request', (req, res) => {
 
-    res.setHeader("Access-Control-Allow-Origin", "*"); //Set the header for stockfish
-    res.setHeader("Content-Type", "application/json");
+   res.setHeader("Access-Control-Allow-Origin", "*"); //Set the header for stockfish
+   res.setHeader("Content-Type", "text/plain");
 
-    engine = stockfish(); // Initialize stockfish server
+   engine = stockfish(); // Initialize stockfish server
 
-    let params = querystring.parse((url.parse(req.url, true).search).substring(1));
+   let params = querystring.parse((url.parse(req.url, true).search).substring(1));
 
-    engine.onmessage = function (line) {
-       if (line.substring(0, 4) == "best") {
-          const game = new chess.Chess(params.fen);
-          game.move(line.split(" ")[1], { sloppy: true });
-          res.write(game.fen());
-          res.end();
-       }
-    };
+   var prev, curr;
 
-    engine.postMessage(`position fen ${params.fen}`);
-    engine.postMessage(`go depth ${params.level}`);
-    process.removeAllListeners();
+   engine.onmessage = function (line) {
+      if (params.info) {
+         console.log(line);
+         prev = curr;
+         curr = line;
+         if (line.substring(0, 4) == "best") {
+            res.write(prev);
+            res.end();
+         } 
+      } else
+      if (line.substring(0, 4) == "best") {
+         const game = new chess.Chess(params.fen);
+         game.move(line.split(" ")[1], { sloppy: true });
+         res.write(game.fen());
+         res.end();
+      }
+   };
+
+   engine.postMessage(`position fen ${params.fen}`);
+   engine.postMessage(`go depth ${params.level}`);
+   process.removeAllListeners();
 });
 
 //Listen on the requested port
 http.listen(process.env.PORT, () => {
-        console.log("listening on *:" + process.env.PORT);
+   console.log("listening on *:" + process.env.PORT);
 });

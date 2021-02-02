@@ -15,7 +15,9 @@ export class BoardAnalyzerComponent implements OnInit {
   private level: number = 7;
   private currentFEN: String = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
   private centipawn: number = 0;
-  private principleVariation: string;
+  private principleVariation: Array<String>;
+  private turn: number = 1;
+  private color: String = "white";
 
   constructor() { }
 
@@ -48,11 +50,11 @@ export class BoardAnalyzerComponent implements OnInit {
 
   //Obtian the centipawn value and principle variation form
   //the stockfish server response
-  private parseStockfish(str) {
+  private parseStockfish(str: String) {
     var split = str.split(" ");    
     var cpIndex = split.indexOf("cp");
 
-    this.centipawn = split[cpIndex + 1];
+    this.centipawn = parseInt(split[cpIndex + 1]);
     this.principleVariation = split.slice(split.indexOf("pv") + 1, split.length - 2);    
   }
 
@@ -66,6 +68,22 @@ export class BoardAnalyzerComponent implements OnInit {
     var CpToHeightRatiio = 100/maxCpRange;
 
     document.getElementById("centipawn-inner").style.height = ( 50 + this.centipawn/100 * CpToHeightRatiio) + "%";
+    
+    var formatPV: String;
+    var i = 0;
+    var j = 2;
 
+    if (this.principleVariation.length % 2 == 1) {
+      formatPV = "1... " + this.principleVariation[0] + " ";
+      i = 1;
+    }
+
+    for (i; i < this.principleVariation.length; i+=2) {
+      formatPV += j.toString() + ". " + this.principleVariation[i] + " " + this.principleVariation[i + 1] + " ";
+      j ++;
+    }
+
+    var PV = document.getElementById("principle-variation");
+    PV.innerText = formatPV.toString();
   }
 }

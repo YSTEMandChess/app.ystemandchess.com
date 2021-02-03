@@ -5,28 +5,28 @@ var chess = require("chess.js");
 
 const querystring = require('querystring');
 const url = require('url');
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require('constants');
 
 //create a server object:
 http.on('request', (req, res) => {
 
    res.setHeader("Access-Control-Allow-Origin", "*"); //Set the header for stockfish
-   res.setHeader("Content-Type", "text/plain");
+   res.setHeader("Content-Type", "application/json");
 
    engine = stockfish(); // Initialize stockfish server
 
    let params = querystring.parse((url.parse(req.url, true).search).substring(1));
 
-   var prev, curr;
+   var lines = [];
 
    engine.onmessage = function (line) {
+      console.log(line);
       if (params.info) {
-         console.log(line);
-         prev = curr;
-         curr = line;
+         lines.push(line);
          if (line.substring(0, 4) == "best") {
-            res.write(prev);
+            res.write(JSON.stringify(lines));
             res.end();
-         } 
+         }
       } else
       if (line.substring(0, 4) == "best") {
          const game = new chess.Chess(params.fen);
@@ -36,7 +36,8 @@ http.on('request', (req, res) => {
       }
    };
 
-   engine.postMessage(`position fen ${params.fen}`);
+   //console.log(`position fen ${params.fen} moves ${params.move}`);
+   engine.postMessage(`position fen ${params.fen} moves ${params.move}`);
    engine.postMessage(`go depth ${params.level}`);
    process.removeAllListeners();
 });

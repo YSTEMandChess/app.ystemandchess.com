@@ -1,9 +1,7 @@
 
-.game {
-    display:flex;
+.game_wrapper {
+    display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
-
 .chess {
     width: 70%;
     display: flex;
@@ -15,7 +13,7 @@
     }
 }
     .jitsi {
-        width: 300px;
+        width: 30%;
         height: 300px;
         padding: 2px;
     }

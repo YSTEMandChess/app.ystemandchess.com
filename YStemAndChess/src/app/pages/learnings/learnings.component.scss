@@ -25,10 +25,10 @@ body {
 }
 
 #instructions-header h3{
-        float:center;
-        // width:25%;
+        float:left;
+        width:25%;
         height:auto;
-        // margin-left:10.5%; //80px;
+        padding-left:2%;
         overflow: hidden;
         font-family: 'Lato';
         font-style:bold;
@@ -41,11 +41,12 @@ body {
 
 }
 #instructions-paragraph p{
-    float: center;
-    // width:25%;
+    float: left;
+    width:35%;
     height:auto;
-    margin-left:10.5%; //80px;
-    margin-right:10.5%; //80px;
+    // margin-left:2.5%;
+    // padding-left:2%;
+    // margin-right:10.5%; //80px;
     overflow: hidden;
     font-family:'Roboto';
     font-style:normal;
@@ -105,14 +106,15 @@ body {
 }
 
 #chess-play {
-    position: relative;
+    // position: relative;
     // width:65%;
-    overflow: hidden;
-    float:center;
-        // max-width:35%;
+    // overflow: hidden;
+    float:right;
+        max-width:65%;
         // max-height: 35%;
-        // margin-bottom: 3%;
-        margin-left: 22%;
+        margin-bottom: 2%;
+        margin-top: -18%;
+        margin-right: -5%;
 }
 #score-board-container {
     position:relative;
@@ -195,3 +197,44 @@ body {
     letter-spacing:0.01em;
     color:#000000;
 }
+
+@media(max-width: 860px) {
+    #instructions-container {
+        margin: 0 auto;
+        width:90%;
+        margin-left:5%;
+        padding-bottom: 8%;
+    }
+
+    #chess-play {
+        max-width: 35%;
+        margin: 0 auto;
+    }
+
+    #instructions-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+            h3 {
+                margin-top: 3%;
+            }
+
+            #links {
+                margin-top: 6%;
+                padding-bottom: 0;
+            }   
+        }  
+    #instructions-paragraph p{
+        p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        }
+        #links {
+            margin-top: 6%;
+            padding-bottom: 0;
+        }
+    }
+}
+

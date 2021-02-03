@@ -1,1 +1,0 @@
-node $(dirname "$(readlink -f "$0")")/src/stockfish.js

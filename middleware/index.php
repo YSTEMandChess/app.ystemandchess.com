@@ -190,6 +190,7 @@ function verifyUser($username, $password) {
     $hashPass = hash("sha384",$password);
 
     $collection = $client->ystem->users;
+
     $document = $collection->findOne(['username' => $username]);
     if($document['password'] == $hashPass) {
         if($document['role'] == 'student') {
@@ -219,7 +220,6 @@ function verifyUser($username, $password) {
     } else {
         echo "The username or password is incorrect.";
     }
-    
 }
 
 function isTakenUsername($username, $collection) {

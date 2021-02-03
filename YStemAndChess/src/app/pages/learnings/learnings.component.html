@@ -1,6 +1,5 @@
 <html>
-
-<head>
+  <head>
     <!-- <script>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -8,15 +7,21 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-KJ979C9');
     </script> -->
-</head>
+  </head>
 
-<header>
+  <header>
     <app-header></app-header>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-</header>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+  </header>
 
-<body>
+  <body>
     <!-- <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9" height="0" width="0"
             style="display:none;visibility:hidden"></iframe>
@@ -43,15 +48,18 @@
 
 
 
+      <div id="chess-play">
+        <app-play></app-play>
+      </div>
     </div>
     <div id="chess-container">
-        <!-- <div id="chess-img">
+      <!-- <div id="chess-img">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/AAA_SVG_Chessboard_and_chess_pieces_02.svg/1200px-AAA_SVG_Chessboard_and_chess_pieces_02.svg.png">
     </div> -->
-        <!-- <div id="chess-paragraph">
+      <!-- <div id="chess-paragraph">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae reprehenderit saepe vitae perspiciatis porro architecto optio. Laudantium, libero officia quisquam non ducimus, facere provident vero aliquam, molestiae quos ut maxime.</p>
     </div> -->
-        <!-- insert chess board -->
+      <!-- insert chess board -->
     </div>
     <!-- <div id="lessons-menu">
     <h4>Basic mat-select</h4>
@@ -67,33 +75,41 @@
     <div id="clear"></div>
 
     <div id="score-board-container">
-        <div id="score-board-header">
-            <h3>Score Board</h3>
-        </div>
-        <div id="score-board-paragraph">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae reprehenderit saepe vitae perspiciatis
-                porro architecto optio. Laudantium, libero officia quisquam non ducimus, facere provident vero aliquam,
-                molestiae quos ut maxime.</p>
-        </div>
+      <div id="score-board-header">
+        <h3>Score Board</h3>
+      </div>
+      <div id="score-board-paragraph">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+          reprehenderit saepe vitae perspiciatis porro architecto optio.
+          Laudantium, libero officia quisquam non ducimus, facere provident vero
+          aliquam, molestiae quos ut maxime.
+        </p>
+      </div>
     </div>
 
     <div id="puzzles-menu-container">
-        <div id="puzzles-menu-header">
-            <!-- Lessons will be beginner level-->
-            <h3>Choose a Lesson</h3>
-        </div>
-        <div id="puzzles-menu-paragraph">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae reprehenderit saepe vitae perspiciatis
-                porro architecto optio. Laudantium, libero officia quisquam non ducimus, facere provident vero aliquam,
-                molestiae quos ut maxime.</p>
-        </div>
+      <div id="puzzles-menu-header">
+        <!-- Lessons will be beginner level-->
+        <h3>Choose a Lesson@@@</h3>
+      </div>
+      <div id="puzzles-menu-paragraph">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
+          reprehenderit saepe vitae perspiciatis porro architecto optio.
+          Laudantium, libero officia quisquam non ducimus, facere provident vero
+          aliquam, molestiae quos ut maxime.
+        </p>
+      </div>
     </div>
 
     <div id="clear"></div>
-</body>
+    <button (click)="postion1()">1</button>
+    <button (click)="postion2()">2</button>
+    <button (click)="postion3()">3</button>
+  </body>
 
-<footer>
+  <footer>
     <app-footer></app-footer>
-</footer>
-
+  </footer>
 </html>

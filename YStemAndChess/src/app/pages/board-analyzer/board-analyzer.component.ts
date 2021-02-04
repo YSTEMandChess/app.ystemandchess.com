@@ -34,7 +34,9 @@ export class BoardAnalyzerComponent implements OnInit {
       pieceTheme: '../chessclient/img/chesspieces/wikipedia/{piece}.png',
       draggable: true,
       position: 'start',
-      onDrop: this.onDrop.bind(this)
+      onDrop: this.onDrop.bind(this),
+      onSnapEnd: this.onSnapEnd.bind(this)
+
     }
     this.board = ChessBoard('board', config);
     this.updateEngineEvaluation();
@@ -137,6 +139,11 @@ export class BoardAnalyzerComponent implements OnInit {
     this.prevFEN = this.chess.fen();
     this.color = this.color == "white" ? "black" : "white";
   }
+
+  private onSnapEnd() {
+    this.board.position(this.chess.fen())
+  }
+  
 
   public debounce(callback, wait = 500) {
     var timerId;

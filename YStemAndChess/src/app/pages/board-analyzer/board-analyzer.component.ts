@@ -14,13 +14,16 @@ export class BoardAnalyzerComponent implements OnInit {
   private board;
   private chess;
   private useAnimation: boolean = false;
-  private level: number = 12;
-  private centipawn: number = 0;
+  private level: number = 10;
+  private centipawn: string = "0";
   private principleVariation: Array<String>;
   private prevFEN: String =
     'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
   private turn: number = 1;
   private color: String = "white";
+
+  //debounce functions
+  public depthDebounce = this.debounce(this.onDepthInput.bind(this));
 
   constructor() {}
 
@@ -34,7 +37,11 @@ export class BoardAnalyzerComponent implements OnInit {
       onDrop: this.onDrop.bind(this)
     }
     this.board = ChessBoard('board', config);
-    window.addEventListener('resize', this.board.resize);
+    this.updateEngineEvaluation();
+  }
+
+  //get the evaluation from the engine and update the screen
+  private updateEngineEvaluation() {
     this.httpGetAsync(
       `${environment.urls.stockFishURL}/?info=${"true"}&level=${this.level}&fen=${this.chess.fen()}`,
       (response) => {
@@ -60,30 +67,31 @@ export class BoardAnalyzerComponent implements OnInit {
     var res: Array<string> = JSON.parse(str);
     console.log(res[res.length -2]);
     
-    var split = res[res.length -2].split(" ");    
+    var split = res[res.length -2].split(" ");
 
     if (split.indexOf("mate") != -1) {
-      this.centipawn = parseInt(split[split.indexOf("mate") + 1]);
+      this.centipawn = "M" + parseInt(split[split.indexOf("mate") + 1]);
     } else {
-        this.centipawn = parseInt(split[split.indexOf("cp") + 1]);
-        if (this.color == "black") {
-          this.centipawn *= -1;
-        }
+        var value: number = parseInt(split[split.indexOf("cp") + 1])/100;
+        value = this.color == "black" ? value * -1 : value;
+        var sign: string = value < 0 ? "" : "+";
+
+        this.centipawn = sign + value;
     }
     this.principleVariation = split.slice(split.indexOf("pv") + 1, split.length - 2);    
   }
 
   //Display centipawn value and change the evaluation bar accoridngly
   private updateCentiPawnEval() {
-    var formatCP = (this.centipawn/100 < 0 ? "" : "+" ) + this.centipawn/100;
-    if(this.centipawn)
+    document.getElementById("centipawn-value").innerText = this.centipawn;
 
-    document.getElementById("centipawn-value").innerText = formatCP;
-
+    //In %
     var maxCpRange: number = 20;
-    var CpToHeightRatiio = 100/maxCpRange;
+    var maxBarRange: number = 95;
+    var CpToHeightRatiio = maxBarRange/maxCpRange;
 
-    document.getElementById("centipawn-inner").style.height = ( 50 + this.centipawn/100 * CpToHeightRatiio) + "%";
+    document.getElementById("centipawn-inner").style.height = 
+    Math.min(Math.max(( 50 + parseFloat(this.centipawn) * CpToHeightRatiio), 100 - maxBarRange), 100) + "%";
     
     var formatPV: String = "";
     var i = 0;
@@ -128,5 +136,36 @@ export class BoardAnalyzerComponent implements OnInit {
 
     this.prevFEN = this.chess.fen();
     this.color = this.color == "white" ? "black" : "white";
+  }
+
+  public debounce(callback, wait = 500) {
+    var timerId;
+
+    return () => {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        callback();
+      }, wait);
+    };
+  }
+  
+  //validate depth input and update the evaluation
+  private onDepthInput() {
+    var maxDepth = 20;
+    var minDepth = 10;
+
+    if (this.level < minDepth || typeof this.level != 'number') {
+      this.level = minDepth;
+      this.updateEngineEvaluation();
+      return;
+    }
+
+    if ( this.level > maxDepth) {
+      this.level = maxDepth;
+      this.updateEngineEvaluation();
+      return;
+    }
+
+    this.updateEngineEvaluation();
   }
 }

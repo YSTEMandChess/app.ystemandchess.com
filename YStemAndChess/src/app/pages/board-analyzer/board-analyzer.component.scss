@@ -31,21 +31,43 @@
         height: 50%;
         background-color: #ffffff;
         line-height: 30px;
-        font-weight: bold;
         color: #2c2f33;
         display: flex;
         justify-content: center;
         transition: height 1.5s;
     }
 
-    #centipawn-value {
-        align-self: flex-end;
-    }
-
     #sidebar {
         width: 600px;
         margin-left: 5px;
         border: 2px solid black;
+    }
+
+    #options {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+    }
+
+    #depth-container {
+        display: flex;
+        align-items: center;
+    }
+
+    #depth-label {
+        margin: 0 5px 0 0;
+        vertical-align: center;
+    }
+    
+    #centipawn-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    #principle-variation {
+        padding: 5px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
     }
 }
 

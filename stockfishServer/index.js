@@ -17,6 +17,7 @@ http.on('request', (req, res) => {
 
    let params = querystring.parse((url.parse(req.url, true).search).substring(1));
 
+   var maxLevel = 30;
    var lines = [];
 
    engine.onmessage = function (line) {
@@ -35,6 +36,11 @@ http.on('request', (req, res) => {
          res.end();
       }
    };
+
+   //limit maximum dpeth
+   if(params.level > maxLevel) {
+      params.level = maxLevel;
+   }
 
    //console.log(`position fen ${params.fen} moves ${params.move}`);
    engine.postMessage(`position fen ${params.fen} moves ${params.move}`);

@@ -9,7 +9,7 @@ export class SocketService {
   private socket;
 
   constructor() {
-    this.socket = io.connect(this.socketEndpoint);
+    this.socket = io();
   }
 
   public emitMessage(eventName: string, message: string) {

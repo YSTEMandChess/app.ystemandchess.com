@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketService } from 'src/app/socket.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -45,14 +44,11 @@ export class LearningsComponent implements OnInit {
         let info: string = e.data;
         if (info.length > 20)
           info = info.substr(0, info.length - 9) + 'w k - 0 1';
-        console.log('DATAAAAAAAAAAAAAAAAAAAAAAA');
-        console.log(info);
-        //console.log("I am info " + info);
+
         if (info == 'ReadyToRecieve') {
           this.isReady = true;
           this.sendFromQueue();
         } else {
-          console.log('ELSEEEEEEEEEE');
           this.currentFEN = info;
 
           if (this.level <= 1) this.level = 1;
@@ -61,12 +57,9 @@ export class LearningsComponent implements OnInit {
             `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
             (response) => {
               if (this.isReady) {
-                console.log('IS READYYYYYYY');
                 response = this.currentFEN;
-                console.log(
-                  'sending message ' +
-                    JSON.stringify({ boardState: response, color: this.color })
-                );
+
+                console.log('Response :  ' + response);
                 var chessBoard = (<HTMLFrameElement>(
                   document.getElementById('chessBd')
                 )).contentWindow;
@@ -76,8 +69,6 @@ export class LearningsComponent implements OnInit {
                   environment.urls.chessClientURL
                 );
               } else {
-                console.log('IS NOOOOOOOOOOT READYYYYYYY');
-
                 this.messageQueue.push(
                   JSON.stringify({ boardState: response, color: this.color })
                 );
@@ -85,27 +76,39 @@ export class LearningsComponent implements OnInit {
               this.currentFEN = response;
             }
           );
-          console.log(
-            'Curr FEN: ' + this.currentFEN + '     Prev FEN: ' + this.prevFEN
-          );
         }
       },
       false
     );
   }
+  ////// Making the request to the server  ///////////
+
+  private httpGetAsync(theUrl: string, callback) {
+    callback(this.currentFEN);
+  }
+  /** 
+   *  WHAT USED TO BE INSIDE ======> httpGetAsync < ======
+   * var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      callback(xmlHttp.responseText);
+    };
+    xmlHttp.open('POST', theUrl, true); // true for asynchronous
+    xmlHttp.send(null) */
+  //////////////    SENDING MASSAGES  ABOUT THE BOARD STATE /////////////
 
   private sendFromQueue() {
     this.messageQueue.forEach((element) => {
-      console.log('sending message ' + element);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
         .contentWindow;
       chessBoard.postMessage(element, environment.urls.chessClientURL);
     });
   }
-
+  private gameOverAlert() {
+    alert('Game over.');
+  }
+  ///////////// Creating a New Game , based on Position ///////////////
   public newGameInit(FEN: string) {
     this.color = 'white';
-    console.log('COLORRRRRRRRRR' + this.color);
     this.currentFEN = FEN;
     this.prevFEN = this.currentFEN;
 
@@ -121,7 +124,7 @@ export class LearningsComponent implements OnInit {
         JSON.stringify({ boardState: this.currentFEN, color: this.color })
       );
     }
-
+    /*
     if (this.color === 'black') {
       this.level = parseInt(
         (<HTMLInputElement>document.getElementById('movesAhead')).value
@@ -149,6 +152,7 @@ export class LearningsComponent implements OnInit {
       this.httpGetAsync(
         `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
         (response) => {
+          console.log('Board Response:' + response);
           if (this.isReady) {
             var chessBoard = (<HTMLFrameElement>(
               document.getElementById('chessBd')
@@ -165,8 +169,11 @@ export class LearningsComponent implements OnInit {
         }
       );
     }
+    */
   }
 
+  ////////////// Undoing the prevouus move //////////////////
+  /*
   public undoPrevMove() {
     var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
       .contentWindow;
@@ -215,19 +222,7 @@ export class LearningsComponent implements OnInit {
       );
     }
   }
+*/
 
-  private httpGetAsync(theUrl: string, callback) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      console.log(xmlHttp.readyState, xmlHttp.status);
-      console.log('/////////////////////////////////////////');
-      callback(xmlHttp.responseText);
-    };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
-  }
-
-  private gameOverAlert() {
-    alert('Game over.');
-  }
+  // telling the user that the game has ended ////////
 }

@@ -6,26 +6,19 @@ body {
     clear:both;
 }
 
-#greeting {
-    color: rgb(57, 57, 243);
-    font-size: 72px;
-}
-
-#instructions-container {
-    // position:relative;
-    // float:left;
+#content-container {
+    position:relative;
     overflow: hidden;
     margin-top: 3%;
     margin-left:3%; //53px
     margin-right:3%; //53px
-    // width:45%;
-    height:auto; //481px
+    height:auto;
     background-color: #51AA00;
     border-radius:33px; //33px
 }
 
-#instructions-header h3{
-        float:left;
+#instructions-header {
+        // float:left;
         width:25%;
         height:auto;
         padding-left:2%;
@@ -41,7 +34,7 @@ body {
 
 }
 #instructions-paragraph p{
-    float: left;
+    // float: left;
     width:35%;
     height:auto;
     // margin-left:2.5%;
@@ -58,158 +51,39 @@ body {
     color:#ffffff;
 }
 
-#chess-container {
-    float:right;
-    overflow: hidden;
-    margin-right: 3%; //77px
-    margin-bottom: 3%; //77px
-    width: 45%;
-    height:108.079%;
-    border-radius:33px;
-    background-color:rgb(191, 243, 123);
-}
-
-#chess-header {
-    margin-top:9.8%; //45 px
-    // margin-left:16.5%; //75px
-    font-family:'Roboto';
-    font-style:bold;
-    font-weight:900;
-    font-size:2vw;
-    line-height:117.1%;
-    letter-spacing: 0.01em;
-    color:rgb(0, 0, 0);
-}
-#chess-paragraph p {
-    margin-top:9.8%; //45px
-    margin-left: 16.5%; //75px
-    width:66%;
-    font-family:'Roboto';
-    font-style:bold;
-    font-weight:500;
-    font-size:1.4vw; //22px
-    line-height:117.1%;
-    letter-spacing:0.01em;
-    color:#fff;
-}
-
-#chess-img img{
-    // position:relative;
-    overflow: hidden;
-    float:right;
-        max-width:35%;
-        max-height: 35%;
-        // height:50%; //108.079%
-        margin-bottom: 3%;
-        margin-right: 3%;
-        box-sizing: border-box;
-}
-
 #chess-play {
-    // position: relative;
+    position: relative;
     // width:65%;
     // overflow: hidden;
-    float:right;
-        max-width:65%;
+    float: right;
+        max-width:45%;
         // max-height: 35%;
         margin-bottom: 2%;
-        margin-top: -18%;
-        margin-right: -5%;
-}
-#score-board-container {
-    position:relative;
-    float:left;
-    overflow: hidden;
-    margin-left:3%; //53px
-    width:45%;
-    height:auto; //481px
-    background-color:rgb(121, 237, 241);
-    border-radius:33px; //33px
-}
-
-#score-board-header h3{
-    // float:right;
-    //     width:35%;
-        height:auto;
-        margin-right:10.5%; //80px
-        overflow: hidden;
-        font-family: 'Lato';
-        font-style:bold;
-        font-weight:900;
-        font-size:3vw;   //42px //262.5%
-        line-height: 250%; 
-        letter-spacing:0.07em;
-        color:#000000;
-        box-sizing: border-box;
-
-}
-#score-board-paragraph {
-    // float:right;
-    //     width:35%;
-    margin-left: 16.5%; //75px
-    width:66%;
-    font-family:'Roboto';
-    font-style:bold;
-    font-weight:500;
-    font-size:1.4vw; //22px
-    line-height:117.1%;
-    letter-spacing:0.01em;
-    color:#000000;
-}
-
-#puzzles-menu-container {
-    float:right;
-    overflow: hidden;
-    margin-right: 3%; //77px
-    margin-bottom: 3%; //77px
-    width: 45%;
-    height:108.079%;
-    border-radius:33px;
-    background-color:rgb(227, 156, 248);
-}
-
-#puzzles-menu-header h3{
-    // float:right;
-    //     width:35%;
-        height:auto;
-        margin-right:10.5%; //80px
-        overflow: hidden;
-        font-family: 'Lato';
-        font-style:bold;
-        font-weight:900;
-        font-size:3vw;   //42px //262.5%
-        line-height: 250%; 
-        letter-spacing:0.07em;
-        color:#000000;
-        box-sizing: border-box;
-
-}
-#puzzles-menu-paragraph {
-    // float:right;
-    //     width:35%;
-    margin-left: 16.5%; //75px
-    width:66%;
-    font-family:'Roboto';
-    font-style:bold;
-    font-weight:500;
-    font-size:1.4vw; //22px
-    line-height:117.1%;
-    letter-spacing:0.01em;
-    color:#000000;
+        margin-top: 2%;
+        // margin-right: -5%;
 }
 
 @media(max-width: 860px) {
-    #instructions-container {
+    #content-container {
         margin: 0 auto;
         width:90%;
         margin-left:5%;
         padding-bottom: 8%;
+        
+        #chess-play {
+        // display: flex;
+        max-width: 50%;
+        // max-height: 350px;
+        justify-content: center;
+        align-items: center;
+        }
     }
 
-    #chess-play {
-        max-width: 35%;
-        margin: 0 auto;
-    }
+    // #chess-play {
+    //     max-width: 10%;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
 
     #instructions-header {
         display: flex;

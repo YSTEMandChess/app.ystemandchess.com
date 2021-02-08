@@ -44,6 +44,7 @@ export class PlayComponent implements OnInit {
 
   ngOnInit() {
     let userContent;
+<<<<<<< HEAD
     let responseText;
 
     if (this.cookie.check('login')) {
@@ -142,6 +143,120 @@ export class PlayComponent implements OnInit {
     } else {
       userContent = '';
     }
+=======
+
+    if (this.cookie.check('login')) {
+      userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
+    } else {
+      userContent = '';
+    }
+
+    this.httpGetAsync(
+      `${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get(
+        'login'
+      )}`,
+      (response) => {
+        if (response == 'There are no current meetings with this user.') {
+          return;
+        }
+        let responseText = JSON.parse(response);
+
+        // Code for webcam
+        // -------------------------------------------------------------------------
+        this.client = this.agoraService.createClient({
+          mode: 'rtc',
+          codec: 'h264',
+        });
+        this.client.init(
+          environment.agora.appId,
+          () => console.log('init sucessful'),
+          () => console.log('init unsucessful')
+        );
+        this.client.join(null, responseText.meetingID, null, (uid) => {
+          console.log('uid: ' + uid);
+          this.clientUID = uid;
+
+          this.localStream = this.agoraService.createStream({
+            streamID: this.clientUID,
+            audio: true,
+            video: true,
+            screen: false,
+          });
+
+          this.localStream.init(
+            () => {
+              this.localStream.play('local_stream');
+              this.client.publish(this.localStream, function (err) {
+                console.log('publish failed');
+                console.error(err);
+              });
+            },
+            () => console.log("THE LOCAL STREAM WANSN'T SUCESSFULL")
+          );
+        });
+
+        // Now the stream has been published, lets try to set up some subscribers.
+        this.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
+          let remoteStream = evt.stream;
+          let id = remoteStream.getId();
+          if (id != this.clientUID) {
+            this.client.subscribe(remoteStream, null, (err) => {
+              console.log(
+                'it appears that something has gone wrong with the subscribing.'
+              );
+            });
+            console.log('stream-added remote-uid: ', id);
+          }
+          console.log('hmm, is this any good?');
+        });
+
+        this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
+          let remoteStream = evt.stream;
+          let id = remoteStream.getId();
+          remoteStream.play('remote_stream');
+          console.log('stream-subscribed remote-uid: ', id);
+        });
+
+        this.client.on(ClientEvent.PeerLeave, (evt) => {
+          let remoteStream = evt.stream;
+          let id = remoteStream.getId();
+          remoteStream.stop();
+          console.log('hmm, is this any good?');
+        });
+        // --------------------------------------------------------------------------
+
+        console.log(
+          'I just connected to the website. Thus, I will send a message saying that I want them to create a new game.'
+        );
+        this.socket.emitMessage(
+          'newGame',
+          JSON.stringify({
+            student: responseText.studentUsername,
+            mentor: responseText.mentorUsername,
+            role: userContent.role,
+          })
+        );
+
+        this.socket.listen('boardState').subscribe((data) => {
+          if (this.isReady) {
+            let newData = JSON.parse(<string>data);
+            var chessBoard = (<HTMLFrameElement>(
+              document.getElementById('chessBd')
+            )).contentWindow;
+            chessBoard.postMessage(
+              JSON.stringify({
+                boardState: newData.boardState,
+                color: newData.color,
+              }),
+              environment.urls.chessClientURL
+            );
+          } else {
+            this.messageQueue.push(data);
+          }
+        });
+      }
+    );
+>>>>>>> 4fe54406c3697969ab3a8aaa2b886f7d2f3722b7
 
     this.socket.listen('gameOver').subscribe((data) => {
       alert('game over ');

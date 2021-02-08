@@ -44,106 +44,6 @@ export class PlayComponent implements OnInit {
 
   ngOnInit() {
     let userContent;
-<<<<<<< HEAD
-    let responseText;
-
-    if (this.cookie.check('login')) {
-      userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
-      this.httpGetAsync(
-        `${
-          environment.urls.middlewareURL
-        }/isInMeeting.php/?jwt=${this.cookie.get('login')}`,
-        (response) => {
-          if (response == 'There are no current meetings with this user.') {
-            return;
-          }
-          responseText = JSON.parse(response);
-
-          // Code for webcam
-          // -------------------------------------------------------------------------
-          this.client = this.agoraService.createClient({
-            mode: 'rtc',
-            codec: 'h264',
-          });
-          this.client.init(
-            environment.agora.appId,
-            () => console.log('init sucessful'),
-            () => console.log('init unsucessful')
-          );
-          this.client.join(null, responseText.meetingID, null, (uid) => {
-            this.clientUID = uid;
-
-            this.localStream = this.agoraService.createStream({
-              streamID: this.clientUID,
-              audio: true,
-              video: true,
-              screen: false,
-            });
-
-            this.localStream.init(
-              () => {
-                this.localStream.play('local_stream');
-                this.client.publish(this.localStream, function (err) {
-                  console.error(err);
-                });
-              },
-              () => {}
-            );
-          });
-
-          // Now the stream has been published, lets try to set up some subscribers.
-          this.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
-            let remoteStream = evt.stream;
-            let id = remoteStream.getId();
-            if (id != this.clientUID) {
-              this.client.subscribe(remoteStream, null, (err) => {});
-            }
-          });
-
-          this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
-            let remoteStream = evt.stream;
-            let id = remoteStream.getId();
-            remoteStream.play('remote_stream');
-          });
-
-          this.client.on(ClientEvent.PeerLeave, (evt) => {
-            let remoteStream = evt.stream;
-            let id = remoteStream.getId();
-            remoteStream.stop();
-          });
-
-          this.socket.emitMessage(
-            'newGame',
-            JSON.stringify({
-              student: responseText.studentUsername,
-              mentor: responseText.mentorUsername,
-              role: userContent.role,
-            })
-          );
-
-          this.socket.listen('boardState').subscribe((data) => {
-            if (this.isReady) {
-              let newData = JSON.parse(<string>data);
-              var chessBoard = (<HTMLFrameElement>(
-                document.getElementById('chessBd')
-              )).contentWindow;
-              chessBoard.postMessage(
-                JSON.stringify({
-                  boardState: newData.boardState,
-                  color: newData.color,
-                }),
-                environment.urls.chessClientURL
-              );
-            } else {
-              this.messageQueue.push(data);
-            }
-          });
-        }
-      );
-    } else {
-      userContent = '';
-    }
-=======
 
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
@@ -256,7 +156,6 @@ export class PlayComponent implements OnInit {
         });
       }
     );
->>>>>>> 4fe54406c3697969ab3a8aaa2b886f7d2f3722b7
 
     this.socket.listen('gameOver').subscribe((data) => {
       alert('game over ');

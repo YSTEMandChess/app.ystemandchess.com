@@ -22,21 +22,28 @@
   </header>
 
   <body> 
+    <!-- Green container holding learnings content -->
     <div id="content-container">
+ 
+        <!-- Displays title and instructions for selected chess board situation -->
+       
         <div id="instructions-header">
             <h1>Lesson 1.1</h1>
         </div>
-
         <div id="instructions-paragraph">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae reprehenderit saepe vitae perspiciatis
                 porro architecto optio. Laudantium, libero officia quisquam non ducimus, facere provident vero aliquam,
                 molestiae quos ut maxime.</p>
         </div>
-        <div id="clear"></div>
+
+        <!-- <div id="clear"></div> -->
+
+        <!-- Display selected chess board situation -->
         <div id="chess-play">
             <app-play></app-play>
         </div>
 
+        <!-- Drop down menu to select chess board situration -->
         <button (click)="postion1()">1</button>
         <button (click)="postion2()">2</button>
         <button (click)="postion3()">3</button>

@@ -21,7 +21,7 @@ body {
         // float:left;
         width:25%;
         height:auto;
-        padding-left:2%;
+        margin-top: 2.5%;
         overflow: hidden;
         font-family: 'Lato';
         font-style:bold;
@@ -37,9 +37,7 @@ body {
     // float: left;
     width:35%;
     height:auto;
-    // margin-left:2.5%;
-    // padding-left:2%;
-    // margin-right:10.5%; //80px;
+    margin-left:2.5%;
     overflow: hidden;
     font-family:'Roboto';
     font-style:normal;
@@ -53,14 +51,41 @@ body {
 
 #chess-play {
     position: relative;
-    // width:65%;
-    // overflow: hidden;
     float: right;
         max-width:45%;
-        // max-height: 35%;
         margin-bottom: 2%;
         margin-top: 2%;
-        // margin-right: -5%;
+}
+
+@media(max-width:1400px) {
+    #content-container {
+        margin: 0 auto;
+        max-width: 90%;
+        margin-left:5%;
+        padding-bottom: 8%;
+    }
+    #chess-play {
+        position: relative;
+        float: right;
+        max-width:45%;
+        margin-bottom: 2%;
+        margin-top: 2%;
+
+    }
+    #instructions-header {
+        display: flex;
+        flex-direction: row;
+    }
+
+}
+
+@media(max-width:950px) {
+    #content-container {
+        margin: 0 auto;
+        max-width: 90%;
+        padding-bottom: 8%;
+    }
+
 }
 
 @media(max-width: 860px) {
@@ -69,21 +94,19 @@ body {
         width:90%;
         margin-left:5%;
         padding-bottom: 8%;
-        
-        #chess-play {
-        // display: flex;
-        max-width: 50%;
-        // max-height: 350px;
-        justify-content: center;
-        align-items: center;
-        }
+    
     }
 
     // #chess-play {
-    //     max-width: 10%;
-    //     justify-content: center;
-    //     align-items: center;
-    // }
+        // display: flex;
+        // // max-width: 30%;
+        // // max-height: 350px;
+        // justify-content: center;
+        // align-items: center;
+        // }
+    #chess-play {
+        width: 100%;
+    }
 
     #instructions-header {
         display: flex;
@@ -101,6 +124,7 @@ body {
     #instructions-paragraph p{
         p {
         display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         margin: 0 auto;

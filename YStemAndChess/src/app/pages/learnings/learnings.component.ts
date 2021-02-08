@@ -16,6 +16,215 @@ export class LearningsComponent implements OnInit {
   private prevFEN: String = this.currentFEN;
 
   constructor() {}
+
+  sections = [
+    {
+      name: "Chess Pieces",
+      subSections: [
+        {
+          name: "The Pawn",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Bishop",
+          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Knight",
+          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Rook",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Queen",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The King",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        }
+      ]
+    },
+    {
+      name: "Bishop",
+      subSections: [
+        {
+          name: "The Pawn",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Bishop",
+          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Knight",
+          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Rook",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Queen",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The King",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        }
+      ]
+    },
+    {
+      name: "Knight",
+      subSections: [
+        {
+          name: "The Pawn",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Bishop",
+          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Knight",
+          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Rook",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Queen",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The King",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        }
+      ]
+    },
+    {
+      name: "Rook",
+      subSections: [
+        {
+          name: "The Pawn",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Bishop",
+          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Knight",
+          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Rook",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Queen",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The King",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        }
+      ]
+    },
+    {
+      name: "Queen",
+      subSections: [
+        {
+          name: "The Pawn",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Bishop",
+          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Knight",
+          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Rook",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Queen",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The King",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        }
+      ]
+    },
+    {
+      name: "King",
+      subSections: [
+        {
+          name: "The Pawn",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Bishop",
+          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Knight",
+          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
+        },
+        {
+          name: "The Rook",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The Queen",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        },
+        {
+          name: "The King",
+          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
+        }
+      ]
+    }
+  ];
+
+  isExpanded = false;
+  activeClass = "";
+
+  onSectionClick(event): void {
+    /* Toggle between adding and removing the "active" class,
+    to highlight the button that controls the panel */
+    this.activeClass = "active";
+    if (event.srcElement.textContent[1] === "+") {
+      event.srcElement.textContent = `[-] ${event.srcElement.textContent.substring(4)}`;
+    } else {
+      event.srcElement.textContent = `[+] ${event.srcElement.textContent.substring(4)}`;
+    }
+
+    /* Toggle between hiding and showing the active panel */
+    let panel = event.srcElement.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  }
+
+  onSubSectionClick(details): void {
+    console.log(details.fen);
+    this.setLesson(details.fen);
+  }
+
+  setLesson(fen: string) {
+    this.newGameInit(fen);
+  }
+
   postion1() {
     this.newGameInit('7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1');
   }

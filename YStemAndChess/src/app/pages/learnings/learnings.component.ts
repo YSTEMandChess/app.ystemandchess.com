@@ -11,18 +11,19 @@ export class LearningsComponent implements OnInit {
   private isReady: boolean;
   private color: String = 'white';
   private level: number = 5;
-  private currentFEN: String = '3qkbnr/3ppppp/8/8/8/8/8/6QN w k - 0 1';
+  private currentFEN: string = '3qkbnr/3ppppp/8/8/8/8/8/6QN w k - 0 1';
   private prevFEN: String = this.currentFEN;
+  private flag: boolean = false;
 
   constructor() {}
   postion1() {
     this.newGameInit('7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1');
   }
   postion2() {
-    this.newGameInit('3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1');
+    this.newGameInit('3p3p/2p2p2/8/2p3p1/4R3/1p3pp1/8/3p3R w - - 0 1');
   }
   postion3() {
-    this.newGameInit('3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1');
+    this.newGameInit('8/2p2p2/8/2p5/4Q3/1p3pp1/8/8 w - - 0 1');
   }
 
   ngOnInit(): void {
@@ -32,52 +33,72 @@ export class LearningsComponent implements OnInit {
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
 
-    this.newGameInit('3qkbnr/3ppppp/8/8/8/8/8/6KN w k - 0 1');
+    this.newGameInit('3qqbnq/3ppppp/8/8/8/8/8/6qN w k - 0 1');
 
     // Listen to message from child window
     eventer(
       messageEvent,
       (e) => {
         // Means that there is the board state and whatnot
+        console.log('CURENET FEN !!!!!!' + e.data);
 
         this.prevFEN = this.currentFEN;
         let info: string = e.data;
+
         if (info.length > 20)
           info = info.substr(0, info.length - 9) + 'w k - 0 1';
 
         if (info == 'ReadyToRecieve') {
           this.isReady = true;
-          this.sendFromQueue();
-        } else {
-          this.currentFEN = info;
 
-          if (this.level <= 1) this.level = 1;
-          else if (this.level >= 30) this.level = 30;
+          this.sendFromQueue();
+        } else if (info == 'checkmate') {
+          console.log(info);
           this.httpGetAsync(
             `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
             (response) => {
               if (this.isReady) {
-                response = this.currentFEN;
-
-                console.log('Response :  ' + response);
                 var chessBoard = (<HTMLFrameElement>(
                   document.getElementById('chessBd')
                 )).contentWindow;
-
                 chessBoard.postMessage(
-                  JSON.stringify({ boardState: response, color: this.color }),
+                  JSON.stringify({
+                    boardState: info,
+                    color: this.color,
+                    lessonFlag: true,
+                  }),
                   environment.urls.chessClientURL
                 );
               } else {
                 this.messageQueue.push(
-                  JSON.stringify({ boardState: response, color: this.color })
+                  JSON.stringify({
+                    boardState: info,
+                    color: this.color,
+                    lessonFlag: true,
+                  })
                 );
               }
               this.currentFEN = response;
             }
           );
+        } else {
+          this.messageQueue.push(
+            JSON.stringify({
+              boardState: info,
+              color: this.color,
+              lessonFlag: true,
+            })
+          );
+          this.sendFromQueue();
         }
+        if (e.data.indexOf('p') === -1 && this.flag) {
+          setTimeout(() => {
+            alert('Lesson complited.');
+          }, 200);
+        }
+        this.flag = true;
       },
+
       false
     );
   }
@@ -97,15 +118,12 @@ export class LearningsComponent implements OnInit {
   //////////////    SENDING MASSAGES  ABOUT THE BOARD STATE /////////////
 
   private sendFromQueue() {
-    this.messageQueue.forEach((element) => {
-      var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
-        .contentWindow;
-      chessBoard.postMessage(element, environment.urls.chessClientURL);
-    });
+    let element = this.messageQueue[this.messageQueue.length - 1];
+    var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
+      .contentWindow;
+    chessBoard.postMessage(element, environment.urls.chessClientURL);
   }
-  private gameOverAlert() {
-    alert('Game over.');
-  }
+
   ///////////// Creating a New Game , based on Position ///////////////
   public newGameInit(FEN: string) {
     this.color = 'white';
@@ -113,116 +131,19 @@ export class LearningsComponent implements OnInit {
     this.prevFEN = this.currentFEN;
 
     if (this.isReady) {
+      console.log('Game in It Ready' + this.isReady);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
         .contentWindow;
       chessBoard.postMessage(
-        JSON.stringify({ boardState: this.currentFEN, color: this.color }),
+        JSON.stringify({
+          boardState: this.currentFEN,
+          color: this.color,
+          lessonFlag: true,
+        }),
         environment.urls.chessClientURL
       );
     } else {
-      this.messageQueue.push(
-        JSON.stringify({ boardState: this.currentFEN, color: this.color })
-      );
-    }
-    /*
-    if (this.color === 'black') {
-      this.level = parseInt(
-        (<HTMLInputElement>document.getElementById('movesAhead')).value
-      );
-      if (this.level <= 1) this.level = 1;
-      else if (this.level >= 10) this.level = 10;
-      this.httpGetAsync(
-        `/chessclient/?level=${this.level}&fen=${this.currentFEN}`,
-        (response) => {
-          if (this.isReady) {
-            var chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBd')
-            )).contentWindow;
-            chessBoard.postMessage(
-              JSON.stringify({ boardState: response, color: this.color }),
-              environment.urls.chessClientURL
-            );
-          } else {
-            this.messageQueue.push(
-              JSON.stringify({ boardState: response, color: this.color })
-            );
-          }
-        }
-      );
-      this.httpGetAsync(
-        `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
-        (response) => {
-          console.log('Board Response:' + response);
-          if (this.isReady) {
-            var chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBd')
-            )).contentWindow;
-            chessBoard.postMessage(
-              JSON.stringify({ boardState: response, color: this.color }),
-              environment.urls.chessClientURL
-            );
-          } else {
-            this.messageQueue.push(
-              JSON.stringify({ boardState: response, color: this.color })
-            );
-          }
-        }
-      );
-    }
-    */
-  }
-
-  ////////////// Undoing the prevouus move //////////////////
-  /*
-  public undoPrevMove() {
-    var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
-      .contentWindow;
-    this.currentFEN = this.prevFEN;
-    if (this.color === 'white')
-      chessBoard.postMessage(
-        JSON.stringify({ boardState: this.currentFEN, color: this.color }),
-        environment.urls.chessClientURL
-      );
-    if (this.color === 'black') {
-      this.httpGetAsync(
-        `/chessclient/?level=${this.level}&fen=${this.currentFEN}`,
-        (response) => {
-          if (this.isReady) {
-            var chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBd')
-            )).contentWindow;
-            chessBoard.postMessage(
-              JSON.stringify({ boardState: response, color: this.color }),
-              environment.urls.chessClientURL
-            );
-          } else {
-            this.messageQueue.push(
-              JSON.stringify({ boardState: response, color: this.color })
-            );
-          }
-        }
-      );
-      this.httpGetAsync(
-        `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
-        (response) => {
-          if (this.isReady) {
-            var chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBd')
-            )).contentWindow;
-            chessBoard.postMessage(
-              JSON.stringify({ boardState: response, color: this.color }),
-              environment.urls.chessClientURL
-            );
-          } else {
-            this.messageQueue.push(
-              JSON.stringify({ boardState: response, color: this.color })
-            );
-          }
-        }
-      );
+      this.messageQueue.push(this.currentFEN);
     }
   }
-*/
-
-  // telling the user that the game has ended ////////
 }

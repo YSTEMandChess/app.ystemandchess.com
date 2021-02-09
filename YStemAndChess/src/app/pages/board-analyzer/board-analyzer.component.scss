@@ -69,6 +69,28 @@
         border-top: 2px solid black;
         border-bottom: 2px solid black;
     }
+
+    #move-list {
+        display: flex;
+    }
+
+    .ply {
+        margin: 5px 0px 5px 5px;
+    }
+
+    .move {
+        margin-left: 5px;
+        color: #0000EE;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .selected {
+        background-color: lightgray;
+    }
 }
 
 @media only screen and (max-width: 1400px) {

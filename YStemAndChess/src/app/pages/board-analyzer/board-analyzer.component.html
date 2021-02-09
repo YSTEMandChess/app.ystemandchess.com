@@ -39,7 +39,12 @@
                     </div>
                 </div>
                 <div id="principle-variation"></div>
-                <div id="move-list"></div>
+                <div id="move-list">
+                    <div class="ply" *ngFor='let ply of plies; index as i'>
+                        <span>{{i + 1}}.</span>
+                        <span (click)="setMove(move)" [ngClass]="{'selected' : move === currMove }" class="move" [id]="'move-' + i + '-' + j" *ngFor='let move of plies[i]; index as j'>{{move.move}}</span>
+                    </div>
+                </div>
             </div>
         </div>
 

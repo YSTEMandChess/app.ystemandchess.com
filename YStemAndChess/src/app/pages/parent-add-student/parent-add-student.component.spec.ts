@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 
 import { ParentAddStudentComponent } from './parent-add-student.component';
@@ -11,14 +11,13 @@ describe('ParentAddStudentComponent', () => {
   let component: ParentAddStudentComponent;
   let fixture: ComponentFixture<ParentAddStudentComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ParentAddStudentComponent, HeaderComponent, FooterComponent, LoginComponent ],
-      imports: [ ModalModule, RouterModule.forRoot(
-        [
-          {path: 'login', component: LoginComponent},
-          {path: 'parent-add-student', component: ParentAddStudentComponent},
-        ])
+      imports: [ ModalModule, RouterModule.forRoot([
+    { path: 'login', component: LoginComponent },
+    { path: 'parent-add-student', component: ParentAddStudentComponent },
+], { relativeLinkResolution: 'legacy' })
       ],
       providers: [ HeaderComponent ]
     })

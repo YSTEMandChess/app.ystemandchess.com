@@ -15,16 +15,14 @@ export class BoardAnalyzerComponent implements OnInit {
 
   private board;
   private chess;
-  private level: number = 10;
+  public level: number = 10;
   private centipawn: string = "0";
   private principleVariation: Array<String>;
-  private prevFEN: String =
-    'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
   // Plies is an array of Moves
   // Moves contain up to two Move Objects
   public plies: Array<Array<Move>> = [];
-  public currMove: Move    // Current move one the board
+  public currMove: Move    // Current move on the board
 
   //debounce functions
   public depthDebounce = this.debounce(this.onDepthInput.bind(this));
@@ -93,9 +91,13 @@ export class BoardAnalyzerComponent implements OnInit {
     var maxCpRange: number = 20;
     var maxBarRange: number = 95;
     var CpToHeightRatiio = maxBarRange/maxCpRange;
+    var evalBar = document.getElementById("centipawn-inner");
 
-    document.getElementById("centipawn-inner").style.height = 
-    Math.min(Math.max(( 50 + parseFloat(this.centipawn) * CpToHeightRatiio), 100 - maxBarRange), 100) + "%";
+    if (this.centipawn[0] == "M") {
+      this.chess.turn() == "w" ? evalBar.style.height = 100 + "%" : evalBar.style.height = 0 + "%"
+    } else {
+      evalBar.style.height = Math.min(Math.max(( 50 + parseFloat(this.centipawn) * CpToHeightRatiio), 100 - maxBarRange), 100) + "%";
+    }
     
     var formatPV: String = "";
     var i = 0;
@@ -132,15 +134,7 @@ export class BoardAnalyzerComponent implements OnInit {
 
     this.updateMoveList(move);
     
-    this.httpGetAsync(
-      `${environment.urls.stockFishURL}/?info=${"true"}&level=${this.level}&fen=${this.prevFEN}&move=${source+target}`,
-      (response) => {
-        this.parseStockfish(response);
-        this.updateCentiPawnEval();
-      }
-    );
-
-    this.prevFEN = this.chess.fen();
+    this.updateEngineEvaluation();
   }
 
   private onSnapEnd() {
@@ -187,7 +181,7 @@ export class BoardAnalyzerComponent implements OnInit {
     var movesPerPly = 2;
     var moveObj: Move = {
       move: move.san,
-      indexes: !currPly ? { pIndex: 0, mIndex: 0 } : this.getNextMoveIndex(this.currMove.indexes),
+      indexes: !this.currMove ? { pIndex: 0, mIndex: 0 } : this.getNextMoveIndex(this.currMove.indexes),
       fen: this.chess.fen()
     }
 
@@ -197,11 +191,19 @@ export class BoardAnalyzerComponent implements OnInit {
       return;
     }
 
-
     // If the new move would overwrite an existing move
     // then delete all moves from the existing move onward
     // unless the new move is the same as the existing move
     if (this.currMove != currPly[currPly.length - 1]) {
+      if (!this.currMove) {
+        if (JSON.stringify(moveObj) === JSON.stringify(this.plies[0][0])) {
+          this.currMove = this.plies[0][0];
+          return;
+        }
+        this.plies = [[moveObj]];
+        this.currMove = moveObj;
+        return;
+      }
       var nextMoveIndexes = this.getNextMoveIndex(this.currMove.indexes);
       var nextMove = this.plies[nextMoveIndexes.pIndex][nextMoveIndexes.mIndex];
 
@@ -236,15 +238,6 @@ export class BoardAnalyzerComponent implements OnInit {
     this.plies.push([moveObj]);
   }
 
-  private getLastMoveIndexes(): MoveIndexes {
-    var numPly = this.plies.length - 1;
-    var moveObj: MoveIndexes = {
-      pIndex: numPly,
-      mIndex: this.plies[numPly].length - 1
-    }
-    return moveObj;
-  }
-
   private getNextMoveIndex(moveIndexes: MoveIndexes): MoveIndexes {
     var nextMoveIndexes: MoveIndexes = {
       pIndex: moveIndexes.pIndex,
@@ -259,12 +252,89 @@ export class BoardAnalyzerComponent implements OnInit {
     return nextMoveIndexes;
   }
 
+  private getPrevMoveIndex(moveIndexes: MoveIndexes): MoveIndexes {
+    if (moveIndexes.pIndex == 0 && moveIndexes.mIndex == 0) {
+      return moveIndexes;
+    }
+
+    var prevMoveIndexes: MoveIndexes = {
+      pIndex: moveIndexes.pIndex,
+      mIndex: moveIndexes.mIndex
+    };
+    if (moveIndexes.mIndex == 0) {
+      prevMoveIndexes.pIndex--;
+      prevMoveIndexes.mIndex = 1;
+    } else {
+      prevMoveIndexes.mIndex = 0;
+    }
+    return prevMoveIndexes;
+  }
 
   //@move-Movelist move object
   public setMove(move) {
+    if(!move) {
+      return
+    }
     this.chess.load(move.fen);
     this.board.position(move.fen);
     this.currMove = move;
     this.updateEngineEvaluation();    
+  }
+
+  public startPosition() {
+    this.board.start();
+    this.chess.reset();
+    this.currMove = null;
+    this.updateEngineEvaluation()
+  }
+
+  public lastPosition() {
+    var lastPly = this.plies[this.plies.length - 1];
+    var lastMove = lastPly[lastPly.length - 1];
+
+    this.setMove(lastMove);
+  }
+
+  public nextPosition() {
+    if (this.plies.length == 0) {
+      return;
+    }
+
+    if (!this.currMove) {
+      this.setMove(this.plies[0][0]);
+      return
+    }
+
+    var lastPly = this.plies[this.plies.length - 1];
+    var lastMove = lastPly[lastPly.length - 1];
+
+    if (this.currMove == lastMove) {
+      return;
+    }
+
+    var nextMoveIndexes = this.getNextMoveIndex(this.currMove.indexes);
+    var nextMove = this.plies[nextMoveIndexes.pIndex][nextMoveIndexes.mIndex];
+    this.setMove(nextMove);
+  }
+
+  public prevPosition() {
+    if (this.plies.length == 0) {
+      return;
+    }
+
+    if (!this.currMove) {
+      return
+    }
+
+    if (this.currMove == this.plies[0][0]) {
+      this.startPosition();
+      return;
+    }
+
+    var prev: Move;
+
+    var prevMoveIndexes = this.getPrevMoveIndex(this.currMove.indexes);
+    var prevMove = this.plies[prevMoveIndexes.pIndex][prevMoveIndexes.mIndex];
+    this.setMove(prevMove);
   }
 }

@@ -1,0 +1,319 @@
+body {
+    padding-top:5%; //50px
+}
+
+#clear {
+    clear:both;
+}
+
+#chess-play {
+    position: relative;
+    float: right;
+    // margin-bottom: 2%;
+    margin-top: -18%;
+    width: 55%;
+}
+
+#content-container {
+    position:relative;
+    overflow: hidden;
+    background-color: #51AA00;
+    border-radius:33px;
+    height:auto; 
+}
+
+#instructions-header h3{
+        // float:left;
+        width:25%;
+        height:auto;
+        margin-top: 2.5%;
+        // margin-left:-70%;
+        // overflow: hidden;
+        font-family: 'Lato';
+        font-style:bold;
+        font-weight:50;
+        font-size:3vw;   // //262.5% // 3vw
+        line-height: 250%; 
+        letter-spacing:0.07em;
+        color:#ffffff;
+        box-sizing: border-box;
+}
+#instructions-paragraph {
+    align-items: left;
+    box-sizing: border-box;
+    color:#ffffff;
+    font-family:'Roboto';
+    font-style:normal;
+    font-size:1.4vw; // 137.5%
+    height:auto;
+    line-height:117.1%;
+    letter-spacing:0.01em;
+    margin-left:2.5%;
+    overflow: hidden;
+    width:35%;
+}
+
+#lessons-menu-container {
+    position: relative;
+    float:left;
+    margin-left:3.5%;
+    width: 30%;
+    h3 {
+        color: #ffffff;
+    }
+}
+
+// Mobile Responsive styles
+
+@media(max-width:1400px) {
+    #content-container {
+        margin: 0 auto;
+        max-width: 90%;
+        margin-left:5%;
+        padding-bottom: 3%;
+    }
+    #chess-play {
+        // position: relative;
+        float: right;
+        margin-top: -18%;
+        margin-right: 8%;
+        width: 35%;
+    }
+
+    #instructions-header {
+        display: flex;
+        flex-direction: row;
+            h3 {
+                margin-top: 3%;
+                // margin-left: -9.5%;
+                font-weight: 500;
+                font-size:3vw; 
+            }
+
+            #links {
+                margin-top: 6%;
+                padding-bottom: 0;
+            }   
+        }  
+    #instructions-paragraph {
+        p {
+        margin-left: 2.5%; 
+        width:65%;
+        font-family:'Roboto';
+        font-style:bold;
+        font-weight:400;
+        font-size:1.4vw; //22px
+        line-height:117.1%;
+        letter-spacing:0.01em;
+        color:#ffffff;
+        }
+        #links {
+            margin-top: 6%;
+            padding-bottom: 0;
+        }
+    }
+    #lessons-menu-container {
+        position: relative;
+        float:left;
+        margin-left:3.5%;
+        width: 20%;
+        h5 {
+            color: #ffffff;
+        }
+    }
+}
+
+@media(max-width:950px) {
+    #content-container {
+        margin: 0 auto;
+        max-width: 90%;
+        padding-bottom: 8%;
+    }
+    #chess-play {
+        width: 100%;
+        margin-right: -13%;
+        margin-bottom: 5%;
+        }
+
+    #instructions-header h3{
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        // margin-left: 40%;
+    }
+    #instructions-paragraph {
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        margin-left: 15%;
+        margin-bottom: 20%;
+    }
+    #lessons-menu-container {
+        position: relative;
+        align-items: center;
+        margin-left:8%;
+        width: 85%;
+        h3 {
+            color: #ffffff;
+        }
+    }
+
+}
+
+@media(max-width: 860px) {
+    #content-container {
+        margin: 0 auto;
+        width:90%;
+        margin-left:5%;
+        padding-bottom: 8%;
+    
+    }
+
+    #chess-play {
+        position: relative;
+        width:90%;
+        justify-content: center;
+        align-items: center;
+        padding-right: 5%;
+        }
+
+    #instructions-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+            h3 {
+                margin-top: 3%;
+                font-size:3vw; 
+            }
+
+            #links {
+                margin-top: 6%;
+                padding-bottom: 0;
+            }   
+        }  
+    #instructions-paragraph p{
+        p {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: left;
+        margin: 0 auto;
+        }
+        #links {
+            margin-top: 6%;
+            padding-bottom: 0;
+        }
+    }
+}
+#lessons-menu-paragraph {
+    margin-left: 16.5%; //75px
+    width:66%;
+    font-family:'Roboto';
+    font-style:bold;
+    font-weight:500;
+    font-size:1.4vw; //22px
+    line-height:117.1%;
+    letter-spacing:0.01em;
+    color:#000000;
+}
+
+@media (min-width: 768px) {
+    #content-container {
+        margin: 0 auto;
+        width:90%;
+        margin-left:5%;
+        padding-bottom: 8%;
+    
+    }
+
+    #chess-play {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        max-width: 100%;
+        max-height: 100%;
+        justify-content: center;
+        align-items: center;
+        // margin-bottom: 40%;
+        }
+
+    #instructions-header h3{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+            h3 {
+                margin-top: 3%;
+                width: 100%;
+            }
+
+            #links {
+                margin-top: 6%;
+                padding-bottom: 0;
+            }   
+        }  
+    #instructions-paragraph p{
+        p {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+        width: 100%;
+        }
+        #links {
+            margin-top: 6%;
+            padding-bottom: 0;
+        }
+    }
+}
+
+///////////////// Accordion /////////////////
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion-expand {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    font-weight: 700;
+    font-size: 16pt;
+    border: 1px solid #000000;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .accordion-expand:hover {
+    background-color: #ccc;
+  }
+
+  .accordion-sub {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 10px 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    border: 1px solid #000000;
+  }
+
+  .active, .accordion-sub:hover {
+    background-color: #ccc;
+  }
+  
+  /* Style the accordion panel. Note: hidden by default */
+  .panel {
+    padding-right: 0px;
+
+    display: none;
+    overflow: hidden;
+  }
+
+  ul {
+    margin-bottom: 0px;
+  }

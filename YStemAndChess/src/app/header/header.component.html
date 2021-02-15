@@ -11,6 +11,10 @@
             <li class="nav-item">
                 <a class="nav-link hvr-underline-from-left" href="{{playLink}}">Play</a>
             </li>
+            <!-- New Page navbar link to new route-->
+            <li class="nav-item">
+                <a class="nav-link hvr-underline-from-left" href="/learnings">Learnings</a>
+            </li>
             <li class="nav-item">
                 <div *ngIf="(role === 'mentor' || role === 'student') && !inMatch">
                     <a class="nav-link hvr-underline-from-left" (click)="openModal('find-game')" (click)="findGame()">Find a Game</a>
@@ -37,9 +41,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link hvr-underline-from-left" href="/contact">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link hvr-underline-from-left" href="/why-chess">Why Chess</a>
             </li>
             <li class="nav-item">
                 <a routerLink="/donate" class="btn btn-lg donate hvr-fade-1" tabindex="-1" role="button"

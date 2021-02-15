@@ -3,10 +3,7 @@
     display: flex;
     justify-content: space-around;
 .chess {
-    // position: relative;
-    // width: 40%;
-    // padding-bottom: 43%;
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: center;
     
@@ -14,16 +11,6 @@
         min-width: 700px;
         min-height: 700px;
     }
-
-    // iframe {
-    //     position: absolute;
-    //     top: 0;
-    //     bottom: 0;
-    //     left: 50%;
-    //     right: 50%;
-    //     width: 100%;
-    //     height:100%;
-    // }
 }
     .jitsi {
         width: 30%;

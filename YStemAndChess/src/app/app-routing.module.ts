@@ -11,6 +11,7 @@ import { ProgramsComponent } from './pages/programs/programs.component';
 import { StudentComponent } from './pages/student/student.component';
 import { PlayMentorComponent} from './pages/play-mentor/play-mentor.component';
 import { DonateComponent} from './pages/donate/donate.component';
+import { LearningsComponent} from './pages/learnings/learnings.component';
 import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { ParentComponent } from './pages/parent/parent.component';
@@ -21,8 +22,6 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
-import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
-import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -33,6 +32,7 @@ const routes: Routes = [
   {path: 'be-amentor', component: BeAMentorComponent},
   {path: 'programs', component: ProgramsComponent},
   {path: 'donate', component: DonateComponent},
+  {path: 'learnings', component: LearningsComponent},
   {path: 'student', component: StudentComponent},
   {path: 'parent', component: ParentComponent},
   {path: 'parent-add-student', component: ParentAddStudentComponent},
@@ -44,9 +44,7 @@ const routes: Routes = [
   {path: 'lessons', component: LessonsComponent},
   {path: 'piece-lessons', component: PieceLessonsComponent},
   {path: 'play-lesson', component: PlayLessonComponent},
-  {path: 'contact', component: ContactComponent},
-  {path: 'board-editor', component: BoardEditorComponent},
-  {path: 'why-chess', component: WhyChessComponent}
+  {path: 'contact', component: ContactComponent}
 ];
 
 @NgModule({

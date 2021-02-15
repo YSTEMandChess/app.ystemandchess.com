@@ -337,4 +337,8 @@ export class BoardAnalyzerComponent implements OnInit {
     var prevMove = this.plies[prevMoveIndexes.pIndex][prevMoveIndexes.mIndex];
     this.setMove(prevMove);
   }
+
+  public flipBoard() {
+    this.board.flip();
+  }
 }

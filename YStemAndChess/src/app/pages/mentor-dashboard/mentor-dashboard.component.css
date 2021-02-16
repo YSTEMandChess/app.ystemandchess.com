@@ -1,0 +1,111 @@
+body {
+  padding-top: 5%;
+}
+
+#clear {
+  clear: both;
+}
+
+.stats-container {
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  padding-bottom: 5%;
+  border-radius: 33px;
+  background-color: #E1E7ED;
+}
+
+.stats-container #row-names {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding-top: 5%;
+  padding-left: 2.5%;
+}
+
+.stats-container #row-names p {
+  padding-right: 27.4%;
+  font-family: 'Lato';
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+}
+
+.stats-container .row-values {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 95%;
+  margin-left: 2.5%;
+  border-bottom-style: solid;
+  border-bottom-width: thick;
+}
+
+.stats-container .row-values #student-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 25%;
+  height: 150px;
+  background-color: #fff;
+}
+
+.stats-container .row-values #student-name p {
+  font-family: 'Roboto';
+  font-size: 2.3vw;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+}
+
+.stats-container .row-values #student-progress {
+  width: 25%;
+  height: 150px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.stats-container .row-values #student-progress img {
+  width: 100%;
+  height: auto;
+}
+
+.stats-container .row-values #graph {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 25%;
+  height: 150px;
+  background-color: #fff;
+}
+
+.stats-container .row-values #graph img {
+  width: 100%;
+}
+/*# sourceMappingURL=mentor-dashboard.component.css.map */

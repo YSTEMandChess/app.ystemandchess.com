@@ -63,7 +63,13 @@ body {
     }
 }
 
-// Mobile Responsive styles
+@media(max-width:9999px) {
+    #lessons-menu-container {
+        width: 500px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
 
 @media(max-width:1400px) {
     #content-container {
@@ -114,9 +120,9 @@ body {
     }
     #lessons-menu-container {
         position: relative;
-        float:left;
-        margin-left:3.5%;
-        width: 20%;
+        // float:left;
+        margin-left: -7%;
+        width: 40%;
         h5 {
             color: #ffffff;
         }
@@ -127,7 +133,7 @@ body {
     #content-container {
         margin: 0 auto;
         max-width: 90%;
-        padding-bottom: 8%;
+        // padding-bottom: 8%;
     }
     #chess-play {
         width: 100%;
@@ -165,7 +171,7 @@ body {
         margin: 0 auto;
         width:90%;
         margin-left:5%;
-        padding-bottom: 8%;
+        // padding-bottom: 8%;
     
     }
 
@@ -204,6 +210,13 @@ body {
             margin-top: 6%;
             padding-bottom: 0;
         }
+    }
+
+    #lessons-menu-container {
+        width: 100%;
+        float: left;
+        padding-left: 50px;
+        padding-right: 50px;
     }
 }
 #lessons-menu-paragraph {
@@ -266,6 +279,11 @@ body {
         }
     }
 }
+#lessons-menu-container {
+    float: left;
+    padding-bottom: 50px;
+}
+
 
 ///////////////// Accordion /////////////////
 /* Style the buttons that are used to open and close the accordion panel */

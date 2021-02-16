@@ -1,0 +1,52 @@
+.prompt {
+  text-align: center;
+  padding-top: 2%;
+}
+
+#play-container {
+  margin-top: 2%;
+}
+
+#play-container #bottom {
+  margin-top: 2%;
+  padding-bottom: 2%;
+  text-align: center;
+}
+
+#play-container #bottom #new-game, #play-container #bottom #undo {
+  outline-style: none;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-family: 'Lato';
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  border-radius: 33px;
+  color: #FFF;
+  background-color: #FF8503;
+}
+
+#play-container #bottom #new-game:hover, #play-container #bottom #undo:hover {
+  color: #FF8503;
+  background-color: #fff;
+}
+
+#play-container #lichess-board {
+  width: 100%;
+}
+
+#play-container #bottom {
+  padding-bottom: 2%;
+}
+
+#movesAhead {
+  width: 100px;
+}
+
+#tag {
+  padding: 20px;
+}
+/*# sourceMappingURL=play-nolog.component.css.map */

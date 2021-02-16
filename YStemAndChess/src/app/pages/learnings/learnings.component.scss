@@ -57,12 +57,20 @@ body {
         margin-top: 2%;
 }
 
+@media(max-width:9999px) {
+    #lessons-menu-container {
+        width: 500px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
+
 @media(max-width:1400px) {
     #content-container {
         margin: 0 auto;
         max-width: 90%;
         margin-left:5%;
-        padding-bottom: 8%;
+        // padding-bottom: 8%;
     }
     #chess-play {
         position: relative;
@@ -76,14 +84,28 @@ body {
         display: flex;
         flex-direction: row;
     }
+    #lessons-menu-container {
+        width: 500px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+}
 
+//Hacky solution, should be replaced in future
+@media(max-width:1127px) {
+    #lessons-menu-container {
+        width: 100%;
+        float: left;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
 }
 
 @media(max-width:950px) {
     #content-container {
         margin: 0 auto;
         max-width: 90%;
-        padding-bottom: 8%;
+        // padding-bottom: 8%;
     }
 
 }
@@ -93,7 +115,7 @@ body {
         margin: 0 auto;
         width:90%;
         margin-left:5%;
-        padding-bottom: 8%;
+        // padding-bottom: 8%;
     
     }
 
@@ -134,6 +156,13 @@ body {
             padding-bottom: 0;
         }
     }
+
+    #lessons-menu-container {
+        width: 100%;
+        float: left;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
 }
 #lessons-menu-paragraph {
     // float:right;
@@ -147,6 +176,11 @@ body {
     line-height:117.1%;
     letter-spacing:0.01em;
     color:#000000;
+}
+
+#lessons-menu-container {
+    float: left;
+    padding-bottom: 50px;
 }
 
 

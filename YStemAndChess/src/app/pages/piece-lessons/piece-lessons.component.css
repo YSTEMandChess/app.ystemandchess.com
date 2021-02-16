@@ -1,0 +1,75 @@
+#lesson-container {
+  margin-top: 2%;
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  text-align: center;
+  border-radius: 33px;
+  background-color: #E1E7ED;
+}
+
+#lesson-container #top {
+  font-style: 'Roboto';
+}
+
+#lesson-container #chess-board {
+  width: 100%;
+}
+
+#lesson-container #bottom {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  text-align: center;
+}
+
+#lesson-container #bottom #next {
+  outline-style: none;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-left: 2%;
+  font-family: 'Lato';
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  border-radius: 33px;
+  color: #FFF;
+  background-color: #FF8503;
+}
+
+#lesson-container #bottom #next:hover {
+  color: #FF8503;
+  background-color: #fff;
+}
+
+#lesson-container #bottom #previous {
+  outline-style: none;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-family: 'Lato';
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  border-radius: 33px;
+  color: #FFF;
+  background-color: #FF8503;
+}
+
+#lesson-container #bottom #previous:hover {
+  color: #FF8503;
+  background-color: #fff;
+}
+
+#movesAhead {
+  width: 100px;
+}
+
+#tag {
+  padding: 20px;
+}
+/*# sourceMappingURL=piece-lessons.component.css.map */

@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { LessonsComponent } from './lessons.component';
+import { BoardEditorComponent } from './board-editor.component';
 import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { ModalModule } from '../../_modal';
 
-describe('LessonsComponent', () => {
-  let component: LessonsComponent;
-  let fixture: ComponentFixture<LessonsComponent>;
+describe('BoardEditorComponent', () => {
+  let component: BoardEditorComponent;
+  let fixture: ComponentFixture<BoardEditorComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LessonsComponent, HeaderComponent, FooterComponent ],
+      declarations: [ BoardEditorComponent, HeaderComponent, FooterComponent ],
       imports: [ ModalModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LessonsComponent);
+    fixture = TestBed.createComponent(BoardEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

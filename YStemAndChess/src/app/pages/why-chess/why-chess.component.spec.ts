@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { LessonsComponent } from './lessons.component';
+import { WhyChessComponent } from './why-chess.component';
 import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { ModalModule } from '../../_modal';
 
-describe('LessonsComponent', () => {
-  let component: LessonsComponent;
-  let fixture: ComponentFixture<LessonsComponent>;
+describe('WhyChessComponent', () => {
+  let component: WhyChessComponent;
+  let fixture: ComponentFixture<WhyChessComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LessonsComponent, HeaderComponent, FooterComponent ],
+      declarations: [ WhyChessComponent, HeaderComponent, FooterComponent ],
       imports: [ ModalModule ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LessonsComponent);
+    fixture = TestBed.createComponent(WhyChessComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

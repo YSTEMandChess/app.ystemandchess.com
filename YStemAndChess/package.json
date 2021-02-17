@@ -12,17 +12,6 @@
   },
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "@angular/animations": "~9.1.11",
-    "@angular/cdk": "^10.0.1",
-    "@angular/common": "~9.1.11",
-    "@angular/compiler": "^9.1.12",
-    "@angular/core": "~9.1.11",
-    "@angular/forms": "~9.1.11",
-    "@angular/platform-browser": "~9.1.11",
-    "@angular/platform-browser-dynamic": "~9.1.11",
-    "@angular/router": "~9.1.11",
-=======
     "@angular/animations": "~12.0.0-next.0",
     "@angular/cdk": "^11.2.0",
     "@angular/common": "~12.0.0-next.0",
@@ -34,7 +23,6 @@
     "@angular/router": "~12.0.0-next.0",
     "@chrisoakman/chessboardjs": "^1.0.0",
     "@types/chessboardjs": "^0.3.1",
->>>>>>> e0896a61a19f0c0cfeb1acc18434002bbb17bfa1
     "agora-rtc-sdk": "^3.1.1",
     "express": "^4.17.1",
     "karma-firefox-launcher": "^2.0.0",

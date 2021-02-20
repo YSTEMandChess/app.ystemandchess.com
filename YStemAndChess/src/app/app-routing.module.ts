@@ -21,6 +21,8 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
+import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -42,11 +44,13 @@ const routes: Routes = [
   {path: 'lessons', component: LessonsComponent},
   {path: 'piece-lessons', component: PieceLessonsComponent},
   {path: 'play-lesson', component: PlayLessonComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'board-editor', component: BoardEditorComponent},
+  {path: 'why-chess', component: WhyChessComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule],
   providers: [HeaderComponent]
 })

@@ -5,75 +5,94 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-piece-lessons',
   templateUrl: './piece-lessons.component.html',
-  styleUrls: ['./piece-lessons.component.scss']
+  styleUrls: ['./piece-lessons.component.scss'],
 })
 export class PieceLessonsComponent implements OnInit {
-
-  private lessonStartFEN: string = "";
-  private lessonEndFEN: string = "";
+  private lessonStartFEN: string = '';
+  private lessonEndFEN: string = '';
   private lessonStarted: boolean = false;
-  private endSquare: string = "";
-  private previousEndSquare: string = "";
+  private endSquare: string = '';
+  private previousEndSquare: string = '';
   private lessonNum: number = 0;
   private totalLessons: number = 0;
-  private currentFEN = "";
+  private currentFEN = '';
   private messageQueue = new Array();
-  private color = "white";
+  private color = 'white';
   private level = 5; //default stockfish value
   private isReady = false;
   private piece: string = this.cookie.get('piece');
   public displayPiece: string = this.piece.toLocaleUpperCase();
   public displayLessonNum = 0;
 
-  constructor(private cookie: CookieService) { }
+  constructor(private cookie: CookieService) {}
 
   async ngOnInit() {
-    var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    var eventMethod = window.addEventListener
+      ? 'addEventListener'
+      : 'attachEvent';
     var eventer = window[eventMethod];
-    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+    var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
     this.getTotalLesson();
     // Listen to message from child window
-    eventer(messageEvent, async (e) => {
-      if (e.origin == environment.urls.chessClientURL) {
-        //child window has loaded and can now recieve data
-        if(e.data == "ReadyToRecieve") {
-          this.isReady = true;
-          this.sendFromQueue();
+    eventer(
+      messageEvent,
+      async (e) => {
+        if (e.origin == environment.urls.chessClientURL) {
+          //child window has loaded and can now recieve data
+          if (e.data == 'ReadyToRecieve') {
+            this.isReady = true;
+            this.sendFromQueue();
+          }
+          //gets the amount of lessons completed if not in lesson
+          if (this.lessonStarted == false) {
+            await this.getLessonsCompleted();
+            this.lessonStarted = true;
+          }
+          //if lesson is completed start new lesson
+          else if (e.data == this.lessonEndFEN) {
+            this.updateLessonCompletion();
+            alert('Lesson ' + this.displayLessonNum + ' completed!');
+            await this.getLessonsCompleted();
+          } else {
+            //stockfish move
+            this.currentFEN = e.data;
+            this.level = 5;
+            if (this.level <= 1) this.level = 1;
+            else if (this.level >= 30) this.level = 30;
+            this.httpGetAsync(
+              `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+              (response) => {
+                if (this.isReady) {
+                  var chessBoard = (<HTMLFrameElement>(
+                    document.getElementById('chessBd')
+                  )).contentWindow;
+                  chessBoard.postMessage(
+                    JSON.stringify({ boardState: response, color: this.color }),
+                    environment.urls.chessClientURL
+                  );
+                } else {
+                  this.messageQueue.push(
+                    JSON.stringify({ boardState: response, color: this.color })
+                  );
+                }
+              }
+            );
+          }
         }
-        //gets the amount of lessons completed if not in lesson
-        if(this.lessonStarted == false) {
-          await this.getLessonsCompleted()
-          this.lessonStarted = true;
-        } 
-        //if lesson is completed start new lesson
-        else if(e.data == this.lessonEndFEN) {
-          this.updateLessonCompletion();
-          alert("Lesson " + this.displayLessonNum + " completed!");
-          await this.getLessonsCompleted();
-        } else {
-          //stockfish move
-          this.currentFEN = e.data;
-          this.level = 5;
-          if(this.level <= 1) this.level = 1;
-          else if (this.level >= 30) this.level = 30;
-          this.httpGetAsync(`${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
-            if (this.isReady) {
-              var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-              chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
-            } else {
-              this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
-            }
-          });
-        }
-      }
-    }, false);
+      },
+      false
+    );
   }
 
   /**
    * get the last lesson completed by the student for the current lesson piece
    */
   private async getLessonsCompleted() {
-    let url = `${environment.urls.middlewareURL}/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}`;
+    let url = `${
+      environment.urls.middlewareURL
+    }/getCompletedLesson.php/?jwt=${this.cookie.get('login')}&piece=${
+      this.piece
+    }`;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonNum = data;
@@ -85,15 +104,20 @@ export class PieceLessonsComponent implements OnInit {
    * get current lesson data
    */
   private async getCurrentLesson() {
-    let url = `${environment.urls.middlewareURL}/getLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
-    console.log("I am lesson Num " + this.lessonNum + ". Piece: " + this.piece);
+    let url = `${
+      environment.urls.middlewareURL
+    }/getLesson.php/?jwt=${this.cookie.get('login')}&piece=${
+      this.piece
+    }&lessonNumber=${this.lessonNum}`;
     this.previousEndSquare = this.endSquare;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.lessonStartFEN = data['startFen'];
       this.lessonEndFEN = data['endFen'];
       this.displayLessonNum = data['lessonNumber'];
-      if(this.checkIfLessonsAreCompleted() === true) { return; }
+      if (this.checkIfLessonsAreCompleted() === true) {
+        return;
+      }
       this.endSquare = data['endSquare'];
       this.sendLessonToChessBoard();
     });
@@ -104,29 +128,35 @@ export class PieceLessonsComponent implements OnInit {
    */
   private checkIfLessonsAreCompleted(): boolean {
     let completed: boolean = false;
-    if(this.displayLessonNum === undefined) {
-      alert("Congratulations all current lessons for this piece have been completed!" + '\n' +
-        "Comeback soon for more lessons or go over previous lessons.");
-        completed = true;
+    if (this.displayLessonNum === undefined) {
+      alert(
+        'Congratulations all current lessons for this piece have been completed!' +
+          '\n' +
+          'Comeback soon for more lessons or go over previous lessons.'
+      );
+      completed = true;
     }
     return completed;
   }
 
   private async getTotalLesson() {
-    let url = `${environment.urls.middlewareURL}/getTotalPieceLesson.php/?jwt=${this.cookie.get('login')}&piece=${this.piece}`;
+    let url = `${
+      environment.urls.middlewareURL
+    }/getTotalPieceLesson.php/?jwt=${this.cookie.get('login')}&piece=${
+      this.piece
+    }`;
     this.httpGetAsync(url, (response) => {
       let data = JSON.parse(response);
       this.totalLessons = data;
-      console.log(this.totalLessons);
     });
   }
   /**
    * store data for chess board before it has loaded
    */
   private sendFromQueue() {
-    this.messageQueue.forEach(element => {
-      console.log("sending message " + element);
-      var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
+    this.messageQueue.forEach((element) => {
+      var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
+        .contentWindow;
       chessBoard.postMessage(element, environment.urls.chessClientURL);
     });
   }
@@ -135,47 +165,68 @@ export class PieceLessonsComponent implements OnInit {
    * initialize stockfish
    */
   public newGameInit() {
-    console.log("A new game has been requested")
     this.currentFEN = this.lessonStartFEN;
-    
+
     if (this.isReady) {
-      console.log("sending message" + this.currentFEN);
-      var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-      chessBoard.postMessage(JSON.stringify({ boardState: this.currentFEN, color: this.color }), environment.urls.chessClientURL);
+      var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
+        .contentWindow;
+      chessBoard.postMessage(
+        JSON.stringify({ boardState: this.currentFEN, color: this.color }),
+        environment.urls.chessClientURL
+      );
     } else {
-      this.messageQueue.push(JSON.stringify({ boardState: this.currentFEN, color: this.color }));
+      this.messageQueue.push(
+        JSON.stringify({ boardState: this.currentFEN, color: this.color })
+      );
     }
-    
-    if (this.color == "white") {
+
+    if (this.color == 'white') {
       this.level = 5;
-      this.color = "black";
-      if(this.level <= 1) this.level = 1;
+      this.color = 'black';
+      if (this.level <= 1) this.level = 1;
       else if (this.level >= 30) this.level = 30;
-      this.httpGetAsync(`${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`, (response) => {
-        if (this.isReady) {
-          console.log("sending message" + response);
-          var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-          chessBoard.postMessage(JSON.stringify({ boardState: response, color: this.color }), environment.urls.chessClientURL);
-        } else {
-          this.messageQueue.push(JSON.stringify({ boardState: response, color: this.color }));
+      this.httpGetAsync(
+        `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+        (response) => {
+          if (this.isReady) {
+            var chessBoard = (<HTMLFrameElement>(
+              document.getElementById('chessBd')
+            )).contentWindow;
+            chessBoard.postMessage(
+              JSON.stringify({ boardState: response, color: this.color }),
+              environment.urls.chessClientURL
+            );
+          } else {
+            this.messageQueue.push(
+              JSON.stringify({ boardState: response, color: this.color })
+            );
+          }
         }
-      });
-    } 
+      );
+    }
   }
 
   /**
    * send current lesson to chess board
    */
   private sendLessonToChessBoard() {
-    var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd')).contentWindow;
-    console.log("start " + this.lessonStartFEN);
-    console.log("end " + this.lessonEndFEN);
-    chessBoard.postMessage(JSON.stringify({ boardState: this.lessonStartFEN, endState: this.lessonEndFEN, lessonFlag: true, endSquare: this.endSquare, color: this.color, previousEndSquare: this.previousEndSquare}), environment.urls.chessClientURL);
+    var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
+      .contentWindow;
+    chessBoard.postMessage(
+      JSON.stringify({
+        boardState: this.lessonStartFEN,
+        endState: this.lessonEndFEN,
+        lessonFlag: true,
+        endSquare: this.endSquare,
+        color: this.color,
+        previousEndSquare: this.previousEndSquare,
+      }),
+      environment.urls.chessClientURL
+    );
   }
 
   public previousLesson() {
-    if (this.lessonNum > 0)
-    {
+    if (this.lessonNum > 0) {
       this.lessonNum--;
       this.previousEndSquare = this.endSquare;
       this.getCurrentLesson();
@@ -183,8 +234,7 @@ export class PieceLessonsComponent implements OnInit {
   }
 
   public nextLesson() {
-    if (this.lessonNum + 1 < this.totalLessons)
-    {
+    if (this.lessonNum + 1 < this.totalLessons) {
       this.lessonNum++;
       this.previousEndSquare = this.endSquare;
       this.getCurrentLesson();
@@ -195,13 +245,13 @@ export class PieceLessonsComponent implements OnInit {
    * update student lesson completion for database
    */
   private async updateLessonCompletion() {
-    let url = `${environment.urls.middlewareURL}/updateLessonCompletion.php/?jwt=${this.cookie.get("login")}&piece=${this.piece}&lessonNumber=${this.lessonNum}`;
-    this.httpGetAsync(url, (response) => {
-      console.log(response);
-    });
+    let url = `${
+      environment.urls.middlewareURL
+    }/updateLessonCompletion.php/?jwt=${this.cookie.get('login')}&piece=${
+      this.piece
+    }&lessonNumber=${this.lessonNum}`;
+    this.httpGetAsync(url, (response) => {});
   }
-
-  
 
   /**
    * make requests to the serer
@@ -213,10 +263,8 @@ export class PieceLessonsComponent implements OnInit {
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
-    }
-    xmlHttp.open("POST", theUrl, true); // true for asynchronous 
+    };
+    xmlHttp.open('POST', theUrl, true); // true for asynchronous
     xmlHttp.send(null);
   }
-
-
 }

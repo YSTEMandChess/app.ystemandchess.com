@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingPageComponent } from './landing-page.component';
+import { HeaderComponent } from '../../header/header.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { ModalModule } from '../../_modal/modal.module';
 
 describe('LandingPageComponent', () => {
   let component: LandingPageComponent;
@@ -8,7 +11,8 @@ describe('LandingPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LandingPageComponent ]
+      declarations: [ LandingPageComponent, HeaderComponent, FooterComponent ],
+      imports: [ ModalModule ],
     })
     .compileComponents();
   });

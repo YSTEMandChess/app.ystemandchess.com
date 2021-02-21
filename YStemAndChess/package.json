@@ -13,7 +13,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.11",
-    "@angular/cdk": "^10.0.1",
+    "@angular/cdk": "^11.2.1",
     "@angular/common": "~9.1.11",
     "@angular/compiler": "^9.1.12",
     "@angular/core": "~9.1.11",
@@ -56,4 +56,3 @@
     "typescript": "~3.8.3"
   }
 }
-

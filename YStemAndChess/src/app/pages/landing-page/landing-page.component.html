@@ -1,0 +1,69 @@
+<html>
+    <header>
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KJ979C9');
+        </script>
+        <!-- End Google Tag Manager -->
+        <app-header></app-header>
+    </header>
+
+    <body>
+        <div id=intro-question-wrapper>
+            <div id="introduction">
+                <h4>
+                    Thank you for helping change a child's life by supporting YSTEM & Chess!
+                </h4>
+
+                <p>
+                    We’re here to empower underserved and at risk children by giving them the 
+                    opportunity through education of STEM and Chess to help change their life 
+                    trajectory. Join us by donating today to ensure children in your community 
+                    continue to have access to our educational experiences, chess and our incredible 
+                    staff. Because when you teach a child the mastery of STEM principles and chess, 
+                    their knowledge will be their greatest power.
+                </p>
+
+                <div id="donor-box">
+                    <script src="https://donorbox.org/widget.js" paypalExpress="false">
+                    </script><iframe allowpaymentrequest="" frameborder="0" height="500px" name="donorbox" 
+                    scrolling="no" seamless="seamless" 
+                    src="https://donorbox.org/embed/y-stem-and-chess-inc-learning-platform?default_interval=o" 
+                    style="max-width: 500px; min-width: 250px; max-height:none!important" width="800px"></iframe>
+                </div>
+            </div>
+
+            <div id="questions">
+                <h3>Questions</h3>
+
+                <ul>
+                    <li (click)="answerClicked('donation-answer')">What does my donation to YSTEM & Chess do?</li>
+                        <p id="donation-answer">Your donation to YSTEM and Chess helps educate underserved 
+                            children chess, math, and computer science to empower them 
+                            to pursue STEM majors/professions with the support of professionals! 
+                            Your donation will help us: - Reach more children K-12 with our free 
+                            programs. - Find and train Volunteers and Teachers for Programs. - 
+                            Create a afterschool world-class curriculum for our classrooms. – 
+                            Encourage children to pursue better futures for themselves and their families. 
+                            Learn more about YSTEM and Chess</p>
+                    <li (click)="answerClicked('sponsor-answer')">Can my company sponsor a YSTEM & Chess program?</li>
+                            <p id="sponsor-answer">Yes! YSTEM and Chess’s possibilities would only help us flourish even more 
+                                with the help of corporate partners. Please email devin@ystemandchess.com 
+                                for further information on the different ways your business could impact 
+                                many children's lives.</p>
+                    <li (click)="answerClicked('contact-answer')">How can I contact YSTEM & Chess?</li>
+                                <p id="contact-answer">You can contact us by emailing devin@ystemandchess.com and we will get 
+                                    back to you as soon as we can.</p>
+                </ul>
+            </div>
+        </div>
+    </body>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

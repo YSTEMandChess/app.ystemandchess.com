@@ -11,6 +11,7 @@ app.use(cors(config.get('corsOptions')))
 
 // Connect Database
 connectDB()
+console.log("I work")
 
 // Init Middleware
 app.use(express.json({ extended: false }))

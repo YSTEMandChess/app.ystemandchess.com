@@ -50,7 +50,6 @@ export class BoardAnalyzerComponent implements OnInit {
       `${environment.urls.stockFishURL}/?info=${"true"}&level=${this.level}&fen=${this.chess.fen()}`,
       (response) => {
         this.parseStockfish(response);
-        this.updateCentiPawnEval();
       }
     );
   }
@@ -70,9 +69,20 @@ export class BoardAnalyzerComponent implements OnInit {
   private parseStockfish(str: string) {
     var res: Array<string> = JSON.parse(str);    
     var split = res[res.length -2].split(" ");
+    var color: string;
+
+    this.principleVariation = split.slice(split.indexOf("pv") + 1, split.length - 2);    
 
     if (split.indexOf("mate") != -1) {
-      this.centipawn = "M" + parseInt(split[split.indexOf("mate") + 1]);
+      var turnsTillMate = parseInt(split[split.indexOf("mate") + 1]);
+      turnsTillMate = this.chess.turn() == "b" ? turnsTillMate * -1 : turnsTillMate;
+      
+      color = turnsTillMate < 0 ? "b" : "w";
+      if (turnsTillMate == 0 ) {
+        this.centipawn = "-"
+      } else {
+        this.centipawn = "#" + Math.abs(turnsTillMate);
+      }
     } else {
         var value: number = parseInt(split[split.indexOf("cp") + 1])/100;
         value = this.chess.turn() == "b" ? value * -1 : value;
@@ -80,11 +90,11 @@ export class BoardAnalyzerComponent implements OnInit {
 
         this.centipawn = sign + value;
     }
-    this.principleVariation = split.slice(split.indexOf("pv") + 1, split.length - 2);    
+    this.updateCentiPawnEval(color);
   }
 
   //Display centipawn value and change the evaluation bar accoridngly
-  private updateCentiPawnEval() {
+  private updateCentiPawnEval(color: string) {
     document.getElementById("centipawn-value").innerText = this.centipawn;
 
     //In %
@@ -93,15 +103,25 @@ export class BoardAnalyzerComponent implements OnInit {
     var CpToHeightRatiio = maxBarRange/maxCpRange;
     var evalBar = document.getElementById("centipawn-inner");
 
-    if (this.centipawn[0] == "M") {
-      this.chess.turn() == "w" ? evalBar.style.height = 100 + "%" : evalBar.style.height = 0 + "%"
+    if (this.centipawn[0] == "#") {
+      if ( color == "b" ) {
+        evalBar.style.height = 0 + "%";
+      } else {
+        evalBar.style.height = 100 + "%"
+      }
     } else {
       evalBar.style.height = Math.min(Math.max(( 50 + parseFloat(this.centipawn) * CpToHeightRatiio), 100 - maxBarRange), 100) + "%";
     }
     
+    var PV = document.getElementById("principle-variation");
     var formatPV: String = "";
     var i = 0;
     var j = 1;
+
+    if(this.chess.game_over()) {
+      PV.innerText = "";      
+      return;
+    }
 
     if (this.chess.turn() == "b") {
       formatPV = "1... " + this.principleVariation[0] + " ";
@@ -117,7 +137,6 @@ export class BoardAnalyzerComponent implements OnInit {
       j ++;
     }
 
-    var PV = document.getElementById("principle-variation");
     PV.innerText = formatPV.toString();
   }
 

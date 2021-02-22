@@ -1,14 +1,19 @@
 {
   "name": "middleware",
   "version": "1.0.0",
-  "description": "",
+  "description": "API for Y STEM And Chess Inc",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.17",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server"
   },
   "author": "",
   "license": "ISC"

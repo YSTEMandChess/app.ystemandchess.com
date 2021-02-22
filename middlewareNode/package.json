@@ -4,11 +4,13 @@
   "description": "API for Y STEM And Chess Inc",
   "main": "server.js",
   "dependencies": {
+    "config": "^3.3.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.11.17",
     "nodemon": "^2.0.7",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {},
   "scripts": {

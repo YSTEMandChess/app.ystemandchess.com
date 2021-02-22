@@ -1,0 +1,8 @@
+{
+  "mongoURI": "mongodb+srv://userAdmin2:S0CwAL5TRffU4wHa@cluster0-rxbrl.mongodb.net/ystem?retryWrites=true&w=majority",
+  "jwtSecret": "*ystemandchess",
+  "corsOptions": {
+    "origin": "http://localhost:8000",
+    "optionsSuccessStatus": 200
+  }
+}

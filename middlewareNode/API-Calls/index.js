@@ -1,23 +1,36 @@
+var express = require("express");
+var app = express();
+const router = express.Router()
+var crypto = require('crypto');
+const { count } = require("console");
 // Allow Cross Origin Requests (other ips can request data)
 
 // Load the JWT library
 
 // Random Key. Needs to be changed later
-var express = require("express");
-var app = express();
-var crypto = require('crypto');
-const { count } = require("console");
 const key = process.env.INDEX_KEY
-// Need to get values from front end
-const username = ""
-const password = ""
-const firstname = ""
-const lastname = ""
-const reason = ""
-const email = ""
-const students = ""
-const parentUsername = ""
-const role = ""
+let username
+let password
+let firstname
+let lastname 
+let reason
+let email
+let students
+let parentUsername
+let role 
+
+// GET values from client
+router.post('/index', function(req, res) {
+    username = req.params.username
+    password = req.params.password
+    firstname = req.params.first 
+    lastname = req.params.last
+    reason = req.params.reason  
+    email = req.params.email
+    students = req.params.students
+    parentUsername = req.params.parentUsername
+    role = req.params.role
+})
 
 // Create the user.
 if(reason == "create") {
@@ -50,7 +63,7 @@ else if(reason == "authenticate") {
 function createUser(username, password, firstname, lastname, email, role, students, parentUsername) {
     // MONGODB connection NEEDS TO BE ADDED
     // DELETE THIS COMMENT AFTER A CONNECTION IS ESTABLISHED HERE
-    client = ""
+    const client
 
     // PHP CODE FOR IT
     // $collection = $client->ystem->users;

@@ -152,8 +152,22 @@ export class BoardAnalyzerComponent implements OnInit {
     if (move === null) return 'snapback';
 
     this.updateMoveList(move);
-    
     this.updateEngineEvaluation();
+    
+    var moveAudioSrc = "../../../assets/audio/move.ogg";
+    var captureAudioSrc = "../../../assets/audio/capture.ogg"
+    var slideAudioSrc = "../../../assets/audio/slider.ogg"
+
+    if (move.captured || this.chess.in_check()) {
+      this.playAudio(captureAudioSrc);
+      return;
+    }
+
+    if (move.san == "O-O" || move.san == "O-O-O") {
+      this.playAudio(slideAudioSrc);
+    }
+
+    this.playAudio(moveAudioSrc);
   }
 
   private onSnapEnd() {
@@ -359,5 +373,12 @@ export class BoardAnalyzerComponent implements OnInit {
 
   public flipBoard() {
     this.board.flip();
+  }
+
+  private playAudio(src: string){
+    let audio = new Audio();
+    audio.src = src;
+    audio.load();
+    audio.play();
   }
 }

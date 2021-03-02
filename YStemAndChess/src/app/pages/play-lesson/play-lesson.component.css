@@ -1,0 +1,70 @@
+.cont {
+  width: 100%;
+  padding: 30px;
+  margin: 0;
+  border: 0;
+}
+
+.cont .lichess {
+  position: relative;
+  width: 40%;
+  padding-bottom: 43%;
+}
+
+.cont .lichess iframe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cont .jitsi {
+  width: 30%;
+  height: 300px;
+  padding: 2px;
+}
+
+@media only screen and (max-width: 1550px) {
+  .cont .lichess {
+    width: 50%;
+    padding-bottom: 53%;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .cont .lichess {
+    width: 70%;
+    padding-bottom: 70%;
+  }
+  .cont .lichess iframe {
+    overflow: hidden;
+  }
+  .cont .jitsi {
+    width: 30%;
+    height: 300px;
+    padding: 2px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .cont .lichess {
+    width: 80%;
+    padding-bottom: 83%;
+  }
+  .cont .jitsi {
+    width: 0%;
+    height: 0;
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .cont .lichess {
+    width: 100%;
+    padding-bottom: 100%;
+  }
+}
+/*# sourceMappingURL=play-lesson.component.css.map */

@@ -23,7 +23,7 @@ import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
-
+import { StudentprofileComponent } from './pages/studentprofile/studentprofile.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   // Lets remove the one below this comment (PlayComponent) when we go into production
@@ -46,7 +46,8 @@ const routes: Routes = [
   {path: 'play-lesson', component: PlayLessonComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'board-editor', component: BoardEditorComponent},
-  {path: 'why-chess', component: WhyChessComponent}
+  {path: 'why-chess', component: WhyChessComponent},
+  {path: 'studentprofile', component: StudentprofileComponent },
 ];
 
 @NgModule({

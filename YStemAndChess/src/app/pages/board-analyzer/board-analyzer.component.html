@@ -23,12 +23,18 @@
         <!-- End Google Tag Manager (noscript) -->
         
         <div id="board-analyzer-container">
-            <div id="board-evaluator-container">
-                <div id="centipawn-outer">
-                    <div id="centipawn-inner">
+            <div id="board-fen-container">
+                <div id="board-evaluator-container">
+                    <div id="centipawn-outer">
+                        <div id="centipawn-inner">
+                        </div>
                     </div>
+                    <div id="board"></div>
                 </div>
-                <div id="board"></div>
+                <div id="fen-container">
+                    <label for="fen">FEN</label>
+                    <input type="text" name="fen" id="fen" (input)="onFenChange()" [(ngModel)]="currFen">
+                </div>
             </div>
             <div id="sidebar">
                 <div id="tools">

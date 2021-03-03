@@ -14,9 +14,31 @@
         flex-grow: 1;
     }
 
+    #board-fen-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     #board {
         width: calc(100% - 42px);
     }
+
+    #fen-container {
+        display: flex;
+        margin: 4px;
+        
+        label {
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+    }
+
+    #fen {
+        flex-grow: 1;
+    }
+
 
     #centipawn-outer {
         width: 42px;

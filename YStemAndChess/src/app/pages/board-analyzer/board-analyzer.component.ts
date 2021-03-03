@@ -16,6 +16,8 @@ export class BoardAnalyzerComponent implements OnInit {
   private board;
   private chess;
   public level: number = 10;
+  public startFen: string = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+  public currFen: string = this.startFen;
   private centipawn: string = "0";
   private principleVariation: Array<String>;
 
@@ -31,11 +33,12 @@ export class BoardAnalyzerComponent implements OnInit {
 
   ngOnInit(): void {
     this.chess = Chess();
+    this.chess.load(this.startFen)
     
     var config = {
       pieceTheme: '../chessclient/img/chesspieces/wikipedia/{piece}.png',
       draggable: true,
-      position: 'start',
+      position: this.startFen,
       onDrop: this.onDrop.bind(this),
       onSnapEnd: this.onSnapEnd.bind(this)
 
@@ -151,6 +154,7 @@ export class BoardAnalyzerComponent implements OnInit {
     // illegal move
     if (move === null) return 'snapback';
 
+    this.currFen = this.chess.fen();
     this.updateMoveList(move);
     this.updateEngineEvaluation();
     
@@ -315,10 +319,11 @@ export class BoardAnalyzerComponent implements OnInit {
   }
 
   public startPosition() {
-    this.board.start();
-    this.chess.reset();
+    this.board.position(this.startFen);
+    this.chess.load(this.startFen);
     this.currMove = null;
     this.updateEngineEvaluation()
+    this.currFen = this.startFen;
   }
 
   public lastPosition() {
@@ -326,6 +331,7 @@ export class BoardAnalyzerComponent implements OnInit {
     var lastMove = lastPly[lastPly.length - 1];
 
     this.setMove(lastMove);
+    this.currFen = lastMove.fen;
   }
 
   public nextPosition() {
@@ -335,6 +341,7 @@ export class BoardAnalyzerComponent implements OnInit {
 
     if (!this.currMove) {
       this.setMove(this.plies[0][0]);
+      this.currFen = this.plies[0][0].fen;
       return
     }
 
@@ -348,6 +355,7 @@ export class BoardAnalyzerComponent implements OnInit {
     var nextMoveIndexes = this.getNextMoveIndex(this.currMove.indexes);
     var nextMove = this.plies[nextMoveIndexes.pIndex][nextMoveIndexes.mIndex];
     this.setMove(nextMove);
+    this.currFen = nextMove.fen;
   }
 
   public prevPosition() {
@@ -369,6 +377,7 @@ export class BoardAnalyzerComponent implements OnInit {
     var prevMoveIndexes = this.getPrevMoveIndex(this.currMove.indexes);
     var prevMove = this.plies[prevMoveIndexes.pIndex][prevMoveIndexes.mIndex];
     this.setMove(prevMove);
+    this.currFen = prevMove.fen;
   }
 
   public flipBoard() {
@@ -380,5 +389,13 @@ export class BoardAnalyzerComponent implements OnInit {
     audio.src = src;
     audio.load();
     audio.play();
+  }
+
+  public onFenChange() {
+    this.startFen = this.currFen;
+    this.chess.load(this.startFen);
+    this.board.position(this.startFen);
+    this.plies = [];
+    this.currMove = null;
   }
 }

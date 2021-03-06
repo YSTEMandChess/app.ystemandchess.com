@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LessonsService } from 'src/app/lessons.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -15,209 +16,40 @@ export class LearningsComponent implements OnInit {
   private prevFEN: String = this.currentFEN;
   private flag: boolean = false;
 
-  constructor() {}
+  constructor(private ls: LessonsService) {}
 
-  sections = [
-    {
-      name: "Chess Pieces",
-      subSections: [
-        {
-          name: "The Pawn",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Bishop",
-          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Knight",
-          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Rook",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Queen",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The King",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        }
-      ]
-    },
-    {
-      name: "Bishop",
-      subSections: [
-        {
-          name: "The Pawn",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Bishop",
-          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Knight",
-          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Rook",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Queen",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The King",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        }
-      ]
-    },
-    {
-      name: "Knight",
-      subSections: [
-        {
-          name: "The Pawn",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Bishop",
-          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Knight",
-          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Rook",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Queen",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The King",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        }
-      ]
-    },
-    {
-      name: "Rook",
-      subSections: [
-        {
-          name: "The Pawn",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Bishop",
-          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Knight",
-          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Rook",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Queen",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The King",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        }
-      ]
-    },
-    {
-      name: "Queen",
-      subSections: [
-        {
-          name: "The Pawn",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Bishop",
-          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Knight",
-          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Rook",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Queen",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The King",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        }
-      ]
-    },
-    {
-      name: "King",
-      subSections: [
-        {
-          name: "The Pawn",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Bishop",
-          fen: '3qkbnR/3ppppp/8/8/8/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Knight",
-          fen: '3qknnr/3ppppp/7k/8/7k/8/6PP/6KN w k - 0 1'
-        },
-        {
-          name: "The Rook",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The Queen",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        },
-        {
-          name: "The King",
-          fen: '7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1'
-        }
-      ]
-    }
-  ];
+  sections = this.ls.getLearnings();
 
+  info = 'Welcome to Lernings';
   isExpanded = false;
-  activeClass = "";
+  activeClass = '';
 
   onSectionClick(event): void {
     /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
-    this.activeClass = "active";
-    if (event.srcElement.textContent[1] === "+") {
-      event.srcElement.textContent = `[-] ${event.srcElement.textContent.substring(4)}`;
+    this.activeClass = 'active';
+    if (event.srcElement.textContent[1] === '+') {
+      event.srcElement.textContent = `[-] ${event.srcElement.textContent.substring(
+        4
+      )}`;
     } else {
-      event.srcElement.textContent = `[+] ${event.srcElement.textContent.substring(4)}`;
+      event.srcElement.textContent = `[+] ${event.srcElement.textContent.substring(
+        4
+      )}`;
     }
 
     /* Toggle between hiding and showing the active panel */
     let panel = event.srcElement.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
+    if (panel.style.display === 'block') {
+      panel.style.display = 'none';
     } else {
-      panel.style.display = "block";
+      panel.style.display = 'block';
     }
   }
 
   onSubSectionClick(details): void {
-    console.log(details.fen);
+    console.log(details);
+    this.info = details.info;
     this.setLesson(details.fen);
   }
 
@@ -225,14 +57,20 @@ export class LearningsComponent implements OnInit {
     this.newGameInit(fen);
   }
 
-  postion1() {
-    this.newGameInit('7R/8/8/4p3/p7/3p4/8/k6K w k - 0 1');
-  }
-  postion2() {
-    this.newGameInit('3p3p/2p2p2/8/2p3p1/4R3/1p3pp1/8/3p3R w - - 0 1');
-  }
-  postion3() {
-    this.newGameInit('8/2p2p2/8/2p5/4Q3/1p3pp1/8/8 w - - 0 1');
+  dataTransform(data) {
+    if (data.split('/')[7]) {
+      let laststring = data.split('/')[7].split(' ');
+      laststring[1] = 'w';
+      laststring[2] = '-';
+      laststring[3] = '-';
+      laststring[4] = '0';
+      laststring[5] = '1';
+      laststring = laststring.join(' ');
+      let tranfomed = data.split('/');
+      tranfomed[7] = laststring;
+      return tranfomed.join('/');
+    }
+    return data;
   }
 
   ngOnInit(): void {
@@ -248,48 +86,21 @@ export class LearningsComponent implements OnInit {
     eventer(
       messageEvent,
       (e) => {
+        if (this.flag && e.data.indexOf('p') === -1)
+          window.removeEventListener(messageEvent, eventer);
+
         // Means that there is the board state and whatnot
         console.log('CURENET FEN !!!!!!' + e.data);
 
         this.prevFEN = this.currentFEN;
-        let info: string = e.data;
 
-        if (info.length > 20)
-          info = info.substr(0, info.length - 9) + 'w k - 0 1';
+        const info = this.dataTransform(e.data);
 
+        console.log('This is info ', info);
         if (info == 'ReadyToRecieve') {
           this.isReady = true;
 
           this.sendFromQueue();
-        } else if (info == 'checkmate') {
-          console.log(info);
-          this.httpGetAsync(
-            `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
-            (response) => {
-              if (this.isReady) {
-                var chessBoard = (<HTMLFrameElement>(
-                  document.getElementById('chessBd')
-                )).contentWindow;
-                chessBoard.postMessage(
-                  JSON.stringify({
-                    boardState: info,
-                    color: this.color,
-                    lessonFlag: true,
-                  }),
-                  environment.urls.chessClientURL
-                );
-              } else {
-                this.messageQueue.push(
-                  JSON.stringify({
-                    boardState: info,
-                    color: this.color,
-                    lessonFlag: true,
-                  })
-                );
-              }
-              this.currentFEN = response;
-            }
-          );
         } else {
           this.messageQueue.push(
             JSON.stringify({

@@ -33,6 +33,7 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { LessonsService as LerningsService } from './lessons.service';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -62,7 +63,7 @@ const agoraConfig: AgoraConfig = {
     LessonsComponent,
     PlayLessonComponent,
     PieceLessonsComponent,
-    ContactComponent
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,13 +72,10 @@ const agoraConfig: AgoraConfig = {
     HttpClientTestingModule,
     ModalModule,
     NgxAgoraModule.forRoot(agoraConfig),
-    NgxAgoraModule.forRoot({ AppID: "6c368b93b82a4b3e9fb8e57da830f2a4" }),
-    FormsModule
+    NgxAgoraModule.forRoot({ AppID: '6c368b93b82a4b3e9fb8e57da830f2a4' }),
+    FormsModule,
   ],
-  providers: [
-    CookieService,
-    SocketService
-  ],
-  bootstrap: [AppComponent]
+  providers: [CookieService, SocketService, LerningsService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

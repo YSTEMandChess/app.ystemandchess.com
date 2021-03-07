@@ -12,12 +12,7 @@ branches:
 before_script:
 - bash create_travis_envs.sh
 - cd YStemAndChess
-- npm install @angular/cli
-- npm install @angular-devkit/build-angular
-- npm install express nodemon socket.io
-- npm install @angular/compiler
 - npm i
-- npm install @angular/compiler-cli
 
 script:
 - npm run test-headless

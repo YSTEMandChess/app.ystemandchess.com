@@ -15,6 +15,7 @@ export class LearningsComponent implements OnInit {
   private currentFEN: string = '3qkbnr/3ppppp/8/8/8/8/8/6QN w k - 0 1';
   private prevFEN: String = this.currentFEN;
   private flag: boolean = false;
+  private stopTheGameFlag = false;
 
   constructor(private ls: LessonsService) {}
 
@@ -58,19 +59,23 @@ export class LearningsComponent implements OnInit {
   }
 
   dataTransform(data) {
-    if (data.split('/')[7]) {
-      let laststring = data.split('/')[7].split(' ');
-      laststring[1] = 'w';
-      laststring[2] = '-';
-      laststring[3] = '-';
-      laststring[4] = '0';
-      laststring[5] = '1';
-      laststring = laststring.join(' ');
-      let tranfomed = data.split('/');
-      tranfomed[7] = laststring;
-      return tranfomed.join('/');
+    try {
+      if (data.split('/')[7]) {
+        let laststring = data.split('/')[7].split(' ');
+        laststring[1] = 'w';
+        laststring[2] = '-';
+        laststring[3] = '-';
+        laststring[4] = '0';
+        laststring[5] = '1';
+        laststring = laststring.join(' ');
+        let tranfomed = data.split('/');
+        tranfomed[7] = laststring;
+        return tranfomed.join('/');
+      }
+      return data;
+    } catch {
+      return data;
     }
-    return data;
   }
 
   ngOnInit(): void {
@@ -86,8 +91,14 @@ export class LearningsComponent implements OnInit {
     eventer(
       messageEvent,
       (e) => {
-        if (this.flag && e.data.indexOf('p') === -1)
-          window.removeEventListener(messageEvent, eventer);
+        if (e.data.indexOf('p') === -1 && this.flag) {
+          if (!this.stopTheGameFlag)
+            setTimeout(() => {
+              alert('Lesson complited.');
+            }, 200);
+          this.stopTheGameFlag = true;
+          return 0;
+        }
 
         // Means that there is the board state and whatnot
         console.log('CURENET FEN !!!!!!' + e.data);
@@ -111,11 +122,7 @@ export class LearningsComponent implements OnInit {
           );
           this.sendFromQueue();
         }
-        if (e.data.indexOf('p') === -1 && this.flag) {
-          setTimeout(() => {
-            alert('Lesson complited.');
-          }, 200);
-        }
+
         this.flag = true;
       },
 
@@ -146,6 +153,7 @@ export class LearningsComponent implements OnInit {
 
   ///////////// Creating a New Game , based on Position ///////////////
   public newGameInit(FEN: string) {
+    this.stopTheGameFlag = false;
     this.color = 'white';
     this.currentFEN = FEN;
     this.prevFEN = this.currentFEN;

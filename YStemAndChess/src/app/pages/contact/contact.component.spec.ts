@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { ContactComponent } from './contact.component';
 import { HeaderComponent } from '../../header/header.component';
@@ -10,7 +10,7 @@ describe('ContactComponent', () => {
   let component: ContactComponent;
   let fixture: ComponentFixture<ContactComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ContactComponent, HeaderComponent, FooterComponent ],
       imports: [ ModalModule, FormsModule]

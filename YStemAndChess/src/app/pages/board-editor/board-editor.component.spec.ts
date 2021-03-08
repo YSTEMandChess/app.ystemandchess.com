@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { BoardEditorComponent } from './board-editor.component';
 import { HeaderComponent } from '../../header/header.component';
@@ -9,7 +9,7 @@ describe('BoardEditorComponent', () => {
   let component: BoardEditorComponent;
   let fixture: ComponentFixture<BoardEditorComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BoardEditorComponent, HeaderComponent, FooterComponent ],
       imports: [ ModalModule ]

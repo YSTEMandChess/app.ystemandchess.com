@@ -1,0 +1,7 @@
+{
+  "jwtSecret": "*ystemandchess",
+  "corsOptions": {
+    "origin": "http://localhost:8000",
+    "optionsSuccessStatus": 200
+  }
+}

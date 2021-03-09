@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterModule, Router } from '@angular/router';
 
 
@@ -502,13 +502,16 @@ describe('SignupComponent', () => {
   let fixture: ComponentFixture<SignupComponent>;
 
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SignupComponent, HeaderComponent, FooterComponent, LoginComponent],
-      imports: [ HttpClientTestingModule, RouterModule.forRoot([
-    { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent },
-], { relativeLinkResolution: 'legacy' }), ModalModule ],
+      imports: [ HttpClientTestingModule, RouterModule.forRoot(
+        [
+          {path: 'login', component: LoginComponent},
+          {path: 'signup', component: SignupComponent},
+        ]
+      ), ModalModule ],
+
     })
     .compileComponents();
   }));

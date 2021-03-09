@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { StudentComponent } from './student.component';
 import { HeaderComponent } from '../../header/header.component';
@@ -16,7 +16,7 @@ describe('StudentComponent', () => {
     AppID: environment.agora.appId
   }
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ StudentComponent, HeaderComponent, FooterComponent, PlayComponent ],
       imports: [ ModalModule, NgxAgoraModule.forRoot(agoraConfig) ]

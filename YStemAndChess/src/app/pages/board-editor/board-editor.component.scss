@@ -1,15 +1,37 @@
 #board-editor-container {
     margin-top: 2%;
-    max-width: 1240px;
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 5%;
     padding-right: 5%;
     display: flex;
     justify-content: center;
+    font-size: .9rem;
 
     #board {
         width: 100%;
+    }
+
+    #board-fen-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #fen-container {
+        display: flex;
+        margin: 4px;
+        
+        label {
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+    }
+
+    #fen {
+        flex-grow: 1;
     }
 
     #bottom {
@@ -43,7 +65,7 @@
            background-color: #FF8503;
        }
 
-       #clear-board {
+       #clear-board, #analyze-position {
            outline-style: none;
            padding-top: 1%;
            padding-bottom:1%;
@@ -57,6 +79,15 @@
            border-radius: 33px;
            color: #FFF;
            background-color: #51AA00;
+
+           a {
+              color: #FFF;
+
+              &:hover {
+                color: #51AA00;
+                text-decoration: none;
+              }
+           }
        }
 
        #flip-board:hover, #start-position:hover {
@@ -65,7 +96,7 @@
            background-color: #fff;
        }
 
-       #clear-board:hover {
+       #clear-board:hover, #analyze-position:hover {
            transition: 0.3s;
            color: #51AA00;
            background-color: #FFF;

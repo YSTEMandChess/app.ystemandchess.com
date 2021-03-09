@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Move, MoveIndexes } from './board-analyzer.model';
 import { environment } from 'src/environments/environment';
 
@@ -29,12 +30,16 @@ export class BoardAnalyzerComponent implements OnInit {
   //debounce functions
   public depthDebounce = this.debounce(this.onDepthInput.bind(this));
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.chess = Chess();
-    this.chess.load(this.startFen)
-    
+    this.route.queryParams.subscribe(params => {
+      if (params['fen']) {
+        this.startFen = params['fen'];
+        this.currFen = this.startFen;
+      }
+    })
+    this.chess = Chess(this.startFen);
     var config = {
       pieceTheme: '../chessclient/img/chesspieces/wikipedia/{piece}.png',
       draggable: true,

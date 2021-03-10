@@ -91,17 +91,17 @@ export class LearningsComponent implements OnInit {
     eventer(
       messageEvent,
       (e) => {
-        if (e.data.indexOf('p') === -1 && this.flag) {
+        const isDataAFen = e.data.indexOf('/') > -1;
+        if (e.data.indexOf('p') === -1 && this.flag && isDataAFen) {
           if (!this.stopTheGameFlag)
             setTimeout(() => {
-              alert('Lesson complited.');
+              swal('Lesson completed', '', 'success');
             }, 200);
           this.stopTheGameFlag = true;
           return 0;
         }
 
         // Means that there is the board state and whatnot
-        console.log('CURENET FEN !!!!!!' + e.data);
 
         this.prevFEN = this.currentFEN;
 

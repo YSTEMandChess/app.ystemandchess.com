@@ -17,7 +17,7 @@ body {
   margin-left: 3%;
   margin-right: 3%;
   height: auto;
-  background-color: #51AA00;
+  background-color: #51aa00;
   border-radius: 33px;
 }
 
@@ -25,7 +25,7 @@ body {
   float: center;
   height: auto;
   overflow: hidden;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: bold;
   font-weight: 900;
   font-size: 3vw;
@@ -33,7 +33,7 @@ body {
   letter-spacing: 0.07em;
   color: #ffffff;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #instructions-paragraph p {
@@ -42,14 +42,14 @@ body {
   margin-left: 10.5%;
   margin-right: 10.5%;
   overflow: hidden;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 1.4vw;
   line-height: 117.1%;
   letter-spacing: 0.01em;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   color: #ffffff;
 }
 
@@ -66,7 +66,7 @@ body {
 
 #chess-header {
   margin-top: 9.8%;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: bold;
   font-weight: 900;
   font-size: 2vw;
@@ -79,7 +79,7 @@ body {
   margin-top: 9.8%;
   margin-left: 16.5%;
   width: 66%;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: bold;
   font-weight: 500;
   font-size: 1.4vw;
@@ -96,7 +96,7 @@ body {
   margin-bottom: 3%;
   margin-right: 3%;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #chess-play {
@@ -121,7 +121,7 @@ body {
   height: auto;
   margin-right: 10.5%;
   overflow: hidden;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: bold;
   font-weight: 900;
   font-size: 3vw;
@@ -129,13 +129,13 @@ body {
   letter-spacing: 0.07em;
   color: #000000;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #score-board-paragraph {
   margin-left: 16.5%;
   width: 66%;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: bold;
   font-weight: 500;
   font-size: 1.4vw;
@@ -159,7 +159,7 @@ body {
   height: auto;
   margin-right: 10.5%;
   overflow: hidden;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: bold;
   font-weight: 900;
   font-size: 3vw;
@@ -167,13 +167,13 @@ body {
   letter-spacing: 0.07em;
   color: #000000;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #puzzles-menu-paragraph {
   margin-left: 16.5%;
   width: 66%;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: bold;
   font-weight: 500;
   font-size: 1.4vw;
@@ -200,7 +200,8 @@ body {
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion-expand:hover {
+.active,
+.accordion-expand:hover {
   background-color: #ccc;
 }
 
@@ -218,7 +219,8 @@ body {
   border: 1px solid #000000;
 }
 
-.active, .accordion-sub:hover {
+.active,
+.accordion-sub:hover {
   background-color: #ccc;
 }
 

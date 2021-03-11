@@ -6,7 +6,7 @@ import { FooterComponent } from '../../footer/footer.component';
 import { PlayComponent } from '../play/play.component';
 import { ModalModule } from '../../_modal';
 
-import { SocketService } from './../../socket.service';
+import { SocketService } from '../../services/socket/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AgoraClient, ClientEvent, NgxAgoraService, Stream, NgxAgoraModule, AgoraConfig } from 'ngx-agora';
 import { environment } from 'src/environments/environment';

@@ -1,4 +1,4 @@
-import { SocketService } from './socket.service';
+import { SocketService } from './services/socket/socket.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';

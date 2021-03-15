@@ -5,6 +5,7 @@
     margin: 5%;
 }
 
+
 *::before {
     box-sizing: inherit;
     margin: 0;
@@ -21,11 +22,6 @@
 div {
     display: block;
 }
-// @media {min-width: 800px}
-// body {
-//     --main-margin: 1vw;
-//     margin-bottom: 2vmin;
-// }
 
 body {
     --site-header-height: 40px;
@@ -36,7 +32,7 @@ body {
 ///User name profile
 .username {
     border: 5px solid red;
-    background: #f7f6f5;
+    background: #d4d3d1;
     flex-flow: row nowrap;
 }
 .username_header {
@@ -46,8 +42,54 @@ body {
     justify-content: space-between;
 }
 
+.username_header h1{
+    font-size: 1.5em;
+}
+
+.user-link {
+    color: #4d4d4d;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    margin-block-start: .67em;
+    margin-block-end: .67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+//user social
 .user-social {
     border: 5px solid blue;
+    background: #d4d3d1;
+    display: flex;
+    flex-direction: row;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.number-menu {
+    background: #d4d3d1;
+    display: flex;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.number-menu-item {
+    flex: 1 1 auto;
+    color: #4d4d4d;
+    text-align: center;
+    line-height: 1.4em;
+    padding: .5em 5px;
+    white-space: normal;
+    font-size: 0.9em;
+
 }
 
 .profile-info {

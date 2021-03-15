@@ -1,4 +1,4 @@
-import { SocketService } from './socket.service';
+import { SocketService } from './services/socket/socket.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -33,6 +33,7 @@ import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.compo
 import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
+import { LoginGuardService } from './services/login-guard/login-guard.service';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -77,7 +78,8 @@ const agoraConfig: AgoraConfig = {
   ],
   providers: [
     CookieService,
-    SocketService
+    SocketService,
+    LoginGuardService
   ],
   bootstrap: [AppComponent]
 })

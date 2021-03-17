@@ -31,7 +31,6 @@ body {
 
 ///User name profile
 .username {
-    border: 5px solid red;
     background: #d4d3d1;
     flex-flow: row nowrap;
 }
@@ -50,50 +49,44 @@ body {
     color: #4d4d4d;
 }
 
-h1 {
-    font-weight: normal;
-    font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
-    display: block;
-    margin-block-start: .67em;
-    margin-block-end: .67em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-}
+
 
 //user social
 .user-social {
     border: 5px solid blue;
     background: #d4d3d1;
-    display: flex;
-    flex-direction: row;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: space-between;
     
 }
 
 .number-menu {
-    background: #d4d3d1;
     display: flex;
-    -webkit-user-select: none;
-    user-select: none;
+    flex-direction: row;
+    // justify-content: flex-start;
 }
 
-.number-menu-item {
-    flex: 1 1 auto;
-    color: #4d4d4d;
-    text-align: center;
-    line-height: 1.4em;
-    padding: .5em 5px;
-    white-space: normal;
-    font-size: 0.9em;
+// .number-menu-item {
+  
 
-}
+// }
 
+
+
+
+//PROFILE 
 .profile-info {
     border: 5px solid green;
+    border-top: 1px solid white;
+    background:  #d4d3d1;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.rating-history {
+    flex: 1 1 58%;
+    margin: -10px 0 -15px -8px;
+    height: 350px;
+    background: orange;
 }
 
 .activity {

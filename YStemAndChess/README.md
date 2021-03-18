@@ -1,4 +1,5 @@
-# YStemAndChess
+<h1 style="text-align:center">YSC Angular App</h1>
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 

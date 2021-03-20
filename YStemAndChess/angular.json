@@ -33,7 +33,8 @@
             ],
             "scripts": [
               "src/assets/external_api.js",
-              "node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js"
+              "node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js",
+              "node_modules/chess.js/chess.js"
             ]
           },
           "configurations": {

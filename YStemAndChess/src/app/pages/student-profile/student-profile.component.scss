@@ -1,8 +1,11 @@
+$background-color: #d4d3d1;
+
 #main-wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 5%;
+    margin: 1%;
+    width: 1000px;
 }
 
 
@@ -27,22 +30,24 @@ body {
     --site-header-height: 40px;
     --site-header-margin: 0px;
     --main-margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
 ///User name profile
-.username {
-    background: #d4d3d1;
-    flex-flow: row nowrap;
-}
+
 .username_header {
+    border-top-left-radius: 33px;
+    border-top-right-radius: 33px;
+    background: #d4d3d1;
     display: flex;
-    flex-flow: row wrap;
     align-items: center;
     justify-content: space-between;
+    padding: 2rem 2rem .2rem 1.5rem;
 }
 
 .username_header h1{
-    font-size: 1.5em;
+    font-size: 2rem;
 }
 
 .user-link {
@@ -51,29 +56,33 @@ body {
 
 
 
-//user social
-.user-social {
-    border: 5px solid blue;
+//profile info
+.profile-info-container {
     background: #d4d3d1;
-    
 }
 
-.number-menu {
+.profile-info {
     display: flex;
     flex-direction: row;
-    // justify-content: flex-start;
+    .profile-info-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: .7rem;
+        .profile-info-item-value {
+            font-size: .9rem;
+        }
+        .profile-info-item-label {
+            font-size: .8rem;
+            font-weight: bold;
+        }
+    }
 }
 
-// .number-menu-item {
-  
 
-// }
-
-
-
-
-//PROFILE 
-.profile-info {
+//CHART 
+.chart-info {
     border: 5px solid green;
     border-top: 1px solid white;
     background:  #d4d3d1;
@@ -84,11 +93,12 @@ body {
 
 .rating-history {
     flex: 1 1 58%;
-    margin: -10px 0 -15px -8px;
     height: 350px;
     background: orange;
 }
 
 .activity {
+    border-bottom-left-radius: 33px;
+    border-bottom-right-radius: 33px;
     border: 5px solid yellow;
 }

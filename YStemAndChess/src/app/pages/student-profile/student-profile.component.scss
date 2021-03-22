@@ -36,7 +36,7 @@ body {
 
 ///User name profile
 
-.username_header {
+.username-header {
     border-top-left-radius: 33px;
     border-top-right-radius: 33px;
     background: #d4d3d1;
@@ -82,23 +82,58 @@ body {
 
 
 //CHART 
-.chart-info {
-    border: 5px solid green;
+.chart-info-container {
+    
     border-top: 1px solid white;
+    border-bottom: 1px solid white;
     background:  #d4d3d1;
     display: flex;
-    flex-flow: row wrap;
+    
     align-items: center;
 }
 
-.rating-history {
+.chart-rating-history {
     flex: 1 1 58%;
     height: 350px;
-    background: orange;
+    text-align: center;
 }
 
-.activity {
+
+.activity-container {
     border-bottom-left-radius: 33px;
     border-bottom-right-radius: 33px;
-    border: 5px solid yellow;
+    border-top: 1px solid white;
+    font-size: 1.2em;
+    height: 200px;
+
+    background: #d4d3d1;
+    display: flex;
+    flex-direction: column;
+    .activity-game-tab-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 20%;
+        .activity-tab{
+            background: #d4d3d1;
+            border: .1px solid grey;
+            width: 50%;
+            justify-content: center;
+            text-align: center;
+        }
+        .game-tab{
+            background: #d4d3d1;
+            border: .1px solid grey;
+            width: 50%;
+            justify-content: center;
+            text-align: center;
+        }
+    }
+    .activity-list-container{
+        padding: .5rem;
+        height: 90%;
+        border-bottom-left-radius: 33px;
+        border-bottom-right-radius: 33px;
+        
+    }
 }

@@ -9,7 +9,14 @@ export class StudentProfileComponent implements OnInit {
 
   constructor() { }
 
+  public activeTab: string;
+
   ngOnInit(): void {
+    this.activeTab = "activity";
+  }
+
+  public onTabClick(tabName: string) {
+    this.activeTab = tabName;
   }
 
 }

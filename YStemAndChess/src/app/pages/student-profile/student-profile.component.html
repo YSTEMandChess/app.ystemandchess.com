@@ -54,18 +54,23 @@
 
         </div>
         <div class="activity-container">
-            <div class="activity-game-tab-container">
-                <div class="activity-tab">
-                    Activity Tab
-                </div>
-                <div class="game-tab">
-                    Game Tab
-                </div>
-            </div>
+            <ul class="activity-game-tab-container">
+                <li class="activity-tab">
+                    <a [ngClass]="{'active' : activeTab == 'activity'}" [routerLink]="" (click)="onTabClick('activity')">Activity Tab</a>
+                </li>
+                <li class="game-tab">
+                    <a [ngClass]="{'active' : activeTab == 'game'}" [routerLink]="" (click)="onTabClick('game')" [routerLink]="">Game Tab</a>
+                </li>
+            </ul>
             <div class="activity-list-container">
-                Activity and Game List
-                <h5>March 22, 2021</h5>
-                <p>Played 1 game</p>
+                <div *ngIf="activeTab == 'activity'" class="activity">                
+                    Activity
+                    <h5>March 22, 2021</h5>
+                    <p>Played 1 game</p>
+                </div>
+                <div *ngIf="activeTab == 'game'" class="game">
+                    List of Games
+                </div>
             </div>
         </div>
         

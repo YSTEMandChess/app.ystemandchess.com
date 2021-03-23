@@ -1,4 +1,5 @@
 $background-color: #d4d3d1;
+$active-background-color: #EEEEEE;
 
 #main-wrap {
     display: flex;
@@ -103,37 +104,44 @@ body {
     border-bottom-left-radius: 33px;
     border-bottom-right-radius: 33px;
     border-top: 1px solid white;
-    font-size: 1.2em;
-    height: 200px;
-
-    background: #d4d3d1;
+    font-size: 1.2rem;
+    min-height: 250px;
+    background: $background-color;
     display: flex;
     flex-direction: column;
     .activity-game-tab-container {
         display: flex;
         flex-direction: row;
         align-items: center;
-        height: 20%;
-        .activity-tab{
-            background: #d4d3d1;
-            border: .1px solid grey;
+        height: 3rem;
+        margin: 0;
+        padding: 0;
+        background: $background-color;
+
+        .activity-tab, .game-tab{
             width: 50%;
-            justify-content: center;
-            text-align: center;
+            height: 100%;     
+            a {
+                color: black;
+                text-decoration: none;
+                display: block;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
         }
-        .game-tab{
-            background: #d4d3d1;
-            border: .1px solid grey;
-            width: 50%;
-            justify-content: center;
-            text-align: center;
+
+        .active {
+            background: $active-background-color;
         }
     }
     .activity-list-container{
         padding: .5rem;
-        height: 90%;
+        height: 100%;
         border-bottom-left-radius: 33px;
         border-bottom-right-radius: 33px;
-        
+        background-color: $active-background-color;
     }
 }

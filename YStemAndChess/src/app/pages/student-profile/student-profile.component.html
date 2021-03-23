@@ -55,11 +55,11 @@
         </div>
         <div class="activity-container">
             <ul class="activity-game-tab-container">
-                <li class="activity-tab">
-                    <a [ngClass]="{'active' : activeTab == 'activity'}" [routerLink]="" (click)="onTabClick('activity')">Activity Tab</a>
+                <li [ngClass]="{'active' : activeTab == 'activity'}" class="activity-tab">
+                    <a [routerLink]="" (click)="onTabClick('activity')">Activity Tab</a>
                 </li>
-                <li class="game-tab">
-                    <a [ngClass]="{'active' : activeTab == 'game'}" [routerLink]="" (click)="onTabClick('game')" [routerLink]="">Game Tab</a>
+                <li [ngClass]="{'active' : activeTab == 'game'}" class="game-tab">
+                    <a [routerLink]="" (click)="onTabClick('game')" [routerLink]="">Game Tab</a>
                 </li>
             </ul>
             <div class="activity-list-container">

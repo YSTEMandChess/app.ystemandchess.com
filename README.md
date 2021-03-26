@@ -36,7 +36,7 @@ The last step is to add environment files to the app, which you will be given if
 
 Within the root of this directory type `cd src`
 
-Within the src directory type `mdkir environments && cd environments`
+Within the src directory type `mkdir environments && cd environments`
 
 Now you need to create the two environment files within this directory with this command `touch environment.ts && touch environment.prod.ts`
 

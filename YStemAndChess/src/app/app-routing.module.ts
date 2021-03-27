@@ -23,6 +23,7 @@ import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
+import { LandingPageComponent} from './pages/landing-page/landing-page.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -46,7 +47,8 @@ const routes: Routes = [
   {path: 'play-lesson', component: PlayLessonComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'board-editor', component: BoardEditorComponent},
-  {path: 'why-chess', component: WhyChessComponent}
+  {path: 'why-chess', component: WhyChessComponent},
+  {path: 'landing-page', component: LandingPageComponent}
 ];
 
 @NgModule({

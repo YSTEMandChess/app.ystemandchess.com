@@ -36,12 +36,8 @@
                     <div class="profile-info-item-value">Just Now</div>
                 </div>
                 <div class=profile-info-item>
-                    <div class="profile-info-item-label">Followers</div>
-                    <div class="profile-info-item-value">999</div>
-                </div>
-                <div class=profile-info-item>
-                    <div class="profile-info-item-label">Views</div>
-                    <div class="profile-info-item-value">10000</div>
+                    <div class="profile-info-item-label">Lessons Completed</div>
+                    <div class="profile-info-item-value">5</div>
                 </div>
             </div>
         </div>
@@ -58,6 +54,9 @@
                 <li [ngClass]="{'active' : activeTab == 'game'}" class="game-tab">
                     <a [routerLink]="" (click)="onTabClick('game')" [routerLink]="">Game Tab</a>
                 </li>
+                <li [ngClass]="{'active' : activeTab == 'lesson'}" class="lesson-tab">
+                    <a [routerLink]="" (click)="onTabClick('lesson')" [routerLink]="">Lesson Tab</a>
+                </li>
             </ul>
             <div class="activity-list-container">
                 <div *ngIf="activeTab == 'activity'" class="activity">                
@@ -67,6 +66,9 @@
                 </div>
                 <div *ngIf="activeTab == 'game'" class="game">
                     List of Games
+                </div>
+                <div *ngIf="activeTab == 'lesson'" class="lesson">
+                    List of Lessons
                 </div>
             </div>
         </div>

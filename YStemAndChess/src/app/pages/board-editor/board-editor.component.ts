@@ -11,6 +11,8 @@ export class BoardEditorComponent implements OnInit {
 
   private board;
   private useAnimation:boolean = false;
+  private shortfen: string;
+  public longFen: string;
 
   constructor() {     
   }
@@ -20,10 +22,13 @@ export class BoardEditorComponent implements OnInit {
       pieceTheme: '../chessclient/img/chesspieces/wikipedia/{piece}.png',
       draggable: true,
       dropOffBoard: 'trash',
+      onChange: this.onChange.bind(this),
       position: 'start',
       sparePieces: true
     }
     this.board = ChessBoard('board', config);
+    this.setFens(this.board.fen());
+
     window.addEventListener('resize', this.board.resize);
   }
 
@@ -33,10 +38,24 @@ export class BoardEditorComponent implements OnInit {
 
   public clearBoard() {
     this.board.clear(this.useAnimation);
+    this.setFens(this.board.fen());
   }
 
   public startPosition() {
     this.board.start(this.useAnimation);
+    this.setFens(this.board.fen());
   }
-  
+
+  public onFenChange() {
+    this.board.position(this.longFen);
+  }
+
+  private onChange (oldPos, newPos) {
+    this.setFens(ChessBoard.objToFen(newPos));
+  }
+
+  private setFens(fen: string) {
+    this.shortfen = fen;
+    this.longFen = this.shortfen + " w KQkq - 0 1";
+  }
 }

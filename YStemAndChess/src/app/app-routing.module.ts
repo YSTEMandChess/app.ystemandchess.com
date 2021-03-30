@@ -24,36 +24,74 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { LandingPageComponent} from './pages/landing-page/landing-page.component';
+import { LoginGuardService } from './services/login-guard/login-guard.service';
+import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   // Lets remove the one below this comment (PlayComponent) when we go into production
   {path: 'play', component: PlayComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'signup', component: SignupComponent},
+  {
+    path: 'login', component: LoginComponent, 
+    data: {redirect: true}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'signup', component: SignupComponent, 
+    data: {redirect: true}, canActivate: [LoginGuardService]
+  },
   {path: 'be-amentor', component: BeAMentorComponent},
   {path: 'programs', component: ProgramsComponent},
   {path: 'donate', component: DonateComponent},
-  {path: 'student', component: StudentComponent},
-  {path: 'parent', component: ParentComponent},
-  {path: 'parent-add-student', component: ParentAddStudentComponent},
-  {path: 'play-mentor', component: PlayMentorComponent},
-  {path: 'mentor-dashboard', component: MentorDashboardComponent},
+  {
+    path: 'student', component: StudentComponent, 
+    data: {roles: ['student', 'admin']}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'parent', component: ParentComponent, 
+    data: {roles: ['parent', 'admin']}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'parent-add-student', component: ParentAddStudentComponent, 
+    data: {roles: ['parent', 'admin']}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'play-mentor', component: PlayMentorComponent, 
+    data: {roles: ['mentor', 'admin']}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'mentor-dashboard', component: MentorDashboardComponent, 
+    data: {roles: ['mentor', 'admin']}, canActivate: [LoginGuardService]
+  },
   {path: 'play-nolog', component: PlayNologComponent},
-  {path: 'admin', component: AdminComponent},
-  {path: 'student-recording', component: StudentRecordingsComponent},
-  {path: 'lessons', component: LessonsComponent},
-  {path: 'piece-lessons', component: PieceLessonsComponent},
+  {
+    path: 'admin', component: AdminComponent, 
+    data: {roles: ['admin']}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'student-recording', component: StudentRecordingsComponent, 
+    data: {roles: ['student', 'parent', 'admin']}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'lessons', component: LessonsComponent, 
+    data: {roles: ['student', 'admin']}, canActivate: [LoginGuardService]
+  },
+  {
+    path: 'piece-lessons', component: PieceLessonsComponent, 
+    data: {roles: ['student', 'admin']}, canActivate: [LoginGuardService]
+  },
   {path: 'play-lesson', component: PlayLessonComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'board-editor', component: BoardEditorComponent},
   {path: 'why-chess', component: WhyChessComponent},
   {path: 'landing-page', component: LandingPageComponent}
+  {path: 'board-analyzer', component: BoardAnalyzerComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [HeaderComponent]
+  providers: [
+    HeaderComponent, 
+    LoginGuardService]
 })
 export class AppRoutingModule { }

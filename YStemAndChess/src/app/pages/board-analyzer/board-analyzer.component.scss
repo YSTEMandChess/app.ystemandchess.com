@@ -1,0 +1,148 @@
+#board-analyzer-container {
+    margin-top: 2%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: .9rem;
+    display: flex;
+
+    #board-evaluator-container {
+        width: 100%;
+        display: flex;
+        flex-grow: 1;
+    }
+
+    #board-fen-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #board {
+        width: calc(100% - 42px);
+    }
+
+    #fen-container {
+        display: flex;
+        margin: 4px;
+        
+        label {
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+    }
+
+    #fen {
+        flex-grow: 1;
+    }
+
+
+    #centipawn-outer {
+        width: 42px;
+        margin-right: 5px;
+        background-color:#2c2f33;
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #centipawn-inner {
+        height: 50%;
+        background-color: #ffffff;
+        line-height: 30px;
+        color: #2c2f33;
+        display: flex;
+        justify-content: center;
+        transition: height 1.5s;
+    }
+
+    #sidebar {
+        width: 600px;
+        margin-left: 5px;
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    #options {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+    }
+
+    #depth-container {
+        display: flex;
+        align-items: center;
+    }
+
+    #depth-label {
+        margin: 0 5px 0 0;
+        vertical-align: center;
+    }
+    
+    #centipawn-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    #principle-variation {
+        padding: 5px;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+    }
+
+    #move-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .ply {
+        margin: 5px 0px 5px 5px;
+    }
+
+    .move {
+        margin-left: 5px;
+        color: #0000EE;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .selected {
+        background-color: lightgray;
+    }
+
+    #controls {
+        width: 100%;
+        height: 40px;
+        font-size: 1.5em;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .control {
+        flex-grow: 1;
+        background: lightgray;
+        border:none; 
+        outline-style: none;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    #board-analyzer-container {
+        flex-wrap: wrap;
+        #sidebar {
+            max-width: 100%;
+            width: 100%;
+            height: 200px;
+            margin-top: 2%;
+            margin-left: 0px;
+        }
+    }
+}

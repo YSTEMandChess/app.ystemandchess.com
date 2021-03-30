@@ -99,13 +99,6 @@ body {
   box-sizing: border-box;
 }
 
-#chess-play {
-  position: relative;
-  overflow: hidden;
-  float: center;
-  margin-left: 22%;
-}
-
 #score-board-container {
   position: relative;
   float: left;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LessonsService } from 'src/app/lessons.service';
 import { environment } from 'src/environments/environment';
 
@@ -16,8 +17,14 @@ export class LearningsComponent implements OnInit {
   private prevFEN: String = this.currentFEN;
   private flag: boolean = false;
   private stopTheGameFlag = false;
+  private chessSrc;
 
-  constructor(private ls: LessonsService) {}
+  constructor(private ls: LessonsService, private sanitization: DomSanitizer) {
+    this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
+      environment.urls.chessClientURL
+    );
+    console.log(this.chessSrc);
+  }
 
   sections = this.ls.getLearnings();
 
@@ -95,7 +102,7 @@ export class LearningsComponent implements OnInit {
         if (e.data.indexOf('p') === -1 && this.flag && isDataAFen) {
           if (!this.stopTheGameFlag)
             setTimeout(() => {
-              swal('Lesson completed', '', 'success');
+              alert('Lesson completed');
             }, 200);
           this.stopTheGameFlag = true;
           return 0;
@@ -129,20 +136,6 @@ export class LearningsComponent implements OnInit {
       false
     );
   }
-  ////// Making the request to the server  ///////////
-
-  private httpGetAsync(theUrl: string, callback) {
-    callback(this.currentFEN);
-  }
-  /** 
-   *  WHAT USED TO BE INSIDE ======> httpGetAsync < ======
-   * var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      callback(xmlHttp.responseText);
-    };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
-    xmlHttp.send(null) */
-  //////////////    SENDING MASSAGES  ABOUT THE BOARD STATE /////////////
 
   private sendFromQueue() {
     let element = this.messageQueue[this.messageQueue.length - 1];

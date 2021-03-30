@@ -2,6 +2,9 @@ body {
   padding-top: 5%;
 }
 
+.jitsi {
+  background-color: green;
+}
 #clear {
   clear: both;
 }
@@ -15,11 +18,11 @@ body {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  font-style: 'Roboto';
+  flex-wrap: wrap;
+  font-style: "Roboto";
   -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
   overflow: hidden;
   font-size: 33px;
   font-weight: 900;

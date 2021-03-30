@@ -1,32 +1,23 @@
-body {
-  padding-top: 5%; //50px
+.chess iframe {
+  min-width: 100%;
+  min-height: 100%;
+  overflow: visible;
 }
-
-#clear {
-  clear: both;
+.chess {
+  height: 40rem;
 }
-
-#chess-play {
-  position: relative;
-  float: right;
-  // margin-bottom: 2%;
-  padding-top: 3%;
-  width: 55%;
-}
-
+/*
 #content-container {
   position: relative;
   overflow: hidden;
-  background-color: #51aa00;
+  background-color: #0300aa;
   border-radius: 33px;
   height: auto;
 }
-
+*/
 #instructions-header h3 {
   // float:left;
-  width: 25%;
   height: auto;
-  margin-top: 2.5%;
   // margin-left:-70%;
   // overflow: hidden;
   font-family: "Lato";
@@ -35,13 +26,13 @@ body {
   font-size: 3vw; // //262.5% // 3vw
   line-height: 250%;
   letter-spacing: 0.07em;
-  color: #ffffff;
+  color: black;
   box-sizing: border-box;
 }
 #instructions-paragraph {
   align-items: left;
   box-sizing: border-box;
-  color: #ffffff;
+  color: black;
   font-family: "Roboto";
   font-style: normal;
   font-size: 1.4vw; // 137.5%
@@ -50,27 +41,15 @@ body {
   letter-spacing: 0.01em;
   margin-left: 2.5%;
   overflow: hidden;
-  width: 35%;
 }
 
 #lessons-menu-container {
-  position: relative;
-  float: left;
-  margin-left: 3.5%;
-  width: 30%;
   h3 {
     color: #ffffff;
   }
 }
 
-@media (max-width: 9999px) {
-  #lessons-menu-container {
-    width: 500px;
-    padding-left: 100px;
-    padding-right: 100px;
-  }
-}
-
+/*
 @media (max-width: 1400px) {
   #content-container {
     margin: 0 auto;
@@ -128,7 +107,7 @@ body {
     }
   }
 }
-
+*/
 @media (max-width: 950px) {
   #content-container {
     margin: 0 auto;

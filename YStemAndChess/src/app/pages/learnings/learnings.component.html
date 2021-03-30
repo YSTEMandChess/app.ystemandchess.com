@@ -1,86 +1,55 @@
-<html>
-  <head>
-    <!-- <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-KJ979C9');
-    </script> -->
-  </head>
+<header>
+  <app-header></app-header>
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto"
+    rel="stylesheet"
+  />
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+</header>
 
-  <header>
-    <app-header></app-header>
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato"
-      rel="stylesheet"
-    />
-  </header>
-
-  <body>
-    <!-- Green container holding learnings content -->
-    <div id="content-container">
-      <!-- Displays title and instructions for selected chess board situation -->
-
+<!-- Green container holding learnings content -->
+<div class="container text-center">
+  <div class="row">
+    <!-- Displays title and instructions for selected chess board situation -->
+    <div class="col instructions">
       <div id="instructions-header">
-        <h3>Lesson Title</h3>
+        <h3>Choose a Lesson</h3>
       </div>
       <div id="instructions-paragraph">
         <p>{{ info }}</p>
       </div>
-
-      <!-- <div id="clear"></div> -->
-
-      <!-- Display selected chess board situation -->
-      <div id="chess-play">
-        <app-play></app-play>
-      </div>
-
-      <div id="lessons-menu-container">
-        <div id="lessons-menu-header">
-          <!-- Lessons will be beginner level-->
-          <h3>Choose a Lesson</h3>
-        </div>
-        <ul id="accordion-ul">
-          <li *ngFor="let section of sections">
-            <button
-              class="accordion-expand"
-              [ngClass]="activeClass"
-              (click)="onSectionClick($event)"
-            >
-              {{ "[+] " + section.name }}
-            </button>
-            <ul class="panel">
-              <li *ngFor="let subSection of section.subSections">
-                <button
-                  class="accordion-sub"
-                  (click)="onSubSectionClick(subSection)"
-                >
-                  {{ subSection.name }}
-                </button>
-              </li>
-            </ul>
-          </li>
-        </ul>
-
-        <!-- <app-accordion></app-accordion> -->
-        <!-- <div id="puzzles-menu-paragraph">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              reprehenderit saepe vitae perspiciatis porro architecto optio.
-              Laudantium, libero officia quisquam non ducimus, facere provident vero
-              aliquam, molestiae quos ut maxime.
-            </p>
-          </div> -->
-      </div>
     </div>
-
-    <footer>
-      <app-footer></app-footer>
-    </footer>
-  </body>
-</html>
+  </div>
+  <div class="row">
+    <div class="col">
+      <ul id="accordion-ul">
+        <li *ngFor="let section of sections">
+          <button
+            class="accordion-expand"
+            [ngClass]="activeClass"
+            (click)="onSectionClick($event)"
+          >
+            {{ "[+] " + section.name }}
+          </button>
+          <ul class="panel">
+            <li *ngFor="let subSection of section.subSections">
+              <button
+                class="accordion-sub"
+                (click)="onSubSectionClick(subSection)"
+              >
+                {{ subSection.name }}
+              </button>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="col chess">
+      <!-- Display selected chess board situation -->
+      <iframe id="chessBd" [src]="chessSrc"></iframe>
+    </div>
+  </div>
+  <div>
+    <app-footer></app-footer>
+  </div>
+</div>

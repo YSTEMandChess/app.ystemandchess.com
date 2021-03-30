@@ -83,7 +83,7 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'board-editor', component: BoardEditorComponent},
   {path: 'why-chess', component: WhyChessComponent},
-  {path: 'landing-page', component: LandingPageComponent}
+  {path: 'landing-page', component: LandingPageComponent},
   {path: 'board-analyzer', component: BoardAnalyzerComponent}
 ];
 

@@ -67,7 +67,7 @@ const agoraConfig: AgoraConfig = {
     ContactComponent,
     BoardEditorComponent,
     WhyChessComponent,
-    LandingPageComponent
+    LandingPageComponent,
     BoardAnalyzerComponent
   ],
   imports: [

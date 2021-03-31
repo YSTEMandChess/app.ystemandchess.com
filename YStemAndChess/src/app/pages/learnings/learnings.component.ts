@@ -24,15 +24,16 @@ export class LearningsComponent {
 
   sections = this.ls.getLearnings();
 
-  onSectionClick(event): void {
+  showSubSection(event): void {
     /* chaging the +  and -,
     to highlight the button that controls the panel */
     /* Toggle between hiding and showing the active panel */
 
     let elText = event.srcElement.textContent;
     let panel = event.srcElement.nextElementSibling;
+    const index = elText.split('').indexOf('+');
 
-    if (elText.split('').indexOf('+') > -1) {
+    if (index > -1 && index < 4) {
       elText = `[-] ${elText.substring(4)}`;
       panel.style.display = 'block';
     } else {
@@ -42,7 +43,7 @@ export class LearningsComponent {
     event.srcElement.textContent = elText;
   }
 
-  onSubSectionClick({ info, fen }): void {
+  startLesson({ info, fen }): void {
     this.info = info;
     this.chess.newGameInit(fen);
   }

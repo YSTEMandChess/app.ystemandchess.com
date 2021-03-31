@@ -15,7 +15,7 @@
       <div id="instructions-header">
         <h3>Choose a Lesson</h3>
       </div>
-      <div id="instructions-paragraph" class="text-center">
+      <div id="instructions-paragraph">
         <p>{{ info }}</p>
       </div>
     </div>
@@ -24,15 +24,12 @@
     <div class="col">
       <ul id="accordion-ul">
         <li *ngFor="let section of sections">
-          <button class="accordion-expand" (click)="onSectionClick($event)">
+          <button class="accordion-expand" (click)="showSubSection($event)">
             [+] {{ section.name }}
           </button>
           <ul class="panel">
             <li *ngFor="let subSection of section.subSections">
-              <button
-                class="accordion-sub"
-                (click)="onSubSectionClick(subSection)"
-              >
+              <button class="accordion-sub" (click)="startLesson(subSection)">
                 {{ subSection.name }}
               </button>
             </li>
@@ -45,7 +42,5 @@
       <iframe id="chessBd" [src]="chessSrc"></iframe>
     </div>
   </div>
-  <div>
-    <app-footer></app-footer>
-  </div>
 </div>
+<app-footer></app-footer>

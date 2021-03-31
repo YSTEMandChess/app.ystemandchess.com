@@ -1,5 +1,5 @@
 import { environment } from 'src/environments/environment';
-//import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 export class Chess {
   stopTheGameFlag: boolean;
@@ -25,18 +25,16 @@ export class Chess {
           document.getElementById(this.frameId)
         )).contentWindow;
         if (typeof e.data === 'object') return;
-        if (this.stopTheGameFlag) return;
 
         const isDataAFen = e.data.indexOf('/') > -1;
         const info = this.dataTransform(e.data);
         const msg = this.createAmessage(info, this.color);
         this.chessBoard.postMessage(msg, environment.urls.chessClientURL);
         if (e.data.indexOf('p') === -1 && isDataAFen) {
-          if (!this.stopTheGameFlag)
-            setTimeout(() => {
-              Swal.fire('Lesson completed', 'good Job', 'success');
-            }, 200);
-          this.stopTheGameFlag = true;
+          setTimeout(() => {
+            Swal.fire('Lesson completed', 'Good Job', 'success');
+            this.newGameInit('8/8/8/8/8/8/8/8 w - - 0 1');
+          }, 200);
         }
       },
 

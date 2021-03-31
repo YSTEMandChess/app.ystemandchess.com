@@ -6,15 +6,7 @@
 .chess {
   height: 40rem;
 }
-/*
-#content-container {
-  position: relative;
-  overflow: hidden;
-  background-color: #0300aa;
-  border-radius: 33px;
-  height: auto;
-}
-*/
+
 #instructions-header h3 {
   // float:left;
   height: auto;
@@ -124,15 +116,8 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    // margin-left: 40%;
   }
-  #instructions-paragraph {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    margin-left: 15%;
-    margin-bottom: 20%;
-  }
+
   #lessons-menu-container {
     position: relative;
     align-items: center;
@@ -278,7 +263,6 @@
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active,
 .accordion-expand:hover {
   background-color: #ccc;
 }
@@ -296,7 +280,6 @@
   border: 1px solid #000000;
 }
 
-.active,
 .accordion-sub:hover {
   background-color: #ccc;
 }

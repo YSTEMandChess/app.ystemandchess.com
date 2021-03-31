@@ -15,7 +15,7 @@
       <div id="instructions-header">
         <h3>Choose a Lesson</h3>
       </div>
-      <div id="instructions-paragraph">
+      <div id="instructions-paragraph" class="text-center">
         <p>{{ info }}</p>
       </div>
     </div>
@@ -24,12 +24,8 @@
     <div class="col">
       <ul id="accordion-ul">
         <li *ngFor="let section of sections">
-          <button
-            class="accordion-expand"
-            [ngClass]="activeClass"
-            (click)="onSectionClick($event)"
-          >
-            {{ "[+] " + section.name }}
+          <button class="accordion-expand" (click)="onSectionClick($event)">
+            [+] {{ section.name }}
           </button>
           <ul class="panel">
             <li *ngFor="let subSection of section.subSections">

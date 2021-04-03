@@ -6,7 +6,9 @@ $active-background-color: #EEEEEE;
     flex-direction: column;
     justify-content: center;
     margin: 1%;
-    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1000px;
 }
 
 
@@ -31,8 +33,6 @@ body {
     --site-header-height: 40px;
     --site-header-margin: 0px;
     --main-margin: 0;
-    display: flex;
-    justify-content: center;
 }
 
 ///User name profile
@@ -89,7 +89,7 @@ body {
     border-bottom: 1px solid white;
     background: $active-background-color;
     display: flex;
-    
+    padding: 1rem;
     align-items: center;
 }
 
@@ -144,7 +144,7 @@ body {
     }
     .activity-list-container{
         padding: .5rem;
-        height: 100%;
+        flex-grow: 1;
         border-bottom-left-radius: 33px;
         border-bottom-right-radius: 33px;
         background-color: $active-background-color;

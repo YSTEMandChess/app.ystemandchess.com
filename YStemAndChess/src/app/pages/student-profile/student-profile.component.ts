@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-declare var Chart:any;
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { data } from './placeholderData';
 
 @Component({
   selector: 'app-student-profile',
@@ -12,42 +12,38 @@ export class StudentProfileComponent implements OnInit {
   constructor() { }
 
   public activeTab: string;
-  public eloChart;
+  data: any[] = data;
+
+  // options
+  public showLabels: boolean = true;
+  public animations: boolean = true;
+  public xAxis: boolean = true;
+  public  yAxis: boolean = true;
+  public timeline: boolean = false;
+  public yScaleMin: number = 1100;
+  public yScaleMax: number = 1300;
+  public xScaleMin: Date = new Date(2020, 1);
+
+
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
   
   ngOnInit(): void {
     this.activeTab = "activity";
-
-    const canvas = <HTMLCanvasElement> document.getElementById('elo-chart');
-    const ctx = canvas.getContext('2d'); 
-
-    this.eloChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    }
-  });
     
+  }
+
+  onSelect(data): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
   public onTabClick(tabName: string) {

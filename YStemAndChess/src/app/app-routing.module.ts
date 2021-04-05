@@ -96,6 +96,12 @@ const routes: Routes = [
     canActivate: [LoginGuardService],
   },
   {
+    path: 'learnings',
+    component: LearningsComponent,
+    data: { roles: ['student', 'admin'] },
+    canActivate: [],
+  },
+  {
     path: 'piece-lessons',
     component: PieceLessonsComponent,
     data: { roles: ['student', 'admin'] },

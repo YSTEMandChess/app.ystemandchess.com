@@ -1,4 +1,4 @@
-import { SocketService } from './../socket.service';
+import { SocketService } from '../services/socket/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Component, OnInit } from '@angular/core';
 import { setPermissionLevel } from '../globals';
@@ -12,6 +12,7 @@ import { environment } from '../../environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent implements OnInit {
   public username = '';
   public role = '';
@@ -52,99 +53,6 @@ export class HeaderComponent implements OnInit {
           }
         });
       }, 600);
-    }
-
-    // Disallowed extentions for each of the types of accounts
-    const notAllowedExtsNotLoggedIn: String[] = [
-      '/parent',
-      '/parent-add-student',
-      '/student',
-      '/play-mentor',
-      '/mentor-dashboard',
-      '/admin',
-      '/student-recording',
-      '/lessons',
-      '/pawn-lessons',
-    ];
-    const notAllowedExtsStudent: String[] = [
-      '/parent',
-      '/parent-add-student',
-      '/play-mentor',
-      '/mentor-dashboard',
-      '/signin',
-      '/login',
-      '/admin',
-    ];
-    const notAllowedExtsParent: String[] = [
-      '/student',
-      '/play-mentor',
-      '/mentor-dashboard',
-      '/signin',
-      '/login',
-      '/admin',
-      '/lessons',
-      '/pawn-lessons',
-    ];
-    const notAllowedExtsMentor: String[] = [
-      '/student',
-      '/parent',
-      '/parent-add-student',
-      '/signin',
-      '/login',
-      '/student-recording',
-      '/lessons',
-      '/pawn-lessons',
-    ];
-    const notAllowedExtsAdmin: String[] = ['/signin', '/login'];
-
-    let pageExt = window.location.pathname;
-
-    switch (pLevel) {
-      case 'student':
-        this.playLink = '/student';
-        this.link = '/student';
-        notAllowedExtsStudent.forEach((element) => {
-          if (pageExt == element) {
-            window.location.pathname = '/student';
-          }
-        });
-        break;
-      case 'parent':
-        this.playLink = '/parent';
-        this.link = '/parent';
-        notAllowedExtsParent.forEach((element) => {
-          if (pageExt == element) {
-            window.location.pathname = '/parent';
-          }
-        });
-        break;
-      case 'mentor':
-        this.playLink = '/play-mentor';
-        this.link = '/play-mentor';
-        notAllowedExtsMentor.forEach((element) => {
-          if (pageExt == element) {
-            window.location.pathname = '/play-mentor';
-          }
-        });
-        break;
-      case 'admin':
-        this.playLink = '/admin';
-        this.link = '/admin';
-        notAllowedExtsAdmin.forEach((element) => {
-          if (pageExt == element) {
-            window.location.pathname = '/admin';
-          }
-        });
-        break;
-      case 'nLogged':
-        this.playLink = '/play-nolog';
-        this.link = '/';
-        notAllowedExtsNotLoggedIn.forEach((element) => {
-          if (pageExt == element) {
-            window.location.pathname = '/';
-          }
-        });
-        break;
     }
 
     // Check to see if they are currently in a game, or not.

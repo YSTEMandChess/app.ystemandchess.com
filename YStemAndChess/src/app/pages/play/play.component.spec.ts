@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { PlayComponent } from './play.component';
 
 import { environment } from 'src/environments/environment';
 
-import { SocketService } from './../../socket.service';
+import { SocketService } from '../../services/socket/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AgoraClient, ClientEvent, NgxAgoraService, Stream, NgxAgoraModule, AgoraConfig } from 'ngx-agora';
 import { ɵBROWSER_SANITIZATION_PROVIDERS, DomSanitizer } from '@angular/platform-browser';
@@ -18,7 +18,7 @@ describe('PlayComponent', () => {
     AppID: environment.agora.appId
   }
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayComponent ],
       imports: [ NgxAgoraModule.forRoot(agoraConfig) ],

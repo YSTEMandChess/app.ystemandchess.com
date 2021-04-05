@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketService } from './../../socket.service';
+import { SocketService } from '../../services/socket/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({

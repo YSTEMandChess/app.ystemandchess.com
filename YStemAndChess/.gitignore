@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
@@ -55,3 +56,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+=======
+# Track the changes that were made
+changes.md
+>>>>>>> cfd23e8aeea133b4ca20abb705732836ca244442

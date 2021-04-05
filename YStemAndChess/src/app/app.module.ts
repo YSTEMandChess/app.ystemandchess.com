@@ -1,4 +1,4 @@
-import { SocketService } from './socket.service';
+import { SocketService } from './services/socket/socket.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -34,6 +34,10 @@ import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { LessonsService as LerningsService } from './lessons.service';
+import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { LoginGuardService } from './services/login-guard/login-guard.service';
+import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -64,6 +68,9 @@ const agoraConfig: AgoraConfig = {
     PlayLessonComponent,
     PieceLessonsComponent,
     ContactComponent,
+    BoardEditorComponent,
+    LandingPageComponent,
+    BoardAnalyzerComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,7 @@ const agoraConfig: AgoraConfig = {
     NgxAgoraModule.forRoot({ AppID: '6c368b93b82a4b3e9fb8e57da830f2a4' }),
     FormsModule,
   ],
-  providers: [CookieService, SocketService, LerningsService],
+  providers: [CookieService, SocketService, LoginGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

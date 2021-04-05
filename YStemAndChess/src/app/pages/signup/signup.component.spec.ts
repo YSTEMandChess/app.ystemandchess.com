@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterModule, Router } from '@angular/router';
 
 
@@ -27,11 +27,6 @@ describe('First Name Verification', () => {
 
   it('a lot of spaces should be false', () => {
     const result = signup.firstNameVerification("                                                       ");
-    expect(result).toBe(false);
-  });
-
-  it('space in the middle of a first name should be false', () => {
-    const result = signup.firstNameVerification("ben jamin");
     expect(result).toBe(false);
   });
 
@@ -502,13 +497,16 @@ describe('SignupComponent', () => {
   let fixture: ComponentFixture<SignupComponent>;
 
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SignupComponent, HeaderComponent, FooterComponent, LoginComponent],
-      imports: [ HttpClientTestingModule, RouterModule.forRoot([
-    { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent },
-], { relativeLinkResolution: 'legacy' }), ModalModule ],
+      imports: [ HttpClientTestingModule, RouterModule.forRoot(
+        [
+          {path: 'login', component: LoginComponent},
+          {path: 'signup', component: SignupComponent},
+        ]
+      ), ModalModule ],
+
     })
     .compileComponents();
   }));

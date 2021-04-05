@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { PlayNologComponent } from './play-nolog.component';
 import { HeaderComponent } from '../../header/header.component';
@@ -6,7 +6,7 @@ import { FooterComponent } from '../../footer/footer.component';
 import { PlayComponent } from '../play/play.component';
 import { ModalModule } from '../../_modal';
 
-import { SocketService } from './../../socket.service';
+import { SocketService } from '../../services/socket/socket.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AgoraClient, ClientEvent, NgxAgoraService, Stream, NgxAgoraModule, AgoraConfig } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
@@ -18,7 +18,7 @@ describe('PlayNologComponent', () => {
     AppID: environment.agora.appId
   }
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PlayNologComponent, HeaderComponent, FooterComponent, PlayComponent ],
       imports: [ ModalModule, NgxAgoraModule.forRoot(agoraConfig) ],

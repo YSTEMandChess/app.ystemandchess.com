@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-168619402-1');
+        </script>
+    </head>
+
+    <header>
+        <app-header></app-header>
+    </header>
+
+    <body>
+        <div id="board-editor-container">
+            <div id="board-fen-container">
+                <div id="board"></div>
+                <div id="fen-container">
+                    <label for="fen">FEN</label>
+                    <input type="text" name="fen" id="fen" (input)="onFenChange()" [(ngModel)]="longFen" >
+                </div>
+            </div>
+            <div id="bottom">
+                <button type="button" id="flip-board" (click)="flipBoard()"> Flip Board</button>
+                <button type="button" id="clear-board" (click)="clearBoard()"> Clear Board</button>    
+                <button type="button" id="start-position" (click)="startPosition()"> Start Position</button>
+                <button type="button" id="analyze-position"> <a routerLink="/board-analyzer" [queryParams]="{fen: longFen}">Analyze Position</a></button>                                                
+            </div>
+            
+        </div>
+
+    </body>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

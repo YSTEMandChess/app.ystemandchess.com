@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-KJ979C9');
+        </script>
+        <!-- End Google Tag Manager -->
+    </head>
+
+    <header>
+        <app-header></app-header>
+    </header>
+
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        
+        <div id="board-analyzer-container">
+            <div id="board-fen-container">
+                <div id="board-evaluator-container">
+                    <div id="centipawn-outer">
+                        <div id="centipawn-inner">
+                        </div>
+                    </div>
+                    <div id="board"></div>
+                </div>
+                <div id="fen-container">
+                    <label for="fen">FEN</label>
+                    <input type="text" name="fen" id="fen" (input)="onFenChange()" [(ngModel)]="currFen">
+                </div>
+            </div>
+            <div id="sidebar">
+                <div id="tools">
+                    <div id="options">
+                        <div id="centipawn-value"></div>
+                        <div id="depth-container">
+                            <label for="depth-value" id="depth-label">Depth</label>
+                            <input type="number" name="depth-value" id="depth-value" min="10" max="20" value="10" (input)="depthDebounce()" [(ngModel)]="level">
+                        </div>
+                    </div>
+                    <div id="principle-variation"></div>
+                    <div id="move-list">
+                        <div class="ply" *ngFor='let ply of plies; index as i'>
+                            <span>{{i + 1}}.</span>
+                            <span (click)="setMove(move)" [ngClass]="{'selected' : move === currMove }" class="move" [id]="'move-' + i + '-' + j" *ngFor='let move of plies[i]; index as j'>{{move.move}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="controls">
+                    <button (click)="flipBoard()"type="button"  class="control" id="flip-board">Flip</button>
+                    <button (click)="startPosition()" type="button" class="control" id="first" ><<</button>
+                    <button (click)="prevPosition()" type="button" class="control" id="prev" ><</button>    
+                    <button (click)="nextPosition()" type="button" class="control" id="next" >></button> 
+                    <button (click)="lastPosition()" type="button" class="control" id="last" >>></button>                          
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

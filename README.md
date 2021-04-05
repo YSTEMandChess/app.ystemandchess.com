@@ -136,4 +136,6 @@ Adding new lessons to the YStem app is farily simple. All one must do is under t
 Once this is added to the database the lesson will be generated when a user reaches that lesson number. I like to use https://lichess.org/editor to create a starting lesson FEN. From there it is easiest to get the ending lesson FEN by going to that lesson number on the YStem app and moving to the desired end position. The current FEN will be output in the browser console. The reason the end FEN cannot be achieved in other editors is becuase they do not update color and turns completed. Plus you have to see which moves Stockfish makes when you move to the end square. Stockfish will always make the same move if you do, becuase stockfish will only make the optimal move.
 
 
+# New Middleware Wiki
 
+This is an API used to commmuncate data betweent the database and front end. The API is written on NodeJS.

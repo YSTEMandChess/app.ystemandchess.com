@@ -41,12 +41,15 @@ export class SignupComponent implements OnInit {
   //http is for testing
   constructor(private http: HttpClient) {}
 
+  // Regex to match firstName with spaces
+  private firstNameVerificationREGEX = /^[A-Za-z ]{2,15}$/;
+
   ngOnInit(): void {}
 
   firstNameVerification(firstName: any): boolean {
     firstName = this.allowTesting(firstName, 'firstName');
 
-    if (/^[A-Za-z]{2,15}$/.test(firstName)) {
+    if (this.firstNameVerificationREGEX.test(firstName)) {
       this.firstNameFlag = true;
       this.firstNameError = '';
       return true;
@@ -60,7 +63,7 @@ export class SignupComponent implements OnInit {
   studentFirstNameVerification(firstName: any, index: any): boolean {
     firstName = this.allowTesting(firstName, 'studentFirstName' + index);
 
-    if (/^[A-Za-z]{2,15}$/.test(firstName)) {
+    if (this.firstNameVerificationREGEX.test(firstName)) {
       this.studentFirstNameFlag = true;
       document.getElementById('errorFirstName' + index).innerHTML = '';
       return true;

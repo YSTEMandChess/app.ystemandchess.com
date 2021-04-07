@@ -1,174 +1,172 @@
 <html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <link rel="stylesheet" type="text/css" href="./css/chessboard-1.0.0.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/chessboard-1.0.0.js"></script>
+    <script src="node_modules/chess960.js/chess.min.js"></script>
+  </head>
+  <div id="myBoard" frameborder="0"></div>
+  <script>
+    // NOTE: this example uses the chess.js library:
+    // https://github.com/jhlywa/chess.js
 
-<head>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
-  <link rel="stylesheet" type="text/css" href="./css/chessboard-1.0.0.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./js/chessboard-1.0.0.js"></script>
-  <script src="node_modules/chess960.js/chess.min.js"></script>
-</head>
-<div id="myBoard" frameborder="0"></div>
-<script>
-  // NOTE: this example uses the chess.js library:
-  // https://github.com/jhlywa/chess.js
+    let flag = false
+    letParentKnow()
 
-  let flag = false;
-  letParentKnow();
-  
-  var board = null
-  var game = new Chess()
-  //var $status = $('#status')
-  //var $fen = $('#fen')
-  //var $pgn = $('#pgn')
+    var board = null
+    var game = new Chess()
+    //var $status = $('#status')
+    //var $fen = $('#fen')
+    //var $pgn = $('#pgn')
 
-  var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-  var eventer = window[eventMethod];
-  var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+    var eventMethod = window.addEventListener
+      ? 'addEventListener'
+      : 'attachEvent'
+    var eventer = window[eventMethod]
+    var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message'
 
-  var playerColor;
+    var playerColor
 
-  let startFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"
+    let startFEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
 
-  // Listen to message from child window
-  eventer(messageEvent, (e) => {
-    //console.log("Hey, I am going to update the board state");
-    let data = JSON.parse(e.data);
-    console.log(data);
-    if(data.boardState == startFEN){
-      game = new Chess();
-    }
-    playerColor = data.color;
-    board.orientation(playerColor);
-    game.load(data.boardState);
-    board.position(data.boardState);
-    updateStatus();
-  }, false);
-  
-  function flip() {
-	  board.flip();
-  }
+    // Listen to message from child window
+    eventer(
+      messageEvent,
+      (e) => {
+        let data = JSON.parse(e.data)
+        if (data.boardState == startFEN) {
+          game = new Chess()
+        }
+        playerColor = data.color
+        board.orientation(playerColor)
+        game.load(data.boardState)
+        board.position(data.boardState)
+        updateStatus()
+      },
+      false
+    )
 
-  function letParentKnow() {
-    if(flag === false) {
-      parent.postMessage("ReadyToRecieve", "http://52.249.251.163");
-      console.log("message sent");
-    }
-    flag = true;
-  }
-
-  function onDragStart(source, piece, position, orientation) {
-    // do not pick up pieces if the game is over
-    if (game.game_over()) {
-      sendGameOver();
-      return false;
-    } 
-
-    console.log(playerColor);
-    if(playerColor === "black") {
-      if(piece.search(/^w/) !== -1) return false;
-    } else if(playerColor === "white") {
-      if(piece.search(/^b/) !== -1) return false;
-    }
-    
-    // only pick up pieces for the side to move
-    if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
-      return false
-    }
-  }
-
-  function onDrop(source, target) {
-    // see if the move is legal
-    var move = game.move({
-      from: source,
-      to: target,
-      promotion: 'q' // NOTE: always promote to a queen for example simplicity
-    })
-
-    // illegal move
-    if (move === null) return 'snapback'
-
-	if(game.game_over()) {
-		console.log("game over");
-    sendGameOver();
-	}
-
-  console.log("I am in drop");
-    updateStatus()
-    sendToParent(game.fen());
-  }
-
-  function sendToParent(fen) {
-    parent.postMessage(fen, "http://52.249.251.163");
-  }
-
-  // update the board position after the piece snap
-  // for castling, en passant, pawn promotion
-  function onSnapEnd() {
-    board.position(game.fen())
-  }
-
-  function updateStatus() {
-    var status = ''
-    console.log("I am in status");
-
-    var moveColor = 'White'
-    if (game.turn() === 'b') {
-      moveColor = 'Black'
+    function flip() {
+      board.flip()
     }
 
-    // checkmate?
-    if (game.in_checkmate()) {
-      status = 'Game over, ' + moveColor + ' is in checkmate.'
-      sendCheckmate();
+    function letParentKnow() {
+      if (flag === false) {
+        parent.postMessage('ReadyToRecieve', 'http://52.249.251.163')
+      }
+      flag = true
     }
 
-    // draw?
-    else if (game.in_draw()) {
-      status = 'Game over, drawn position'
-      sendDraw();
-    }
+    function onDragStart(source, piece, position, orientation) {
+      // do not pick up pieces if the game is over
+      if (game.game_over()) {
+        sendGameOver()
+        return false
+      }
 
-    // game still on
-    else {
-      status = moveColor + ' to move'
+      if (playerColor === 'black') {
+        if (piece.search(/^w/) !== -1) return false
+      } else if (playerColor === 'white') {
+        if (piece.search(/^b/) !== -1) return false
+      }
 
-      // check?
-      if (game.in_check()) {
-        status += ', ' + moveColor + ' is in check';
+      // only pick up pieces for the side to move
+      if (
+        (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+        (game.turn() === 'b' && piece.search(/^w/) !== -1)
+      ) {
+        return false
       }
     }
 
-    // $status.html(status)
-    // $fen.html(game.fen())
-    // $pgn.html(game.pgn())
-  }
+    function onDrop(source, target) {
+      // see if the move is legal
+      var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q', // NOTE: always promote to a queen for example simplicity
+      })
 
-  function sendGameOver() {
-    parent.postMessage("gameOver", "http://52.249.251.163");
-  }
+      // illegal move
+      if (move === null) return 'snapback'
 
-  function sendDraw() {
-    parent.postMessage("draw", "http://52.249.251.163");
-  }
+      if (game.game_over()) {
+        sendGameOver()
+      }
 
-  function sendCheckmate() {
-    parent.postMessage("checkmate", "http://52.249.251.163");
-  }
+      updateStatus()
+      sendToParent(game.fen())
+    }
 
-  var config = {
-    draggable: true,
-    position: 'start',
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onSnapEnd: onSnapEnd
-  }
-  board = Chessboard('myBoard', config)
-  $(window).resize(board.resize);
+    function sendToParent(fen) {
+      parent.postMessage(fen, 'http://52.249.251.163')
+    }
 
-  updateStatus()
-</script>
+    // update the board position after the piece snap
+    // for castling, en passant, pawn promotion
+    function onSnapEnd() {
+      board.position(game.fen())
+    }
 
+    function updateStatus() {
+      var status = ''
 
+      var moveColor = 'White'
+      if (game.turn() === 'b') {
+        moveColor = 'Black'
+      }
+
+      // checkmate?
+      if (game.in_checkmate()) {
+        status = 'Game over, ' + moveColor + ' is in checkmate.'
+        sendCheckmate()
+      }
+
+      // draw?
+      else if (game.in_draw()) {
+        status = 'Game over, drawn position'
+        sendDraw()
+      }
+
+      // game still on
+      else {
+        status = moveColor + ' to move'
+
+        // check?
+        if (game.in_check()) {
+          status += ', ' + moveColor + ' is in check'
+        }
+      }
+
+      // $status.html(status)
+      // $fen.html(game.fen())
+      // $pgn.html(game.pgn())
+    }
+
+    function sendGameOver() {
+      parent.postMessage('gameOver', 'http://52.249.251.163')
+    }
+
+    function sendDraw() {
+      parent.postMessage('draw', 'http://52.249.251.163')
+    }
+
+    function sendCheckmate() {
+      parent.postMessage('checkmate', 'http://52.249.251.163')
+    }
+
+    var config = {
+      draggable: true,
+      position: 'start',
+      onDragStart: onDragStart,
+      onDrop: onDrop,
+      onSnapEnd: onSnapEnd,
+    }
+    board = Chessboard('myBoard', config)
+    $(window).resize(board.resize)
+
+    updateStatus()
+  </script>
 </html>

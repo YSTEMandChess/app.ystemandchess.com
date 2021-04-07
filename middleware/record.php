@@ -1,3 +1,4 @@
+  
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -90,11 +91,3 @@ function stopRecording($queryURL, $channelName, $uid, $auth, $resourceID, $sid) 
     echo "<br>Stopping Recording: " . (($body)->serverResponse->fileList);
     return (($body));
 }
-
-//$returnInfo = startRecording($queryURL, $channelName, $uid, $auth);
-//sleep(30);
-//stopRecording($queryURL, $channelName, $uid, $auth, $returnInfo[1], $returnInfo[0])
-
-
-//cho json_encode($stopBody);
-?>

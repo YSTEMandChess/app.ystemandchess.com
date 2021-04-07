@@ -100,7 +100,7 @@ To begin the development servers, please follow these steps listed below.
 Start by going into the YStemAndChess directory and running `npm i`. This will install all the packages we need to run the development environment. 
 ***Make sure Angular-CLI is installed afterwards by using the `ng` command. If it is not installed, you can install it using the command `npm install -g @angular/cli`.***
 
-After installing the packages, head back out to the root of our directory using `cd ..`. We now want to build the docker images that we need to run.
+After installing the packages, head back out to the root of our directory using `cd ..` and then navigate into the scripts folder. We now want to build the docker images that we need to run.
 We can do this by using the command `bash tag_build_containers.sh`.
 ***If you are on Linux, use this command instead: `sudo bash tag_build_containers.sh`.***
 
@@ -111,11 +111,9 @@ After that, we can run the command `docker-compose up -d` to start all our docke
 
 To stop the images, use the command `docker-compose down`. 
 
-***Important Note: You need to run the bash script everytime you make any changes to the files in any folder.
+***Important Note: You need to run the bash script every time you make changes to a file and want to see them. `This only applies to changes outside of the YStemAndChess folder.` 
 You need to run `docker-compose down`, build the docker images using `bash tag_build_containers.sh`, and then `docker-compose up -d` to restart the virtual machine.
 Also, make sure you run the terminal AS AN ADMINISTRATOR!!!!!!***
-
-&nbsp; 
 
 # Running Tests in YStemAndChess Directory
 

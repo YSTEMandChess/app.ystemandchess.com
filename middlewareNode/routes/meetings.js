@@ -69,6 +69,8 @@ router.post('/pairUp', passport.authenticate('jwt'), async (req, res) => {
     if (waitingMentors.length < waitingStudents.length) {
       await Promise.all(
         waitingMentors.map(async (mentor) => {
+          let meetingID = genUniqueId(20)
+          let recording = startRecording
           let deleted = deleteUser('mentor', mentor.username)
         })
       )

@@ -15,7 +15,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install -g @angular/cli@9.1.13 @angular-devkit/build-angular && npm install
+RUN npm install -g @angular/cli@9.1.8 @angular-devkit/build-angular && npm install
 
 COPY . .
 

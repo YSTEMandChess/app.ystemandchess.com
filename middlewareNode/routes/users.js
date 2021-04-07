@@ -1,10 +1,28 @@
 const express = require('express')
+const passport = require('passport')
 const router = express.Router()
 const { check, validationResult } = require('express-validator')
 const users = require('../models/users')
 //const bcrypt = require('bcryptjs')
 //const jwt = require('jsonwebtoken')
 //const config = require('config')
+
+router.get('/children', passport.authenticate('jwt'), async (req, res) => {
+  try {
+    const { role, username } = req.user
+    if (role !== 'parent') {
+      res
+        .status(400)
+        .json('You must have a parent account to access your children')
+    } else {
+      const childrenArray = await users.find({ parentUsername: username })
+      res.send(childrenArray)
+    }
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).json('Server error')
+  }
+})
 
 router.post(
   '/',

@@ -18,8 +18,7 @@ export class StudentProfileComponent implements OnInit {
   public showLabels: boolean = true;
   public animations: boolean = true;
   public xAxis: boolean = true;
-  public  yAxis: boolean = true;
-  public timeline: boolean = false;
+  public yAxis: boolean = true;
   public yScaleMin: number = 1100;
   public yScaleMax: number = 1300;
   public xScaleMin: Date = new Date(2020, 1);

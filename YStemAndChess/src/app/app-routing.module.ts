@@ -26,6 +26,7 @@ import { BoardEditorComponent } from './pages/board-editor/board-editor.componen
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
+import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -112,6 +113,7 @@ const routes: Routes = [
   { path: 'board-editor', component: BoardEditorComponent },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'board-analyzer', component: BoardAnalyzerComponent },
+  { path: 'why-chess', component: WhyChessComponent },
 ];
 
 @NgModule({

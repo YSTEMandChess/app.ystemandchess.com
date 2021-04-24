@@ -36,7 +36,7 @@ The last step is to add environment files to the app, which you will be given if
 
 Within the root of this directory type `cd src`
 
-Within the src directory type `mdkir environments && cd environments`
+Within the src directory type `mkdir environments && cd environments`
 
 Now you need to create the two environment files within this directory with this command `touch environment.ts && touch environment.prod.ts`
 
@@ -109,9 +109,13 @@ After that, we can run the command `docker-compose up -d` to start all our docke
 
 To stop the images, use the command `docker-compose down`. 
 
-***Important Note: You need to run the bash script every time you make changes to a file and want to see them. `This only applies to changes outside of the YStemAndChess folder.` 
+***Important Note: 
+1. You need to run the bash script every time you make changes to a file and want to see them. `This only applies to changes outside of the YStemAndChess folder.` 
 You need to run `docker-compose down`, build the docker images using `bash tag_build_containers.sh`, and then `docker-compose up -d` to restart the virtual machine.
 Also, make sure you run the terminal AS AN ADMINISTRATOR!!!!!!***
+
+2. If you are trying to launch the project on "http://localhost/" , ensure that `npm i dotenv` is ran in the following fodlers inside the project. 
+(chessClient, chessServer, stockfishServer)
 
 # Running Tests in YStemAndChess Directory
 

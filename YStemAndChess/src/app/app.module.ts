@@ -23,18 +23,22 @@ import { ParentComponent } from './pages/parent/parent.component';
 import { PlayMentorComponent } from './pages/play-mentor/play-mentor.component';
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { DonateComponent } from './pages/donate/donate.component';
+import { LearningsComponent } from './pages/learnings/learnings.component';
 import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
+import { environment } from 'src/environments/environment';
 import { StudentRecordingsComponent } from './pages/student-recordings/student-recordings.component';
 import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { LessonsService as LerningsService } from './lessons.service';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
-import { WhyChessComponent } from './pages/why-chess/why-chess.component';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
+import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -56,6 +60,7 @@ const agoraConfig: AgoraConfig = {
     PlayMentorComponent,
     PlayNologComponent,
     DonateComponent,
+    LearningsComponent,
     MentorDashboardComponent,
     AdminComponent,
     ParentAddStudentComponent,
@@ -65,8 +70,9 @@ const agoraConfig: AgoraConfig = {
     PieceLessonsComponent,
     ContactComponent,
     BoardEditorComponent,
+    LandingPageComponent,
+    BoardAnalyzerComponent,
     WhyChessComponent,
-    BoardAnalyzerComponent
   ],
   imports: [
     BrowserModule,
@@ -75,14 +81,10 @@ const agoraConfig: AgoraConfig = {
     HttpClientTestingModule,
     ModalModule,
     NgxAgoraModule.forRoot(agoraConfig),
-    NgxAgoraModule.forRoot({ AppID: "6c368b93b82a4b3e9fb8e57da830f2a4" }),
-    FormsModule
+    NgxAgoraModule.forRoot({ AppID: '6c368b93b82a4b3e9fb8e57da830f2a4' }),
+    FormsModule,
   ],
-  providers: [
-    CookieService,
-    SocketService,
-    LoginGuardService
-  ],
-  bootstrap: [AppComponent]
+  providers: [CookieService, SocketService, LoginGuardService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

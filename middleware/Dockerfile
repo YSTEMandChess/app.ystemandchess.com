@@ -15,7 +15,7 @@ RUN pecl install mongodb
 # This touch command may not be neccicary, but idk.
 
 WORKDIR /var/www/html
-COPY / .
+COPY / ./
 
 # Run the web server.
 EXPOSE 8000

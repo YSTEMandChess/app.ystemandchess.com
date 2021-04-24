@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --port 80 --disable-host-check --poll 1",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -34,6 +34,8 @@
     "rxjs": "~6.5.4",
     "socket.io": "^2.4.0",
     "socket.io-client": "^2.3.0",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.15.7",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

@@ -31,8 +31,10 @@ export class PlayNologComponent implements OnInit {
       messageEvent,
       (e) => {
         // Means that there is the board state and whatnot
+        console.log('this does work every time');
         this.prevFEN = this.currentFEN;
         let info = e.data;
+        //console.log("I am info " + info);
         if (info == 'ReadyToRecieve') {
           this.isReady = true;
           this.sendFromQueue();
@@ -53,6 +55,10 @@ export class PlayNologComponent implements OnInit {
             `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
             (response) => {
               if (this.isReady) {
+                console.log(
+                  'sending message ' +
+                    JSON.stringify({ boardState: response, color: this.color })
+                );
                 var chessBoard = (<HTMLFrameElement>(
                   document.getElementById('chessBd')
                 )).contentWindow;
@@ -65,8 +71,11 @@ export class PlayNologComponent implements OnInit {
                   JSON.stringify({ boardState: response, color: this.color })
                 );
               }
-              this.currentFEN = String(response);
+              this.currentFEN = response;
             }
+          );
+          console.log(
+            'Curr FEN: ' + this.currentFEN + '     Prev FEN: ' + this.prevFEN
           );
         }
       },
@@ -76,6 +85,7 @@ export class PlayNologComponent implements OnInit {
 
   private sendFromQueue() {
     this.messageQueue.forEach((element) => {
+      console.log('sending message ' + element);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
         .contentWindow;
       chessBoard.postMessage(element, environment.urls.chessClientURL);
@@ -91,6 +101,8 @@ export class PlayNologComponent implements OnInit {
       .contentWindow;
 
     if (this.isReady) {
+      var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
+        .contentWindow;
       chessBoard.postMessage(
         JSON.stringify({ boardState: this.currentFEN, color: this.color }),
         environment.urls.chessClientURL
@@ -107,8 +119,8 @@ export class PlayNologComponent implements OnInit {
       );
       if (this.level <= 1) this.level = 1;
       else if (this.level >= 10) this.level = 10;
-      /*this.httpGetAsync(
-        `${environment.urls.chessClientURL}?level=${this.level}&fen=${this.currentFEN}`,
+      this.httpGetAsync(
+        `/chessclient/?level=${this.level}&fen=${this.currentFEN}`,
         (response) => {
           if (this.isReady) {
             var chessBoard = (<HTMLFrameElement>(
@@ -124,10 +136,6 @@ export class PlayNologComponent implements OnInit {
             );
           }
         }
-      );*/
-      chessBoard.postMessage(
-        JSON.stringify({ boardState: this.currentFEN, color: this.color }),
-        environment.urls.chessClientURL
       );
       this.httpGetAsync(
         `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
@@ -159,7 +167,7 @@ export class PlayNologComponent implements OnInit {
         JSON.stringify({ boardState: this.currentFEN, color: this.color }),
         environment.urls.chessClientURL
       );
-    else if (this.color === 'black') {
+    if (this.color === 'black') {
       this.httpGetAsync(
         `/chessclient/?level=${this.level}&fen=${this.currentFEN}`,
         (response) => {
@@ -202,6 +210,8 @@ export class PlayNologComponent implements OnInit {
   private httpGetAsync(theUrl: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
+      console.log(xmlHttp.readyState, xmlHttp.status);
+      console.log('/////////////////////////////////////////');
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     };

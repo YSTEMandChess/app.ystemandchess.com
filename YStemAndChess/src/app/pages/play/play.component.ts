@@ -15,6 +15,7 @@ import {
 } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Chess } from 'src/app/models/Chess';
 
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 
@@ -30,19 +31,22 @@ export class PlayComponent implements OnInit {
   private messageQueue = new Array();
   private isReady: boolean;
   public chessSrc;
+  private chess: Chess;
 
   constructor(
     private cookie: CookieService,
     private socket: SocketService,
     private agoraService: NgxAgoraService,
     private sanitization: DomSanitizer
-  ) {
-    this.chessSrc = sanitization.bypassSecurityTrustResourceUrl(
+  ) {}
+
+  async ngOnInit() {
+    this.chessSrc = await this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
-  }
+    console.log('ON in it');
+    this.chess = await new Chess('chessBd', false);
 
-  ngOnInit() {
     let userContent;
 
     if (this.cookie.check('login')) {
@@ -50,7 +54,11 @@ export class PlayComponent implements OnInit {
     } else {
       userContent = '';
     }
-
+  }
+  undoPrevMove() {
+    this.chess.undoPrevMove();
+  }
+  /*
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get(
         'login'
@@ -128,6 +136,14 @@ export class PlayComponent implements OnInit {
         console.log(
           'I just connected to the website. Thus, I will send a message saying that I want them to create a new game.'
         );
+
+        console.log({
+          socketmsgEmit: {
+            student: responseText.studentUsername,
+            mentor: responseText.mentorUsername,
+            role: userContent.role,
+          },
+        });
         this.socket.emitMessage(
           'newGame',
           JSON.stringify({
@@ -160,7 +176,7 @@ export class PlayComponent implements OnInit {
     this.socket.listen('gameOver').subscribe((data) => {
       alert('game over ');
     });
-
+  /*
     var eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent';
@@ -168,6 +184,7 @@ export class PlayComponent implements OnInit {
     var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
 
     // Listen to message from child window
+    
     eventer(
       messageEvent,
       (e) => {
@@ -249,4 +266,5 @@ export class PlayComponent implements OnInit {
       JSON.stringify({ username: userContent.username })
     );
   }
+  */
 }

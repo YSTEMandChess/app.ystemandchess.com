@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './play-nolog.component.html',
   styleUrls: ['./play-nolog.component.scss'],
 })
-export class PlayNologComponent implements OnInit {
+export class PlayNologComponent {
   private messageQueue = new Array();
   private isReady: boolean;
   private color: String = 'white';
@@ -17,14 +17,13 @@ export class PlayNologComponent implements OnInit {
 
   constructor() {}
 
+  /*
   ngOnInit(): void {
     var eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent';
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
-
-    this.newGameInit();
 
     // Listen to message from child window
     eventer(
@@ -82,7 +81,6 @@ export class PlayNologComponent implements OnInit {
       false
     );
   }
-
   private sendFromQueue() {
     this.messageQueue.forEach((element) => {
       console.log('sending message ' + element);
@@ -220,6 +218,7 @@ export class PlayNologComponent implements OnInit {
   }
 
   private gameOverAlert() {
-    alert('Game over.');
+    ///alert('Game over.');
   }
+  */
 }

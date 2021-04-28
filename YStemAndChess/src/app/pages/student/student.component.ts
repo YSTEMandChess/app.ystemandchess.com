@@ -5,19 +5,19 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+  styleUrls: ['./student.component.scss'],
 })
 export class StudentComponent implements OnInit {
+  constructor(private socket: SocketService, private cookie: CookieService) {}
 
-  constructor(private socket: SocketService, private cookie: CookieService) { }
-
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   public newGame() {
-    let userContent = JSON.parse(atob(this.cookie.get("login").split(".")[1]));
-    this.socket.emitMessage("createNewGame", JSON.stringify({username: userContent.username}));
+    let userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
+    console.log({ userContent }, 'works?');
+    this.socket.emitMessage(
+      'createNewGame',
+      JSON.stringify({ username: userContent.username })
+    );
   }
-
 }

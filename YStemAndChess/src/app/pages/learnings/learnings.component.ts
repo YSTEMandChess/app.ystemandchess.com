@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LessonsService } from 'src/app/lessons.service';
 import { Chess } from 'src/app/models/Chess';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './learnings.component.html',
   styleUrls: ['./learnings.component.scss'],
 })
-export class LearningsComponent {
+export class LearningsComponent implements AfterViewInit {
   chess;
   info = 'Welcome to Learnings';
   isExpanded = false;
@@ -19,7 +19,12 @@ export class LearningsComponent {
     this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
+  }
+  ngAfterViewInit() {
     this.chess = new Chess('chessBd', true);
+    this.chess.newGameInit(
+      'rnbqkbnr/ppppkppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+    );
   }
 
   sections = this.ls.getLearnings();

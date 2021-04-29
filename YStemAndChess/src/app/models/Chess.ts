@@ -4,13 +4,11 @@ import Swal from 'sweetalert2';
 export class Chess {
   stopTheGameFlag: boolean;
   color: string;
-  chessBoard;
+  chessBoard: any = (<HTMLFrameElement>document.getElementById(this.frameId))
+    .contentWindow;
   moves: string[] = [];
 
   constructor(private frameId: string, private isLesson: boolean) {
-    this.chessBoard = (<HTMLFrameElement>(
-      document.getElementById(this.frameId)
-    )).contentWindow;
     this.preGame();
   }
 
@@ -25,14 +23,10 @@ export class Chess {
     eventer(
       messageEvent,
       (e) => {
-        console.log({ data: e.data });
-
-        if (!e || typeof e.data === 'object' || !e.data || this.stopTheGameFlag)
-          return;
-        if (e.data === '8/8/8/8/8/8/8/8 w - - 0 1') return;
+        if (this.badCondition(e)) return;
 
         const isDataAFen = e.data.indexOf('/') > -1;
-        if (isDataAFen) this.moves.push(e.data);
+
         const info = this.isLesson ? this.dataTransform(e.data) : e.data;
         const msg = this.createAmessage(info, this.color);
         this.chessBoard.postMessage(msg, environment.urls.chessClientURL);
@@ -41,6 +35,8 @@ export class Chess {
           this.lessonOver(e, isDataAFen);
         } else if (!isDataAFen) {
           this.gameOver(e.data);
+        } else if (this.chessBoard.game.fen()) {
+          this.moves.push(this.chessBoard.game.fen());
         }
       },
 
@@ -48,16 +44,27 @@ export class Chess {
     );
   }
 
+  public flipBoard() {
+    this.chessBoard.flip();
+  }
+
   public newGameInit(FEN?: string) {
-    const msg = this.createAmessage(FEN, this.color);
-    if (FEN) {
-      this.chessBoard.postMessage(msg, environment.urls.chessClientURL);
-      this.stopTheGameFlag = false;
+    if (!FEN) {
+      FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+      this.moves = [];
     }
+    const msg = this.createAmessage(FEN, this.color);
+    this.chessBoard.postMessage(msg, environment.urls.chessClientURL);
+    this.stopTheGameFlag = false;
   }
 
   public undoPrevMove() {
-    this.newGameInit(this.moves[this.moves.length - 2]);
+    console.log(this.moves);
+    this.moves.pop();
+
+    this.newGameInit(this.moves[this.moves.length - 1]);
+
+    this.stopTheGameFlag = false;
   }
 
   private dataTransform(data) {
@@ -102,7 +109,13 @@ export class Chess {
       setTimeout(() => {
         Swal.fire(condition, 'Good Job', 'success');
       }, 200);
-      this.newGameInit();
     }
+  }
+
+  private badCondition(e): boolean {
+    if (!e || typeof e.data === 'object') return true;
+    if (!e.data || this.stopTheGameFlag) return true;
+    if (e.data === '8/8/8/8/8/8/8/8 w - - 0 1') return true;
+    return false;
   }
 }

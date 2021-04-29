@@ -38,6 +38,7 @@ import { BoardEditorComponent } from './pages/board-editor/board-editor.componen
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
+import { AgoraService } from './agora.service';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -82,7 +83,7 @@ const agoraConfig: AgoraConfig = {
     NgxAgoraModule.forRoot({ AppID: '6c368b93b82a4b3e9fb8e57da830f2a4' }),
     FormsModule,
   ],
-  providers: [CookieService, SocketService, LoginGuardService],
+  providers: [CookieService, SocketService, LoginGuardService, AgoraService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

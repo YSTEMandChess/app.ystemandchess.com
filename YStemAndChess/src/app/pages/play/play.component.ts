@@ -1,21 +1,10 @@
-import { SocketService } from '../../services/socket/socket.service';
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  SecurityContext,
-} from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import {
-  AgoraClient,
-  ClientEvent,
-  NgxAgoraService,
-  Stream,
-  StreamEvent,
-} from 'ngx-agora';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
+import { AgoraService } from 'src/app/agora.service';
 import { Chess } from 'src/app/models/Chess';
+import { environment } from 'src/environments/environment';
+import { SocketService } from '../../services/socket/socket.service';
 
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 
@@ -25,191 +14,49 @@ import { Chess } from 'src/app/models/Chess';
   styleUrls: ['./play.component.scss'],
 })
 export class PlayComponent implements OnInit {
-  private localStream: Stream;
-  private client: AgoraClient;
-  private clientUID;
-  private messageQueue = new Array();
-  private isReady: boolean;
-  public chessSrc;
-  private chess: Chess;
+  chessSrc;
+  chess: Chess;
+  userContent = '';
+  rotated = false;
 
   constructor(
     private cookie: CookieService,
     private socket: SocketService,
-    private agoraService: NgxAgoraService,
-    private sanitization: DomSanitizer
+    private sanitization: DomSanitizer,
+    private as: AgoraService
   ) {}
 
   async ngOnInit() {
     this.chessSrc = await this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
-    console.log('ON in it');
     this.chess = await new Chess('chessBd', false);
 
-    let userContent;
+    this.as.videoOn('local_stream', 'remote_stream');
 
     if (this.cookie.check('login')) {
-      userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
-    } else {
-      userContent = '';
+      this.userContent = JSON.parse(
+        atob(this.cookie.get('login').split('.')[1])
+      );
     }
   }
   undoPrevMove() {
     this.chess.undoPrevMove();
   }
+  newGame() {
+    this.chess.flipBoard();
+  }
+
   /*
-    this.httpGetAsync(
-      `${environment.urls.middlewareURL}/isInMeeting.php/?jwt=${this.cookie.get(
-        'login'
-      )}`,
-      (response) => {
-        if (response == 'There are no current meetings with this user.') {
-          return;
-        }
-        let responseText = JSON.parse(response);
-
-        // Code for webcam
-        // -------------------------------------------------------------------------
-        this.client = this.agoraService.createClient({
-          mode: 'rtc',
-          codec: 'h264',
-        });
-        this.client.init(
-          environment.agora.appId,
-          () => console.log('init sucessful'),
-          () => console.log('init unsucessful')
-        );
-        this.client.join(null, responseText.meetingID, null, (uid) => {
-          console.log('uid: ' + uid);
-          this.clientUID = uid;
-
-          this.localStream = this.agoraService.createStream({
-            streamID: this.clientUID,
-            audio: true,
-            video: true,
-            screen: false,
-          });
-
-          this.localStream.init(
-            () => {
-              this.localStream.play('local_stream');
-              this.client.publish(this.localStream, function (err) {
-                console.log('publish failed');
-                console.error(err);
-              });
-            },
-            () => console.log("THE LOCAL STREAM WANSN'T SUCESSFULL")
-          );
-        });
-
-        // Now the stream has been published, lets try to set up some subscribers.
-        this.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
-          let remoteStream = evt.stream;
-          let id = remoteStream.getId();
-          if (id != this.clientUID) {
-            this.client.subscribe(remoteStream, null, (err) => {
-              console.log(
-                'it appears that something has gone wrong with the subscribing.'
-              );
-            });
-            console.log('stream-added remote-uid: ', id);
-          }
-          console.log('hmm, is this any good?');
-        });
-
-        this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
-          let remoteStream = evt.stream;
-          let id = remoteStream.getId();
-          remoteStream.play('remote_stream');
-          console.log('stream-subscribed remote-uid: ', id);
-        });
-
-        this.client.on(ClientEvent.PeerLeave, (evt) => {
-          let remoteStream = evt.stream;
-          let id = remoteStream.getId();
-          remoteStream.stop();
-          console.log('hmm, is this any good?');
-        });
-        // --------------------------------------------------------------------------
-
-        console.log(
-          'I just connected to the website. Thus, I will send a message saying that I want them to create a new game.'
-        );
-
-        console.log({
-          socketmsgEmit: {
-            student: responseText.studentUsername,
-            mentor: responseText.mentorUsername,
-            role: userContent.role,
-          },
-        });
-        this.socket.emitMessage(
-          'newGame',
-          JSON.stringify({
-            student: responseText.studentUsername,
-            mentor: responseText.mentorUsername,
-            role: userContent.role,
-          })
-        );
-
-        this.socket.listen('boardState').subscribe((data) => {
-          if (this.isReady) {
-            let newData = JSON.parse(<string>data);
-            var chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBd')
-            )).contentWindow;
-            chessBoard.postMessage(
-              JSON.stringify({
-                boardState: newData.boardState,
-                color: newData.color,
-              }),
-              environment.urls.chessClientURL
-            );
-          } else {
-            this.messageQueue.push(data);
-          }
-        });
-      }
-    );
-
     this.socket.listen('gameOver').subscribe((data) => {
       alert('game over ');
     });
   /*
-    var eventMethod = window.addEventListener
-      ? 'addEventListener'
-      : 'attachEvent';
-    var eventer = window[eventMethod];
-    var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
-
-    // Listen to message from child window
-    
-    eventer(
-      messageEvent,
-      (e) => {
-        if (e.origin == environment.urls.chessClientURL) {
-          // Means that there is the board state and whatnot
-          let info = e.data;
-
-          if (info == 'ReadyToRecieve') {
-            this.isReady = true;
-            this.sendFromQueue();
-          } else if (info == 'checkmate') {
-            this.gameOverAlert();
-          } else if (info == 'draw') {
-            this.gameOverAlert();
-          } else if (info == 'gameOver') {
-            this.gameOverAlert();
-          } else {
-            this.updateBoardState(info);
-          }
-        }
-      },
-      false
+ 
+    this.socket.emitMessage(
+      'flipBoard',
+      JSON.stringify({ username: this.userContent.username })
     );
-  }
-
   private sendFromQueue() {
     this.messageQueue.forEach((element) => {
       let newData = JSON.parse(<string>element);

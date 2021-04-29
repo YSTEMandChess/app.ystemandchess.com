@@ -1,3 +1,7 @@
+.rotated {
+  transform: rotate(180deg);
+}
+
 .game_wrapper {
   display: flex;
   justify-content: space-around;

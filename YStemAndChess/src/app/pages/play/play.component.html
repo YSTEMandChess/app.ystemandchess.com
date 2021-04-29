@@ -1,6 +1,6 @@
 <div class="game_wrapper">
   <div class="chess">
-    <iframe [src]="chessSrc" id="chessBd"></iframe>
+    <iframe [class.rotated]="rotated" [src]="chessSrc" id="chessBd"></iframe>
   </div>
   <div class="jitsi" id="local_stream">
     <!-- <iframe src="https://meet.jit.si/" class="jitsi" frameborder="0" style="position: relative; height: 100%; width: 100%;"></iframe>  -->
@@ -9,4 +9,5 @@
     <!-- <iframe src="https://meet.jit.si/" class="jitsi" frameborder="0" style="position: relative; height: 100%; width: 100%;"></iframe>  -->
   </div>
   <button (click)="undoPrevMove()">Undo</button>
+  <button (click)="newGame()">new Game</button>
 </div>

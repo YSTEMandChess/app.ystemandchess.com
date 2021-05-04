@@ -32,7 +32,7 @@ export class PlayComponent implements OnInit {
     );
     this.chess = await new Chess('chessBd', false);
 
-    this.as.videoOn('local_stream', 'remote_stream');
+    //this.as.videoOn('local_stream', 'remote_stream');
 
     if (this.cookie.check('login')) {
       this.userContent = JSON.parse(

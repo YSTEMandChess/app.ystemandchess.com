@@ -1,45 +1,55 @@
 <html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-            gtag('config', 'UA-168619402-1');
-        </script>
-    </head>
+      gtag("config", "UA-168619402-1");
+    </script>
+  </head>
 
-    <header>
-        <app-header></app-header>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    </header>
+  <header>
+    <app-header></app-header>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+  </header>
 
-    <body>
-        <!-- start of welcome container  -->
-        <div id="welcome-container">
-            <div id="welcome-header">
-                <h3> Welcome Robert </h3>
-                <h4> Not Robert? &#9658;</h4>
-            </div>
-            <div id="welcome-statement">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Eligendi enim incidunt excepturi assumenda quod
-                    accusantium inventore, dignissimos ad, cumque labore,
-                    perspiciatis at architecto quisquam delectus. Rerum
-                    aspernatur ea accusamus officiis!
-                </p>
-            </div>
-        </div>
-        <!-- end of welcome container -->
+  <body>
+    <!-- start of welcome container  -->
+    <div id="welcome-container">
+      <div id="welcome-header">
+        <h3>Welcome Robert</h3>
+        <h4>Not Robert? &#9658;</h4>
+      </div>
+      <div id="welcome-statement">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
+          enim incidunt excepturi assumenda quod accusantium inventore,
+          dignissimos ad, cumque labore, perspiciatis at architecto quisquam
+          delectus. Rerum aspernatur ea accusamus officiis!
+        </p>
+      </div>
+    </div>
+    <!-- end of welcome container -->
 
-        <!-- start of mentor-container -->
-        <div id="mentor-container">
-            <div id="top"></div>
-                <!-- 
+    <!-- start of mentor-container -->
+    <div id="mentor-container">
+      <div id="top"></div>
+      <!-- 
                     <div class="turn-indicator">
                         
                     </div>
@@ -56,18 +66,18 @@
                     <iframe src="http://chessclient:9663/" allowfullscreen></iframe>
                 </div>
             -->
-                <app-play></app-play>
-                <div id="bottom">
-                    <button type="button" id="flip-board" (click)="flipBoard()"> Flip Board</button>
-                    <button type="button" id="new-game" (click)="newGame()"> New Game</button>
-                    <button type="button" id="lesson-prep"> Lesson Prep</button>
-                </div>
-            </div>
-            <!-- end of mentor container -->
-    </body>
+      <iframe [src]="chessSrc" id="chessBd"></iframe>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+      <div id="bottom">
+        <button type="button" id="flip-board">Flip Board</button>
+        <button type="button" id="new-game">New Game</button>
+        <button type="button" id="lesson-prep">Lesson Prep</button>
+      </div>
+    </div>
+    <!-- end of mentor container -->
+  </body>
 
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>

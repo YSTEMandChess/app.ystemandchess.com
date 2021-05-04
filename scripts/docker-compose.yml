@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 networks:
   ysc-net:
@@ -13,7 +13,7 @@ services:
     networks:
       - ysc-net
     ports:
-      - '80:80'
+      - "80:80"
     depends_on:
       - chessserver
       - middleware
@@ -28,9 +28,9 @@ services:
     networks:
       - ysc-net
     expose:
-      - '3000'
+      - "3000"
     volumes:
-      - ../chessServer:/usr/src/app
+      - ../chessServer/usr/src/app
   chessclient:
     image: chessclient
     container_name: chessclient
@@ -39,7 +39,7 @@ services:
     networks:
       - ysc-net
     expose:
-      - '80'
+      - "80"
     volumes:
       - ../chessClient:/usr/share/nginx/html
   stockfishserver:
@@ -50,7 +50,7 @@ services:
     networks:
       - ysc-net
     expose:
-      - '8080'
+      - "8080"
     volumes:
       - ../stockfishServer:/usr/src/app
   middleware:
@@ -61,7 +61,7 @@ services:
     networks:
       - ysc-net
     expose:
-      - '8000'
+      - "8000"
     volumes:
       - ../middleware:/var/www/html
   ystemandchess:
@@ -72,7 +72,7 @@ services:
     networks:
       - ysc-net
     ports:
-      - '80'
+      - "80"
     depends_on:
       - middleware
       - stockfishserver

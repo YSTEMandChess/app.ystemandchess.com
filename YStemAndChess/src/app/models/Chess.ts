@@ -1,14 +1,22 @@
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+import { SocketService } from '../services/socket/socket.service';
 
 export class Chess {
   stopTheGameFlag: boolean;
-  color: string;
   chessBoard: any = (<HTMLFrameElement>document.getElementById(this.frameId))
     .contentWindow;
   moves: string[] = [];
 
-  constructor(private frameId: string, private isLesson: boolean) {
+  constructor(
+    private frameId: string,
+    private isLesson: boolean,
+    private isOnevOne = false,
+    private studentid?: string,
+    private mentorid?: string,
+    private socketService?: SocketService,
+    private color?: string
+  ) {
     this.preGame();
   }
 
@@ -23,9 +31,19 @@ export class Chess {
     eventer(
       messageEvent,
       (e) => {
+        if (e.data === 'ReadyToRecieve' && this.color === 'black')
+          this.flipBoard();
+
         if (this.badCondition(e)) return;
 
         const isDataAFen = e.data.indexOf('/') > -1;
+
+        if (this.color && isDataAFen) {
+          let color = e.data.split('/')[7].split(' ')[1];
+
+          if (this.color === 'white' && color === 'w') return;
+          if (this.color === 'black' && color === 'b') return;
+        }
 
         const info = this.isLesson ? this.dataTransform(e.data) : e.data;
         const msg = this.createAmessage(info, this.color);
@@ -38,10 +56,23 @@ export class Chess {
         } else if (this.chessBoard.game.fen()) {
           this.moves.push(this.chessBoard.game.fen());
         }
+
+        if (this.isOnevOne) {
+          if (this.stopTheGameFlag) this.isOnevOne = false;
+          this.oneVOneLogic();
+        }
       },
 
       false
     );
+  }
+
+  private oneVOneLogic() {
+    this.socketService.emitMessage('ivoBoard', {
+      board: this.chessBoard.game.fen(),
+      studentid: this.studentid,
+      mentorid: this.mentorid,
+    });
   }
 
   public flipBoard() {
@@ -84,7 +115,7 @@ export class Chess {
     return data;
   }
 
-  private createAmessage(fen: String, color: string) {
+  private createAmessage(fen: String, color: string): string {
     return JSON.stringify({
       boardState: fen,
       color: color,

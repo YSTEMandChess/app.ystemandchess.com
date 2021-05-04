@@ -12,7 +12,7 @@ export class SocketService {
     this.socket = io();
   }
 
-  public emitMessage(eventName: string, message: string) {
+  public emitMessage(eventName: string, message: any) {
     this.socket.emit(eventName, message);
   }
 

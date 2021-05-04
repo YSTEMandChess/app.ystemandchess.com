@@ -1,7 +1,8 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LessonsService } from 'src/app/lessons.service';
 import { Chess } from 'src/app/models/Chess';
+import { SocketService } from 'src/app/services/socket/socket.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,18 +11,32 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./learnings.component.scss'],
 })
 export class LearningsComponent implements AfterViewInit {
+  @Input('online') online: boolean = false;
+  @Input('studentId') studentId;
+  @Input('mentorId') mentorId;
   chess;
   info = 'Welcome to Learnings';
   isExpanded = false;
   chessSrc;
 
-  constructor(private ls: LessonsService, private sanitization: DomSanitizer) {
+  constructor(
+    private ls: LessonsService,
+    private sanitization: DomSanitizer,
+    private socket: SocketService
+  ) {
     this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
   }
   ngAfterViewInit() {
-    this.chess = new Chess('chessBd', true);
+    this.chess = new Chess(
+      'chessBd',
+      true,
+      this.online,
+      this.studentId,
+      this.mentorId,
+      this.socket
+    );
     this.chess.newGameInit(
       'rnbqkbnr/ppppkppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
     );

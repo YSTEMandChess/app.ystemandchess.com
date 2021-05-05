@@ -67,8 +67,6 @@ services:
   ystemandchess:
     image: ystemandchess
     container_name: ystemandchess
-    env_file:
-      - ../YStemAndChess/src/environments/environment.ts
     networks:
       - ysc-net
     ports:

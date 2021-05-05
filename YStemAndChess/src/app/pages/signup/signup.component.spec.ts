@@ -30,11 +30,6 @@ describe('First Name Verification', () => {
     expect(result).toBe(false);
   });
 
-  it('space in the middle of a first name should be false', () => {
-    const result = signup.firstNameVerification("ben jamin");
-    expect(result).toBe(false);
-  });
-
   it('numbers should be false', () => {
     const result = signup.firstNameVerification("123");
     expect(result).toBe(false);

@@ -44,7 +44,6 @@ export class PlayComponent implements OnInit {
 
   async ngOnInit() {
     let userContent;
-    let responseText;
 
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
@@ -111,40 +110,40 @@ export class PlayComponent implements OnInit {
             remoteStream.play('remote_stream');
           });
 
-          this.client.on(ClientEvent.PeerLeave, (evt) => {
-            let remoteStream = evt.stream;
-            let id = remoteStream.getId();
-            remoteStream.stop();
-          });
+        this.client.on(ClientEvent.PeerLeave, (evt) => {
+          let remoteStream = evt.stream;
+          let id = remoteStream.getId();
+          remoteStream.stop();
+        });
 
-          this.socket.emitMessage(
-            'newGame',
-            JSON.stringify({
-              student: responseText.studentUsername,
-              mentor: responseText.mentorUsername,
-              role: userContent.role,
-            })
-          );
+        this.socket.emitMessage(
+          'newGame',
+          JSON.stringify({
+            student: responseText.studentUsername,
+            mentor: responseText.mentorUsername,
+            role: userContent.role,
+          })
+        );
 
-          this.socket.listen('boardState').subscribe((data) => {
-            if (this.isReady) {
-              let newData = JSON.parse(<string>data);
-              var chessBoard = (<HTMLFrameElement>(
-                document.getElementById('chessBd')
-              )).contentWindow;
-              chessBoard.postMessage(
-                JSON.stringify({
-                  boardState: newData.boardState,
-                  color: newData.color,
-                }),
-                environment.urls.chessClientURL
-              );
-            } else {
-              this.messageQueue.push(data);
-            }
-          });
-        }
-      );
+        this.socket.listen('boardState').subscribe((data) => {
+          if (this.isReady) {
+            let newData = JSON.parse(<string>data);
+            var chessBoard = (<HTMLFrameElement>(
+              document.getElementById('chessBd')
+            )).contentWindow;
+            chessBoard.postMessage(
+              JSON.stringify({
+                boardState: newData.boardState,
+                color: newData.color,
+              }),
+              environment.urls.chessClientURL
+            );
+          } else {
+            this.messageQueue.push(data);
+          }
+        });
+      }
+    );
     } else {
       //hide web cam styling
       document.getElementById('local_stream').style.display = 'none';

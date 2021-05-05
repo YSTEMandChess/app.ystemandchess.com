@@ -1,0 +1,273 @@
+@mixin accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  border: 1px solid #000000;
+  text-align: left;
+  outline: none;
+  transition: 0.4s;
+  font-size: 1.3rem;
+  padding: 18px;
+
+  ul {
+    margin-bottom: 0px;
+  }
+
+  &:hover {
+    background-color: #ccc;
+  }
+}
+.chess {
+  height: 35rem;
+  iframe {
+    min-width: 100%;
+    min-height: 100%;
+    overflow: visible;
+  }
+}
+
+#instructions-header h3 {
+  font-style: bold;
+  font-size: 3vw; // //262.5% // 3vw
+  line-height: 250%;
+}
+#instructions-paragraph {
+  align-items: left;
+  font-style: normal;
+  font-size: 1.4vw; // 137.5%
+  line-height: 117.1%;
+  margin-left: 2.5%;
+  overflow: hidden;
+}
+
+///////////////// Accordion /////////////////
+/* Style the buttons that are used to open and close the accordion panel */
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.accordion-expand {
+  @include accordion();
+  font-weight: 700;
+}
+
+.accordion-sub {
+  @include accordion();
+  padding: 10px 18px;
+  font-weight: 400;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  display: none;
+  overflow: hidden;
+}
+
+@media (max-width: 375) {
+  .chess {
+    height: 10rem;
+  }
+}
+/*
+@media (max-width: 1400px) {
+  #content-container {
+    margin: 0 auto;
+    max-width: 90%;
+    margin-left: 5%;
+    padding-bottom: 3%;
+  }
+  #chess-play {
+    // position: relative;
+    float: right;
+    margin-top: -18%;
+    margin-right: 10%;
+    width: 30%;
+  }
+
+  #instructions-header {
+    display: flex;
+    flex-direction: row;
+    h3 {
+      margin-top: 3%;
+      // margin-left: -9.5%;
+      font-weight: 500;
+      font-size: 3vw;
+    }
+
+    #links {
+      margin-top: 6%;
+      padding-bottom: 0;
+    }
+  }
+  #instructions-paragraph {
+    p {
+      margin-left: 2.5%;
+      width: 65%;
+      font-family: "Roboto";
+      font-style: bold;
+      font-weight: 400;
+      font-size: 1.4vw; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      color: #ffffff;
+    }
+    #links {
+      margin-top: 6%;
+      padding-bottom: 0;
+    }
+  }
+  #lessons-menu-container {
+    position: relative;
+    // float:left;
+    margin-left: -7%;
+    width: 40%;
+    h5 {
+      color: #ffffff;
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  #content-container {
+    margin: 0 auto;
+    max-width: 90%;
+    // padding-bottom: 8%;
+  }
+  #chess-play {
+    width: 100%;
+    margin-right: -13%;
+    margin-bottom: 5%;
+  }
+
+  #instructions-header h3 {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  #lessons-menu-container {
+    position: relative;
+    align-items: center;
+    margin-left: 8%;
+    width: 85%;
+    h3 {
+      color: #ffffff;
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  #content-container {
+    margin: 0 auto;
+    width: 90%;
+    margin-left: 5%;
+    // padding-bottom: 8%;
+  }
+
+  #chess-play {
+    position: relative;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5%;
+  }
+
+  #instructions-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      margin-top: 3%;
+      font-size: 3vw;
+    }
+
+    #links {
+      margin-top: 6%;
+      padding-bottom: 0;
+    }
+  }
+  #instructions-paragraph {
+    p {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: left;
+      margin: 0 auto;
+    }
+    #links {
+      margin-top: 6%;
+      padding-bottom: 0;
+    }
+  }
+
+  #lessons-menu-container {
+    width: 90%;
+    float: left;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+#lessons-menu-paragraph {
+  margin-left: 16.5%; //75px
+  width: 66%;
+  font-family: "Roboto";
+  font-style: bold;
+  font-weight: 500;
+  font-size: 1.4vw; //22px
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+@media (min-width: 768px) {
+  #content-container {
+    margin: 0 auto;
+    width: 90%;
+    margin-left: 5%;
+    padding-bottom: 8%;
+  }
+
+  #chess-play {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    justify-content: center;
+    align-items: center;
+    // margin-bottom: 40%;
+  }
+
+  #instructions-header h3 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    h3 {
+      margin-top: 3%;
+      width: 100%;
+    }
+
+    #links {
+      margin-top: 6%;
+      padding-bottom: 0;
+    }
+  }
+  #instructions-paragraph p {
+    p {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+      width: 100%;
+    }
+    #links {
+      margin-top: 6%;
+      padding-bottom: 0;
+    }
+  }
+}
+#lessons-menu-container {
+  float: left;
+  padding-bottom: 50px;
+}
+*/

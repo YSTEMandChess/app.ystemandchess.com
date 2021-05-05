@@ -1,0 +1,113 @@
+.container {
+  margin-top: 20px;
+}
+
+.container p {
+  font-size: 20px;
+}
+
+.containing {
+  background: #F2C94C;
+  border-radius: 0px 66px 66px 66px;
+  margin: 10px;
+  padding-left: 16px;
+}
+
+.containing h2 {
+  padding: 30px;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 33px;
+  line-height: 150%;
+  /* or 49px */
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+.btns {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 2px;
+}
+
+.btns .new-game {
+  font-family: 'Lato';
+  font-size: 22px;
+  line-height: 117.1%;
+  /* or 26px */
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  padding: 20px;
+  margin: 30px;
+  border: 1px #FF8503 solid;
+  background-color: #FF8503;
+  border-radius: 33px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btns .new-game:hover {
+  color: #FF8503;
+  background-color: white;
+}
+
+.btns .play-cpu-game {
+  font-family: 'Lato';
+  font-size: 22px;
+  line-height: 117.1%;
+  /* or 26px */
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  padding: 20px;
+  margin: 30px;
+  border: 1px #51AA00 solid;
+  background-color: #51AA00;
+  border-radius: 33px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btns .play-cpu-game:hover {
+  color: #51AA00;
+  background-color: white;
+}
+
+.btns .curr-game {
+  font-family: 'Lato';
+  font-size: 22px;
+  line-height: 117.1%;
+  /* or 26px */
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+  padding: 20px;
+  margin: 30px;
+  border: 1px #3A7CCA solid;
+  background-color: #3A7CCA;
+  border-radius: 33px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btns .curr-game:hover {
+  color: #3A7CCA;
+  background-color: white;
+}
+
+.bigCont {
+  border-radius: 33px;
+  margin: 10px;
+}
+
+app-play {
+  padding: 150px;
+}
+/*# sourceMappingURL=student.component.css.map */

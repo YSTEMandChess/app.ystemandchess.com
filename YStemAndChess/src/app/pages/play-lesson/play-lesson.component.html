@@ -1,33 +1,43 @@
 <html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-            gtag('config', 'UA-168619402-1');
-        </script>
-    </head>
+      gtag("config", "UA-168619402-1");
+    </script>
+  </head>
 
-    <body>
-        <div class="cont">
-            <div class="row">
-                <div class="lichess">
-                    <iframe [src]=chessLessonSrc id="chessBd"></iframe>
-                </div>
-                <div class="jitsi" id="local_stream">
-                    <!--<iframe src="https://meet.jit.si/" class="jitsi" frameborder="0" style="position: relative; height: 100%; width: 100%;"></iframe>-->
-                </div>
-                <div class="jitsi" id="remote_stream">
-                    <iframe src="https://meet.jit.si/" class="jitsi" frameborder="0" style="position: relative; height: 100%; width: 100%;"></iframe>
-                </div>
-            </div>
+  <body>
+    <div class="cont">
+      <div class="row">
+        <div class="lichess">
+          <iframe [src]="chessLessonSrc" id="chessBd"></iframe>
         </div>
-    </body>
+        <div class="jitsi" id="local_stream">
+          <!--<iframe src="https://meet.jit.si/" class="jitsi" frameborder="0" style="position: relative; height: 100%; width: 100%;"></iframe>-->
+        </div>
+        <div class="jitsi" id="remote_stream">
+          <iframe
+            src="https://meet.jit.si/"
+            class="jitsi"
+            frameborder="0"
+            style="position: relative; height: 100%; width: 100%"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </body>
 
-    <!-- <footer>
+  <!-- <footer>
         <app-footer></app-footer>
     </footer> -->
 </html>

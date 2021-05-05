@@ -1,0 +1,199 @@
+body {
+  padding-top: 2%;
+}
+
+#clear {
+  clear: both;
+}
+
+#welcome-container {
+  width: 45%;
+  height: auto;
+  margin-left: 5%;
+}
+
+#welcome-container #welcome-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#welcome-container #welcome-header h3 {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2.15vw;
+  line-height: 117.1%;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #3A7CCA;
+}
+
+#welcome-container #welcome-header h4 {
+  margin-top: 1.5%;
+  margin-left: 7%;
+  font-family: 'Lato';
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #FF8503;
+}
+
+#welcome-container #welcome-statement p {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.55vw;
+  line-height: 125.1%;
+  letter-spacing: 0.02em;
+  color: #4F4F4F;
+}
+
+#mentor-container {
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  border-radius: 33px;
+}
+
+#mentor-container #top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+#mentor-container #top .turn-indicator {
+  width: 28px;
+  height: 28px;
+  margin-right: 1%;
+  border-radius: 100%;
+  background-color: #fff;
+}
+
+#mentor-container #top .turn-indicator:hover {
+  background-color: #4F4F4F;
+}
+
+#mentor-container #top p {
+  margin-right: 3%;
+  font-family: 'Lato';
+  font-size: 1.4vw;
+  line-height: 142.1%;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+#mentor-container #top button {
+  outline-style: none;
+  margin-right: 3%;
+  padding-right: 2%;
+  padding-left: 2%;
+  border-radius: 33px;
+  font-family: 'Lato';
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #fff;
+  background-color: #3A7CCA;
+}
+
+#mentor-container #top button:hover {
+  background-color: #fff;
+  color: #3A7CCA;
+}
+
+#mentor-container #lichess-board {
+  overflow: hidden;
+}
+
+#mentor-container #lichess-board iframe {
+  overflow: hidden;
+  border: 0;
+  width: 100%;
+  height: 80vh;
+}
+
+#mentor-container #bottom {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+#mentor-container #bottom #flip-board {
+  outline-style: none;
+  margin-left: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 33px;
+  font-family: 'Lato';
+  font-weight: 900;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #000000;
+  background-color: #F2C94C;
+  margin-right: 47.4%;
+}
+
+#mentor-container #bottom #flip-board:hover {
+  color: #F2C94C;
+  background-color: #000;
+}
+
+#mentor-container #bottom #new-game {
+  outline-style: none;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-family: 'Lato';
+  font-weight: 900;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  border-radius: 33px;
+  color: #FFF;
+  background-color: #FF8503;
+  margin-right: 5%;
+}
+
+#mentor-container #bottom #new-game:hover {
+  color: #FF8503;
+  background-color: #fff;
+}
+
+#mentor-container #bottom #lesson-prep {
+  outline-style: none;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 3.5%;
+  padding-right: 3.5%;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  border-radius: 33px;
+  color: #fff;
+  background-color: #3A7CCA;
+}
+
+#mentor-container #bottom #lesson-prep:hover {
+  color: #3A7CCA;
+  background-color: #fff;
+}
+/*# sourceMappingURL=play-mentor.component.css.map */

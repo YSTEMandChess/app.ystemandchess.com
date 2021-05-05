@@ -1,0 +1,167 @@
+body {
+  padding-top: 5%;
+}
+
+.jitsi {
+  background-color: green;
+}
+#clear {
+  clear: both;
+}
+
+#top {
+  text-transform: capitalize;
+}
+
+#lessons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  font-style: "Roboto";
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  overflow: hidden;
+  font-size: 33px;
+  font-weight: 900;
+}
+
+#lessons #pawn-lessons {
+  text-align: center;
+  width: 30%;
+  margin-bottom: 5%;
+  border-radius: 33px;
+  background-color: orange;
+}
+
+#lessons #pawn-lessons a {
+  color: black;
+  text-decoration: none;
+}
+
+#lessons #pawn-lessons:hover {
+  cursor: pointer;
+  background-color: black;
+}
+
+#lessons #pawn-lessons:hover a {
+  color: orange;
+}
+
+#lessons #rook-lessons {
+  text-align: center;
+  width: 30%;
+  margin-bottom: 5%;
+  border-radius: 33px;
+  background-color: orange;
+}
+
+#lessons #rook-lessons a {
+  color: black;
+  text-decoration: none;
+}
+
+#lessons #rook-lessons:hover {
+  cursor: pointer;
+  background-color: black;
+  color: orange;
+}
+
+#lessons #rook-lessons:hover a {
+  color: orange;
+}
+
+#lessons #horse-lessons {
+  text-align: center;
+  width: 30%;
+  margin-bottom: 5%;
+  border-radius: 33px;
+  background-color: orange;
+}
+
+#lessons #horse-lessons a {
+  color: black;
+  text-decoration: none;
+}
+
+#lessons #horse-lessons:hover {
+  cursor: pointer;
+  background-color: black;
+  color: orange;
+}
+
+#lessons #horse-lessons:hover a {
+  color: orange;
+}
+
+#lessons #bishop-lessons {
+  text-align: center;
+  width: 30%;
+  margin-bottom: 5%;
+  border-radius: 33px;
+  background-color: orange;
+}
+
+#lessons #bishop-lessons a {
+  color: black;
+  text-decoration: none;
+}
+
+#lessons #bishop-lessons:hover {
+  cursor: pointer;
+  background-color: black;
+  color: orange;
+}
+
+#lessons #bishop-lessons:hover a {
+  color: orange;
+}
+
+#lessons #queen-lessons {
+  text-align: center;
+  width: 30%;
+  margin-bottom: 5%;
+  border-radius: 33px;
+  background-color: orange;
+}
+
+#lessons #queen-lessons a {
+  color: black;
+  text-decoration: none;
+}
+
+#lessons #queen-lessons:hover {
+  cursor: pointer;
+  background-color: black;
+  color: orange;
+}
+
+#lessons #queen-lessons:hover a {
+  color: orange;
+}
+
+#lessons #king-lessons {
+  text-align: center;
+  width: 30%;
+  margin-bottom: 5%;
+  border-radius: 33px;
+  background-color: orange;
+}
+
+#lessons #king-lessons a {
+  color: black;
+  text-decoration: none;
+}
+
+#lessons #king-lessons:hover {
+  cursor: pointer;
+  background-color: black;
+  color: orange;
+}
+
+#lessons #king-lessons:hover a {
+  color: orange;
+}
+/*# sourceMappingURL=lessons.component.css.map */

@@ -1,0 +1,52 @@
+.game {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.game .chess {
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.game .chess iframe {
+  min-width: 700px;
+  min-height: 700px;
+}
+
+.game .jitsi {
+  width: 300px;
+  height: 300px;
+  padding: 2px;
+}
+
+@media only screen and (max-width: 710px) {
+  .chess iframe {
+    min-width: 600px;
+    min-height: 600px;
+  }
+}
+
+@media only screen and (max-width: 615px) {
+  .chess iframe {
+    min-width: 500px;
+    min-height: 500px;
+  }
+}
+
+@media only screen and (max-width: 525px) {
+  .chess iframe {
+    min-width: 425px;
+    min-height: 500px;
+  }
+}
+/*# sourceMappingURL=play.component.css.map */

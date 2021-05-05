@@ -1,0 +1,56 @@
+body {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 75px;
+}
+
+body a {
+  padding-left: 10px;
+}
+
+h3 {
+  color: red;
+}
+
+input {
+  outline-style: none;
+  margin: 20px;
+  padding: 15px 32px;
+  font-size: 22px;
+  font-family: 'Roboto' !important;
+  font-weight: 500;
+  font-family: normal;
+  background-color: white;
+  color: black;
+  border: 3px solid #D64309;
+  border-radius: 8px;
+}
+
+.input-container li {
+  list-style: none;
+}
+
+.input-container input {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 10px;
+}
+
+.input-container button {
+  outline-style: none;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-family: 'Roboto';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  background-color: #fff;
+  color: #3A7CCA;
+  border-radius: 33px;
+}
+
+.input-container button:hover {
+  background-color: #3A7CCA;
+  color: #fff;
+}
+/*# sourceMappingURL=login.component.css.map */

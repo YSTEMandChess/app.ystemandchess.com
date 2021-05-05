@@ -1,0 +1,25 @@
+body #notice h1 {
+  font-family: 'Roboto';
+}
+
+body #notice h2 {
+  font-family: 'Roboto';
+}
+
+body #recordings {
+  margin-top: 2%;
+}
+
+body #recordings h1 {
+  font-family: 'Lato';
+}
+
+body #recordings h2 {
+  font-family: 'Lato';
+}
+
+a:hover {
+  cursor: pointer;
+  color: blue;
+}
+/*# sourceMappingURL=student-recordings.component.css.map */

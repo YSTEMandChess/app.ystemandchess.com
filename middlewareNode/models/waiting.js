@@ -1,33 +1,29 @@
 const mongoose = require('mongoose')
 const { Schema, model } = mongoose
 
-const waitingSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    default: mongoose.Types.ObjectId(),
+const waitingSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    requestedGameAt: {
+      type: Date,
+      required: true,
+    },
   },
-  username: {
-    type: String,
-    required: true,
-  },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  requestedGameAt: {
-    type: Date,
-    required: true,
-  },
-})
+  { versionKey: false }
+)
 
-let waitingStudents = model('waitingStudents', waitingSchema)
-let waitingMentors = model('waitingMentors', waitingSchema)
+var waitingStudents = model('waitingStudents', waitingSchema, 'waitingStudents')
+var waitingMentors = model('waitingMentors', waitingSchema, 'waitingMentors')
 
-module.export = {
-  waitingMentors: waitingMentors,
-  waitingStudents: waitingStudents,
-}
+module.exports = { waitingStudents, waitingMentors }

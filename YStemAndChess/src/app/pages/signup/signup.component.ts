@@ -4,6 +4,7 @@ import { isString } from 'util';
 import { HttpClient } from '@angular/common/http';
 import { stringify } from 'querystring';
 import { environment } from 'src/environments/environment';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-signup',
@@ -349,7 +350,7 @@ export class SignupComponent implements OnInit {
     return newarr;
   }
 
-  SendToDataBase(): void {
+  async SendToDataBase() {
     //account not valid
     if (!this.checkIfValidAccount()) {
       return;
@@ -377,26 +378,19 @@ export class SignupComponent implements OnInit {
     if (accountType === 'parent' && this.newStudentFlag === true) {
       this.newStudents = this.clearNulls(this.newStudents);
       var students = JSON.stringify(this.newStudents);
-      url = `${environment.urls.middlewareURL}/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
+      url = `${environment.urls.middlewareURL}/user/?first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}&students=${students}`;
     } else {
-      url = `${environment.urls.middlewareURL}/?reason=create&first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
+      url = `${environment.urls.middlewareURL}/user/?first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
     }
 
-    this.httpGetAsync(url, (response) => {
-      if (response == 'This username has been taken. Please choose another.') {
+    await this.httpGetAsync(url, (response) => {
+      if (
+        JSON.parse(response) ==
+        'This username has been taken. Please choose another.'
+      ) {
         this.link = '/signup';
       }
     });
-  }
-
-  private httpGetAsync(theUrl: string, callback) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-        callback(xmlHttp.responseText);
-    };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
   }
 
   /*
@@ -409,6 +403,16 @@ export class SignupComponent implements OnInit {
       )).value);
     }
     return userParameter;
+  }
+
+  private httpGetAsync(theUrl: string, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    };
+    xmlHttp.open('POST', theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
   }
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -52,12 +53,12 @@ export class LoginComponent implements OnInit {
       .value;
     var password = (<HTMLInputElement>document.getElementById('password'))
       .value;
-    let url = `${environment.urls.middlewareURL}/?reason=verify&username=${username}&password=${password}`;
+    let url = `${environment.urls.middlewareURL}/auth/login?username=${username}&password=${password}`;
     this.httpGetAsync(url, (response) => {
       if (response == 'The username or password is incorrect.') {
         this.loginError = 'Username or Password is incorrect';
       } else {
-        this.cookie.set('login', response, 1);
+        this.cookie.set('login', JSON.parse(response).token, 1);
         let payload = JSON.parse(atob(response.split('.')[1]));
         switch (payload['role']) {
           case 'student':
@@ -79,7 +80,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private httpGetAsync(theUrl, callback) {
+  errorMessages() {
+    if (this.passwordFlag == false || this.usernameFlag == false) {
+      this.loginError = 'Invalid username or password';
+    } else {
+      this.loginError = '';
+    }
+  }
+
+  private httpGetAsync(theUrl: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -87,13 +96,5 @@ export class LoginComponent implements OnInit {
     };
     xmlHttp.open('POST', theUrl, true); // true for asynchronous
     xmlHttp.send(null);
-  }
-
-  errorMessages() {
-    if (this.passwordFlag == false || this.usernameFlag == false) {
-      this.loginError = 'Invalid username or password';
-    } else {
-      this.loginError = '';
-    }
   }
 }

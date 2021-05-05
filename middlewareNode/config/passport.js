@@ -8,20 +8,20 @@ passport.serializeUser(function (user, done) {
 })
 
 passport.deserializeUser(function (id, done) {
-  //User.findById(id, function (err, user) {
-  done(err, user)
-  //})
+  users.findById(id, function (err, user) {
+    done(err, user)
+  })
 })
 
 passport.use(
   new JwtStrategy(
     {
-      secretOrKey: config.get('jwtSecret'),
+      secretOrKey: config.get('indexKey'),
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     },
     async (jwt_payload, done) => {
       try {
-        const user = await User.findById(jwt_payload.user.id)
+        const user = await users.findOne({ username: jwt_payload.username })
         if (user) {
           return done(null, user)
         } else {

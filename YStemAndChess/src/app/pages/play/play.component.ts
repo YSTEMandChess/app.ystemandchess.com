@@ -42,25 +42,27 @@ export class PlayComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     let userContent;
     let responseText;
 
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
-      this.httpGetAsync(
-        `${
-          environment.urls.middlewareURL
-        }/isInMeeting.php/?jwt=${this.cookie.get('login')}`,
+      await this.httpGetAsync(
+        `${environment.urls.middlewareURL}/meetings/inMeeting`,
+        'GET',
         (response) => {
-          if (response == 'There are no current meetings with this user.') {
+          console.log(response);
+          if (
+            JSON.parse(response) ===
+            'There are no current meetings with this user.'
+          ) {
             return;
           }
-          responseText = JSON.parse(response);
-
+          responseText = JSON.parse(response)[0];
           //display web cam styling
-          document.getElementById("local_stream").style.display = "block";
-          document.getElementById("remote_stream").style.display = "block";
+          document.getElementById('local_stream').style.display = 'block';
+          document.getElementById('remote_stream').style.display = 'block';
 
           // Code for webcam
           // -------------------------------------------------------------------------
@@ -73,7 +75,7 @@ export class PlayComponent implements OnInit {
             () => console.log('init sucessful'),
             () => console.log('init unsucessful')
           );
-          this.client.join(null, responseText.meetingID, null, (uid) => {
+          this.client.join(null, responseText.meetingId, null, (uid) => {
             this.clientUID = uid;
 
             this.localStream = this.agoraService.createStream({
@@ -145,9 +147,9 @@ export class PlayComponent implements OnInit {
       );
     } else {
       //hide web cam styling
-      document.getElementById("local_stream").style.display = "none";
-      document.getElementById("remote_stream").style.display = "none";
-      
+      document.getElementById('local_stream').style.display = 'none';
+      document.getElementById('remote_stream').style.display = 'none';
+
       userContent = '';
     }
 
@@ -202,13 +204,17 @@ export class PlayComponent implements OnInit {
     });
   }
 
-  private httpGetAsync(theUrl: string, callback) {
+  private httpGetAsync(theUrl: string, method: string = 'POST', callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
+    xmlHttp.open(method, theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader(
+      'Authorization',
+      `Bearer ${this.cookie.get('login')}`
+    );
     xmlHttp.send(null);
   }
 

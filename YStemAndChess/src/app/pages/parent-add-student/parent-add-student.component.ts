@@ -34,8 +34,9 @@ export class ParentAddStudentComponent implements OnInit {
     let uInfo = await setPermissionLevel(this.cookie);
     if (uInfo['error'] == undefined) {
       this.logged = true;
-      pLevel = uInfo['role'];
-      this.username = uInfo['username'];
+      pLevel = uInfo.role;
+      this.username = uInfo.username;
+      console.log(this.username);
     }
   }
 
@@ -241,11 +242,13 @@ export class ParentAddStudentComponent implements OnInit {
       let userName: string = this.newStudents[index].username;
       let password: string = this.newStudents[index].password;
 
-      url = `${environment.urls.middlewareURL}/?reason=create&parentUsername=${this.parentUser}&first=${firstName}&last=${lastName}&username=${userName}&password=${password}&role=student`;
+      url = `${environment.urls.middlewareURL}/user/children?first=${firstName}&last=${lastName}&username=${userName}&password=${password}`;
 
-      this.httpGetAsync(url, (response) => {
+      await this.httpGetAsync(url, 'POST', (response) => {
+        console.log(response);
         if (
-          response == 'This username has been taken. Please choose another.'
+          JSON.parse(response) ===
+          'This username has been taken. Please choose another.'
         ) {
           this.link = '/parent-add-student';
         }
@@ -254,13 +257,17 @@ export class ParentAddStudentComponent implements OnInit {
     }
   }
 
-  private httpGetAsync(theUrl: string, callback) {
+  private httpGetAsync(theUrl: string, method: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
+    xmlHttp.open(method, theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader(
+      'Authorization',
+      `Bearer ${this.cookie.get('login')}`
+    );
     xmlHttp.send(null);
   }
 

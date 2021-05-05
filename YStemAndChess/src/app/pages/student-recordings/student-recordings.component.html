@@ -1,39 +1,57 @@
 <html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-            gtag('config', 'UA-168619402-1');
-        </script>
-    </head>
+      gtag("config", "UA-168619402-1");
+    </script>
+  </head>
 
-    <header>
-        <app-header></app-header>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    </header>
+  <header>
+    <app-header></app-header>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+  </header>
 
-    <body>
-        <div id="notice">
-            <h1>Recordings here</h1>
-            <h2>Note: we recommend using <a href="https://www.videolan.org/vlc/index.html">VLC</a>
-                 media players to watch the recordings.</h2>
-            <h2>Recordings will have to be downloaded again after seven days.</h2>
+  <body>
+    <div id="notice">
+      <h1>Recordings here</h1>
+      <h2>
+        Note: we recommend using
+        <a href="https://www.videolan.org/vlc/index.html">VLC</a> media players
+        to watch the recordings.
+      </h2>
+      <h2>Recordings will have to be downloaded again after seven days.</h2>
+    </div>
+    <div id="recordings">
+      <h2>{{ studentName }} Recordings</h2>
+      <div *ngFor="let record of recordings | keyvalue">
+        <h1>{{ record.key }}</h1>
+        <div *ngFor="let myRecords of record.value">
+          <a (click)="verify(myRecords)"
+            ><h5>{{ myRecords }}</h5></a
+          >
         </div>
-        <div id="recordings">
-            <h2>{{studentName}} Recordings</h2>
-            <div *ngFor="let record of recordings; let i = index;">
-                <h1>{{recordingDates[i]}}</h1>
-                <a (click)="verify(i)"><h5>{{record}}</h5></a>
-            </div>
-        </div>
-    </body>
+      </div>
+    </div>
+  </body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>

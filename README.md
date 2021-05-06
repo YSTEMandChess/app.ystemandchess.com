@@ -1,34 +1,58 @@
-# Installation of the Development Environment 
-All you need to run our development environment is Docker. 
-
+# Installation of the Development Environment
 ##### Linux
 
-To install Docker, please use the command `sudo apt install docker.io`. This will install Docker onto your machine which would give you access to Docker and docker-compose.
-After the installation is complete, use the command `sudo systemctl start docker` to start Docker and `sudo systemctl enable docker` to allow Docker to start when you login to your OS. 
+To do this, run `sudo apt install nodejs`.
 
 ##### Windows
 
-To install Docker, click the following [link](https://hub.docker.com/editions/community/docker-ce-desktop-windows/). 
-Follow the steps to install Docker properly and then restart your computer. Once your computer restarts, try to run Docker.
-***If it doesn't start and asks for you to enable virtualization, follow this [guide](https://docs.docker.com/docker-for-windows/troubleshoot/) 
-for enabling virtualization. You will need to enable this in your computer's BIOS.
-&nbsp; 
-I would also recommend installing the new [Windows Subsystem for Linux for Docker](https://docs.microsoft.com/en-us/windows/wsl/wsl2-kernel).***
+To do this, go download [node.js](https://nodejs.org/en/download/).
+&nbsp;
+Now you need to install the **angular cli**.
+
+##### Linux
+
+To do this, run `sudo npm install -g @angular/cli`
+and you will also need to install `sudo npm install -g @angular-devkit/build-angular`.
+
+##### Windows
+
+To do this, run `npm install -g @angular/cli` in **Git Bash**.
+**_If somehow Git Bash isn't installed for you, you can download it [here](https://gitforwindows.org/)_**.
+
 &nbsp;
 
-##### MacOS
+##### Linux
 
-To install Docker, click the following [link](https://docs.docker.com/docker-for-mac/install/).
-Follow the steps to install Docker properly and you should be good!
+Please install apache2 using the command `sudo apt update` followed with `sudo apt install apache2`.
 
-## Adding Environment Variables 
+##### Windows
+
+Please install apache2 [here](https://httpd.apache.org/docs/2.4/platform/windows.html).
+Once you are done downloading the .zip file, extract it to any location you want.
+The first step, after extracting the .zip file, is to set the environment variable for it. Add the
+location of the `<Insert Path Here>Apache24/bin` folder to the PATH environment variable.
+
+&nbsp;
+
+Now we need to install **nodemon, express, and socket.io**.
+
+##### Linux
+
+To do this, run the command: `sudo npm install -g express nodemon socket.io`
+
+##### Windows
+
+To do this, run the command: `npm install -g express nodemon socket.io`
+**_If nothing shows up, continue waiting. It installs in the background and should let you know when it's complete._**
+&nbsp;
+
 Now go into the chessClient directory and run `npm i dotenv`
-
 Repeat this step in chessServer as well
-
 &nbsp;
 
 The last step is to add environment files to the app, which you will be given if working with us, otherwise you will have to use your personal accounts. Below is a list of all the directories in root and where to place your env files for each directory if you want to do it manually. Otherwise run the given `create_envs.sh` script from root by typing `bash create_envs.sh`
+
+## Adding Environment Variables
 
 ###### THIS IS ONLY TESTED ON UBUNTU
 
@@ -36,7 +60,7 @@ The last step is to add environment files to the app, which you will be given if
 
 Within the root of this directory type `cd src`
 
-Within the src directory type `mdkir environments && cd environments`
+Within the src directory type `mkdir environments && cd environments`
 
 Now you need to create the two environment files within this directory with this command `touch environment.ts && touch environment.prod.ts`
 
@@ -70,59 +94,71 @@ Now you should be good to start developing!
 
 # Quick GitHub Developer Guide
 
-***This is a quick guide on how to develop with GitHub locally.***
+**_This is a quick guide on how to develop with GitHub locally._**
 
 **How to clone and have your own working branch locally:**
+
 1. Create your own branch from the master branch on GitHub.
 2. Clone the repo locally onto your computer, wherever you want it, using `git clone (https or ssh key)`.
 3. Create that same branch locally using `git checkout -b (branch name created from step 1)`.
 4. Begin developing!
 
 **How to Push and Pull to your GitHub repo branch:**
+
 1. Always pull from your branch on GitHub before working locally, using `git pull origin (branch name here)`.
-2. Begin coding and developing what you want/tasked to do. 
+2. Begin coding and developing what you want/tasked to do.
 3. When you are ready to push your changes to your GitHub branch, navigate to the home directory of the repo and use `git add .`. This will get all the files, in the current branch, ready for the push. This ignores all the files stated in the .gitignore.
 4. Create a commit by using the command `git commit -m "(Insert commit message here. Usually the commit message is about what changes you made to the repository)"`.
 5. Finish the push by using the command `git push origin (branch to push to here)`.
-6. Go onto the GitHub repo on the web and create a pull request to merge your branch changes with the master branch. 
-7. Merge the pull request into the master branch after consulting Alex, Benjamin, or Owen. 
+6. Go onto the GitHub repo on the web and create a pull request to merge your branch changes with the master branch.
+7. Merge the pull request into the master branch after consulting Alex, Benjamin, or Owen.
 
 Congrats! You have learned the basic commands and techniques to use GitHub!
 
-&nbsp; 
+&nbsp;
 
 # Running the Development Environment
 
 To begin the development servers, please follow these steps listed below.
 
-Start by going into the YStemAndChess directory and running `npm i`. This will install all the packages we need to run the development environment. 
-***Make sure Angular-CLI is installed afterwards by using the `ng` command. If it is not installed, you can install it using the command `npm install -g @angular/cli`.***
+### Linux
 
-After installing the packages, head back out to the root of our directory using `cd ..` and then navigate into the scripts folder. We now want to build the docker images that we need to run.
-We can do this by using the command `bash tag_build_containers.sh`.
-***If you are on Linux, use this command instead: `sudo bash tag_build_containers.sh`.***
+Now, it is time to start running the dev environment. As a side note, all of the development environments (except for `chessClient`) refresh when you save a file.
+&nbsp;
+The frontend code is stored in the `YStemAndChess` folder. Navigate inside of that folder.
+Then, run the command `ng serve`. This will start the angular developer server. It can be found by going to `http://localhost:4200`.
+If angular can't be found in /usr/, a possible solution is to cd into the YStemAndChess folder and install local modules with:  
+`sudo npm install express nodemon socket.io`  
+`sudo npm install @angular-devkit/build-angular`  
+In the event of NGCC failing with an unhandled exception:  
+In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
+As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
+&nbsp;
+Now, we need to start the middleware server. It handles verification and communicates with the mongodb server. This is stored in the `middlewareNode` folder. Navigate inside of it.
+Now, run the command `npm run server`. As you may have guessed, this creates a http server on the port 8000. While you most likely will not need to directly access the server, it can be found by going to `http://localhost:8000`.
+&nbsp;
+Next is the chess server. This is in the directory `chessServer`.
+After navigating inside of that server, you need to run `nodemon index.js`. This will start the server on port 3000.
+This is a websocket server though, so you cannot use a simple http request to access it.
+&nbsp;
+Following the chess server, we need to run the stockfish server to allow players to play with an AI. This is done in the directory 'stockfishServer'.
+After navigating inside the directory, you need to run `nodemon index.js`. This will start the stockfish server.
+&nbsp;
+The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
+So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
-Next, we need to start the network to run our local virtual machine of docker containers. Use the command `docker network create ysc-net` to achieve this. 
-***This only needs to be run one time. After it is run, you can skip this step for all future cases.***
-
-After that, we can run the command `docker-compose up -d` to start all our docker images. 
-
-To stop the images, use the command `docker-compose down`. 
-
-***Important Note: You need to run the bash script every time you make changes to a file and want to see them. `This only applies to changes outside of the YStemAndChess folder.` 
-You need to run `docker-compose down`, build the docker images using `bash tag_build_containers.sh`, and then `docker-compose up -d` to restart the virtual machine.
-Also, make sure you run the terminal AS AN ADMINISTRATOR!!!!!!***
+2. If you are trying to launch the project on "http://localhost/" , ensure that `npm i dotenv` is ran in the following fodlers inside the project.
+   (chessClient, chessServer, stockfishServer)
 
 # Running Tests in YStemAndChess Directory
 
-We use karma and jasmine to test front end functionality. To run tests simply run `ng test` inside of the YStemAndChess directory. Tests will automatically be re-run whenever you make a saved change to the source code. If tests do not work you may need to go into the `karma.conf.js` file in root and add your browser to the browsers array. 
+We use karma and jasmine to test front end functionality. To run tests simply run `ng test` inside of the YStemAndChess directory. Tests will automatically be re-run whenever you make a saved change to the source code. If tests do not work you may need to go into the `karma.conf.js` file in root and add your browser to the browsers array.
 
-&nbsp; 
+&nbsp;
 
 # Adding New Lessons
 
 Adding new lessons to the YStem app is farily simple. All one must do is under the "lessons" collection, select the piece you wish to add a lesson for. You need to add a lesson number, start FEN, end FEN, and end square so it can be highlighted on the board. If you do not want to highlight a square on the board simply leave that section blank. Below is an example of input for lessons being created.
-
 
 `lessonNumber: 5`
 
@@ -132,9 +168,7 @@ Adding new lessons to the YStem app is farily simple. All one must do is under t
 
 `endSquare: "e4"`
 
-
 Once this is added to the database the lesson will be generated when a user reaches that lesson number. I like to use https://lichess.org/editor to create a starting lesson FEN. From there it is easiest to get the ending lesson FEN by going to that lesson number on the YStem app and moving to the desired end position. The current FEN will be output in the browser console. The reason the end FEN cannot be achieved in other editors is becuase they do not update color and turns completed. Plus you have to see which moves Stockfish makes when you move to the end square. Stockfish will always make the same move if you do, becuase stockfish will only make the optimal move.
-
 
 # New Middleware Wiki
 

@@ -8,21 +8,26 @@ async function setPermissionLevel(cookie: CookieService) {
   if (cookie.check(cookieName)) {
     var rawData;
     let cookieContents: string = cookie.get(cookieName);
-    let url = `${environment.urls.middlewareURL}/verify.php?jwt=${cookieContents}`;
-    await fetch(url)
-      .then((response) => response.text())
-      .then((data) => (rawData = data.toString()));
+    let url = `${environment.urls.middlewareURL}/auth/validate`;
+    var headers = new Headers();
+    headers.append('Authorization', `Bearer ${cookieContents}`);
+    await fetch(url, { method: 'POST', headers: headers })
+      .then((response) => {
+        return response.text();
+      })
+      .then((data) => {
+        rawData = data;
+      });
     if (
-      rawData.includes(
-        'Error: 405. This key has been tampered with or is out of date.'
-      )
+      rawData.includes('Unauthorized') ||
+      rawData.includes('Error 405: User authentication is not valid or expired')
     ) {
       cookie.delete(cookieName);
       return {
-        error: 'Error: 405: User authentication is not valid or expired',
+        error: 'Error 405: User authentication is not valid or expired',
       };
     } else {
-      information = JSON.parse(rawData);
+      information = JSON.parse(atob(cookieContents.split('.')[1]));
       return information;
     }
   } else {

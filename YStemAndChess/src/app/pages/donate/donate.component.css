@@ -1,0 +1,115 @@
+body {
+  padding-top: 5%;
+}
+
+#clear {
+  clear: both;
+}
+
+#donate-container {
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  border-radius: 33px;
+  background-color: #51AA00;
+}
+
+#donate-container #donate-header {
+  width: 90%;
+  height: auto;
+  padding-top: 2%;
+  padding-left: 2%;
+  font-family: 'Lato';
+  font-style: normal;
+  font-size: 2.7vw;
+  font-weight: 900;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+#donate-container #donate-statement {
+  width: 90%;
+  height: auto;
+  padding-top: 2%;
+  padding-left: 2%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 1.4vw;
+  font-weight: 700;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+#donate-container #donate-statement ul {
+  list-style-type: disc;
+  padding-left: 1.5%;
+}
+
+#donate-container #donate-button {
+  margin-top: 2%;
+  text-align: center;
+  font-family: 'Lato';
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1.8vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+}
+
+#donate-container #donate-button button {
+  outline-style: none;
+  padding: 1.1%;
+  color: #3A7CCA;
+  background-color: #fff;
+  border-radius: 33px;
+}
+
+#donate-container #donate-button button:hover {
+  color: #fff;
+  background-color: #3A7CCA;
+}
+
+#donate-container #donate-tax {
+  margin-top: 1%;
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 1.1vw;
+  font-style: normal;
+  font-weight: 500;
+  font-size: auto;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+#donate-container #donate-barcode {
+  text-align: center;
+  overflow: hidden;
+  padding-bottom: 2%;
+}
+
+#donate-container #donate-barcode img {
+  width: 20%;
+}
+
+#donate-container #donate-barcode p {
+  font-family: 'Lato';
+  font-weight: 700;
+  font-style: bold;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+
+#donate-container #donate-barcode a {
+  font-family: 'Roboto';
+  font-size: 1.1vw;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+}
+/*# sourceMappingURL=donate.component.css.map */

@@ -1,90 +1,92 @@
 <html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-168619402-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-            gtag('config', 'UA-168619402-1');
-        </script>
-    </head>
+      gtag("config", "UA-168619402-1");
+    </script>
+  </head>
 
-    <header>
-        <app-header></app-header>
-    </header>
+  <header>
+    <app-header></app-header>
+  </header>
 
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-8 pad">
-                    <h2>Welcome {{username}}</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. In aliquam sem fringilla ut. Eget mi proin sed libero enim sed faucibus turpis.
-                        Tristique senectus et netus et malesuada fames ac. Lobortis scelerisque fermentum dui faucibus. Vitae
-                        congue eu consequat ac felis donec et odio. Augue ut lectus arcu bibendum. Felis eget velit aliquet
-                        sagittis id consectetur purus ut faucibus. Justo eget magna fermentum iaculis eu. Tempus iaculis urna id
-                        volutpat lacus laoreet. Justo laoreet sit amet cursus sit. Facilisis gravida neque convallis a cras.
-                        Quam vulputate dignissim suspendisse in est ante in.
-                    </p>
-                    <div class="benifits">
-                        Benefits
-                    </div>
-                </div>
-            </div>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-8 pad">
+          <h2>Welcome {{ username }}</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. In
+            aliquam sem fringilla ut. Eget mi proin sed libero enim sed faucibus
+            turpis. Tristique senectus et netus et malesuada fames ac. Lobortis
+            scelerisque fermentum dui faucibus. Vitae congue eu consequat ac
+            felis donec et odio. Augue ut lectus arcu bibendum. Felis eget velit
+            aliquet sagittis id consectetur purus ut faucibus. Justo eget magna
+            fermentum iaculis eu. Tempus iaculis urna id volutpat lacus laoreet.
+            Justo laoreet sit amet cursus sit. Facilisis gravida neque convallis
+            a cras. Quam vulputate dignissim suspendisse in est ante in.
+          </p>
+          <div class="benifits">Benefits</div>
         </div>
-        <div *ngFor="let student of students; let i = index;">
-            <div class="container cont">
-                <div class="row prog">
-                    {{student}} Progress
-                </div>
-                <div class="row">
-                    <div class="col-sm">
-                        <h2>Hours Played</h2>
-                        <h1>{{times[i]}}</h1>
-                    </div>
-                    <div class="col-sm">
-                        <h2>Progress</h2>
-                    </div>
-                    <div class="col-sm nobac">
-                        <div class="recordsLink">
-                            Recorded Games
-                        </div>
-                        <div class="recordsLink">
-                            <a (click)="getStudentInfo(i)" href="/student-recording">Recorded Lessons</a>
-                        </div>
-                        <div class="recordsLink">
-                            Messages
-                        </div>
-                    </div>
-                </div>
+      </div>
+    </div>
+    <div *ngFor="let student of students; let i = index">
+      <div class="container cont">
+        <div class="row prog">{{ student }} Progress</div>
+        <div class="row">
+          <div class="col-sm">
+            <h2>Hours Played</h2>
+            <h1>{{ times[i] }} Minutes</h1>
+          </div>
+          <div class="col-sm">
+            <h2>Progress</h2>
+          </div>
+          <div class="col-sm nobac">
+            <div class="recordsLink">Recorded Games</div>
+            <div class="recordsLink">
+              <a (click)="getStudentInfo(i)" href="/student-recording"
+                >Recorded Lessons</a
+              >
             </div>
+            <div class="recordsLink">Messages</div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="container faqs">
-            <h2>FAQs</h2>
-            <div class="faq">
-                <h3>Q: This is a question?</h3>
-                <p> This is the answer to the question</p>
-            </div>
-            <div class="faq">
-                <h3>Q: This is a question?</h3>
-                <p> This is the answer to the question</p>
-            </div>
-            <div class="faq">
-                <h3>Q: This is a question?</h3>
-                <p> This is the answer to the question</p>
-            </div>
-            <div class="faq">
-                <h3>Q: This is a question?</h3>
-                <p> This is the answer to the question</p>
-            </div>
-        </div>
-    </body>
+    <div class="container faqs">
+      <h2>FAQs</h2>
+      <div class="faq">
+        <h3>Q: This is a question?</h3>
+        <p>This is the answer to the question</p>
+      </div>
+      <div class="faq">
+        <h3>Q: This is a question?</h3>
+        <p>This is the answer to the question</p>
+      </div>
+      <div class="faq">
+        <h3>Q: This is a question?</h3>
+        <p>This is the answer to the question</p>
+      </div>
+      <div class="faq">
+        <h3>Q: This is a question?</h3>
+        <p>This is the answer to the question</p>
+      </div>
+    </div>
+  </body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
-    
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>

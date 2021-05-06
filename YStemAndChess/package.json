@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "ystem-and-chess",
   "version": "0.0.0",
@@ -59,3 +60,67 @@
     "typescript": "4.0.6"
   }
 }
+=======
+{
+  "name": "ystem-and-chess",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "test-headless": "ng test --watch=false --browsers=ChromeHeadless"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^11.2.6",
+    "@angular/cdk": "^11.2.5",
+    "@angular/common": "^11.2.6",
+    "@angular/compiler": "^11.2.6",
+    "@angular/core": "^11.2.6",
+    "@angular/forms": "^11.2.6",
+    "@angular/platform-browser": "^11.2.6",
+    "@angular/platform-browser-dynamic": "^11.2.6",
+    "@angular/router": "^11.2.6",
+    "@chrisoakman/chessboardjs": "^1.0.0",
+    "@types/chess.js": "^0.10.1",
+    "@types/chessboardjs": "^0.3.1",
+    "agora-rtc-sdk": "^3.1.1",
+    "chess.js": "^0.11.0",
+    "express": "^4.17.1",
+    "karma-firefox-launcher": "^2.0.0",
+    "ngx-agora": "^2.0.1",
+    "ngx-cookie-service": "^3.0.4",
+    "nodemon": "^2.0.4",
+    "rxjs": "~6.5.4",
+    "socket.io": "^2.4.0",
+    "socket.io-client": "^2.3.0",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^10.15.7",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.1102.5",
+    "@angular/cli": "^11.2.5",
+    "@angular/compiler-cli": "^11.2.6",
+    "@types/jasmine": "~3.5.0",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^5.1.2",
+    "jasmine-core": "~3.5.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~5.0.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~2.1.0",
+    "karma-jasmine": "~3.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
+    "protractor": "~7.0.0",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~4.0.6"
+  }
+}
+>>>>>>> master

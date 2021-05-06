@@ -4,6 +4,8 @@
   "description": "API for Y STEM And Chess Inc",
   "main": "server.js",
   "dependencies": {
+    "aws-sdk": "^2.889.0",
+    "axios": "^0.21.1",
     "config": "^3.3.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -14,7 +16,6 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server"

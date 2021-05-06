@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WhyChessComponent } from './why-chess.component';
 import { HeaderComponent } from '../../header/header.component';
@@ -9,13 +9,12 @@ describe('WhyChessComponent', () => {
   let component: WhyChessComponent;
   let fixture: ComponentFixture<WhyChessComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ WhyChessComponent, HeaderComponent, FooterComponent ],
-      imports: [ ModalModule ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [WhyChessComponent, HeaderComponent, FooterComponent],
+      imports: [ModalModule],
+    }).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WhyChessComponent);

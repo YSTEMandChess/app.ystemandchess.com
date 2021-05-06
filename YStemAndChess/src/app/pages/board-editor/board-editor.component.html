@@ -17,12 +17,20 @@
 
     <body>
         <div id="board-editor-container">
-            <div id="board"></div>
+            <div id="board-fen-container">
+                <div id="board"></div>
+                <div id="fen-container">
+                    <label for="fen">FEN</label>
+                    <input type="text" name="fen" id="fen" (input)="onFenChange()" [(ngModel)]="longFen" >
+                </div>
+            </div>
             <div id="bottom">
                 <button type="button" id="flip-board" (click)="flipBoard()"> Flip Board</button>
                 <button type="button" id="clear-board" (click)="clearBoard()"> Clear Board</button>    
-                <button type="button" id="start-position" (click)="startPosition()"> Start Position</button>                        
+                <button type="button" id="start-position" (click)="startPosition()"> Start Position</button>
+                <button type="button" id="analyze-position"> <a routerLink="/board-analyzer" [queryParams]="{fen: longFen}">Analyze Position</a></button>                                                
             </div>
+            
         </div>
 
     </body>

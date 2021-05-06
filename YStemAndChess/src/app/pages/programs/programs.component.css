@@ -1,0 +1,321 @@
+body {
+  padding-top: 5%;
+}
+
+#clear {
+  clear: both;
+}
+
+#our-programs-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  border-radius: 33px;
+  background-color: #3A7CCA;
+}
+
+#our-programs-container #our-programs-image {
+  -webkit-box-flex: 7.5;
+      -ms-flex: 7.5;
+          flex: 7.5;
+  height: auto;
+}
+
+#our-programs-container #our-programs-image img {
+  width: 100%;
+  height: auto;
+  border-bottom-left-radius: 33px;
+  border-top-left-radius: 33px;
+}
+
+#our-programs-container #our-programs-statement {
+  -webkit-box-flex: 9.5;
+      -ms-flex: 9.5;
+          flex: 9.5;
+  padding-top: 3%;
+  margin-left: 5%;
+}
+
+#our-programs-container #our-programs-statement h3 {
+  width: 50%;
+  padding-bottom: 1.5%;
+  height: auto;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2.7vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+#our-programs-container #our-programs-statement h4 {
+  width: 80%;
+  padding-bottom: 1.5%;
+  height: auto;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.4vw;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+#our-programs-container #our-programs-statement p {
+  width: 85%;
+  padding-bottom: 5%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.4vw;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+#our-programs-container #our-programs-statement button {
+  padding: 1.1%;
+  margin-bottom: 7%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.8vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  border-radius: 33px;
+  color: #3A7CCA;
+  background-color: #fff;
+}
+
+#our-programs-container #our-programs-statement button:hover {
+  color: #fff;
+  background-color: #3A7CCA;
+}
+
+#cost-container {
+  margin-top: 5%;
+  margin-left: 5%;
+  float: left;
+  width: 40%;
+  height: auto;
+  border-radius: 33px;
+  background-color: #FF8503;
+}
+
+#cost-container #cost-statement h3 {
+  width: 70%;
+  padding-left: 5%;
+  padding-top: 5%;
+  height: auto;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2.7vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+#cost-container #cost-statement h4 {
+  padding-left: 5%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.7vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+#cost-container #cost-statement p {
+  width: 95%;
+  height: auto;
+  padding-left: 5%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+#cost-container #cost-statement ul {
+  padding-left: 7%;
+  margin-bottom: 10%;
+  list-style: disc;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+#helping-container {
+  float: right;
+  margin-top: 5%;
+  margin-right: 5%;
+  width: 40%;
+  height: auto;
+  border-radius: 33px;
+  background-color: #51AA00;
+}
+
+#helping-container #helping-statement h3 {
+  padding-right: 5%;
+  padding-top: 5%;
+  padding-left: 5%;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.9vw;
+  line-height: 117.1%;
+  letter-spacing: 0.07em;
+  color: #FFFFFF;
+}
+
+#helping-container #helping-statement p {
+  width: 89.5%;
+  height: auto;
+  margin-bottom: 3%;
+  padding-right: 5%;
+  padding-left: 5%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+@media screen and (max-width: 950px) {
+  #our-programs-container #our-programs-image img {
+    height: 100%;
+  }
+  #our-programs-container #our-programs-statement h3 {
+    font-size: 3.5vw;
+  }
+  #our-programs-container #our-programs-statement h4 {
+    font-size: 2.2vw;
+  }
+  #our-programs-container #our-programs-statement p {
+    font-size: 2.2vw;
+  }
+  #our-programs-container #our-programs-statement button {
+    font-size: 2.6vw;
+  }
+  #cost-container #cost-statement h3 {
+    font-size: 3.5vw;
+  }
+  #cost-container #cost-statement h4 {
+    font-size: 2.5vw;
+  }
+  #cost-container #cost-statement p {
+    font-size: 2.2vw;
+  }
+  #cost-container #cost-statement ul {
+    font-size: 2.2vw;
+  }
+  #helping-container #helping-statement h3 {
+    font-size: 2.7vw;
+  }
+  #helping-container #helping-statement p {
+    font-size: 2.2vw;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  #our-programs-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  #our-programs-container #our-programs-image img {
+    border-top-right-radius: 33px;
+    border-top-left-radius: 33px;
+    border-bottom-left-radius: 0px;
+  }
+  #our-programs-container #our-programs-statement h3 {
+    font-size: 4.3vw;
+  }
+  #our-programs-container #our-programs-statement h4 {
+    font-size: 3vw;
+  }
+  #our-programs-container #our-programs-statement p {
+    font-size: 3vw;
+  }
+  #our-programs-container #our-programs-statement button {
+    font-size: 3.2vw;
+  }
+  #cost-container {
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 90%;
+  }
+  #cost-container #cost-statement h3 {
+    font-size: 3.5vw;
+  }
+  #cost-container #cost-statement h4 {
+    font-size: 2.5vw;
+  }
+  #cost-container #cost-statement p {
+    font-size: 3vw;
+  }
+  #cost-container #cost-statement ul {
+    font-size: 3vw;
+  }
+  #helping-container {
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 90%;
+    height: auto;
+  }
+  #helping-container #helping-statement h3 {
+    font-size: 3.5vw;
+  }
+  #helping-container #helping-statement p {
+    font-size: 3vw;
+  }
+}
+
+@media screen and (max-width: 766px) and (max-width: 535px) {
+  #our-programs-container #our-programs-statement h3 {
+    font-size: 5.1vw;
+  }
+  #our-programs-container #our-programs-statement h4 {
+    font-size: 3.8vw;
+  }
+  #our-programs-container #our-programs-statement p {
+    font-size: 3.8vw;
+  }
+  #our-programs-container #our-programs-statement button {
+    font-size: 4vw;
+  }
+  #cost-container #cost-statement h3 {
+    font-size: 4.3vw;
+  }
+  #cost-container #cost-statement h4 {
+    font-size: 3.3vw;
+  }
+  #cost-container #cost-statement p {
+    font-size: 3.8vw;
+  }
+  #cost-container #cost-statement ul {
+    font-size: 3.8vw;
+  }
+  #helping-container #helping-statement h3 {
+    font-size: 4.3vw;
+  }
+  #helping-container #helping-statement p {
+    font-size: 3.8vw;
+  }
+}
+/*# sourceMappingURL=programs.component.css.map */

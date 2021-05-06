@@ -18,7 +18,7 @@ printf "    urls: {\n" >> environment.ts
 printf "      middlewareURL: 'http://127.0.0.1:8000',\n" >> environment.ts
 printf "      chessClientURL: 'http://localhost',\n" >> environment.ts
 printf "      stockFishURL : 'http://127.0.0.1:8080',\n" >> environment.ts
-printf "      chessServer : 'http://127.0.0.1:3000'\n" >> environment.ts
+printf "      chessServerURL : 'http://127.0.0.1:3000'\n" >> environment.ts
 printf "    }\n" >> environment.ts
 printf "  };\n" >> environment.ts
 
@@ -33,7 +33,7 @@ printf "    urls: {\n" >> environment.prod.ts
 printf "      middlewareURL: 'http://127.0.0.1:8000',\n" >> environment.prod.ts
 printf "      chessClientURL: 'http://localhost',\n" >> environment.prod.ts
 printf "      stockFishURL : 'http://127.0.0.1:8080',\n" >> environment.prod.ts
-printf "      chessServer : 'http://127.0.0.1:3000'\n" >> environment.prod.ts
+printf "      chessServerURL : 'http://127.0.0.1:3000'\n" >> environment.prod.ts
 printf "    }\n" >> environment.prod.ts
 printf "  };\n" >> environment.prod.ts
 

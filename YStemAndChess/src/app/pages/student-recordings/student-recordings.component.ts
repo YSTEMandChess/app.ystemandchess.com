@@ -9,8 +9,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./student-recordings.component.scss'],
 })
 export class StudentRecordingsComponent implements OnInit {
-  public recordings = [];
-  public recordingDates = [];
+  public recordings = new Map();
   public studentName: string = '';
 
   constructor(private cookie: CookieService) {}
@@ -30,40 +29,68 @@ export class StudentRecordingsComponent implements OnInit {
   }
 
   private getRecordings() {
-    let url = `${
-      environment.urls.middlewareURL
-    }/getRecordings.php/?jwt=${this.cookie.get('login')}&student=${
-      this.studentName
-    }`;
-    this.httpGetAsync(url, (response) => {
+    let url = `${environment.urls.middlewareURL}/meetings/parents/recordings/?childUsername=${this.studentName}`;
+    this.httpGetAsync(url, 'GET', (response) => {
       let data = JSON.parse(response);
-      let key: any;
-      for (key in data) {
-        let video = data[key].video;
-        let date = data[key].recordingDate;
-        this.recordings.push(video);
-        this.recordingDates.push(date);
-      }
+      data.map((recording) => {
+        let recordingDate: string = this.getRecordingString(
+          recording.meetingStartTime
+        );
+        let newArr = [];
+        if (this.recordings.has(recordingDate)) {
+          newArr = this.recordings.get(recordingDate);
+        }
+        newArr.push(recording.fileName);
+        this.recordings.set(recordingDate, newArr);
+      });
     });
   }
 
-  public verify(index) {
-    let url = `${environment.urls.middlewareURL}/awsGen.php/?filename=${this.recordings[index]}`;
-    this.httpGetAsync(url, (response) => {
-      let data = response;
+  private getRecordingString(recordingDate: Date) {
+    const monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    if (recordingDate) {
+      let dateString = new Date(recordingDate);
+      return `${
+        monthNames[dateString.getMonth()]
+      } ${dateString.getDate()}, ${dateString.getFullYear()}`;
+    }
+    return null;
+  }
+
+  public async verify(fileName) {
+    let url = `${environment.urls.middlewareURL}/meetings/singleRecording/?filename=${fileName}`;
+    await this.httpGetAsync(url, 'GET', (response) => {
       if (confirm('Download now?')) {
-        window.open(data);
+        window.open(JSON.parse(response));
       }
     });
   }
 
-  private httpGetAsync(theUrl: string, callback) {
+  private httpGetAsync(theUrl: string, method: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
+    xmlHttp.open(method, theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader(
+      'Authorization',
+      `Bearer ${this.cookie.get('login')}`
+    );
     xmlHttp.send(null);
   }
 }

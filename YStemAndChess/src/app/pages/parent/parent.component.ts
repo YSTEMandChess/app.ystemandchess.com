@@ -19,31 +19,26 @@ export class ParentComponent implements OnInit {
   ngOnInit() {
     this.getUsername();
     this.getStudents();
-    this.getTimePlayedOfStudents();
+    //this.getTimePlayedOfStudents();
   }
 
   getStudents() {
-    let url = `${
-      environment.urls.middlewareURL
-    }/getInfo.php/?jwt=${this.cookie.get('login')}`;
-    this.httpGetAsync(url, (response) => {
+    let url = `${environment.urls.middlewareURL}/user/children`;
+    this.httpGetAsync(url, 'GET', (response) => {
       if (response == 'This username has been taken. Please choose another.') {
         alert('username has been taken');
       }
       let data = JSON.parse(response);
-      let key: any;
-      for (key in data) {
-        let student = data[key].username;
-        this.students.push(student);
-      }
+      data.map((student) => {
+        this.students.push(student.username);
+        this.times.push(student.timePlayed);
+      });
     });
   }
 
-  getTimePlayedOfStudents() {
-    let url = `${
-      environment.urls.middlewareURL
-    }/studentInfo.php/?jwt=${this.cookie.get('login')}`;
-    this.httpGetAsync(url, (response) => {
+  /*getTimePlayedOfStudents() {
+    let url = `${environment.urls.middlewareURL}/meetings/parents/recordings`;
+    this.httpGetAsync(url, 'POST', (response) => {
       if (response == 'This username has been taken. Please choose another.') {
         alert('username has been taken');
       }
@@ -54,7 +49,7 @@ export class ParentComponent implements OnInit {
         this.times.push(time);
       }
     });
-  }
+  }*/
 
   public getStudentInfo(index) {
     this.cookie.set('student', this.students[index]);
@@ -70,13 +65,17 @@ export class ParentComponent implements OnInit {
     }
   }
 
-  private httpGetAsync(theUrl: string, callback) {
+  private httpGetAsync(theUrl: string, method: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
+    xmlHttp.open(method, theUrl, true); // true for asynchronous
+    xmlHttp.setRequestHeader(
+      'Authorization',
+      `Bearer ${this.cookie.get('login')}`
+    );
     xmlHttp.send(null);
   }
 }

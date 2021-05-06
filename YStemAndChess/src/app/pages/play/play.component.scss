@@ -1,7 +1,7 @@
 .game_wrapper {
   display: flex;
   justify-content: space-around;
-
+  
   .chess {
     width: 100%;
     display: flex;
@@ -12,7 +12,6 @@
       min-height: 700px;
     }
   }
-
   .jitsi {
     width: 30%;
     height: 300px;

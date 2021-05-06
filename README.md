@@ -54,14 +54,6 @@ The last step is to add environment files to the app, which you will be given if
 
 ## Adding Environment Variables
 
-Now go into the chessClient directory and run `npm i dotenv`
-
-Repeat this step in chessServer as well
-
-&nbsp;
-
-The last step is to add environment files to the app, which you will be given if working with us, otherwise you will have to use your personal accounts. Below is a list of all the directories in root and where to place your env files for each directory if you want to do it manually. Otherwise run the given `create_envs.sh` script from root by typing `bash create_envs.sh`
-
 ###### THIS IS ONLY TESTED ON UBUNTU
 
 **YStemAndChess**

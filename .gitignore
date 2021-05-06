@@ -18,6 +18,7 @@ environment.php
 environment.*
 create_envs.sh
 create_env.sh
+default.json
 
 # profiling files
 chrome-profiler-events*.json

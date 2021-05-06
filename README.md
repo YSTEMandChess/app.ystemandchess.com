@@ -1,7 +1,4 @@
 # Installation of the Development Environment
-
-All you need to run our development environment is Docker.
-
 ##### Linux
 
 To do this, run `sudo apt install nodejs`.

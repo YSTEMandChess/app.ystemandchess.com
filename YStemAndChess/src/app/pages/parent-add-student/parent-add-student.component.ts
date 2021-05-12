@@ -36,7 +36,6 @@ export class ParentAddStudentComponent implements OnInit {
       this.logged = true;
       pLevel = uInfo.role;
       this.username = uInfo.username;
-      console.log(this.username);
     }
   }
 
@@ -245,7 +244,6 @@ export class ParentAddStudentComponent implements OnInit {
       url = `${environment.urls.middlewareURL}/user/children?first=${firstName}&last=${lastName}&username=${userName}&password=${password}`;
 
       this.httpGetAsync(url, 'POST', (response) => {
-        console.log(response);
         if (
           JSON.parse(response) ===
           'This username has been taken. Please choose another.'

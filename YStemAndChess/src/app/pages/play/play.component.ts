@@ -51,7 +51,6 @@ export class PlayComponent implements OnInit {
         `${environment.urls.middlewareURL}/meetings/inMeeting`,
         'GET',
         (response) => {
-          console.log(response);
           if (
             JSON.parse(response) ===
             'There are no current meetings with this user.'

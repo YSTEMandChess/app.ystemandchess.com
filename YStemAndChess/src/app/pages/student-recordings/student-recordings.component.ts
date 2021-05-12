@@ -72,7 +72,7 @@ export class StudentRecordingsComponent implements OnInit {
     return null;
   }
 
-  public async verify(fileName) {
+  public verify(fileName) {
     let url = `${environment.urls.middlewareURL}/meetings/singleRecording/?filename=${fileName}`;
     this.httpGetAsync(url, 'GET', (response) => {
       if (confirm('Download now?')) {

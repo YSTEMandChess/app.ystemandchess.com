@@ -31,20 +31,12 @@ export class PlayNologComponent implements OnInit {
       messageEvent,
       (e) => {
         // Means that there is the board state and whatnot
-        console.log('this does work every time');
         this.prevFEN = this.currentFEN;
         let info = e.data;
-        //console.log("I am info " + info);
         if (info == 'ReadyToRecieve') {
           this.isReady = true;
           this.sendFromQueue();
-        } else if (info == 'checkmate') {
-          this.gameOverAlert();
-        } else if (info == 'draw') {
-          this.gameOverAlert();
-        } else if (info == 'gameOver') {
-          this.gameOverAlert();
-        } else if (typeof info !== 'object') {
+        } else if (typeof info !== 'object' && info && info !== 'draw') {
           this.currentFEN = info;
           this.level = parseInt(
             (<HTMLInputElement>document.getElementById('movesAhead')).value
@@ -55,10 +47,6 @@ export class PlayNologComponent implements OnInit {
             `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
             (response) => {
               if (this.isReady) {
-                console.log(
-                  'sending message ' +
-                    JSON.stringify({ boardState: response, color: this.color })
-                );
                 var chessBoard = (<HTMLFrameElement>(
                   document.getElementById('chessBd')
                 )).contentWindow;
@@ -74,9 +62,6 @@ export class PlayNologComponent implements OnInit {
               this.currentFEN = response;
             }
           );
-          console.log(
-            'Curr FEN: ' + this.currentFEN + '     Prev FEN: ' + this.prevFEN
-          );
         }
       },
       false
@@ -85,7 +70,6 @@ export class PlayNologComponent implements OnInit {
 
   private sendFromQueue() {
     this.messageQueue.forEach((element) => {
-      console.log('sending message ' + element);
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
         .contentWindow;
       chessBoard.postMessage(element, environment.urls.chessClientURL);
@@ -210,8 +194,6 @@ export class PlayNologComponent implements OnInit {
   private httpGetAsync(theUrl: string, callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
-      console.log(xmlHttp.readyState, xmlHttp.status);
-      console.log('/////////////////////////////////////////');
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
         callback(xmlHttp.responseText);
     };

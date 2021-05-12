@@ -1,0 +1,15 @@
+ #EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-MEDIA-SEQUENCE:0
+#EXT-X-ALLOW-CACHE:YES
+#EXT-X-TARGETDURATION:18
+#EXTINF:16.767000
+https://ystemandchess-meeting-recordings.s3.us-east-2.amazonaws.com/4ed241a01c42d927786bde81c9978983_64f98f2a4c48fd19601a_20210505055428772.ts?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3W5HAAMI23BHM5JP%2F20210507%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210507T234524Z&X-Amz-Expires=604800&X-Amz-Signature=e42089efe55abe6a771d3da09124e4b3aac29376a1eea74dc8d95e920c01c05d&X-Amz-SignedHeaders=host
+#EXTINF:15.973000
+https://ystemandchess-meeting-recordings.s3.us-east-2.amazonaws.com/4ed241a01c42d927786bde81c9978983_64f98f2a4c48fd19601a_20210505055446006.ts?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3W5HAAMI23BHM5JP%2F20210507%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210507T234524Z&X-Amz-Expires=604800&X-Amz-Signature=a8b5a8249a0429981f670412d06e87cb61a5251868dc370f2ea084d4a010ebca&X-Amz-SignedHeaders=host
+#EXTINF:16.037000
+https://ystemandchess-meeting-recordings.s3.us-east-2.amazonaws.com/4ed241a01c42d927786bde81c9978983_64f98f2a4c48fd19601a_20210505055501978.ts?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3W5HAAMI23BHM5JP%2F20210507%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210507T234524Z&X-Amz-Expires=604800&X-Amz-Signature=60baa7bf4fcaece8438eea3120cd98e7c72eba552e4d784d3d06c06aeb042d7c&X-Amz-SignedHeaders=host
+#EXTINF:11.880000
+https://ystemandchess-meeting-recordings.s3.us-east-2.amazonaws.com/4ed241a01c42d927786bde81c9978983_64f98f2a4c48fd19601a_20210505055518016.ts?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA3W5HAAMI23BHM5JP%2F20210507%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20210507T234524Z&X-Amz-Expires=604800&X-Amz-Signature=2599d28a853f5dde068e082608ec609bcf1084cbbd73559a445d352b3f708daa&X-Amz-SignedHeaders=host
+#EXT-X-ENDLIST
+

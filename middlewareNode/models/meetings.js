@@ -54,8 +54,9 @@ const meetingsSchema = new mongoose.Schema(
     meetingEndTime: {
       type: Date,
     },
-    fileName: {
-      type: String,
+    filesList: {
+      type: Array,
+      default: [],
     },
   },
   { versionKey: false }

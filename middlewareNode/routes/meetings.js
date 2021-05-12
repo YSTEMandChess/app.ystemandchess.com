@@ -3,24 +3,12 @@ const passport = require('passport')
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const AWS = require('aws-sdk')
-const fs = require('fs')
 const axios = require('axios')
 const config = require('config')
 const router = express.Router()
 const { check, validationResult, query } = require('express-validator')
 const { waitingStudents, waitingMentors } = require('../models/waiting')
 const meetings = require('../models/meetings')
-
-//Parameters and headers for AWS and Agora Services
-const channel = config.get('channel')
-const uid = config.get('uid')
-const queryURL = `https://api.agora.io/v1/apps/${config.appID}/cloud_recording`
-const headers = {
-  'Content-type': 'application/json;charset=utf-8',
-  Authorization: config.get('auth'),
-}
-const ACCESSKEY = config.get('awsAccessKey')
-const SECRETKEY = config.get('awsSecretKey')
 
 var isBusy = false //State variable to see if a query is already running.
 
@@ -36,8 +24,8 @@ router.get(
       const s3Config = {
         apiVersion: 'latest',
         region: 'us-east-2',
-        accessKeyId: ACCESSKEY,
-        secretAccessKey: SECRETKEY,
+        accessKeyId: config.get('awsAccessKey'),
+        secretAccessKey: config.get('awsSecretKey'),
       }
 
       var s3 = new AWS.S3(s3Config)
@@ -48,7 +36,7 @@ router.get(
         Expires: 604800,
       }
 
-      var url = await s3.getSignedUrl('getObject', params)
+      const url = s3.getSignedUrl('getObject', params)
       res.status(200).json(url)
     } catch (error) {
       console.error(error.message)
@@ -121,9 +109,9 @@ router.get(
         const recordings = await meetings
           .find({
             studentUsername: childUsername,
-            fileName: { $ne: '' || null },
+            filesList: { $ne: null },
           })
-          .select(['fileName', 'meetingStartTime', '-_id']) //Select only fileName and meetingStartTime fields for all found entries
+          .select(['filesList', 'meetingStartTime', '-_id']) //Select only fileName and meetingStartTime fields for all found entries
 
         //Error checking for no recordings
         if (recordings.length === 0) {
@@ -343,12 +331,20 @@ router.put('/endMeeting', passport.authenticate('jwt'), async (req, res) => {
       return res.status(400).json(stopResponse)
     }
 
+    //Get all mp4 files from recording and push them onto an array
+    let filesList = []
+    await Promise.all(
+      stopResponse.fileList.map((file) => {
+        if (file.fileName.indexOf('.mp4') !== -1) {
+          filesList.push(file.fileName)
+        }
+      })
+    )
+
     //Update the fields to the meeting to change to inactive
     currMeeting.CurrentlyOngoing = false
     currMeeting.meetingEndTime = new Date()
-    if (stopResponse) {
-      currMeeting.fileName = stopResponse.fileList
-    }
+    currMeeting.filesList = filesList
     await currMeeting.save() //Save the changes made
 
     //Calculate the number of minutes the recording went on for
@@ -450,23 +446,26 @@ const startRecording = async (meetingID) => {
     //Set the body and query url to create a recording session
     let body = {
       cname: meetingID,
-      uid: uid,
+      uid: config.get('uid'),
       clientRequest: { resourceExpiredHour: 24 },
     }
-    let newQueryURL = `${queryURL}/acquire`
+    let newQueryURL = `https://api.agora.io/v1/apps/${config.appID}/cloud_recording/acquire`
 
     //POST request to obtain an agora recording session
     const response = await axios.post(newQueryURL, body, {
-      headers: headers,
+      headers: {
+        'Content-type': 'application/json;charset=utf-8',
+        Authorization: config.get('auth'),
+      },
     })
     if (!response) {
       return 'Could not start recording. Server Error'
     }
 
     //Set the new body and query url to start the recording session
-    newQueryURL = `${queryURL}/resourceid/${response.data.resourceId}/mode/mix/start`
+    newQueryURL = `https://api.agora.io/v1/apps/${config.appID}/cloud_recording/resourceid/${response.data.resourceId}/mode/mix/start`
     body = {
-      uid: uid,
+      uid: config.get('uid'),
       cname: meetingID,
       clientRequest: {
         storageConfig: {
@@ -507,12 +506,18 @@ const startRecording = async (meetingID) => {
             ],
           },
         },
+        recordingFileConfig: {
+          avFileType: ['hls', 'mp4'],
+        },
       },
     }
 
     //POST request to start the agora recording session we obtained from above
     const secondResponse = await axios.post(newQueryURL, body, {
-      headers: headers,
+      headers: {
+        'Content-type': 'application/json;charset=utf-8',
+        Authorization: config.get('auth'),
+      },
     })
     if (!secondResponse) {
       return 'Could not start recording. Server error.'
@@ -532,15 +537,20 @@ const startRecording = async (meetingID) => {
 //Async function to stop the agora recording session
 const stopRecording = async (meetingID, resourceId, sid) => {
   //Set the body and query url to stop an agora recording session
-  let newQueryURL = `${queryURL}/resourceid/${resourceId}/sid/${sid}/mode/mix/stop`
+  let newQueryURL = `https://api.agora.io/v1/apps/${config.appID}/cloud_recording/resourceid/${resourceId}/sid/${sid}/mode/mix/stop`
   const body = {
-    uid: uid,
+    uid: config.get('uid'),
     cname: meetingID,
     clientRequest: {},
   }
 
   //POST request to stop the recording and return the response from agora
-  let response = await axios.post(newQueryURL, body, { headers })
+  let response = await axios.post(newQueryURL, body, {
+    headers: {
+      'Content-type': 'application/json;charset=utf-8',
+      Authorization: config.get('auth'),
+    },
+  })
   if (!response) {
     return 'Could not stop recording. Server error.'
   }

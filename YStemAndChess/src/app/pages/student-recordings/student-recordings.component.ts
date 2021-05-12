@@ -39,9 +39,8 @@ export class StudentRecordingsComponent implements OnInit {
         let newArr = [];
         if (this.recordings.has(recordingDate)) {
           newArr = this.recordings.get(recordingDate);
-          newArr = newArr.concat(recording.filesList);
         } else {
-          newArr = [].concat(recording.filesList);
+          newArr = newArr.concat(recording.filesList);
         }
         this.recordings.set(recordingDate, newArr);
       });

@@ -19,7 +19,6 @@ export class ParentComponent implements OnInit {
   ngOnInit() {
     this.getUsername();
     this.getStudents();
-    //this.getTimePlayedOfStudents();
   }
 
   getStudents() {
@@ -35,21 +34,6 @@ export class ParentComponent implements OnInit {
       });
     });
   }
-
-  /*getTimePlayedOfStudents() {
-    let url = `${environment.urls.middlewareURL}/meetings/parents/recordings`;
-    this.httpGetAsync(url, 'POST', (response) => {
-      if (response == 'This username has been taken. Please choose another.') {
-        alert('username has been taken');
-      }
-      let data = JSON.parse(response);
-      let key: any;
-      for (key in data) {
-        let time = data[key].timePlayed;
-        this.times.push(time);
-      }
-    });
-  }*/
 
   public getStudentInfo(index) {
     this.cookie.set('student', this.students[index]);

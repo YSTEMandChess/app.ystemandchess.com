@@ -353,7 +353,7 @@ export class SignupComponent implements OnInit {
     return newarr;
   }
 
-  async SendToDataBase() {
+  SendToDataBase() {
     //account not valid
     if (!this.checkIfValidAccount()) {
       return;
@@ -386,7 +386,7 @@ export class SignupComponent implements OnInit {
       url = `${environment.urls.middlewareURL}/user/?first=${firstName}&last=${lastName}&email=${email}&password=${password}&username=${username}&role=${accountType}`;
     }
 
-    await this.httpGetAsync(url, (response) => {
+    this.httpGetAsync(url, (response) => {
       if (
         JSON.parse(response) ==
         'This username has been taken. Please choose another.'

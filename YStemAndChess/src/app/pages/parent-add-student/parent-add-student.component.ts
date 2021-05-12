@@ -225,7 +225,7 @@ export class ParentAddStudentComponent implements OnInit {
     return newarr;
   }
 
-  async SendToDataBase() {
+  SendToDataBase() {
     if (this.ifValidStudentAccount(this.studentIndex)) {
       return;
     }
@@ -244,7 +244,7 @@ export class ParentAddStudentComponent implements OnInit {
 
       url = `${environment.urls.middlewareURL}/user/children?first=${firstName}&last=${lastName}&username=${userName}&password=${password}`;
 
-      await this.httpGetAsync(url, 'POST', (response) => {
+      this.httpGetAsync(url, 'POST', (response) => {
         console.log(response);
         if (
           JSON.parse(response) ===
@@ -279,11 +279,6 @@ export class ParentAddStudentComponent implements OnInit {
     }
     return userParameter;
   }
-
-  // private async getParentUserName() {
-  //   let uInfo = await setPermissionLevel(this.cookie);
-  //   this.parentUser = uInfo["username"];
-  // }
 }
 
 export interface Student {

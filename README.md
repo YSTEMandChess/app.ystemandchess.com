@@ -153,6 +153,7 @@ The final piece of the puzzle is to add the chess client. This is in the directo
 So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
 On Windows, it will be a little different. First, figure out where Apache was installed on your hard drive. It's usually found in `Program Files` folder. Once you found it, navigate into the folder and then enter the folder htdocs. Copy and paste all the files from chessClient into this folder. Afterwards, go into your terminal and run the command `httpd -k install` followed by `httpd -k start`. This will install apache as a windows service and then start the application. After this, you should be able to go to "http://localhost" and see the chessboard there. 
+&nbsp;
 More info can be found here: https://httpd.apache.org/docs/trunk/platform/windows.html
 
 2. If you are trying to launch the project on "http://localhost/" , ensure that `npm i dotenv` is ran in the following fodlers inside the project.

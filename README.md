@@ -125,6 +125,7 @@ To begin the development servers, please follow these steps listed below.
 
 Now, it is time to start running the dev environment. As a side note, all of the development environments (except for `chessClient`) refresh when you save a file.
 &nbsp;
+
 The frontend code is stored in the `YStemAndChess` folder. Navigate inside of that folder.
 Then, run the command `ng serve`. This will start the angular developer server. It can be found by going to `http://localhost:4200`.
 If angular can't be found in /usr/, a possible solution is to cd into the YStemAndChess folder and install local modules with:  
@@ -134,18 +135,25 @@ In the event of NGCC failing with an unhandled exception:
 In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
 As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
 &nbsp;
+
 Now, we need to start the middleware server. It handles verification and communicates with the mongodb server. This is stored in the `middlewareNode` folder. Navigate inside of it.
 Now, run the command `npm run server`. As you may have guessed, this creates a http server on the port 8000. While you most likely will not need to directly access the server, it can be found by going to `http://localhost:8000`.
 &nbsp;
+
 Next is the chess server. This is in the directory `chessServer`.
 After navigating inside of that server, you need to run `nodemon index.js`. This will start the server on port 3000.
 This is a websocket server though, so you cannot use a simple http request to access it.
 &nbsp;
+
 Following the chess server, we need to run the stockfish server to allow players to play with an AI. This is done in the directory 'stockfishServer'.
 After navigating inside the directory, you need to run `nodemon index.js`. This will start the stockfish server.
 &nbsp;
+
 The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
 So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
+
+On Windows, it will be a little different. First, figure out where Apache was installed on your hard drive. It's usually found in `Program Files` folder. Once you found it, navigate into the folder and then enter the folder htdocs. Copy and paste all the files from chessClient into this folder. Afterwards, go into your terminal and run the command `httpd -k install` followed by `httpd -k start`. This will install apache as a windows service and then start the application. After this, you should be able to go to "http://localhost" and see the chessboard there. 
+More info can be found here: https://httpd.apache.org/docs/trunk/platform/windows.html
 
 2. If you are trying to launch the project on "http://localhost/" , ensure that `npm i dotenv` is ran in the following fodlers inside the project.
    (chessClient, chessServer, stockfishServer)

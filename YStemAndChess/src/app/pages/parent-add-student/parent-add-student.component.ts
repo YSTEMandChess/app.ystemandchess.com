@@ -36,7 +36,6 @@ export class ParentAddStudentComponent implements OnInit {
       this.logged = true;
       pLevel = uInfo.role;
       this.username = uInfo.username;
-      console.log(this.username);
     }
   }
 
@@ -225,7 +224,7 @@ export class ParentAddStudentComponent implements OnInit {
     return newarr;
   }
 
-  async SendToDataBase() {
+  SendToDataBase() {
     if (this.ifValidStudentAccount(this.studentIndex)) {
       return;
     }
@@ -244,8 +243,7 @@ export class ParentAddStudentComponent implements OnInit {
 
       url = `${environment.urls.middlewareURL}/user/children?first=${firstName}&last=${lastName}&username=${userName}&password=${password}`;
 
-      await this.httpGetAsync(url, 'POST', (response) => {
-        console.log(response);
+      this.httpGetAsync(url, 'POST', (response) => {
         if (
           JSON.parse(response) ===
           'This username has been taken. Please choose another.'
@@ -279,11 +277,6 @@ export class ParentAddStudentComponent implements OnInit {
     }
     return userParameter;
   }
-
-  // private async getParentUserName() {
-  //   let uInfo = await setPermissionLevel(this.cookie);
-  //   this.parentUser = uInfo["username"];
-  // }
 }
 
 export interface Student {

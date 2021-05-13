@@ -39,8 +39,9 @@ export class StudentRecordingsComponent implements OnInit {
         let newArr = [];
         if (this.recordings.has(recordingDate)) {
           newArr = this.recordings.get(recordingDate);
+        } else {
+          newArr = newArr.concat(recording.filesList);
         }
-        newArr.push(recording.fileName);
         this.recordings.set(recordingDate, newArr);
       });
     });
@@ -71,9 +72,9 @@ export class StudentRecordingsComponent implements OnInit {
     return null;
   }
 
-  public async verify(fileName) {
+  public verify(fileName) {
     let url = `${environment.urls.middlewareURL}/meetings/singleRecording/?filename=${fileName}`;
-    await this.httpGetAsync(url, 'GET', (response) => {
+    this.httpGetAsync(url, 'GET', (response) => {
       if (confirm('Download now?')) {
         window.open(JSON.parse(response));
       }

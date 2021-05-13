@@ -12,7 +12,6 @@ import { environment } from '../../environments/environment';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-
 export class HeaderComponent implements OnInit {
   public username = '';
   public role = '';
@@ -45,10 +44,10 @@ export class HeaderComponent implements OnInit {
     }
 
     if (this.role == 'student' || this.role == 'mentor') {
-      setInterval(async () => {
+      setInterval(() => {
         let url = `${environment.urls.middlewareURL}/meetings/inMeeting`;
         //change rest
-        await this.httpGetAsync(url, 'GET', (response) => {
+        this.httpGetAsync(url, 'GET', (response) => {
           if (
             JSON.parse(response) ===
             'There are no current meetings with this user.'
@@ -65,7 +64,7 @@ export class HeaderComponent implements OnInit {
     // Check to see if they are currently in a game, or not.
     let url = `${environment.urls.middlewareURL}/meetings/inMeeting`;
 
-    await this.httpGetAsync(url, 'GET', (response) => {
+    this.httpGetAsync(url, 'GET', (response) => {
       // They are currently in a meeting. So set it up.
       if (
         JSON.parse(response) ==
@@ -87,19 +86,19 @@ export class HeaderComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  public async removeFromWaiting() {
+  public removeFromWaiting() {
     let url = `${environment.urls.middlewareURL}/meetings/dequeue`;
-    await this.httpGetAsync(url, 'DELETE', (response) => {});
+    this.httpGetAsync(url, 'DELETE', (response) => {});
     this.endFlag = true;
   }
 
-  public async findGame() {
+  public findGame() {
     let url = `${environment.urls.middlewareURL}/meetings/queue`;
-    await this.httpGetAsync(url, 'POST', (response) => {
+    this.httpGetAsync(url, 'POST', (response) => {
       if (JSON.parse(response) === 'Person Added Successfully.') {
         url = `${environment.urls.middlewareURL}/meetings/inMeeting`;
-        let meeting = setInterval(async () => {
-          await this.gameFound(url);
+        let meeting = setInterval(() => {
+          this.gameFound(url);
           if (this.foundFlag === true || this.endFlag === true) {
             this.endFlag = false;
             this.foundFlag = false;
@@ -114,8 +113,8 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  private async createGame(url) {
-    await this.httpGetAsync(url, 'POST', (response) => {
+  private createGame(url) {
+    this.httpGetAsync(url, 'POST', (response) => {
       if (
         JSON.parse(response) !==
         'No one is available for matchmaking. Please wait for the next available person'
@@ -125,8 +124,8 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  private async gameFound(url) {
-    await this.httpGetAsync(url, 'GET', (response) => {
+  private gameFound(url) {
+    this.httpGetAsync(url, 'GET', (response) => {
       try {
         let parsedResponse = JSON.parse(response);
         if (
@@ -168,8 +167,8 @@ export class HeaderComponent implements OnInit {
     window.location.reload();
   }
 
-  public async leaveMatch() {
-    await this.httpGetAsync(
+  public leaveMatch() {
+    this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/endMeeting`,
       'PUT',
       (response) => {}

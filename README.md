@@ -119,18 +119,17 @@ Congrats! You have learned the basic commands and techniques to use GitHub!
 
 # Running the Development Environment
 
-To begin the development servers, please follow these steps listed below.
-
-### Linux
-
-Now, it is time to start running the dev environment. As a side note, all of the development environments (except for `chessClient`) refresh when you save a file.
+Now, it is time to start running the development environment. As a side note, all of the development environments (except for `chessClient`) refresh when you save a file.
 &nbsp;
 
-The frontend code is stored in the `YStemAndChess` folder. Navigate inside of that folder.
-Then, run the command `ng serve`. This will start the angular developer server. It can be found by going to `http://localhost:4200`.
+Another side note, please run `npm install` in the following folders before starting the environment: `YStemAndChess, chessServer, stockfishServer, middlewareNode`. You only need to run this command **ONCE** unless you add more packages/dependencies to project folders. Also, please use `sudo` when running the commands in an ***macOS or Linux*** environment!
+
+&nbsp;
+
+The frontend code is stored in the `YStemAndChess` folder. Navigate inside of that folder.  Then, run the command `ng serve`. This will start the angular developer server. It can be found by going to `http://localhost:4200`.
 If angular can't be found in /usr/, a possible solution is to cd into the YStemAndChess folder and install local modules with:  
-`sudo npm install express nodemon socket.io`  
-`sudo npm install @angular-devkit/build-angular`  
+`npm install express nodemon socket.io`  
+`npm install @angular-devkit/build-angular`  
 In the event of NGCC failing with an unhandled exception:  
 In tsconfig.json, in angularCompilerOptions set ("enableIvy": false)
 As per: https://stackoverflow.com/questions/61222467/angular-9-ngcc-fails-with-an-unhandled-exception
@@ -150,7 +149,7 @@ After navigating inside the directory, you need to run `nodemon index.js`. This 
 &nbsp;
 
 The final piece of the puzzle is to add the chess client. This is in the directory `chessClient`. This can be run on any apache server however we currently look at port 80 for such server.
-So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `sudo cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
+So, on ubuntu, in order to add such a thing, after navigating into the `chessClient` directory, run the command `cp -r * /var/www/html/`. You will need to do this every time you make a change to the `chessClient` directory.
 
 On Windows, it will be a little different. First, figure out where Apache was installed on your hard drive. It's usually found in `Program Files` folder. Once you found it, navigate into the folder and then enter the folder htdocs. Copy and paste all the files from chessClient into this folder. Afterwards, go into your terminal and run the command `httpd -k install` followed by `httpd -k start`. This will install apache as a windows service and then start the application. After this, you should be able to go to "http://localhost" and see the chessboard there. 
 &nbsp;

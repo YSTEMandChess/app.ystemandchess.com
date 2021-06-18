@@ -41,7 +41,7 @@ export class BoardAnalyzerComponent implements OnInit {
     })
     this.chess = Chess(this.startFen);
     var config = {
-      pieceTheme: '../chessclient/img/chesspieces/wikipedia/{piece}.png',
+      pieceTheme: '../../../assets/images/chessPieces/wikipedia/{piece}.png',
       draggable: true,
       position: this.startFen,
       onDrop: this.onDrop.bind(this),

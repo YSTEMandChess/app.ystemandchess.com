@@ -43,10 +43,10 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td><input type="text" name="" id="name"></td>
-                        <td><input type="date" name="" id="name"></td>
-                        <td><input type="text" name="" id="name"></td>
-                        <td><button class="searchBtn">Search</button></td>
+                        <td><input type="text" name="fullName" id="name" (keypress)="searchStudent()"></td>
+                        <td><input type="date" name="dateOfBirth" id="dob"></td>
+                        <td><input type="text" name="zipCode" id="zip"></td>
+                        <td><button class="searchBtn" (click)="searchStudent()">Search</button></td>
                     </tr>
                 </table>
             </div>
@@ -55,7 +55,7 @@
 
         <div class="container cont">
             <h2>Results</h2>
-            <table class="studentProgress">
+            <table class="studentProgress" id="studentProgressTable">
                 <tr>
                     <th>Student</th>
                     <th>Progress</th>

@@ -57,3 +57,16 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Changed files bval
+YStemAndChess/package-lock.json
+middlewareNode/package-lock.json
+chessServer/node_modules/dotenv/package.json
+chessServer/package.json
+chessServer/package-lock.json
+chessClient/node_modules/dotenv/README.md
+chessClient/node_modules/dotenv/types/index.d.ts
+chessClient/node_modules/dotenv/package.json
+chessClient/node_modules/dotenv/CHANGELOG.md
+chessClient/package.json
+chessClient/package-lock.json

@@ -31,9 +31,9 @@
     "karma-firefox-launcher": "^2.0.0",
     "ngx-agora": "^2.0.1",
     "ngx-cookie-service": "^3.0.4",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.7",
     "rxjs": "~6.5.4",
-    "socket.io": "^2.4.0",
+    "socket.io": "^2.4.1",
     "socket.io-client": "^2.3.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^10.15.7",
@@ -41,7 +41,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1102.5",
+    "@angular-devkit/build-angular": "^0.1102.13",
     "@angular/cli": "^11.2.5",
     "@angular/compiler-cli": "^11.2.6",
     "@types/jasmine": "~3.5.0",

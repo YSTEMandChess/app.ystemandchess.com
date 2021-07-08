@@ -19,7 +19,7 @@ export class BoardEditorComponent implements OnInit {
 
   ngOnInit(): void {
     var config = {
-      pieceTheme: '../chessclient/img/chesspieces/wikipedia/{piece}.png',
+      pieceTheme: '../../../assets/images/chessPieces/wikipedia/{piece}.png',
       draggable: true,
       dropOffBoard: 'trash',
       onChange: this.onChange.bind(this),

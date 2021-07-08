@@ -152,7 +152,10 @@ body {
     width:94%;
     margin-left:3%;
     margin-right:3%;
-    padding-bottom: 8%;
+
+    // PADDING-BOTTOM 8% --> 5%
+
+    padding-bottom: 5%;
     border-radius: 33px;
     background-color: #FDD005;
 
@@ -198,6 +201,49 @@ body {
             font-size:22px; 
             line-height: 130%;
             letter-spacing: 0.02em;
+        }
+
+        // BUTTON FOR HOME WEBPAGE !!! 
+
+        #links {
+            margin-top: 10%;
+
+
+            a {
+                margin-right: 8%;
+                text-decoration: none;
+                font-family:'Roboto';
+                font-style:bold;
+                font-weight:700;
+                font-size:25px; //25px
+                line-height:117.1%;
+                letter-spacing:0.01em;
+                color:#fff;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            button {
+                padding:4%; //15px
+                font-family:'Roboto';
+                font-style:bold;
+                font-weight:bold;
+                font-size:28px; //28px
+                line-height: 117.1%;
+                letter-spacing:0.01em;
+                border-radius: 33px;
+                color:#FDD005;
+                background-color: #51AA00;
+            }
+
+            button:hover {
+                transition: .3s ease; /* delays for 1 second /
+                -webkit-transition: .3s ease; / for Safari & Chrome */
+                color:#4f4f4f;
+                background-color: #FDD005;
+            }
         }
     }
 }
@@ -368,3 +414,55 @@ body {
     }   
 }
 
+#why-chess-container {
+    display:flex;
+    flex-wrap: wrap;
+    flex-flow: row-reverse;
+    margin-top:5%;
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+    overflow: hidden;
+    border-radius: 33px;
+    background-color: #FA8072;
+
+
+    #why-chess-img {
+        width:38%;
+        height: auto;
+    }
+
+    #why-chess-img img {
+        width:100%;
+        height:475px;
+        border-bottom-right-radius: 33px;
+        border-top-right-radius: 33px;
+    }
+
+    #why-chess-statement {
+        width: 43%;
+        line-height: 117.1%;
+        margin-right:11%;
+        margin-top:7.5%;
+        color:#4f4f4f;
+
+        h2 {
+            font-family:'Lato';
+            font-style:normal; 
+            font-weight:900;
+            font-size:42px;
+            line-height: 117.1%;
+            letter-spacing: 0.01em;
+        }
+
+        p {
+            margin-top:3%;
+            font-family:'Roboto';
+            font-style:bold;
+            font-weight:700;
+            font-size:22px; 
+            line-height: 130%;
+            letter-spacing: 0.02em;
+        }
+    }
+}

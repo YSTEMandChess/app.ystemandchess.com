@@ -5,7 +5,21 @@
 
 version: 2
 updates:
+
+    #Update npm packages in chessClient
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/chessClient" # Location of package manifests
+    schedule:
+      interval: "daily"
+      
+    #Update npm packages in chessServer  
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/chessServer" # Location of package manifests
+    schedule:
+      interval: "daily"
+    
+    #Update npm packages in middlewareNode
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/middlewareNode" # Location of package manifests
     schedule:
       interval: "daily"

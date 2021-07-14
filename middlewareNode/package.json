@@ -11,7 +11,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
-    "mongoose": "^5.11.17",
+    "mongoose": "^5.13.2",
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"

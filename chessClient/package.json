@@ -25,7 +25,7 @@
     "csso": "4.2.0",
     "fs-plus": "3.1.1",
     "kidif": "1.1.0",
-    "mustache": "2.3.0",
+    "mustache": "4.2.0",
     "standard": "16.0.3",
     "uglify-js": "3.13.10"
   },

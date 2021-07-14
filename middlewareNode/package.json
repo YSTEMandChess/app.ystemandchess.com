@@ -4,7 +4,7 @@
   "description": "API for Y STEM And Chess Inc",
   "main": "server.js",
   "dependencies": {
-    "aws-sdk": "^2.889.0",
+    "aws-sdk": "^2.945.0",
     "axios": "^0.21.1",
     "config": "^3.3.6",
     "cors": "^2.8.5",

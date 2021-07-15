@@ -13,6 +13,7 @@
     "express-validator": "^6.12.0",
     "mongoose": "^5.13.2",
     "nodemon": "^2.0.12",
+    "normalize-url": "^4.5.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
   },

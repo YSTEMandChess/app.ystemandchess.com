@@ -16,9 +16,12 @@
     "chess960.js": "^0.2.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "glob-parent": "^6.0.0",
     "jquery": ">=3.4.1",
     "nodejs": "0.0.0",
     "nodemon": "^2.0.4",
+    "normalize-url": "^7.0.0",
+    "underscore": "^1.13.1",
     "uniq": "^1.0.1"
   },
   "devDependencies": {

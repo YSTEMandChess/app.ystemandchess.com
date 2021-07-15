@@ -81,8 +81,6 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    data: { roles: ['admin'] },
-    canActivate: [LoginGuardService],
   },
   {
     path: 'student-recording',

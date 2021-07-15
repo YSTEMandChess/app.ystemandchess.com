@@ -43,7 +43,7 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td><input type="text" name="fullName" id="name" (keypress)="searchStudent()"></td>
+                        <td><input type="text" name="fullName" id="name" (keyup)="searchStudent()"></td>
                         <td><input type="date" name="dateOfBirth" id="dob"></td>
                         <td><input type="text" name="zipCode" id="zip"></td>
                         <td><button class="searchBtn" (click)="searchStudent()">Search</button></td>

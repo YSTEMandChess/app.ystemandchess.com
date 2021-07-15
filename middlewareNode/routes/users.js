@@ -175,7 +175,7 @@ router.post(
   }
 )
 
-// @route   POST /users/selectByFirstName
+// @route   POST /user/selectByFirstName
 // @desc    POST return the users corresponding to the first name queried
 // @access  Public
 router.post(
@@ -199,18 +199,17 @@ router.post(
       let returnArray = [];
 
       // Find all users with a corresponding first name 
-      for (let i = 0; i < foundUsers.length() ; i++) {
-        if (foundUsers[i].firstName.includes(first)) {
+      for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
+        if (foundUsers[i].firstName.includes(first) && first != " ") {
           let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
           returnArray.push(fullName);
         };
       }
 
-      // If returnArray is empty, no users were found
-      if ( returnArray.isEmpty() ) {
-        return res.status(204).json('No users were found.')
+      if ( returnArray.length == 0  ) {
+        res.status(200).send('No users were found.')
       } else {
-        return returnArray;
+        res.status(200).send(returnArray);
       }
     } catch (error) {
       console.error(error.message)
@@ -244,7 +243,7 @@ router.post(
       let returnArray = [];
 
       // Find all users with a corresponding first name 
-      for (let i = 0; i < foundUsers.length() ; i++) {
+      for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
         if (foundUsers[i].lastName.includes(last)) {
           let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
           returnArray.push(fullName);
@@ -252,10 +251,10 @@ router.post(
       }
 
       // If returnArray is empty, no users were found
-      if ( returnArray.isEmpty() ) {
-        return res.status(204).json('No users were found.')
+      if ( returnArray.length == 0 ) {
+        res.status(200).send('No users were found.')
       } else {
-        return returnArray;
+        res.status(200).send(returnArray);
       }
     } catch (error) {
       console.error(error.message)

@@ -175,13 +175,13 @@ router.post(
   }
 )
 
-// @route   POST /user/selectByFirstName
-// @desc    POST return the users corresponding to the first name queried
+// @route   POST /users/selectByName
+// @desc    POST return the users corresponding to the name queried
 // @access  Public
 router.post(
-  '/selectByFirstName',
+  '/selectByName',
   [
-    check('first', 'First name is required').not().isEmpty()
+    check('name', 'First name is required').not().isEmpty()
   ],
   async (req, res) => {
     try {
@@ -192,70 +192,51 @@ router.post(
         return res.status(400).json({ errors: errors.array() })
       }
       */
-      const { first } = req.query
+      const { name } = req.query;
+      var nameArray = name.split(" ");
+      // Assert first name has been entered
+      if ( nameArray.length == 1 ) {
+        //Find all users
+        let foundUsers = await users.find()
+        let returnArray = [];
 
-      //Find all users
-      let foundUsers = await users.find()
-      let returnArray = [];
+        // Find all users with a corresponding first name 
+        for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
+          if (foundUsers[i].firstName.includes(nameArray[0]) && nameArray[0] != " ") {
+            let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
+            returnArray.push(fullName);
+          };
+        }
 
-      // Find all users with a corresponding first name 
-      for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
-        if (foundUsers[i].firstName.includes(first) && first != " ") {
-          let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
-          returnArray.push(fullName);
-        };
-      }
+        if ( returnArray.length == 0  ) {
+          res.status(200).send('No users were found.')
+        } else {
+          res.status(200).send(returnArray);
+        }
 
-      if ( returnArray.length == 0  ) {
-        res.status(200).send('No users were found.')
-      } else {
-        res.status(200).send(returnArray);
-      }
-    } catch (error) {
-      console.error(error.message)
-      res.status(500).send('Server error')
-    }
-  }
-)
+      };
+      // Assert first and last name have been entered
+      if ( nameArray.length == 2 ) {
+        let first = nameArray[0];
+        let last = nameArray[1];
 
-// @route   POST /users/selectByFullName
-// @desc    POST return the users corresponding to the first and last name queried
-// @access  Public
-router.post(
-  '/selectByFullName',
-  [
-    check('first', 'First name is required').not().isEmpty(),
-    check('last', 'Last name is required').not().isEmpty()
-  ],
-  async (req, res) => {
-    try {
-      /* Not sure if this is necessary for this route
-      //Validation checks to ensure the required fields are present
-      const errors = validationResult(req)
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() })
-      }
-      */
-      const { first , last } = req.query
-
-      //Find all users
-      let foundUsers = await users.find({ first })
-      let returnArray = [];
-
-      // Find all users with a corresponding first name 
-      for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
-        if (foundUsers[i].lastName.includes(last)) {
-          let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
-          returnArray.push(fullName);
-        };
-      }
-
-      // If returnArray is empty, no users were found
-      if ( returnArray.length == 0 ) {
-        res.status(200).send('No users were found.')
-      } else {
-        res.status(200).send(returnArray);
-      }
+        //Find all users with a corresponding first name
+        let foundUsers = await users.find({ firstName: first })
+        let returnArray = [];
+        // Cycle through foundUsers and add the ones with a corresponding last name to returnArray
+        for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
+          if (foundUsers[i].lastName.includes(last)) {
+            let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
+            returnArray.push(fullName);
+          };
+        }
+        // If returnArray is empty, no users were found
+        if ( returnArray.length == 0 ) {
+          res.status(200).send('No users were found.')
+        } else {
+          res.status(200).send(returnArray);
+        }
+      };
     } catch (error) {
       console.error(error.message)
       res.status(500).send('Server error')

@@ -204,7 +204,11 @@ router.post(
         for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
           if (foundUsers[i].firstName.includes(nameArray[0]) && nameArray[0] != " ") {
             let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
-            returnArray.push(fullName);
+            let userRole = foundUsers[i].role;
+            let tempArray = [];
+            tempArray.push(fullName);
+            tempArray.push(userRole);
+            returnArray.push(tempArray);
           };
         }
 

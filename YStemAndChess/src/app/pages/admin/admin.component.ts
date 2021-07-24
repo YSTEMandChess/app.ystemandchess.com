@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { exit } from 'process';
 import { environment } from 'src/environments/environment';
 import { ViewEncapsulation } from '@angular/core';
+import { FileDetector } from 'selenium-webdriver';
 
 
 @Component({
@@ -12,42 +13,60 @@ import { ViewEncapsulation } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  listResults: any;
+  isNameFieldEmpty: boolean;
+  listRoles: any;
+
+  constructor() { 
+    this.listResults = [];
+    this.isNameFieldEmpty = true;
+    this.listRoles = ["","Student", "Parent", "Mentor", "Admin"]
+  }
 
   ngOnInit(): void {
   }
 
-  searchStudent() {
-    // Retrieve name from input field and split by space
+  checkNameField() {
+    if ((<HTMLInputElement>document.getElementById('name')).value == "") {
+      this.isNameFieldEmpty = true;
+      this.listResults = [];
+    } else {
+      this.isNameFieldEmpty = false;
+    }
+    return this.isNameFieldEmpty
+  }
+
+  checkUsersFound(){
+    if (this.listResults == [["No users were found."]] ) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  filterResults() {
+    var selectedFilter = (<HTMLInputElement>document.getElementById('role')).value;
+    var filteredList = [];
+    for (let i= 0; i < this.listResults.length; i++){
+      if (this.listResults[i][1] == selectedFilter.toLowerCase()) {
+        filteredList.push(this.listResults[i])
+      }
+    }
+    this.listResults = filteredList;
+  }
+
+  searchUsers() {
+    // Retrieve name from input field
     var fullName = (<HTMLInputElement>document.getElementById('name')).value;
-    // Validates a non-empty name field, which was returning all users.
-    if (fullName == ""){
-      document.getElementById("studentProgressTable").innerHTML = 
-      '<tr><th>Student</th><th>Progress</th><th></th></tr><tr><td>Name field must not be empty.</td><td></td><td></td></tr>';
-      return false;
-    };
     let url = `${environment.urls.middlewareURL}/user/selectByName?name=${fullName}`;
     this.httpGetAsync(url, (response) => {
       if (response == 'No users were found.') {
-        document.getElementById("studentProgressTable").innerHTML = 
-        '<tr><th>Student</th><th>Progress</th><th></th></tr><tr><td>No users were found.</td><td></td><td></td></tr>';
+        this.listResults = [["No users were found."]];
       } else {
         var responseArray = JSON.parse(response);
-        // Build HTML string 
-        let html = '';
-        html += '<tr><th>Student</th><th>Progress</th><th></th></tr>';
-        for (let i = 0; i < responseArray.length ; i++){
-          html += '<tr>'
-          html += '<td>'+responseArray[i]+'</td>'
-          html += '<td>Placeholder</td>'
-          html += '<td>Data</td>'
-          html += '</tr>'
+        // Set the response from the server as list data
+        this.listResults = responseArray;
         }
-    
-        // Populate HTML with the html string built
-        document.getElementById("studentProgressTable").innerHTML = html;
-
-      }
     })
   }
     

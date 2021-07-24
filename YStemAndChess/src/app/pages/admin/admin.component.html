@@ -38,15 +38,17 @@
                 <table class="studentProgress">
                     <tr>
                         <th>Name</th>
-                        <th>DOB</th>
+                        <th>Role</th>
                         <th>Zip</th>
                         <th></th>
                     </tr>
                     <tr>
-                        <td><input type="text" name="fullName" id="name" (keyup)="searchStudent()"></td>
-                        <td><input type="date" name="dateOfBirth" id="dob"></td>
+                        <td><input type="text" name="fullName" id="name" (keyup)="searchUsers()"></td>
+                        <td><select type="text" name="role" id="role">
+                            <option *ngFor="let role of listRoles">{{role}}</option></select>
+                        </td>
                         <td><input type="text" name="zipCode" id="zip"></td>
-                        <td><button class="searchBtn" (click)="searchStudent()">Search</button></td>
+                        <td><button class="searchBtn" (click)="filterResults()">Filter</button></td>
                     </tr>
                 </table>
             </div>
@@ -61,15 +63,20 @@
                     <th>Progress</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>Anna C.</td>
-                    <td>Up Down Up Down</td>
-                    <td>Down Up Down Up</td>
+                <tr *ngIf="checkNameField()">
+                    <td><span>Type into the name field to search for users, and use the role dropdown and button to filter by role.</span></td>
+                    <td></td>
+                    <td></td>
                 </tr>
-                <tr>
-                    <td>Michel D.</td>
-                    <td>Up Down Up Down</td>
-                    <td>Down Up Down Up</td>
+                <tr *ngIf="!checkUsersFound()">
+                    <td><span>No users were found.</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr *ngFor="let result of listResults">
+                    <td><span>{{result[0]}}</span></td>
+                    <td><span>Placeholder</span></td>
+                    <td></td>
                 </tr>
             </table>
         </div>

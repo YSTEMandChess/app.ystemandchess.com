@@ -231,7 +231,11 @@ router.post(
         for (let i = 0; i < Object.keys(foundUsers).length ; i++) {
           if (foundUsers[i].lastName.includes(last)) {
             let fullName = foundUsers[i].firstName+' '+foundUsers[i].lastName;
-            returnArray.push(fullName);
+            let userRole = foundUsers[i].role;
+            let tempArray = [];
+            tempArray.push(fullName);
+            tempArray.push(userRole);
+            returnArray.push(tempArray);
           };
         }
         // If returnArray is empty, no users were found

@@ -36,14 +36,6 @@ export class AdminComponent implements OnInit {
     return this.isNameFieldEmpty
   }
 
-  checkUsersFound(){
-    if (this.listResults == [["No users were found."]] ) {
-      return false
-    } else {
-      return true
-    }
-  }
-
   filterResults() {
     var selectedFilter = (<HTMLInputElement>document.getElementById('role')).value;
     var filteredList = [];
@@ -51,6 +43,9 @@ export class AdminComponent implements OnInit {
       if (this.listResults[i][1] == selectedFilter.toLowerCase()) {
         filteredList.push(this.listResults[i])
       }
+    }
+    if (filteredList.length == 0) {
+      filteredList.push(["No users were found.",""]);
     }
     this.listResults = filteredList;
   }
@@ -61,7 +56,7 @@ export class AdminComponent implements OnInit {
     let url = `${environment.urls.middlewareURL}/user/selectByName?name=${fullName}`;
     this.httpGetAsync(url, (response) => {
       if (response == 'No users were found.') {
-        this.listResults = [["No users were found."]];
+        this.listResults = [["No users were found.",""]];
       } else {
         var responseArray = JSON.parse(response);
         // Set the response from the server as list data

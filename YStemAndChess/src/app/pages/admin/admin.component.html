@@ -60,7 +60,7 @@
             <table class="studentProgress" id="studentProgressTable">
                 <tr>
                     <th>Student</th>
-                    <th>Progress</th>
+                    <th>Role</th>
                     <th></th>
                 </tr>
                 <tr *ngIf="checkNameField()">
@@ -68,14 +68,9 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr *ngIf="!checkUsersFound()">
-                    <td><span>No users were found.</span></td>
-                    <td></td>
-                    <td></td>
-                </tr>
                 <tr *ngFor="let result of listResults">
                     <td><span>{{result[0]}}</span></td>
-                    <td><span>Placeholder</span></td>
+                    <td><span>{{result[1]}}</span></td>
                     <td></td>
                 </tr>
             </table>

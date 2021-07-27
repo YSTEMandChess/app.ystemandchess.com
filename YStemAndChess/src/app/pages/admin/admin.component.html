@@ -35,7 +35,7 @@
         <div class="container">
             <div class="searchbox">
                 <h2>Search for a Student</h2>
-                <table class="studentProgress">
+                <table class="student-progress">
                     <tr>
                         <th>Name</th>
                         <th>Role</th>
@@ -43,12 +43,12 @@
                         <th></th>
                     </tr>
                     <tr>
-                        <td><input type="text" name="fullName" id="name" (keyup)="searchUsers()"></td>
+                        <td><input type="text" name="full-name" id="name" (keyup)="searchUsers()"></td>
                         <td><select type="text" name="role" id="role">
                             <option *ngFor="let role of listRoles">{{role}}</option></select>
                         </td>
                         <td><input type="text" name="zipCode" id="zip"></td>
-                        <td><button class="searchBtn" (click)="filterResults()">Filter</button></td>
+                        <td><button class="search-btn" (click)="filterResults()">Filter</button></td>
                     </tr>
                 </table>
             </div>
@@ -57,7 +57,7 @@
 
         <div class="container cont">
             <h2>Results</h2>
-            <table class="studentProgress" id="studentProgressTable">
+            <table class="student-progress">
                 <tr>
                     <th>Student</th>
                     <th>Role</th>
@@ -77,7 +77,7 @@
         </div>
 
         <div class="container cont">
-            <table class="studentProgress">
+            <table class="student-progress">
                 <tr>
                     <th>Mentor</th>
                     <th>Progress</th>

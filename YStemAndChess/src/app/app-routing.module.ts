@@ -115,6 +115,12 @@ const routes: Routes = [
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'board-analyzer', component: BoardAnalyzerComponent },
   { path: 'why-chess', component: WhyChessComponent },
+  { 
+    path: 'student',
+    children: [
+      { path: ':id', component: StudentProfileComponent }
+    ]
+  }
 ];
 
 @NgModule({

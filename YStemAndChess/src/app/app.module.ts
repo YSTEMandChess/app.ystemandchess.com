@@ -76,6 +76,7 @@ const agoraConfig: AgoraConfig = {
     LandingPageComponent,
     BoardAnalyzerComponent,
     WhyChessComponent,
+    StudentProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +88,7 @@ const agoraConfig: AgoraConfig = {
     NgxAgoraModule.forRoot(agoraConfig),
     NgxAgoraModule.forRoot({ AppID: '6c368b93b82a4b3e9fb8e57da830f2a4' }),
     FormsModule,
+    NgxChartsModule
   ],
   providers: [CookieService, SocketService, LoginGuardService],
   bootstrap: [AppComponent],

@@ -24,7 +24,10 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.css"
+            ],
             "scripts": [
               "src/assets/external_api.js",
               "node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js",

@@ -1,4 +1,4 @@
-<html>
+<html *ngIf="isLoaded">
 
 <head>
     <!-- Google Tag Manager -->
@@ -22,22 +22,22 @@
     <div id="main-wrap">
         <div class="username-header"> 
             <h1 class="username">
-                Username
+                {{fullName}}
             </h1>
         </div>
         <div class="profile-info-container">
             <div class="profile-info">
                 <div class=profile-info-item>
                     <div class="profile-info-item-label">Joined</div>
-                    <div class="profile-info-item-value">1/1/2011</div>
+                    <div class="profile-info-item-value">{{joinDate}}</div>
                 </div>
                 <div class=profile-info-item>
-                    <div class="profile-info-item-label">Online</div>
-                    <div class="profile-info-item-value">Just Now</div>
+                    <div class="profile-info-item-label">Email</div>
+                    <div class="profile-info-item-value">{{studentObj.email}}</div>
                 </div>
                 <div class=profile-info-item>
-                    <div class="profile-info-item-label">Lessons Completed</div>
-                    <div class="profile-info-item-value">5</div>
+                    <div class="profile-info-item-label">Time Played</div>
+                    <div class="profile-info-item-value">{{studentObj.timePlayed}}</div>
                 </div>
             </div>
         </div>

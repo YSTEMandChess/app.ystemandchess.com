@@ -5,6 +5,20 @@ const crypto = require('crypto')
 const { check, validationResult } = require('express-validator')
 const users = require('../models/users')
 
+// @route   GET /user/:id
+// @desc    GET user's fields except password
+// @access  Public with jwt Authentication
+router.get('/:id', passport.authenticate('jwt'), async (req, res) => {
+  try {
+    const user = await users.find({_id: req.params.id})
+                          .select(['-password']);
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).json('Server error')
+  }
+})
+
 // @route   GET /user/children
 // @desc    GET the parent user's children username and their timePlayed fields
 // @access  Public with jwt Authentication

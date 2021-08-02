@@ -62,6 +62,9 @@ export class AdminComponent implements OnInit {
         // Set the response from the server as list data
         this.listResults = responseArray;
         }
+      if ( (<HTMLInputElement>document.getElementById('role')).value != ""){
+        this.filterResults();
+      }
     })
   }
     

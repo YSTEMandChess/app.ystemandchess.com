@@ -44,11 +44,11 @@
                     </tr>
                     <tr>
                         <td><input type="text" name="full-name" id="name" (keyup)="searchUsers()"></td>
-                        <td><select type="text" name="role" id="role">
+                        <td><select type="text" name="role" id="role" (change)="filterResults()">
                             <option *ngFor="let role of listRoles">{{role}}</option></select>
                         </td>
                         <td><input type="text" name="zipCode" id="zip"></td>
-                        <td><button class="search-btn" (click)="filterResults()">Filter</button></td>
+                        <td><button class="search-btn" >Search</button></td>
                     </tr>
                 </table>
             </div>

@@ -13,12 +13,14 @@ import { FileDetector } from 'selenium-webdriver';
 })
 export class AdminComponent implements OnInit {
 
-  listResults: any;
+  existingResults: any;
+  displayedResults: any;
   isNameFieldEmpty: boolean;
   listRoles: any;
 
   constructor() { 
-    this.listResults = [];
+    this.existingResults = [];
+    this.displayedResults = [];
     this.isNameFieldEmpty = true;
     this.listRoles = ["","Student", "Parent", "Mentor", "Admin"]
   }
@@ -26,41 +28,57 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /** 
+   * If the name field is empty, returns true and clears arrays of entries.
+  */
   checkNameField() {
     if ((<HTMLInputElement>document.getElementById('name')).value == "") {
       this.isNameFieldEmpty = true;
-      this.listResults = [];
+      this.existingResults = [];
+      this.displayedResults = [];
     } else {
       this.isNameFieldEmpty = false;
     }
     return this.isNameFieldEmpty
   }
-
+  /**
+   * Filters existing results and sets the displayed results according to the filter selected.
+   */
   filterResults() {
     var selectedFilter = (<HTMLInputElement>document.getElementById('role')).value;
     var filteredList = [];
-    for (let i= 0; i < this.listResults.length; i++){
-      if (this.listResults[i][1] == selectedFilter.toLowerCase()) {
-        filteredList.push(this.listResults[i])
+    // For each of the existing results
+    for (let i= 0; i < this.existingResults.length; i++){
+      // If the role of the user matches the filter
+      if (this.existingResults[i][1] == selectedFilter.toLowerCase()) {
+        // Push the user into the filtered list 
+        filteredList.push(this.existingResults[i])
       }
     }
+    // If there are no entries in the filtered list
     if (filteredList.length == 0) {
+      // Display no users were found
       filteredList.push(["No users were found.",""]);
     }
-    this.listResults = filteredList;
+    // Display the results of the filtered list
+    this.displayedResults = filteredList;
   }
-
+  /**
+   * Returns and array containing [[username,role]].
+   * If the role filter is selected, the results are filtered.
+   */
   searchUsers() {
     // Retrieve name from input field
     var fullName = (<HTMLInputElement>document.getElementById('name')).value;
     let url = `${environment.urls.middlewareURL}/user/selectByName?name=${fullName}`;
     this.httpGetAsync(url, (response) => {
       if (response == 'No users were found.') {
-        this.listResults = [["No users were found.",""]];
+        this.displayedResults = [["No users were found.",""]];
       } else {
         var responseArray = JSON.parse(response);
         // Set the response from the server as list data
-        this.listResults = responseArray;
+        this.existingResults = responseArray;
+        this.displayedResults = responseArray;
         }
       if ( (<HTMLInputElement>document.getElementById('role')).value != ""){
         this.filterResults();

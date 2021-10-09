@@ -35,7 +35,7 @@ body {
 
     #our-programs-statement h3 {
         width:50%;
-        padding-bottom: 1.5%;
+        padding-bottom: 0.5%;
         height:auto;
         font-family: 'Lato';
         font-style: normal;
@@ -53,7 +53,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: bold;
-        font-size: 1.4vw; //22px
+        font-size: 1vw; //22px
         line-height: 130%;
         letter-spacing: 0.02em;
         color: #FFFFFF;
@@ -61,11 +61,11 @@ body {
 
     #our-programs-statement p {
         width:85%;
-        padding-bottom:5%;
+        padding-bottom:0%;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: normal;
-        font-size: 1.4vw; //22px
+        font-size: 0.9vw; //22px
         line-height: 130%;
         letter-spacing: 0.02em;
         color: #FFFFFF;
@@ -83,6 +83,18 @@ body {
         border-radius: 33px;
         color: #3A7CCA;
         background-color: #fff;
+    }
+    #our-programs-statement ul {
+        padding-left:7%;
+        margin-bottom:2%;
+        list-style: disc;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 0.9vw; //22px
+        line-height: 117.1%;
+        letter-spacing: 0.01em;
+        color: #FFFFFF;
     }
 
     #our-programs-statement button:hover {
@@ -110,7 +122,6 @@ body {
         font-weight: 900;
         font-size: 2.7vw; //42px
         line-height: 117.1%;
-        letter-spacing: 0.01em;
         color: #FFFFFF;
     }
 
@@ -129,19 +140,6 @@ body {
         width:95%;
         height:auto;
         padding-left:5%;
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 1.4vw; //22px
-        line-height: 117.1%;
-        letter-spacing: 0.01em;
-        color: #FFFFFF;
-    }
-
-    #cost-statement ul {
-        padding-left:7%;
-        margin-bottom:10%;
-        list-style: disc;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
@@ -170,7 +168,6 @@ body {
         font-weight: 900;
         font-size: 1.9vw; //30px
         line-height: 117.1%;
-        letter-spacing: 0.07em;
         color: #FFFFFF;
     }
 

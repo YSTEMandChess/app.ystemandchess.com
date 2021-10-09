@@ -1,47 +1,64 @@
 <html>
-    <head>
-        <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-KJ979C9');
-        </script>
-        <!-- End Google Tag Manager -->
-    </head>
+  <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KJ979C9");
+    </script>
+    <!-- End Google Tag Manager -->
+  </head>
 
-    <header>
-        <app-header></app-header>
-    </header>
+  <header>
+    <app-header></app-header>
+  </header>
 
-    <body>
-        <!-- Google Tag Manager (noscript) -->
-        <noscript>
-            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-        </noscript>
-        <!-- End Google Tag Manager (noscript) -->
-        <div class="prompt">
-            <h3>If you want tutoring, <a href="/signup">sign up</a> for Y Stem and Chess today with a parent!</h3>
-            <h3>Or practice with computer down below!</h3>
-        </div>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KJ979C9"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="prompt">
+      <h3>
+        If you want chess, math or computer science tutoring,
+        <a href="/signup">sign up</a> for Y Stem and Chess today with a parent!
+      </h3>
+      <h3>Or, practice chess with computer down below!</h3>
+    </div>
 
-        <div id="play-container">
-            <div id="top">
-                <button type="button" id="new-game" (click)="newGameInit()"> New Game</button> 
-                <button type="button" id="undo" (click)="undoPrevMove()">Undo</button>
-                <p id="tag">The computer will think <input type="number" min="1" max="30" value="5" id="movesAhead"> moves ahead.</p>
-            </div>
-            <div id="chess-board">
-                <app-play></app-play>
-            </div>
-            <div id="bottom">       
-            </div>
-        </div>
-    </body>
+    <div id="play-container">
+      <div id="top">
+        <button type="button" id="new-game" (click)="newGameInit()">
+          New Game
+        </button>
+        <button type="button" id="undo" (click)="undoPrevMove()">Undo</button>
+        <p id="tag">
+          The computer will think
+          <input type="number" min="1" max="30" value="5" id="movesAhead" />
+          moves ahead.
+        </p>
+      </div>
+      <div id="chess-board">
+        <app-play></app-play>
+      </div>
+      <div id="bottom"></div>
+    </div>
+  </body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
-    
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>

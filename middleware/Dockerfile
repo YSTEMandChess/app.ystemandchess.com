@@ -1,22 +1,13 @@
-FROM php:apache
+FROM node:alpine
 
-RUN echo "Docker file version v0.1"
+WORKDIR /usr/src/app
 
-SHELL ["/bin/bash", "-c"]
+COPY package*.json ./
 
-RUN ln -s ../mods-available/{expires,headers,rewrite}.load /etc/apache2/mods-enabled/
-RUN sed -e '/<Directory \/var\/www\/>/,/<\/Directory>/s/AllowOverride None/AllowOverride All/' -i /etc/apache2/apache2.conf
-COPY php.ini /usr/local/etc/php/
+RUN npm install
+RUN npm ci --only=production
 
-# Install mongo extention
-RUN apt-get update && apt-get install -y openssl libssl-dev libcurl4-openssl-dev
-# Install and setup mongo
-RUN pecl install mongodb
-# This touch command may not be neccicary, but idk.
+COPY . .
 
-WORKDIR /var/www/html
-COPY / ./
-
-# Run the web server.
 EXPOSE 8000
-CMD [ "/usr/local/bin/php", "-S", "0.0.0.0:8000" ]
+CMD [ "node", "server.js" ]

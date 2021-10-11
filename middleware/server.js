@@ -5,9 +5,15 @@ require('./config/passport.js')
 const app = express()
 const cors = require('cors')
 const config = require('config')
+require('dotenv').config()
+
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+}
 
 //Enable Cors
-app.use(cors(config.get('corsOptions')))
+app.use(cors(corsOptions))
 
 // Connect Database
 connectDB()
@@ -23,6 +29,6 @@ app.use(passport.session())
 app.use('/user', require('./routes/users'))
 app.use('/meetings', require('./routes/meetings'))
 app.use('/auth', require('./routes/auth'))
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

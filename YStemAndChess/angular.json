@@ -25,13 +25,11 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.scss",
-              "node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.css"
+              "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/external_api.js",
-              "node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js",
-              "node_modules/chess.js/chess.js"
+              "src/assets/external_api.js"
+              //"node_modules/chess.js/chess.js"
             ]
           },
           "configurations": {

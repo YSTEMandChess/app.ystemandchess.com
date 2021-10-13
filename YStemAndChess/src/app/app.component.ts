@@ -10,6 +10,5 @@ export class AppComponent {
   constructor(cookie: CookieService) {}
 
   title = 'YStemAndChess';
-
   ngInit() {}
 }

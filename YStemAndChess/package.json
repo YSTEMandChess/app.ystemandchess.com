@@ -35,6 +35,7 @@
     "rxjs": "~6.5.4",
     "socket.io": "^2.4.1",
     "socket.io-client": "^2.3.0",
+    "sockjs-client": "^1.5.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^10.15.7",
     "tslib": "^1.10.0",

@@ -23,6 +23,7 @@ app.use(passport.session())
 app.use('/user', require('./routes/users'))
 app.use('/meetings', require('./routes/meetings'))
 app.use('/auth', require('./routes/auth'))
+app.use('/profile',require('./routes/profile'))
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

@@ -15,7 +15,7 @@ http.on('request', (req, res) => {
 
    engine = stockfish(); // Initialize stockfish server
 
-   let params = querystring.parse((url.parse(req.url, true).search).substring(1));
+   let params = querystring.parse((url.parse(req.url, true).search)?.substring(1));
 
    var maxLevel = 30;
    var lines = [];

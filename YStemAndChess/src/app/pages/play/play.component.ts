@@ -26,6 +26,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class PlayComponent implements OnInit {
   private localStream: Stream;
   private localScreenStream: Stream;
+  private remoteStream: Stream;
   private client: AgoraClient;
   private screenClient: AgoraClient;
   private clientUID;
@@ -103,7 +104,6 @@ export class PlayComponent implements OnInit {
           );
 
           if (userContent.role === 'mentor') {
-            console.log('userContent.role: ', userContent.role);
             this.screenClient = this.agoraService.createClient({
               mode: 'rtc',
               codec: 'h264',
@@ -123,6 +123,7 @@ export class PlayComponent implements OnInit {
                   audio: false,
                   video: false,
                   screen: true,
+                  mediaSource: 'window',
                 });
                 this.localScreenStream.init(
                   () => {
@@ -160,15 +161,17 @@ export class PlayComponent implements OnInit {
           });
           // Now the stream has been published, lets try to set up some subscribers.
           this.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
-            let remoteStream = evt;
-            this.client.subscribe(remoteStream, null, (err) => {
-              console.log(err);
-            });
+            this.remoteStream = evt.stream;
+            if (this.remoteStream.getId() == 456) {
+              this.client.subscribe(this.remoteStream, null, (err) => {
+                console.log(err);
+              });
+            }
           });
 
           this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
-            let remoteStream = evt.stream;
-            remoteStream.play('remote_stream');
+            this.remoteStream = evt.stream;
+            this.remoteStream.play('remote_stream');
           });
 
           this.client.on(ClientEvent.PeerLeave, (evt) => {
@@ -176,7 +179,6 @@ export class PlayComponent implements OnInit {
             let id = remoteStream.getId();
             remoteStream.stop();
           });
-
           this.socket.emitMessage(
             'newGame',
             JSON.stringify({

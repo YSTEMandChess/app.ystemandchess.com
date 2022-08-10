@@ -70,6 +70,7 @@ const startRecording = async (meetingID) => {
                 render_mode: 1,
               },
               {
+                uid: "1000000001",
                 x_axis: 0,
                 y_axis: 0,
                 width: 0.8,

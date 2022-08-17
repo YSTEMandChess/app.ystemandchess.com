@@ -10,7 +10,7 @@ export class SocketService {
 
   constructor() {
     this.socket = io.connect(environment.urls.chessServer, {
-      transport: ['websocket'],
+      transports: ['websocket'],
     });
   }
 

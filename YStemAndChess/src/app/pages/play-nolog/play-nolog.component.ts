@@ -104,7 +104,7 @@ export class PlayNologComponent implements OnInit {
       if (this.level <= 1) this.level = 1;
       else if (this.level >= 10) this.level = 10;
       this.httpGetAsync(
-        `/chessclient/?level=${this.level}&fen=${this.currentFEN}`,
+        `/chessClient/?level=${this.level}&fen=${this.currentFEN}`,
         (response) => {
           if (this.isReady) {
             var chessBoard = (<HTMLFrameElement>(

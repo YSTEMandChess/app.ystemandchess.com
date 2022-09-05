@@ -58,6 +58,7 @@ router.post(
         role: foundUser.role,
         email: foundUser.email,
         iat: Math.floor(Date.now() / 1000),
+        accountCreatedAt:foundUser.accountCreatedAt,
       }
 
       if (foundUser.role === 'student') {

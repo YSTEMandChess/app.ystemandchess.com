@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
       } else {
         this.cookie.set('login', JSON.parse(response).token, 1);
         let payload = JSON.parse(atob(response.split('.')[1]));
+        console.log(payload,true);
         switch (payload['role']) {
           case 'student':
             window.location.pathname = '/student';

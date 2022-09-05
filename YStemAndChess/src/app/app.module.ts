@@ -27,6 +27,7 @@ import { LearningsComponent } from './pages/learnings/learnings.component';
 import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashboard.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { environment } from 'src/environments/environment';
 import { StudentRecordingsComponent } from './pages/student-recordings/student-recordings.component';
 import { LessonsComponent } from './pages/lessons/lessons.component';
@@ -64,6 +65,7 @@ const agoraConfig: AgoraConfig = {
     MentorDashboardComponent,
     AdminComponent,
     ParentAddStudentComponent,
+    UserProfileComponent,
     StudentRecordingsComponent,
     LessonsComponent,
     PlayLessonComponent,

@@ -38,8 +38,10 @@ router.get(
         Expires: 604800,
       };
 
-      const url = s3.getSignedUrl("getObject", params);
-      res.status(200).json(url);
+      const url = s3.getSignedUrl('getObject', params)
+      console.log(url);
+      res.status(200).json(url)
+
     } catch (error) {
       console.error(error.message);
       res.status(500).json("Server error");
@@ -82,6 +84,39 @@ router.get("/recordings", passport.authenticate("jwt"), async (req, res) => {
   }
 });
 
+
+// @route   GET /meetings/usersRecordings
+// @desc    GET all recordings available for the student or mentor
+// @access  Public with jwt Authentication
+router.get('/usersRecordings', passport.authenticate('jwt'), async (req, res) => {
+  // console.log(req);
+  try {
+    const { role, username, firstName, lastName } = req.user
+    let filters = { }
+    if (role === 'student') {
+      filters.studentUsername = username
+    } else if (role === 'mentor') {
+      filters.mentorUsername = username
+    } else {
+      return res
+        .status(404)
+        .json('Must be a student or mentor to get your own recordings')
+    }
+
+    const recordings = await meetings.find(filters) //Find all meetings with the listed filters above
+    // console.log('recordings = ',recordings);
+    //Error handling for query
+    if (!recordings) {
+      res.status(400).json('User did not have any recordings available')
+    } else {
+      
+      res.send(recordings.reverse())
+    }
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).json('Server error')
+  }
+})
 // @route   GET /meetings/parents/recordings
 // @desc    GET all recordings available for the student from a parent account
 // @access  Public with jwt Authentication

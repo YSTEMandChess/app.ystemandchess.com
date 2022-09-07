@@ -16,6 +16,7 @@ import { MentorDashboardComponent } from './pages/mentor-dashboard/mentor-dashbo
 import { PlayNologComponent } from './pages/play-nolog/play-nolog.component';
 import { ParentComponent } from './pages/parent/parent.component';
 import { ParentAddStudentComponent } from './pages/parent-add-student/parent-add-student.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { HeaderComponent } from './header/header.component';
 import { StudentRecordingsComponent } from './pages/student-recordings/student-recordings.component';
 import { LessonsComponent } from './pages/lessons/lessons.component';
@@ -63,6 +64,12 @@ const routes: Routes = [
     path: 'parent-add-student',
     component: ParentAddStudentComponent,
     data: { roles: ['parent', 'admin'] },
+    canActivate: [LoginGuardService],
+  }, 
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
+    data: { roles: ['student'] },
     canActivate: [LoginGuardService],
   },
   {

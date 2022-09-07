@@ -14,7 +14,8 @@
     "mongoose": "^5.11.17",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

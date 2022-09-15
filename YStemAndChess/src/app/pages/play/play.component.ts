@@ -25,7 +25,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class PlayComponent implements OnInit {
   private localStream: Stream;
+  private localScreenStream: Stream;
+  private remoteStream: Stream;
   private client: AgoraClient;
+  private screenClient: AgoraClient;
   private clientUID;
   private messageQueue = new Array();
   private isReady: boolean;
@@ -70,43 +73,105 @@ export class PlayComponent implements OnInit {
           });
           this.client.init(
             environment.agora.appId,
-            () => console.log('init sucessful'),
-            () => console.log('init unsucessful')
+            () => console.log('init successful'),
+            () => console.log('init unsuccessful')
           );
-          this.client.join(null, responseText.meetingId, null, (uid) => {
-            this.clientUID = uid;
+          this.client.join(
+            null,
+            responseText.meetingId,
+            userContent?.role === 'mentor' ? '123' : '456',
+            (uid) => {
+              this.clientUID = uid;
+              this.localStream = this.agoraService.createStream({
+                streamID: this.clientUID,
+                audio: true,
+                video: true,
+                screen: false,
+              });
+              this.localStream.init(
+                () => {
+                  this.localStream.play('local_stream');
+                  this.client.publish(this.localStream, function (err) {
+                    console.log('Publish local stream error: ' + err);
+                  });
+                  this.client.on(ClientEvent.LocalStreamPublished, (evt) =>
+                    console.log('Publish local stream successfully', evt)
+                  );
+                },
+                (err) => console.log('getUserMedia failed', err)
+              );
+            }
+          );
 
-            this.localStream = this.agoraService.createStream({
-              streamID: this.clientUID,
-              audio: true,
-              video: true,
-              screen: false,
+          if (userContent.role === 'mentor') {
+            this.screenClient = this.agoraService.createClient({
+              mode: 'rtc',
+              codec: 'h264',
             });
-
-            this.localStream.init(
-              () => {
-                this.localStream.play('local_stream');
-                this.client.publish(this.localStream, function (err) {
-                  console.error(err);
-                });
-              },
-              () => {}
+            this.screenClient.init(
+              environment.agora.appId,
+              () => console.log('init successful'),
+              () => console.log('init unsuccessful')
             );
-          });
+            this.screenClient.join(
+              null,
+              responseText.meetingId,
+              '789',
+              (uid) => {
+                this.localScreenStream = this.agoraService.createStream({
+                  streamID: uid,
+                  audio: false,
+                  video: false,
+                  screen: true,
+                  mediaSource: 'window',
+                });
+                this.localScreenStream.init(
+                  () => {
+                    this.screenClient.publish(
+                      this.localScreenStream,
+                      function (err) {
+                        console.log('Publish local stream error: ' + err);
+                      }
+                    );
+                    this.screenClient.on(
+                      ClientEvent.LocalStreamPublished,
+                      (evt) =>
+                        console.log('Publish local stream successfully', evt)
+                    );
+                  },
+                  (err) => console.log('getUserMedia failed', err)
+                );
+              }
+            );
+          }
 
+          this.agoraService.client.on(ClientEvent.Error, (err) => {
+            console.log('Got error msg:', err.reason);
+            if (err.reason === 'DYNAMIC_KEY_TIMEOUT') {
+              this.agoraService.client.renewChannelKey(
+                '',
+                () => {
+                  console.log('Renew channel key successfully');
+                },
+                (err) => {
+                  console.log('Renew channel key failed: ', err);
+                }
+              );
+            }
+          });
           // Now the stream has been published, lets try to set up some subscribers.
           this.client.on(ClientEvent.RemoteStreamAdded, (evt) => {
-            let remoteStream = evt.stream;
-            let id = remoteStream.getId();
-            if (id != this.clientUID) {
-              this.client.subscribe(remoteStream, null, (err) => {});
+            this.remoteStream = evt.stream;
+            if (this.remoteStream.getId() == 456) {
+              this.client.subscribe(this.remoteStream, null, (err) => {
+                console.log(err);
+              });
             }
           });
 
           this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
-            let remoteStream = evt.stream;
-            let id = remoteStream.getId();
-            remoteStream.play('remote_stream');
+            this.remoteStream = evt.stream;
+            this.remoteStream.play('remote_stream');
           });
 
           this.client.on(ClientEvent.PeerLeave, (evt) => {
@@ -114,7 +179,6 @@ export class PlayComponent implements OnInit {
             let id = remoteStream.getId();
             remoteStream.stop();
           });
-
           this.socket.emitMessage(
             'newGame',
             JSON.stringify({

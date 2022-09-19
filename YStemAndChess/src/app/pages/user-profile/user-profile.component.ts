@@ -1,7 +1,6 @@
 import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
-import { HeaderComponent } from '../../header/header.component';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
 
@@ -34,7 +33,7 @@ export class UserProfileComponent implements OnInit {
   public showPdfListView = false;
   recordingList = [];
   signedURL = '';
-  constructor(private cookie: CookieService, private head: HeaderComponent,private viewSDKClient: ViewSDKClient) {}
+  constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
 
   async ngOnInit() {
     this.numStudents.push(0);

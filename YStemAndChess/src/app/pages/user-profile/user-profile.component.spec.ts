@@ -11,6 +11,20 @@ describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
 
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ UserProfileComponent, HeaderComponent, FooterComponent ],
+      imports: [ ModalModule ]
+    })
+    .compileComponents(); 
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(UserProfileComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

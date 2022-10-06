@@ -31,7 +31,7 @@ export class LessonsService {
           info: `Capture, then promote!`,
         },
         {
-          name: 'Traning 3',
+          name: 'Training 3',
           fen: '8/8/8/1pp1p3/3p2p1/P1PP3P/8/8 w - - 0 1',
           info: `Use all the pawns!
           No need to promote.`,

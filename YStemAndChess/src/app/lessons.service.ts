@@ -99,7 +99,7 @@ export class LessonsService {
         {
           name: 'Training 3',
           fen: '8/8/8/8/4ppp1/4pNp1/4ppp1/8 w - - 0 1',
-          info: `Knights can jump over obstacles!Escape and vanquish the pawns!`,
+          info: `Knights can jump over obstacles! Escape and vanquish the pawns!`,
         },
         {
           name: 'Training 4',

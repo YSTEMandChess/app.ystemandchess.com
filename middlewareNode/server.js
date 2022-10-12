@@ -21,6 +21,7 @@ app.get('/', (req, res) => res.send('API Running'))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use('/user', require('./routes/users'))
+app.use('/category', require('./routes/categorys'))
 app.use('/meetings', require('./routes/meetings'))
 app.use('/auth', require('./routes/auth'))
 const PORT = process.env.PORT || 8000

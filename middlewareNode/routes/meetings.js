@@ -38,10 +38,9 @@ router.get(
         Expires: 604800,
       };
 
-      const url = s3.getSignedUrl('getObject', params)
+      const url = s3.getSignedUrl("getObject", params);
       console.log(url);
-      res.status(200).json(url)
-
+      res.status(200).json(url);
     } catch (error) {
       console.error(error.message);
       res.status(500).json("Server error");
@@ -84,39 +83,41 @@ router.get("/recordings", passport.authenticate("jwt"), async (req, res) => {
   }
 });
 
-
 // @route   GET /meetings/usersRecordings
 // @desc    GET all recordings available for the student or mentor
 // @access  Public with jwt Authentication
-router.get('/usersRecordings', passport.authenticate('jwt'), async (req, res) => {
-  // console.log(req);
-  try {
-    const { role, username, firstName, lastName } = req.user
-    let filters = { }
-    if (role === 'student') {
-      filters.studentUsername = username
-    } else if (role === 'mentor') {
-      filters.mentorUsername = username
-    } else {
-      return res
-        .status(404)
-        .json('Must be a student or mentor to get your own recordings')
-    }
+router.get(
+  "/usersRecordings",
+  passport.authenticate("jwt"),
+  async (req, res) => {
+    // console.log(req);
+    try {
+      const { role, username, firstName, lastName } = req.user;
+      let filters = {};
+      if (role === "student") {
+        filters.studentUsername = username;
+      } else if (role === "mentor") {
+        filters.mentorUsername = username;
+      } else {
+        return res
+          .status(404)
+          .json("Must be a student or mentor to get your own recordings");
+      }
 
-    const recordings = await meetings.find(filters) //Find all meetings with the listed filters above
-    // console.log('recordings = ',recordings);
-    //Error handling for query
-    if (!recordings) {
-      res.status(400).json('User did not have any recordings available')
-    } else {
-      
-      res.send(recordings.reverse())
+      const recordings = await meetings.find(filters); //Find all meetings with the listed filters above
+      // console.log('recordings = ',recordings);
+      //Error handling for query
+      if (!recordings) {
+        res.status(400).json("User did not have any recordings available");
+      } else {
+        res.send(recordings.reverse());
+      }
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json("Server error");
     }
-  } catch (error) {
-    console.error(error.message)
-    res.status(500).json('Server error')
   }
-})
+);
 // @route   GET /meetings/parents/recordings
 // @desc    GET all recordings available for the student from a parent account
 // @access  Public with jwt Authentication
@@ -174,7 +175,6 @@ router.get(
 router.get("/inMeeting", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { role, username } = req.user;
-
     let message = await inMeeting(role, username);
     res.status(200).json(message);
   } catch (error) {
@@ -294,7 +294,6 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
       const meetingId = uuidv4(); //Generate a random meetingId
 
       const recordingInfo = await startRecording(meetingId); //Create and start the recording for the mentor and student
-
       //Error checking to see if a meeting was able to be created
       if (recordingInfo === "Could not start recording. Server error.") {
         return res.status(400).json(recordingInfo);
@@ -497,4 +496,53 @@ const updateTimePlayed = async (username, firstName, lastName, timePlayed) => {
   return "Saved";
 };
 
+//Async function to get moves from the database
+const getMoves = async (meetingId) => {
+  const moves = await meetings.findOne({
+    meetingId: meetingId,
+    CurrentlyOngoing: true,
+  });
+  console.log("moves", moves);
+  return moves;
+};
+//Async function to store moves in the database
+const updateMoves = async (meetingId, oldMovesArr) => {
+  const newdata = await meetings.findOneAndUpdate(
+    { meetingId: meetingId },
+    { moves: oldMovesArr }
+  );
+  return newdata;
+};
+
+router.post("/boardState", passport.authenticate("jwt"), async (req, res) => {
+  try {
+    const { meetingId, fen, pos, image } = req.query;
+    let meeting = await getMoves(meetingId);
+    let oldMovesArr = meeting.moves;
+    if (
+      oldMovesArr.length === 0 ||
+      oldMovesArr[oldMovesArr.length - 1]?.fen !== fen
+    ) {
+      fen && oldMovesArr.push({ fen, pos, image });
+      let updatedMove = await updateMoves(meetingId, oldMovesArr);
+      res.status(200).send(updatedMove);
+    } else {
+      res.status(202).send(oldMovesArr);
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
+  try {
+    const { meetingId } = req.query;
+    const getBoardStates = await getMoves(meetingId);
+    res.status(200).send(getBoardStates);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
 module.exports = router;

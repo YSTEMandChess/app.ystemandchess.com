@@ -4,6 +4,11 @@ import {
   OnInit,
   ViewEncapsulation,
   SecurityContext,
+  ViewChild,
+  ElementRef,
+  ViewChildren,
+  QueryList,
+  AfterViewChecked,
 } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import {
@@ -33,7 +38,16 @@ export class PlayComponent implements OnInit {
   private messageQueue = new Array();
   private isReady: boolean;
   public chessSrc;
-
+  private move: string;
+  private pieceImage: string;
+  private boardState: string;
+  private scrollContainer: any;
+  private isNearBottom = true;
+  meetingId: string;
+  boardstate: string;
+  displayMoves = [];
+  isStepLast: boolean = true;
+  currentStep: number;
   constructor(
     private cookie: CookieService,
     private socket: SocketService,
@@ -44,6 +58,8 @@ export class PlayComponent implements OnInit {
       environment.urls.chessClientURL
     );
   }
+  @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
+  @ViewChildren('item') itemElements: QueryList<any>;
 
   ngOnInit() {
     let userContent;
@@ -61,6 +77,7 @@ export class PlayComponent implements OnInit {
             return;
           }
           let responseText = JSON.parse(response)[0];
+          this.meetingId = responseText.meetingId;
           //display web cam styling
           document.getElementById('local_stream').style.display = 'block';
           document.getElementById('remote_stream').style.display = 'block';
@@ -187,9 +204,9 @@ export class PlayComponent implements OnInit {
               role: userContent.role,
             })
           );
-
+          this.getMovesList();
           this.socket.listen('boardState').subscribe((data) => {
-            if (this.isReady) {
+            if (this.isReady && this.isStepLast) {
               let newData = JSON.parse(<string>data);
               var chessBoard = (<HTMLFrameElement>(
                 document.getElementById('chessBd')
@@ -203,6 +220,7 @@ export class PlayComponent implements OnInit {
               );
             } else {
               this.messageQueue.push(data);
+              this.getMovesList();
             }
           });
         }
@@ -232,7 +250,8 @@ export class PlayComponent implements OnInit {
         if (e.origin == environment.urls.chessClientURL) {
           // Means that there is the board state and whatnot
           let info = e.data;
-
+          const temp = info.split(':');
+          const piece = info.split('-');
           if (info == 'ReadyToRecieve') {
             this.isReady = true;
             this.sendFromQueue();
@@ -242,15 +261,27 @@ export class PlayComponent implements OnInit {
             this.gameOverAlert();
           } else if (info == 'gameOver') {
             this.gameOverAlert();
+          } else if (temp?.length > 1 && temp[0] === 'target') {
+            this.move = temp[1];
+          } else if (piece?.length > 1 && piece[0] === 'piece') {
+            this.pieceImage = piece[1];
           } else {
             this.updateBoardState(info);
+            this.getMovesList();
           }
         }
       },
       false
     );
   }
-
+  getMovesList = () => {
+    let url: string = '';
+    url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
+    this.httpGetAsync(url, 'GET', (response) => {
+      response = JSON.parse(response);
+      this.displayMoves = response.moves || [];
+    });
+  };
   private sendFromQueue() {
     this.messageQueue.forEach((element) => {
       let newData = JSON.parse(<string>element);
@@ -264,6 +295,16 @@ export class PlayComponent implements OnInit {
         environment.urls.chessClientURL
       );
     });
+  }
+  private changeBoardState(fen?) {
+    var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
+      .contentWindow;
+    chessBoard.postMessage(
+      JSON.stringify({
+        boardState: fen,
+      }),
+      environment.urls.chessClientURL
+    );
   }
 
   private httpGetAsync(theUrl: string, method: string = 'POST', callback) {
@@ -290,6 +331,15 @@ export class PlayComponent implements OnInit {
 
   public updateBoardState(data) {
     let userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
+    let url: string;
+    this.getMovesList();
+    url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
+    this.httpGetAsync(url, 'POST', (response) => {
+      response = JSON.parse(response);
+      this.displayMoves = response.moves || [];
+      this.scrollToBottom();
+    });
+    this.getMovesList();
     this.socket.emitMessage(
       'newState',
       JSON.stringify({ boardState: data, username: userContent.username })
@@ -310,5 +360,51 @@ export class PlayComponent implements OnInit {
       'gameOver',
       JSON.stringify({ username: userContent.username })
     );
+  }
+
+  setMove(index) {
+    this.currentStep =
+      index <= 0
+        ? 0
+        : index > this.displayMoves.length - 1
+        ? this.displayMoves.length - 1
+        : index;
+    this.getMovesList();
+    if (this.displayMoves.length - 1 === index) {
+      this.isStepLast = true;
+    } else {
+      this.isStepLast = false;
+    }
+    this.changeBoardState(this.displayMoves[index]?.fen);
+    if (this.isNearBottom) {
+      this.scrollToBottom();
+    }
+  }
+  imgPos(index) {
+    return (
+      '../../../assets/images/chessPieces/wikipedia/' +
+      this.displayMoves[index].image +
+      '.png'
+    );
+  }
+
+  private scrollToBottom(): void {
+    this.scrollContainer = this.scrollFrame.nativeElement;
+    this.scrollContainer?.scroll({
+      top: this.scrollContainer?.scrollHeight,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+  private isUserNearBottom(): boolean {
+    const threshold = 150;
+    const position =
+      this.scrollContainer?.scrollTop + this.scrollContainer?.offsetHeight;
+    const height = this.scrollContainer?.scrollHeight;
+    return position > height - threshold;
+  }
+
+  scrolled(event: any): void {
+    this.isNearBottom = this.isUserNearBottom();
   }
 }

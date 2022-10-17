@@ -28,6 +28,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
+import { PracticeComponent } from './pages/practice/practice.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -65,7 +66,7 @@ const routes: Routes = [
     component: ParentAddStudentComponent,
     data: { roles: ['parent', 'admin'] },
     canActivate: [LoginGuardService],
-  }, 
+  },
   {
     path: 'user-profile',
     component: UserProfileComponent,
@@ -108,6 +109,10 @@ const routes: Routes = [
     component: LearningsComponent,
     data: { roles: ['student', 'admin'] },
     canActivate: [],
+  },
+  {
+    path: 'practice',
+    component: PracticeComponent,
   },
   {
     path: 'piece-lessons',

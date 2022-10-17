@@ -25,7 +25,6 @@ export class Chess {
           document.getElementById(this.frameId)
         )).contentWindow;
         if (typeof e.data === 'object') return;
-
         const isDataAFen = e.data.indexOf('/') > -1;
         const info = this.dataTransform(e.data);
         const msg = this.createAmessage(info, this.color);

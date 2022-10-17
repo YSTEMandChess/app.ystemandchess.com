@@ -34,12 +34,12 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { ContactComponent } from './pages/contact/contact.component';
-import { LessonsService as LerningsService } from './lessons.service';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
+import { PracticeComponent } from './pages/practice/practice.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -75,6 +75,7 @@ const agoraConfig: AgoraConfig = {
     LandingPageComponent,
     BoardAnalyzerComponent,
     WhyChessComponent,
+    PracticeComponent,
   ],
   imports: [
     BrowserModule,

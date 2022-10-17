@@ -16,7 +16,10 @@
             <li><input type="text" placeholder="username" id="username" (blur)="usernameVerification()"></li>
             <li><input type="password" placeholder="password" id="password" (blur)="passwordVerification()"></li>
             <button type="submit" (click)="errorMessages()" (click)="verifyUser()">Enter</button>
+           <div class="links">
             <a routerLink="/signup">Create new account</a>
+            <a routerLink="/resetpassword">Forgot Password?</a>
+           </div>
 
         </div>
     </body>

@@ -7,7 +7,6 @@ const axios = require("axios");
 const config = require("config");
 const { v4: uuidv4 } = require("uuid");
 const router = express.Router();
-var http = require("https");
 const { check, validationResult, query } = require("express-validator");
 const { waitingStudents, waitingMentors } = require("../models/waiting");
 const meetings = require("../models/meetings");
@@ -39,9 +38,10 @@ router.get(
         Expires: 604800,
       };
 
-      const url = s3.getSignedUrl("getObject", params);
+      const url = s3.getSignedUrl('getObject', params)
       console.log(url);
-      res.status(200).json(url);
+      res.status(200).json(url)
+
     } catch (error) {
       console.error(error.message);
       res.status(500).json("Server error");
@@ -84,41 +84,39 @@ router.get("/recordings", passport.authenticate("jwt"), async (req, res) => {
   }
 });
 
+
 // @route   GET /meetings/usersRecordings
 // @desc    GET all recordings available for the student or mentor
 // @access  Public with jwt Authentication
-router.get(
-  "/usersRecordings",
-  passport.authenticate("jwt"),
-  async (req, res) => {
-    // console.log(req);
-    try {
-      const { role, username, firstName, lastName } = req.user;
-      let filters = {};
-      if (role === "student") {
-        filters.studentUsername = username;
-      } else if (role === "mentor") {
-        filters.mentorUsername = username;
-      } else {
-        return res
-          .status(404)
-          .json("Must be a student or mentor to get your own recordings");
-      }
-
-      const recordings = await meetings.find(filters); //Find all meetings with the listed filters above
-      // console.log('recordings = ',recordings);
-      //Error handling for query
-      if (!recordings) {
-        res.status(400).json("User did not have any recordings available");
-      } else {
-        res.send(recordings.reverse());
-      }
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).json("Server error");
+router.get('/usersRecordings', passport.authenticate('jwt'), async (req, res) => {
+  // console.log(req);
+  try {
+    const { role, username, firstName, lastName } = req.user
+    let filters = { }
+    if (role === 'student') {
+      filters.studentUsername = username
+    } else if (role === 'mentor') {
+      filters.mentorUsername = username
+    } else {
+      return res
+        .status(404)
+        .json('Must be a student or mentor to get your own recordings')
     }
+
+    const recordings = await meetings.find(filters) //Find all meetings with the listed filters above
+    // console.log('recordings = ',recordings);
+    //Error handling for query
+    if (!recordings) {
+      res.status(400).json('User did not have any recordings available')
+    } else {
+      
+      res.send(recordings.reverse())
+    }
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).json('Server error')
   }
-);
+})
 // @route   GET /meetings/parents/recordings
 // @desc    GET all recordings available for the student from a parent account
 // @access  Public with jwt Authentication
@@ -176,6 +174,7 @@ router.get(
 router.get("/inMeeting", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { role, username } = req.user;
+
     let message = await inMeeting(role, username);
     res.status(200).json(message);
   } catch (error) {
@@ -231,73 +230,53 @@ router.post("/queue", passport.authenticate("jwt"), async (req, res) => {
 // @access  Public with jwt Authentication
 router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
   try {
-    capturedLogs("student", "pairup called 234 ");
-
     const { role, username, firstName, lastName } = req.user;
-    capturedLogs(role, "pairup called 237 ");
-
     let studentInfo = {};
     let mentorInfo = {};
 
     //Get a first person in queue from either waitingMentors or waitingStudents collection
     if (role === "student") {
-      capturedLogs(role, "pairup called 244 ");
-
       waitingQueue = await waitingMentors.findOne(
         {},
         {},
         { sort: { created_at: 1 } }
       );
     } else if (role === "mentor") {
-      capturedLogs(role, "pairup called 252 ");
-
       waitingQueue = await waitingStudents.findOne(
         {},
         {},
         { sort: { created_at: 1 } }
       );
     } else {
-      capturedLogs(role, "pairup called 260 ");
-
       return res
         .status(404)
         .json("Must be a student or mentor to pair up for a game.");
     }
     if (!waitingQueue) {
-      capturedLogs(role, "pairup called 267 ");
-
       return res
         .status(200)
         .json(
           "No one is available for matchmaking. Please wait for the next available person"
         );
     }
-    capturedLogs(role, "pairup called 275");
 
     const response = await inMeeting(role, username); //Check if user is in a meeting
-    capturedLogs(role, "pairup called 278 ");
 
     //Check if the user waiting for a game is in a meeting already
     const secondResponse = await inMeeting(
       role === "student" ? "mentor" : "student",
       waitingQueue.username
     );
-    capturedLogs(role, "pairup called 285 ");
-    capturedLogs(role, "pairup called 286" + isBusy);
+
     if (
       response === "There are no current meetings with this user." &&
       secondResponse === "There are no current meetings with this user." &&
       !isBusy
     ) {
-      capturedLogs(role, "pairup called 292");
-
       isBusy = true; //Change state to busy to complete query
-      capturedLogs(role, "pairup called 295");
 
       //Set information for ease of access and less redundant meeting creation code
       if (role === "student") {
-        capturedLogs(role, "pairup called 300");
-
         studentInfo.username = username;
         studentInfo.firstName = firstName;
         studentInfo.lastName = lastName;
@@ -305,8 +284,6 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
         mentorInfo.firstName = waitingQueue.firstName;
         mentorInfo.lastName = waitingQueue.lastName;
       } else {
-        capturedLogs(role, "pairup called 309");
-
         mentorInfo.username = username;
         mentorInfo.firstName = firstName;
         mentorInfo.lastName = lastName;
@@ -314,28 +291,19 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
         studentInfo.firstName = waitingQueue.firstName;
         studentInfo.lastName = waitingQueue.lastName;
       }
-      capturedLogs(role, "pairup called 318");
-
       const meetingId = uuidv4(); //Generate a random meetingId
-      capturedLogs(role, "pairup called 321");
 
       const recordingInfo = await startRecording(meetingId); //Create and start the recording for the mentor and student
-      capturedLogs(role, "pairup called 323");
 
       //Error checking to see if a meeting was able to be created
       if (recordingInfo === "Could not start recording. Server error.") {
-        capturedLogs(role, "pairup called 327");
-
         return res.status(400).json(recordingInfo);
       }
-      capturedLogs(role, "pairup called 331");
 
       const uniquePassword = uuidv4(); //Generated a random password for the meeting
 
       //Create the meeting with all the required fields
       //Save the meeting
-      capturedLogs(role, "pairup called 337");
-
       await meetings.create({
         meetingId: meetingId,
         password: uniquePassword,
@@ -350,19 +318,11 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
         sid: recordingInfo.sid,
         meetingStartTime: new Date(),
       });
-      capturedLogs(role, "pairup called 353");
 
       await deleteUser("student", studentInfo.username); //Remove user from the waitingStudents collection
-      capturedLogs(role, "pairup called 356");
-
       await deleteUser("mentor", mentorInfo.username); //Remove user from the waitingMentors collection
-      capturedLogs(role, "pairup called 359");
-
       isBusy = false; //Set state to not busy
-      capturedLogs(role, "pairup called 362");
     }
-    capturedLogs(role, "pairup called 365");
-
     return res.status(200).json("Ok");
   } catch (error) {
     console.error(error.message);
@@ -478,25 +438,17 @@ router.delete("/dequeue", passport.authenticate("jwt"), async (req, res) => {
 
 //Async function to check whether a username is in a current meeting
 const inMeeting = async (role, username) => {
-  // capturedLogs("481", "in meeting called");
   let filters = { CurrentlyOngoing: true };
-  // capturedLogs("443", "filters");
   if (role === "student") {
-    // capturedLogs("445", "student");
     filters.studentUsername = username;
   } else if (role === "mentor") {
-    // capturedLogs("448", "mentor");
     filters.mentorUsername = username;
   } else {
-    // capturedLogs("451", "else part");
     return "Please be either a student or a mentor.";
   }
   const foundMeeting = await meetings.find(filters);
-  // capturedLogs("455", "found meeting");
   if (foundMeeting.length !== 0) {
-    // capturedLogs("457", "inside if");
     await deleteUser(role, username);
-    // capturedLogs("459", "response of delete user");
     return foundMeeting;
   }
   return "There are no current meetings with this user.";
@@ -526,35 +478,6 @@ const deleteUser = async (role, username) => {
   return true;
 };
 
-const capturedLogs = async (lineNo, message) => {
-  if (lineNo == "student") {
-    var options = {
-      method: "POST",
-      hostname: "crm.creditfreedomrestoration.com",
-      port: null,
-      path: "/ystemlog.php",
-      headers: {
-        "cache-control": "no-cache",
-        "postman-token": "def86f5f-f27e-0f04-2822-7dbc23e97e1c",
-      },
-    };
-    var req = http.request(options, function (res) {
-      var chunks = [];
-
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
-      });
-
-      res.on("end", function () {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-      });
-    });
-    var obj = { lineNo, message };
-    req.write(message);
-    req.end();
-  }
-};
 //Async function to create and start an agora recording session
 
 //Async function to update the time played for a user

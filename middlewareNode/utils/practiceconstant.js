@@ -254,5 +254,286 @@ const practiceLessons = [
       },
     ],
   },
+  {
+    practice_name: "Checkmate Patterns III",
+    subpractice: [
+      {
+        subPracticeName: "Opera Mate #1",
+        startFen: "4k3/5p2/8/6B1/8/8/8/3R2K1",
+        info: "The Opera Mate works by attacking the king on the back rank with a rook using a bishop to protect it. A pawn or other piece other than a knight of the enemy king's is used to restrict its movement. The checkmate was named after its implementation by Paul Morphy in 1858 at a game at the Paris opera against Duke Karl of Brunswick and Count Isouard, known as the The Opera Game",
+      },
+      {
+        subPracticeName: "Opera Mate #2",
+        startFen: "RN1K2NR/PPP3PP/3Q1PB1/1b1P4/1B1b4/2n1q3/ppp2ppp/1k2r1nr",
+        info: "Checkmate the opponent in 2 moves",
+      },
+      {
+        subPracticeName: "Opera Mate #3",
+        startFen: "RN1K3R/PP2BPPP/6Q1/5q2/2bpP3/5p2/pp5p/1kr3nr",
+        info: "Checkmate the opponent in 2 moves",
+      },
+      {
+        subPracticeName: "Anderssen's Mate #1",
+        startFen: "6k1/6P1/5K1R/8/8/8/8/8",
+        info: "In Anderssen's mate, named for Adolf Anderssen, the rook or queen is supported by a diagonally-attacking piece such as a pawn or bishop as it checkmates the opposing king along the eighth rank.",
+      },
+      {
+        subPracticeName: "Anderssen's Mate #2",
+        startFen: "1K6R/1pP3PP/2b2P1N/2Q5/p1B1P3/8/1pp3Pp/3r2k1",
+        info: "Checkmate the opponent in 3 moves",
+      },
+      {
+        subPracticeName: "Anderssen's Mate #3",
+        startFen: "2r1nrk1/p4p1p/1p2p1pQ/nPqbRN2/8/P2B4/1BP2PPP/3R2K1",
+        info: "Checkmate the opponent in 4 moves",
+      },
+      {
+        subPracticeName: "Dovetail Mate #1",
+        startFen: "1r6/pk6/4Q3/3P4/8/8/8/6K1",
+        info: "In the Dovetail Mate, the mating queen is one square diagonally from the mated king which escape is blocked by two friendly non-Knight pieces.",
+      },
+      {
+        subPracticeName: "Dovetail Mate #2",
+        startFen: "r2b1q1r1/ppp3kp/1bnp4/4p1B1/3PP3/2P2Q2/PP3PPP/RN3RK1",
+        info: "Checkmate the opponent in 1 moves",
+      },
+      {
+        subPracticeName: "Dovetail Mate #3",
+        startFen: "5QR1/PR3N1P/2KpP1P1/qP2bP2/7p/1p2pp2/p3b1p1/1k6",
+        info: "Checkmate the opponent in 4 moves",
+      },
+      {
+        subPracticeName: "Dovetail Mate #4",
+        startFen: "rR6/5k2/2p3q1/4Qpb1/2PB1Pb1/4P3/r5R1/6K1",
+        info: "Checkmate the opponent in 1 moves",
+      },
+      {
+        subPracticeName: "Cozio's Mate #1",
+        startFen: "8/8/1Q6/8/6pk/5q2/8/6K1",
+        info: "Cozio's Mate is an upside down version of the Dovetail Mate. It was named after a study by Carlo Cozio that was published in 1766.",
+      },
+      {
+        subPracticeName: "Swallow's Tail Mate #1",
+        startFen: "3r1r2/4k3/R7/3Q4/8/8/8/6K1",
+        info: "The Swallow's Tail Mate works by attacking the enemy king with a queen that is protected by a rook or other piece. The enemy king's own pieces block its means of escape. It is also known as the Guéridon Mate.",
+      },
+      {
+        subPracticeName: "Swallow's Tail Mate #2",
+        startFen: "8/8/5q2/1p3R2/2k1K3/5P2/8/8",
+        info: "Checkmate the opponent in 1 moves",
+      },
+      {
+        subPracticeName: "Epaulette Mate #1",
+        startFen: "3rkr2/8/5Q2/8/8/8/8/6K1",
+        info: "The Epaulette Mate is a checkmate where two parallel retreat squares for a checked king are occupied by its own pieces, preventing its escape.",
+      },
+      {
+        subPracticeName: "Epaulette Mate #2",
+        startFen: "RKR5/6P1/3PnB2/P6P/2r2p2/2pQb3/p1B1Q1pp/4r1k1",
+        info: "Checkmate the opponent in 2 moves",
+      },
+      {
+        subPracticeName: "Epaulette Mate #3",
+        startFen: "5r2/pp3k2/5r2/Q1p2Q2/3P4/6R1/PPP2PP1/1K6",
+        info: "Checkmate the opponent in 1 moves",
+      },
+      {
+        subPracticeName: "Pawn Mate #1",
+        startFen: "8/7R/1pkp4/2p5/1PP5/8/8/6K1",
+        info: "Although the Pawn Mate can take many forms, it is generally characterized as a mate in which a pawn is the final attacking piece and where enemy pawns are nearby. The Pawn Mate is sometimes also called the David and Goliath Mate, named after the biblical account of David and Goliath.",
+      },
+      {
+        subPracticeName: "Pawn Mate #2",
+        startFen: "r1b3nr/ppp3qp/1bnpk3/4p1bQ/3PP3/2P5/PP3PPP/RN3RK1",
+        info: "Checkmate the opponent in 2 moves",
+      },
+    ],
+  },
+  {
+    practice_name: "Checkmate Pattern IV",
+    subpractice: [
+      {
+        subPracticeName: "Suffocation Mate #1",
+        startFen: "5rk1/5p1p/8/3N4/8/8/1B6/7K",
+        info: "The Suffocation Mate works by using the knight to attack the enemy king and the bishop to confine the king's escape routes.",
+      },
+      {
+        subPracticeName: "Suffocation Mate #2",
+        startFen: "r4k1r/1q3p1p/p1N2p2/1pp5/8/1PPP4/1P3PPP/R1B1R1K1",
+        info: "Checkmate the opponent in 4 moves",
+      },
+      {
+        subPracticeName: "Greco's Mate #1",
+        startFen: "7k/6p1/6Q1/8/8/1B6/8/6K1",
+        info: "Greco's Mate is named after the famous Italian checkmate cataloguer Gioachino Greco. It works by using the bishop to contain the black king by use of the black g-pawn and subsequently using the queen or a rook to checkmate the king by moving it to the edge of the board.",
+      },
+      {
+        subPracticeName: "Greco's Mate #2",
+        startFen: "r4r1k/ppn1NBpp/4b3/4P3/3p1R2/1P6/P1P3PP/R5K1",
+        info: "Checkmate the opponent in 2 moves",
+      },
+      {
+        subPracticeName: "Greco's Mate #3",
+        startFen: "r2q1rk1/pbp3pp/1p1b4/3N1p2/2B5/P3PPn1/1P3P1P/2RQK2R",
+        info: "Checkmate the opponent in 4 moves",
+      },
+      {
+        subPracticeName: "Max Lange's Mate #1",
+        startFen: "2Q5/5Bpk/7p/8/8/8/8/6K1",
+        info: "Max Lange's Mate is named after German chess player and problem composer Max Lange. It works by using the bishop and queen in combination to checkmate the king.",
+      },
+      {
+        subPracticeName: "Max Lange's Mate #1",
+        startFen: "K4BNR/1P2PPPP/2Q1p1B1/3q4/P2Ppb2/8/1pp2ppp/3k3r",
+        info: "Checkmate the opponent in 5 moves",
+      },
+      {
+        subPracticeName: "Blackburne's Mate #1",
+        startFen: "5rk1/7p/8/6N1/8/8/1BB5/6K1",
+        info: "Blackburne's Mate is named for Joseph Henry Blackburne. This checkmate utilizes an enemy rook (or bishop or queen) to confine the black king's escape to the f8 square. One of the bishops confines the black king's movement by operating at a distance, while the knight and the other bishop operate within close range.",
+      },
+      {
+        subPracticeName: "Reti's Mate #1",
+        startFen: "1nb5/1pk5/2P5/8/7B/8/8/3R3K",
+        info: "Réti's Mate is named after Richard Réti, who delivered it in an 11-move game against Savielly Tartakower in 1910 in Vienna. It works by trapping the enemy king with four of its own pieces that are situated on flight squares and then attacking it with a bishop that is protected by a rook or queen.",
+      },
+      {
+        subPracticeName: "Legal's Mate #1",
+        startFen: "3q1b2/k4B2/3p4/4N3/8/2N5/8/6K1",
+        info: "In Légal's Mate, the knight moves into a position to check the king. The bishop is guarded by the other knight, and the enemy pieces block the king's escape.",
+      },
+      {
+        subPracticeName: "Kill Box Mate #1",
+        startFen: "2kr4/8/1Q6/8/8/8/5PPP/3R1RK1",
+        info: "The Kill Box Mate occurs when a rook is next to the enemy king and supported by a queen that also blocks the king's escape squares. The rook and the queen catch the enemy king in a 3 by 3 kill box.",
+      },
+      {
+        subPracticeName: "Triangle Mate #1",
+        startFen: "8/3p4/3k4/2R4Q/8/4K3/8/8",
+        info: "A Triangle Mate is delivered by a queen attacking an enemy king, while it is supported by a rook. The queen and rook are one square away from the enemy king. They are on the same rank or file, separated by one square, with the enemy king being between them one square away, forming a triangle. The king must be restricted from escaping to the middle square behind it away from the queen and rook, by the edge of the board, a piece blocking it, or by controlling that square with a third piece.",
+      },
+      {
+        subPracticeName: "Vukovic Mate #1",
+        startFen: "4k3/R7/4N3/3r4/8/B7/4K3/8",
+        info: "In the Vukovic Mate, a rook and knight team up to mate the king on the edge of the board. The rook delivers mate while supported by a third piece, and the knight is used to block the king's escape squares.",
+      },
+      {
+        subPracticeName: "Vukovic Mate #2",
+        startFen: "2K5/4r3/1k6/1n6/p7/8/8/7R",
+        info: "Checkmate the opponent in 3 moves",
+      },
+      {
+        subPracticeName: "Vukovic Mate #3",
+        startFen: "2r5/8/8/5K1k/4N1R1/7P/8/8",
+        info: "Checkmate the opponent in 2 moves",
+      },
+    ],
+  },
+  {
+    practice_name: "Piece checkmates II",
+    subpractice: [
+      {
+        subPracticeName: "Queen vs bishop mate",
+        startFen: "8/83kb3/8/8/3KQ3/8/8",
+        info: "Keep your pieces on the opposite color squares from the enemy bishop to stay safe. Use your queen to encroach on the king and look for double attacks. Mate in 10 if played perfectly.",
+      },
+      {
+        subPracticeName: "Queen vs knight mate",
+        startFen: "8/8/3kn3/8/8/3KQ/8/8",
+        info: "Force the enemy king to the edge of the board while avoiding tricky knight forks. Mate in 12 if played perfectly.",
+      },
+      {
+        subPracticeName: "Queen vs rook mate",
+        startFen: "8/3kr3/8/3KQ3/8/8/8/8",
+        info: "Normally the winning process involves the queen first winning the rook by a fork and then checkmating with the king and queen, but forced checkmates with the rook still on the board are possible in some positions or against incorrect defense.",
+      },
+      {
+        subPracticeName: "Two bishop mate",
+        startFen: "8/8/3k4/8/8/2BBK3/8/8",
+        info: "When trying to checkmate with two bishops, there are two important principles to follow. One, the bishops are best when they are near the center of the board and on adjacent diagonals. This cuts off the opposing king. Two, the king must be used aggressively, in conjunction with the bishops. Mate in 13 if played perfectly.",
+      },
+      {
+        subPracticeName: "Knight and bishop mate #1",
+        startFen: "8/8/1k1K4/8/2BN4/8/8/8",
+        info: "Of the basic checkmates, this is the most difficult one to force, because the knight and bishop cannot form a linear barrier to the enemy king from a distance. The checkmate can be forced only in a corner that the bishop controls. The mating process often requires accurate play, since a few errors could result in a draw either by the fifty-move rule or stalemate.Mate in 10 if played perfectly.",
+      },
+      {
+        subPracticeName: "Knight and bishop mate #2",
+        startFen: "8/8/3k4/3B4/3K4/8/3N4/8",
+        info: "Of the basic checkmates, this is the most difficult one to force, because the knight and bishop cannot form a linear barrier to the enemy king from a distance. The checkmate can be forced only in a corner that the bishop controls. The mating process often requires accurate play, since a few errors could result in a draw either by the fifty-move rule or stalemate. Mate in 19 if played perfectly.",
+      },
+      {
+        subPracticeName: "Two knights vs pawn",
+        startFen: "6k1/6p1/8/4K3/4NN2/8/8/8",
+        info: "Two knights can't force checkmate by themselves, but if the enemy has a pawn, we can avoid stalemate and force mate. Mate in 15 if played perfectly.",
+      },
+    ],
+  },
+  {
+    practice_name: "Knight and Bishop Mate",
+    subpractice: [
+      {
+        subPracticeName: "Introduction",
+        startFen: "8/8/4k3/8/4K3/8/8/4BN1",
+        info: "In this Study, we will look at how to checkmate a lone King with a Knight and Bishop.The first thing to note, is that we can only checkmate the King in the corner of the board which is the same color as our Bishop, which in this example is a8 and h1. If we had a dark squared Bishop, we could only checkmate Black on a1 or h8.Black will therefore try to stay in the center of the board, and if they can't, then they will move towards the wrong corner, meaning a corner in which we can't checkmate the King.White however, wants to force Black's King to a8 or h1. To accomplish this, there are two well-known methods that can be used. One is called Delétang's triangle method and the other is called the W method. You only have to know one of these methods. In this Study, we will learn the first one.The basic idea is to restrict Blacks King to smaller and smaller areas of the board.",
+      },
+      {
+        subPracticeName: "Epic Failure",
+        startFen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+        info: "KBN vs K is a fairly rare endgame. A 2001 study showed that it happens in about 0.02% of games. Even so, it can be useful to study because the technique is hard to find OTB as this game shows.This game took place in Geneva, Switzerland in 2013. It was Round 4 in a FIDE Women Grand Prix tournament. The Women's World Chess Champion, Anna Ushenina, failed to mate with Knight and Bishop and her opponent claimed a draw due to the 50 move rule.The relevant part of the game starts at 72. Nxc3. Scroll through the moves and watch the video below. Move on to the next chapter when you're ready.",
+      },
+      {
+        subPracticeName: "Restricting the king to the first triangle",
+        startFen: "4k3/8/8/8/8/8/8/4KBN1",
+        info: "You will have to use all of your pieces to push Black's king to a corner. Black will first try to stay in the center. Continue the lesson by moving your King towards the center.",
+      },
+      {
+        subPracticeName: "Exercise: Restricting the king to the first triangle",
+        startFen: "6k1/5N2/5K2/8/2B5/8/8/8",
+        info: "In the previous chapter, Black replied to Nf7+ with Kh7. Here, Black replies Kg8 instead. Based on what we have learned so far, what move should White now play?",
+      },
+      {
+        subPracticeName: "Restricting the king to the second triangle",
+        startFen: "8/4k3/6K1/8/8/1B1N4/8/8",
+        info: "Before we can transition our Bishop to the second triangle by playing Ba4, we must further restrict the Black King. Start by taking away the f8 square.",
+      },
+      {
+        subPracticeName:
+          "Exercise: Restricting the king to the second triangle",
+        startFen: "8/4k1K1/8/8/2B5/3N4/8/8",
+        info: "What would you play in this position?",
+      },
+      {
+        subPracticeName: "Exercise: Restricting the king to the third triangle",
+        startFen: "8/k3K3/8/1B1N4/8/8/8/8",
+        info: "Before you can safely transition your Bishop to the third triangle by playing Ba6, you must further restrict the Black King. Restrict the Black King further in a way that does not allow Black to take the opposition.",
+      },
+      {
+        subPracticeName: "Delivering Mate",
+        startFen: "2B5/k1K5/8/3N4/8/8/8/8",
+        info: "When we reach the third triangle, our King and Bishop is restricting the enemy King which frees up our Knight to deliver mate.",
+      },
+      {
+        subPracticeName: "Exercise: Delivering Mate",
+        startFen: "2B5/k1K5/8/3N4/8/8/8/8",
+        info: "In this position, the King is on a7 instead of a8 which means you must checkmate Black slightly differently. Mate in three.",
+      },
+      {
+        subPracticeName: "Exercise: Checkmate the Engine",
+        startFen: "4k3/8/8/8/8/8/8/4KBN1",
+        info: "Checkmate the opponent",
+      },
+      {
+        subPracticeName: "Exercise: Checkmate the Engine- DSB Edition",
+        startFen: "4k3/8/8/8/8/8/8/4KNB1",
+        info: "Checkmate the opponent",
+      },
+      {
+        subPracticeName: "Exercise: Checkmate the Engine- Rotated Edition",
+        startFen: "1NBK4/8/8/8/8/8/8/3k4",
+        info: "Checkmate the opponent",
+      },
+    ],
+  },
 ];
 module.exports = practiceLessons;

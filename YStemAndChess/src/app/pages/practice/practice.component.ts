@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Chess } from 'src/app/models/Chess';
+import { PracticeChess } from 'src/app/models/PracticeChess';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -10,24 +10,26 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./practice.component.scss'],
 })
 export class PracticeComponent implements OnInit {
-  chess;
+  PracticeChess;
   info = 'Welcome to Practice';
   isExpanded = false;
-  chessSrc;
+  PracticechessSrc;
   sections;
 
   constructor(
     private sanitization: DomSanitizer,
     private cookie: CookieService
   ) {
-    this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
+    this.PracticechessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
-    this.chess = new Chess('chessBd', true);
+    console.log('chessSrc: ', this.PracticechessSrc);
+    this.PracticeChess = new PracticeChess('practiceChessBd', true);
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/practice/getpractices`,
       'GET',
       (response) => {
+        console.log(' JSON.parse(response): ', JSON.parse(response));
         this.sections = JSON.parse(response);
       }
     );
@@ -56,7 +58,7 @@ export class PracticeComponent implements OnInit {
   }
   startLesson({ info, startFen }): void {
     this.info = info;
-    this.chess.newGameInit(startFen);
+    this.PracticeChess.newGameInit(startFen);
   }
 
   ngOnInit(): void {}
@@ -72,5 +74,8 @@ export class PracticeComponent implements OnInit {
       `Bearer ${this.cookie.get('login')}`
     );
     xmlHttp.send(null);
+  }
+  myLoadEvent() {
+    console.log('Frame loaded');
   }
 }

@@ -39,7 +39,11 @@
     </div>
     <div class="col chess">
       <!-- Display selected chess board situation -->
-      <iframe id="chessBd" [src]="chessSrc"></iframe>
+      <iframe
+        id="practiceChessBd"
+        [src]="PracticechessSrc"
+        (load)="myLoadEvent()"
+      ></iframe>
     </div>
   </div>
 </div>

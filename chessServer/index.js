@@ -9,7 +9,7 @@ var http = require("http")
   );
 var io = require("socket.io")(http, {
   cors: true,
-  origins: ["http://localhost:4200"],
+  origins: ["https://ystemandchess.com:4200"],
   credentials: true,
 });
 

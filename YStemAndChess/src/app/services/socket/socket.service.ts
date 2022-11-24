@@ -9,7 +9,7 @@ export class SocketService {
   private socket;
 
   constructor() {
-    const socket = io(environment.urls.chessServer + `chessServer`, {
+    const socket = io(environment.urls.chessServer, {
       reconnection: true,
       timeout: 30000,
     });

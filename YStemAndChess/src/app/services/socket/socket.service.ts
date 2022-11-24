@@ -9,8 +9,35 @@ export class SocketService {
   private socket;
 
   constructor() {
-    this.socket = io.connect(environment.urls.chessServer, {
-      transports: ['websocket'],
+    const socket = io(environment.urls.chessServer, {
+      reconnection: true,
+      timeout: 30000,
+    });
+    // this.socket = io.connect(environment.urls.chessServer, {
+    //   transports: ['websocket'],
+    // });
+    this.socket = socket;
+
+    this.socket.connect();
+
+    console.log('this.socket: ', this.socket);
+
+    this.socket.on('connect', function () {
+      // socket.close();
+      console.log('connected');
+
+      socket
+        .on('authenticated', () => {
+          console.log('authorized');
+          // socket.close();
+        })
+        .on('unauthorized', (msg) => {
+          console.log(`unauthorized: ${JSON.stringify(msg.data)}`);
+        });
+
+      socket.on('get sessionID', (data) => {
+        console.log('sessionID: ', data.sessionId);
+      });
     });
     console.log('this.socket ====>: ', this.socket);
   }

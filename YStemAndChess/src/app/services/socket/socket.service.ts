@@ -12,7 +12,7 @@ export class SocketService {
     this.socket = io.connect(environment.urls.chessServer, {
       transports: ['websocket'],
     });
-    console.log('this.socket : ', this.socket);
+    console.log('this.socket ====>: ', this.socket);
   }
 
   public emitMessage(eventName: string, message: string) {

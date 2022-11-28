@@ -2,21 +2,26 @@ require("dotenv").config();
 var app = require("express")();
 var http = require("http")
   .createServer(app)
-  .listen(
-    process.env.PORT,
-    () => capturedLogs("6", `listening on ${process.env.PORT}`)
-    // console.log(`listening on ${process.env.PORT}`);
+  .listen(process.env.PORT, () =>
+    // capturedLogs("6", `listening on ${process.env.PORT}`)
+    console.log(`listening on ${process.env.PORT}`)
   );
 var io = require("socket.io")(http, {
   cors: true,
-  origins: ["http://localhost:4200"],
-  credentials: true,
+  origins: [
+    "http://localhost:4200",
+    "https://ystemandchess.com:443",
+    "http://ystemandchess.com:80",
+    "https://ystemandchess.com",
+    "https://ystemandchess.com:80",
+  ],
+   credentials: true,
 });
 
 var ongoingGames = [];
 
 io.sockets.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("a user connected to socket");
   // On the connection of a new game being found.
   socket.on("newGame", (msg) => {
     newGame = true;

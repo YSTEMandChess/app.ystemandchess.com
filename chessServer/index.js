@@ -8,14 +8,15 @@ var http = require("http")
   );
 var io = require("socket.io")(http, {
   cors: true,
-  origins: [
-    "http://localhost:4200",
-    "https://ystemandchess.com:443",
-    "http://ystemandchess.com:80",
-    "https://ystemandchess.com",
-    "https://ystemandchess.com:80",
-  ],
-   credentials: true,
+  // origins: [
+  //   "http://localhost:4200",
+  //   "https://ystemandchess.com:443",
+  //   "http://ystemandchess.com:80",
+  //   "https://ystemandchess.com",
+  //   "https://ystemandchess.com:80",
+  // ],
+  origin: ["https://ystemandchess.com"],
+  credentials: true,
 });
 
 var ongoingGames = [];

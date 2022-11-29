@@ -17,12 +17,15 @@ var isBusy = false; //State variable to see if a query is already running.
 // @route   GET /meetings/singleRecording
 // @desc    GET a presigned URL from AWS S3
 // @access  Public with jwt Authentication
+console.log("meeting JS called");
 router.get(
   "/singleRecording",
   [check("filename", "The filename is required").not().isEmpty()],
   passport.authenticate("jwt"),
   async (req, res) => {
     try {
+      console.log("single recording called");
+      console.log(config.get("awsSecretKey"));
       const s3Config = {
         apiVersion: "latest",
         region: "us-east-2",
@@ -230,6 +233,8 @@ router.post("/queue", passport.authenticate("jwt"), async (req, res) => {
 // @access  Public with jwt Authentication
 router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
   try {
+    capturedLogs("student", "pairup called 234 ");
+    console.log("pairup api called");
     const { role, username, firstName, lastName } = req.user;
     let studentInfo = {};
     let mentorInfo = {};
@@ -241,12 +246,14 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
         {},
         { sort: { created_at: 1 } }
       );
+      console.log("waitingQueuestudent: ", waitingQueue);
     } else if (role === "mentor") {
       waitingQueue = await waitingStudents.findOne(
         {},
         {},
         { sort: { created_at: 1 } }
       );
+      console.log("waitingQueuementor: ", waitingQueue);
     } else {
       return res
         .status(404)
@@ -261,12 +268,17 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
     }
 
     const response = await inMeeting(role, username); //Check if user is in a meeting
+    console.log("response: ", response);
+    capturedLogs(role, "pairup called 278 ");
 
     //Check if the user waiting for a game is in a meeting already
     const secondResponse = await inMeeting(
       role === "student" ? "mentor" : "student",
       waitingQueue.username
     );
+    console.log("secondResponse: ", secondResponse);
+    capturedLogs(role, "pairup called 285 ");
+    capturedLogs(role, "pairup called 286" + isBusy);
 
     if (
       response === "There are no current meetings with this user." &&
@@ -438,6 +450,8 @@ router.delete("/dequeue", passport.authenticate("jwt"), async (req, res) => {
 
 //Async function to check whether a username is in a current meeting
 const inMeeting = async (role, username) => {
+  // capturedLogs("481", "in meeting called");
+  console.log("in meeting function called");
   let filters = { CurrentlyOngoing: true };
   if (role === "student") {
     filters.studentUsername = username;
@@ -447,6 +461,8 @@ const inMeeting = async (role, username) => {
     return "Please be either a student or a mentor.";
   }
   const foundMeeting = await meetings.find(filters);
+  console.log("foundMeeting: ", foundMeeting);
+  // capturedLogs("455", "found meeting");
   if (foundMeeting.length !== 0) {
     await deleteUser(role, username);
     return foundMeeting;

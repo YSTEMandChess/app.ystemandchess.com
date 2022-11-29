@@ -232,6 +232,7 @@ export class PlayComponent implements OnInit {
         if (e.origin == environment.urls.chessClientURL) {
           // Means that there is the board state and whatnot
           let info = e.data;
+          console.log('info: ', info);
 
           if (info == 'ReadyToRecieve') {
             this.isReady = true;

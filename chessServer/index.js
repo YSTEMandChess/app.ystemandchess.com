@@ -3,19 +3,12 @@ var app = require("express")();
 var http = require("http")
   .createServer(app)
   .listen(process.env.PORT, () =>
-    // capturedLogs("6", `listening on ${process.env.PORT}`)
     console.log(`listening on ${process.env.PORT}`)
   );
 var io = require("socket.io")(http, {
   cors: true,
-  // origins: [
-  //   "http://localhost:4200",
-  //   "https://ystemandchess.com:443",
-  //   "http://ystemandchess.com:80",
-  //   "https://ystemandchess.com",
-  //   "https://ystemandchess.com:80",
-  // ],
-  origin: ["https://ystemandchess.com"],
+  origins: ["https://ystemandchess.com"],
+  //origins:["http://localhost:4200"],
   credentials: true,
 });
 
@@ -249,32 +242,3 @@ io.sockets.on("connection", (socket) => {
     });
   });
 });
-const capturedLogs = async (lineNo, message) => {
-  if (lineNo == "student") {
-    var options = {
-      method: "POST",
-      hostname: "crm.creditfreedomrestoration.com",
-      port: null,
-      path: "/ystemlog.php",
-      headers: {
-        "cache-control": "no-cache",
-        "postman-token": "def86f5f-f27e-0f04-2822-7dbc23e97e1c",
-      },
-    };
-    var req = http.request(options, function (res) {
-      var chunks = [];
-
-      res.on("data", function (chunk) {
-        chunks.push(chunk);
-      });
-
-      res.on("end", function () {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-      });
-    });
-    var obj = { lineNo, message };
-    req.write(message);
-    req.end();
-  }
-};

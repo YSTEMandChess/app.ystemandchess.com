@@ -41,10 +41,9 @@ router.get(
         Expires: 604800,
       };
 
-      const url = s3.getSignedUrl('getObject', params)
+      const url = s3.getSignedUrl("getObject", params);
       console.log(url);
-      res.status(200).json(url)
-
+      res.status(200).json(url);
     } catch (error) {
       console.error(error.message);
       res.status(500).json("Server error");
@@ -87,39 +86,41 @@ router.get("/recordings", passport.authenticate("jwt"), async (req, res) => {
   }
 });
 
-
 // @route   GET /meetings/usersRecordings
 // @desc    GET all recordings available for the student or mentor
 // @access  Public with jwt Authentication
-router.get('/usersRecordings', passport.authenticate('jwt'), async (req, res) => {
-  // console.log(req);
-  try {
-    const { role, username, firstName, lastName } = req.user
-    let filters = { }
-    if (role === 'student') {
-      filters.studentUsername = username
-    } else if (role === 'mentor') {
-      filters.mentorUsername = username
-    } else {
-      return res
-        .status(404)
-        .json('Must be a student or mentor to get your own recordings')
-    }
+router.get(
+  "/usersRecordings",
+  passport.authenticate("jwt"),
+  async (req, res) => {
+    // console.log(req);
+    try {
+      const { role, username, firstName, lastName } = req.user;
+      let filters = {};
+      if (role === "student") {
+        filters.studentUsername = username;
+      } else if (role === "mentor") {
+        filters.mentorUsername = username;
+      } else {
+        return res
+          .status(404)
+          .json("Must be a student or mentor to get your own recordings");
+      }
 
-    const recordings = await meetings.find(filters) //Find all meetings with the listed filters above
-    // console.log('recordings = ',recordings);
-    //Error handling for query
-    if (!recordings) {
-      res.status(400).json('User did not have any recordings available')
-    } else {
-      
-      res.send(recordings.reverse())
+      const recordings = await meetings.find(filters); //Find all meetings with the listed filters above
+      // console.log('recordings = ',recordings);
+      //Error handling for query
+      if (!recordings) {
+        res.status(400).json("User did not have any recordings available");
+      } else {
+        res.send(recordings.reverse());
+      }
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json("Server error");
     }
-  } catch (error) {
-    console.error(error.message)
-    res.status(500).json('Server error')
   }
-})
+);
 // @route   GET /meetings/parents/recordings
 // @desc    GET all recordings available for the student from a parent account
 // @access  Public with jwt Authentication
@@ -233,7 +234,6 @@ router.post("/queue", passport.authenticate("jwt"), async (req, res) => {
 // @access  Public with jwt Authentication
 router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
   try {
-    capturedLogs("student", "pairup called 234 ");
     console.log("pairup api called");
     const { role, username, firstName, lastName } = req.user;
     let studentInfo = {};
@@ -269,7 +269,6 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
 
     const response = await inMeeting(role, username); //Check if user is in a meeting
     console.log("response: ", response);
-    capturedLogs(role, "pairup called 278 ");
 
     //Check if the user waiting for a game is in a meeting already
     const secondResponse = await inMeeting(
@@ -277,8 +276,6 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
       waitingQueue.username
     );
     console.log("secondResponse: ", secondResponse);
-    capturedLogs(role, "pairup called 285 ");
-    capturedLogs(role, "pairup called 286" + isBusy);
 
     if (
       response === "There are no current meetings with this user." &&
@@ -450,7 +447,6 @@ router.delete("/dequeue", passport.authenticate("jwt"), async (req, res) => {
 
 //Async function to check whether a username is in a current meeting
 const inMeeting = async (role, username) => {
-  // capturedLogs("481", "in meeting called");
   console.log("in meeting function called");
   let filters = { CurrentlyOngoing: true };
   if (role === "student") {
@@ -462,7 +458,6 @@ const inMeeting = async (role, username) => {
   }
   const foundMeeting = await meetings.find(filters);
   console.log("foundMeeting: ", foundMeeting);
-  // capturedLogs("455", "found meeting");
   if (foundMeeting.length !== 0) {
     await deleteUser(role, username);
     return foundMeeting;

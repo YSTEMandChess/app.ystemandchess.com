@@ -3,7 +3,7 @@
 #echo $version > ./currentVersion.txt
 #sudo echo "TAG="$version > ../compose/.env
 
-services=(YStemAndChess chessClient chessServer middlewareNode stockfishServer)
+services=(YStemAndChess chessClient chessServer middleware stockfishServer)
 
 #cd ..
 

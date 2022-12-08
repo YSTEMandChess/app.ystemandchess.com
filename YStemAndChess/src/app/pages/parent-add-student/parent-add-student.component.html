@@ -1,37 +1,104 @@
 <html>
-    <head>
-    </head>
+  <head> </head>
 
-    <header>
-        <app-header></app-header>
-    </header>
+  <header>
+    <app-header></app-header>
+  </header>
 
-    <body>
-        <div class="signupForm">
-            <div *ngFor="let student of students(); let i = index" id="newStudent{{i}}">
-                <div id="error{{i}}" class="errorMessages">
-                    <h3 id="errorFirstName{{i}}"></h3>
-                    <h3 id="errorLastName{{i}}"></h3>
-                    <h3 id="errorUsername{{i}}"></h3>
-                    <h3 id="errorPassword{{i}}"></h3>
-                    <h3 id="errorRetype{{i}}"></h3>
-                </div>
-                <div *ngIf="numNewStudents > 1">
-                    <button type="button" id="x" class="x" (click)="removeNewStudent($event, i)">X</button>
-                </div>
-                <li><input type="text" placeholder="Students first name" id="studentFirstName{{i}}" (blur)="studentFirstNameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
-                <li><input type="text" placeholder="Students last name " id="studentLastName{{i}}" (blur)="studentLastNameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
-                <li><input type="text" placeholder="Student username" id="studentUsername{{i}}" (blur)="studentUsernameVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
-                <li><input type="password" placeholder="Student password" id="studentPassword{{i}}" (blur)="studentPasswordVerification($event, i)" (blur)="ifValidStudentAccount(i)"></li>
-                <li><input type="password" placeholder="Re-type password" id="studentRetypedPassword{{i}}" (blur)="studentRetypePasswordVerification($event, $event, i)" (blur)="ifValidStudentAccount(i)"></li>
-                <button type="button" id="plus{{i}}" class="x" (click)="addNewStudentForm($event, i)">+</button>
-            </div>
-            <button type="submit" [routerLink]="[link]" (click)="SendToDataBase()">Sign up</button>
+  <body>
+    <div class="signupForm">
+      <div
+        *ngFor="let student of students(); let i = index"
+        id="newStudent{{ i }}"
+      >
+        <div id="error{{ i }}" class="errorMessages">
+          <h3 id="errorFirstName{{ i }}"></h3>
+          <h3 id="errorLastName{{ i }}"></h3>
+          <h3 id="errorUsername{{ i }}"></h3>
+          <h3 id="errorEmail{{ i }}"></h3>
+          <h3 id="errorPassword{{ i }}"></h3>
+          <h3 id="errorRetype{{ i }}"></h3>
         </div>
-    </body>
+        <div *ngIf="numNewStudents > 1">
+          <button
+            type="button"
+            id="x"
+            class="x"
+            (click)="removeNewStudent($event, i)"
+          >
+            X
+          </button>
+        </div>
+        <li>
+          <input
+            type="text"
+            placeholder="Students first name"
+            id="studentFirstName{{ i }}"
+            (blur)="studentFirstNameVerification($event, i)"
+            (blur)="ifValidStudentAccount(i)"
+          />
+        </li>
+        <li>
+          <input
+            type="text"
+            placeholder="Students last name "
+            id="studentLastName{{ i }}"
+            (blur)="studentLastNameVerification($event, i)"
+            (blur)="ifValidStudentAccount(i)"
+          />
+        </li>
+        <li>
+          <input
+            type="text"
+            placeholder="Student username"
+            id="studentUsername{{ i }}"
+            (blur)="studentUsernameVerification($event, i)"
+            (blur)="ifValidStudentAccount(i)"
+          />
+        </li>
+        <li>
+          <input
+            type="text"
+            placeholder="Student email"
+            id="studentEmail{{ i }}"
+            (blur)="studentEmailVerification($event, i)"
+            (blur)="ifValidStudentAccount(i)"
+          />
+        </li>
+        <li>
+          <input
+            type="password"
+            placeholder="Student password"
+            id="studentPassword{{ i }}"
+            (blur)="studentPasswordVerification($event, i)"
+            (blur)="ifValidStudentAccount(i)"
+          />
+        </li>
+        <li>
+          <input
+            type="password"
+            placeholder="Re-type password"
+            id="studentRetypedPassword{{ i }}"
+            (blur)="studentRetypePasswordVerification($event, $event, i)"
+            (blur)="ifValidStudentAccount(i)"
+          />
+        </li>
+        <button
+          type="button"
+          id="plus{{ i }}"
+          class="x"
+          (click)="addNewStudentForm($event, i)"
+        >
+          +
+        </button>
+      </div>
+      <button type="submit" [routerLink]="[link]" (click)="SendToDataBase()">
+        Sign up
+      </button>
+    </div>
+  </body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
-    
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>

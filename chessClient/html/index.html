@@ -37,10 +37,12 @@
       (e) => {
         let data = JSON.parse(e.data)
         if (data.boardState == startFEN) {
+	  console.log("[CB] Starting a new chess game");
           game = new Chess()
         }
         playerColor = data.color
         board.orientation(playerColor)
+	console.log("Loading a new chess game. The board state is: " + data.boardState);
         game.load(data.boardState)
         board.position(data.boardState)
         updateStatus()

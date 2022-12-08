@@ -21,6 +21,7 @@ export class ParentAddStudentComponent implements OnInit {
   private studentFirstNameFlag: boolean = false;
   private studentLastNameFlag: boolean = false;
   private studentUserNameFlag: boolean = false;
+  private studentEmailFlag: boolean = false;
   private studentPasswordFlag: boolean = false;
   private studentRetypeFlag: boolean = false;
   numNewStudents: number = 0;
@@ -85,6 +86,20 @@ export class ParentAddStudentComponent implements OnInit {
     }
   }
 
+  studentEmailVerification(email: any, index: any): boolean {
+    email = this.allowTesting(email, 'studentEmail' + index);
+
+    if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/.test(email)) {
+      this.studentEmailFlag = true;
+      document.getElementById('errorEmail' + index).innerHTML = '';
+      return true;
+    } else {
+      this.studentEmailFlag = false;
+      document.getElementById('errorEmail' + index).innerHTML = 'Invalid Email';
+      return false;
+    }
+  }
+
   studentPasswordVerification(password: any, index: any): boolean {
     password = this.allowTesting(password, 'studentPassword' + index);
 
@@ -130,6 +145,7 @@ export class ParentAddStudentComponent implements OnInit {
       this.studentFirstNameFlag === true &&
       this.studentLastNameFlag === true &&
       this.studentUserNameFlag === true &&
+      this.studentEmailFlag === true &&
       this.studentPasswordFlag === true &&
       this.studentRetypeFlag === true
     ) {
@@ -148,6 +164,7 @@ export class ParentAddStudentComponent implements OnInit {
     this.studentFirstNameFlag = false;
     this.studentLastNameFlag = false;
     this.studentUserNameFlag = false;
+    this.studentEmailFlag = false;
     this.studentPasswordFlag = false;
     this.studentRetypeFlag = false;
   }
@@ -162,6 +179,9 @@ export class ParentAddStudentComponent implements OnInit {
     var studentUserName = (<HTMLInputElement>(
       document.getElementById('studentUsername' + index)
     )).value;
+    var studentEmail = (<HTMLInputElement>(
+      document.getElementById('studentEmail' + index)
+    )).value;
     var studentPasssword = (<HTMLInputElement>(
       document.getElementById('studentPassword' + index)
     )).value;
@@ -170,6 +190,7 @@ export class ParentAddStudentComponent implements OnInit {
       first: studentFirstName,
       last: studentLastName,
       username: studentUserName,
+      email: studentEmail,
       password: studentPasssword,
     };
     return student;
@@ -239,9 +260,10 @@ export class ParentAddStudentComponent implements OnInit {
       let firstName: string = this.newStudents[index].first;
       let lastName: string = this.newStudents[index].last;
       let userName: string = this.newStudents[index].username;
+      let email: string = this.newStudents[index].email;
       let password: string = this.newStudents[index].password;
 
-      url = `${environment.urls.middlewareURL}/user/children?first=${firstName}&last=${lastName}&username=${userName}&password=${password}`;
+      url = `${environment.urls.middlewareURL}/user/children?first=${firstName}&last=${lastName}&username=${userName}&email=${email}&password=${password}`;
 
       this.httpGetAsync(url, 'POST', (response) => {
         if (
@@ -283,5 +305,6 @@ export interface Student {
   first: string;
   last: string;
   username: string;
+  email: string;
   password: string;
 }

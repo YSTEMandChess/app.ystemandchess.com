@@ -40,6 +40,8 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { SetPasswordComponent } from './pages/set-password/set-password.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -75,6 +77,8 @@ const agoraConfig: AgoraConfig = {
     LandingPageComponent,
     BoardAnalyzerComponent,
     WhyChessComponent,
+    ResetPasswordComponent,
+    SetPasswordComponent,
   ],
   imports: [
     BrowserModule,

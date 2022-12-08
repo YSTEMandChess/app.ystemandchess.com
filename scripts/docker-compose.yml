@@ -10,10 +10,17 @@ services:
     container_name: reverse-proxy-server
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - /home/azureuser/ysc-2/app.ystemandchess.com/YStemAndChess/dist_new/YStemAndChess:/var/www/html
+      - /etc/letsencrypt/live/ystemandchess.com/fullchain.pem:/etc/ysc-certs/ysc-cert.pem
+      - /etc/letsencrypt/live/ystemandchess.com/privkey.pem:/etc/ysc-certs/ysc-key.pem
+      - /etc/letsencrypt/options-ssl-nginx.conf:/etc/ysc-certs/options-ssl-nginx.conf
+      - /etc/letsencrypt/ssl-dhparams.pem:/etc/ysc-certs/ysc-dhparam.pem
+      - /etc/letsencrypt/live/ystemandchess.com/chain.pem:/etc/ysc-certs/ysc-chain.pem
     networks:
       - ysc-net
     ports:
-      - '80:80'
+      - 80:80
+      - 443:443
     depends_on:
       - chessserver
       - middleware
@@ -21,61 +28,77 @@ services:
       - chessclient
       - ystemandchess
   chessserver:
-    image: chessserver
+    image: chessserver:${TAG}
     container_name: chessserver
     environment:
       - PORT=3000
     networks:
       - ysc-net
     expose:
-      - '3000'
-    volumes:
-      - ../chessServer:/usr/src/app
+      - "3000"
   chessclient:
-    image: chessclient
+    image: chessclient:${TAG}
     container_name: chessclient
     environment:
       - PARENT=ystemandchess
     networks:
       - ysc-net
     expose:
-      - '80'
-    volumes:
-      - ../chessClient:/usr/share/nginx/html
+      - "80"
   stockfishserver:
-    image: stockfishserver
+    image: stockfishserver:${TAG}
     container_name: stockfishserver
     environment:
       - PORT=8080
     networks:
       - ysc-net
     expose:
-      - '8080'
-    volumes:
-      - ../stockfishServer:/usr/src/app
+      - "8080"
   middleware:
-    image: middleware
+    image: middlewarenode
     container_name: middleware
-    env_file:
-      - ../middleware/environment.php
+    environment:
+      - PORT=8000
+      - indexKey=4F15D94B7A5CF347A36FC1D85A3B487D8B4F596FB62C51EFF9E518E433EA4C8C
+      - awsAccessKey=AKIA3W5HAAMI23BHM5JP
+      - awsSecretKey=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
+      - mongoURI=mongodb+srv://userAdmin2:Ap4OoVnQX4ovWrfy@cluster0-rxbrl.mongodb.net/ystem?retryWrites=true&w=majority
+      - appID=6c368b93b82a4b3e9fb8e57da830f2a4
+      - auth=Basic OTE3ZTZlOTlmODgxNDEwYWI2ZjEyNmY3ZTJiMWM5MDc6NWYwMTU0MTIwMmM3NDYzNzhjZTQ3Nzg3NTljYzg4NGE=
+      - channel=10000
+      - uid=123
+      - jwtSecret=*ystemandchess
+      - NODE_ENV=production
+      - basepath=https://ystemandchess.com
+      - clientId=63720075567-bebpkmcvvcq4u8uknhqaqgpnua7q6vv4.apps.googleusercontent.com
+      - clientSecret=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
+      - redirectUri=https://developers.google.com/oauthplayground
+      - refreshToken=1//04rlOFcKqdnGxCgYIARAAGAQSNwF-L9IrrWBVBTj43iwJicMSiNDC8HeaQuMh8jKm6YuudLySpUZUWDWkEuzHAmXuJ0vE1LvnUro
+      - user=khyati@ystemandchess.com
+      - senderEmail=khyati@ystemandchess.com
     networks:
       - ysc-net
     expose:
       - '8000'
     volumes:
-      - ../middleware:/var/www/html
+      - ../middleware:/var/www/html 
   ystemandchess:
-    image: ystemandchess
+    image: ystemandchess:${TAG}
     container_name: ystemandchess
+    environment:
+      - agora:appID=6c368b93b82a4b3e9fb8e57da830f2a4
+      - urls:middlewareURL=52.249.251.163/middleware
+      - urls:chessClientURL=52.249.251.163/chessclient
+      - urls:stockFishURL=52.249.251.163/stockfishserver
+      - urls:chessServerURL=52.249.251.163/chessserver
     networks:
       - ysc-net
-    ports:
-      - '80'
+    expose:
+      - "80"
     depends_on:
       - middleware
       - stockfishserver
       - chessclient
       - chessserver
     volumes:
-      - ../YStemAndChess:/usr/src/app/
-      - /usr/src/app/node_modules
+      - ../YStemAndChess:/usr/src/app

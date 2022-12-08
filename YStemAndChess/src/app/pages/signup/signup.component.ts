@@ -37,6 +37,7 @@ export class SignupComponent implements OnInit {
   private studentUserNameFlag: boolean = false;
   private studentPasswordFlag: boolean = false;
   private studentRetypeFlag: boolean = false;
+  private studentEmailFlag: boolean = true;
   private numNewStudents: number = 0;
 
   //http is for testing
@@ -241,6 +242,7 @@ export class SignupComponent implements OnInit {
       this.studentFirstNameFlag === true &&
       this.studentLastNameFlag === true &&
       this.studentUserNameFlag === true &&
+      this.studentEmailFlag === true &&
       this.studentPasswordFlag === true &&
       this.studentRetypeFlag === true
     ) {
@@ -257,6 +259,7 @@ export class SignupComponent implements OnInit {
     this.studentFirstNameFlag = false;
     this.studentLastNameFlag = false;
     this.studentUserNameFlag = false;
+    this.studentEmailFlag = false;
     this.studentPasswordFlag = false;
     this.studentRetypeFlag = false;
   }
@@ -271,6 +274,9 @@ export class SignupComponent implements OnInit {
     var studentUserName = (<HTMLInputElement>(
       document.getElementById('studentUsername' + index)
     )).value;
+    var studentEmail = (<HTMLInputElement>(
+      document.getElementById('studentEmail' + index)
+    )).value;
     var studentPasssword = (<HTMLInputElement>(
       document.getElementById('studentPassword' + index)
     )).value;
@@ -278,6 +284,7 @@ export class SignupComponent implements OnInit {
     let student: Student = {
       first: studentFirstName,
       last: studentLastName,
+      email: studentEmail,
       username: studentUserName,
       password: studentPasssword,
     };
@@ -422,6 +429,7 @@ export class SignupComponent implements OnInit {
 export interface Student {
   first: string;
   last: string;
+  email: string;
   username: string;
   password: string;
 }

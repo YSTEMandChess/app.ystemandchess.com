@@ -28,6 +28,8 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { SetPasswordComponent } from './pages/set-password/set-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,6 +44,16 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
+    data: { redirect: true },
+    canActivate: [LoginGuardService],
+  },
+  {
+    path: 'resetpassword',
+    component: ResetPasswordComponent,
+  },
+  {
+    path: 'setpassword',
+    component: SetPasswordComponent,
     data: { redirect: true },
     canActivate: [LoginGuardService],
   },
@@ -65,7 +77,7 @@ const routes: Routes = [
     component: ParentAddStudentComponent,
     data: { roles: ['parent', 'admin'] },
     canActivate: [LoginGuardService],
-  }, 
+  },
   {
     path: 'user-profile',
     component: UserProfileComponent,

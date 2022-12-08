@@ -5,7 +5,7 @@
 
 services=(YStemAndChess chessClient chessServer middlewareNode stockfishServer)
 
-cd ..
+#cd ..
 
 for service in "${services[@]}"
 do

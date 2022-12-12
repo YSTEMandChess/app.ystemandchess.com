@@ -229,22 +229,47 @@ export class PlayComponent implements OnInit {
     eventer(
       messageEvent,
       (e) => {
-        if (e.origin == environment.urls.chessClientURL) {
-          // Means that there is the board state and whatnot
-          let info = e.data;
-          console.log('info: ', info);
+        if (environment.productionType === 'development') {
+          if (e.origin == environment.urls.chessClientURL) {
+            // Means that there is the board state and whatnot
+            let info = e.data;
+            console.log('info: ', info);
 
-          if (info == 'ReadyToRecieve') {
-            this.isReady = true;
-            this.sendFromQueue();
-          } else if (info == 'checkmate') {
-            this.gameOverAlert();
-          } else if (info == 'draw') {
-            this.gameOverAlert();
-          } else if (info == 'gameOver') {
-            this.gameOverAlert();
+            if (info == 'ReadyToRecieve') {
+              this.isReady = true;
+              this.sendFromQueue();
+            } else if (info == 'checkmate') {
+              this.gameOverAlert();
+            } else if (info == 'draw') {
+              this.gameOverAlert();
+            } else if (info == 'gameOver') {
+              this.gameOverAlert();
+            } else {
+              this.updateBoardState(info);
+            }
           } else {
-            this.updateBoardState(info);
+            console.log('chessClientURL Missmatch.');
+          }
+        } else {
+          if (e.origin != environment.urls.chessClientURL) {
+            // Means that there is the board state and whatnot
+            let info = e.data;
+            console.log('info: ', info);
+
+            if (info == 'ReadyToRecieve') {
+              this.isReady = true;
+              this.sendFromQueue();
+            } else if (info == 'checkmate') {
+              this.gameOverAlert();
+            } else if (info == 'draw') {
+              this.gameOverAlert();
+            } else if (info == 'gameOver') {
+              this.gameOverAlert();
+            } else {
+              this.updateBoardState(info);
+            }
+          } else {
+            console.log('chessClientURL Missmatch.');
           }
         }
       },

@@ -58,6 +58,10 @@ const meetingsSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    moves: {
+      type: Array,
+      default: [],
+    },
   },
   { versionKey: false }
 );

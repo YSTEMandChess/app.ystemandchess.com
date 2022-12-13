@@ -535,5 +535,95 @@ const practiceLessons = [
       },
     ],
   },
+  {
+    practice_name: "The Pin",
+    subpractice: [
+      {
+        subPracticeName: "Set up an absolute pin #1",
+        startFen: "7k/8/8/4n3/4P3/8/8/6BK",
+        info: "An absolute pin is when a piece is pinned to its king and can't move without exposing its king to a check from an opposing piece on the same line or diagonal. Pin the knight to win it.",
+      },
+      {
+        subPracticeName: "Set up an absolute pin #2",
+        startFen: "5k2/p1p2pp1/7p/2r5/8/1P3P2/PBP3PP/1K6",
+        info: "Get a winning position in 2 moves",
+      },
+      {
+        subPracticeName: "Set up an relative pin #1",
+        startFen: "1k6/ppp3q1/8/4r3/8/8/3b1PPP/R4QK1",
+        info: "A relative pin is one where the piece shielded by the pinned piece is a piece other than the king, but it's typically more valuable than the pinned piece. Moving such a pinned piece is legal but may not be prudent, as the shielded piece would then be vulnerable to capture. Do you see the immediate relative pin?",
+      },
+      {
+        subPracticeName: "Exploit the pin #1",
+        startFen: "4k3/6p1/5p1p/4n3/8/7P/5PP1/4R1K1",
+        info: "Get a winning position in 2 moves",
+      },
+      {
+        subPracticeName: "Exploit the pin #2",
+        startFen: "r4rk1/pp1p1ppp/1qp2n2/8/4P3/1P1P2Q1/PBP2PPP/R4RK1",
+        info: "Get a winning position in 1 moves",
+      },
+      {
+        subPracticeName: "Exploit the pin #3",
+        startFen: "4r1r1/2p5/1p1kn3/p1p1R1p1/P6p/5N1P/1PP1R1PK/8",
+        info: "Get a winning position in 1 moves",
+      },
+      {
+        subPracticeName: "Exploit the pin #4",
+        startFen: "1r1n1rk1/ppq2p2/2b2bp1/2pB3p/2P4P/4P3/PBQ2PP1/1R3RK1",
+        info: "Checkmate the opponent in 2 moves",
+      },
+      {
+        subPracticeName: "Exploit the pin #5",
+        startFen: "K1R3N1/1QP3P1/P1r2P2/p4p2/3P1bp1/8/1pp5/1k5q",
+        info: "Get a winning position in 3 moves",
+      },
+    ],
+  },
+  {
+    practice_name: "The Skewer",
+    subpractice: [
+      {
+        subPracticeName: "Relative skewer #1",
+        startFen: "8/1r3k2/2q1ppp1/8/5PB1/4P3/4QK2/5R2",
+        info: "Get a winning position in 2 moves",
+      },
+      {
+        subPracticeName: "Relative skewer #2",
+        startFen: "r2r2k1/2p2ppp/5n2/4p3/pB2P3/P2q3P/2R2PP1/2RQ2K1",
+        info: "Get a winning position in 2 moves",
+      },
+      {
+        subPracticeName: "Relative skewer #3",
+        startFen: "R2K3R/3NBQ2/1P4PP/P1PBpP2/2n2p2/4b3/1p2bqpp/k1rr4",
+        info: "Get a winning position in 3 moves",
+      },
+      {
+        subPracticeName: "Absolute skewer #1",
+        startFen: "8/8/2Q5/2BK4/8/8/2bkq3/8",
+        info: "Get a winning position in 2 moves",
+      },
+      {
+        subPracticeName: "Absolute skewer #2",
+        startFen: "2Q5/1p4q1/p4k2/6p1/P3b3/6BP/5PP1/6K1",
+        info: "Get a winning position in 3 moves",
+      },
+      {
+        subPracticeName: "Absolute skewer #3",
+        startFen: "5Q2/2k2p2/3bqP2/R2p4/3P1p2/2p4P/2P3P1/7K",
+        info: "Get a winning position in 3 moves",
+      },
+      {
+        subPracticeName: "Absolute skewer #4",
+        startFen: "5k2/pp1b4/3N1pp1/3P4/2p5/q1P1QP2/5KP1/8",
+        info: "Get a winning position in 4 moves",
+      },
+      {
+        subPracticeName: "Absolute skewer #5",
+        startFen: "6Q1/6p1/2k4p/R6B/p7/8/2P3P1/2K5",
+        info: "Get a winning position in 3 moves",
+      },
+    ],
+  },
 ];
 module.exports = practiceLessons;

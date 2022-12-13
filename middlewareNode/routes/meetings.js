@@ -507,5 +507,54 @@ const updateTimePlayed = async (username, firstName, lastName, timePlayed) => {
   await user.save(); //Save the new time played
   return "Saved";
 };
+//Async function to get moves from the database
+const getMoves = async (meetingId) => {
+  const moves = await meetings.findOne({
+    meetingId: meetingId,
+    CurrentlyOngoing: true,
+  });
+  console.log("moves", moves);
+  return moves;
+};
+//Async function to store moves in the database
+const updateMoves = async (meetingId, oldMovesArr) => {
+  const newdata = await meetings.findOneAndUpdate(
+    { meetingId: meetingId },
+    { moves: oldMovesArr }
+  );
+  return newdata;
+};
+
+router.post("/boardState", passport.authenticate("jwt"), async (req, res) => {
+  try {
+    const { meetingId, fen, pos, image } = req.query;
+    let meeting = await getMoves(meetingId);
+    let oldMovesArr = meeting.moves;
+    if (
+      oldMovesArr.length === 0 ||
+      oldMovesArr[oldMovesArr.length - 1]?.fen !== fen
+    ) {
+      fen && oldMovesArr.push({ fen, pos, image });
+      let updatedMove = await updateMoves(meetingId, oldMovesArr);
+      res.status(200).send(updatedMove);
+    } else {
+      res.status(202).send(oldMovesArr);
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
+  try {
+    const { meetingId } = req.query;
+    const getBoardStates = await getMoves(meetingId);
+    res.status(200).send(getBoardStates);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
 
 module.exports = router;

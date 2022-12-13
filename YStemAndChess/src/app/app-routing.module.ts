@@ -30,6 +30,7 @@ import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.co
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
+import { PracticeComponent } from './pages/practice/practice.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -83,6 +84,10 @@ const routes: Routes = [
     component: UserProfileComponent,
     data: { roles: ['student'] },
     canActivate: [LoginGuardService],
+  },
+  {
+    path: 'practice',
+    component: PracticeComponent,
   },
   {
     path: 'play-mentor',

@@ -1,29 +1,30 @@
-const express = require('express')
-const connectDB = require('./config/db')
-const passport = require('passport')
-require('./config/passport.js')
-const app = express()
-const cors = require('cors')
-const config = require('config')
+const express = require("express");
+const connectDB = require("./config/db");
+const passport = require("passport");
+require("./config/passport.js");
+const app = express();
+const cors = require("cors");
+const config = require("config");
 
 //Enable Cors
-app.use(cors(config.get('corsOptions')))
+app.use(cors(config.get("corsOptions")));
 
 // Connect Database
-connectDB()
+connectDB();
 
 // Init Middleware
-app.use(express.json({ extended: false }))
+app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('API Running'))
+app.get("/", (req, res) => res.send("API Running"));
 
 // Define Routes
-app.use(passport.initialize())
-app.use(passport.session())
-app.use('/user', require('./routes/users'))
-app.use('/category', require('./routes/categorys'))
-app.use('/meetings', require('./routes/meetings'))
-app.use('/auth', require('./routes/auth'))
-const PORT = process.env.PORT || 8000
+app.use(passport.initialize());
+app.use(passport.session());
+app.use("/user", require("./routes/users"));
+app.use("/category", require("./routes/categorys"));
+app.use("/meetings", require("./routes/meetings"));
+app.use("/auth", require("./routes/auth"));
+app.use("/practice", require("./routes/practice"));
+const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

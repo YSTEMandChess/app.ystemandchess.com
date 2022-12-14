@@ -205,13 +205,14 @@ export class PlayComponent implements OnInit {
               role: userContent.role,
             })
           );
-          this.getMovesList();
           this.socket.listen('boardState').subscribe((data) => {
+            this.getMovesList();
             if (this.isReady && this.isStepLast) {
               let newData = JSON.parse(<string>data);
               var chessBoard = (<HTMLFrameElement>(
                 document.getElementById('chessBd')
               )).contentWindow;
+              this.getMovesList();
               chessBoard.postMessage(
                 JSON.stringify({
                   boardState: newData.boardState,
@@ -221,7 +222,6 @@ export class PlayComponent implements OnInit {
               );
             } else {
               this.messageQueue.push(data);
-              this.getMovesList();
             }
           });
         }
@@ -270,7 +270,6 @@ export class PlayComponent implements OnInit {
               this.pieceImage = piece[1];
             } else {
               this.updateBoardState(info);
-              this.getMovesList();
             }
           } else {
             console.log('chessClientURL Missmatch.');
@@ -296,7 +295,6 @@ export class PlayComponent implements OnInit {
               this.pieceImage = piece[1];
             } else {
               this.updateBoardState(info);
-              this.getMovesList();
             }
           } else {
             console.log('chessClientURL Missmatch.');
@@ -362,20 +360,19 @@ export class PlayComponent implements OnInit {
 
   public updateBoardState(data) {
     let userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
-    let url: string;
-    this.getMovesList();
-    url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
-    this.httpGetAsync(url, 'POST', (response) => {
-      response = JSON.parse(response);
-      console.log('response: ', response);
-      this.displayMoves = response.moves || [];
-      this.scrollToBottom();
-    });
-    this.getMovesList();
     this.socket.emitMessage(
       'newState',
       JSON.stringify({ boardState: data, username: userContent.username })
     );
+    this.getMovesList();
+    let url: string;
+    url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
+    this.httpGetAsync(url, 'POST', (response) => {
+      response = JSON.parse(response);
+      this.displayMoves = response.moves || [];
+      this.scrollToBottom();
+    });
+    this.getMovesList();
   }
 
   public createNewGame() {
@@ -400,14 +397,12 @@ export class PlayComponent implements OnInit {
         : index > this.displayMoves.length - 1
         ? this.displayMoves.length - 1
         : index;
-    this.getMovesList();
     if (this.displayMoves.length - 1 === index) {
       this.isStepLast = true;
     } else {
       this.isStepLast = false;
     }
     this.changeBoardState(this.displayMoves[index]?.fen);
-    this.getMovesList();
     if (this.isNearBottom) {
       this.scrollToBottom();
     }

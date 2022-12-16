@@ -81,12 +81,12 @@ export class ResetPasswordComponent implements OnInit {
       `${environment.urls.middlewareURL}/user/sendMail?username=${username}&email=${email}`,
       'POST',
       (response) => {
-        if (response.status === 400) {
-          this.result = 'Invalid data';
-          this.showData = false;
-        } else {
+        if (response.status === 200) {
           this.result = '';
           this.showData = true;
+        } else {
+          this.result = 'Invalid data';
+          this.showData = false;
         }
       }
     );

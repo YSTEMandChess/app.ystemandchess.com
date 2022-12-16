@@ -7,8 +7,8 @@ var http = require("http")
   );
 var io = require("socket.io")(http, {
   cors: true,
-   origins: ["https://ystemandchess.com"],
-  // origins:["http://localhost:4200"],
+    origins: ["https://ystemandchess.com"],
+  // origins: ["http://localhost:4200"],
   credentials: true,
 });
 
@@ -45,7 +45,7 @@ io.sockets.on("connection", (socket) => {
 
     if (newGame) {
       let colors = [];
-      if (Math.random() > 0.5) {
+      if (parsedmsg.role == "student") {
         colors = ["black", "white"];
       } else {
         colors = ["white", "black"];

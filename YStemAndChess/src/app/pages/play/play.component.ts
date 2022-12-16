@@ -304,6 +304,9 @@ export class PlayComponent implements OnInit {
       false
     );
   }
+  reload() {
+    window.location.reload();
+  }
   getMovesList = () => {
     let url: string = '';
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
@@ -399,6 +402,7 @@ export class PlayComponent implements OnInit {
         : index;
     if (this.displayMoves.length - 1 === index) {
       this.isStepLast = true;
+      this.reload();
     } else {
       this.isStepLast = false;
     }

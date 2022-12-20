@@ -42,7 +42,6 @@ import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.co
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
-import { PracticeComponent } from './pages/practice/practice.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -80,7 +79,6 @@ const agoraConfig: AgoraConfig = {
     WhyChessComponent,
     ResetPasswordComponent,
     SetPasswordComponent,
-    PracticeComponent,
   ],
   imports: [
     BrowserModule,

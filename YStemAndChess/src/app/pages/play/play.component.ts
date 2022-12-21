@@ -206,7 +206,12 @@ export class PlayComponent implements OnInit {
             })
           );
           this.socket.listen('boardState').subscribe((data) => {
-            this.getMovesList();
+            setTimeout(()=>{              
+              this.getMovesList();
+              setTimeout(()=>{              
+                this.scrollToBottom();
+            }, 500);
+          }, 1000);
             if (this.isReady && this.isStepLast) {
               let newData = JSON.parse(<string>data);
               var chessBoard = (<HTMLFrameElement>(
@@ -254,7 +259,7 @@ export class PlayComponent implements OnInit {
             let info = e.data;
             const temp = info.split(':');
             const piece = info.split('-');
-
+          
             if (info == 'ReadyToRecieve') {
               this.isReady = true;
               this.sendFromQueue();
@@ -375,7 +380,12 @@ export class PlayComponent implements OnInit {
       this.displayMoves = response.moves || [];
       this.scrollToBottom();
     });
-    this.getMovesList();
+      setTimeout(()=>{              
+        this.getMovesList();
+          setTimeout(()=>{              
+            this.scrollToBottom();
+        }, 500);
+    }, 1000);
   }
 
   public createNewGame() {

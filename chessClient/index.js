@@ -131,8 +131,8 @@ function onDrop(source, target, draggedPieceSource) {
   }
 
   updateStatus();
-  sendToParent(`piece-${draggedPieceSource}`);
-  sendToParent(`target:${move.to}`);
+  setTimeout(sendToParent(`piece-${draggedPieceSource}`), 500);
+  setTimeout(sendToParent(`target:${move.to}`), 500);
   sendToParent(game.fen());
 }
 

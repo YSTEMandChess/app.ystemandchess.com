@@ -130,8 +130,15 @@ function onDrop(source, target) {
     }
   }
 
+<<<<<<< Updated upstream
   updateStatus()
   sendToParent(game.fen())
+=======
+  updateStatus();
+  setTimeout(sendToParent(`piece-${draggedPieceSource}`), 500);
+  setTimeout(sendToParent(`target:${move.to}`), 500);
+  sendToParent(game.fen());
+>>>>>>> Stashed changes
 }
 
 function sendToParent(fen) {

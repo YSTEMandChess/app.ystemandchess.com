@@ -189,7 +189,17 @@ export class PlayComponent implements OnInit {
           );
 
           this.socket.listen('boardState').subscribe((data) => {
+<<<<<<< Updated upstream
             if (this.isReady) {
+=======
+            setTimeout(()=>{              
+              this.getMovesList();
+              setTimeout(()=>{              
+                this.scrollToBottom();
+            }, 500);
+          }, 1000);
+            if (this.isReady && this.isStepLast) {
+>>>>>>> Stashed changes
               let newData = JSON.parse(<string>data);
               var chessBoard = (<HTMLFrameElement>(
                 document.getElementById('chessBd')
@@ -233,8 +243,14 @@ export class PlayComponent implements OnInit {
           if (e.origin == environment.urls.chessClientURL) {
             // Means that there is the board state and whatnot
             let info = e.data;
+<<<<<<< Updated upstream
             console.log('info: ', info);
 
+=======
+            const temp = info.split(':');
+            const piece = info.split('-');
+          
+>>>>>>> Stashed changes
             if (info == 'ReadyToRecieve') {
               this.isReady = true;
               this.sendFromQueue();
@@ -320,6 +336,23 @@ export class PlayComponent implements OnInit {
       'newState',
       JSON.stringify({ boardState: data, username: userContent.username })
     );
+<<<<<<< Updated upstream
+=======
+    this.getMovesList();
+    let url: string;
+    url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
+    this.httpGetAsync(url, 'POST', (response) => {
+      response = JSON.parse(response);
+      this.displayMoves = response.moves || [];
+      this.scrollToBottom();
+    });
+      setTimeout(()=>{              
+        this.getMovesList();
+          setTimeout(()=>{              
+            this.scrollToBottom();
+        }, 500);
+    }, 1000);
+>>>>>>> Stashed changes
   }
 
   public createNewGame() {

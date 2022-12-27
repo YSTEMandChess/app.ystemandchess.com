@@ -234,7 +234,6 @@ router.post("/queue", passport.authenticate("jwt"), async (req, res) => {
 // @access  Public with jwt Authentication
 router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
   try {
-    console.log("pairup api called");
     const { role, username, firstName, lastName } = req.user;
     let studentInfo = {};
     let mentorInfo = {};
@@ -246,14 +245,12 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
         {},
         { sort: { created_at: 1 } }
       );
-      console.log("waitingQueuestudent: ", waitingQueue);
     } else if (role === "mentor") {
       waitingQueue = await waitingStudents.findOne(
         {},
         {},
         { sort: { created_at: 1 } }
       );
-      console.log("waitingQueuementor: ", waitingQueue);
     } else {
       return res
         .status(404)
@@ -268,7 +265,6 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
     }
 
     const response = await inMeeting(role, username); //Check if user is in a meeting
-    console.log("response: ", response);
 
     //Check if the user waiting for a game is in a meeting already
     const secondResponse = await inMeeting(
@@ -420,7 +416,6 @@ router.put("/endMeeting", passport.authenticate("jwt"), async (req, res) => {
     if (returnMessage !== "Saved") {
       return res.status(404).json(returnMessage);
     }
-
     return res.sendStatus(200);
   } catch (error) {
     console.error(error.message);
@@ -447,7 +442,6 @@ router.delete("/dequeue", passport.authenticate("jwt"), async (req, res) => {
 
 //Async function to check whether a username is in a current meeting
 const inMeeting = async (role, username) => {
-  console.log("in meeting function called");
   let filters = { CurrentlyOngoing: true };
   if (role === "student") {
     filters.studentUsername = username;
@@ -457,7 +451,6 @@ const inMeeting = async (role, username) => {
     return "Please be either a student or a mentor.";
   }
   const foundMeeting = await meetings.find(filters);
-  console.log("foundMeeting: ", foundMeeting);
   if (foundMeeting.length !== 0) {
     await deleteUser(role, username);
     return foundMeeting;
@@ -513,14 +506,13 @@ const getMoves = async (meetingId) => {
     meetingId: meetingId,
     CurrentlyOngoing: true,
   });
-  console.log("moves", moves);
   return moves;
 };
 //Async function to store moves in the database
-const updateMoves = async (meetingId, oldMovesArr) => {
+const updateMoves = async (meetingId, moveArray) => {
   const newdata = await meetings.findOneAndUpdate(
     { meetingId: meetingId },
-    { moves: oldMovesArr }
+    { moves: moveArray }
   );
   return newdata;
 };
@@ -529,13 +521,20 @@ router.post("/boardState", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { meetingId, fen, pos, image } = req.query;
     let meeting = await getMoves(meetingId);
-    let oldMovesArr = meeting.moves;
+    let moveArray = meeting.moves;
+    let oldMovesArr = [];
+    let moveArrayLength = moveArray.length;
+    if (moveArray.length > 0) {
+      oldMovesArr = moveArray[moveArrayLength - 1];
+      moveArrayLength = moveArray.length - 1;
+    }
     if (
       oldMovesArr.length === 0 ||
       oldMovesArr[oldMovesArr.length - 1]?.fen !== fen
     ) {
       fen && oldMovesArr.push({ fen, pos, image });
-      let updatedMove = await updateMoves(meetingId, oldMovesArr);
+      moveArray[moveArrayLength] = oldMovesArr;
+      let updatedMove = await updateMoves(meetingId, moveArray);
       res.status(200).send(updatedMove);
     } else {
       res.status(202).send(oldMovesArr);
@@ -556,5 +555,25 @@ router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
     res.status(500).json("Server error");
   }
 });
+
+router.post(
+  "/newBoardState",
+  passport.authenticate("jwt"),
+  async (req, res) => {
+    try {
+      const { meetingId } = req.query;
+      let meeting = await getMoves(meetingId);
+      let moveArray = meeting.moves;
+      let oldMovesArr = [];
+      let moveArrayLength = moveArray.length;
+      moveArray[moveArrayLength] = oldMovesArr;
+      let updatedMove = await updateMoves(meetingId, moveArray);
+      res.status(200).send(updatedMove);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json("Server error");
+    }
+  }
+);
 
 module.exports = router;

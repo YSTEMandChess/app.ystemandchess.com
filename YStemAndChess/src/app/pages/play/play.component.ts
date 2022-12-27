@@ -64,7 +64,6 @@ export class PlayComponent implements OnInit {
   @ViewChildren('item') itemElements: QueryList<any>;
   ngOnInit() {
     let userContent;
-
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
       this.httpGetAsync(
@@ -206,18 +205,18 @@ export class PlayComponent implements OnInit {
             })
           );
           this.socket.listen('boardState').subscribe((data) => {
-            setTimeout(()=>{              
+            setTimeout(() => {
               this.getMovesList();
-              setTimeout(()=>{              
+              setTimeout(() => {
                 this.scrollToBottom();
-            }, 500);
-          }, 1000);
+              }, 1000);
+            }, 1000);
             if (this.isReady && this.isStepLast) {
               let newData = JSON.parse(<string>data);
               var chessBoard = (<HTMLFrameElement>(
                 document.getElementById('chessBd')
               )).contentWindow;
-              this.getMovesList();
+              //this.getMovesList();
               chessBoard.postMessage(
                 JSON.stringify({
                   boardState: newData.boardState,
@@ -259,7 +258,7 @@ export class PlayComponent implements OnInit {
             let info = e.data;
             const temp = info.split(':');
             const piece = info.split('-');
-          
+
             if (info == 'ReadyToRecieve') {
               this.isReady = true;
               this.sendFromQueue();
@@ -317,7 +316,12 @@ export class PlayComponent implements OnInit {
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
     this.httpGetAsync(url, 'GET', (response) => {
       response = JSON.parse(response);
-      this.displayMoves = response.moves || [];
+      let finalMove =
+        response.moves.length > 0
+          ? response.moves[response.moves.length - 1]
+          : response.moves;
+      this.displayMoves = finalMove || [];
+      this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
     });
   };
   private sendFromQueue() {
@@ -372,22 +376,25 @@ export class PlayComponent implements OnInit {
       'newState',
       JSON.stringify({ boardState: data, username: userContent.username })
     );
-    this.getMovesList();
+    // this.getMovesList();
     let url: string;
     url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
     this.httpGetAsync(url, 'POST', (response) => {
       response = JSON.parse(response);
-      this.displayMoves = response.moves || [];
+      let finalMove =
+        response.moves.length > 0
+          ? response.moves[response.moves.length - 1]
+          : response.moves;
+      this.displayMoves = finalMove || [];
       this.scrollToBottom();
     });
-      setTimeout(()=>{              
-        this.getMovesList();
-          setTimeout(()=>{              
-            this.scrollToBottom();
-        }, 500);
+    setTimeout(() => {
+      this.getMovesList();
+      setTimeout(() => {
+        this.scrollToBottom();
+      }, 500);
     }, 1000);
   }
-
   public createNewGame() {
     let userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
     this.socket.emitMessage(
@@ -403,20 +410,35 @@ export class PlayComponent implements OnInit {
       JSON.stringify({ username: userContent.username })
     );
   }
-  setMove(index) {
+  setMove(index, direction) {
     this.currentStep =
       index <= 0
         ? 0
         : index > this.displayMoves.length - 1
         ? this.displayMoves.length - 1
         : index;
-    if (this.displayMoves.length - 1 === index) {
-      this.isStepLast = true;
-      this.reload();
+    if (direction != 'backward') {
+      if (this.displayMoves.length - 1 === index) {
+        this.isStepLast = true;
+        this.reload();
+      } else {
+        this.isStepLast = false;
+      }
     } else {
-      this.isStepLast = false;
+      if (this.displayMoves.length <= index) {
+        this.isStepLast = true;
+        this.reload();
+      } else {
+        this.isStepLast = false;
+      }
     }
-    this.changeBoardState(this.displayMoves[index]?.fen);
+    let movePos = 0;
+    if (index <= 0) {
+      movePos = 0;
+    } else {
+      movePos = index - 1;
+    }
+    this.changeBoardState(this.displayMoves[movePos]?.fen);
     if (this.isNearBottom) {
       this.scrollToBottom();
     }
@@ -430,7 +452,7 @@ export class PlayComponent implements OnInit {
   }
 
   private scrollToBottom(): void {
-    this.scrollContainer = this.scrollFrame.nativeElement;
+    this.scrollContainer = this.scrollFrame?.nativeElement;
     this.scrollContainer?.scroll({
       top: this.scrollContainer?.scrollHeight,
       left: 0,

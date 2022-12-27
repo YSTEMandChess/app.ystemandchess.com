@@ -51,7 +51,7 @@
           <div style="width: 100px">
             <div
               *ngFor="let item of displayMoves; let i = index"
-              (click)="setMove(i)"
+              (click)="setMove(i,'direct')"
             >
               <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
                 <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}

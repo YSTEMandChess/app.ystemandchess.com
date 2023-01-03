@@ -185,11 +185,23 @@ export class PlayComponent implements OnInit {
                 console.log(err);
               });
             }
+            else{
+              this.client.subscribe(this.remoteStream, { audio: true, video: false }, (err) => {
+                console.log(err);
+              });
+            }
           });
 
           this.client.on(ClientEvent.RemoteStreamSubscribed, (evt) => {
             this.remoteStream = evt.stream;
             this.remoteStream.play('remote_stream');
+            if (userContent.role === 'mentor') {
+              document.getElementById('player_789').style.display = 'none'; 
+            }
+            else{
+              document.getElementById('remote_stream').style.display = 'none';
+            }
+           
           });
 
           this.client.on(ClientEvent.PeerLeave, (evt) => {

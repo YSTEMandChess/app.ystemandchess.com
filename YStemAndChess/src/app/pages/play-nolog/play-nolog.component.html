@@ -1,34 +1,48 @@
 <html>
-    <head>
-    </head>
+  <head> </head>
 
-    <header>
-        <app-header></app-header>
-    </header>
+  <header>
+    <app-header></app-header>
+  </header>
 
-    <body>
-        <div class="prompt">
-            <h3>
-              If you want chess, math or computer science tutoring,
-              <a href="/signup">sign up</a> for Y Stem and Chess today with a parent!
-            </h3>
-            <h3>Or, practice chess with computer down below!</h3>
-          </div>
+  <body>
+    <div class="prompt">
+      <h3>
+        If you want chess, math or computer science tutoring,
+        <a href="/signup">sign up</a> for Y Stem and Chess today with a parent!
+      </h3>
+      <h3>Or, practice chess with computer down below!</h3>
+    </div>
 
-        <div id="play-container">
-            <div id="chess-board">
-                <app-play></app-play>
-            </div>
-            <div id="bottom">
-                <button type="button" id="new-game" (click)="newGameInit()"> New Game</button> 
-                <button type="button" id="undo" (click)="undoPrevMove()">Undo</button>
-                <p id="tag">The computer will think <input type="number" min="1" max="30" value="5" id="movesAhead"> moves ahead.</p>       
-            </div>
+    <div id="play-container">
+      <div id="chess-board">
+        <app-play></app-play>
+      </div>
+      <div id="bottom" class="newGameUndo">
+        <button type="button" id="new-game" (click)="newGameInit()">
+          New Game
+        </button>
+        <button type="button" id="undo" (click)="undoPrevMove()">Undo</button>
+        <div class="movesAhead">
+          <p id="tag">
+            The computer will think
+            <input
+              type="number"
+              min="1"
+              step="1"
+              max="30"
+              value="5"
+              id="movesAhead"
+              (keypress)="numberOnly($event)"
+            />
+            moves ahead.
+          </p>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
-    
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>

@@ -1,75 +1,83 @@
 .prompt {
-    text-align: center;
-    padding-top: 2%;
+  text-align: center;
+  padding-top: 2%;
 }
 
 #play-container {
-     margin-top: 2%;
+  margin-top: 2%;
 
-    #bottom {
-        margin-top: 2%;
-        padding-bottom:2%;
-        text-align: center;
+  #bottom {
+    margin-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
 
-        #new-game, #undo {
-            outline-style: none;
-            padding-top: 1%;
-            padding-bottom:1%;
-            padding-left: 2%;
-            padding-right:2%;
-            font-family: 'Lato';
-            font-weight: 900;
-            font-size: 22px; //22px
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            border-radius: 33px;
-            color: #FFF;
-            background-color: #FF8503;
-        }
-
-        #undo {
-            outline-style: none;
-            padding-top: 1%;
-            padding-bottom:1%;
-            padding-left: 2%;
-            padding-right:2%;
-            font-family: 'Lato';
-            font-weight: 900;
-            font-size: 22px; //22px
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            border-radius: 33px;
-            color: #FFF;
-            background-color: #51AA00;
-        }
-
-        #new-game:hover {
-            transition: 0.3s;
-            color:#FF8503;
-            background-color: #fff;
-        }
-
-        #undo:hover {
-            transition: 0.3s;
-            color: #51AA00;
-            background-color: #FFF;
-        }
-    }
-        
-
-    #lichess-board {
-        width:100%;
+    #new-game,
+    #undo {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 2%;
+      padding-right: 2%;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 22px; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      border-radius: 33px;
+      color: #fff;
+      background-color: #ff8503;
     }
 
-    #bottom {
-        padding-bottom:2%;
+    #undo {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 2%;
+      padding-right: 2%;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 22px; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      border-radius: 33px;
+      color: #fff;
+      background-color: #51aa00;
     }
+
+    #new-game:hover {
+      transition: 0.3s;
+      color: #ff8503;
+      background-color: #fff;
+    }
+
+    #undo:hover {
+      transition: 0.3s;
+      color: #51aa00;
+      background-color: #fff;
+    }
+  }
+
+  #lichess-board {
+    width: 100%;
+  }
+
+  #bottom {
+    padding-bottom: 2%;
+  }
 }
-
-#movesAhead { 
-    width: 100px;
+.newGameUndo {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.movesAhead {
+  position: absolute;
+  margin-top: 60px;
+}
+#movesAhead {
+  width: 45px;
 }
 
 #tag {
-    padding: 20px;
+  padding: 15px;
 }

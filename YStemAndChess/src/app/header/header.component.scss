@@ -1,179 +1,204 @@
 // Add this class to any DOM element to center their content
-.display-flex{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.display-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-.red-text{color: red;}
+.red-text {
+  color: red;
+}
 .nav-item {
-    margin-left: 15px; //15px
-    margin-right: 15px; //15px
-
-    font-family: 'Lato';
-
-    font-style: normal;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+  //   margin-left: 15px; //15px
+  //   margin-right: 15px; //15px
+  font-family: "Lato";
+  //   margin-bottom: 10px;
+  font-style: normal;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
-//login button spacing from header border 
-@media only screen and (max-width:1175px) {
-    .nav-item {
-        font-size:15px;
-        margin-left:10px;
-        margin-right:10px;
-    }
+//login button spacing from header border
+@media only screen and (max-width: 1175px) {
+  .nav-item {
+    font-size: 15px;
+  }
+  .nav-link,
+  .nav-item .btn {
+    font-weight: 800;
+    font-size: 0.9rem !important;
+  }
+  .donate {
+    font-size: 15px;
+  }
 
-    .donate {
-        font-size:15px;
-    }
-
-    .login {
-        font-size:15px;
-    }
+  .login {
+    font-size: 15px;
+  }
 }
 
 //buttom spacing in button nav bar
-@media only screen and (max-width:1000px) {
-    .nav-item {
-        margin-top:15px;
-    }
+@media only screen and (max-width: 1000px) {
+  .nav-item {
+    margin-top: 15px;
+  }
+  .nav-item .btn {
+    font-weight: 800;
+    font-size: 0.9rem !important;
+  }
 }
 
 @media only screen and (max-width: 600px) {
-    .nav-item {
-        margin-top: 10px;
-        margin-bottom: 10px
-    }
+  .nav-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .nav-item .btn {
+    font-weight: 800;
+    font-size: 15px !important;
+  }
 }
 
 // make the navlinks and buttons equally bold
 .nav-link,
-.nav-item .btn{
-    font-weight: 800;
-    font-size: 18px;
-
+.nav-item .btn {
+  font-weight: 800;
+  font-size: 18px;
 }
 .navbar-light {
-    background-color: #D4DDE0;
-    color: #3F8500;
+  background-color: #d4dde0;
+  color: #3f8500;
 }
-
+.navbar-expand-lg {
+  width: 100% !important;
+}
+.navbar-brand {
+  margin-right: 0px !important;
+}
 .nav-link {
-    color: #3F8500;
+  color: #3f8500;
+}
+.navbar-expand-lg .navbar-nav {
+  justify-content: end;
+  gap: 0.6rem;
+  width: 100%;
 }
 
 .donate {
-    color: #3F8500;
+  color: #3f8500;
 }
-.login{
-    color: #3A7CCA;
+.login {
+  color: #3a7cca;
 }
 
 .btn-lg {
-    background-color: white;
-    border-radius: 30px;
-    
+  background-color: white;
+  border-radius: 30px;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: #3F8500;
+  color: #3f8500;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #3F8500;
+  color: #3f8500;
 }
 // Underline from Left Animation
 .hvr-underline-from-left {
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    position: relative;
-    overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
 }
 .hvr-underline-from-left:before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    right: 100%;
-    bottom: 0;
-    background: #3F8500;
-    height: 4px;
-    -webkit-transition-property: right;
-    transition-property: right;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-timing-function: ease-out;
-    transition-timing-function: ease-out;  
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: #3f8500;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
 }
-.hvr-underline-from-left:hover:before, .hvr-underline-from-left:focus:before, .hvr-underline-from-left:active:before {
-   right: 0;
+.hvr-underline-from-left:hover:before,
+.hvr-underline-from-left:focus:before,
+.hvr-underline-from-left:active:before {
+  right: 0;
 }
 
 // Hover
 .hvr-fade-1 {
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    overflow: hidden;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: color, background-color;
-    transition-property: color, background-color;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
 }
-.hvr-fade-1:hover, .hvr-fade-1:focus, .hvr-fade-1:active {
-    background-color: #3F8500;
-    color: white;
+.hvr-fade-1:hover,
+.hvr-fade-1:focus,
+.hvr-fade-1:active {
+  background-color: #3f8500;
+  color: white;
 }
 
 .hvr-fade-2 {
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    overflow: hidden;
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: color, background-color;
-    transition-property: color, background-color;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  overflow: hidden;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
 }
-.hvr-fade-2:hover, .hvr-fade-2:focus, .hvr-fade-2:active {
-    background-color: #3A7CCA;
-    color: white;
+.hvr-fade-2:hover,
+.hvr-fade-2:focus,
+.hvr-fade-2:active {
+  background-color: #3a7cca;
+  color: white;
 }
 
 .dropdown-menu {
-    border-radius: 30px;
+  border-radius: 30px;
 }
 
 .dropdown-item {
-    border-radius: 30px;
-    background: none;
-    text-align: center;
+  border-radius: 30px;
+  background: none;
+  text-align: center;
 }
 
 .btn-secondary {
-    border: none;
+  border: none;
 }
 
 .disp {
-    //display: block;
+  //display: block;
 }
 .dontdisp {
-    display: none;
+  display: none;
 }
 
 .dropdown-item {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .nav-link {
-    cursor: pointer;
+  cursor: pointer;
 }

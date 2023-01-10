@@ -67,7 +67,17 @@ export class PlayNologComponent implements OnInit {
       false
     );
   }
-
+  numberOnly(event): boolean {
+    var data = (<HTMLInputElement>document.getElementById('movesAhead')).value;
+    const charCode = event.which ? event.which : event.keyCode;
+    if (data.length >= 2) {
+      return false;
+    }
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
   private sendFromQueue() {
     this.messageQueue.forEach((element) => {
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))

@@ -184,11 +184,14 @@ export class PlayComponent implements OnInit {
               this.client.subscribe(this.remoteStream, null, (err) => {
                 console.log(err);
               });
-            }
-            else{
-              this.client.subscribe(this.remoteStream, { audio: true, video: false }, (err) => {
-                console.log(err);
-              });
+            } else {
+              this.client.subscribe(
+                this.remoteStream,
+                { audio: true, video: false },
+                (err) => {
+                  console.log(err);
+                }
+              );
             }
           });
 
@@ -196,12 +199,10 @@ export class PlayComponent implements OnInit {
             this.remoteStream = evt.stream;
             this.remoteStream.play('remote_stream');
             if (userContent.role === 'mentor') {
-              document.getElementById('player_789').style.display = 'none'; 
-            }
-            else{
+              document.getElementById('player_789').style.display = 'none';
+            } else {
               document.getElementById('remote_stream').style.display = 'none';
             }
-           
           });
 
           this.client.on(ClientEvent.PeerLeave, (evt) => {
@@ -218,12 +219,12 @@ export class PlayComponent implements OnInit {
             })
           );
           this.socket.listen('boardState').subscribe((data) => {
-            setTimeout(()=>{              
+            setTimeout(() => {
               this.getMovesList();
-              setTimeout(()=>{              
+              setTimeout(() => {
                 this.scrollToBottom();
+              }, 1000);
             }, 1000);
-          }, 1000);
             if (this.isReady && this.isStepLast) {
               let newData = JSON.parse(<string>data);
               var chessBoard = (<HTMLFrameElement>(
@@ -271,7 +272,7 @@ export class PlayComponent implements OnInit {
             let info = e.data;
             const temp = info.split(':');
             const piece = info.split('-');
-          
+
             if (info == 'ReadyToRecieve') {
               this.isReady = true;
               this.sendFromQueue();
@@ -390,23 +391,26 @@ export class PlayComponent implements OnInit {
       JSON.stringify({ boardState: data, username: userContent.username })
     );
     // this.getMovesList();
-    let url: string;
-    url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
-    this.httpGetAsync(url, 'POST', (response) => {
-      response = JSON.parse(response);
-      let finalMove =
-        response.moves.length > 0
-          ? response.moves[response.moves.length - 1]
-          : response.moves;
-      this.displayMoves = finalMove || [];
-      this.scrollToBottom();
-    });
-      setTimeout(()=>{              
+    if (this.meetingId == undefined) {
+    } else {
+      let url: string;
+      url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
+      this.httpGetAsync(url, 'POST', (response) => {
+        response = JSON.parse(response);
+        let finalMove =
+          response.moves.length > 0
+            ? response.moves[response.moves.length - 1]
+            : response.moves;
+        this.displayMoves = finalMove || [];
+        this.scrollToBottom();
+      });
+      setTimeout(() => {
         this.getMovesList();
-          setTimeout(()=>{              
-            this.scrollToBottom();
+        setTimeout(() => {
+          this.scrollToBottom();
         }, 500);
-    }, 1000);
+      }, 1000);
+    }
   }
 
   public createNewGame() {
@@ -424,33 +428,33 @@ export class PlayComponent implements OnInit {
       JSON.stringify({ username: userContent.username })
     );
   }
-  setMove(index,direction) {
+  setMove(index, direction) {
     this.currentStep =
       index <= 0
         ? 0
         : index > this.displayMoves.length - 1
         ? this.displayMoves.length - 1
         : index;
-      if (direction != 'backward') {
-        if (this.displayMoves.length - 1 === index) {
-          this.isStepLast = true;
-          this.reload();
-        } else {
-          this.isStepLast = false;
-        }
+    if (direction != 'backward') {
+      if (this.displayMoves.length - 1 === index) {
+        this.isStepLast = true;
+        this.reload();
       } else {
-        if (this.displayMoves.length <= index) {
-          this.isStepLast = true;
-          this.reload();
-        } else {
-          this.isStepLast = false;
-        }
+        this.isStepLast = false;
       }
-      let movePos = 0;
-      if (index <= 0) {
-        movePos = 0;
+    } else {
+      if (this.displayMoves.length <= index) {
+        this.isStepLast = true;
+        this.reload();
       } else {
-        movePos = index - 1;
+        this.isStepLast = false;
+      }
+    }
+    let movePos = 0;
+    if (index <= 0) {
+      movePos = 0;
+    } else {
+      movePos = index - 1;
     }
     this.changeBoardState(this.displayMoves[movePos]?.fen);
     if (this.isNearBottom) {

@@ -12,7 +12,7 @@ http.on("request", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*"); //Set the header for stockfish
   res.setHeader("Content-Type", "application/json");
 
-  engine = stockfish(); // Initialize stockfish server
+  const engine = stockfish(); // Initialize stockfish server
 
   let params = querystring.parse(url.parse(req.url, true).search?.substring(1));
 

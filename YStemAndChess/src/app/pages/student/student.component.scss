@@ -1,124 +1,119 @@
 .container {
-  margin-top: 20px;
-
-  p {
-    font-size: 20px;
-  }
+    margin-top: 20px;
+    
+    p {
+        font-size: 20px;
+    }
 }
 
 .containing {
-  background: #f2c94c;
-  border-radius: 0px 66px 66px 66px;
-  margin: 10px;
-  padding-left: 16px;
-  h2 {
-    padding: 30px;
-    font-family: "Lato";
-    font-style: normal;
-    font-weight: 900;
-    font-size: 33px;
-    line-height: 150%;
-    /* or 49px */
+    background: #F2C94C;
+    border-radius: 0px 66px 66px 66px;
+    margin: 10px;
+    padding-left: 16px;
+    h2 {
+        padding: 30px;
+        font-family: 'Lato';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 33px;
+        line-height: 150%;
+        /* or 49px */
 
-    letter-spacing: 0.01em;
+        letter-spacing: 0.01em;
 
-    color: #000000;
-  }
-}
-.movesAhead {
-  position: relative;
-  margin-left: 175px;
-  margin-top: 1px;
-}
-#movesAhead {
-  width: 47px;
+        color: #000000;
+    }
 }
 .btns {
-  justify-content: flex-start;
-  padding: 5px;
-  margin: -2px;
+    justify-content: center;
+    margin-top: 20px;
 
-  .new-game {
-    font-family: "Lato";
-    font-size: 22px;
-    line-height: 117.1%;
-    /* or 26px */
+    .new-game {
+        font-family: 'Lato';
+        font-size: 22px;
+        line-height: 117.1%;
+        /* or 26px */
 
-    text-align: center;
-    letter-spacing: 0.01em;
+        text-align: center;
+        letter-spacing: 0.01em;
 
-    color: #ffffff;
+        color: #FFFFFF;
 
-    padding: 20px;
-    margin: 30px;
+        padding: 20px;
+        margin: 30px;
 
-    border: 1px #ff8503 solid;
-    background-color: #ff8503;
-    border-radius: 33px;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-  .new-game:hover {
-    color: #ff8503;
-    background-color: white;
-  }
-  .play-cpu-game {
-    font-family: "Lato";
-    font-size: 22px;
-    line-height: 117.1%;
-    /* or 26px */
+        border: 1px #FF8503 solid;
+        background-color: #FF8503;
+        border-radius: 33px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .new-game:hover {
+        color: #FF8503;
+        background-color: white;
+        
+    }
+    .play-cpu-game {
+        font-family: 'Lato';
+        font-size: 22px;
+        line-height: 117.1%;
+        /* or 26px */
 
-    text-align: center;
-    letter-spacing: 0.01em;
+        text-align: center;
+        letter-spacing: 0.01em;
 
-    color: #ffffff;
+        color: #FFFFFF;
 
-    padding: 20px;
-    margin: 30px;
+        padding: 20px;
+        margin: 30px;
 
-    border: 1px #51aa00 solid;
-    background-color: #51aa00;
-    border-radius: 33px;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-  .play-cpu-game:hover {
-    color: #51aa00;
-    background-color: white;
-  }
+        border: 1px #51AA00 solid;
+        background-color: #51AA00;
+        border-radius: 33px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .play-cpu-game:hover {
+        color: #51AA00;
+        background-color: white;
+        
+    }
 
-  .curr-game {
-    font-family: "Lato";
-    font-size: 22px;
-    line-height: 117.1%;
-    /* or 26px */
+    .curr-game {
+        font-family: 'Lato';
+        font-size: 22px;
+        line-height: 117.1%;
+        /* or 26px */
 
-    text-align: center;
-    letter-spacing: 0.01em;
+        text-align: center;
+        letter-spacing: 0.01em;
 
-    color: #ffffff;
+        color: #FFFFFF;
 
-    padding: 20px;
-    margin: 30px;
+        padding: 20px;
+        margin: 30px;
 
-    border: 1px #3a7cca solid;
-    background-color: #3a7cca;
-    border-radius: 33px;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-  .curr-game:hover {
-    color: #3a7cca;
-    background-color: white;
-  }
-  margin-bottom: 2px;
+        border: 1px #3A7CCA solid;
+        background-color: #3A7CCA;
+        border-radius: 33px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .curr-game:hover {
+        color: #3A7CCA;
+        background-color: white;
+        
+    }
+    margin-bottom: 2px;
+
 }
 
 .bigCont {
-  border-radius: 33px;
-  margin: 10px;
+    border-radius: 33px;
+    margin: 10px;
 }
 
 app-play {
-  padding: 150px;
+    padding: 150px;
 }

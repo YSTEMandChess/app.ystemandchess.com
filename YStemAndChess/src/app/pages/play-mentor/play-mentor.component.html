@@ -1,36 +1,40 @@
 <html>
-    <head>
-    </head>
+  <head> </head>
 
-    <header>
-        <app-header></app-header>
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    </header>
+  <header>
+    <app-header></app-header>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+  </header>
 
-    <body>
-        <!-- start of welcome container  -->
-        <div id="welcome-container">
-            <div id="welcome-header">
-                <h3> Welcome Robert </h3>
-                <h4> Not Robert? &#9658;</h4>
-            </div>
-            <div id="welcome-statement">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Eligendi enim incidunt excepturi assumenda quod
-                    accusantium inventore, dignissimos ad, cumque labore,
-                    perspiciatis at architecto quisquam delectus. Rerum
-                    aspernatur ea accusamus officiis!
-                </p>
-            </div>
-        </div>
-        <!-- end of welcome container -->
+  <body>
+    <!-- start of welcome container  -->
+    <div id="welcome-container">
+      <div id="welcome-header">
+        <h3>Welcome Robert</h3>
+        <h4>Not Robert? &#9658;</h4>
+      </div>
+      <div id="welcome-statement">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
+          enim incidunt excepturi assumenda quod accusantium inventore,
+          dignissimos ad, cumque labore, perspiciatis at architecto quisquam
+          delectus. Rerum aspernatur ea accusamus officiis!
+        </p>
+      </div>
+    </div>
+    <!-- end of welcome container -->
 
-        <!-- start of mentor-container -->
-        <div id="mentor-container">
-            <div id="top"></div>
-                <!-- 
+    <!-- start of mentor-container -->
+    <div id="mentor-container">
+      <div id="top"></div>
+      <!-- 
                     <div class="turn-indicator">
                         
                     </div>
@@ -47,18 +51,133 @@
                     <iframe src="http://chessclient:9663/" allowfullscreen></iframe>
                 </div>
             -->
-                <app-play></app-play>
-                <div id="bottom">
-                    <button type="button" id="flip-board" (click)="flipBoard()"> Flip Board</button>
-                    <button type="button" id="new-game" (click)="newGame()"> New Game</button>
-                    <button type="button" id="lesson-prep"> Lesson Prep</button>
+      <div class="gameclass">
+        <div [ngClass]="{ 'disable-board': !isStepLast }">
+          <app-play></app-play>
+        </div>
+        <div class="game_wrapper">
+          <div class="chess">
+            <div *ngIf="displayMoves.length > 0" class="steps-div">
+              <div class="text-center">
+                <span>Steps</span>
+              </div>
+              <div class="fwd-btns">
+                <p
+                  (click)="setMove(0, 'backward')"
+                  [ngClass]="currentStep === 0 && 'isBlur'"
+                >
+                  <img
+                    src="../../../assets/images/moves/icons8-rewind-100.png"
+                  />
+                </p>
+                <p
+                  (click)="setMove(currentStep - 1, 'backward')"
+                  [ngClass]="currentStep <= 0 && 'isBlur'"
+                >
+                  <img
+                    src="../../../assets/images/moves/icons8-less-than-60.png"
+                  />
+                </p>
+                <p
+                  (click)="setMove(currentStep + 1, 'forward')"
+                  [ngClass]="
+                    currentStep === displayMoves.length - 1 && 'isBlur'
+                  "
+                >
+                  <img
+                    src="../../../assets/images/moves/icons8-more-than-60.png"
+                  />
+                </p>
+                <p
+                  (click)="setMove(displayMoves.length - 1, 'forward')"
+                  [ngClass]="
+                    currentStep === displayMoves.length - 1 && 'isBlur'
+                  "
+                >
+                  <img
+                    src="../../../assets/images/moves/icons8-fast-forward-100.png"
+                  />
+                </p>
+              </div>
+              <div
+                class="display-step"
+                (scroll)="scrolled($event)"
+                #scrollframe
+              >
+                <div class="table-moves" #item>
+                  <div style="width: 100px">
+                    <div
+                      *ngFor="let item of displayMoves; let i = index"
+                      (click)="setMove(i, 'direct')"
+                    >
+                      <p
+                        *ngIf="i % 2 === 0"
+                        [class.tableMove-selected]="i == currentStep"
+                      >
+                        <img [src]="imgPos(i)" alt="" class="imgRes" />
+                        {{ item.pos }}
+                      </p>
+                    </div>
+                  </div>
+                  <div style="width: 100px">
+                    <div
+                      *ngFor="let item of displayMoves; let i = index"
+                      (click)="setMove(i, 'direct')"
+                    >
+                      <p
+                        *ngIf="i % 2 !== 0"
+                        [class.tableMove-selected]="i == currentStep"
+                      >
+                        <img [src]="imgPos(i)" alt="" class="imgRes" />{{
+                          item.pos
+                        }}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-            <!-- end of mentor container -->
-    </body>
+          </div>
+        </div>
+      </div>
+      <div id="bottom">
+        <div>
+          <button type="button" id="flip-board" (click)="flipBoard()">
+            Flip Board
+          </button>
+          <button type="button" id="new-game" (click)="newGame()">
+            New Game
+          </button>
+          <button type="button" id="undo-move" (click)="undoPrevMove()">
+            Undo
+          </button>
+        </div>
+        <div class="playwithcomputer">
+          <button type="button" id="lesson-prep" (click)="playWithComputer()">
+            Play With Computer
+          </button>
+        </div>
+      </div>
+      <div class="movesAhead">
+        <p id="tag">
+          The computer will think
+          <input
+            type="number"
+            min="1"
+            step="1"
+            max="30"
+            value="5"
+            id="movesAhead"
+            (keypress)="numberOnly($event)"
+          />
+          moves ahead.
+        </p>
+      </div>
+    </div>
+    <!-- end of mentor container -->
+  </body>
 
-    <footer>
-        <app-footer></app-footer>
-    </footer>
-
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </html>

@@ -118,7 +118,79 @@
   border-radius: 33px;
   margin: 10px;
 }
+.game_wrapper {
+  display: flex;
+  justify-content: space-around;
+  .chess {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
+    iframe {
+      min-width: 700px;
+      min-height: 700px;
+    }
+  }
+}
+#chess-board {
+  display: flex;
+  justify-content: center;
+}
+.steps-div span {
+  font-weight: 500;
+  font-size: xx-large;
+}
+.fwd-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.fwd-btns img {
+  height: 25px;
+}
+.isBlur {
+  opacity: 50%;
+  pointer-events: none;
+}
+.display-step {
+  display: block;
+  height: 20rem;
+  overflow: hidden scroll;
+  cursor: pointer;
+  background-color: lightgray;
+  padding: 7%;
+  width: fit-content;
+}
+.table-moves {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-around;
+}
+.table-moves div p {
+  border: 2px solid black;
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.display-step::-webkit-scrollbar {
+  display: none;
+}
+.tableMove-selected {
+  background-color: white !important;
+}
+.imgRes {
+  height: 30px !important;
+  width: 30px !important;
+  margin: 0px 0px 8px;
+  padding: 3.2px;
+}
+.gameclass {
+  display: flex;
+  justify-content: center;
+}
 app-play {
   padding: 150px;
 }

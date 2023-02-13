@@ -1,200 +1,307 @@
 body {
-    padding-top:2%; //50px
+  padding-top: 2%; //50px
 }
 
 //clears floats once they are no longer needed
 #clear {
-    clear:both;
+  clear: both;
 }
 
 #welcome-container {
-    width:45%;
-    height:auto;
-    margin-left: 5%;
+  width: 45%;
+  height: auto;
+  margin-left: 5%;
 
-    #welcome-header {
-        display:flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+  #welcome-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 
-        h3 {
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 900;
-            font-size: 2.15vw; //33px
-            line-height: 117.1%;
-            text-align: center;
-            letter-spacing: 0.01em;
-            color: #3A7CCA;
-        }
-
-        h4 {
-            margin-top:1.5%;
-            margin-left:7%;
-            font-family: 'Lato';
-            font-size: 1.4vw; //22px
-            line-height: 117.1%;
-            text-align: center;
-            letter-spacing: 0.01em;
-            color: #FF8503;
-        }
+    h3 {
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 900;
+      font-size: 2.15vw; //33px
+      line-height: 117.1%;
+      text-align: center;
+      letter-spacing: 0.01em;
+      color: #3a7cca;
     }
 
-    #welcome-statement {
-
-        p {
-            font-family: 'Roboto';
-            font-style: normal;
-            font-weight: normal;
-            font-size: 1.55vw; //24px
-            line-height: 125.1%;
-            letter-spacing: 0.02em;
-            color: #4F4F4F;
-        }
+    h4 {
+      margin-top: 1.5%;
+      margin-left: 7%;
+      font-family: "Lato";
+      font-size: 1.4vw; //22px
+      line-height: 117.1%;
+      text-align: center;
+      letter-spacing: 0.01em;
+      color: #ff8503;
     }
+  }
+
+  #welcome-statement {
+    p {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.55vw; //24px
+      line-height: 125.1%;
+      letter-spacing: 0.02em;
+      color: #4f4f4f;
+    }
+  }
 }
 
 #mentor-container {
-    //margin-top: 5%;
-    width:90%;
-    height: auto;
-    margin-left: 5%;
-    border-radius:33px;
-    //background-color: #E1E7ED;
+  //margin-top: 5%;
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  border-radius: 33px;
+  //background-color: #E1E7ED;
 
-    #top {
-        display:flex;
-        justify-content: flex-end;
-        padding-top:2%;
-        padding-bottom:2%;
+  #top {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 2%;
+    padding-bottom: 2%;
 
-        .turn-indicator {
-            width:28px;
-            height:28px;
-            margin-right:1%;
-            border-radius: 100%;
-            background-color: #fff;
-        }
-
-        //will change in future to which
-        //players turn it is
-        .turn-indicator:hover {
-            background-color: #4F4F4F;
-        }
-
-        p {
-            margin-right:3%;
-            font-family: 'Lato';
-            font-size: 1.4vw; //2px
-            line-height: 142.1%;
-            letter-spacing: 0.01em;
-            color: #000000; 
-        }
-
-        button {
-            outline-style: none;
-            margin-right:3%;
-            padding-right:2%;
-            padding-left:2%;
-            border-radius: 33px;
-            font-family: 'Lato';
-            font-size: 1.4vw;
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            color:#fff;
-            background-color: #3A7CCA;
-        }
-
-        button:hover {
-            background-color: #fff;
-            color:#3A7CCA;
-        }
+    .turn-indicator {
+      width: 28px;
+      height: 28px;
+      margin-right: 1%;
+      border-radius: 100%;
+      background-color: #fff;
     }
 
-    #lichess-board {
-        overflow: hidden;
-        iframe {
-            overflow: hidden;
-            border:0;
-            width:100%;
-            height:80vh; //80vh
-        }
+    //will change in future to which
+    //players turn it is
+    .turn-indicator:hover {
+      background-color: #4f4f4f;
     }
 
-    #bottom {
-        padding-top:2%;
-        padding-bottom:2%;
-
-        #flip-board {
-            outline-style: none;
-            margin-left:3%;
-            padding-top:1%;
-            padding-bottom:1%;
-            padding-left: 3%;
-            padding-right:3%;
-            border-radius: 33px;
-            font-family: 'Lato';
-            font-weight: 900;
-            font-size: 1.4vw; //22px
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            color: #000000;
-            background-color: #F2C94C;
-
-            //push new game button away
-            margin-right:47.4%;
-        }
-
-        #flip-board:hover {
-            color:#F2C94C;
-            background-color: #000;
-        }
-
-        #new-game {
-            outline-style: none;
-            padding-top: 1%;
-            padding-bottom:1%;
-            padding-left: 2%;
-            padding-right:2%;
-            font-family: 'Lato';
-            font-weight: 900;
-            font-size: 1.4vw; //22px
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            border-radius: 33px;
-            color: #FFF;
-            background-color: #FF8503;
-
-            //push lesson prep button away
-            margin-right:5%;
-        }
-
-        #new-game:hover {
-            color:#FF8503;
-            background-color: #fff;
-        }
-
-        #lesson-prep {
-            outline-style: none;
-            padding-top: 1%;
-            padding-bottom:1%;
-            padding-left: 3.5%;
-            padding-right:3.5%;
-            font-family: 'Lato';
-            font-style: normal;
-            font-weight: 900;
-            font-size: 1.4vw; //22px
-            line-height: 117.1%;
-            letter-spacing: 0.01em;
-            border-radius: 33px;
-            color: #fff;
-            background-color: #3A7CCA;
-        }
-
-        #lesson-prep:hover {
-            color:#3A7CCA;
-            background-color: #fff;
-        }
+    p {
+      margin-right: 3%;
+      font-family: "Lato";
+      font-size: 1.4vw; //2px
+      line-height: 142.1%;
+      letter-spacing: 0.01em;
+      color: #000000;
     }
+
+    button {
+      outline-style: none;
+      margin-right: 3%;
+      padding-right: 2%;
+      padding-left: 2%;
+      border-radius: 33px;
+      font-family: "Lato";
+      font-size: 1.4vw;
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      color: #fff;
+      background-color: #3a7cca;
+    }
+
+    button:hover {
+      background-color: #fff;
+      color: #3a7cca;
+    }
+  }
+
+  #lichess-board {
+    overflow: hidden;
+    iframe {
+      overflow: hidden;
+      border: 0;
+      width: 100%;
+      height: 80vh; //80vh
+    }
+  }
+
+  #bottom {
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    #flip-board {
+      outline-style: none;
+      margin-left: 3%;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 3%;
+      padding-right: 3%;
+      border-radius: 33px;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 1.4vw; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      color: #000000;
+      background-color: #f2c94c;
+
+      //push new game button away
+      margin-right: 47.4%;
+    }
+
+    #flip-board:hover {
+      color: #f2c94c;
+      background-color: #000;
+    }
+
+    #new-game {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 2%;
+      padding-right: 2%;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 1.4vw; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      border-radius: 33px;
+      color: #fff;
+      background-color: #ff8503;
+
+      //push lesson prep button away
+      margin-right: 5%;
+    }
+    #undo-move {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 2%;
+      padding-right: 2%;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 1.4vw; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      border-radius: 33px;
+      color: #fff;
+      background-color: #ff8503;
+
+      //push lesson prep button away
+      margin-right: 5%;
+    }
+
+    #new-game:hover {
+      color: #ff8503;
+      background-color: #fff;
+    }
+
+    #lesson-prep {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 3.5%;
+      padding-right: 3.5%;
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 900;
+      font-size: 1.4vw; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      border-radius: 33px;
+      color: #fff;
+      background-color: #3a7cca;
+    }
+
+    #lesson-prep:hover {
+      color: #3a7cca;
+      background-color: #fff;
+    }
+  }
 }
+#lesson-prep {
+  justify-content: center;
+  margin: -28px;
+  padding-left: 48px;
+}
+.game_wrapper {
+  display: flex;
+  justify-content: space-around;
+  .chess {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
+    iframe {
+      min-width: 700px;
+      min-height: 700px;
+    }
+  }
+}
+.steps-div span {
+  font-weight: 500;
+  font-size: xx-large;
+}
+.fwd-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.fwd-btns img {
+  height: 25px;
+}
+.isBlur {
+  opacity: 50%;
+  pointer-events: none;
+}
+.display-step {
+  display: block;
+  height: 20rem;
+  overflow: hidden scroll;
+  cursor: pointer;
+  background-color: lightgray;
+  padding: 7%;
+  width: fit-content;
+}
+.table-moves {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-around;
+}
+.table-moves div p {
+  border: 2px solid black;
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.display-step::-webkit-scrollbar {
+  display: none;
+}
+.tableMove-selected {
+  background-color: white !important;
+}
+.imgRes {
+  height: 30px !important;
+  width: 30px !important;
+  margin: 0px 0px 8px;
+  padding: 3.2px;
+}
+.movesAhead {
+  position: relative;
+  margin-left: 175px;
+  margin-top: 1px;
+}
+.gameclass {
+  display: flex;
+  justify-content: space-between;
+}
+#new-game {
+  margin-left: -590px;
+}
+.playwithcomputer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  margin-right: 890px;
+}
+.undomove {
+  display: flex;
+}

@@ -7,11 +7,9 @@ const connectDB = async () => {
     await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true,
+      // useCreateIndex: true,
     });
-    console.log("connecting.... from middleware node");
-    console.log("MongoDB Connected...from middleware node");
-    console.log("succefully connected..from middleware node");
+    console.log("MongoDB Connected...");
   } catch (err) {
     console.error(err.message);
     process.exit(1); // Exit process if connection fails

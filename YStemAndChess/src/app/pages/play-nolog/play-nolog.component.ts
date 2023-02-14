@@ -91,7 +91,6 @@ export class PlayNologComponent implements OnInit {
                   this.httpGetAsync(
                     `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
                     (response) => {
-                      console.log('response from stockfish: ', response);
                       var fen = response.split('move:')[0];
                       var move = response.split('move:')[1].slice(0, 2);
                       var pos = response.split('target:')[1];
@@ -161,30 +160,31 @@ export class PlayNologComponent implements OnInit {
   }
 
   public refresh() {
-    console.log('this.refresh called');
     var frame = (<HTMLFrameElement>(
       document.getElementById('chessBd')
     )).getAttribute('src');
-    console.log('frame: ', frame);
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/getStoreMoves?gameId=${this.newGameId}`,
       (response) => {
         let getMoves = JSON.parse(response);
-        console.log('response: ', getMoves);
         let finalMove =
           getMoves.moves.length > 0
             ? getMoves.moves[getMoves.moves.length - 1]
             : getMoves.moves;
         this.displayMoves = finalMove || [];
-        console.log(finalMove);
         this.FEN = finalMove[finalMove.length - 1].fen;
         this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
-        var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
-          .contentWindow;
-        chessBoard.postMessage(
-          JSON.stringify({ boardState: this.FEN, color: this.color }),
-          environment.urls.chessClientURL
-        );
+
+        setTimeout(() => {
+          var chessBoard = (<HTMLFrameElement>(
+            document.getElementById('chessBd')
+          )).contentWindow;
+          chessBoard.postMessage(
+            JSON.stringify({ boardState: this.FEN, color: this.color }),
+            environment.urls.chessClientURL
+          );
+        }, 1000);
+
         (<HTMLFrameElement>document.getElementById('chessBd')).setAttribute(
           'src',
           frame
@@ -226,24 +226,6 @@ export class PlayNologComponent implements OnInit {
       );
       if (this.level <= 1) this.level = 1;
       else if (this.level >= 10) this.level = 10;
-      // this.httpGetAsync(
-      //   `/chessClient/?level=${this.level}&fen=${this.currentFEN}`,
-      //   (response) => {
-      //     if (this.isReady) {
-      //       var chessBoard = (<HTMLFrameElement>(
-      //         document.getElementById('chessBd')
-      //       )).contentWindow;
-      //       chessBoard.postMessage(
-      //         JSON.stringify({ boardState: response, color: this.color }),
-      //         environment.urls.chessClientURL
-      //       );
-      //     } else {
-      //       this.messageQueue.push(
-      //         JSON.stringify({ boardState: response, color: this.color })
-      //       );
-      //     }
-      //   }
-      // );
       this.httpGetAsync(
         `${environment.urls.middlewareURL}/meetings/newGameStoreMoves?gameId=${this.newGameId}`,
         (response) => {
@@ -251,7 +233,6 @@ export class PlayNologComponent implements OnInit {
             this.httpGetAsync(
               `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
               (response) => {
-                console.log('response from oninit stockfish: ', response);
                 var fen = response.split('move:')[0];
                 var move = response.split('move:')[1].slice(0, 2);
                 var pos = response.split('target:')[1];
@@ -325,8 +306,6 @@ export class PlayNologComponent implements OnInit {
               environment.urls.chessClientURL
             );
           }
-
-          console.log(FEN);
         }
       }
     );
@@ -356,8 +335,6 @@ export class PlayNologComponent implements OnInit {
     );
   };
   setMove(index, direction) {
-    console.log('direction: ', direction);
-    console.log('index: ', index);
     this.currentStep =
       index <= 0
         ? 0
@@ -385,7 +362,6 @@ export class PlayNologComponent implements OnInit {
     } else {
       movePos = index - 1;
     }
-    console.log('this.displayMoves[movePos]: ', this.displayMoves[movePos]);
     this.changeBoardState(this.displayMoves[movePos]?.fen);
     if (this.isNearBottom) {
       this.scrollToBottom();
@@ -399,7 +375,6 @@ export class PlayNologComponent implements OnInit {
     );
   }
   private changeBoardState(fen?) {
-    console.log('fen: ', fen);
     var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
       .contentWindow;
     chessBoard.postMessage(

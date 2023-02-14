@@ -126,7 +126,6 @@ body {
 
     #flip-board {
       outline-style: none;
-      margin-left: 3%;
       padding-top: 1%;
       padding-bottom: 1%;
       padding-left: 3%;
@@ -141,7 +140,6 @@ body {
       background-color: #f2c94c;
 
       //push new game button away
-      margin-right: 47.4%;
     }
 
     #flip-board:hover {
@@ -165,7 +163,6 @@ body {
       background-color: #ff8503;
 
       //push lesson prep button away
-      margin-right: 5%;
     }
     #undo-move {
       outline-style: none;
@@ -183,7 +180,6 @@ body {
       background-color: #ff8503;
 
       //push lesson prep button away
-      margin-right: 5%;
     }
 
     #new-game:hover {
@@ -293,15 +289,24 @@ body {
   display: flex;
   justify-content: space-between;
 }
-#new-game {
-  margin-left: -590px;
-}
+
 .playwithcomputer {
-  margin-top: 30px;
   display: flex;
   justify-content: center;
-  margin-right: 890px;
 }
 .undomove {
   display: flex;
+}
+.outer-filp-board {
+  max-width: 700px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.outer-new-game {
+  max-width: 700px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 4%;
 }

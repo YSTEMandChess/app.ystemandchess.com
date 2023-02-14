@@ -51,6 +51,7 @@ export class PlayNologComponent implements OnInit {
     eventer(
       messageEvent,
       (e) => {
+        console.log('e: ', e);
         // Means that there is the board state and whatnot
         this.prevFEN = this.currentFEN;
         let info = e.data;
@@ -91,8 +92,9 @@ export class PlayNologComponent implements OnInit {
                   this.httpGetAsync(
                     `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
                     (response) => {
-                      var fen = response.split('move:')[0];
-                      var move = response.split('move:')[1].slice(0, 2);
+                      console.log('response from stockfish: ', response);
+                      var fen = response.split(' move:')[0];
+                      var move = response.split(' move:')[1].slice(0, 2);
                       var pos = response.split('target:')[1];
                       if (this.isReady) {
                         var chessBoard = (<HTMLFrameElement>(
@@ -194,6 +196,7 @@ export class PlayNologComponent implements OnInit {
   }
 
   public newGameInit() {
+    console.log('New game init called');
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/newGameStoreMoves?gameId=${this.newGameId}`,
       (response) => {
@@ -233,8 +236,8 @@ export class PlayNologComponent implements OnInit {
             this.httpGetAsync(
               `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
               (response) => {
-                var fen = response.split('move:')[0];
-                var move = response.split('move:')[1].slice(0, 2);
+                var fen = response.split(' move:')[0];
+                var move = response.split(' move:')[1].slice(0, 2);
                 var pos = response.split('target:')[1];
                 if (this.isReady) {
                   var chessBoard = (<HTMLFrameElement>(

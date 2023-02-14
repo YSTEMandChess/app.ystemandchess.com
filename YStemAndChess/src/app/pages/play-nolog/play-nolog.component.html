@@ -17,7 +17,7 @@
     <div id="play-container">
       <div id="chess-board">
         <div [ngClass]="{ 'disable-board': !isStepLast }">
-          <app-play></app-play>
+          <iframe [src]="chessSrc" id="chessBd"></iframe>
         </div>
         <div class="game_wrapper">
           <div class="chess">

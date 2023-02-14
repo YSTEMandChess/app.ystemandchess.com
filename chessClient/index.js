@@ -114,6 +114,7 @@ function onDragStart(source, piece, position, orientation) {
 }
 
 function onDrop(source, target, draggedPieceSource) {
+  console.log("on drop start");
   // see if the move is legal
   var move = game.move({
     from: source,
@@ -131,9 +132,11 @@ function onDrop(source, target, draggedPieceSource) {
   }
 
   updateStatus();
+  console.log("Between");
   setTimeout(sendToParent(`piece-${draggedPieceSource}`), 500);
   setTimeout(sendToParent(`target:${move.to}`), 500);
   sendToParent(game.fen());
+  console.log("End");
 }
 
 function sendToParent(fen) {

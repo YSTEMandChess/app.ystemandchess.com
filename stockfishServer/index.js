@@ -33,7 +33,7 @@ http.on("request", (req, res) => {
       const move = color + image;
       const target = result.to;
       res.write(game.fen());
-      res.write(`move:${move}`);
+      res.write(` move:${move}`);
       res.write(`target:${target}`);
       res.end();
     }

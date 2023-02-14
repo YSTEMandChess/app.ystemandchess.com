@@ -89,7 +89,10 @@
   justify-content: center;
   gap: 15px;
 }
-
+iframe {
+  min-width: 700px;
+  min-height: 700px;
+}
 .movesAhead {
   position: absolute;
   margin-top: 60px;

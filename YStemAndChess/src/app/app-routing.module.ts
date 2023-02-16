@@ -23,6 +23,7 @@ import { LessonsComponent } from './pages/lessons/lessons.component';
 import { PieceLessonsComponent } from './pages/piece-lessons/piece-lessons.component';
 import { PlayLessonComponent } from './pages/play-lesson/play-lesson.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { PracticeLessonsComponent } from './pages/practice-lessons/practice-lessons.component';
 import { BoardEditorComponent } from './pages/board-editor/board-editor.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
@@ -83,6 +84,10 @@ const routes: Routes = [
     component: UserProfileComponent,
     data: { roles: ['student'] },
     canActivate: [LoginGuardService],
+  },
+  {
+    path: 'practice',
+    component: PracticeLessonsComponent,
   },
   {
     path: 'play-mentor',

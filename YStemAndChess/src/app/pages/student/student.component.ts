@@ -61,91 +61,192 @@ export class StudentComponent implements OnInit {
       messageEvent,
       (e) => {
         // Means that there is the board state and whatnot
-        this.prevFEN = this.currentFEN;
-        let info = e.data;
-        const temp = info.split(':');
-        const piece = info.split('-');
-        if (e.origin == environment.urls.chessClientURL) {
-          if (info == 'ReadyToRecieve') {
-            this.isReady = true;
-            this.sendFromQueue();
-          } else if (temp?.length > 1 && temp[0] === 'target') {
-            this.move = temp[1];
-          } else if (piece?.length > 1 && piece[0] === 'piece') {
-            this.pieceImage = piece[1];
-          } else if (typeof info !== 'object' && info && info !== 'draw') {
-            this.currentFEN = info;
-            this.level = parseInt(
-              (<HTMLInputElement>document.getElementById('movesAhead')).value
-            );
-            if (this.level <= 1) this.level = 1;
-            else if (this.level >= 30) this.level = 30;
-            this.httpGetAsync(
-              `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,
-              'POST',
-              (response) => {
-                response = JSON.parse(response);
-                let finalMove =
-                  response.moves.length > 0
-                    ? response.moves[response.moves.length - 1]
-                    : response.moves;
-                this.displayMoves = finalMove || [];
-                this.scrollToBottom();
-                setTimeout(() => {
-                  this.getMovesList();
+
+        if (environment.productionType === 'development') {
+          if (e.origin == environment.urls.chessClientURL) {
+            this.prevFEN = this.currentFEN;
+            let info = e.data;
+            const temp = info.split(':');
+            const piece = info.split('-');
+            if (info == 'ReadyToRecieve') {
+              this.isReady = true;
+              this.sendFromQueue();
+            } else if (temp?.length > 1 && temp[0] === 'target') {
+              this.move = temp[1];
+            } else if (piece?.length > 1 && piece[0] === 'piece') {
+              this.pieceImage = piece[1];
+            } else if (typeof info !== 'object' && info && info !== 'draw') {
+              this.currentFEN = info;
+              this.level = parseInt(
+                (<HTMLInputElement>document.getElementById('movesAhead')).value
+              );
+              if (this.level <= 1) this.level = 1;
+              else if (this.level >= 30) this.level = 30;
+              this.httpGetAsync(
+                `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,
+                'POST',
+                (response) => {
+                  response = JSON.parse(response);
+                  let finalMove =
+                    response.moves.length > 0
+                      ? response.moves[response.moves.length - 1]
+                      : response.moves;
+                  this.displayMoves = finalMove || [];
+                  this.scrollToBottom();
                   setTimeout(() => {
-                    this.scrollToBottom();
-                  }, 500);
-                }, 1000);
-                if (response) {
-                  this.httpGetAsync(
-                    `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
-                    'POST',
-                    (response) => {
-                      var fen = response.split('move:')[0];
-                      var move = response.split('move:')[1].slice(0, 2);
-                      var pos = response.split('target:')[1];
-                      if (this.isReady) {
-                        var chessBoard = (<HTMLFrameElement>(
-                          document.getElementById('chessBd')
-                        )).contentWindow;
-                        chessBoard.postMessage(
-                          JSON.stringify({
-                            boardState: fen,
-                            color: this.color,
-                          }),
-                          environment.urls.chessClientURL
-                        );
-                        this.httpGetAsync(
-                          `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,
-                          'POST',
-                          (response) => {
-                            response = JSON.parse(response);
-                            let finalMove =
-                              response.moves.length > 0
-                                ? response.moves[response.moves.length - 1]
-                                : response.moves;
-                            this.displayMoves = finalMove || [];
-                            this.scrollToBottom();
-                            setTimeout(() => {
-                              this.getMovesList();
+                    this.getMovesLists();
+                    setTimeout(() => {
+                      this.scrollToBottom();
+                    }, 500);
+                  }, 1000);
+                  if (response) {
+                    this.httpGetAsync(
+                      `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+                      'POST',
+                      (response) => {
+                        var fen = response.split(' move:')[0];
+                        var move = response.split(' move:')[1].slice(0, 2);
+                        var pos = response.split('target:')[1];
+                        if (this.isReady) {
+                          var chessBoard = (<HTMLFrameElement>(
+                            document.getElementById('chessBd')
+                          )).contentWindow;
+                          chessBoard.postMessage(
+                            JSON.stringify({
+                              boardState: fen,
+                              color: this.color,
+                            }),
+                            environment.urls.chessClientURL
+                          );
+                          this.httpGetAsync(
+                            `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,
+                            'POST',
+                            (response) => {
+                              response = JSON.parse(response);
+                              let finalMove =
+                                response.moves.length > 0
+                                  ? response.moves[response.moves.length - 1]
+                                  : response.moves;
+                              this.displayMoves = finalMove || [];
+                              this.scrollToBottom();
                               setTimeout(() => {
-                                this.scrollToBottom();
-                              }, 500);
-                            }, 1000);
-                          }
-                        );
-                      } else {
-                        this.messageQueue.push(
-                          JSON.stringify({ boardState: fen, color: this.color })
-                        );
+                                this.getMovesLists();
+                                setTimeout(() => {
+                                  this.scrollToBottom();
+                                }, 500);
+                              }, 1000);
+                            }
+                          );
+                        } else {
+                          this.messageQueue.push(
+                            JSON.stringify({
+                              boardState: fen,
+                              color: this.color,
+                            })
+                          );
+                        }
+                        this.currentFEN = response;
                       }
-                      this.currentFEN = response;
-                    }
-                  );
+                    );
+                  }
                 }
-              }
-            );
+              );
+            }
+          } else {
+            console.log('chessClientURL Missmatch.');
+          }
+        } else {
+          if (e.origin != environment.urls.chessClientURL) {
+            this.prevFEN = this.currentFEN;
+            let info = e.data;
+            const temp = info.split(':');
+            const piece = info.split('-');
+            if (info == 'ReadyToRecieve') {
+              this.isReady = true;
+              this.sendFromQueue();
+            } else if (temp?.length > 1 && temp[0] === 'target') {
+              this.move = temp[1];
+            } else if (piece?.length > 1 && piece[0] === 'piece') {
+              this.pieceImage = piece[1];
+            } else if (typeof info !== 'object' && info && info !== 'draw') {
+              this.currentFEN = info;
+              this.level = parseInt(
+                (<HTMLInputElement>document.getElementById('movesAhead')).value
+              );
+              if (this.level <= 1) this.level = 1;
+              else if (this.level >= 30) this.level = 30;
+              this.httpGetAsync(
+                `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,
+                'POST',
+                (response) => {
+                  response = JSON.parse(response);
+                  let finalMove =
+                    response.moves.length > 0
+                      ? response.moves[response.moves.length - 1]
+                      : response.moves;
+                  this.displayMoves = finalMove || [];
+                  this.scrollToBottom();
+                  setTimeout(() => {
+                    this.getMovesLists();
+                    setTimeout(() => {
+                      this.scrollToBottom();
+                    }, 500);
+                  }, 1000);
+                  if (response) {
+                    this.httpGetAsync(
+                      `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+                      'POST',
+                      (response) => {
+                        var fen = response.split(' move:')[0];
+                        var move = response.split(' move:')[1].slice(0, 2);
+                        var pos = response.split('target:')[1];
+                        if (this.isReady) {
+                          var chessBoard = (<HTMLFrameElement>(
+                            document.getElementById('chessBd')
+                          )).contentWindow;
+                          chessBoard.postMessage(
+                            JSON.stringify({
+                              boardState: fen,
+                              color: this.color,
+                            }),
+                            environment.urls.chessClientURL
+                          );
+                          this.httpGetAsync(
+                            `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,
+                            'POST',
+                            (response) => {
+                              response = JSON.parse(response);
+                              let finalMove =
+                                response.moves.length > 0
+                                  ? response.moves[response.moves.length - 1]
+                                  : response.moves;
+                              this.displayMoves = finalMove || [];
+                              this.scrollToBottom();
+                              setTimeout(() => {
+                                this.getMovesLists();
+                                setTimeout(() => {
+                                  this.scrollToBottom();
+                                }, 500);
+                              }, 1000);
+                            }
+                          );
+                        } else {
+                          this.messageQueue.push(
+                            JSON.stringify({
+                              boardState: fen,
+                              color: this.color,
+                            })
+                          );
+                        }
+                        this.currentFEN = response;
+                      }
+                    );
+                  }
+                }
+              );
+            }
+          } else {
+            console.log('chessClientURL Missmatch.');
           }
         }
       },
@@ -280,8 +381,8 @@ export class StudentComponent implements OnInit {
               'POST',
               (response) => {
                 console.log('response: ', response);
-                var fen = response.split('move:')[0];
-                var move = response.split('move:')[1].slice(0, 2);
+                var fen = response.split(' move:')[0];
+                var move = response.split(' move:')[1].slice(0, 2);
                 var pos = response.split('target:')[1];
                 if (this.isReady) {
                   var chessBoard = (<HTMLFrameElement>(

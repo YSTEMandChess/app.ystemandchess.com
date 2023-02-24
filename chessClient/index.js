@@ -10,9 +10,6 @@ var squareClass = "square-55d63";
 var $board = $("#myBoard");
 var board = null;
 var game = new Chess();
-//var $status = $('#status')
-//var $fen = $('#fen')
-//var $pgn = $('#pgn')
 var whiteSquareGrey = '#eebe7bf7';
 var blackSquareGrey = '#ae5716d6';
 
@@ -108,7 +105,6 @@ function flip() {
 function letParentKnow() {
   if (flag === false) {
     parent.postMessage("ReadyToRecieve", "*");
-    //parent.postMessage("ReadyToRecieve", "http://localhost:4200");
   }
   flag = true;
 }
@@ -160,7 +156,7 @@ function onDrop(source, target, draggedPieceSource) {
   sendToParent(`target:${move.to}`);
   sendToParent(game.fen());
 }
-
+// To add possible move suggestion on chessboard
 function onMouseoverSquare (square, piece) {
   // get list of possible moves for this square
   var moves = game.moves({
@@ -171,15 +167,12 @@ function onMouseoverSquare (square, piece) {
   // exit if there are no moves available for this square
   if (moves.length === 0) return
 
-  // highlight the square they moused over
-  // greySquare(square)
-
   // highlight the possible squares for this piece
   for (var i = 0; i < moves.length; i++) {
     greySquare(moves[i].to)
   }
 }
-
+// To remove possible move suggestion on chessboard
 function onMouseoutSquare (square, piece) {
   removeGreySquares()
 }

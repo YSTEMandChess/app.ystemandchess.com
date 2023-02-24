@@ -28,14 +28,22 @@ http.on("request", (req, res) => {
     } else if (line.substring(0, 4) == "best") {
       const game = new chess.Chess(params.fen);
       const result = game.move(line.split(" ")[1], { sloppy: true });
-      const color = result.color;
-      const image = result.piece.toUpperCase();
-      const move = color + image;
-      const target = result.to;
-      res.write(game.fen());
-      res.write(` move:${move}`);
-      res.write(`target:${target}`);
-      res.end();
+      // check for the result exist or not
+      if(result)
+      {
+        const color = result.color;
+        const image = result.piece.toUpperCase();
+        const move = color + image;
+        const target = result.to;
+        res.write(game.fen());
+        res.write(` move:${move}`);
+        res.write(`target:${target}`);
+        res.end();
+      }
+      else
+      {
+        res.end();
+      }
     }
   };
 

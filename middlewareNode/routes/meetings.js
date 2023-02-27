@@ -5,11 +5,13 @@ const jwt = require("jsonwebtoken");
 const AWS = require("aws-sdk");
 const axios = require("axios");
 const config = require("config");
+const requestIp = require("request-ip");
 const { v4: uuidv4 } = require("uuid");
 const router = express.Router();
 const { check, validationResult, query } = require("express-validator");
 const { waitingStudents, waitingMentors } = require("../models/waiting");
 const meetings = require("../models/meetings");
+const movesList = require("../models/moves");
 const { startRecording, stopRecording } = require("../utils/recordings");
 
 var isBusy = false; //State variable to see if a query is already running.
@@ -17,7 +19,6 @@ var isBusy = false; //State variable to see if a query is already running.
 // @route   GET /meetings/singleRecording
 // @desc    GET a presigned URL from AWS S3
 // @access  Public with jwt Authentication
-console.log("meeting JS called");
 router.get(
   "/singleRecording",
   [check("filename", "The filename is required").not().isEmpty()],
@@ -576,5 +577,111 @@ router.post(
     }
   }
 );
+
+router.post("/storeMoves", async (req, res) => {
+  try {
+    const { gameId, fen, pos, image } = req.query;
+    if (gameId) {
+      const getbyId = await getMovesByGameId(gameId);
+      let moveArray = getbyId.moves;
+      let oldMovesArr = [];
+      let moveArrayLength = moveArray.length;
+      if (moveArray.length > 0) {
+        oldMovesArr = moveArray[moveArrayLength - 1];
+        moveArrayLength = moveArray.length - 1;
+      }
+      if (
+        oldMovesArr.length === 0 ||
+        oldMovesArr[oldMovesArr.length - 1]?.fen !== fen
+      ) {
+        fen && oldMovesArr.push({ fen, pos, image });
+        moveArray[moveArrayLength] = oldMovesArr;
+        let updatedMove = await updateMoveByGameId(gameId, moveArray);
+        res.status(200).send(updatedMove);
+      } else {
+        res.status(202).send(oldMovesArr);
+      }
+    } else {
+      const newGameId = uuidv4();
+      const ipAddress = requestIp.getClientIp(req);
+      const { userId } = req?.query || null;
+      const moves = [];
+      // await movesList.find().populate("userId");
+      let response = await movesList.create({
+        gameId: newGameId,
+        userId: userId,
+        moves: moves,
+        ipAddress: ipAddress,
+      });
+      res.status(200).send(response);
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.post("/newGameStoreMoves", async (req, res) => {
+  try {
+    const { gameId } = req.query;
+    let meeting = await getMovesByGameId(gameId);
+    let moveArray = meeting.moves;
+    let oldMovesArr = [];
+    let moveArrayLength = moveArray.length;
+    moveArray[moveArrayLength] = oldMovesArr;
+    let updatedMove = await updateMoveByGameId(gameId, moveArray);
+    res.status(200).send(updatedMove);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.post("/getStoreMoves", async (req, res) => {
+  try {
+    const { gameId } = req.query;
+    const getBoardStates = await getMovesByGameId(gameId);
+    res.status(200).send(getBoardStates);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.post("/undoMoves", async (req, res) => {
+  try {
+    const { gameId } = req.query;
+    const getBoardState = await getMovesByGameId(gameId);
+    const movesData = getBoardState.moves;
+    const newData = movesData[movesData.length - 1];
+    const finalData = newData.splice(-2, 2);
+    const deletedData = await deleteMovesByGameId(gameId, movesData);
+    res.status(200).send(deletedData);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("server error");
+  }
+});
+
+const deleteMovesByGameId = async (gameId, deletedData) => {
+  const deletedMove = await movesList.findOneAndUpdate(
+    { gameId: gameId },
+    { moves: deletedData }
+  );
+  return deletedMove;
+};
+const getMovesByGameId = async (gameId) => {
+  const getMoves = await movesList.findOne({
+    gameId: gameId,
+  });
+  return getMoves;
+};
+const updateMoveByGameId = async (gameId, oldMovesArr) => {
+  const getMoves = await movesList.findOneAndUpdate(
+    { gameId: gameId },
+    { moves: oldMovesArr }
+  );
+  return getMoves;
+};
 
 module.exports = router;

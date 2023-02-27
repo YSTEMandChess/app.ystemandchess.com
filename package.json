@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@angular/cli": "^15.1.5"
+  },
+  "scripts": {
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve -o"
+    
+  }
+}

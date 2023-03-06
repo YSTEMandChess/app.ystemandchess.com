@@ -4,6 +4,7 @@ const router = express.Router();
 const crypto = require("crypto");
 const { check, validationResult } = require("express-validator");
 const users = require("../models/users");
+const timeTracking = require("../models/timeTracking");
 const {
   ChangePasswordTemplateForUser,
 } = require("../template/changePasswordTemplate");
@@ -105,6 +106,13 @@ router.post(
                 timePlayed: 0,
               });
               await newStudent.save();
+              // Insert new student into timeTracking Database
+              const newTimeTracking = new timeTracking({
+                username: student.username,
+                firstName: student.first,
+                lastName: student.last
+              });
+              await newTimeTracking.save();
             })
           );
         }
@@ -176,6 +184,15 @@ router.post(
         recordingList: [],
       });
       await newStudent.save();
+
+      // Insert new student into timeTracking Database
+      const newTimeTracking = new timeTracking({
+        username: student.username,
+        firstName: student.first,
+        lastName: student.last
+      });
+      await newTimeTracking.save();
+
       return res.status(200).json("Added student");
     } catch (error) {
       console.error(error.message);

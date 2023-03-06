@@ -6,10 +6,14 @@ const gamesSchema = new mongoose.Schema(
         username: {
             type: String,
             required: true,
-          },
-        currentlyOngoing: {
-            type: Boolean,
-            required: false,
+        },
+        firstName: {
+            type: String,
+            required: true,
+        },
+        lastName: {
+            type: String,
+            required: true,
         },
         meetingStartTime: {
             type: Date,

@@ -6,7 +6,15 @@ const timeTrackingSchema = new mongoose.Schema(
         username: {
             type: String,
             required: true,
-          },
+        },
+        firstName: {
+            type: String,
+            required: true,
+        },
+        lastName: {
+            type: String,
+            required: true,
+        },
         timePlayed: {
             type: Number,
             required: true,

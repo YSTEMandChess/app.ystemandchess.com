@@ -1,35 +1,24 @@
 const mongoose = require('mongoose')
 const { Schema, model } = mongoose
 
-const timeTrackingSchema = new mongoose.Schema(
+const timeTrackingSchema = new Schema(
     {
         username: {
             type: String,
             required: true,
         },
-        firstName: {
-            type: String,
-            required: true,
+        eventType: {
+            type: String, 
+            enum: ["mentor", "lessons", "play", "puzzle"],
+            required: true
         },
-        lastName: {
-            type: String,
-            required: true,
+        startTime: {
+            type: Date,
+            required: true
         },
-        timePlayed: {
-            type: Number,
-            required: true,
-            default: 0
-        },
-        computerGameTime: {
-            type: Number,
-            required: true,
-            default: 0
-        },
-        mentorLessonTime: {
-            type: Number,
-            required: true,
-            default: 0
-        },
+        endTime: {
+            type: Date
+        }
     },
     { versionKey: false }
 )

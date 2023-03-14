@@ -24,6 +24,7 @@ app.use('/user', require('./routes/users'))
 app.use('/category', require('./routes/categorys'))
 app.use('/meetings', require('./routes/meetings'))
 app.use('/auth', require('./routes/auth'))
+app.use('/timeTracking', require('./routes/timeTracking'))
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

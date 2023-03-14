@@ -14,14 +14,14 @@ router.post("/start", passport.authenticate("jwt"), async (req, res) => {
       const eventId = uuidv4(); //Generate a random meetingId
   
       // Creating an event with required fields
-      await timeTracking.create({
+      const newEvent = await timeTracking.create({
         username: username, 
         eventType: eventType,
         eventId: eventId,
         startTime: new Date(),
       });
   
-      return res.status(200).json("Ok");
+      return res.status(200).json(newEvent);
     } catch (error) {
       console.error(error.message);
       res.status(500).json("Server error");
@@ -39,9 +39,8 @@ router.put("/end", passport.authenticate("jwt"), async (req, res) => {
 
         //Error checking to ensure the user is actually in a event
         if (!currEvent){
-        return res.status(400).json("This event is currently not happening!")
+          return res.status(400).json("This event is currently not happening!")
         }
-
         // Saving end time 
         currEvent.endTime = new Date();
         await currEvent.save();
@@ -53,3 +52,4 @@ router.put("/end", passport.authenticate("jwt"), async (req, res) => {
     }
 });
   
+module.exports = router;

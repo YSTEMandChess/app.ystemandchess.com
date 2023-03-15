@@ -55,14 +55,20 @@ export class StudentComponent implements OnInit {
     var eventMethod = 'addEventListener';
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
+    
+
 
     this.newGameInit();
+    console.log("play with computer---->", this.playWithComputer)
+    
     eventer(
       messageEvent,
       (e) => {
         // Means that there is the board state and whatnot
 
         if (environment.productionType === 'development') {
+          console.log("test 1st")
+          console.log("origin url---->",e)
           if (e.origin == environment.urls.chessClientURL) {
             this.prevFEN = this.currentFEN;
             let info = e.data;
@@ -157,6 +163,7 @@ export class StudentComponent implements OnInit {
           }
         } else {
           if (e.origin != environment.urls.chessClientURL) {
+            console.log("test 2nd")
             this.prevFEN = this.currentFEN;
             let info = e.data;
             const temp = info.split(':');

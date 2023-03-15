@@ -62,11 +62,11 @@
 // make the navlinks and buttons equally bold
 .nav-link,
 .nav-item .btn {
-  font-weight: 800;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 16px;
 }
 .navbar-light {
-  background-color: #d4dde0;
+  background-color: white;
   color: #3f8500;
 }
 .navbar-expand-lg {
@@ -97,11 +97,11 @@
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #3f8500;
+  color: #3b3839;
 }
 
 .navbar-light .navbar-nav .nav-link:hover {
-  color: #3f8500;
+  color: #3b3839;
 }
 // Underline from Left Animation
 .hvr-underline-from-left {
@@ -120,7 +120,7 @@
   left: 0;
   right: 100%;
   bottom: 0;
-  background: #3f8500;
+  background: #3b3839;
   height: 4px;
   -webkit-transition-property: right;
   transition-property: right;
@@ -186,6 +186,17 @@
 
 .btn-secondary {
   border: none;
+}
+
+.sign-btn {
+  background-color: #EAD94C !important;
+  border: none;
+  box-shadow: 3px 4px #d4dddd;
+  color: black;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 .disp {

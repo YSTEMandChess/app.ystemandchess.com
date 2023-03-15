@@ -34,13 +34,13 @@
   width: 47px;
 }
 .btns {
-  justify-content: flex-start;
+  justify-content: center;
   padding: 5px;
   margin: -2px;
 
   .new-game {
     font-family: "Lato";
-    font-size: 22px;
+    font-size: 18px;
     line-height: 117.1%;
     /* or 26px */
 
@@ -49,22 +49,26 @@
 
     color: #ffffff;
 
-    padding: 20px;
-    margin: 30px;
+    padding: 10px;
+    margin: 10px;
+    max-height:45px;
+    height:auto;
 
-    border: 1px #ff8503 solid;
-    background-color: #ff8503;
-    border-radius: 33px;
+    border: 1px #0046fd solid;
+    background-color: #0046fd;
+    box-shadow: 3px 4px #EAD94C;
+    border-radius: 6px;
+    width: 200px;
     transition: 0.3s;
     cursor: pointer;
   }
-  .new-game:hover {
-    color: #ff8503;
-    background-color: white;
-  }
+  // .new-game:hover {
+  //   color: #ff8503;
+  //   background-color: white;
+  // }
   .play-cpu-game {
     font-family: "Lato";
-    font-size: 22px;
+    font-size: 18px;
     line-height: 117.1%;
     /* or 26px */
 
@@ -73,23 +77,26 @@
 
     color: #ffffff;
 
-    padding: 20px;
-    margin: 30px;
-
-    border: 1px #51aa00 solid;
-    background-color: #51aa00;
-    border-radius: 33px;
+    padding: 10px;
+    margin: 10px;
+    width:200px;
+    max-height: 65px;
+    height: auto;
+    border: 1px #0046fd solid;
+    background-color: #0046fd;
+    box-shadow: 3px 4px #EAD94C;
+    border-radius: 6px;
     transition: 0.3s;
     cursor: pointer;
   }
-  .play-cpu-game:hover {
-    color: #51aa00;
-    background-color: white;
-  }
+  // .play-cpu-game:hover {
+  //   color: #51aa00;
+  //   background-color: white;
+  // }
 
   .curr-game {
     font-family: "Lato";
-    font-size: 22px;
+    font-size: 18px;
     line-height: 117.1%;
     /* or 26px */
 
@@ -98,25 +105,30 @@
 
     color: #ffffff;
 
-    padding: 20px;
-    margin: 30px;
-
-    border: 1px #3a7cca solid;
-    background-color: #3a7cca;
-    border-radius: 33px;
+    padding: 10px;
+    margin: 10px;
+    width:200px;
+    max-height:45px;
+    height:auto;
+    border: 1px #0046fd solid;
+    background-color: #0046fd;
+    box-shadow: 3px 4px #EAD94C;
+    border-radius: 6px;
     transition: 0.3s;
     cursor: pointer;
   }
-  .curr-game:hover {
-    color: #3a7cca;
-    background-color: white;
-  }
+  // .curr-game:hover {
+  //   color: #3a7cca;
+  //   background-color: white;
+  // }
   margin-bottom: 2px;
 }
 
 .bigCont {
-  border-radius: 33px;
-  margin: 10px;
+  // border-radius: 33px;
+  // margin: 10px;"");
+  background-image: url('../../../assets/images/student/bg-image.jpg');
+  background-size: cover;
 }
 .game_wrapper {
   display: flex;
@@ -190,6 +202,7 @@
 .gameclass {
   display: flex;
   justify-content: center;
+  
 }
 app-play {
   padding: 150px;

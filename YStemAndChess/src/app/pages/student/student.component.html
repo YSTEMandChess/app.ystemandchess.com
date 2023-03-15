@@ -14,9 +14,9 @@
                         dolore magna aliqua. Aliquet bibendum enim facilisis gravida neque convallis a. Sapien et ligula
                         ullamcorper malesuada proin libero nunc consequat. Posuere sollicitudin aliquam ultrices sagittis orci a
                         scelerisque purus.</p> -->
-        <a href="/student-recording">
+        <!-- <a href="/student-recording">
           <h1>View Previous Lessons</h1>
-        </a>
+        </a> -->
         <!-- </div> -->
         <!-- <div class="col-sm">
                     <div class="containing">
@@ -119,13 +119,16 @@
       </div>
       <div class="container">
         <div class="btns row">
-          <div class="new-game" (click)="CheckGame()">New Game</div>
+          <div class="curr-game" (click)="undoPrevMove()">UNDO</div>
           <div class="play-cpu-game" (click)="playWithComputer()">
-            Play with a computer
+            PLAY with COMPUTER
           </div>
-          <div class="curr-game" (click)="undoPrevMove()">Undo</div>
+          <div class="new-game" (click)="CheckGame()">NEW GAME</div>
+          <div class="new-game" (click)="CheckGame()">FLIP BOARD</div>
+          
+         
         </div>
-        <div class="movesAhead">
+        <!-- <div class="movesAhead">
           <p id="tag">
             The computer will think
             <input
@@ -139,7 +142,7 @@
             />
             moves ahead.
           </p>
-        </div>
+        </div> -->
       </div>
     </div>
   </body>

@@ -32,7 +32,7 @@
     <!-- end of welcome container -->
 
     <!-- start of mentor-container -->
-    <div id="mentor-container">
+    <div class="mentor-bg"><div id="mentor-container">
       <div id="top"></div>
       <!-- 
                     <div class="turn-indicator">
@@ -51,6 +51,7 @@
                     <iframe src="http://chessclient:9663/" allowfullscreen></iframe>
                 </div>
             -->
+           
       <div class="gameclass">
         <div [ngClass]="{ 'disable-board': !isStepLast }">
           <app-play></app-play>
@@ -151,14 +152,15 @@
           <button type="button" id="undo-move" (click)="undoPrevMove()">
             Undo
           </button>
-        </div>
-        <div class="outer-new-game">
           <button type="button" id="lesson-prep" (click)="playWithComputer()">
             Play With Computer
           </button>
         </div>
+        <div class="outer-new-game">
+        
+        </div>
       </div>
-      <div class="movesAhead">
+      <!-- <div class="movesAhead">
         <p id="tag">
           The computer will think
           <input
@@ -172,8 +174,11 @@
           />
           moves ahead.
         </p>
-      </div>
-    </div>
+      </div> -->
+     
+    </div></div>
+
+    
     <!-- end of mentor container -->
   </body>
 

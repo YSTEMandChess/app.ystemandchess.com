@@ -29,6 +29,7 @@ export class PlayMentorComponent implements OnInit {
   FEN;
   scrollContainer;
   isNearBottom;
+  studentName;
   constructor(private socket: SocketService, private cookie: CookieService) {}
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
 
@@ -47,7 +48,9 @@ export class PlayMentorComponent implements OnInit {
             return;
           }
           let responseText = JSON.parse(response)[0];
+          this.studentName = responseText.studentUsername
           this.meetingId = responseText.meetingId;
+          console.log("student name---->", this.studentName)
         }
       );
       this.userName = userContent.username;
@@ -120,6 +123,7 @@ export class PlayMentorComponent implements OnInit {
   }
 
   public newGame() {
+  
     if (this.meetingId) {
       let userContent = JSON.parse(
         atob(this.cookie.get('login').split('.')[1])
@@ -130,6 +134,7 @@ export class PlayMentorComponent implements OnInit {
       );
       this.getMovesLists();
       let url: string;
+      console.log("test function")
       url = `${environment.urls.middlewareURL}/meetings/newBoardState?meetingId=${this.meetingId}`;
       this.httpGetAsync(url, 'POST', (response) => {
         response = JSON.parse(response);
@@ -137,6 +142,7 @@ export class PlayMentorComponent implements OnInit {
       });
     } else {
       this.newGameInit();
+     
     }
   }
   playWithComputer() {
@@ -151,6 +157,7 @@ export class PlayMentorComponent implements OnInit {
       (e) => {
         // Means that there is the board state and whatnot
         if (environment.productionType === 'development') {
+          console.log("origin url----->", e)
           if (e.origin == environment.urls.chessClientURL) {
             this.prevFEN = this.currentFEN;
             let info = e.data;

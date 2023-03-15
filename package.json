@@ -4,6 +4,8 @@
   },
   "scripts": {
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve -o"
-    
+  },
+  "dependencies": {
+    "request-ip": "^3.3.0"
   }
 }

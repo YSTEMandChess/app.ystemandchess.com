@@ -59,6 +59,7 @@ body {
   height: auto;
   margin-left: 5%;
   border-radius: 33px;
+  // background-image: url('../../../assets/images/student/bg-image.jpg');
   //background-color: #E1E7ED;
 
   #top {
@@ -130,22 +131,27 @@ body {
       padding-bottom: 1%;
       padding-left: 3%;
       padding-right: 3%;
-      border-radius: 33px;
+      border-radius: 6px;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      color: #000000;
-      background-color: #f2c94c;
+      color: white;
+      margin: 10px;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
+    
 
       //push new game button away
     }
 
-    #flip-board:hover {
-      color: #f2c94c;
-      background-color: #000;
-    }
+    // #flip-board:hover {
+    //   color: #f2c94c;
+    //   background-color: #000;
+    // }
 
     #new-game {
       outline-style: none;
@@ -155,12 +161,16 @@ body {
       padding-right: 2%;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      border-radius: 6px;
+      margin: 10px;
       color: #fff;
-      background-color: #ff8503;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
 
       //push lesson prep button away
     }
@@ -172,20 +182,23 @@ body {
       padding-right: 2%;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      margin: 10px;
+      border-radius: 6px;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
       color: #fff;
-      background-color: #ff8503;
-
       //push lesson prep button away
     }
 
-    #new-game:hover {
-      color: #ff8503;
-      background-color: #fff;
-    }
+    // #new-game:hover {
+    //   color: #ff8503;
+    //   background-color: #fff;
+    // }
 
     #lesson-prep {
       outline-style: none;
@@ -196,17 +209,21 @@ body {
       font-family: "Lato";
       font-style: normal;
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      border-radius: 6px;
+      margin: 10px;
       color: #fff;
-      background-color: #3a7cca;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
     }
 
     #lesson-prep:hover {
-      color: #3a7cca;
-      background-color: #fff;
+      background-color: #0046fd;
+      color: #fff;
     }
   }
 }
@@ -288,6 +305,11 @@ body {
 .gameclass {
   display: flex;
   justify-content: space-between;
+  // background-image: url('../../../assets/images/student/bg-image.jpg');
+}
+.mentor-bg{
+  background-image: url('../../../assets/images/student/bg-image.jpg');
+  background-size: cover;
 }
 
 .playwithcomputer {
@@ -298,9 +320,9 @@ body {
   display: flex;
 }
 .outer-filp-board {
-  max-width: 700px;
+  // max-width: 700px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 .outer-new-game {

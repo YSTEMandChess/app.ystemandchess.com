@@ -11,6 +11,7 @@ import {
   AfterViewChecked,
 } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { setPermissionLevel } from '../../globals';
 import {
   AgoraClient,
   ClientEvent,
@@ -23,12 +24,19 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 
+var selected = null, // Object of the element to be moved
+    x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
+    x_elem = 0, y_elem = 0;
+
+
+      
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss'],
 })
 export class PlayComponent implements OnInit {
+  public username = '';
   private localStream: Stream;
   private localScreenStream: Stream;
   private remoteStream: Stream;
@@ -48,6 +56,9 @@ export class PlayComponent implements OnInit {
   displayMoves = [];
   isStepLast: boolean = true;
   currentStep: number;
+  movestep :number;
+  studentName;
+  
 
   constructor(
     private cookie: CookieService,
@@ -62,9 +73,18 @@ export class PlayComponent implements OnInit {
 
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
-  ngOnInit() {
-    let userContent;
 
+ 
+  async ngOnInit() {
+    
+    let userContent;
+    let uInfo = await setPermissionLevel(this.cookie);
+    if (uInfo['error'] == undefined) {
+      this.username = uInfo['username'];
+    
+    }
+
+    
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
       this.httpGetAsync(
@@ -79,9 +99,25 @@ export class PlayComponent implements OnInit {
           }
           let responseText = JSON.parse(response)[0];
           this.meetingId = responseText.meetingId;
+          this.studentName= responseText.studentUsername
+
+
+          
+
           //display web cam styling
           document.getElementById('local_stream').style.display = 'block';
+          document.getElementById('local_streamName').style.display = 'block';
+          document.getElementById('local_stream').style.backgroundColor = '#00dff2';
+          document.getElementById('local_stream').style.cursor = 'move';
           document.getElementById('remote_stream').style.display = 'block';
+          document.getElementById('remote_stream').style.backgroundColor = '#ff0000';
+          document.getElementById('remote_stream').style.marginTop = '10px';
+          document.getElementById('remote_stream').style.height = '250px';
+          document.getElementById('remote_streamName').style.display = 'block';
+
+         
+          
+          
 
           // Code for webcam
           // -------------------------------------------------------------------------
@@ -136,7 +172,7 @@ export class PlayComponent implements OnInit {
               responseText.meetingId,
               '789',
               (uid) => {
-                this.localScreenStream = this.agoraService.createStream({
+                  this.localScreenStream = this.agoraService.createStream({
                   streamID: uid,
                   audio: false,
                   video: false,
@@ -202,6 +238,7 @@ export class PlayComponent implements OnInit {
               document.getElementById('player_789').style.display = 'none';
             } else {
               document.getElementById('remote_stream').style.display = 'none';
+              document.getElementById('remote_streamName').style.display = 'none';
             }
           });
 
@@ -247,7 +284,10 @@ export class PlayComponent implements OnInit {
     } else {
       //hide web cam styling
       document.getElementById('local_stream').style.display = 'none';
+      document.getElementById('local_streamName').style.display = 'none';
       document.getElementById('remote_stream').style.display = 'none';
+      document.getElementById('remote_streamName').style.display = 'none';
+      
 
       userContent = '';
     }
@@ -267,7 +307,9 @@ export class PlayComponent implements OnInit {
       messageEvent,
       (e) => {
         if (environment.productionType === 'development') {
+          // console.log("origin url---->", e)
           if (e.origin == environment.urls.chessClientURL) {
+            console.log("url match")
             // Means that there is the board state and whatnot
             let info = e.data;
             const temp = info.split(':');
@@ -321,10 +363,83 @@ export class PlayComponent implements OnInit {
       },
       false
     );
+
+    //draggable div "draggable-element=> divid"  
+  //   document.getElementById('draggable-element').onmousedown = () => {
+  //     var element = document.getElementById("draggable-element");
+  //     this._drag_init_Div(element);
+  //     return false;
+  // }; 
+  // document.onmousemove = this._move_elem;
+  // document.onmouseup = this._destroy;
+
   }
+
+//   function for drag intit
+//    _drag_init_Div(elem) {
+//     // Store the object of the element which needs to be moved
+//     //console.log(elem);
+//     selected = elem;
+//     x_elem = x_pos - selected.offsetLeft;
+//     y_elem = y_pos - selected.offsetTop;
+// }
+
+
+//  _move_elem(e) {
+//   // x_pos = document.all ? window.e.clientX : e.pageX;
+//   // y_pos = document.all ? window.e.clientY : e.pageY;
+//   x_pos = document.all ? e.clientX : e.pageX;
+//   y_pos = document.all ? e.clientY : e.pageY;
+//    console.log("Selected : ", selected);
+//   if (selected !== null) {
+//       selected.style.left = (x_pos - x_elem) + 'px';
+//       selected.style.top = (y_pos - y_elem) + 'px';
+//   }
+// }
+
+// _destroy() {
+//   selected = null;
+// }
+// 
+//    drag_init(elem) {
+//     // Store the object of the element which needs to be moved
+//     selected = elem;
+//     x_elem = x_pos - selected.offsetLeft;
+//     y_elem = y_pos - selected.offsetTop;
+//   }
+
+// // Will be called when user dragging an element
+//  move_elem(e) {
+//     x_pos = document.all ? window.event.clientX : e.pageX;
+//     y_pos = document.all ? window.event.clientY : e.pageY;
+//     if (selected !== null) {
+//         selected.style.left = (x_pos - x_elem) + 'px';
+//         selected.style.top = (y_pos - y_elem) + 'px';
+//     }
+// }
+
+// // Destroy the object when we are done
+//  _destroy() {
+//     selected = null;
+// }
+
+
+// // Bind the functions...
+// document.getElementById('draggable-element').onmousedown = function () {
+//   drag_init(this);
+//   return false;
+// };
+// document.onmousemove = move_elem;
+// document.onmouseup = _destroy;
+
+
+//joyu documrnt vadi error solve etle tamne koi function banavi ne j e document no use kerva de
+// ha but aema drag_init vadu function call ma error aave chhe
+
   reload() {
     window.location.reload();
   }
+
   getMovesList = () => {
     let url: string = '';
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
@@ -428,7 +543,7 @@ export class PlayComponent implements OnInit {
       JSON.stringify({ username: userContent.username })
     );
   }
-  setMove(index, direction) {
+  setMove(index, direction, ) {
     this.currentStep =
       index <= 0
         ? 0
@@ -460,6 +575,8 @@ export class PlayComponent implements OnInit {
     if (this.isNearBottom) {
       this.scrollToBottom();
     }
+    
+
   }
   imgPos(index) {
     return (

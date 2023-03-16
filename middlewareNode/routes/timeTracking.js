@@ -51,5 +51,38 @@ router.put("/end", passport.authenticate("jwt"), async (req, res) => {
         res.status(500).json("Server error");
     }
 });
-  
+
+// @route   GET /timeTracking/statistics
+// @desc    GET all the user's events between two dates and sum the times for each event type
+// @access  Public with jwt Authentication
+router.put("/statistics", passport.authenticate("jwt"), async (req, res) => {
+  try{
+    const {username, startDate, endDate} = req.query
+    // startDate: ISODate('2023-03-01T00:00:00.000Z')
+    // endDate: ISODate('2023-04-01T00:00:00.000Z')
+    // could change to just month: 'march', year: 2023 and put it together on our own
+    let filters = {
+      username: username,
+      meetingStartTime: {
+        $gte: ISODate(startDate),
+        $lt: ISODate(endDate)
+      }
+    }
+
+    const eventArray = await timeTracking.find(filters);
+
+    // generate sum for each event type and save it 
+
+
+
+
+    // Response: {username:String, websiteTime:Date, lessonsTime:Date,
+    // puzzleTime:Date, playTime:Date, mentorTime:Date}
+    return res.status(200).json("Ok");
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
 module.exports = router;

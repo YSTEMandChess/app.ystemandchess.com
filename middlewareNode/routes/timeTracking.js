@@ -70,15 +70,25 @@ router.put("/statistics", passport.authenticate("jwt"), async (req, res) => {
     }
 
     const eventArray = await timeTracking.find(filters);
+    var eventTimes = {
+      username: username,
+      "mentor": 0, 
+      "lesson": 0,
+      "play": 0, 
+      "puzzle": 0 
+    };
 
-    // generate sum for each event type and save it 
+    for (i = 0; i < eventArray.length; i++){
+      // subtracting each event's start and end time
+      var eventTime = eventArray[i].startTime - eventArray[i].endTime;
+      // converting that time into seconds and adding it to the total time for each event type
+      var currentEventType = eventArray[i].eventType/1000;
+      eventTimes[currentEventType] += eventTime;
+    }
 
-
-
-
-    // Response: {username:String, websiteTime:Date, lessonsTime:Date,
-    // puzzleTime:Date, playTime:Date, mentorTime:Date}
-    return res.status(200).json("Ok");
+    // Response: {username:String, websiteTime:number, lessonsTime:number,
+    // puzzleTime:number, playTime:number, mentorTime:number}
+    return res.status(200).json(eventTimes);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server error");

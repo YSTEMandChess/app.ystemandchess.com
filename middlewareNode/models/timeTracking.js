@@ -22,6 +22,9 @@ const timeTrackingSchema = new Schema(
         },
         endTime: {
             type: Date
+        },
+        totalTime: {
+            type: Number
         }
     },
     { versionKey: false }

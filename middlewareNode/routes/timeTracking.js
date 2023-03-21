@@ -33,7 +33,7 @@ router.post("/start", passport.authenticate("jwt"), async (req, res) => {
 // @access  Public with jwt Authentication
 router.put("/end", passport.authenticate("jwt"), async (req, res) => {
     try{
-        const {username, eventType, eventId} = req.query
+        const {username, eventType, eventId, totalTime} = req.query
         let filters = {username: username, eventID: eventId, eventType: eventType}
         const currEvent = await timeTracking.findOne(filters);
 
@@ -41,8 +41,9 @@ router.put("/end", passport.authenticate("jwt"), async (req, res) => {
         if (!currEvent){
           return res.status(400).json("This event is currently not happening!")
         }
-        // Saving end time 
-        currEvent.endTime = new Date();
+        // Saving to DB
+        currEvent.endDate = new Date();
+        currEvent.totalTime = totalTime;
         await currEvent.save();
 
         return res.status(200).json("Ok");
@@ -60,7 +61,6 @@ router.put("/statistics", passport.authenticate("jwt"), async (req, res) => {
     const {username, startDate, endDate} = req.query
     // startDate: ISODate('2023-03-01T00:00:00.000Z')
     // endDate: ISODate('2023-04-01T00:00:00.000Z')
-    // could change to just month: 'march', year: 2023 and put it together on our own
     let filters = {
       username: username,
       meetingStartTime: {
@@ -79,11 +79,9 @@ router.put("/statistics", passport.authenticate("jwt"), async (req, res) => {
     };
 
     for (i = 0; i < eventArray.length; i++){
-      // subtracting each event's start and end time
-      var eventTime = eventArray[i].startTime - eventArray[i].endTime;
-      // converting that time into seconds and adding it to the total time for each event type
-      var currentEventType = eventArray[i].eventType/1000;
-      eventTimes[currentEventType] += eventTime;
+      // filling array with event total times based on Type
+      var eventTime = eventArray[i].totalTime
+      eventTimes[eventArray[i].eventType] += eventTime;
     }
 
     // Response: {username:String, websiteTime:number, lessonsTime:number,

@@ -29,7 +29,7 @@ router.post("/start", passport.authenticate("jwt"), async (req, res) => {
   });
   
 // @route   PUT /timeTracking/end
-// @desc    PUT a user's event to an end
+// @desc    PUT a user's event to an end and update the total time
 // @access  Public with jwt Authentication
 router.put("/end", passport.authenticate("jwt"), async (req, res) => {
     try{
@@ -75,7 +75,8 @@ router.put("/statistics", passport.authenticate("jwt"), async (req, res) => {
       "mentor": 0, 
       "lesson": 0,
       "play": 0, 
-      "puzzle": 0 
+      "puzzle": 0,
+      "website": 0, 
     };
 
     for (i = 0; i < eventArray.length; i++){
@@ -85,7 +86,7 @@ router.put("/statistics", passport.authenticate("jwt"), async (req, res) => {
     }
 
     // Response: {username:String, websiteTime:number, lessonsTime:number,
-    // puzzleTime:number, playTime:number, mentorTime:number}
+    // puzzleTime:number, playTime:number, mentorTime:number, websiteTime:number}
     return res.status(200).json(eventTimes);
   } catch (error) {
     console.error(error.message);

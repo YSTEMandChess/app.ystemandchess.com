@@ -1,9 +1,8 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-const crypto = require("crypto");
-const { check, validationResult } = require("express-validator");
 const timeTracking = require("../models/timeTracking");
+const { v4: uuidv4 } = require("uuid");
 
 // @route   POST /timeTracking/start
 // @desc    POST a user's event for time tracking
@@ -33,7 +32,7 @@ router.post("/start", passport.authenticate("jwt"), async (req, res) => {
 // @access  Public with jwt Authentication
 router.put("/end", passport.authenticate("jwt"), async (req, res) => {
     try{
-        const {username, eventType, eventId, totalTime} = req.query
+        const {username, eventType, eventId} = req.query
         let filters = {username: username, eventID: eventId, eventType: eventType}
         const currEvent = await timeTracking.findOne(filters);
 
@@ -42,8 +41,8 @@ router.put("/end", passport.authenticate("jwt"), async (req, res) => {
           return res.status(400).json("This event is currently not happening!")
         }
         // Saving to DB
-        currEvent.endDate = new Date();
-        currEvent.totalTime = totalTime;
+        currEvent.endTime = new Date();
+        // currEvent.totalTime = totalTime;
         await currEvent.save();
 
         return res.status(200).json("Ok");
@@ -56,33 +55,34 @@ router.put("/end", passport.authenticate("jwt"), async (req, res) => {
 // @route   GET /timeTracking/statistics
 // @desc    GET all the user's events between two dates and sum the times for each event type
 // @access  Public with jwt Authentication
-router.put("/statistics", passport.authenticate("jwt"), async (req, res) => {
+router.get("/statistics", passport.authenticate("jwt"), async (req, res) => {
   try{
     const {username, startDate, endDate} = req.query
     // startDate: ISODate('2023-03-01T00:00:00.000Z')
     // endDate: ISODate('2023-04-01T00:00:00.000Z')
-    let filters = {
+    const filters = {
       username: username,
       meetingStartTime: {
-        $gte: ISODate(startDate),
-        $lt: ISODate(endDate)
+        $gte: new Date(startDate),
+        $lt: new Date(endDate)
       }
     }
 
     const eventArray = await timeTracking.find(filters);
-    var eventTimes = {
+    const eventTimes = {
       username: username,
-      "mentor": 0, 
+      "mentor": 0,
       "lesson": 0,
-      "play": 0, 
+      "play": 0,
       "puzzle": 0,
-      "website": 0, 
+      "website": 0,
     };
 
-    for (i = 0; i < eventArray.length; i++){
+    for (const event of eventArray){
       // filling array with event total times based on Type
-      var eventTime = eventArray[i].totalTime
-      eventTimes[eventArray[i].eventType] += eventTime;
+      if (event.startTime && event.endTime){
+        eventTimes[event.eventType] += event.endTime - event.startTime;
+      }
     }
 
     // Response: {username:String, websiteTime:number, lessonsTime:number,

@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 const timeTracking = require("../models/timeTracking");
 const { v4: uuidv4 } = require("uuid");
 
@@ -12,40 +13,41 @@ router.post("/start", passport.authenticate("jwt"), async (req, res) => {
       const {username, eventType} = req.query
       const eventId = uuidv4(); //Generate a random meetingId
   
-      // Creating an event with required fields
-      const newEvent = await timeTracking.create({
-        username: username, 
-        eventType: eventType,
-        eventId: eventId,
-        startTime: new Date(),
-      });
+      // Creating an event with requirewd fields
+        const newEvent = await timeTracking.create({
+          username: username, 
+          eventType: eventType,
+          eventId: eventId,
+          startTime: new Date(),
+        });
   
       return res.status(200).json(newEvent);
+
     } catch (error) {
       console.error(error.message);
       res.status(500).json("Server error");
     }
   });
   
-// @route   PUT /timeTracking/end
-// @desc    PUT a user's event to an end and update the total time
+// @route   PUT /timeTracking/update
+// @desc    PUT a update for totalTime and endTime to an user's event
 // @access  Public with jwt Authentication
-router.put("/end", passport.authenticate("jwt"), async (req, res) => {
+router.put("/update", passport.authenticate("jwt"), async (req, res) => {
     try{
-        const {username, eventType, eventId} = req.query
+        const {username, eventType, eventId, totalTime} = req.query
         let filters = {username: username, eventID: eventId, eventType: eventType}
         const currEvent = await timeTracking.findOne(filters);
 
-        //Error checking to ensure the user is actually in a event
+        //Error checking to ensure the event exist
         if (!currEvent){
-          return res.status(400).json("This event is currently not happening!")
+          return res.status(400).json("This event does not exist!")
         }
         // Saving to DB
-        currEvent.endTime = new Date();
-        // currEvent.totalTime = totalTime;
+        currEvent.endDate = new Date();
+        currEvent.totalTime = totalTime;
         await currEvent.save();
 
-        return res.status(200).json("Ok");
+        return res.status(200).json("Timetracking for event updated");
     } catch (error) {
         console.error(error.message);
         res.status(500).json("Server error");
@@ -60,7 +62,7 @@ router.get("/statistics", passport.authenticate("jwt"), async (req, res) => {
     const {username, startDate, endDate} = req.query
     // startDate: ISODate('2023-03-01T00:00:00.000Z')
     // endDate: ISODate('2023-04-01T00:00:00.000Z')
-    const filters = {
+    let filters = {
       username: username,
       meetingStartTime: {
         $gte: new Date(startDate),
@@ -71,22 +73,18 @@ router.get("/statistics", passport.authenticate("jwt"), async (req, res) => {
     const eventArray = await timeTracking.find(filters);
     const eventTimes = {
       username: username,
-      "mentor": 0,
+      "mentor": 0, 
       "lesson": 0,
-      "play": 0,
+      "play": 0, 
       "puzzle": 0,
-      "website": 0,
+      "website": 0, 
     };
 
-    for (const event of eventArray){
+    for (i = 0; i < eventArray.length; i++){
       // filling array with event total times based on Type
-      if (event.startTime && event.endTime){
-        eventTimes[event.eventType] += event.endTime - event.startTime;
-      }
+      eventTimes[eventArray[i].eventType] +=  eventArray[i].totalTime;
     }
 
-    // Response: {username:String, websiteTime:number, lessonsTime:number,
-    // puzzleTime:number, playTime:number, mentorTime:number, websiteTime:number}
     return res.status(200).json(eventTimes);
   } catch (error) {
     console.error(error.message);

@@ -43,7 +43,7 @@ router.put("/update", passport.authenticate("jwt"), async (req, res) => {
           return res.status(400).json("This event does not exist!")
         }
         // Saving to DB
-        currEvent.endDate = new Date();
+        currEvent.endTime = new Date();
         currEvent.totalTime = totalTime;
         await currEvent.save();
 
@@ -64,7 +64,7 @@ router.get("/statistics", passport.authenticate("jwt"), async (req, res) => {
     // endDate: ISODate('2023-04-01T00:00:00.000Z')
     let filters = {
       username: username,
-      meetingStartTime: {
+      startTime: {
         $gte: new Date(startDate),
         $lt: new Date(endDate)
       }

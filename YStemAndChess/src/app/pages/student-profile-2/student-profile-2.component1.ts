@@ -62,3 +62,11 @@ let config = {
       };
 
 let newChart = new Chart(canvasElement, config);
+          },
+          barPercentage: 0.5,
+          categoryPercentage: 1,
+          borderRadius: 3
+      },
+      };
+
+let newChart = new Chart(canvasElement, config);

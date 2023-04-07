@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAGQ,IAHJ,CAEA,OAAO,CACH,EAAE,CAAC;EACC,WAAW,EAAE,QAAQ;CACxB;;AALT,AAOQ,IAPJ,CAEA,OAAO,CAKH,EAAE,CAAC;EACC,WAAW,EAAE,QAAQ;CACxB;;AATT,AAYI,IAZA,CAYA,WAAW,CAAC;EACR,UAAU,EAAE,EAAE;CAQjB;;AArBL,AAcQ,IAdJ,CAYA,WAAW,CAEP,EAAE,CAAC;EACC,WAAW,EAAE,MAAM;CACtB;;AAhBT,AAkBQ,IAlBJ,CAYA,WAAW,CAMP,EAAE,CAAC;EACC,WAAW,EAAE,MAAM;CACtB;;AAIT,AAAA,CAAC,AAAA,MAAM,CAAC;EACJ,MAAM,EAAE,OAAO;EACf,KAAK,EAAE,IAAI;CACd",
     "sources": [
-        "student-recordings.component.scss"
+        "sponsors.component.scss"
     ],
     "names": [],
-    "file": "student-recordings.component.css"
+    "file": "sponsors.component.css"
 }

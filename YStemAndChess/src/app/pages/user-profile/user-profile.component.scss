@@ -4,10 +4,79 @@ body {
     text-align: center;
 }
 
+.website-icon::before{
+  position: absolute;
+    left: -16px;
+    top: 4px;
+    content: " ";
+    border: 5px solid #0a0a0a;
+    border-radius: 500%;
+    background: #7fcc26;
+    height: 17px;
+    width: 17px;
+    margin-left:14px;
+}
+
+.lesson::before{
+  position: absolute;
+    left: -16px;
+    top: 4px;
+    content: " ";
+    border: 5px solid #0a0a0a;
+    border-radius: 500%;
+    background: #C8B4FF;
+    height: 17px;
+    width: 17px;
+    margin-left:14px;
+}
+
+.puzzle::before{
+  position: absolute;
+    left: -16px;
+    top: 4px;
+    content: " ";
+    border: 5px solid #0a0a0a;
+    border-radius: 500%;
+    background: #0FDFF2;
+    height: 17px;
+    width: 17px;
+    margin-left:14px;
+}
+
+.mentoring::before{
+  position: absolute;
+    left: -16px;
+    top: 4px;
+    content: " ";
+    border: 5px solid #0a0a0a;
+    border-radius: 500%;
+    background: #FD8E4F;
+    height: 17px;
+    width: 17px;
+    margin-left:14px;
+}
+
+.playing::before{
+  position: absolute;
+    left: -16px;
+    top: 4px;
+    content: " ";
+    border: 5px solid #0a0a0a;
+    border-radius: 500%;
+    background: #F24598;
+    height: 17px;
+    width: 17px;
+    margin-left:14px;
+}
+
 .signupForm h2 {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 900;
+}
+
+.myDiv h2{
+  font-size:23px;
 }
 
 .signupForm input {
@@ -27,6 +96,7 @@ body {
     font-style: normal;
     font-weight: 500;
 }
+
 
 .signupForm button {
     outline-style:none;
@@ -61,7 +131,7 @@ body {
 
 
 .userProfileDiv {
-    background-color: #D4DDE0 ;    
+    background-color: #E5F3D2 ;    
     text-align: left;
     padding: 40px;
   }
@@ -85,15 +155,205 @@ body {
   {
       border-bottom: 1px solid #a3a0a0;
   }
+
+  .myDiv{
+    margin-left:60px;
+  }
   .tabView
   {
       margin-top: 15%;
+      
   }
 
 
 .rightbox {
 height: 100%;
 }
+
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 21%;
+  height: 447px;
+  background-color: #E5F3D2;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 79%;
+  border-left: none;
+  height: 447px;
+  overflow-y: auto;
+  background-color: #C8F2AE;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* Style the buttons inside the tab */
+// .tab button {
+//   display: block;
+//   background-color: red;
+  
+//   color: black;
+//   padding: 22px 16px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   text-align: left;
+//   cursor: pointer;
+//   transition: 0.3s;
+//   font-size: 17px;
+// }
+
+.tab-image{
+  width: 231px;
+  height: 46px;
+  border-top-left-radius: 5px;
+}
+
+.tab-image2{
+  width: 231px;
+  height: 46px;
+}
+
+.tab-image3{
+  width: 231px;
+  height: 46px;
+  border-bottom-left-radius: 5px;
+}
+
+.tab button.tab1{
+  display: block;
+  padding-left: 0;
+  padding-top: 0;
+  border-top-left-radius: 5px;
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+}
+
+.tab button.tab2{
+  display: block;
+  padding-left: 0;
+  padding-top: 0;
+  margin-top:10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  
+}
+
+.tab button.tab3{
+  display: block;
+  padding-left: 0;
+  padding-top: 0;
+  border-bottom-left-radius: 5px;
+  margin-top:10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.tab button.tab4{
+  display: block;
+  background-color: white;
+  font-weight: 600;
+  margin-top:10px;
+  color: black;
+  padding: 11px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+
+.tab button.tab5{
+  display: block;
+  font-weight: 600;
+  background-color: dodgerblue;
+  margin-top:10px;
+  color: black;
+  padding: 11px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.tab button.tab6{
+  display: block;
+  font-weight: 600;
+  background-color: yellow;
+  margin-top:10px;
+  color: black;
+  padding: 11px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.tab button.tab7{
+  display: block;
+  font-weight: 600;
+  background-color: rgb(227, 133, 149);
+  margin-top:10px;
+  color: black;
+  padding: 11px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+.tab button.tab8{
+  display: block;
+  font-weight: 600;
+  background-color: red;
+  border-bottom-left-radius: 10px;
+  color: black;
+  margin-top:10px;
+  padding: 11px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+
+/* Change background color of buttons on hover */
+
+
+/* Create an active/current "tab button" class */
+
+
+/* Style the tab content */
+
 
 .rb-container {
 font-family: "PT Sans", sans-serif;
@@ -111,7 +371,7 @@ display: inline-block;
 .rb-container ul.rb li {
 list-style: none;
 margin: auto;
-margin-left: 10em;
+margin-left: 3em;
 min-height: 50px;
 border-left: 1px dashed #000;
 padding: 0 0 50px 30px;
@@ -134,6 +394,8 @@ height: 28px;
 width: 28px;
 transition: all 500ms ease-in-out;
 }
+
+
 
 .rb-container ul.rb li:hover::before {
 border-color: #232931;
@@ -248,9 +510,9 @@ color: #000;
 .pdf-view {
     margin: auto;
     margin-top: 5%;
-    height: 500px;
+    height: 95px;
     // width: 600px;
-    border: 1px solid #dadada;
+    // border: 1px solid #dadada;
 }
 .sharedExpCategoryList{
   cursor: pointer;

@@ -1,16 +1,15 @@
 <header>
   <app-header></app-header>
-  <link
-    href="https://fonts.googleapis.com/css?family=Roboto"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+
 </header>
 
 <!-- Green container holding learnings content -->
-<div class="container text-center">
-  <div class="row">
-    <!-- Displays title and instructions for selected chess board situation -->
+<div class="container ">
+  <!-- <div class="row">
+    
     <div class="col instructions">
       <div id="instructions-header">
         <h3>Choose a Lesson</h3>
@@ -19,28 +18,71 @@
         <p>{{ info }}</p>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <ul id="accordion-ul">
-        <li *ngFor="let section of sections">
-          <button class="accordion-expand" (click)="showSubSection($event)">
-            [+] {{ section.name }}
-          </button>
-          <ul class="panel">
-            <li *ngFor="let subSection of section.subSections">
-              <button class="accordion-sub" (click)="startLesson(subSection)">
-                {{ subSection.name }}
-              </button>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="col chess">
+  </div> -->
+  <div class="row lesson-play-section">
+    <div class="col-8 chess">
+      <div class="btn-div">
+        <button class="lesson-btn">
+          Lesson
+        </button>
+        <button class="play-btn" onclick="">
+          <a style="color:black" href="{{ playLink }}">Play</a>
+        </button>
+      </div>
+
+
       <!-- Display selected chess board situation -->
       <iframe id="chessBd" [src]="chessSrc"></iframe>
     </div>
+
+    <div class="col-4 pl-5">
+      <div class="row mt-5 align-items-center">
+        <div class="col-8 font-weight-bold" *ngFor="let section of sections" (click)="showSubSection($event)">
+          <h3>{{ section.name }}
+          </h3>
+        </div>
+        <div class="col-4 text-right">
+          <button class="refresh-btn" (click)="refresh()">
+            <i class="fa-sharp fa-solid fa-rotate-right icon-size"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-4 mx-1">
+        <div class="col-12 lesson-instruction-section" *ngFor="let section of sections">
+          <p class="lesson-instruction text-center">Try<br />this!</p>
+          <p class="lesson-instruction instruction-detail pl-5">{{ info }}</p>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-6 text-right"><button class="play-btn" (click)="loadPrevLesson()"
+            [disabled]="lessonNumber == 0"><i class="fa-solid fa-arrow-left pr-2 icon-size"></i>Back</button></div>
+        <div class="col-6"> <button class="next-btn" (click)="loadNextLesson()" [disabled]="lessonNumber == 5">Next<i
+              class="fa-solid fa-arrow-right pl-2 icon-size"></i></button></div>
+      </div>
+
+
+
+    </div>
   </div>
+  <div class="row mt-5 pt-2">
+    <div class="col">
+      <div *ngFor="let section of sections">
+
+        <div class="tab subsection-section" *ngFor="let subSection of section.subSections"
+          (click)="setStateAsActive(subSection)">
+
+          <button class="tablinks col-2 font-weight-bold" [ngClass]="{'active': subSection === activeState}"
+            (click)="startLesson(subSection)"> {{ subSection.name }} </button>
+          <!-- <button class="tablinks col-2 font-weight-bold" [ngClass]="{'active': subSection === activeState}" > {{ subSection.name }} </button> -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
-<app-footer></app-footer>
+<footer style="margin-top: 25%;">
+  <app-footer></app-footer>
+</footer>

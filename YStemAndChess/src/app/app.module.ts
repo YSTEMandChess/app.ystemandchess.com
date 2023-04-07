@@ -42,6 +42,16 @@ import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.co
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
+import {SponsorsComponent} from "./pages/sponsors/sponsors.component"
+import {MissionHifiComponent} from "./pages/mission-hifi/mission-hifi.component"
+import {FinancialsHifiComponent} from "./pages/financials/financials-hifi.component";
+import {BoardHifiComponent} from "./pages/board/board-hifi.component";
+import {MathArticleComponent} from "./pages/math-article/math-article.component";
+import {OnlineArticleComponent} from "./pages/Online-expansion-article/online-article.component";
+import {ComputerBenefitArticleComponent} from "./pages/computer-science-benefit-article/computer-benefit-article.component"
+import {ChessBenefitArticleComponent} from "./pages/chess-benefit-article/chess-benefit-article.component";
+import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-article/mentoring-benefit-article.component";
+import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -79,6 +89,17 @@ const agoraConfig: AgoraConfig = {
     WhyChessComponent,
     ResetPasswordComponent,
     SetPasswordComponent,
+    SponsorsComponent,
+    MissionHifiComponent,
+    FinancialsHifiComponent,
+    BoardHifiComponent,
+    MathArticleComponent,
+    OnlineArticleComponent,
+    ComputerBenefitArticleComponent,
+    ChessBenefitArticleComponent,
+    MentoringBenefitArticleComponent,
+    AboutUsComponent
+    
   ],
   imports: [
     BrowserModule,

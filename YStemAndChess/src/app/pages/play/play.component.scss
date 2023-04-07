@@ -9,6 +9,10 @@
     iframe {
       min-width: 700px;
       min-height: 700px;
+
+      #document html {
+        height: 690px;
+      }
     }
   }
 }
@@ -19,14 +23,21 @@
 
 .stream_wrapper {
   display: flex;
-  justify-content: flex-end;
+  width: 335px;
+  margin-top: 8px;
+  position: relative;
+  // justify-content: flex-end;
   flex-direction: column;
   .jitsi {
     display: flex;
-    width: 300px;
-    height: 300px;
-    padding: 20px;
+    width: 325px;
+    height: 310px;
+    padding: 6px 3px
   }
+}
+
+.steps-div {
+  margin-top: 8px;
 }
 .movesList {
   height: 251px;
@@ -35,11 +46,12 @@
 }
 .table-moves {
   display: flex;
-  gap: 0.5rem;
+ 
   justify-content: space-around;
 }
 .table-moves div p {
-  border: 2px solid black;
+  border: 3px solid #257d96;
+  
   padding: 0.2rem;
   margin-bottom: 0.5rem;
   display: flex;
@@ -47,7 +59,7 @@
   align-items: center;
 }
 .tableMove-selected {
-  background-color: white !important;
+  background-color: #b5d6e1 !important;
 }
 .imgRes {
   height: 30px !important;
@@ -60,12 +72,20 @@
 }
 .display-step {
   display: block;
-  height: 20rem;
+  height: 41rem;
   overflow: hidden scroll;
   cursor: pointer;
-  background-color: lightgray;
+  margin-left: 25px;
+  // background-color: lightgray;
+  border:4px solid #257d96;
   padding: 7%;
   width: fit-content;
+  background-image: url('../../../assets/images/student/STEMy_Mascot.png');
+  background-size: auto; 
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  
 }
 table {
   text-align: center;
@@ -78,13 +98,18 @@ table tbody {
 }
 td {
   cursor: pointer;
+ 
 }
+
+
+
 .display-step::-webkit-scrollbar {
   display: none;
 }
 .steps-div span {
   font-weight: 500;
   font-size: xx-large;
+ 
 }
 .disable-board {
   filter: grayscale(1);
@@ -102,6 +127,64 @@ td {
 .fwd-btns img {
   height: 25px;
 }
+
+.steps-main{
+  list-style: decimal;
+}
+
+.stpes-list{
+  display: list-item;
+  margin-left:10px;
+}
+
+.stpes-list::marker {
+  font-weight: 600;
+  font-size: 22px;
+  
+}
+
+.steps-decoration{
+  
+  margin-top: 2px;
+  width: 80px;
+  background-color: black;
+
+}
+
+#local_streamName{
+  text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+    padding-top: 0;
+    background-color: #00dff2;
+    display: none;
+}
+
+#remote_streamName{
+  text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+    padding-top: 0;
+    background-color: #ff0000;
+    display: none;
+}
+
+#draggable-element {
+  width:100px;
+  height:100px;
+  background-color:#666;
+  color:white;
+  padding:10px 12px;
+  cursor:move;
+  position:relative; /* important (all position that's not `static`) */
+}
+
+#remote_streamName{
+  display: none;
+}
+
 
 @media only screen and (max-width: 1024px) {
   .chess {

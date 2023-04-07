@@ -31,6 +31,17 @@ import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
 
+import {MathArticleComponent} from "./pages/math-article/math-article.component";
+import {OnlineArticleComponent} from "./pages/Online-expansion-article/online-article.component";
+import {ComputerBenefitArticleComponent} from "./pages/computer-science-benefit-article/computer-benefit-article.component"
+import {ChessBenefitArticleComponent} from "./pages/chess-benefit-article/chess-benefit-article.component";
+import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-article/mentoring-benefit-article.component";
+import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
+import {MissionHifiComponent} from "./pages/mission-hifi/mission-hifi.component"
+import {FinancialsHifiComponent} from "./pages/financials/financials-hifi.component";
+import {BoardHifiComponent} from "./pages/board/board-hifi.component";
+
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   // Lets remove the one below this comment (PlayComponent) when we go into production
@@ -133,6 +144,17 @@ const routes: Routes = [
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'board-analyzer', component: BoardAnalyzerComponent },
   { path: 'why-chess', component: WhyChessComponent },
+
+  { path: 'math-article', component: MathArticleComponent },
+  { path: 'mentoring-article', component: MentoringBenefitArticleComponent },
+  { path: 'online-expansion-article', component: OnlineArticleComponent },
+  { path: 'chess-benefit-article', component: ChessBenefitArticleComponent },
+  { path: 'computer-science-article', component: ComputerBenefitArticleComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'mission-hifi', component: MissionHifiComponent },
+  { path: 'financial-hifi', component: FinancialsHifiComponent },
+  { path: 'board-hifi', component: BoardHifiComponent },
+
 ];
 
 @NgModule({

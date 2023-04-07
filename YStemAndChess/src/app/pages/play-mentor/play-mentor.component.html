@@ -1,21 +1,21 @@
 <html>
-  <head> </head>
+  
 
   <header>
     <app-header></app-header>
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css?family=Roboto"
       rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/css?family=Lato"
       rel="stylesheet"
-    />
+    /> -->
   </header>
 
   <body>
     <!-- start of welcome container  -->
-    <div id="welcome-container">
+    <!-- <div id="welcome-container">
       <div id="welcome-header">
         <h3>Welcome Robert</h3>
         <h4>Not Robert? &#9658;</h4>
@@ -28,11 +28,12 @@
           delectus. Rerum aspernatur ea accusamus officiis!
         </p>
       </div>
-    </div>
+    </div> -->
     <!-- end of welcome container -->
 
     <!-- start of mentor-container -->
-    <div id="mentor-container">
+    <div class="mentor-bg" id="video">
+      <div id="mentor-container">
       <div id="top"></div>
       <!-- 
                     <div class="turn-indicator">
@@ -51,86 +52,40 @@
                     <iframe src="http://chessclient:9663/" allowfullscreen></iframe>
                 </div>
             -->
+           
       <div class="gameclass">
         <div [ngClass]="{ 'disable-board': !isStepLast }">
           <app-play></app-play>
         </div>
-        <div class="game_wrapper">
+        <!-- <div class="game_wrapper">
           <div class="chess">
             <div *ngIf="displayMoves.length > 0" class="steps-div">
-              <div class="text-center">
-                <span>Steps</span>
-              </div>
-              <div class="fwd-btns">
-                <p
-                  (click)="setMove(0, 'backward')"
-                  [ngClass]="currentStep === 0 && 'isBlur'"
-                >
-                  <img
-                    src="../../../assets/images/moves/icons8-rewind-100.png"
-                  />
-                </p>
-                <p
-                  (click)="setMove(currentStep - 1, 'backward')"
-                  [ngClass]="currentStep <= 0 && 'isBlur'"
-                >
-                  <img
-                    src="../../../assets/images/moves/icons8-less-than-60.png"
-                  />
-                </p>
-                <p
-                  (click)="setMove(currentStep + 1, 'forward')"
-                  [ngClass]="
-                    currentStep === displayMoves.length - 1 && 'isBlur'
-                  "
-                >
-                  <img
-                    src="../../../assets/images/moves/icons8-more-than-60.png"
-                  />
-                </p>
-                <p
-                  (click)="setMove(displayMoves.length - 1, 'forward')"
-                  [ngClass]="
-                    currentStep === displayMoves.length - 1 && 'isBlur'
-                  "
-                >
-                  <img
-                    src="../../../assets/images/moves/icons8-fast-forward-100.png"
-                  />
-                </p>
-              </div>
-              <div
-                class="display-step"
-                (scroll)="scrolled($event)"
-                #scrollframe
-              >
+             
+
+              <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
+                <div class="text-center">
+                  <span>Steps</span>
+                  <hr class="steps-decoration">
+                </div>
                 <div class="table-moves" #item>
+                  
                   <div style="width: 100px">
                     <div
                       *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i, 'direct')"
+                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
                     >
-                      <p
-                        *ngIf="i % 2 === 0"
-                        [class.tableMove-selected]="i == currentStep"
-                      >
-                        <img [src]="imgPos(i)" alt="" class="imgRes" />
-                        {{ item.pos }}
+                      <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
+                        <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
                       </p>
                     </div>
                   </div>
                   <div style="width: 100px">
                     <div
                       *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i, 'direct')"
+                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
                     >
-                      <p
-                        *ngIf="i % 2 !== 0"
-                        [class.tableMove-selected]="i == currentStep"
-                      >
-                        <img [src]="imgPos(i)" alt="" class="imgRes" />{{
-                          item.pos
-                        }}
+                      <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
+                        <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
                       </p>
                     </div>
                   </div>
@@ -138,7 +93,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div id="bottom">
         <div class="outer-filp-board">
@@ -151,12 +106,13 @@
           <button type="button" id="undo-move" (click)="undoPrevMove()">
             Undo
           </button>
-        </div>
-        <div class="outer-new-game">
           <button type="button" id="lesson-prep" (click)="playWithComputer()">
             Play With Computer
           </button>
         </div>
+        <!-- <div class="outer-new-game">
+        
+        </div> -->
       </div>
       <div class="movesAhead">
         <p id="tag">
@@ -172,8 +128,15 @@
           />
           moves ahead.
         </p>
+
+       
       </div>
+     
     </div>
+  </div>
+  <button id="pipBtn" class="btn btn-lg btn-primary hidden" disabled>Enter Picture-in-Picture mode</button>
+
+    
     <!-- end of mentor container -->
   </body>
 

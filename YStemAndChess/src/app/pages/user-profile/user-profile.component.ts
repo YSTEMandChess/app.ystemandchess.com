@@ -3,6 +3,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
+// import { Chart } from 'chart.js';
+// import { Chart, registerables } from 'chart.js';
+// Chart.register(...registerables);
+
 
 
 @Component({
@@ -10,13 +14,14 @@ import { ViewSDKClient } from '../../view-sdk.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
+
 export class UserProfileComponent implements OnInit {
   link: string = null;
   numStudents = new Array();
   newStudentFlag: boolean = false;
   numNewStudents: number = 0;
-
-
+ 
+  public chart: any;
   public username = '';
   public firstName = '';
   public lastName = '';
@@ -35,7 +40,47 @@ export class UserProfileComponent implements OnInit {
   signedURL = '';
   constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
 
+
+
+  // chartOptions = {
+  //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
+  // }
+
+  // labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+  // // STATIC DATA FOR THE CHART IN JSON FORMAT.
+  // chartData = [
+  //   {
+  //     label: '1st Year',
+  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
+  //   },
+  //   { 
+  //     label: '2nd Year',
+  //     data: [47, 9, 28, 54, 77, 51, 24]
+  //   }
+  // ];
+
+  // // CHART COLOR.
+  // colors = [
+  //   { // 1st Year.
+  //     backgroundColor: 'rgba(77,83,96,0.2)'
+  //   },
+  //   { // 2nd Year.
+  //     backgroundColor: 'rgba(30, 169, 224, 0.8)'
+  //   }
+  // ]
+  
+  // // CHART CLICK EVENT.
+  // onChartClick(event) {
+  //   console.log(event);
+  // }
+
+
   async ngOnInit() {
+
+
+    
+    
     this.numStudents.push(0);
     this.numNewStudents++;
     let pLevel = 'nLogged';
@@ -46,6 +91,8 @@ export class UserProfileComponent implements OnInit {
     this.lastName = uInfo['lastName'];
     this.accountCreatedAt = uInfo['accountCreatedAt'];
     this.role = uInfo['role'];
+
+    document.getElementById("defaultOpen").click();
 
     if (uInfo['error'] == undefined) {
       pLevel = uInfo.role;
@@ -86,6 +133,54 @@ export class UserProfileComponent implements OnInit {
     // this.categoryList = categoryList;
 
   }
+
+  // createChart(){
+  
+  //   this.chart = new Chart("MyChart", {
+  //     type: 'bar', //this denotes tha type of chart
+
+  //     data: {// values on X-Axis
+  //       labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
+	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
+	//        datasets: [
+  //         {
+  //           label: "Sales",
+  //           data: ['467','576', '572', '79', '92',
+	// 							 '574', '573', '576'],
+  //           backgroundColor: 'blue'
+  //         },
+  //         {
+  //           label: "Profit",
+  //           data: ['542', '542', '536', '327', '17',
+	// 								 '0.00', '538', '541'],
+  //           backgroundColor: 'limegreen'
+  //         }  
+  //       ]
+  //     },
+  //     options: {
+  //       aspectRatio:2.5
+  //     }
+      
+  //   });
+  // }
+
+  public openCity(evt, cityName) {
+    console.log("cityname--->", cityName)
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  
+  // Get the element with id="defaultOpen" and click on it
+  
 
   private httpGetAsync(theUrl: string, method: string, callback) {
     var xmlHttp = new XMLHttpRequest();
@@ -192,6 +287,8 @@ export class UserProfileComponent implements OnInit {
   }
   
 }
+
+
 
 // export class SizedContainerComponent implements AfterViewInit {
 //   constructor(private viewSDKClient: ViewSDKClient) { }

@@ -34,7 +34,7 @@ export class ViewSDKClient {
     previewFile(filePath:string,divId: string, viewerConfig: any) {
         const config: any = {
             /* Pass your registered client id */
-            clientId: '8c0cd670273d451cbc9b351b11d22318',
+            clientId: '03a63d1f9f1349f7934a54b5d61f53d7',
         };
         if (divId) { /* Optional only for Light Box embed mode */
             /* Pass the div id in which PDF should be rendered */

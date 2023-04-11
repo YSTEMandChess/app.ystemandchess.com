@@ -18,11 +18,11 @@ footer {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-top: 10%;
+  /* margin-top: 10%; */
   position: relative;
   height: 100%;
-  border-top: solid;
-  border-color: black;
+  /* border-top: solid;
+  border-color: black; */
 }
 
 .main-container {

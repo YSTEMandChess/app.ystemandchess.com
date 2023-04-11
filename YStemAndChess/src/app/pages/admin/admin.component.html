@@ -1,93 +1,49 @@
-<html>
-    <head>
-    </head>
-
-    <header>
-        <app-header></app-header>
-    </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="admin.component.css">
+</head>
+<header>
+    <app-header></app-header>
+   
+</header>
+<body>
     
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-7">
-                    <h2>Welecome Brian</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. In aliquam sem fringilla ut. Eget mi proin sed libero enim sed faucibus turpis.
-                        Tristique senectus et netus et malesuada fames ac. Lobortis scelerisque fermentum dui faucibus. Vitae
-                        congue eu consequat ac felis donec et odio. Augue ut lectus arcu bibendum. Felis eget velit aliquet
-                        sagittis id consectetur purus ut faucibus. Justo eget magna fermentum iaculis eu. Tempus iaculis urna id
-                        volutpat lacus laoreet. Justo laoreet sit amet cursus sit. Facilisis gravida neque convallis a cras.
-                        Quam vulputate dignissim suspendisse in est ante in.
-                    </p>
-                </div>
+
+    <div class="board-container">
+        <div class="box">
+            <div class="tab-nav">
+              <button class="tab-btn active" data-target="#dashboard"><b>Dashboard</b></button>
+              <button class="tab-btn" data-target="#search"><b>Search</b></button>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="searchbox">
-                <h2>Search for a Student</h2>
-                <table class="studentProgress">
-                    <tr>
-                        <th>Name</th>
-                        <th>DOB</th>
-                        <th>Zip</th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="" id="name"></td>
-                        <td><input type="date" name="" id="name"></td>
-                        <td><input type="text" name="" id="name"></td>
-                        <td><button class="searchBtn">Search</button></td>
-                    </tr>
-                </table>
+            <div class="tab-content active" id="dashboard">
+              <p>Dashboard</p>
             </div>
-            
-        </div>
+            <div class="tab-content" id="search">
+              <p>Search</p>
+            </div>
+          </div>
 
-        <div class="container cont">
-            <h2>Results</h2>
-            <table class="studentProgress">
-                <tr>
-                    <th>Student</th>
-                    <th>Progress</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Anna C.</td>
-                    <td>Up Down Up Down</td>
-                    <td>Down Up Down Up</td>
-                </tr>
-                <tr>
-                    <td>Michel D.</td>
-                    <td>Up Down Up Down</td>
-                    <td>Down Up Down Up</td>
-                </tr>
-            </table>
-        </div>
+          <script>
+            document.querySelectorAll('.tab-btn').forEach(button => {
+              button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-        <div class="container cont">
-            <table class="studentProgress">
-                <tr>
-                    <th>Mentor</th>
-                    <th>Progress</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Anna C.</td>
-                    <td>Up Down Up Down</td>
-                    <td>Down Up Down Up</td>
-                </tr>
-                <tr>
-                    <td>Michel D.</td>
-                    <td>Up Down Up Down</td>
-                    <td>Down Up Down Up</td>
-                </tr>
-            </table>
-        </div>
-    </body>
+                button.classList.add('active');
+                document.querySelector(button.getAttribute('data-target')).classList.add('active');
+              });
+            });
+          </script>
 
-    <footer>
+    </div>     
+
+    <footer class="footer" style="padding-top:7rem">
         <app-footer></app-footer>
-    </footer>
-    
+    </footer>   
+</body>
 </html>

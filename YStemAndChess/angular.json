@@ -10,6 +10,7 @@
           "style": "scss"
         }
       },
+      
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -27,7 +28,7 @@
             "styles": ["src/styles.scss"],
             "scripts": [
               "src/assets/external_api.js"
-              //"node_modules/chess.js/chess.js"
+             
             ]
           },
           "configurations": {

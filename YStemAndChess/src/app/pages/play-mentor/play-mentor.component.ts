@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './play-mentor.component.html',
   styleUrls: ['./play-mentor.component.scss'],
 })
+
+
+
 export class PlayMentorComponent implements OnInit {
   meetingId;
   private currentFEN: String =
@@ -34,6 +37,53 @@ export class PlayMentorComponent implements OnInit {
 
   ngOnInit(): void {
     let userContent;
+
+  const videodrag = document.getElementById('video');
+  const pipButtonmove = document.getElementById('pipBtn');
+//     const video = document.getElementById('mentor-bg');
+// const pipButton = document.getElementById('pipBtn');
+
+const video = videodrag as any;
+const pipButton = pipButtonmove as any;
+
+
+if ('pictureInPictureEnabled' in document as any) {
+  pipButton.classList.remove('hidden')
+  pipButton.disabled = false;
+
+  
+  pipButton.addEventListener('click', () => {
+    
+    if ((document as any).pictureInPictureElement) {
+      console.log("test");
+      (document as any)
+        .exitPictureInPicture()
+        .catch(error => {
+          // Error handling
+          console.log("error--->",error)
+        })
+    } else {
+      console.log("test 111--->")
+      video
+      .requestPictureInPicture()
+      .catch(error => {
+        // Error handling
+        console.log(error)
+        
+      });
+    }
+  });
+}
+
+video.addEventListener('enterpictureinpicture', () => {
+    pipButton.textContent = 'Exit Picture-in-Picture mode';
+});
+
+video.addEventListener('leavepictureinpicture', () => {
+    pipButton.textContent = 'Enter Picture-in-Picture mode';
+});
+
+
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
       this.httpGetAsync(
@@ -75,7 +125,11 @@ export class PlayMentorComponent implements OnInit {
       },
       false
     );
-  }
+   
+  };
+
+  
+
   numberOnly(event): boolean {
     var data = (<HTMLInputElement>document.getElementById('movesAhead')).value;
     const charCode = event.which ? event.which : event.keyCode;

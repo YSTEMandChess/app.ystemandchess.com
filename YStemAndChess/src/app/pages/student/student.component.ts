@@ -425,6 +425,7 @@ export class StudentComponent implements OnInit {
   }
 
   public undoPrevMove() {
+    // console.log("test undo function--->")
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/undoMoves?gameId=${this.newGameId}`,
       'POST',
@@ -534,6 +535,7 @@ export class StudentComponent implements OnInit {
     xmlHttp.send(null);
   }
   public CheckGame() {
+    console.log("test new game----->")
     if (this.meetingId == undefined) {
       setTimeout(() => {
         this.newGameInit();

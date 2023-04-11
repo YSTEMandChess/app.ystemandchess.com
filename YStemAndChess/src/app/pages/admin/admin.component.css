@@ -1,46 +1,126 @@
-.row h2 {
-  margin-top: 4%;
-}
+.box {
+  width: 700px; /* Increased width */
+  height: 500px; /* Added height */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #D4DDDD;
 
-.studentProgress {
-  padding: 5px;
-  margin: 10px;
-  width: 100%;
-  background-color: #C4C4C4;
-  border-collapse: separate;
+  margin: 0 auto;
 }
-
-.studentProgress td {
-  padding: 10px;
-  background-color: #E5E5E5;
-  border-bottom: black 1px solid;
+.tab-nav {
+  display: flex;
+  margin-bottom: 20px;
 }
-
-.studentProgress th {
-  font-family: 'Lato';
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 117.1%;
-  padding: 10px;
-  background-color: #C4C4C4;
-  border-bottom: black 1px solid;
-}
-
-.searchbox {
-  margin-bottom: 40px;
-}
-
-.searchBtn {
-  padding: 7px;
-  font-size: 19px;
-  border-radius: 12px;
+.tab-nav button {
+  flex: 1; /* Added flex to make tabs equal width */
+  background-color: #EAD94C;
   border: none;
-  background-color: #C4C4C4;
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
+  border-radius: 0px;
+  padding: 5px 10px; /* Adjusted padding */
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center; /* Added text alignment */
+}
+.tab-nav button:hover {
+  background-color: #D4DDDD;
+}
+.tab-nav button.active {
+  background-color: #7FCC26;
+  color: #000000;
+}
+.tab-content {
+  display: none;
+  /* Increased padding to accommodate tabs at the top of the box */
+  padding-top: 20px;
+}
+.tab-content.active {
+  display: block;
 }
 
-.searchBtn:hover {
-  background-color: white;
+li {
+  list-style-type: none;
+  margin-bottom: 1%;
 }
-/*# sourceMappingURL=admin.component.css.map */
+
+.board-heading {
+  font-size: xx-large;
+  margin-left: 10%;
+}
+
+.sub-heading {
+  font-size: x-large;
+}
+
+.header-container {
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.board-logo {
+  width: 20%;
+  margin-right: 5%;
+}
+
+.header-button {
+  display: inline-block;
+  margin-right: 5%;
+  margin-top: 10px;
+}
+
+.header-right-section {
+  width: 75%;
+  text-align: right;
+}
+
+.board-container{
+  margin: 5% 10%;
+  margin-bottom: 10%;
+}
+
+.board-container img {
+  padding: 5%;
+}
+
+.chess-image {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #E5F3D2;
+}
+
+.footer {
+  width: 100%;
+  background-color: rgb(169, 208, 159) !important;
+  overflow: auto;
+}
+
+.table {
+  width: 50%;
+  float: right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.contact-info, .table-two {
+  line-height: 10%;
+  margin-left: 10%;
+}
+
+.contact-info {
+  margin-top: 1.5%;
+}
+
+.table-two {
+  margin-top: 2%;
+}
+
+.table img {
+  width: 25%;
+}

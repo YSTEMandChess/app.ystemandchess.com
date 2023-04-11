@@ -47,10 +47,10 @@
         </div>
 
 
-        <div *ngIf="role !== 'student'">
+       
           <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>
 
-        </div>
+       
         
         <div> <li class="dropdown">
           <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
@@ -63,9 +63,9 @@
             <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/math-article">Math Tutoring Benefit Article</a></li>
             <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/mentoring-article">Mentoring Benefit Article</a></li>
             <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/about-us">About us</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/mission-hifi">Mission Hifi</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/financial-hifi">Financial Hifi</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/board-hifi">Board hifi</a></li>  
+            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/mission-hifi">Mission</a></li>
+            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/financial-hifi">Financial</a></li>
+            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/board-hifi">Board</a></li>  
 
           </ul>
         </li></div>
@@ -145,16 +145,12 @@
      
 
 
-      <li class="nav-item display-flex">
+      <!-- <li class="nav-item display-flex">
         <div *ngIf="role === 'student'">
           <a class="nav-link hvr-underline-from-left" href="/lessons">Lessons</a>
         </div>
-        <!-- <div *ngIf="role !== 'student'">
-          <a class="nav-link hvr-underline-from-left" href="/programs"
-            >Programs</a
-          >
-        </div> -->
-      </li>
+        
+      </li> -->
       <!-- <li class="nav-item display-flex">
         <a class="nav-link hvr-underline-from-left" href="/contact">Contact</a>
       </li>
@@ -185,8 +181,12 @@
             <div *ngIf="role === 'student'">
               <a class="dropdown-item" routerLink="/user-profile">Profile</a>
             </div>
+            <div *ngIf="role === 'mentor'">
+              <a class="dropdown-item" routerLink="/mentor-profile">Profile</a>
+            </div>
             <a class="dropdown-item" (click)="logout()">Logout</a>
             <div *ngIf="role === 'parent'">
+            
               <a class="dropdown-item" routerLink="/parent-add-student">Add Student</a>
             </div>
           </div>

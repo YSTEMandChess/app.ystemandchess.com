@@ -28,39 +28,42 @@
       <!-- </div>
     </div> -->
     <div class="bigCont">
-      <div class="gameclass">
-        <div [ngClass]="{ 'disable-board': !isStepLast }">
-          <app-play></app-play>
-        </div>
-        <div class="game_wrapper">
-          <div class="chess">
-            <div *ngIf="displayMoves.length > 0" class="steps-div">
-            
-              <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
-                <div class="text-center">
-                  <span>Steps</span>
-                  <hr class="steps-decoration">
-                </div>
-                <div class="table-moves" #item>
-                  
-                  <div style="width: 100px">
-                    <div
-                      *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                    >
-                      <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
-                        <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
-                      </p>
-                    </div>
+      <div id="mentor-container">
+        <div id="top"></div>
+        <div class="gameclass">
+          <div [ngClass]="{ 'disable-board': !isStepLast }">
+            <app-play></app-play>
+          </div>
+          <div class="game_wrapper">
+            <div class="chess">
+              <div *ngIf="displayMoves.length > 0" class="steps-div">
+              
+                <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
+                  <div class="text-center">
+                    <span>Steps</span>
+                    <hr class="steps-decoration">
                   </div>
-                  <div style="width: 100px">
-                    <div
-                      *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                    >
-                      <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
-                        <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
-                      </p>
+                  <div class="table-moves" #item>
+                    
+                    <div style="width: 100px">
+                      <div
+                        *ngFor="let item of displayMoves; let i = index"
+                        (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
+                      >
+                        <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
+                          <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
+                        </p>
+                      </div>
+                    </div>
+                    <div style="width: 100px">
+                      <div
+                        *ngFor="let item of displayMoves; let i = index"
+                        (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
+                      >
+                        <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
+                          <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -68,31 +71,33 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="container">
-        <div class="btns row">
-          <div class="new-game" (click)="CheckGame()">New Game</div>
-          <div class="play-cpu-game" (click)="playWithComputer()">
-            Play with a computer
+        <div class="container">
+          <div class="btns row">
+            <div class="new-game" (click)="CheckGame()">New Game</div>
+            <div class="play-cpu-game" (click)="playWithComputer()">
+              Play with a computer
+            </div>
+            <div class="curr-game" (click)="undoPrevMove()">Undo</div>
           </div>
-          <div class="curr-game" (click)="undoPrevMove()">Undo</div>
+          <div class="movesAhead">
+            <p id="tag">
+              The computer will think
+              <input
+                type="number"
+                min="1"
+                step="1"
+                max="30"
+                value="5"
+                id="movesAhead"
+                (keypress)="numberOnly($event)"
+              />
+              moves ahead.
+            </p>
+          </div>
         </div>
-        <div class="movesAhead">
-          <p id="tag">
-            The computer will think
-            <input
-              type="number"
-              min="1"
-              step="1"
-              max="30"
-              value="5"
-              id="movesAhead"
-              (keypress)="numberOnly($event)"
-            />
-            moves ahead.
-          </p>
         </div>
-      </div>
+      
+      
     </div>
   </body>
 

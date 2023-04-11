@@ -1,0 +1,332 @@
+body {
+  padding-top: 5%;
+  background-color: #DFF2C8;
+}
+
+#clear {
+  clear: both;
+}
+
+
+#difference-container {
+  position: relative;
+  margin: 0 auto;
+  width: 92.5%;
+  height: auto;
+  overflow: hidden;
+  background-color: #fdd005;
+  border-radius: 33px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#difference-container #difference-image img {
+  float: left;
+  overflow: hidden;
+  width: 42.45%;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-bottom-left-radius: 33px;
+  border-top-left-radius: 33px;
+}
+
+#difference-container #difference-header h4 {
+  float: right;
+  overflow: hidden;
+  margin-top: 3%;
+  margin-right: 23%;
+  width: 30%;
+  height: auto;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2.9vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#difference-container #difference-statement p {
+  float: right;
+  overflow: hidden;
+  width: 42%;
+  height: auto;
+  margin-right: 11%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.4vw;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+  color: #4f4f4f;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#difference-container #difference-toApply h5 {
+  float: right;
+  overflow: hidden;
+  width: 40%;
+  height: auto;
+  margin-right: 13%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.4vw;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+  color: #4f4f4f;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#difference-container #difference-button button {
+  float: right;
+  overflow: hidden;
+  padding: 1.1%;
+  margin-right: 39%;
+  height: auto;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.8vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  background-color: #fff;
+  color: #3A7CCA;
+  border-radius: 33px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#difference-container #difference-button button:hover {
+  color: #fff;
+  background-color: #3A7CCA;
+}
+
+#locations-container {
+  width: 92.5%;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 5%;
+  width: 92.5%;
+  height: auto;
+  overflow: hidden;
+  background-color: #51AA00;
+  border-radius: 33px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#locations-container #locations-image img {
+  float: right;
+  width: 50%;
+  height: auto;
+}
+
+#locations-container #locations-header h3 {
+  float: left;
+  margin-top: 3%;
+  margin-left: 7%;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 42px;
+  line-height: 117.1%;
+  letter-spacing: 0.07em;
+  color: #FFFFFF;
+}
+
+#locations-container #locations-statement p {
+  float: left;
+  width: 38%;
+  margin-top: 3%;
+  margin-left: 7%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+#become-mentor-container {
+  position: relative;
+  width: 92.5%;
+  margin: 0 auto;
+  margin-top: 5%;
+  width: 92.5%;
+  height: auto;
+  overflow: hidden;
+  background-color: #ff8503;
+  border-radius: 33px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#become-mentor-container #become-mentor-image img {
+  float: left;
+  width: 27%;
+  height: auto;
+  padding-bottom: 5%;
+  margin-top: 3.7%;
+  margin-left: 9%;
+  border-radius: 100%;
+}
+
+#become-mentor-container #become-mentor-header h3 {
+  float: right;
+  margin-top: 3%;
+  margin-right: 30%;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 3vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  color: #FFFFFF;
+}
+
+#become-mentor-container #become-mentor-statement p {
+  float: right;
+  width: 48%;
+  height: auto;
+  margin-top: 2%;
+  margin-right: 8%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4vw;
+  line-height: 130%;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+#become-mentor-container #become-mentor-button button {
+  float: right;
+  margin-right: 42.3%;
+  padding: 1%;
+  font-family: 'Roboto';
+  font-style: bold;
+  font-weight: bold;
+  font-size: 1.8vw;
+  line-height: 117.1%;
+  letter-spacing: 0.01em;
+  border-radius: 33px;
+  color: #3A7CCA;
+  background-color: #fff;
+}
+
+#become-mentor-container #become-mentor-button button:hover {
+  color: #fff;
+  background-color: #3A7CCA;
+}
+
+@media (max-width: 766px) {
+  #difference-container #difference-image {
+    margin: 0 auto;
+  }
+  #difference-container #difference-image img {
+    width: 100%;
+    max-height: 350px;
+    border-top-left-radius: 33px;
+    border-top-right-radius: 33px;
+    border-bottom-left-radius: 0px;
+  }
+  #difference-container #difference-header {
+    margin-left: 5%;
+  }
+  #difference-container #difference-header h4 {
+    margin: 0 auto;
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    margin-top: 3%;
+    font-size: 7vw;
+  }
+  #difference-container #difference-statement p {
+    margin: 0 auto;
+    width: 90%;
+    height: auto;
+    margin-top: 3%;
+    margin-right: 5%;
+    font-size: 3.1vw;
+  }
+  #difference-container #difference-toApply h5 {
+    margin: 0 auto;
+    width: 90%;
+    height: auto;
+    margin-right: 5%;
+    margin-top: 3%;
+    font-size: 3.1vw;
+  }
+  #difference-container #difference-button button {
+    padding: 4%;
+    height: auto;
+    margin-right: 34%;
+    margin-top: 3%;
+    margin-bottom: 5%;
+    font-size: 3.5vw;
+  }
+  #difference-container #difference-button button:active {
+    color: #fff;
+    background-color: #3A7CCA;
+  }
+  #locations-container #location-image {
+    margin: 0 auto;
+  }
+  #locations-container #locations-image img {
+    width: 100%;
+    height: auto;
+  }
+  #locations-container #locations-header h3 {
+    text-align: center;
+    width: 90%;
+    height: auto;
+    font-size: 7vw;
+  }
+  #locations-container #locations-statement p {
+    text-align: center;
+    width: 90%;
+    margin-bottom: 3%;
+    font-size: 3.1vw;
+  }
+  #become-mentor-container #become-mentor-image {
+    margin: 0 auto;
+    text-align: center;
+  }
+  #become-mentor-container #become-mentor-image img {
+    width: 60%;
+    margin-left: 21%;
+  }
+  #become-mentor-container #become-mentor-header h3 {
+    margin: 0 auto;
+    margin-right: 5%;
+    width: 90%;
+    height: auto;
+    text-align: center;
+    font-size: 7vw;
+  }
+  #become-mentor-container #become-mentor-statement p {
+    text-align: center;
+    width: 90%;
+    height: auto;
+    margin-top: 3%;
+    font-size: 3.1vw;
+  }
+  #become-mentor-container #become-mentor-button button {
+    padding: 4%;
+    margin-right: 34%;
+    margin-top: 3%;
+    margin-bottom: 5%;
+    font-size: 3.5vw;
+  }
+  #become-mentor-container #become-mentor-button button:active {
+    color: #fff;
+    background-color: #3A7CCA;
+  }
+}
+/*# sourceMappingURL=be-amentor.component.css.map */

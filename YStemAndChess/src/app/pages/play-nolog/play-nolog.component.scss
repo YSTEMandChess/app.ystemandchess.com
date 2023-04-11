@@ -20,12 +20,16 @@
       padding-right: 2%;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 22px; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      border-radius: 6px;
+      margin: 10px;
       color: #fff;
-      background-color: #ff8503;
+      width: 200px;
+      border: none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
     }
 
     #undo {
@@ -36,24 +40,28 @@
       padding-right: 2%;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 22px; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      border-radius: 6px;
+      margin: 10px;
       color: #fff;
-      background-color: #51aa00;
+      width: 200px;
+      border: none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
     }
 
     #new-game:hover {
-      transition: 0.3s;
-      color: #ff8503;
-      background-color: #fff;
+     
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
     }
 
     #undo:hover {
-      transition: 0.3s;
-      color: #51aa00;
-      background-color: #fff;
+      
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
     }
   }
 
@@ -62,6 +70,7 @@
     display: flex;
     justify-content: center;
   }
+
   // iframe {
   //   min-width: 700px;
   //   min-height: 700px;
@@ -70,9 +79,11 @@
     padding-bottom: 2%;
   }
 }
+
 .game_wrapper {
   display: flex;
   justify-content: space-around;
+
   .chess {
     width: 100%;
     display: flex;
@@ -84,53 +95,84 @@
     }
   }
 }
+
 .newGameUndo {
   display: flex;
   justify-content: center;
   gap: 15px;
 }
+
 iframe {
   min-width: 700px;
   min-height: 700px;
 }
+
 .movesAhead {
   position: absolute;
   margin-top: 60px;
 }
+
 #movesAhead {
   width: 45px;
 }
+
 .steps-div span {
   font-weight: 500;
   font-size: xx-large;
 }
+
 .fwd-btns {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
 }
+
 .fwd-btns img {
   height: 25px;
 }
+
 .isBlur {
   opacity: 50%;
   pointer-events: none;
 }
+
 .display-step {
+  // display: block;
+  // height: 20rem;
+  // overflow: hidden scroll;
+  // cursor: pointer;
+  // background-color: lightgray;
+  // padding: 7%;
+  // width: fit-content;
   display: block;
-  height: 20rem;
+  height: 41rem;
   overflow: hidden scroll;
   cursor: pointer;
-  background-color: lightgray;
+  margin-left: 25px;
+  // background-color: lightgray;
+  border: 4px solid #257d96;
   padding: 7%;
   width: fit-content;
+  background-image: url('../../../assets/images/student/STEMy_Mascot.png');
+  background-size: auto;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
+
+.steps-decoration {
+  margin-top: 2px;
+  width: 80px;
+  background-color: black;
+}
+
 .table-moves {
   display: flex;
   gap: 0.5rem;
   justify-content: space-around;
 }
+
 .table-moves div p {
   border: 2px solid black;
   padding: 0.2rem;
@@ -139,12 +181,15 @@ iframe {
   justify-content: center;
   align-items: center;
 }
+
 .display-step::-webkit-scrollbar {
   display: none;
 }
+
 .tableMove-selected {
   background-color: white !important;
 }
+
 .imgRes {
   height: 30px !important;
   width: 30px !important;
@@ -155,6 +200,7 @@ iframe {
 #tag {
   padding: 15px;
 }
+
 #chess-board {
   display: flex;
   justify-content: center;

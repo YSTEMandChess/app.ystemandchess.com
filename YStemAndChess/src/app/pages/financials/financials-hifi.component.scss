@@ -1,0 +1,530 @@
+// body {
+//     margin: 0 auto;
+//     padding-top:5%;
+//     text-align: center;
+// }
+
+// .website-icon::before{
+//   position: absolute;
+//     left: -16px;
+//     top: 4px;
+//     content: " ";
+//     border: 5px solid #0a0a0a;
+//     border-radius: 500%;
+//     background: #7fcc26;
+//     height: 17px;
+//     width: 17px;
+//     margin-left:14px;
+// }
+
+// .lesson::before{
+//   position: absolute;
+//     left: -16px;
+//     top: 4px;
+//     content: " ";
+//     border: 5px solid #0a0a0a;
+//     border-radius: 500%;
+//     background: #C8B4FF;
+//     height: 17px;
+//     width: 17px;
+//     margin-left:14px;
+// }
+
+// .puzzle::before{
+//   position: absolute;
+//     left: -16px;
+//     top: 4px;
+//     content: " ";
+//     border: 5px solid #0a0a0a;
+//     border-radius: 500%;
+//     background: #0FDFF2;
+//     height: 17px;
+//     width: 17px;
+//     margin-left:14px;
+// }
+
+// .mentoring::before{
+//   position: absolute;
+//     left: -16px;
+//     top: 4px;
+//     content: " ";
+//     border: 5px solid #0a0a0a;
+//     border-radius: 500%;
+//     background: #FD8E4F;
+//     height: 17px;
+//     width: 17px;
+//     margin-left:14px;
+// }
+
+// .playing::before{
+//   position: absolute;
+//     left: -16px;
+//     top: 4px;
+//     content: " ";
+//     border: 5px solid #0a0a0a;
+//     border-radius: 500%;
+//     background: #F24598;
+//     height: 17px;
+//     width: 17px;
+//     margin-left:14px;
+// }
+
+// .signupForm h2 {
+//     font-family: 'Lato';
+//     font-style: normal;
+//     font-weight: 900;
+// }
+
+// .myDiv h2{
+//   font-size:23px;
+// }
+
+// .signupForm input {
+//     margin: 20px;
+//     padding: 15px 32px;
+//     background-color: white; 
+//     color: black; 
+//     border: 3px solid #D64309;
+//     border-radius: 8px;
+//     outline-style: none;
+// }
+
+// .signupForm li {
+//     list-style: none;
+//     font-family: 'Roboto';
+//     font-size: 22px;
+//     font-style: normal;
+//     font-weight: 500;
+// }
+
+
+// .signupForm button {
+//     outline-style:none;
+//     padding-left:2%; //15px
+//     padding-right:2%;
+//     font-family: 'Roboto';
+//     font-size: 22px;
+//     font-style: normal;
+//     font-weight: 700;
+//     background-color: #fff;
+//     color:#3A7CCA;
+//     border-radius: 33px;
+// }
+
+// .signupForm button:hover {
+//     background-color: #3A7CCA;
+//     color: #fff;
+// }
+
+// .errorMessages {
+//     color: red;
+// }
+
+// #create {
+//     margin-top:2%;
+// }
+
+// .x {
+//     margin-top: 2%;
+//     margin-left:235px;
+// }
+
+
+// .userProfileDiv {
+//     background-color: #E5F3D2 ;    
+//     text-align: left;
+//     padding: 40px;
+//   }
+//   .memberInfo
+//   {
+//       text-align: left;
+//       margin-top: 20px;    
+//       border-left: 1px solid #a3a0a0;
+//       padding-left:10%
+//   }
+//   .progressInfo
+//   {
+//       text-align: left;
+//       margin-top: 20px;
+//   }   
+//   .lastLoginTime
+//   {
+//       font-size: 12px;
+//   }
+//   .basicDetail
+//   {
+//       border-bottom: 1px solid #a3a0a0;
+//   }
+
+//   .myDiv{
+//     margin-left:60px;
+//   }
+//   .tabView
+//   {
+//       margin-top: 15%;
+      
+//   }
+
+
+// .rightbox {
+// height: 100%;
+// }
+
+// .tab {
+//   float: left;
+//   border: 1px solid #ccc;
+//   background-color: #f1f1f1;
+//   width: 21%;
+//   height: 447px;
+//   background-color: #E5F3D2;
+//   border-top-left-radius: 6px;
+//   border-bottom-left-radius: 6px;
+// }
+
+// .tabcontent {
+//   float: left;
+//   padding: 0px 12px;
+//   border: 1px solid #ccc;
+//   width: 79%;
+//   border-left: none;
+//   height: 447px;
+//   overflow-y: auto;
+//   background-color: #C8F2AE;
+//   border-top-right-radius: 6px;
+//   border-bottom-right-radius: 6px;
+// }
+
+// /* Style the buttons inside the tab */
+// // .tab button {
+// //   display: block;
+// //   background-color: red;
+  
+// //   color: black;
+// //   padding: 22px 16px;
+// //   width: 100%;
+// //   border: none;
+// //   outline: none;
+// //   text-align: left;
+// //   cursor: pointer;
+// //   transition: 0.3s;
+// //   font-size: 17px;
+// // }
+
+// .tab-image{
+//   width: 231px;
+//   height: 46px;
+//   border-top-left-radius: 5px;
+// }
+
+// .tab-image2{
+//   width: 231px;
+//   height: 46px;
+// }
+
+// .tab-image3{
+//   width: 231px;
+//   height: 46px;
+//   border-bottom-left-radius: 5px;
+// }
+
+// .tab button.tab1{
+//   display: block;
+//   padding-left: 0;
+//   padding-top: 0;
+//   border-top-left-radius: 5px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   cursor: pointer;
+  
+// }
+
+// .tab button.tab2{
+//   display: block;
+//   padding-left: 0;
+//   padding-top: 0;
+//   margin-top:10px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   cursor: pointer;
+  
+// }
+
+// .tab button.tab3{
+//   display: block;
+//   padding-left: 0;
+//   padding-top: 0;
+//   border-bottom-left-radius: 5px;
+//   margin-top:10px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   cursor: pointer;
+// }
+
+// .tab button.tab4{
+//   display: block;
+//   background-color: white;
+//   font-weight: 600;
+//   margin-top:10px;
+//   color: black;
+//   padding: 11px 16px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   text-align: left;
+//   cursor: pointer;
+//   transition: 0.3s;
+//   font-size: 17px;
+// }
+
+
+// .tab button.tab5{
+//   display: block;
+//   font-weight: 600;
+//   background-color: dodgerblue;
+//   margin-top:10px;
+//   color: black;
+//   padding: 11px 16px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   text-align: left;
+//   cursor: pointer;
+//   transition: 0.3s;
+//   font-size: 17px;
+// }
+
+// .tab button.tab6{
+//   display: block;
+//   font-weight: 600;
+//   background-color: yellow;
+//   margin-top:10px;
+//   color: black;
+//   padding: 11px 16px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   text-align: left;
+//   cursor: pointer;
+//   transition: 0.3s;
+//   font-size: 17px;
+// }
+
+// .tab button.tab7{
+//   display: block;
+//   font-weight: 600;
+//   background-color: rgb(227, 133, 149);
+//   margin-top:10px;
+//   color: black;
+//   padding: 11px 16px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   text-align: left;
+//   cursor: pointer;
+//   transition: 0.3s;
+//   font-size: 17px;
+// }
+
+// .tab button.tab8{
+//   display: block;
+//   font-weight: 600;
+//   background-color: red;
+//   border-bottom-left-radius: 10px;
+//   color: black;
+//   margin-top:10px;
+//   padding: 11px 16px;
+//   width: 100%;
+//   border: none;
+//   outline: none;
+//   text-align: left;
+//   cursor: pointer;
+//   transition: 0.3s;
+//   font-size: 17px;
+// }
+
+
+// /* Change background color of buttons on hover */
+
+
+// /* Create an active/current "tab button" class */
+
+
+// /* Style the tab content */
+
+
+// .rb-container {
+// font-family: "PT Sans", sans-serif;
+// margin: auto;
+// display: block;
+// position: relative;
+// }
+
+// .rb-container ul.rb {
+// margin: 2.5em 0;
+// padding: 0;
+// display: inline-block;
+// }
+
+// .rb-container ul.rb li {
+// list-style: none;
+// margin: auto;
+// margin-left: 3em;
+// min-height: 50px;
+// border-left: 1px dashed #000;
+// padding: 0 0 50px 30px;
+// position: relative;
+// }
+
+// .rb-container ul.rb li:last-child {
+// border-left: 0;
+// }
+
+// .rb-container ul.rb li::before {
+// position: absolute;
+// left: -16px;
+// top: -5px;
+// content: " ";
+// border: 8px solid rgb(10, 10, 10);
+// border-radius: 500%;
+// background: #7fcc26;
+// height: 28px;
+// width: 28px;
+// transition: all 500ms ease-in-out;
+// }
+
+
+
+// .rb-container ul.rb li:hover::before {
+// border-color: #232931;
+// transition: all 1000ms ease-in-out;
+// }
+
+// ul.rb li .timestamp {
+// color: #0e0f0e;
+// position: relative;
+// width: 100px;
+// font-size: 12px;
+// }
+
+// .item-title {
+// color: #000;
+// }
+
+
+
+// .tabView {
+//     .container {
+//       width: 100%;
+//       position: relative;
+//     //   top: 25%;
+//       left: 50%;
+//       transform: translate(-50%,-50%);
+//       font-size: 0;
+//       border-radius: 3px;
+//       overflow: hidden;
+//       input {
+//         display: none;
+//         &:checked + label {
+//           background:#becfb7;
+//         }
+//         @for $i from 1 through 4 {
+//           &#tab#{$i}:checked {
+//             ~ .line {
+//               left: #{($i - 1) * 25%};
+//             }
+//             ~ .content-container #c#{$i} {
+//               opacity: 1;
+//             }
+//           }
+//         }
+//       }
+//       label {
+//         display: inline-block;
+//         font-size: 16px;
+//         height: 36px;
+//         line-height: 36px;
+//         width: 33.3%;
+//         text-align: center;
+//         background: #f4f4f4;
+//         color: #555;
+//         position: relative;
+//         transition: 0.25s background ease;
+//         cursor: pointer;
+//         &::after {
+//           content: "";
+//           height: 2px;
+//           width: 100%;
+//           position: absolute;
+//           display: block;
+//           background: #ccc;
+//           bottom: 0;
+//           opacity: 0;
+//           left: 0;
+//           transition: 0.25s ease;
+//         }
+//         &:hover::after {
+//           opacity: 1;
+//         }
+//       }
+//       .line {
+//         position: absolute;
+//         height: 0px;
+//         background: #1E88E5;
+//         width: 33.3%;
+//         top: 34px;
+//         left: 0;
+//         transition: 0.25s ease;
+//       }
+//       .content-container {
+//         background: #eee;
+//         position: relative;
+//         height: 250px;
+//         font-size: 16px;
+//         overflow-y:scroll;
+//         .content {
+//           position: absolute;
+//           padding: 10px;
+//           width: 100%;
+//           top: 0;
+//           opacity: 0;
+//           transition: 0.25s ease;
+//           color: #333;
+//           h3 {
+//             font-weight: 200;
+//             margin: 10px 0;
+//           }
+//           p {
+//             margin: 10px 0;
+//           }
+//           p, i {
+//             font-size: 13px;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+// .pdf-view {
+//     margin: auto;
+//     margin-top: 5%;
+//     height: 95px;
+//     // width: 600px;
+//     // border: 1px solid #dadada;
+// }
+// .sharedExpCategoryList{
+//   cursor: pointer;
+//   list-style: square;
+//   color:red;
+//   padding-left: 4%;
+// }
+
+// .sharedExpCategoryFile {
+//   list-style: square;
+//   cursor: pointer;
+//   color:red;
+//   padding-left: 4%;
+// }
+

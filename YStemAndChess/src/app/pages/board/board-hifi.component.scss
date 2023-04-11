@@ -1,0 +1,81 @@
+li {
+  list-style-type: none;
+  margin-bottom: 1%;
+}
+
+.board-heading {
+  font-size: xx-large;
+  margin: 1% 14%;
+}
+
+.sub-heading {
+  font-size: x-large;
+}
+
+.header-container {
+  display: flex;
+  width: 100%;
+}
+
+.board-logo {
+  width: 20%;
+  margin-right: 5%;
+}
+
+.header-button {
+  display: inline-block;
+  margin-right: 5%;
+  margin-top: 10px;
+}
+
+.header-right-section {
+  width: 75%;
+  text-align: right;
+}
+
+.board-container{
+  margin: 1% 14%;
+  margin-bottom: 10%;
+}
+
+.chess-image {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.footer {
+  width: 100%;
+  background-color: rgb(169, 208, 159) !important;
+  overflow: auto;
+}
+
+.table {
+  width: 50%;
+  float: right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.contact-info, .table-two {
+  line-height: 10%;
+  margin-left: 10%;
+}
+
+.contact-info {
+  margin-top: 1.5%;
+}
+
+.table-two {
+  margin-top: 2%;
+}
+
+.table img {
+  width: 25%;
+}

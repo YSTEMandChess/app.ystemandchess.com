@@ -3,14 +3,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-
-
-// import { Chart } from 'chart.js';
-// import { Chart, registerables } from 'chart.js';
-// Chart.register(...registerables);
-
-
-
 @Component({
   selector: 'app-mentor-profile',
   templateUrl: './mentor-profile.component.html',
@@ -42,43 +34,7 @@ export class MentorProfileComponent implements OnInit {
   recordingList = [];
   signedURL = '';
   constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
-
-
-
-  // chartOptions = {
-  //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-  // }
-
-  // labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-  // // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  // chartData = [
-  //   {
-  //     label: '1st Year',
-  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-  //   },
-  //   { 
-  //     label: '2nd Year',
-  //     data: [47, 9, 28, 54, 77, 51, 24]
-  //   }
-  // ];
-
-  // // CHART COLOR.
-  // colors = [
-  //   { // 1st Year.
-  //     backgroundColor: 'rgba(77,83,96,0.2)'
-  //   },
-  //   { // 2nd Year.
-  //     backgroundColor: 'rgba(30, 169, 224, 0.8)'
-  //   }
-  // ]
   
-  // // CHART CLICK EVENT.
-  // onChartClick(event) {
-  //   console.log(event);
-  // }
-
-
   async ngOnInit() {
     this.viewSDKClient.ready().then(() => {
       /* Invoke file preview */

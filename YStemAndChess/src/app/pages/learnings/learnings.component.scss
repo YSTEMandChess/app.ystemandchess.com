@@ -19,7 +19,7 @@
   }
 }
 .chess {
-  height: 35rem;
+  height: 46rem;
   iframe {
     min-width: 100%;
     min-height: 100%;
@@ -60,6 +60,107 @@
 .panel {
   display: none;
   overflow: hidden;
+}
+
+.lesson-btn{
+    background-color: #EAD94C !important;
+    border: none;
+    box-shadow: 3px 4px #D4DDDD;
+    width: 100px;
+    padding: 6px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.play-btn{
+    background-color: #D4DDDD;
+    border: none;
+    box-shadow: 3px 4px #74cc33;
+    width: 100px;
+    padding: 6px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.next-btn{
+    background-color: #74cc33 !important;
+    border: none;
+    box-shadow: 3px 4px #EAD94C;
+    width: 100px;
+    padding: 6px;
+    border-radius: 5px;
+}
+
+.refresh-btn{
+  background-color: #74cc33 !important;
+  border: none;
+  box-shadow: 3px 4px #EAD94C;
+  width: 50px;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+
+.icon-size{
+  font-size: 20px;
+} 
+
+
+
+.btn-div{
+  display: flex;
+  justify-content: space-between;
+  padding:5px 10px
+}
+
+.subsection-section{
+  background-color: #D4DDDD;
+  box-shadow: 3px 4px green;
+}
+
+.tab button {
+  background-color: #D4DDDD;
+  float: left;
+  border:none;
+  border-right:1px solid black;
+  // border-radius:5px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 3px 4px #74cc33;
+ 
+}
+
+.active {
+  background-color:  #EAD94C !important;
+}
+
+.basic{
+  border-radius: 5px 0 0 5px;
+}
+
+.special{
+  border-radius: 0 5px 5px 0;
+}
+
+.lesson-instruction-section{
+  background-color: #bcd9a0;
+  padding:25px 0 0 0;
+  border-radius:4px;
+  box-shadow: 8px 8px #D4DDDD;
+}
+
+.lesson-instruction{
+  font-size:20px;
+  font-weight: bold;
+}
+
+
+.lesson-play-section{
+  margin-top:45px;
+}
+
+.instruction-detail{
+  padding: 0px 25px 0px 80px;
 }
 
 @media (max-width: 375) {

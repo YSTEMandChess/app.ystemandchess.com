@@ -7,6 +7,29 @@ body {
   clear: both;
 }
 
+video {
+  max-width: 100%;
+  border: 1px solid;
+}
+
+.btn {
+  display: block;
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.bigCont {
+  // border-radius: 33px;
+  // margin: 10px;"");
+  background-image: url('../../../assets/images/student/bg-image.jpg');
+  background-size: cover;
+}
+
+
+
 #welcome-container {
   width: 45%;
   height: auto;
@@ -40,6 +63,8 @@ body {
     }
   }
 
+  
+
   #welcome-statement {
     p {
       font-family: "Roboto";
@@ -59,6 +84,7 @@ body {
   height: auto;
   margin-left: 5%;
   border-radius: 33px;
+  // background-image: url('../../../assets/images/student/bg-image.jpg');
   //background-color: #E1E7ED;
 
   #top {
@@ -130,22 +156,27 @@ body {
       padding-bottom: 1%;
       padding-left: 3%;
       padding-right: 3%;
-      border-radius: 33px;
+      border-radius: 6px;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      color: #000000;
-      background-color: #f2c94c;
+      color: white;
+      margin: 10px;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
+    
 
       //push new game button away
     }
 
-    #flip-board:hover {
-      color: #f2c94c;
-      background-color: #000;
-    }
+    // #flip-board:hover {
+    //   color: #f2c94c;
+    //   background-color: #000;
+    // }
 
     #new-game {
       outline-style: none;
@@ -155,12 +186,16 @@ body {
       padding-right: 2%;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      border-radius: 6px;
+      margin: 10px;
       color: #fff;
-      background-color: #ff8503;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
 
       //push lesson prep button away
     }
@@ -172,20 +207,23 @@ body {
       padding-right: 2%;
       font-family: "Lato";
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      margin: 10px;
+      border-radius: 6px;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
       color: #fff;
-      background-color: #ff8503;
-
       //push lesson prep button away
     }
 
-    #new-game:hover {
-      color: #ff8503;
-      background-color: #fff;
-    }
+    // #new-game:hover {
+    //   color: #ff8503;
+    //   background-color: #fff;
+    // }
 
     #lesson-prep {
       outline-style: none;
@@ -196,20 +234,26 @@ body {
       font-family: "Lato";
       font-style: normal;
       font-weight: 900;
-      font-size: 1.4vw; //22px
+      font-size: 18px; //22px
       line-height: 117.1%;
       letter-spacing: 0.01em;
-      border-radius: 33px;
+      border-radius: 6px;
+      margin: 10px;
       color: #fff;
-      background-color: #3a7cca;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
+      width:265px;
     }
 
     #lesson-prep:hover {
-      color: #3a7cca;
-      background-color: #fff;
+      background-color: #0046fd;
+      color: #fff;
     }
   }
 }
+
 #lesson-prep {
   justify-content: center;
   margin: -28px;
@@ -233,6 +277,9 @@ body {
   font-weight: 500;
   font-size: xx-large;
 }
+
+
+
 .fwd-btns {
   display: flex;
   flex-direction: row;
@@ -247,14 +294,36 @@ body {
   pointer-events: none;
 }
 .display-step {
+  // display: block;
+  // height: 20rem;
+  // overflow: hidden scroll;
+  // cursor: pointer;
+  // background-color: lightgray;
+  // padding: 7%;
+  // width: fit-content;
+
   display: block;
-  height: 20rem;
+  height: 41rem;
   overflow: hidden scroll;
   cursor: pointer;
-  background-color: lightgray;
+  margin-left: 25px;
+  // background-color: lightgray;
+  border:4px solid #257d96;
   padding: 7%;
   width: fit-content;
+  background-image: url('../../../assets/images/student/STEMy_Mascot.png');
+  background-size: auto; 
+  background-color: white;
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
+
+.steps-decoration{
+  margin-top: 2px;
+  width: 80px;
+  background-color: black;
+}
+
 .table-moves {
   display: flex;
   gap: 0.5rem;
@@ -284,10 +353,16 @@ body {
   position: relative;
   margin-left: 175px;
   margin-top: 1px;
+  text-align: center;
 }
 .gameclass {
   display: flex;
   justify-content: space-between;
+  // background-image: url('../../../assets/images/student/bg-image.jpg');
+}
+.mentor-bg{
+  background-image: url('../../../assets/images/student/bg-image.jpg');
+  background-size: cover;
 }
 
 .playwithcomputer {
@@ -298,9 +373,9 @@ body {
   display: flex;
 }
 .outer-filp-board {
-  max-width: 700px;
+  // max-width: 700px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 }
 .outer-new-game {

@@ -40,6 +40,7 @@ import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
 import {MissionHifiComponent} from "./pages/mission-hifi/mission-hifi.component"
 import {FinancialsHifiComponent} from "./pages/financials/financials-hifi.component";
 import {BoardHifiComponent} from "./pages/board/board-hifi.component";
+import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component"
 
 
 const routes: Routes = [
@@ -154,6 +155,13 @@ const routes: Routes = [
   { path: 'mission-hifi', component: MissionHifiComponent },
   { path: 'financial-hifi', component: FinancialsHifiComponent },
   { path: 'board-hifi', component: BoardHifiComponent },
+  
+  {
+    path: 'mentor-profile',
+    component: MentorProfileComponent,
+    data: { roles: ['mentor'] },
+    canActivate: [LoginGuardService],
+  },
 
 ];
 

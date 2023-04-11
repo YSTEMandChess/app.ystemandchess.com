@@ -27,6 +27,10 @@
     color: #000000;
   }
 }
+
+
+
+
 .movesAhead {
   position: relative;
   margin-left: 175px;
@@ -225,10 +229,186 @@
 }
 .gameclass {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   
 }
 app-play {
   padding: 150px;
 }
  
+
+#mentor-container {
+  //margin-top: 5%;
+  width: 90%;
+  height: auto;
+  margin-left: 5%;
+  border-radius: 33px;
+  // background-image: url('../../../assets/images/student/bg-image.jpg');
+  //background-color: #E1E7ED;
+
+  #top {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    .turn-indicator {
+      width: 28px;
+      height: 28px;
+      margin-right: 1%;
+      border-radius: 100%;
+      background-color: #fff;
+    }
+
+    //will change in future to which
+    //players turn it is
+    .turn-indicator:hover {
+      background-color: #4f4f4f;
+    }
+
+    p {
+      margin-right: 3%;
+      font-family: "Lato";
+      font-size: 1.4vw; //2px
+      line-height: 142.1%;
+      letter-spacing: 0.01em;
+      color: #000000;
+    }
+
+    button {
+      outline-style: none;
+      margin-right: 3%;
+      padding-right: 2%;
+      padding-left: 2%;
+      border-radius: 33px;
+      font-family: "Lato";
+      font-size: 1.4vw;
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      color: #fff;
+      background-color: #3a7cca;
+    }
+
+    button:hover {
+      background-color: #fff;
+      color: #3a7cca;
+    }
+  }
+
+  #lichess-board {
+    overflow: hidden;
+    iframe {
+      overflow: hidden;
+      border: 0;
+      width: 100%;
+      height: 80vh; //80vh
+    }
+  }
+
+  #bottom {
+    padding-top: 2%;
+    padding-bottom: 2%;
+
+    #flip-board {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 3%;
+      padding-right: 3%;
+      border-radius: 6px;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 18px; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      color: white;
+      margin: 10px;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
+    
+
+      //push new game button away
+    }
+
+    // #flip-board:hover {
+    //   color: #f2c94c;
+    //   background-color: #000;
+    // }
+
+    #new-game {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 2%;
+      padding-right: 2%;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 18px; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      border-radius: 6px;
+      margin: 10px;
+      color: #fff;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
+
+      //push lesson prep button away
+    }
+    #undo-move {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 2%;
+      padding-right: 2%;
+      font-family: "Lato";
+      font-weight: 900;
+      font-size: 18px; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      margin: 10px;
+      border-radius: 6px;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
+      color: #fff;
+      //push lesson prep button away
+    }
+
+    // #new-game:hover {
+    //   color: #ff8503;
+    //   background-color: #fff;
+    // }
+
+    #lesson-prep {
+      outline-style: none;
+      padding-top: 1%;
+      padding-bottom: 1%;
+      padding-left: 3.5%;
+      padding-right: 3.5%;
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 900;
+      font-size: 18px; //22px
+      line-height: 117.1%;
+      letter-spacing: 0.01em;
+      border-radius: 6px;
+      margin: 10px;
+      color: #fff;
+      width:200px;
+      border:none;
+      background-color: #0046fd;
+      box-shadow: 3px 4px #ead94c;
+      width:265px;
+    }
+
+    #lesson-prep:hover {
+      background-color: #0046fd;
+      color: #fff;
+    }
+  }
+}

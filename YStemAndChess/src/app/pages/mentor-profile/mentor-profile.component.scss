@@ -6,7 +6,7 @@ body {
 
 .website-icon::before{
   position: absolute;
-    left: -16px;
+    left: -35px;
     top: 4px;
     content: " ";
     border: 5px solid #0a0a0a;
@@ -17,57 +17,10 @@ body {
     margin-left:14px;
 }
 
-.lesson::before{
-  position: absolute;
-    left: -16px;
-    top: 4px;
-    content: " ";
-    border: 5px solid #0a0a0a;
-    border-radius: 500%;
-    background: #C8B4FF;
-    height: 17px;
-    width: 17px;
-    margin-left:14px;
+.time-icon {
+  position:relative
 }
 
-.puzzle::before{
-  position: absolute;
-    left: -16px;
-    top: 4px;
-    content: " ";
-    border: 5px solid #0a0a0a;
-    border-radius: 500%;
-    background: #0FDFF2;
-    height: 17px;
-    width: 17px;
-    margin-left:14px;
-}
-
-.mentoring::before{
-    position: absolute;
-    left: -16px;
-    top: 4px;
-    content: " ";
-    border: 5px solid #0a0a0a;
-    border-radius: 500%;
-    background: #FD8E4F;
-    height: 17px;
-    width: 17px;
-    margin-left:14px;
-}
-
-.playing::before{
-  position: absolute;
-    left: -16px;
-    top: 4px;
-    content: " ";
-    border: 5px solid #0a0a0a;
-    border-radius: 500%;
-    background: #F24598;
-    height: 17px;
-    width: 17px;
-    margin-left:14px;
-}
 
 .signupForm h2 {
     font-family: 'Lato';
@@ -129,24 +82,24 @@ body {
     margin-left:235px;
 }
 
+.mentor-section{
+  background-color: #D4DDDD;
+}
+
 
 .userProfileDiv {
     background-color: #E5F3D2 ;    
     text-align: left;
-    padding: 40px;
+    padding: 40px 40px 112px 40px;
   }
   .memberInfo
   {
       text-align: left;
       margin-top: 20px;    
-      border-left: 1px solid #a3a0a0;
+      // border-left: 1px solid #a3a0a0;
       padding-left:10%
   }
-  .progressInfo
-  {
-      text-align: left;
-      margin-top: 20px;
-  }   
+ 
   .lastLoginTime
   {
       font-size: 12px;
@@ -174,11 +127,54 @@ height: 100%;
   float: left;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
-  width: 21%;
+  width: 20.92%;
   height: 447px;
   background-color: #E5F3D2;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+}
+
+.student-tab{
+  overflow: hidden;
+  // border: 1px solid #ccc;
+  background-color: #7FCC26;
+  width:100%;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 5px;
+  outline: none;
+}
+
+.user-img{
+  height:100px;
+  width: 100px;
+}
+
+
+.tablinks1{
+  width: 33.33%;
+  background-color: #7FCC26;
+  border:none;
+  outline: none;
+  font-weight: 700;
+ 
+}
+
+.tablinks2{
+  border-left:2px solid black !important;
+  border-right:2px solid black !important;
+  width: 33.33%;
+  background-color: #7FCC26;
+border: none;
+  outline: none;
+  font-weight: 700;
+}
+.tablinks3{
+  width: 33.33%;
+  background-color: #7FCC26;
+  border:none;
+  outline: none;
+  font-weight: 700;
 }
 
 .tabcontent {
@@ -192,6 +188,50 @@ height: 100%;
   background-color: #C8F2AE;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
+}
+
+.tabcontent1 {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 79%;
+  border-left: none;
+  height: 447px;
+  overflow-y: auto;
+  background-color: #C8F2AE;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.tabcontent2 {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 79%;
+  border-left: none;
+  height: 447px;
+  overflow-y: auto;
+  background-color: #C8F2AE;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+
+
+  .progressInfo
+  {
+      text-align: left;
+      margin-top: 20px;
+  } 
+
+.mainTabcontent{
+ 
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  width: 100%;
+  
 }
 
 /* Style the buttons inside the tab */
@@ -312,38 +352,23 @@ height: 100%;
   font-size: 17px;
 }
 
-.tab button.tab7{
-  display: block;
-  font-weight: 600;
-  background-color: rgb(227, 133, 149);
-  margin-top:10px;
-  color: black;
-  padding: 11px 16px;
-  width: 100%;
-  border: none;
-  outline: none;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 17px;
+.mainTabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }
 
-.tab button.tab8{
-  display: block;
-  font-weight: 600;
-  background-color: red;
-  border-bottom-left-radius: 10px;
-  color: black;
-  margin-top:10px;
-  padding: 11px 16px;
-  width: 100%;
-  border: none;
+
+
+
+
+.student-tab button.active {
+  background-color:#EAD94C;
+  // border:none !important;
   outline: none;
-  text-align: left;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 17px;
 }
+
 
 
 /* Change background color of buttons on hover */
@@ -510,9 +535,8 @@ color: #000;
 .pdf-view {
     margin: auto;
     margin-top: 5%;
-    height: 95px;
-    // width: 600px;
-    // border: 1px solid #dadada;
+    height: 500px;
+  
 }
 .sharedExpCategoryList{
   cursor: pointer;

@@ -70,11 +70,11 @@
       <div *ngFor="let section of sections">
 
         <div class="tab subsection-section" *ngFor="let subSection of section.subSections"
-          (click)="setStateAsActive(subSection)">
+          (click)="setStateAsActive(subSection)" id="{{subSection.name}}">
 
-          <button class="tablinks col-2 font-weight-bold" [ngClass]="{'active': subSection === activeState}"
+          <button class="tablinks col-2 font-weight-bold"
+            [ngClass]="{'active': subSection === activeState || subSection.name === activeState.name}"
             (click)="startLesson(subSection)"> {{ subSection.name }} </button>
-          <!-- <button class="tablinks col-2 font-weight-bold" [ngClass]="{'active': subSection === activeState}" > {{ subSection.name }} </button> -->
 
         </div>
       </div>

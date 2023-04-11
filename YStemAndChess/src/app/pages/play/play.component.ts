@@ -176,7 +176,7 @@ export class PlayComponent implements OnInit {
               this.clientUID = uid;
               this.localStream = this.agoraService.createStream({
                 streamID: this.clientUID,
-                audio: false,
+                audio: true,
                 video: true,
                 screen: false,
               });
@@ -212,7 +212,7 @@ export class PlayComponent implements OnInit {
               (uid) => {
                 this.localScreenStream = this.agoraService.createStream({
                   streamID: uid,
-                  audio: false,
+                  audio: true,
                   video: false,
                   screen: true,
                   mediaSource: 'window',
@@ -277,6 +277,8 @@ export class PlayComponent implements OnInit {
             } else {
               document.getElementById('remote_stream').style.display = 'none';
               document.getElementById('remote_streamName').style.display = 'none';
+              
+              
             }
           });
 

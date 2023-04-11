@@ -52,6 +52,7 @@ import {ComputerBenefitArticleComponent} from "./pages/computer-science-benefit-
 import {ChessBenefitArticleComponent} from "./pages/chess-benefit-article/chess-benefit-article.component";
 import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-article/mentoring-benefit-article.component";
 import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
+import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component";
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -98,7 +99,8 @@ const agoraConfig: AgoraConfig = {
     ComputerBenefitArticleComponent,
     ChessBenefitArticleComponent,
     MentoringBenefitArticleComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    MentorProfileComponent
     
   ],
   imports: [

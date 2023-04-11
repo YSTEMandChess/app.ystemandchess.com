@@ -23,23 +23,35 @@ export class LearningsComponent {
   chessSrc;
   sections;
   currentFen;
-  activeState = 'false';
+  activeState = {
+    name: 'Basic',
+    fen: '8/8/8/P7/8/5p2/8/8 w k - 0 1',
+    info: `Pawns move one square only.
+    But when they reach the other side of the board, they become a stronger piece!`,
+  };
   lessonNumber = 0;
+  activeTabIndex = 0
+  
 
-  constructor(private ls: LessonsService, private sanitization: DomSanitizer,private cookie: CookieService,) {
+  constructor(private ls: LessonsService, private sanitization: DomSanitizer,private cookie: CookieService) {
    
     this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
     this.chess = new Chess('chessBd', true);
+   
     this.loadLessons();
-    
+    // this.setStateAsActive(this.ls.learningsArray[0].subSections[0].fen);
   }
 
   
 
   async ngOnInit() {
     let pLevel = 'nLogged';
+    this.setStateAsActive(this.ls.learningsArray[0].subSections[0]);
+    this.activeState = this.ls.learningsArray[0].subSections[0];
+    
+    console.log("active state--->", this.activeState)
     let uInfo = await setPermissionLevel(this.cookie);
     if (uInfo['error'] == undefined) {
       this.logged = true;
@@ -52,11 +64,27 @@ export class LearningsComponent {
         this.playLink = 'play-mentor';
       }
     }
+
+    // this.startLesson(this.ls.learningsArray[0].subSections[0]);
   }
 
   setStateAsActive(state) {
+  console.log("click state---->", state)
+  var firstObj = {
+    'info': state.info,
+    'fen': state.fen,
+    'event':''
+  };
+  console.log("first obj---->", firstObj)
+  
+  setTimeout(() => {
+    // this.chess.newGameInit(state.fen);
     this.activeState = state;
-    console.log("active state--->", this.activeState)
+    this.startLesson(firstObj);
+  }, 500);
+    
+
+    
   }
 
   loadNextLesson(){
@@ -70,6 +98,7 @@ export class LearningsComponent {
   }
 
   loadLessons(){
+    
     this.sections = this.ls.getLearnings(this.lessonNumber);
   }
 
@@ -101,10 +130,10 @@ export class LearningsComponent {
   }
 
   startLesson({ info, fen,event }): void {
+  console.log("start lesson call---->", info)
     this.info = info;
     this.chess.newGameInit(fen);
     this.currentFen = fen;
-    // this.showSubSection(event);
-    // console.log("fen--->", fen)
+    
   }
 }

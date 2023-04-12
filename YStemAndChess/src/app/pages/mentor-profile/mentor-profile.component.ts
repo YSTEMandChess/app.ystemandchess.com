@@ -212,6 +212,28 @@ export class MentorProfileComponent implements OnInit {
     xmlHttp.send(null);
   }
 
+  public studentTime(username, startDate, endDate){
+    // username
+    // start date
+    // end date
+    this.httpGetAsync(
+    `GET`,
+    `${environment.urls.middlewareURL}/timeTracking/statistics?username=`+username+`&startDate=`+startDate+`&endDate=`+endDate,
+      (response) => {
+        if (
+          JSON.parse(response) ===
+          'Server error'
+        ) {
+          return;
+        }
+        let responseText = JSON.parse(response);
+        console.log(responseText)
+        console.log(responseText[2])
+      }
+    );
+      
+  }
+
   public getPresignURL(sid,meetingid)
   {
     let filename = sid+'_'+meetingid+'_0.mp4';

@@ -18,8 +18,8 @@
              <hr> -->
             </div>
           </div>
-            
-            
+
+
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
@@ -40,10 +40,10 @@
                             <img src="../../../assets/images/student/chart.PNG" />
                         <!-- </div> -->
                     </div>
-                    
+
                 </div>
                 <div class="col-12">
-                  
+
                       <!-- <p style="font-size: 25px;"><strong>{{ firstName | titlecase }} {{ lastName | titlecase}} </strong></p>
                       <p><img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/time-138-97129.png" srcset="https://cdn.iconscout.com/icon/premium/png-512-thumb/time-138-97129.png 2x" alt="Time Icon" width="20">&nbsp; Member since <strong>{{ accountCreatedAt  }} </strong></p>
                       <p>&nbsp;</p> -->
@@ -52,25 +52,25 @@
 
                       <div class="row" style="margin-bottom: 20px">
                       <div class="col-4">
-                        <p style="margin-left:20px"> <span class="website-icon"></span>&nbsp; Website : <strong>45 minutes</strong></p>
+                        <p style="margin-left:20px"> <span class="website-icon"></span>&nbsp; Website : <strong>{{timeTrackingStat.website}} minutes</strong></p>
                       </div>
                       <div class="col-4">
-                        <p style="margin-left:20px"><span class="lesson"></span>&nbsp; Lesson : <strong>10 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="lesson"></span>&nbsp; Lesson : <strong>{{timeTrackingStat.lesson}} minutes</strong></p>
                       </div>
                       <div class="col-4">
-                        <p style="margin-left:20px"><span class="puzzle"></span> &nbsp; Puzzle : <strong>5 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="puzzle"></span> &nbsp; Puzzle : <strong>{{timeTrackingStat.puzzle}} minutes</strong></p>
                       </div>
                       <div class="col-4">
-                        <p style="margin-left:20px"><span class="playing"></span>&nbsp; Playing : <strong>15 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="playing"></span>&nbsp; Playing : <strong>{{timeTrackingStat.play}} minutes</strong></p>
                       </div>
                       <div class="col-4">
-                        <p style="margin-left:20px"><span class="mentoring"></span>&nbsp; Mentoring : <strong>15 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="mentoring"></span>&nbsp; Mentoring : <strong>{{timeTrackingStat.mentor}} minutes</strong></p>
                       </div>
-                      
-                      
-                      
-                      
-                      
+
+
+
+
+
                   </div>
               </div>
                 <!-- <div class="row tabView">
@@ -92,28 +92,28 @@
                                         23rd July 2022<br> 7:00 PM
                                       </div>
                                       <div class="item-title">Solved 2 tactical puzzles</div>
-                            
+
                                     </li>
                                     <li class="rb-item" ng-repeat="itembx">
                                       <div class="timestamp">
                                         19th July 2022<br> 3:00 PM
                                       </div>
                                       <div class="item-title">Practiced 7 positions on <a href="/learnings">Piece Checkmates I</a></div>
-                            
+
                                     </li>
-                            
+
                                     <li class="rb-item" ng-repeat="itembx">
                                       <div class="timestamp">
                                         17st July 2022<br> 7:00 PM
                                       </div>
                                       <div class="item-title">Signed up to <a target="_blank" href="http://ystemandchess.com/">ystemandchess.com</a></div>
-                            
+
                                     </li>
-                            
+
                                   </ul>
-                            
+
                                 </div>
-                            </div>  
+                            </div>
                           </div>
                           <div class="content" id="c2">
                             <h3>Games</h3>
@@ -130,14 +130,14 @@
                                   <a style="color:#007bff;cursor: pointer;" title="Click to see the recording" target="_blank" (click)="getPresignURL(screenRecord.sid,screenRecord.meetingId)" >{{ screenRecord.sid}}_{{screenRecord.meetingId }}_0.mp4 </a>
                                 </strong>&nbsp; - {{ screenRecord.meetingStartTime }}
                               </p>
-                              
-                           
+
+
                           </div>
-                          
+
                         </div>
                       </div>
 
-                    
+
                 </div> -->
 
 
@@ -150,9 +150,9 @@
                   <button class="tablinks tab2" (click)="openCity($event, 'Puzzles')"><img src="../../../assets/images/student/puzzles_tab.PNG" class="tab-image2" /></button>
                   <button class="tablinks tab2" (click)="openCity($event, 'computer')"><img src="../../../assets/images/student/play_tab.PNG" class="tab-image2" /></button>
                   <button class="tablinks tab3" (click)="openCity($event, 'Recordings')"><img src="../../../assets/images/student/recordings_tab.PNG" class="tab-image3" /></button>
-                  
+
                 </div>
-                
+
                 <div id="Activity" class="tabcontent">
                   <div class="rightbox">
                     <div class="rb-container">
@@ -162,58 +162,58 @@
                             23rd July 2022<br> 7:00 PM
                           </div>
                           <div class="item-title">Solved 2 tactical puzzles</div>
-                
+
                         </li>
                         <li class="rb-item" ng-repeat="itembx">
                           <div class="timestamp">
                             19th July 2022<br> 3:00 PM
                           </div>
                           <div class="item-title">Practiced 7 positions on <a href="/learnings">Piece Checkmates I</a></div>
-                
+
                         </li>
-                
+
                         <li class="rb-item" ng-repeat="itembx">
                           <div class="timestamp">
                             17st July 2022<br> 7:00 PM
                           </div>
                           <div class="item-title">Signed up to <a target="_blank" href="http://ystemandchess.com/">ystemandchess.com</a></div>
-                
+
                         </li>
-                
+
                       </ul>
-                
+
                     </div>
-                </div>  
                 </div>
-                
+                </div>
+
                 <div id="Mentor_Session" class="tabcontent">
                   <h3>Mentor Session</h3>
-                  
+
                 </div>
-                
+
                 <div id="Professional_Development" class="tabcontent">
                   <h3>Professional Development</h3>
-                
+
                 </div>
 
                 <div id="Chess_Lession" class="tabcontent">
                   <h3>Chess Lession</h3>
-                  
+
                 </div>
 
                 <div id="Games" class="tabcontent">
                   <h3>Games</h3>
-                
+
                 </div>
 
                 <div id="Puzzles" class="tabcontent">
                   <h3>Puzzles</h3>
-                  
+
                 </div>
 
                 <div id="computer" class="tabcontent">
                   <h3>Computer</h3>
-                 
+
                 </div>
 
                 <div id="Recordings" class="tabcontent">
@@ -228,31 +228,31 @@
                       </strong>&nbsp; - {{ screenRecord.meetingStartTime }}
                     </p>
                 </div>
-              
 
 
-               
+
+
                 <div class="row">
                   <div id='pdf-div' class='pdf-view'></div>
-                </div>  
+                </div>
               </div>
         </div>
 
-        
-        
+
+
     </body>
 
-   
 
-    
+
+
     <footer>
         <app-footer></app-footer>
-        
-     
+
+
     </footer>
-   
-    
-    
-   
-    
+
+
+
+
+
 </html>

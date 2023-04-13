@@ -3,9 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-import { Chart } from 'node_modules/chart.js/auto'
-import { ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
-
+import { Chart, ChartConfiguration, ChartItem, registerables } from '../../../node_modules/chart.js';
 @Component({
   selector: 'app-mentor-profile',
   templateUrl: './mentor-profile.component.html',
@@ -136,38 +134,8 @@ export class MentorProfileComponent implements OnInit {
       
   //   });
   // }
-    
-  public timeTrackingStat = {
-    "username": "",
-    "mentor": 0,
-    "lesson": 0,
-    "play": 0,
-    "puzzle": 0,
-    "website": 0
-  }
 
-  async getTimeTrackingStat(studentUsername,startDate, endDate){
-    // if (!!username ){
-    //   let username = `${environment.urls.middlewareURL}/user/studentUsername?firstName={firstName}&lastName={lastName}`; 
-    // }
-    this.httpGetAsync(
-      `GET`,
-      `${environment.urls.middlewareURL}/timeTracking/statistics?username=${studentUsername}&startDate=${startDate}&endDate=${endDate}`,
-      (response) => {
-        if (
-          JSON.parse(response) ===
-          'Server error'
-        ) {
-          return response;
-        }
-        let responseText = JSON.parse(response);
-        this.timeTrackingStat = responseText;
-        console.log(responseText)
-      }
-    );
-  }
-
-  public createStudentChart(): void {
+  createStudentChart(): void {
     Chart.register(...registerables);
 
     const exampleData: number[] = [1, 2, 3, 4, 5];

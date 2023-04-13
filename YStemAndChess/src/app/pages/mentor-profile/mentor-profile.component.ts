@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-import { Chart } from '../../../node_modules/chart.js';
+import { Chart, ChartConfiguration, ChartItem, registerables } from '../../../node_modules/chart.js';
 @Component({
   selector: 'app-mentor-profile',
   templateUrl: './mentor-profile.component.html',
@@ -135,104 +135,84 @@ export class MentorProfileComponent implements OnInit {
   //   });
   // }
 
-  createStudentChart(){
-//get canvas element
-const canvasElement = document.getElementById('myChart') as HTMLCanvasElement;
+  createStudentChart(): void {
+    Chart.register(...registerables);
 
-interface Timecard {
-    username: string;
-    mentor: number;
-    lesson: number;
-    play: number;
-    puzzle: number;
-    website: number;
-}
+    const exampleData: number[] = [1, 2, 3, 4, 5];
 
-const timecardStorage: any[] = [];
+    const data = {
+      labels: ['January'],
+      datasets: [{
+        label: 'Website',
+        backgroundColor: 'rgb(255, 71, 97)',
+        borderColor: 'rgb(255, 71, 97)',
+        data: exampleData[0],
+    }, {
+        label: 'Lessons',
+        backgroundColor: 'rgb(163, 255, 168)',
+        borderColor: 'rgb(163, 255, 168)',
+        data: exampleData[1],
+    }, {
+        label: 'Puzzle',
+        backgroundColor: 'rgb(42, 106, 255)',
+        borderColor: 'rgb(42, 106, 255)',
+        data: exampleData[2],
+    },{
+        label: 'Plaything',
+        backgroundColor: 'rgb(255, 220, 50)',
+        borderColor: 'rgb(255, 220, 50)',
+        data: exampleData[3],
+    }, {
+        label: 'Mentoring',
+        backgroundColor: 'rgb(200, 140, 255)',
+        borderColor: 'rgb(200, 140, 255)',
+        data: exampleData[4],
+    }]
+  };
 
-let testAPIObj: Timecard = {
-    username: "zteststudent",
-    mentor: 368455,
-    lesson: 0,
-    play: 0,
-    puzzle: 0,
-    website: 0
-};
-
-function convertAPIValues(apiObj) {
-  let dummyAPIObj = apiObj;
-  let milMentor = dummyAPIObj.mentor / 60000;
-  let milLesson = dummyAPIObj.lesson / 60000;
-  let milPlay = dummyAPIObj.play / 60000;
-  let milPuzzle = dummyAPIObj.puzzle / 60000;
-  let milWebsite = dummyAPIObj.website / 60000;
-
-  let trueArray = [milWebsite, milLesson, milPuzzle, milPlay, milMentor];
-  return trueArray;
-};
-
-//dummy tables
-timecardStorage.push(convertAPIValues(testAPIObj));
-let monthX = timecardStorage[0];
-let monthY = [Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1];
-
-//chartjs config
-let config = {
-        type: 'bar',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-          datasets: [{
-            label: 'Website',
-            data: [monthX[0], monthY[0]]
-          }, {
-            label: 'Lessons',
-            data: [monthX[1], monthY[1]]
-          }, {
-            label: 'Puzzle',
-            data: [monthX[2], monthY[2]]
-          }, {
-            label: 'Playing',
-            data: [monthX[3], monthY[3]]
-          }, {
-            label: 'Mentoring',
-            data: [monthX[4], monthY[4]]
-          }]
-        },
-        options: {
-          aspectRatio: 0.75,
-          maintainAspectRatio: false,
-          Responsive: true,
-          layout: {
-            padding: {
-              left: 100,
-              top: 50,
-              right: 100
-            },
-          },
-          scales: {
-            y: {
-              grid: {
-                display: true
-              }
-            },
-            x: {
-              grid: {
-                display: true
-              }
-            }
-          },
-          plugins: {
-            legend: {
-                position: 'bottom'
-            }
-          },
-          barPercentage: 0.5,
-          categoryPercentage: 1,
-          borderRadius: 3
+  const options = {
+    aspectRatio: 0.75,
+    maintainAspectRatio: false,
+    Responsive: true,
+    layout: {
+      padding: {
+        left: 100,
+        top: 50,
+        right: 100
       },
-      };
-  let newChart = new Chart(canvasElement, config), any;
-  }
+    },
+    scales: {
+      y: {
+        grid: {
+          display: true
+        }
+      },
+      x: {
+        grid: {
+          display: true
+        }
+      }
+    },
+    plugins: {
+      legend: {
+          position: 'bottom'
+      }
+    },
+    barPercentage: 0.5,
+    categoryPercentage: 1,
+    borderRadius: 3
+  };
+
+  const config: ChartConfiguration = {
+    type: 'bar',
+    data: data,
+    options: options
+  };
+
+  const chartItem: ChartItem = document.getElementById('my-chart') as ChartItem
+
+  new Chart(chartItem, config)
+}
 
   public openCity(evt, cityName) {
     console.log("cityname--->",evt)

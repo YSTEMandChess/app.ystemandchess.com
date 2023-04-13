@@ -172,7 +172,7 @@ export class MentorProfileComponent implements OnInit {
 
     const exampleData: number[] = [1, 2, 3, 4, 5];
 
-    const data = {
+    const data: any = {
       labels: ['January'],
       datasets: [{
         label: 'Website',
@@ -202,7 +202,7 @@ export class MentorProfileComponent implements OnInit {
     }]
   };
 
-  const options = {
+  const options: any = {
     aspectRatio: 0.75,
     maintainAspectRatio: false,
     Responsive: true,
@@ -234,7 +234,6 @@ export class MentorProfileComponent implements OnInit {
     categoryPercentage: 1,
     borderRadius: 3
   };
-
   const config: ChartConfiguration = {
     type: 'bar',
     data: data,

@@ -3,7 +3,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-import { Chart, ChartConfiguration, ChartItem, registerables } from '../../../node_modules/chart.js';
+import { Chart } from 'node_modules/chart.js/auto'
+import { ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
+
 @Component({
   selector: 'app-mentor-profile',
   templateUrl: './mentor-profile.component.html',
@@ -134,8 +136,38 @@ export class MentorProfileComponent implements OnInit {
       
   //   });
   // }
+    
+  public timeTrackingStat = {
+    "username": "",
+    "mentor": 0,
+    "lesson": 0,
+    "play": 0,
+    "puzzle": 0,
+    "website": 0
+  }
 
-  createStudentChart(): void {
+  async getTimeTrackingStat(studentUsername,startDate, endDate){
+    // if (!!username ){
+    //   let username = `${environment.urls.middlewareURL}/user/studentUsername?firstName={firstName}&lastName={lastName}`; 
+    // }
+    this.httpGetAsync(
+      `GET`,
+      `${environment.urls.middlewareURL}/timeTracking/statistics?username=${studentUsername}&startDate=${startDate}&endDate=${endDate}`,
+      (response) => {
+        if (
+          JSON.parse(response) ===
+          'Server error'
+        ) {
+          return response;
+        }
+        let responseText = JSON.parse(response);
+        this.timeTrackingStat = responseText;
+        console.log(responseText)
+      }
+    );
+  }
+
+  public createStudentChart(): void {
     Chart.register(...registerables);
 
     const exampleData: number[] = [1, 2, 3, 4, 5];
@@ -273,6 +305,8 @@ export class MentorProfileComponent implements OnInit {
     }
     document.getElementById(studentName).style.display = "block";
     event.currentTarget.className += " active";
+
+    this.getTimeTrackingStat(studentName,new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
   }
   
   // Get the element with id="defaultOpen" and click on it
@@ -292,27 +326,6 @@ export class MentorProfileComponent implements OnInit {
     xmlHttp.send(null);
   }
 
-  public studentTime(username, startDate, endDate){
-    // username
-    // start date
-    // end date
-    this.httpGetAsync(
-    `GET`,
-    `${environment.urls.middlewareURL}/timeTracking/statistics?username=`+username+`&startDate=`+startDate+`&endDate=`+endDate,
-      (response) => {
-        if (
-          JSON.parse(response) ===
-          'Server error'
-        ) {
-          return;
-        }
-        let responseText = JSON.parse(response);
-        console.log(responseText)
-        console.log(responseText[2])
-      }
-    );
-      
-  }
 
   public getPresignURL(sid,meetingid)
   {

@@ -39,6 +39,18 @@
                             </div> -->
                             <div class="chart-container"><canvas id="my-chart"></canvas></div>
                             <!-- <img src="../../../assets/images/student/chart.PNG" /> -->
+                            <!-- <img src="../../../assets/images/student/chart.PNG" /> -->
+                            <div class="chart-container">
+                              <canvas baseChart
+                                [datasets]="barChartData"
+                                [labels]="barChartLabels"
+                                [options]="barChartOptions"
+                                [legend]="true"
+                                chartType="bar"
+                                [colors]="barChartColor">
+                              </canvas>
+                            </div>
+
                         <!-- </div> -->
                     </div>
 

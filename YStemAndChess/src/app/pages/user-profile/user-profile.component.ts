@@ -1,10 +1,13 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
 import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
 // npm install chart.js@2.9.4
+
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { BaseChartDirective, Color, Label } from 'ng2-charts';
 
 
 
@@ -38,6 +41,67 @@ export class UserProfileComponent implements OnInit {
   recordingList = [];
   signedURL = '';
   constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
+
+  public timeTrackingStat = {
+    "username": "",
+    "mentor": 0,
+    "lesson": 0,
+    "play": 0,
+    "puzzle": 0,
+    "website": 0
+  }
+  getTimeTrackingStat(username, startDate, endDate){
+    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
+    let authToken = this.cookie.get('login');
+    const headers = new Headers ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    return fetch(url, { method: 'GET', headers: headers }).then((response) => {
+      return response.json();
+    });
+  }
+
+  getTimeTrackingStatByMonth(username){
+    let promiseList = [];
+    for (let i = 0; i < 12; i++){
+      const promiseThisMonth = this.getTimeTrackingStat(username, new Date(new Date().getFullYear(), i, 1), new Date(new Date().getFullYear(), i+1, 1))
+      promiseList.push(promiseThisMonth);
+    }
+    Promise.all(promiseList).then(data=>{
+      for (const key in data){
+        for (const d of this.barChartData){
+          d.data[key] = data[key][d.label.toLowerCase().replace('ing','')];
+        }
+      }
+      this.userChart.chart.update();
+    })
+  }
+  @ViewChild(BaseChartDirective)
+  public userChart: BaseChartDirective;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = ["January","February","March","April","May","June","July",
+  "August","September","October","November","December"];
+  public barChartType: ChartType = 'bar';
+
+  public barChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Website' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Lesson' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Puzzle' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Playing' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Mentoring' },
+  ];
+  public barChartColor: Color[] = [{backgroundColor: '#7fcc26'}, {backgroundColor: '#c8b4ff'}, {backgroundColor: '#0fdff2'}, {backgroundColor: '#f24598'}, {backgroundColor: '#fd8e4f'}]
+
 
   // chartOptions = {
   //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
@@ -119,7 +183,8 @@ export class UserProfileComponent implements OnInit {
       // }, 1500);
     }
     if (this.role == 'student'){
-      await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
+      await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
+      this.getTimeTrackingStatByMonth(this.username);
       this.createStudentChart();
     }
 
@@ -134,30 +199,7 @@ export class UserProfileComponent implements OnInit {
     // this.categoryList = categoryList;
 
   }
-  
-  public timeTrackingStat = {
-    "username": "",
-    "mentor": 0,
-    "lesson": 0,
-    "play": 0,
-    "puzzle": 0,
-    "website": 0
-  }
-  public getTimeTrackingStat(username, startDate, endDate){
-    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
-    let authToken = this.cookie.get('login');
-    const headers = new Headers ({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${authToken}`
-    })
-    return fetch(url, { method: 'GET', headers: headers })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      this.timeTrackingStat = data;
-    });
-  }
+
 
   public createStudentChart(): void {
     Chart.register(...registerables);

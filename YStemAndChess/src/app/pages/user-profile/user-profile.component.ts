@@ -3,6 +3,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
+import { Chart } from 'node_modules/chart.js/auto'
+import { ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
+
 // import { Chart } from 'chart.js';
 // import { Chart, registerables } from 'chart.js';
 // Chart.register(...registerables);
@@ -39,30 +42,6 @@ export class UserProfileComponent implements OnInit {
   recordingList = [];
   signedURL = '';
   constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
-
-  public timeTrackingStat = {
-    "username": "",
-    "mentor": 0,
-    "lesson": 0,
-    "play": 0,
-    "puzzle": 0,
-    "website": 0
-  }
-  getTimeTrackingStat(username, startDate, endDate){
-    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
-    let authToken = this.cookie.get('login');
-    const headers = new Headers ({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${authToken}`
-    })
-    return fetch(url, { method: 'GET', headers: headers })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      this.timeTrackingStat = data;
-    });
-  }
 
   // chartOptions = {
   //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
@@ -145,6 +124,7 @@ export class UserProfileComponent implements OnInit {
     }
     if (this.role == 'student'){
       await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
+      this.createStudentChart();
     }
 
 
@@ -158,7 +138,108 @@ export class UserProfileComponent implements OnInit {
     // this.categoryList = categoryList;
 
   }
+  
+  public timeTrackingStat = {
+    "username": "",
+    "mentor": 0,
+    "lesson": 0,
+    "play": 0,
+    "puzzle": 0,
+    "website": 0
+  }
+  public getTimeTrackingStat(username, startDate, endDate){
+    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
+    let authToken = this.cookie.get('login');
+    const headers = new Headers ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    return fetch(url, { method: 'GET', headers: headers })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this.timeTrackingStat = data;
+    });
+  }
 
+  public createStudentChart(): void {
+    Chart.register(...registerables);
+
+    const exampleData: number[] = [1, 2, 3, 4, 5];
+
+    const data: any = {
+      labels: ['January'],
+      datasets: [{
+        label: 'Website',
+        backgroundColor: 'rgb(255, 71, 97)',
+        borderColor: 'rgb(255, 71, 97)',
+        data: exampleData[0],
+    }, {
+        label: 'Lessons',
+        backgroundColor: 'rgb(163, 255, 168)',
+        borderColor: 'rgb(163, 255, 168)',
+        data: exampleData[1],
+    }, {
+        label: 'Puzzle',
+        backgroundColor: 'rgb(42, 106, 255)',
+        borderColor: 'rgb(42, 106, 255)',
+        data: exampleData[2],
+    },{
+        label: 'Plaything',
+        backgroundColor: 'rgb(255, 220, 50)',
+        borderColor: 'rgb(255, 220, 50)',
+        data: exampleData[3],
+    }, {
+        label: 'Mentoring',
+        backgroundColor: 'rgb(200, 140, 255)',
+        borderColor: 'rgb(200, 140, 255)',
+        data: exampleData[4],
+    }]
+  };
+
+  const options: any = {
+    aspectRatio: 0.75,
+    maintainAspectRatio: false,
+    Responsive: true,
+    layout: {
+      padding: {
+        left: 100,
+        top: 50,
+        right: 100
+      },
+    },
+    scales: {
+      y: {
+        grid: {
+          display: true
+        }
+      },
+      x: {
+        grid: {
+          display: true
+        }
+      }
+    },
+    plugins: {
+      legend: {
+          position: 'bottom'
+      }
+    },
+    barPercentage: 0.5,
+    categoryPercentage: 1,
+    borderRadius: 3
+  };
+  const config: ChartConfiguration = {
+    type: 'bar',
+    data: data,
+    options: options
+  };
+
+  const chartItem: ChartItem = document.getElementById('my-chart') as ChartItem
+
+  new Chart(chartItem, config)
+}
   // createChart(){
 
   //   this.chart = new Chart("MyChart", {

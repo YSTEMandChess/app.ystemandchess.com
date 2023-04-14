@@ -3,12 +3,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-import { Chart } from 'node_modules/chart.js/auto'
-import { ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
-
-// import { Chart } from 'chart.js';
-// import { Chart, registerables } from 'chart.js';
-// Chart.register(...registerables);
+import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
+// npm install chart.js@2.9.4
 
 
 

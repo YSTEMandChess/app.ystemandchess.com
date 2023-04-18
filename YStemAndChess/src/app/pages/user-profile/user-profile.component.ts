@@ -10,7 +10,6 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
 
 
-
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -81,7 +80,25 @@ export class UserProfileComponent implements OnInit {
   public userChart: BaseChartDirective;
   public barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
+    maintainAspectRatio: false,
+    aspectRatio: (1|1),
+
+    scales: { 
+      xAxes: [{
+        gridLines: {
+          display: false,
+        }
+      }], 
+      yAxes: [{
+        gridLines: {
+          display: false,
+        },
+        ticks: {
+          stepSize: 50,
+          beginAtZero: true
+        } 
+      }] 
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -89,8 +106,7 @@ export class UserProfileComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ["January","February","March","April","May","June","July",
-  "August","September","October","November","December"];
+  public barChartLabels: Label[] = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
   public barChartType: ChartType = 'bar';
 
   public barChartData: ChartDataSets[] = [
@@ -185,7 +201,7 @@ export class UserProfileComponent implements OnInit {
     if (this.role == 'student'){
       await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
       this.getTimeTrackingStatByMonth(this.username);
-      this.createStudentChart();
+      // this.createStudentChart();
     }
 
 
@@ -199,114 +215,6 @@ export class UserProfileComponent implements OnInit {
     // this.categoryList = categoryList;
 
   }
-
-
-  public createStudentChart(): void {
-    Chart.register(...registerables);
-
-    const exampleData: number[] = [1, 2, 3, 4, 5];
-
-    const data: any = {
-      labels: ['January'],
-      datasets: [{
-        label: 'Website',
-        backgroundColor: 'rgb(255, 71, 97)',
-        borderColor: 'rgb(255, 71, 97)',
-        data: exampleData[0],
-    }, {
-        label: 'Lessons',
-        backgroundColor: 'rgb(163, 255, 168)',
-        borderColor: 'rgb(163, 255, 168)',
-        data: exampleData[1],
-    }, {
-        label: 'Puzzle',
-        backgroundColor: 'rgb(42, 106, 255)',
-        borderColor: 'rgb(42, 106, 255)',
-        data: exampleData[2],
-    },{
-        label: 'Plaything',
-        backgroundColor: 'rgb(255, 220, 50)',
-        borderColor: 'rgb(255, 220, 50)',
-        data: exampleData[3],
-    }, {
-        label: 'Mentoring',
-        backgroundColor: 'rgb(200, 140, 255)',
-        borderColor: 'rgb(200, 140, 255)',
-        data: exampleData[4],
-    }]
-  };
-
-  const options: any = {
-    aspectRatio: 0.75,
-    maintainAspectRatio: false,
-    Responsive: true,
-    layout: {
-      padding: {
-        left: 100,
-        top: 50,
-        right: 100
-      },
-    },
-    scales: {
-      y: {
-        grid: {
-          display: true
-        }
-      },
-      x: {
-        grid: {
-          display: true
-        }
-      }
-    },
-    plugins: {
-      legend: {
-          position: 'bottom'
-      }
-    },
-    barPercentage: 0.5,
-    categoryPercentage: 1,
-    borderRadius: 3
-  };
-  const config: ChartConfiguration = {
-    type: 'bar',
-    data: data,
-    options: options
-  };
-
-  const chartItem: ChartItem = document.getElementById('my-chart') as ChartItem
-
-  new Chart(chartItem, config)
-}
-  // createChart(){
-
-  //   this.chart = new Chart("MyChart", {
-  //     type: 'bar', //this denotes tha type of chart
-
-  //     data: {// values on X-Axis
-  //       labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
-	//        datasets: [
-  //         {
-  //           label: "Sales",
-  //           data: ['467','576', '572', '79', '92',
-	// 							 '574', '573', '576'],
-  //           backgroundColor: 'blue'
-  //         },
-  //         {
-  //           label: "Profit",
-  //           data: ['542', '542', '536', '327', '17',
-	// 								 '0.00', '538', '541'],
-  //           backgroundColor: 'limegreen'
-  //         }
-  //       ]
-  //     },
-  //     options: {
-  //       aspectRatio:2.5
-  //     }
-
-  //   });
-  // }
 
   public openCity(evt, cityName) {
     console.log("cityname--->", cityName)

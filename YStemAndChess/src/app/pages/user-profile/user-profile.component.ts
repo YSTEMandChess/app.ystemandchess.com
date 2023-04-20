@@ -1,11 +1,12 @@
 import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
 import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
-import { ChartDataSets, ChartOptions, ChartType } from 'node_modules/chart.js';
-import { BaseChartDirective, Color, Label } from 'node_modules/ng2-charts';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { BaseChartDirective, Color, Label } from 'ng2-charts';
 
 
 @Component({
@@ -47,7 +48,33 @@ export class UserProfileComponent implements OnInit {
     "puzzle": 0,
     "website": 0
   }
-  
+  getTimeTrackingStat(username, startDate, endDate){
+    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
+    let authToken = this.cookie.get('login');
+    const headers = new Headers ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    return fetch(url, { method: 'GET', headers: headers }).then((response) => {
+      return response.json();
+    });
+  }
+
+  getTimeTrackingStatByMonth(username){
+    let promiseList = [];
+    for (let i = 0; i < 12; i++){
+      const promiseThisMonth = this.getTimeTrackingStat(username, new Date(new Date().getFullYear(), i, 1), new Date(new Date().getFullYear(), i+1, 1))
+      promiseList.push(promiseThisMonth);
+    }
+    Promise.all(promiseList).then(data=>{
+      for (const key in data){
+        for (const d of this.barChartData){
+          d.data[key] = data[key][d.label.toLowerCase().replace('ing','')];
+        }
+      }
+      this.userChart.chart.update();
+    })
+  }
   @ViewChild(BaseChartDirective)
   public userChart: BaseChartDirective;
   public barChartOptions: ChartOptions = {
@@ -175,6 +202,9 @@ export class UserProfileComponent implements OnInit {
       await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
       this.getTimeTrackingStatByMonth(this.username);
       // this.createStudentChart();
+      await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
+      this.getTimeTrackingStatByMonth(this.username);
+      // this.createStudentChart();
     }
 
 
@@ -188,38 +218,7 @@ export class UserProfileComponent implements OnInit {
     // this.categoryList = categoryList;
 
   }
-  
-  public async getTimeTrackingStat(username, startDate, endDate){
-    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
-    // this.httpGetAsync(url, 'GET', (response) => {
-    //   return response.json();
-    // })
 
-    let authToken = this.cookie.get('login');
-    const headers = new Headers ({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${authToken}`
-    })
-    return fetch(url, { method: 'GET', headers: headers }).then((response) => {
-      return response.json();
-    });
-  }
-
-  public async getTimeTrackingStatByMonth(username){
-    let promiseList = [];
-    for (let i = 0; i < 12; i++){
-      const promiseThisMonth = this.getTimeTrackingStat(username, new Date(new Date().getFullYear(), i, 1), new Date(new Date().getFullYear(), i+1, 1))
-      promiseList.push(promiseThisMonth);
-    }
-    Promise.all(promiseList).then(data=>{
-      for (const key in data){
-        for (const d of this.barChartData){
-          d.data[key] = data[key][d.label.toLowerCase().replace('ing','')];
-        }
-      }
-      this.userChart.chart.update();
-    })
-  }
 
   public openCity(evt, cityName) {
     console.log("cityname--->", cityName)

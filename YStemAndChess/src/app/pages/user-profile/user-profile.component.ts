@@ -4,8 +4,6 @@ import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
 import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
-// npm install chart.js@2.9.4
-
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
 
@@ -216,6 +214,7 @@ export class UserProfileComponent implements OnInit {
     // this.categoryList = categoryList;
 
   }
+
 
   public openCity(evt, cityName) {
     console.log("cityname--->", cityName)

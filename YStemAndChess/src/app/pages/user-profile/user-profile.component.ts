@@ -94,7 +94,8 @@ export class UserProfileComponent implements OnInit {
           display: false,
         },
         ticks: {
-          stepSize: 50,
+          stepSize: 30,
+          precision: 0,
           beginAtZero: true
         } 
       }] 

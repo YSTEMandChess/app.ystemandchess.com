@@ -1,12 +1,11 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-// import { Chart } from 'chart.js';
-// import { Chart, registerables } from 'chart.js';
-// Chart.register(...registerables);
-
+import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { BaseChartDirective, Color, Label } from 'ng2-charts';
 
 
 @Component({
@@ -55,14 +54,69 @@ export class UserProfileComponent implements OnInit {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
     })
-    return fetch(url, { method: 'GET', headers: headers })
-    .then((response) => {
+    return fetch(url, { method: 'GET', headers: headers }).then((response) => {
       return response.json();
-    })
-    .then((data) => {
-      this.timeTrackingStat = data;
     });
   }
+
+  getTimeTrackingStatByMonth(username){
+    let promiseList = [];
+    for (let i = 0; i < 12; i++){
+      const promiseThisMonth = this.getTimeTrackingStat(username, new Date(new Date().getFullYear(), i, 1), new Date(new Date().getFullYear(), i+1, 1))
+      promiseList.push(promiseThisMonth);
+    }
+    Promise.all(promiseList).then(data=>{
+      for (const key in data){
+        for (const d of this.barChartData){
+          d.data[key] = data[key][d.label.toLowerCase().replace('ing','')];
+        }
+      }
+      this.userChart.chart.update();
+    })
+  }
+  @ViewChild(BaseChartDirective)
+  public userChart: BaseChartDirective;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: (1|1),
+
+    scales: { 
+      xAxes: [{
+        gridLines: {
+          display: false,
+        }
+      }], 
+      yAxes: [{
+        gridLines: {
+          display: false,
+        },
+        ticks: {
+          stepSize: 30,
+          precision: 0,
+          beginAtZero: true
+        } 
+      }] 
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
+  public barChartType: ChartType = 'bar';
+
+  public barChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Website' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Lesson' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Puzzle' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Playing' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Mentoring' },
+  ];
+  public barChartColor: Color[] = [{backgroundColor: '#7fcc26'}, {backgroundColor: '#c8b4ff'}, {backgroundColor: '#0fdff2'}, {backgroundColor: '#f24598'}, {backgroundColor: '#fd8e4f'}]
+
 
   // chartOptions = {
   //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
@@ -144,7 +198,9 @@ export class UserProfileComponent implements OnInit {
       // }, 1500);
     }
     if (this.role == 'student'){
-      await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
+      await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
+      this.getTimeTrackingStatByMonth(this.username);
+      // this.createStudentChart();
     }
 
 
@@ -159,35 +215,6 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  // createChart(){
-
-  //   this.chart = new Chart("MyChart", {
-  //     type: 'bar', //this denotes tha type of chart
-
-  //     data: {// values on X-Axis
-  //       labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
-	//        datasets: [
-  //         {
-  //           label: "Sales",
-  //           data: ['467','576', '572', '79', '92',
-	// 							 '574', '573', '576'],
-  //           backgroundColor: 'blue'
-  //         },
-  //         {
-  //           label: "Profit",
-  //           data: ['542', '542', '536', '327', '17',
-	// 								 '0.00', '538', '541'],
-  //           backgroundColor: 'limegreen'
-  //         }
-  //       ]
-  //     },
-  //     options: {
-  //       aspectRatio:2.5
-  //     }
-
-  //   });
-  // }
 
   public openCity(evt, cityName) {
     console.log("cityname--->", cityName)

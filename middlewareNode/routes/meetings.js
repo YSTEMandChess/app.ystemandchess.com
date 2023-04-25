@@ -548,6 +548,7 @@ router.post("/boardState", passport.authenticate("jwt"), async (req, res) => {
   }
 });
 
+// api to get the latest board state
 router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { meetingId } = req.query;

@@ -84,6 +84,13 @@ router.get("/statistics", passport.authenticate("jwt"), async (req, res) => {
       // filling array with event total times based on Type
       eventTimes[eventArray[i].eventType] +=  eventArray[i].totalTime;
     }
+    
+    //convert to minutes
+    eventTimes.mentor = Math.round(eventTimes.mentor/60)
+    eventTimes.lesson = Math.round(eventTimes.lesson/60)
+    eventTimes.play = Math.round(eventTimes.play/60)
+    eventTimes.puzzle = Math.round(eventTimes.puzzle/60)
+    eventTimes.website = Math.round(eventTimes.website/60)
 
     //convert to minutes
     eventTimes.mentor = Math.round(eventTimes.mentor/60)

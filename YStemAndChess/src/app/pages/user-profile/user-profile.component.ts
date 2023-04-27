@@ -47,37 +47,7 @@ export class UserProfileComponent implements OnInit {
     "puzzle": 0,
     "website": 0
   }
-  getTimeTrackingStat(username, startDate, endDate){
-    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
-    // this.httpGetAsync(url, 'GET', (response) => {
-    //   return response.json();
-    // })
-
-    let authToken = this.cookie.get('login');
-    const headers = new Headers ({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${authToken}`
-    })
-    return fetch(url, { method: 'GET', headers: headers }).then((response) => {
-      return response.json();
-    });
-  }
-
-  getTimeTrackingStatByMonth(username){
-    let promiseList = [];
-    for (let i = 0; i < 12; i++){
-      const promiseThisMonth = this.getTimeTrackingStat(username, new Date(new Date().getFullYear(), i, 1), new Date(new Date().getFullYear(), i+1, 1))
-      promiseList.push(promiseThisMonth);
-    }
-    Promise.all(promiseList).then(data=>{
-      for (const key in data){
-        for (const d of this.barChartData){
-          d.data[key] = data[key][d.label.toLowerCase().replace('ing','')];
-        }
-      }
-      this.userChart.chart.update();
-    })
-  }
+  
   @ViewChild(BaseChartDirective)
   public userChart: BaseChartDirective;
   public barChartOptions: ChartOptions = {
@@ -217,6 +187,38 @@ export class UserProfileComponent implements OnInit {
       {'id':'6','name':'Puzzles'}];
     // this.categoryList = categoryList;
 
+  }
+  
+  public async getTimeTrackingStat(username, startDate, endDate){
+    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
+    // this.httpGetAsync(url, 'GET', (response) => {
+    //   return response.json();
+    // })
+
+    let authToken = this.cookie.get('login');
+    const headers = new Headers ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    return fetch(url, { method: 'GET', headers: headers }).then((response) => {
+      return response.json();
+    });
+  }
+
+  public async getTimeTrackingStatByMonth(username){
+    let promiseList = [];
+    for (let i = 0; i < 12; i++){
+      const promiseThisMonth = this.getTimeTrackingStat(username, new Date(new Date().getFullYear(), i, 1), new Date(new Date().getFullYear(), i+1, 1))
+      promiseList.push(promiseThisMonth);
+    }
+    Promise.all(promiseList).then(data=>{
+      for (const key in data){
+        for (const d of this.barChartData){
+          d.data[key] = data[key][d.label.toLowerCase().replace('ing','')];
+        }
+      }
+      this.userChart.chart.update();
+    })
   }
 
   public openCity(evt, cityName) {

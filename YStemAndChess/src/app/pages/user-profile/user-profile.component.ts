@@ -47,7 +47,7 @@ export class UserProfileComponent implements OnInit {
     "puzzle": 0,
     "website": 0
   }
-  
+
   @ViewChild(BaseChartDirective)
   public userChart: BaseChartDirective;
   public barChartOptions: ChartOptions = {
@@ -90,7 +90,7 @@ export class UserProfileComponent implements OnInit {
     { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Mentoring' },
   ];
   public barChartColor: Color[] = [{backgroundColor: '#7fcc26'}, {backgroundColor: '#c8b4ff'}, {backgroundColor: '#0fdff2'}, {backgroundColor: '#f24598'}, {backgroundColor: '#fd8e4f'}]
-
+  
 
   // chartOptions = {
   //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
@@ -191,10 +191,6 @@ export class UserProfileComponent implements OnInit {
   
   public async getTimeTrackingStat(username, startDate, endDate){
     let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
-    // this.httpGetAsync(url, 'GET', (response) => {
-    //   return response.json();
-    // })
-
     let authToken = this.cookie.get('login');
     const headers = new Headers ({
       'Content-Type': 'application/json',

@@ -102,7 +102,7 @@ const agoraConfig: AgoraConfig = {
     MentoringBenefitArticleComponent,
     AboutUsComponent,
     MentorProfileComponent
-    
+
   ],
   imports: [
     BrowserModule,

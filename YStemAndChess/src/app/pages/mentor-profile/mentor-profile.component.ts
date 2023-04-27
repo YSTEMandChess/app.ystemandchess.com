@@ -3,7 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-import { Chart } from 'node_modules/chart.js/auto'
+import { Chart } from 'node_modules/chart.js'
 import { ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
 
 @Component({
@@ -146,27 +146,6 @@ export class MentorProfileComponent implements OnInit {
     "website": 0
   }
 
-  async getTimeTrackingStat(studentUsername,startDate, endDate){
-    // if (!!username ){
-    //   let username = `${environment.urls.middlewareURL}/user/studentUsername?firstName={firstName}&lastName={lastName}`; 
-    // }
-    this.httpGetAsync(
-      `GET`,
-      `${environment.urls.middlewareURL}/timeTracking/statistics?username=${studentUsername}&startDate=${startDate}&endDate=${endDate}`,
-      (response) => {
-        if (
-          JSON.parse(response) ===
-          'Server error'
-        ) {
-          return response;
-        }
-        let responseText = JSON.parse(response);
-        this.timeTrackingStat = responseText;
-        console.log(responseText)
-      }
-    );
-  }
-
   public createStudentChart(): void {
     Chart.register(...registerables);
 
@@ -304,8 +283,6 @@ export class MentorProfileComponent implements OnInit {
     }
     document.getElementById(studentName).style.display = "block";
     event.currentTarget.className += " active";
-
-    this.getTimeTrackingStat(studentName,new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
   }
   
   // Get the element with id="defaultOpen" and click on it

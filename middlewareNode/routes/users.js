@@ -10,27 +10,6 @@ const {
 const { sendMail } = require("../utils/nodemailer");
 const { validator } = require("../utils/middleware");
 
-// @route   GET /user/studentUsername
-// @desc    GET a user's username based on firstname and lastname
-// @access  Public with jwt Authentication
-// router.get("/studentUsername", passport.authenticate("jwt"), async(req,res) => {
-//   try{
-//     const {firstName, lastName} = req.query;
-//     let filters = {
-//       firstName: firstName,
-//       lastName: lastName,
-//       role: "student"
-//     }
-//     const username = await users.find(filters)
-    
-//     return res.status(200).json(username);
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).json("Server error");
-//   } 
-// });
-
-
 // @route   GET /user/children
 // @desc    GET the parent user's children username and their timePlayed fields
 // @access  Public with jwt Authentication

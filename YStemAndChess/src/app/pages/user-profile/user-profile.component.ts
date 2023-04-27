@@ -202,7 +202,6 @@ export class UserProfileComponent implements OnInit {
       // }, 1500);
     }
     if (this.role == 'student'){
-      // await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31));
       await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
       this.getTimeTrackingStatByMonth(this.username);
       // this.createStudentChart();

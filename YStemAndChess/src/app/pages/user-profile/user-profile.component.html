@@ -23,25 +23,23 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12">
+                      <!-- style="min-height: 200px;" -->
                         <!-- <div class="progressInfo"> -->
                             <!-- <span>Progress bar here</span> -->
-                            <!-- <div>
-                              <canvas
-                                  baseChart
-                                  [chartType]="'bar'"
-                                  [datasets]="chartData"
-                                  [labels]="labels"
-                                  [options]="chartOptions"
-                                  [legend]="true"
-                                  [colors]="colors"
-                                  (chartClick)="onChartClick($event)">
+                            <!-- <img src="../../../assets/images/student/chart.PNG" /> -->
+                            <div class="chart-container">
+                              <canvas baseChart
+                                [datasets]="barChartData"
+                                [labels]="barChartLabels"
+                                [options]="barChartOptions"
+                                [legend]="true"
+                                chartType="bar"
+                                [colors]="barChartColor">
                               </canvas>
-                            </div> -->
-                            <img src="../../../assets/images/student/chart.PNG" />
+                            </div>
                         <!-- </div> -->
                     </div>
-
-                </div>
+                  </div>
                 <div class="col-12">
 
                       <!-- <p style="font-size: 25px;"><strong>{{ firstName | titlecase }} {{ lastName | titlecase}} </strong></p>

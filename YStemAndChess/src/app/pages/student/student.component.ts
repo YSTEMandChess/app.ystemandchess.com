@@ -17,6 +17,7 @@ export class StudentComponent implements OnInit {
   private level: number = 5;
   private currentFEN: String =
     'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+    
   private prevFEN: String = this.currentFEN;
   meetingId;
   move;

@@ -1,11 +1,12 @@
-import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { BaseChartDirective, Color, Label } from 'ng2-charts';
+// import { Chart } from 'chart.js';
+// import { Chart, registerables } from 'chart.js';
+// Chart.register(...registerables);
+
 
 
 @Component({
@@ -54,6 +55,14 @@ export class UserProfileComponent implements OnInit {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${authToken}`
     })
+    return fetch(url, { method: 'GET', headers: headers })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this.timeTrackingStat = data;
+    });
+  }
 
   // chartOptions = {
   //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
@@ -134,12 +143,9 @@ export class UserProfileComponent implements OnInit {
         });
       // }, 1500);
     }
-    //if (this.role == 'student'){
-      //await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
-      //await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
-      //this.getTimeTrackingStatByMonth(this.username);
-      // this.createStudentChart();
-   // }
+    if (this.role == 'student'){
+      await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
+    }
 
 
     this.categoryList = [
@@ -182,7 +188,6 @@ export class UserProfileComponent implements OnInit {
 
   //   });
   // }
-
 
   public openCity(evt, cityName) {
     console.log("cityname--->", cityName)

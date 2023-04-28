@@ -4,7 +4,7 @@
     <div class="stream_wrapper">
       <div class="container">
         <div class="row">
-          <div class="  col-lg-3 col-12 col-md-6 order-sm-1 order-1 mt-sm-4 mt-lg-0 order-lg-0"
+          <div class="  col-lg-3 col-12 col-md-6 order-sm-1 order-1 mt-sm-4 mt-lg-0 order-lg-0 px-4"
             [ngClass]="{'video-student': userRole ==='student', 'video-col': userRole ==='mentor', 'display-none':meetingId === undefined}">
             <div id="draggable">
               <div class="jitsi" id="local_stream"></div>
@@ -23,34 +23,9 @@
               <iframe [src]="chessSrc" id="chessBd"></iframe>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-12 order-2 order-sm-2 mt-sm-4 mt-lg-0">
-            <div *ngIf="displayMoves.length > 0" class="steps-div">
-              <!-- <div class="text-center">
-                <span>Steps</span>
-              </div> -->
-              <!-- <div class="fwd-btns">
-                <p (click)="setMove(0,'backward')" [ngClass]="currentStep === 0 && 'isBlur'">
-                  <img src="../../../assets/images/moves/icons8-rewind-100.png" />
-                </p>
-                <p
-                  (click)="setMove(currentStep - 1,'backward')"
-                  [ngClass]="currentStep <= 0 && 'isBlur'"
-                >
-                  <img src="../../../assets/images/moves/icons8-less-than-60.png" />
-                </p>
-                <p
-                  (click)="setMove(currentStep + 1,'forward')"
-                  [ngClass]="currentStep === displayMoves.length - 1 && 'isBlur'"
-                >
-                  <img src="../../../assets/images/moves/icons8-more-than-60.png" />
-                </p>
-                <p
-                  (click)="setMove(displayMoves.length - 1,'forward')"
-                  [ngClass]="currentStep === displayMoves.length - 1 && 'isBlur'"
-                >
-                  <img src="../../../assets/images/moves/icons8-fast-forward-100.png" />
-                </p>
-              </div> -->
+          <div *ngIf="displayMoves.length > 0" class="col-lg-3 col-md-6 col-12 order-2 order-sm-2 mt-sm-4 mt-lg-0">
+            <div  class="steps-div">
+             
               <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
                 <div class="text-center">
                   <span>Steps</span>

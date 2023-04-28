@@ -191,3 +191,121 @@
 //         }
 //     }
 // }
+
+.donate-btn {
+    padding: 10px 60px;
+    background: #D4DDDD;
+    color: black;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 600;
+    box-shadow: 8px 9px 3px 0px #7fcc26;
+}
+
+.info {
+    width: -webkit-fill-available;
+    background-color: #deeace;
+}
+
+.divider {
+    display: flex;
+    position: relative;
+    top: 30px;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    z-index: 10;
+    padding-top: 0px;
+    justify-content: center;
+}
+
+.first-pic img {
+    width: -webkit-fill-available;
+}
+
+.free-card {
+    align-items: center;
+    border-radius: 12px;
+    background: #78ce2d;
+    border: none;
+    box-shadow: 20px 25px 3px 0px #EAD94C;
+
+    .main-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .free-title{
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .free-card-text {
+        text-align: center;
+        font-size: 26px;
+        margin-bottom: 97px;
+    }
+
+    .free-btn {
+        padding: 10px 60px;
+        background: #EAD94C;
+        color: black;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 8px 9px 3px 0px #d4dddd;
+    }
+
+}
+
+@media only screen and (min-width:768px) and (max-width:900px) {
+    .free-card .free-card-text {
+        margin-bottom: 130px;
+    }
+}
+
+.join-btn {
+    padding: 10px 60px;
+        background: #EAD94C;
+        color: black;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 8px 9px 3px 0px #d4dddd;
+}
+
+.Premium-card {
+    align-items: center;
+    border-radius: 12px;
+    background: white;
+    border: 4px solid #78ce2d;
+    box-shadow: 20px 25px 3px 0px #78ce2d;
+
+    .main-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .free-title{
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .free-card-text {
+        text-align: center;
+        font-size: 26px;
+        margin-bottom: 50px;
+    }
+
+    .free-btn {
+        padding: 10px 60px;
+        background: #d3dddd;
+        color: black;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 8px 9px 3px 0px #78ce2d;
+    }
+
+}

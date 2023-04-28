@@ -846,10 +846,16 @@ li, a, button {
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    padding: 0 9rem;
+    padding: 0;
     z-index: 10;
     padding-top: 0px;
     justify-content: center;
+}
+
+@media only screen and (min-width:768px) and (max-width:900px) {
+    .free-card .free-card-text {
+        margin-bottom: 130px;
+    }
 }
 
 .second-head {
@@ -986,6 +992,15 @@ li, a, button {
     position: absolute;
     overflow-x: hidden;
     height: 250px; 
+}
+
+@media only screen and (max-width:426px) {
+    .center {
+        text-align: center;
+    }
+    .margin-0 {
+        margin-left: 0!important;
+    }
 }
 
 

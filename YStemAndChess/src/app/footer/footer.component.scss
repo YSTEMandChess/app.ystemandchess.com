@@ -225,3 +225,21 @@ footer {
         }
     }
 }
+
+@media only screen and (min-width:426px) {
+    .sponsor-img {
+        display: contents;
+    }
+}
+
+@media only screen and (max-width:426px) {
+    .sponsor-img {
+        display: flex;
+        justify-content: space-between;
+
+        img {
+            width: 30%;
+        }
+
+    }
+}

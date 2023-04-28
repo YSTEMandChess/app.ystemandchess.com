@@ -34,36 +34,34 @@
           <div [ngClass]="{ 'disable-board': !isStepLast }">
             <app-play></app-play>
           </div>
-          <div class="game_wrapper">
-            <div class="chess">
-              <div *ngIf="displayMoves.length > 0" class="steps-div">
+          <div *ngIf="displayMoves.length > 0" class="col-lg-3 col-md-6 col-12 order-2 order-sm-2 mt-sm-4 mt-lg-0">
+            <div  class="steps-div">
               
-                <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
-                  <div class="text-center">
-                    <span>Steps</span>
-                    <hr class="steps-decoration">
-                  </div>
-                  <div class="table-moves" #item>
-                    
-                    <div style="width: 100px">
-                      <div
-                        *ngFor="let item of displayMoves; let i = index"
-                        (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                      >
-                        <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
-                          <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
-                        </p>
-                      </div>
+              <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
+                <div class="text-center">
+                  <span>Steps</span>
+                  <hr class="steps-decoration">
+                </div>
+                <div class="table-moves" #item>
+                
+                  <div style="width: 100px">
+                    <div
+                      *ngFor="let item of displayMoves; let i = index"
+                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
+                    >
+                      <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
+                        <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
+                      </p>
                     </div>
-                    <div style="width: 100px">
-                      <div
-                        *ngFor="let item of displayMoves; let i = index"
-                        (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                      >
-                        <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
-                          <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
-                        </p>
-                      </div>
+                  </div>
+                  <div style="width: 100px">
+                    <div
+                      *ngFor="let item of displayMoves; let i = index"
+                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
+                    >
+                      <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
+                        <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
+                      </p>
                     </div>
                   </div>
                 </div>

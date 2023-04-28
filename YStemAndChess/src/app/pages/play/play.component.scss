@@ -234,7 +234,7 @@ td {
   }
 
   .stream_wrapper .jitsi {
-    width: 260px;
+    width: 275px;
     height: 175px !important;
   }
 
@@ -255,11 +255,20 @@ td {
 
 @media only screen and (max-width:426px) {
   .video-col {
-    height: 34rem;
+    height: 40rem;
   }
 
+  .stream_wrapper .jitsi {
+    width: 380px;
+    height: 225px !important;
+  }
+
+  #draggable-remote {
+    top: 316px !important;
+}
+
   .video-student {
-    height: 17rem;
+    height: 19rem;
   }
 
   .display-step {
@@ -273,13 +282,24 @@ td {
   }
 }
 
+@media only screen and (min-width:321px) and (max-width:376px) {
+  .stream_wrapper .jitsi{
+    width: 330px;
+  }
+}
+
 @media only screen and (max-width:321px) {
   .video-col {
-    height: 34rem;
+    height: 39rem;
+  }
+
+  .stream_wrapper .jitsi{
+    width: 275px;
+    height: 190px;
   }
 
   .video-student {
-    height: 16rem;
+    height: 20rem;
   }
 
   .display-step {

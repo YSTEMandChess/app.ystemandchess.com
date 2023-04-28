@@ -3,6 +3,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
+// import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
+
 @Component({
   selector: 'app-mentor-profile',
   templateUrl: './mentor-profile.component.html',
@@ -133,6 +135,114 @@ export class MentorProfileComponent implements OnInit {
       
   //   });
   // }
+    
+  public timeTrackingStat = {
+    "username": "",
+    "mentor": 0,
+    "lesson": 0,
+    "play": 0,
+    "puzzle": 0,
+    "website": 0
+  }
+
+  async getTimeTrackingStat(studentUsername,startDate, endDate){
+    // if (!!username ){
+    //   let username = `${environment.urls.middlewareURL}/user/studentUsername?firstName={firstName}&lastName={lastName}`; 
+    // }
+    this.httpGetAsync(
+      `GET`,
+      `${environment.urls.middlewareURL}/timeTracking/statistics?username=${studentUsername}&startDate=${startDate}&endDate=${endDate}`,
+      (response) => {
+        if (
+          JSON.parse(response) ===
+          'Server error'
+        ) {
+          return response;
+        }
+        let responseText = JSON.parse(response);
+        this.timeTrackingStat = responseText;
+        console.log(responseText)
+      }
+    );
+  }
+
+//   public createStudentChart(): void {
+//     Chart.register(...registerables);
+
+//     const exampleData: number[] = [1, 2, 3, 4, 5];
+
+//     const data: any = {
+//       labels: ['January'],
+//       datasets: [{
+//         label: 'Website',
+//         backgroundColor: 'rgb(255, 71, 97)',
+//         borderColor: 'rgb(255, 71, 97)',
+//         data: exampleData[0],
+//     }, {
+//         label: 'Lessons',
+//         backgroundColor: 'rgb(163, 255, 168)',
+//         borderColor: 'rgb(163, 255, 168)',
+//         data: exampleData[1],
+//     }, {
+//         label: 'Puzzle',
+//         backgroundColor: 'rgb(42, 106, 255)',
+//         borderColor: 'rgb(42, 106, 255)',
+//         data: exampleData[2],
+//     },{
+//         label: 'Plaything',
+//         backgroundColor: 'rgb(255, 220, 50)',
+//         borderColor: 'rgb(255, 220, 50)',
+//         data: exampleData[3],
+//     }, {
+//         label: 'Mentoring',
+//         backgroundColor: 'rgb(200, 140, 255)',
+//         borderColor: 'rgb(200, 140, 255)',
+//         data: exampleData[4],
+//     }]
+//   };
+
+//   const options: any = {
+//     aspectRatio: 0.75,
+//     maintainAspectRatio: false,
+//     Responsive: true,
+//     layout: {
+//       padding: {
+//         left: 100,
+//         top: 50,
+//         right: 100
+//       },
+//     },
+//     scales: {
+//       y: {
+//         grid: {
+//           display: true
+//         }
+//       },
+//       x: {
+//         grid: {
+//           display: true
+//         }
+//       }
+//     },
+//     plugins: {
+//       legend: {
+//           position: 'bottom'
+//       }
+//     },
+//     barPercentage: 0.5,
+//     categoryPercentage: 1,
+//     borderRadius: 3
+//   };
+//   const config: ChartConfiguration = {
+//     type: 'bar',
+//     data: data,
+//     options: options
+//   };
+
+//   const chartItem: ChartItem = document.getElementById('my-chart') as ChartItem
+
+//   new Chart(chartItem, config)
+// }
 
   public openCity(evt, cityName) {
     console.log("cityname--->",evt)
@@ -193,6 +303,7 @@ export class MentorProfileComponent implements OnInit {
     }
     document.getElementById(studentName).style.display = "block";
     event.currentTarget.className += " active";
+
   }
   
   // Get the element with id="defaultOpen" and click on it
@@ -211,6 +322,8 @@ export class MentorProfileComponent implements OnInit {
     );
     xmlHttp.send(null);
   }
+
+
 
   public getPresignURL(sid,meetingid)
   {

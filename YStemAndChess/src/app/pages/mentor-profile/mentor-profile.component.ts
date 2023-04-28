@@ -145,27 +145,6 @@ export class MentorProfileComponent implements OnInit {
     "website": 0
   }
 
-  async getTimeTrackingStat(studentUsername,startDate, endDate){
-    // if (!!username ){
-    //   let username = `${environment.urls.middlewareURL}/user/studentUsername?firstName={firstName}&lastName={lastName}`; 
-    // }
-    this.httpGetAsync(
-      `GET`,
-      `${environment.urls.middlewareURL}/timeTracking/statistics?username=${studentUsername}&startDate=${startDate}&endDate=${endDate}`,
-      (response) => {
-        if (
-          JSON.parse(response) ===
-          'Server error'
-        ) {
-          return response;
-        }
-        let responseText = JSON.parse(response);
-        this.timeTrackingStat = responseText;
-        console.log(responseText)
-      }
-    );
-  }
-
 //   public createStudentChart(): void {
 //     Chart.register(...registerables);
 
@@ -322,7 +301,6 @@ export class MentorProfileComponent implements OnInit {
     );
     xmlHttp.send(null);
   }
-
 
 
   public getPresignURL(sid,meetingid)

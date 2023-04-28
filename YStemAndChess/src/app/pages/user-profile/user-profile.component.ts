@@ -166,15 +166,12 @@ export class UserProfileComponent implements OnInit {
       // setInterval(() => {
         let url = `${environment.urls.middlewareURL}/meetings/usersRecordings`;
         //change rest
-        this.httpGetAsync(url, 'GET', (response) => {
+        this.httpGetAsync(url, 'GET', (response) => { 
           this.recordingList = JSON.parse(response);
         });
       // }, 1500);
     }
     if (this.role == 'student'){
-      await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
-      this.getTimeTrackingStatByMonth(this.username);
-      // this.createStudentChart();
       await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
       this.getTimeTrackingStatByMonth(this.username);
       // this.createStudentChart();

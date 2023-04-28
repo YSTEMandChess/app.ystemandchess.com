@@ -1,11 +1,12 @@
-import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit,AfterViewInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { BaseChartDirective, Color, Label } from 'ng2-charts';
+// import { Chart } from 'chart.js';
+// import { Chart, registerables } from 'chart.js';
+// Chart.register(...registerables);
+
 
 
 @Component({
@@ -47,6 +48,7 @@ export class UserProfileComponent implements OnInit {
     "puzzle": 0,
     "website": 0
   }
+
 
   @ViewChild(BaseChartDirective)
   public userChart: BaseChartDirective;
@@ -90,6 +92,7 @@ export class UserProfileComponent implements OnInit {
     { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Mentoring' },
   ];
   public barChartColor: Color[] = [{backgroundColor: '#7fcc26'}, {backgroundColor: '#c8b4ff'}, {backgroundColor: '#0fdff2'}, {backgroundColor: '#f24598'}, {backgroundColor: '#fd8e4f'}]
+
 
 
   // chartOptions = {
@@ -172,9 +175,7 @@ export class UserProfileComponent implements OnInit {
       // }, 1500);
     }
     if (this.role == 'student'){
-      await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
-      this.getTimeTrackingStatByMonth(this.username);
-      // this.createStudentChart();
+      await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
     }
 
 
@@ -219,6 +220,7 @@ export class UserProfileComponent implements OnInit {
       this.userChart.chart.update();
     })
   }
+
 
   public openCity(evt, cityName) {
     console.log("cityname--->", cityName)

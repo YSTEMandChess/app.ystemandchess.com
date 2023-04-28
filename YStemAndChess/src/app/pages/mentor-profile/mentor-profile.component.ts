@@ -304,7 +304,6 @@ export class MentorProfileComponent implements OnInit {
     document.getElementById(studentName).style.display = "block";
     event.currentTarget.className += " active";
 
-    this.getTimeTrackingStat(studentName,new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
   }
   
   // Get the element with id="defaultOpen" and click on it

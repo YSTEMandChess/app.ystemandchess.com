@@ -20,7 +20,6 @@ export class UserProfileComponent implements OnInit {
   numStudents = new Array();
   newStudentFlag: boolean = false;
   numNewStudents: number = 0;
- 
   public chart: any;
   public username = '';
   public firstName = '';
@@ -40,7 +39,29 @@ export class UserProfileComponent implements OnInit {
   signedURL = '';
   constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
 
-
+  public timeTrackingStat = {
+    "username": "",
+    "mentor": 0,
+    "lesson": 0,
+    "play": 0,
+    "puzzle": 0,
+    "website": 0
+  }
+  getTimeTrackingStat(username, startDate, endDate){
+    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
+    let authToken = this.cookie.get('login');
+    const headers = new Headers ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    return fetch(url, { method: 'GET', headers: headers })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      this.timeTrackingStat = data;
+    });
+  }
 
   // chartOptions = {
   //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
@@ -52,9 +73,9 @@ export class UserProfileComponent implements OnInit {
   // chartData = [
   //   {
   //     label: '1st Year',
-  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
+  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59]
   //   },
-  //   { 
+  //   {
   //     label: '2nd Year',
   //     data: [47, 9, 28, 54, 77, 51, 24]
   //   }
@@ -69,7 +90,6 @@ export class UserProfileComponent implements OnInit {
   //     backgroundColor: 'rgba(30, 169, 224, 0.8)'
   //   }
   // ]
-  
   // // CHART CLICK EVENT.
   // onChartClick(event) {
   //   console.log(event);
@@ -79,8 +99,8 @@ export class UserProfileComponent implements OnInit {
   async ngOnInit() {
 
 
-    
-    
+
+
     this.numStudents.push(0);
     this.numNewStudents++;
     let pLevel = 'nLogged';
@@ -116,13 +136,16 @@ export class UserProfileComponent implements OnInit {
       // setInterval(() => {
         let url = `${environment.urls.middlewareURL}/meetings/usersRecordings`;
         //change rest
-        this.httpGetAsync(url, 'GET', (response) => { 
+        this.httpGetAsync(url, 'GET', (response) => {
           this.recordingList = JSON.parse(response);
         });
       // }, 1500);
     }
-    
-    
+    if (this.role == 'student'){
+      await this.getTimeTrackingStat(this.username, new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31));
+    }
+
+
     this.categoryList = [
       {'id':'1','name':'Mantra'},
       {'id':'2','name':'Exercise'},
@@ -135,13 +158,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   // createChart(){
-  
   //   this.chart = new Chart("MyChart", {
   //     type: 'bar', //this denotes tha type of chart
 
   //     data: {// values on X-Axis
   //       labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
+	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
 	//        datasets: [
   //         {
   //           label: "Sales",
@@ -154,13 +176,12 @@ export class UserProfileComponent implements OnInit {
   //           data: ['542', '542', '536', '327', '17',
 	// 								 '0.00', '538', '541'],
   //           backgroundColor: 'limegreen'
-  //         }  
+  //         }
   //       ]
   //     },
   //     options: {
   //       aspectRatio:2.5
   //     }
-      
   //   });
   // }
 
@@ -178,9 +199,9 @@ export class UserProfileComponent implements OnInit {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
   }
-  
+
   // Get the element with id="defaultOpen" and click on it
-  
+
 
   private httpGetAsync(theUrl: string, method: string, callback) {
     var xmlHttp = new XMLHttpRequest();
@@ -203,14 +224,14 @@ export class UserProfileComponent implements OnInit {
     // singleRecording
     let url = `${environment.urls.middlewareURL}/meetings/singleRecording?filename=`+filename;
     //change rest
-    this.httpGetAsync(url, 'GET', (response) => { 
+    this.httpGetAsync(url, 'GET', (response) => {
       this.signedURL = JSON.parse(response);
     });
 
     if(this.signedURL !='')
     {
       window.open(this.signedURL);
-    }   
+    }
   }
   public showSharedSlideShowPdfList(catId,catName)
   {
@@ -275,7 +296,7 @@ export class UserProfileComponent implements OnInit {
   public showSharedSlideShow(filePath)
   {
     // var filePath = 'https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf';
-    
+
     this.viewSDKClient.ready().then(() => {
       /* Invoke file preview */
       this.viewSDKClient.previewFile(filePath,'pdf-div', {
@@ -285,7 +306,7 @@ export class UserProfileComponent implements OnInit {
       });
   });
   }
-  
+
 }
 
 

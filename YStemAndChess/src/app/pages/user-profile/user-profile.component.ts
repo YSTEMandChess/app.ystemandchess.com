@@ -20,7 +20,6 @@ export class UserProfileComponent implements OnInit {
   numStudents = new Array();
   newStudentFlag: boolean = false;
   numNewStudents: number = 0;
-
   public chart: any;
   public username = '';
   public firstName = '';
@@ -91,7 +90,6 @@ export class UserProfileComponent implements OnInit {
   //     backgroundColor: 'rgba(30, 169, 224, 0.8)'
   //   }
   // ]
-
   // // CHART CLICK EVENT.
   // onChartClick(event) {
   //   console.log(event);
@@ -160,7 +158,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   // createChart(){
-
   //   this.chart = new Chart("MyChart", {
   //     type: 'bar', //this denotes tha type of chart
 
@@ -185,7 +182,6 @@ export class UserProfileComponent implements OnInit {
   //     options: {
   //       aspectRatio:2.5
   //     }
-
   //   });
   // }
 

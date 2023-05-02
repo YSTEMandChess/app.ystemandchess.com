@@ -664,21 +664,22 @@ li, a, button {
     height: 100px;
 }
 
-.container{
-    display: flex;
-    position: relative;
-    // top: 30px;
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 3rem;
-    z-index: 10;
-    padding-top: 45px;
-    justify-content: space-around;
-}
+// .container{
+//     display: flex;
+//     position: relative;
+//     // top: 30px;
+//     max-width: 100%;
+//     width: 100%;
+//     margin: 0 auto;
+//     padding: 0 3rem;
+//     z-index: 10;
+//     padding-top: 45px;
+//     justify-content: space-around;
+// }
 
 .txt-p{
-    text-align: justify;
+    text-align: left;
+    text-align:justify;
 }
 
 .apply-now-btn{
@@ -694,19 +695,19 @@ li, a, button {
     font-family: "Lato", sans-serif;
     font-size: 24px;
     font-weight: bold;
-    height: 96px;
-    width: 550px;
-    // padding-left: 80px;
-    padding-top: 20px;
+    // height: 96px;
+    // width: 550px;
+    // // padding-left: 80px;
+    // padding-top: 20px;
 }
 
 .first-text {
-    height: 84px;
-    width: 549px;
+    // height: 84px;
+    // width: 549px;
     font-family: "Roboto", sans-serif;
     font-size: 20px; 
     // padding-left: 80px;
-    padding-top: 0px;
+    // padding-top: 0px;
 }
 
 .donate {
@@ -724,6 +725,12 @@ li, a, button {
     
 }
 
+
+.first-pic img {
+    width: -webkit-fill-available;
+    object-fit: none;
+}
+
 .divider {
     display: flex;
     position: relative;
@@ -731,7 +738,7 @@ li, a, button {
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    padding: 0 9rem;
+    padding: 0;
     z-index: 10;
     padding-top: 0px;
     justify-content: center;
@@ -862,14 +869,13 @@ li, a, button {
 .rectdiv2{
     background-color: #BFD99E;
     width: 100%;
-    height: 450px;
     margin-bottom: 30px;
     padding:34px 0;
 }
 
 
 .recttext{
-    padding-left: 12rem;
+    padding-left: 45px;
     line-height: 28px;
     list-style: none;
     position: relative;
@@ -890,10 +896,37 @@ li, a, button {
     background-size: contain;
     width: 46px;
     position: absolute;
-    left: 144px;
+    left: 0px;
     top: -6px;
     background-image: url('../../../assets/images/aboutUs/divide_icon.png');
 }
+
+@media only screen and (max-width: 992px) {
+    .current-chart {
+        height: 285px;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .p-relative .red {
+        width: 70px!important;
+        font-size: 13px;
+    }
+
+    .p-relative .yellow {
+        width: 70px!important;
+        font-size: 13px;
+        left: 70px!important;
+    }
+
+    .p-relative .orange {
+        width: 70px!important;
+        font-size: 13px;
+        left: 140px!important;
+    }
+}
+
+
 
 .student-img{
     padding-bottom:20px;
@@ -902,8 +935,14 @@ li, a, button {
 
 }
 
+@media only screen and (max-width: 480px){
+    .student-img {
+        height: auto;
+        width: -webkit-fill-available;
+    }
+}
+
 .text6{
-    padding: 0 143px;
     padding-bottom: 3px;
     font-family: "Roboto", sans-serif;
     font-size: 16px;

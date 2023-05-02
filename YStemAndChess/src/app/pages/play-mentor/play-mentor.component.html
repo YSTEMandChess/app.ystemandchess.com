@@ -54,14 +54,15 @@
             -->
            
       <div class="gameclass">
+        
         <div [ngClass]="{ 'disable-board': !isStepLast }">
           <app-play></app-play>
         </div>
         <div class="game_wrapper">
           <div class="chess">
-            <div *ngIf="displayMoves.length > 0" class="steps-div">
+            <div *ngIf="displayMoves.length > 0" class="steps-div"> 
              
-
+              
               <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
                 <div class="text-center">
                   <span>Steps</span>
@@ -100,7 +101,7 @@
           <button type="button" id="flip-board" (click)="flipBoard()">
             Flip Board
           </button>
-          <button type="button" id="new-game" (click)="newGame()">
+          <button type="button" id="new-game" (click)="CheckGame()">
             New Game
           </button>
           <button type="button" id="undo-move" (click)="undoPrevMove()">
@@ -115,7 +116,7 @@
         </div> -->
       </div>
       <div class="movesAhead">
-        <p id="tag">
+        <p id="tag" class="pb-3">
           The computer will think
           <input
             type="number"
@@ -134,7 +135,7 @@
      
     </div>
   </div>
-  <button id="pipBtn" class="btn btn-lg btn-primary hidden" disabled>Enter Picture-in-Picture mode</button>
+  <!-- <button id="pipBtn" class="btn btn-lg btn-primary hidden" disabled>Enter Picture-in-Picture mode</button> -->
 
     
     <!-- end of mentor container -->

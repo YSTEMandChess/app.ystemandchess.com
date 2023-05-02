@@ -349,6 +349,7 @@ export class PlayNologComponent implements OnInit {
                   this.httpGetAsync(
                     `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,
                     (response) => {
+                      
                       response = JSON.parse(response);
                       let finalMove =
                         response.moves.length > 0

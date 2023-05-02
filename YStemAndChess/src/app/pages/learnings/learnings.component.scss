@@ -168,6 +168,39 @@
     height: 10rem;
   }
 }
+
+@media only screen and (max-width: 470px) {
+  .btn-tabs {
+    font-size: 12px;
+    height: 36px;
+    padding: 0;
+  }
+}
+
+@media only screen and (min-width: 470px) and (max-width: 769px) {
+  .btn-tabs {
+    font-size: 14px;
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 321px) {
+  .chess {
+    height: 20rem;
+  }
+}
+
+@media only screen and (min-width: 321px) and (max-width:376px) {
+  .chess {
+    height: 24rem;
+  }
+}
+
+@media only screen and (min-width: 376px) and (max-width:426px) {
+  .chess {
+    height: 27rem;
+  }
+}
 /*
 @media (max-width: 1400px) {
   #content-container {

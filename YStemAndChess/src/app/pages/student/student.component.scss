@@ -33,8 +33,6 @@
 
 .movesAhead {
   position: relative;
-  margin-left: 175px;
-  margin-top: 1px;
   text-align: center;
 }
 #movesAhead {
@@ -227,21 +225,20 @@
   margin: 0px 0px 8px;
   padding: 3.2px;
 }
-.gameclass {
-  display: flex;
-  justify-content: space-between;
+// .gameclass {
+//   display: flex;
+//   justify-content: space-between;
   
-}
+// }
 app-play {
   padding: 150px;
 }
  
 
 #mentor-container {
-  //margin-top: 5%;
-  width: 90%;
+  width: 100%;
   height: auto;
-  margin-left: 5%;
+  height: auto;
   border-radius: 33px;
   // background-image: url('../../../assets/images/student/bg-image.jpg');
   //background-color: #E1E7ED;
@@ -388,8 +385,8 @@ app-play {
       outline-style: none;
       padding-top: 1%;
       padding-bottom: 1%;
-      padding-left: 3.5%;
-      padding-right: 3.5%;
+      padding-left: 2.5%;
+      padding-right: 2.5%;
       font-family: "Lato";
       font-style: normal;
       font-weight: 900;
@@ -410,5 +407,66 @@ app-play {
       background-color: #0046fd;
       color: #fff;
     }
+  }
+}
+
+@media only screen and (max-width:321px) {
+
+  footer {
+    margin-top: -28px;
+  }
+ 
+}
+
+@media only screen and (max-width:426px) {
+  .outer-filp-board {
+    display: grid;
+    justify-items: center;
+
+    button {
+      width: 100%!important;
+    }
+  }
+}
+
+@media only screen and (min-width:321px) and (max-width:376px) {
+  footer {
+    margin-top: -33px;
+  }
+}
+
+@media only screen and  (min-width:376px) and (max-width:426px) {
+  footer {
+    margin-top: -38px;
+  }
+}
+
+@media only screen and  (min-width:426px) and (max-width:769px) {
+  footer {
+    margin-top: -68px;
+  }
+}
+
+@media only screen and  (min-width:769px) and (max-width:1025px) {
+  footer {
+    margin-top: -91px;
+  }
+}
+
+@media only screen and  (min-width:1025px) and (max-width:1441px) {
+  footer {
+    margin-top: -130px;
+  }
+}
+
+@media only screen and  (min-width:1441px) and (max-width:1600px) {
+  footer {
+    margin-top: -135px;
+  }
+}
+
+@media only screen and  (min-width:1600px) and (max-width:2560px) {
+  footer {
+    margin-top: -230px;
   }
 }

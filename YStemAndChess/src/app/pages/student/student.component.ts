@@ -17,6 +17,7 @@ export class StudentComponent implements OnInit {
   private level: number = 5;
   private currentFEN: String =
     'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+    
   private prevFEN: String = this.currentFEN;
   meetingId;
   move;
@@ -42,6 +43,7 @@ export class StudentComponent implements OnInit {
       (e) => {
         // Means that there is the board state and whatnot
         this.prevFEN = this.currentFEN;
+        
         let info = e.data;
         if (info == 'ReadyToRecieve') {
           this.isReady = true;
@@ -49,7 +51,201 @@ export class StudentComponent implements OnInit {
       },
       false
     );
+
+    // eventer(
+    //   messageEvent,
+    //   (e) => {
+    //     console.log('e: ', e);
+    //     // Means that there is the board state and whatnot
+
+    //     if (environment.productionType === 'development') {
+    //       if (e.origin == environment.urls.chessClientURL) {
+    //         this.prevFEN = this.currentFEN;
+    //         let info = e.data;
+    //         const temp = info.split(':');
+    //         const piece = info.split('-');
+    //         if (info == 'ReadyToRecieve') {
+    //           this.isReady = true;
+    //           this.sendFromQueue();
+    //         } else if (temp?.length > 1 && temp[0] === 'target') {
+    //           this.move = temp[1];
+    //         } else if (piece?.length > 1 && piece[0] === 'piece') {  
+    //           this.pieceImage = piece[1];
+    //         } else if (typeof info !== 'object' && info && info !== 'draw') {
+    //           this.currentFEN = info;
+    //           this.level = parseInt(
+    //             (<HTMLInputElement>document.getElementById('movesAhead')).value
+    //           );
+    //           if (this.level <= 1) this.level = 1;
+    //           else if (this.level >= 30) this.level = 30;
+    //           this.httpGetAsync(
+    //             `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,'POST',
+    //             (response) => {
+    //               response = JSON.parse(response);
+    //               let finalMove =
+    //                 response.moves.length > 0
+    //                   ? response.moves[response.moves.length - 1]
+    //                   : response.moves;
+    //               this.displayMoves = finalMove || [];
+    //               this.scrollToBottom();
+    //               setTimeout(() => {
+    //                 this.getMovesList();
+    //                 setTimeout(() => {
+    //                   this.scrollToBottom();
+    //                 }, 500);
+    //               }, 1000);
+    //               if (response) {
+    //                 this.httpGetAsync(
+    //                   `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,'POST',
+    //                   (response) => {
+    //                     console.log('response from stockfish: ', response);
+    //                     var fen = response.split(' move:')[0];
+    //                     var move = response.split(' move:')[1].slice(0, 2);
+    //                     var pos = response.split('target:')[1];
+    //                     if (this.isReady) {
+    //                       var chessBoard = (<HTMLFrameElement>(
+    //                         document.getElementById('chessBd')
+    //                       )).contentWindow;
+    //                       chessBoard.postMessage(
+    //                         JSON.stringify({
+    //                           boardState: fen,
+    //                           color: this.color,
+    //                         }),
+    //                         environment.urls.chessClientURL
+    //                       );
+    //                       this.httpGetAsync(
+    //                         `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,'POST',
+    //                         (response) => {
+    //                           response = JSON.parse(response);
+    //                           let finalMove =
+    //                             response.moves.length > 0
+    //                               ? response.moves[response.moves.length - 1]
+    //                               : response.moves;
+    //                           this.displayMoves = finalMove || [];
+    //                           this.scrollToBottom();
+    //                           setTimeout(() => {
+    //                             this.getMovesList();
+    //                             setTimeout(() => {
+    //                               this.scrollToBottom();
+    //                             }, 500);
+    //                           }, 1000);
+    //                         }
+    //                       );
+    //                     } else {
+    //                       this.messageQueue.push(
+    //                         JSON.stringify({
+    //                           boardState: fen,
+    //                           color: this.color,
+    //                         })
+    //                       );
+    //                     }
+    //                     this.currentFEN = response;
+    //                   }
+    //                 );
+    //               }
+    //             }
+    //           );
+    //         }
+    //       } else {
+    //         console.log('chessClientURL Missmatch.');
+    //       }
+    //     } else {
+    //       if (e.origin != environment.urls.chessClientURL) {
+    //         this.prevFEN = this.currentFEN;
+    //         let info = e.data;
+    //         const temp = info.split(':');
+    //         const piece = info.split('-');
+    //         if (info == 'ReadyToRecieve') {
+    //           this.isReady = true;
+    //           this.sendFromQueue();
+    //         } else if (temp?.length > 1 && temp[0] === 'target') {
+    //           this.move = temp[1];
+    //         } else if (piece?.length > 1 && piece[0] === 'piece') {
+    //           this.pieceImage = piece[1];
+    //         } else if (typeof info !== 'object' && info && info !== 'draw') {
+    //           this.currentFEN = info;
+    //           this.level = parseInt(
+    //             (<HTMLInputElement>document.getElementById('movesAhead')).value
+    //           );
+    //           if (this.level <= 1) this.level = 1;
+    //           else if (this.level >= 30) this.level = 30;
+    //           this.httpGetAsync(
+    //             `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,'POST',
+    //             (response) => {
+    //               response = JSON.parse(response);
+    //               let finalMove =
+    //                 response.moves.length > 0
+    //                   ? response.moves[response.moves.length - 1]
+    //                   : response.moves;
+    //               this.displayMoves = finalMove || [];
+    //               this.scrollToBottom();
+    //               setTimeout(() => {
+    //                 this.getMovesList();
+    //                 setTimeout(() => {
+    //                   this.scrollToBottom();
+    //                 }, 500);
+    //               }, 1000);
+    //               if (response) {
+    //                 this.httpGetAsync(
+    //                   `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,'POST',
+    //                   (response) => {
+    //                     console.log('response from stockfish: ', response);
+    //                     var fen = response.split(' move:')[0];
+    //                     var move = response.split(' move:')[1].slice(0, 2);
+    //                     var pos = response.split('target:')[1];
+    //                     if (this.isReady) {
+    //                       var chessBoard = (<HTMLFrameElement>(
+    //                         document.getElementById('chessBd')
+    //                       )).contentWindow;
+    //                       chessBoard.postMessage(
+    //                         JSON.stringify({
+    //                           boardState: fen,
+    //                           color: this.color,
+    //                         }),
+    //                         environment.urls.chessClientURL
+    //                       );
+    //                       this.httpGetAsync(
+    //                         `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,'POST',
+    //                         (response) => {
+    //                           response = JSON.parse(response);
+    //                           let finalMove =
+    //                             response.moves.length > 0
+    //                               ? response.moves[response.moves.length - 1]
+    //                               : response.moves;
+    //                           this.displayMoves = finalMove || [];
+    //                           this.scrollToBottom();
+    //                           setTimeout(() => {
+    //                             this.getMovesList();
+    //                             setTimeout(() => {
+    //                               this.scrollToBottom();
+    //                             }, 500);
+    //                           }, 1000);
+    //                         }
+    //                       );
+    //                     } else {
+    //                       this.messageQueue.push(
+    //                         JSON.stringify({
+    //                           boardState: fen,
+    //                           color: this.color,
+    //                         })
+    //                       );
+    //                     }
+    //                     this.currentFEN = response;
+    //                   }
+    //                 );
+    //               }
+    //             }
+    //           );
+    //         }
+    //       } else {
+    //         console.log('chessClientURL Missmatch.');
+    //       }
+    //     }
+    //   },
+    //   false
+    // );
   }
+  
   playWithComputer() {
     this.playwithcomputer = true;
     var eventMethod = 'addEventListener';

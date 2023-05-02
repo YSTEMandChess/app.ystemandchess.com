@@ -64,60 +64,17 @@ li, a, button {
 }
 
 .text1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   
     font-family: "Lato", sans-serif;
     // font-size: 15px !important;
-    font-weight: bold;
-    padding-bottom: 16px;
-    padding-top: 70px;
+    font-weight: 700;
 }
 
-.picture1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.pic1 {
-    width: 850px;
-    height: 450px;
-}
 
-.text2{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 10px; 
-}
 
-.text3{
-    padding: 0 143px;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px; 
-    padding-bottom: 3px;
-    text-indent: 20px;
-}
 
-.text4{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    text-indent: 20px; 
-}
 
-.txt-p{
-  text-align: justify;
-}
-
-.rectdiv2{
-    background-color: #BFD99E;
-    width: 100%;
-    height: 173px;
-    margin-bottom: 30px;
-}
 
 
 .recttext{
@@ -127,72 +84,54 @@ li, a, button {
     // padding-top: 45px;
     // height:200px;
     text-align: center;
-    font-size: 29px;
-    padding: 0 27rem;
-    padding-top: 40px;
-    line-height: 31px;
+    font-size: 32px;
+    // padding: 0 27rem;
+    // padding-top: 45px;
+    line-height: 38px;
     font-weight: 500;
 
 }
 
-.text5{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    text-indent: 20px; 
-   
+.txt-h {
+    font-family: Lato,sans-serif;
+    font-weight: 700;
 }
 
-.text6{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    text-indent: 20px; 
+.text2{
+    font-size: 14px !important;
+    
 }
 
-.text10{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    text-indent: 20px; 
-}
 
-.text7{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    text-indent: 20px;  
+.pic1 {
+    width: -webkit-fill-available;
 }
 
 .pic2{
-    padding-left: 381px;
+    width: auto;
+    max-width: 65%;
+    height: auto;
 }
 
-.text8{
-    padding-left: 382px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 13px; 
+
+
+.txt-p{
+  text-align: justify;
 }
 
-.text9{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
+.bg-main{
+    background-color: #BFD99E;
+}
+
+.txt-p{
+    text-align: left;
+    font-family: Roboto,sans-serif;
     font-size: 16px;
-    text-indent: 20px; 
-}
+    text-align:justify;
 
-.text10{
-    padding: 0 143px;
-    padding-bottom: 3px;
-    font-family: "Roboto", sans-serif;
-    font-size: 16px;
-    text-indent: 20px; 
+    p {
+        text-indent: 12px;
+    };
 }
 
 // .footer{

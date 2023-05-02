@@ -50,11 +50,7 @@ html, body {
   padding: 0;
 }
 
-.footer {
-  width: 100%;
-  background-color: rgb(169, 208, 159) !important;
-  overflow: auto;
-}
+
 
 .table {
   width: 50%;

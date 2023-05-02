@@ -3,19 +3,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-// import { Chart } from 'chart.js';
-// import { Chart, registerables } from 'chart.js';
-// Chart.register(...registerables);
-
-
-
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
+  selector: 'app-parent-profile',
+  templateUrl: './parent-profile.component.html',
+  styleUrls: ['./parent-profile.component.scss'],
 })
 
-export class UserProfileComponent implements OnInit {
+export class ParentProfileComponent implements OnInit {
   link: string = null;
   numStudents = new Array();
   newStudentFlag: boolean = false;
@@ -34,51 +28,22 @@ export class UserProfileComponent implements OnInit {
   public inMatch = false;
   categoryList = [];
   sharedPdfList =  [];
+  ystemPdf = [];
   public categoryName= '';
   public showPdfListView = false;
   recordingList = [];
   signedURL = '';
   constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
-
-
-
-  // chartOptions = {
-  //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-  // }
-
-  // labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-  // // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  // chartData = [
-  //   {
-  //     label: '1st Year',
-  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-  //   },
-  //   { 
-  //     label: '2nd Year',
-  //     data: [47, 9, 28, 54, 77, 51, 24]
-  //   }
-  // ];
-
-  // // CHART COLOR.
-  // colors = [
-  //   { // 1st Year.
-  //     backgroundColor: 'rgba(77,83,96,0.2)'
-  //   },
-  //   { // 2nd Year.
-  //     backgroundColor: 'rgba(30, 169, 224, 0.8)'
-  //   }
-  // ]
   
-  // // CHART CLICK EVENT.
-  // onChartClick(event) {
-  //   console.log(event);
-  // }
-
-
   async ngOnInit() {
-
-
+    this.viewSDKClient.ready().then(() => {
+      /* Invoke file preview */
+      this.viewSDKClient.previewFile('../../../assets/pdf/mentor/Y_STEM_Chess_Training_Lessons.pdf','pdf-div', {
+          /* Pass the embed mode option here */
+          embedMode: 'SIZED_CONTAINER',
+          dockPageControls:false,
+      });
+  });
     
     
     this.numStudents.push(0);
@@ -93,6 +58,11 @@ export class UserProfileComponent implements OnInit {
     this.role = uInfo['role'];
 
     document.getElementById("defaultOpen").click();
+    document.getElementById("student3").click();
+    document.getElementById("defaultOpen2").click();
+    
+    
+    document.getElementById("defaultOpenStudent").click();
 
     if (uInfo['error'] == undefined) {
       pLevel = uInfo.role;
@@ -165,7 +135,7 @@ export class UserProfileComponent implements OnInit {
   // }
 
   public openCity(evt, cityName) {
-    console.log("cityname--->", cityName)
+    console.log("cityname--->",evt)
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -177,6 +147,52 @@ export class UserProfileComponent implements OnInit {
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+  }
+
+  public openStudent(evt, cityName) {
+    console.log("cityname--->",evt)
+    var i, tabcontent, stablinks;
+    tabcontent = document.getElementsByClassName("tabcontent1");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    stablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < stablinks.length; i++) {
+      stablinks[i].className = stablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  public openStudentInfo(evt, cityName) {
+    console.log("cityname--->",evt)
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent2");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  public studentDetails(event, studentName) {
+    console.log("event---->", event)
+   
+    var i, mainTabcontent, tablinks;
+    mainTabcontent = document.getElementsByClassName("mainTabcontent");
+    for (i = 0; i < mainTabcontent.length; i++) {
+      mainTabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(studentName).style.display = "block";
+    event.currentTarget.className += " active";
   }
   
   // Get the element with id="defaultOpen" and click on it
@@ -272,19 +288,19 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  public showSharedSlideShow(filePath)
-  {
-    // var filePath = 'https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf';
+  // public showSharedSlideShow(filePath)
+  // {
+  //   // var filePath = 'https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf';
     
-    this.viewSDKClient.ready().then(() => {
-      /* Invoke file preview */
-      this.viewSDKClient.previewFile(filePath,'pdf-div', {
-          /* Pass the embed mode option here */
-          embedMode: 'SIZED_CONTAINER',
-          dockPageControls:false,
-      });
-  });
-  }
+  //   this.viewSDKClient.ready().then(() => {
+  //     /* Invoke file preview */
+  //     this.viewSDKClient.previewFile(filePath,'pdf-div', {
+  //         /* Pass the embed mode option here */
+  //         embedMode: 'SIZED_CONTAINER',
+  //         dockPageControls:false,
+  //     });
+  // });
+  // }
   
 }
 

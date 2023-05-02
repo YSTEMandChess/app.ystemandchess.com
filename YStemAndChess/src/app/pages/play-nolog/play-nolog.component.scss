@@ -65,6 +65,8 @@
     }
   }
 
+
+
   #lichess-board {
     width: 100%;
     display: flex;
@@ -80,18 +82,25 @@
   }
 }
 
+.chess {
+  height: 46rem !important;
+  iframe {
+    min-width: 100%;
+    min-height: 100%;
+    overflow: visible;
+  }
+}
+
 .game_wrapper {
   display: flex;
   justify-content: space-around;
 
-  .chess {
+  .chess-steps {
     width: 100%;
-    display: flex;
-    justify-content: center;
 
     iframe {
-      min-width: 700px;
-      min-height: 700px;
+      min-width: 100%;
+      min-height: 100%;
     }
   }
 }
@@ -103,8 +112,8 @@
 }
 
 iframe {
-  min-width: 700px;
-  min-height: 700px;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .movesAhead {
@@ -146,7 +155,7 @@ iframe {
   // padding: 7%;
   // width: fit-content;
   display: block;
-  height: 41rem;
+  height: 45rem;
   overflow: hidden scroll;
   cursor: pointer;
   margin-left: 25px;
@@ -201,7 +210,66 @@ iframe {
   padding: 15px;
 }
 
-#chess-board {
-  display: flex;
-  justify-content: center;
+.game_wrapper {
+  text-align: -webkit-center;
+  
 }
+
+@media only screen and (max-width: 321px) {
+  .chess {
+    height: 20rem !important;
+  }
+
+  .display-step {
+    height: 28rem;
+    margin-left: 0;
+  }
+
+  footer {
+    padding-top: 60px;
+  }
+}
+@media only screen and (min-width: 321px) and (max-width:376px) {
+  .chess {
+    height: 24rem !important;
+  }
+
+  .display-step {
+    height: 30rem;
+    margin-left: 0;
+  }
+
+  footer {
+    padding-top: 48px;
+  }
+}
+
+@media only screen and (min-width: 376px) and (max-width:426px) {
+  .chess {
+    height: 27rem !important;
+  }
+
+  .display-step {
+    height: 27rem;
+    margin-left: 0;
+  }
+
+  footer {
+    padding-top: 40px;
+  }
+}
+
+@media only screen and (min-width:992px) and (max-width: 1024px) {
+  .chess {
+    height: 39rem !important;
+  }
+
+  .display-step {
+    height: 37rem;
+  }
+}
+
+// #chess-board {
+//   display: flex;
+//   justify-content: center;
+// }

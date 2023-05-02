@@ -20,7 +20,7 @@
     </div>
   </div> -->
   <div class="row lesson-play-section">
-    <div class="col-8 chess">
+    <div class="col-12 col-lg-8 chess">
       <div class="btn-div">
         <button class="lesson-btn">
           Lesson
@@ -35,7 +35,7 @@
       <iframe id="chessBd" [src]="chessSrc"></iframe>
     </div>
 
-    <div class="col-4 pl-5">
+    <div class="col-12 col-lg-4 pl-lg-5">
       <div class="row mt-5 align-items-center">
         <div class="col-8 font-weight-bold" *ngFor="let section of sections" (click)="showSubSection($event)">
           <h3>{{ section.name }}
@@ -50,7 +50,7 @@
 
       <div class="row mt-4 mx-1">
         <div class="col-12 lesson-instruction-section" *ngFor="let section of sections">
-          <p class="lesson-instruction text-center">Try<br />this!</p>
+          <p class="lesson-instruction text-center">Try this!</p>
           <p class="lesson-instruction instruction-detail pl-5">{{ info }}</p>
         </div>
       </div>
@@ -72,7 +72,7 @@
         <div class="tab subsection-section" *ngFor="let subSection of section.subSections"
           (click)="setStateAsActive(subSection)" id="{{subSection.name}}">
 
-          <button class="tablinks col-2 font-weight-bold"
+          <button class="tablinks btn-tabs col-2 font-weight-bold"
             [ngClass]="{'active': subSection === activeState || subSection.name === activeState.name}"
             (click)="startLesson(subSection)"> {{ subSection.name }} </button>
 
@@ -83,6 +83,6 @@
   </div>
 
 </div>
-<footer style="margin-top: 25%;">
+<footer>
   <app-footer></app-footer>
 </footer>

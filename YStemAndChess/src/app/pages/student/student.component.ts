@@ -17,7 +17,6 @@ export class StudentComponent implements OnInit {
   private level: number = 5;
   private currentFEN: String =
     'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-    
   private prevFEN: String = this.currentFEN;
   meetingId;
   move;
@@ -30,10 +29,11 @@ export class StudentComponent implements OnInit {
   scrollContainer;
   isNearBottom;
   displayMoves = [];
-  constructor(private socket: SocketService, private cookie: CookieService) {}
+  constructor(private socket: SocketService, private cookie: CookieService) { }
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
 
   ngOnInit(): void {
+    console.log("in playyyyyyyyyyyyyyyyyyyy");
     this.getData();
     var eventMethod = 'addEventListener';
     var eventer = window[eventMethod];
@@ -43,7 +43,7 @@ export class StudentComponent implements OnInit {
       (e) => {
         // Means that there is the board state and whatnot
         this.prevFEN = this.currentFEN;
-        
+        console.log("this.prevFEN", this.prevFEN)
         let info = e.data;
         if (info == 'ReadyToRecieve') {
           this.isReady = true;
@@ -51,201 +51,7 @@ export class StudentComponent implements OnInit {
       },
       false
     );
-
-    // eventer(
-    //   messageEvent,
-    //   (e) => {
-    //     console.log('e: ', e);
-    //     // Means that there is the board state and whatnot
-
-    //     if (environment.productionType === 'development') {
-    //       if (e.origin == environment.urls.chessClientURL) {
-    //         this.prevFEN = this.currentFEN;
-    //         let info = e.data;
-    //         const temp = info.split(':');
-    //         const piece = info.split('-');
-    //         if (info == 'ReadyToRecieve') {
-    //           this.isReady = true;
-    //           this.sendFromQueue();
-    //         } else if (temp?.length > 1 && temp[0] === 'target') {
-    //           this.move = temp[1];
-    //         } else if (piece?.length > 1 && piece[0] === 'piece') {  
-    //           this.pieceImage = piece[1];
-    //         } else if (typeof info !== 'object' && info && info !== 'draw') {
-    //           this.currentFEN = info;
-    //           this.level = parseInt(
-    //             (<HTMLInputElement>document.getElementById('movesAhead')).value
-    //           );
-    //           if (this.level <= 1) this.level = 1;
-    //           else if (this.level >= 30) this.level = 30;
-    //           this.httpGetAsync(
-    //             `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,'POST',
-    //             (response) => {
-    //               response = JSON.parse(response);
-    //               let finalMove =
-    //                 response.moves.length > 0
-    //                   ? response.moves[response.moves.length - 1]
-    //                   : response.moves;
-    //               this.displayMoves = finalMove || [];
-    //               this.scrollToBottom();
-    //               setTimeout(() => {
-    //                 this.getMovesList();
-    //                 setTimeout(() => {
-    //                   this.scrollToBottom();
-    //                 }, 500);
-    //               }, 1000);
-    //               if (response) {
-    //                 this.httpGetAsync(
-    //                   `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,'POST',
-    //                   (response) => {
-    //                     console.log('response from stockfish: ', response);
-    //                     var fen = response.split(' move:')[0];
-    //                     var move = response.split(' move:')[1].slice(0, 2);
-    //                     var pos = response.split('target:')[1];
-    //                     if (this.isReady) {
-    //                       var chessBoard = (<HTMLFrameElement>(
-    //                         document.getElementById('chessBd')
-    //                       )).contentWindow;
-    //                       chessBoard.postMessage(
-    //                         JSON.stringify({
-    //                           boardState: fen,
-    //                           color: this.color,
-    //                         }),
-    //                         environment.urls.chessClientURL
-    //                       );
-    //                       this.httpGetAsync(
-    //                         `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,'POST',
-    //                         (response) => {
-    //                           response = JSON.parse(response);
-    //                           let finalMove =
-    //                             response.moves.length > 0
-    //                               ? response.moves[response.moves.length - 1]
-    //                               : response.moves;
-    //                           this.displayMoves = finalMove || [];
-    //                           this.scrollToBottom();
-    //                           setTimeout(() => {
-    //                             this.getMovesList();
-    //                             setTimeout(() => {
-    //                               this.scrollToBottom();
-    //                             }, 500);
-    //                           }, 1000);
-    //                         }
-    //                       );
-    //                     } else {
-    //                       this.messageQueue.push(
-    //                         JSON.stringify({
-    //                           boardState: fen,
-    //                           color: this.color,
-    //                         })
-    //                       );
-    //                     }
-    //                     this.currentFEN = response;
-    //                   }
-    //                 );
-    //               }
-    //             }
-    //           );
-    //         }
-    //       } else {
-    //         console.log('chessClientURL Missmatch.');
-    //       }
-    //     } else {
-    //       if (e.origin != environment.urls.chessClientURL) {
-    //         this.prevFEN = this.currentFEN;
-    //         let info = e.data;
-    //         const temp = info.split(':');
-    //         const piece = info.split('-');
-    //         if (info == 'ReadyToRecieve') {
-    //           this.isReady = true;
-    //           this.sendFromQueue();
-    //         } else if (temp?.length > 1 && temp[0] === 'target') {
-    //           this.move = temp[1];
-    //         } else if (piece?.length > 1 && piece[0] === 'piece') {
-    //           this.pieceImage = piece[1];
-    //         } else if (typeof info !== 'object' && info && info !== 'draw') {
-    //           this.currentFEN = info;
-    //           this.level = parseInt(
-    //             (<HTMLInputElement>document.getElementById('movesAhead')).value
-    //           );
-    //           if (this.level <= 1) this.level = 1;
-    //           else if (this.level >= 30) this.level = 30;
-    //           this.httpGetAsync(
-    //             `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,'POST',
-    //             (response) => {
-    //               response = JSON.parse(response);
-    //               let finalMove =
-    //                 response.moves.length > 0
-    //                   ? response.moves[response.moves.length - 1]
-    //                   : response.moves;
-    //               this.displayMoves = finalMove || [];
-    //               this.scrollToBottom();
-    //               setTimeout(() => {
-    //                 this.getMovesList();
-    //                 setTimeout(() => {
-    //                   this.scrollToBottom();
-    //                 }, 500);
-    //               }, 1000);
-    //               if (response) {
-    //                 this.httpGetAsync(
-    //                   `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,'POST',
-    //                   (response) => {
-    //                     console.log('response from stockfish: ', response);
-    //                     var fen = response.split(' move:')[0];
-    //                     var move = response.split(' move:')[1].slice(0, 2);
-    //                     var pos = response.split('target:')[1];
-    //                     if (this.isReady) {
-    //                       var chessBoard = (<HTMLFrameElement>(
-    //                         document.getElementById('chessBd')
-    //                       )).contentWindow;
-    //                       chessBoard.postMessage(
-    //                         JSON.stringify({
-    //                           boardState: fen,
-    //                           color: this.color,
-    //                         }),
-    //                         environment.urls.chessClientURL
-    //                       );
-    //                       this.httpGetAsync(
-    //                         `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,'POST',
-    //                         (response) => {
-    //                           response = JSON.parse(response);
-    //                           let finalMove =
-    //                             response.moves.length > 0
-    //                               ? response.moves[response.moves.length - 1]
-    //                               : response.moves;
-    //                           this.displayMoves = finalMove || [];
-    //                           this.scrollToBottom();
-    //                           setTimeout(() => {
-    //                             this.getMovesList();
-    //                             setTimeout(() => {
-    //                               this.scrollToBottom();
-    //                             }, 500);
-    //                           }, 1000);
-    //                         }
-    //                       );
-    //                     } else {
-    //                       this.messageQueue.push(
-    //                         JSON.stringify({
-    //                           boardState: fen,
-    //                           color: this.color,
-    //                         })
-    //                       );
-    //                     }
-    //                     this.currentFEN = response;
-    //                   }
-    //                 );
-    //               }
-    //             }
-    //           );
-    //         }
-    //       } else {
-    //         console.log('chessClientURL Missmatch.');
-    //       }
-    //     }
-    //   },
-    //   false
-    // );
   }
-  
   playWithComputer() {
     this.playwithcomputer = true;
     var eventMethod = 'addEventListener';
@@ -512,7 +318,6 @@ export class StudentComponent implements OnInit {
         this.displayMoves = finalMove || [];
         this.FEN = finalMove[finalMove.length - 1].fen;
         this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
-
         setTimeout(() => {
           var chessBoard = (<HTMLFrameElement>(
             document.getElementById('chessBd')
@@ -532,6 +337,7 @@ export class StudentComponent implements OnInit {
   }
 
   public newGameInit() {
+    console.log("new game this.newGameId", this.newGameId)
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/newGameStoreMoves?gameId=${this.newGameId}`,
       'POST',
@@ -545,7 +351,7 @@ export class StudentComponent implements OnInit {
     this.prevFEN = this.currentFEN;
     var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
       .contentWindow;
-
+      console.log('new game this.isReady:',this.isReady);
     if (this.isReady) {
       var chessBoard = (<HTMLFrameElement>document.getElementById('chessBd'))
         .contentWindow;
@@ -559,7 +365,7 @@ export class StudentComponent implements OnInit {
         JSON.stringify({ boardState: this.currentFEN, color: this.color })
       );
     }
-
+    console.log('new game this.color',this.color);
     if (this.color === 'black') {
       this.level = parseInt(
         (<HTMLInputElement>document.getElementById('movesAhead')).value
@@ -621,74 +427,139 @@ export class StudentComponent implements OnInit {
   }
 
   public undoPrevMove() {
-    // console.log("test undo function--->")
-    this.httpGetAsync(
-      `${environment.urls.middlewareURL}/meetings/undoMoves?gameId=${this.newGameId}`,
-      'POST',
-      (response) => {
-        if (response) {
-          response = JSON.parse(response);
-          this.getMovesLists();
-          const finalFEN = response.moves[response.moves.length - 1];
-          const FEN = finalFEN[finalFEN.length - 2].fen;
-          if (finalFEN.length === 2) {
-            let chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBd')
-            )).contentWindow;
-            chessBoard.postMessage(
-              JSON.stringify({
-                boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-              }),
-              environment.urls.chessClientURL
-            );
-          } else {
-            var chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBd')
-            )).contentWindow;
-            chessBoard.postMessage(
-              JSON.stringify({
-                boardState: FEN,
-                color: this.color,
-              }),
-              environment.urls.chessClientURL
-            );
-          }
+    if (this.meetingId) {
+      this.httpGetAsync(
+        `${environment.urls.middlewareURL}/meetings/undoMeetingMoves?meetingId=${this.meetingId}`,
+        'POST',
+        (response) => {
+          if (response) {
+            response = JSON.parse(response);
+            console.log("undo response", response)
+            this.getMovesLists();
+            const finalFEN = response.moves[response.moves.length - 1];
+            console.log("finalFENfinalFENfinalFEN", finalFEN)
+            const FEN = finalFEN[finalFEN.length - 2].fen;
+            // console.log("FENFENFENFENFEN",FEN)
+            if (finalFEN.length === 2) {
+              console.log("11111111111111111111")
+              let chessBoard = (<HTMLFrameElement>(
+                document.getElementById('chessBd')
+              )).contentWindow;
+              chessBoard.postMessage(
+                JSON.stringify({
+                  boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+                }),
+                environment.urls.chessClientURL
+              );
+              this.displayMoves = [];
+            } else {
+              console.log("222222222222222222")
+              var chessBoard = (<HTMLFrameElement>(
+                document.getElementById('chessBd')
+              )).contentWindow;
+              chessBoard.postMessage(
+                JSON.stringify({
+                  boardState: FEN,
+                  color: this.color,
+                }),
+                environment.urls.chessClientURL
+              );
+            }
 
-          console.log(FEN);
+            console.log(FEN);
+          }
         }
-      }
-    );
+      );
+    } else {
+      this.httpGetAsync(
+        `${environment.urls.middlewareURL}/meetings/undoMoves?gameId=${this.newGameId}`,
+        'POST',
+        (response) => {
+          if (response) {
+            response = JSON.parse(response);
+            this.getMovesLists();
+            const finalFEN = response.moves[response.moves.length - 1];
+            const FEN = finalFEN[finalFEN.length - 2].fen;
+            if (finalFEN.length === 2) {
+              let chessBoard = (<HTMLFrameElement>(
+                document.getElementById('chessBd')
+              )).contentWindow;
+              chessBoard.postMessage(
+                JSON.stringify({
+                  boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+                }),
+                environment.urls.chessClientURL
+              );
+            } else {
+              var chessBoard = (<HTMLFrameElement>(
+                document.getElementById('chessBd')
+              )).contentWindow;
+              chessBoard.postMessage(
+                JSON.stringify({
+                  boardState: FEN,
+                  color: this.color,
+                }),
+                environment.urls.chessClientURL
+              );
+            }
+
+            console.log(FEN);
+          }
+        }
+      );
+    }
   }
   getMovesList = () => {
+    console.log('this.meetingId', this.meetingId);
     let url: string = '';
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
     this.httpGetAsync(url, 'GET', (response) => {
+      console.log("kkkkkkkkkkkkkkkkkkkk")
       response = JSON.parse(response);
+      console.log("response", response)
+      console.log("response.moves", response.moves)
       this.displayMoves = response.moves || [];
     });
   };
   getMovesLists = () => {
-    this.httpGetAsync(
-      `${environment.urls.middlewareURL}/meetings/getStoreMoves?gameId=${this.newGameId}`,
-      'POST',
-      (response) => {
-        response = JSON.parse(response);
-        let finalMove =
-          response.moves.length > 0
-            ? response.moves[response.moves.length - 1]
-            : response.moves;
-        this.displayMoves = finalMove || [];
-        this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
-      }
-    );
+    if (this.meetingId) {
+      this.httpGetAsync(
+        `${environment.urls.middlewareURL}/meetings/getStoreMoves?meetingId=${this.meetingId}`,
+        'GET',
+        (response) => {
+          response = JSON.parse(response);
+          console.log("responseresponseresponse", response)
+          let finalMove =
+            response.moves.length > 0
+              ? response.moves[response.moves.length - 1]
+              : response.moves;
+          this.displayMoves = finalMove || [];
+          this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
+        }
+      );
+    } else {
+      this.httpGetAsync(
+        `${environment.urls.middlewareURL}/meetings/getStoreMoves?gameId=${this.newGameId}`,
+        'GET',
+        (response) => {
+          response = JSON.parse(response);
+          let finalMove =
+            response.moves.length > 0
+              ? response.moves[response.moves.length - 1]
+              : response.moves;
+          this.displayMoves = finalMove || [];
+          this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
+        }
+      );
+    }
   };
   setMove(index, direction) {
     this.currentStep =
       index <= 0
         ? 0
         : index > this.displayMoves.length - 1
-        ? this.displayMoves.length - 1
-        : index;
+          ? this.displayMoves.length - 1
+          : index;
     if (direction != 'backward') {
       if (this.displayMoves.length - 1 === index) {
         this.isStepLast = true;
@@ -731,7 +602,7 @@ export class StudentComponent implements OnInit {
     xmlHttp.send(null);
   }
   public CheckGame() {
-    console.log("test new game----->")
+    console.log('test new game----->');
     if (this.meetingId == undefined) {
       setTimeout(() => {
         this.newGameInit();
@@ -741,18 +612,24 @@ export class StudentComponent implements OnInit {
     }
   }
   public newGame() {
+    console.log("click on play")
+    console.log("meetingIdmeetingId", this.meetingId)
+    this.displayMoves = [];
     this.playwithcomputer = false;
     let userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
     this.socket.emitMessage(
       'createNewGame',
       JSON.stringify({ username: userContent.username })
     );
-    this.getMovesList();
+    // this.getMovesList();
+
     let url: string;
+    this.displayMoves = [];
     url = `${environment.urls.middlewareURL}/meetings/newBoardState?meetingId=${this.meetingId}`;
     this.httpGetAsync(url, 'POST', (response) => {
       response = JSON.parse(response);
-      this.displayMoves = response.moves || [];
+      // this.displayMoves = response.moves || [];
+      this.displayMoves = [];
     });
   }
   private scrollToBottom(): void {

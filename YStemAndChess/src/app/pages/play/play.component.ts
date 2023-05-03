@@ -127,7 +127,7 @@ export class PlayComponent implements OnInit {
           document.getElementById('local_stream').style.backgroundColor = '#00dff2';
           document.getElementById('remote_stream').style.backgroundColor = '#ff0000';
           document.getElementById('remote_stream').style.marginTop = '0px';
-          document.getElementById('remote_stream').style.height = '215px';
+          document.getElementById('remote_stream').style.height = '175px';
           document.getElementById('local_stream').style.cursor = 'move';
           document.getElementById('remote_stream').style.cursor = 'move';
           document.getElementById('local_streamName').style.display = 'block';
@@ -176,7 +176,7 @@ export class PlayComponent implements OnInit {
               this.clientUID = uid;
               this.localStream = this.agoraService.createStream({
                 streamID: this.clientUID,
-                audio: true,
+                audio: false,
                 video: true,
                 screen: false,
               });
@@ -212,7 +212,7 @@ export class PlayComponent implements OnInit {
               (uid) => {
                 this.localScreenStream = this.agoraService.createStream({
                   streamID: uid,
-                  audio: true,
+                  audio: false,
                   video: false,
                   screen: true,
                   mediaSource: 'window',

@@ -25,8 +25,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 
 var selected = null, // Object of the element to be moved
-    x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
-    x_elem = 0, y_elem = 0;
+  x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
+  x_elem = 0, y_elem = 0;
 
 
 @Component({
@@ -37,7 +37,7 @@ var selected = null, // Object of the element to be moved
 export class PlayComponent implements OnInit {
   findStudentname = '';
   findMentorName = '';
-  userRole='';
+  userRole = '';
   private localStream: Stream;
   private localScreenStream: Stream;
   private remoteStream: Stream;
@@ -71,23 +71,23 @@ export class PlayComponent implements OnInit {
 
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
-    ngOnInit() {
+  ngOnInit() {
     let userContent;
 
     // let uInfo = await setPermissionLevel(this.cookie);
     // if (uInfo['error'] == undefined) {
     //   this.findStudentname = uInfo['username'];
     //   this.userRole = uInfo['role']
-    
+
     // }
 
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
-      console.log("user context----->",userContent)
+      console.log("user context----->", userContent)
       this.findStudentname = userContent.username;
       this.userRole = userContent.role;
 
-      
+
 
 
       // window.onload = function() {
@@ -97,15 +97,15 @@ export class PlayComponent implements OnInit {
       //   doc.body.innerHTML = doc.body.innerHTML + '<style>body {margin: 0;}</style>'
       // }  
 
-    //   window.onload = function() {
-    //     let iframe = document.getElementById("chessBd");
-    //     let doc = iframe.ownerDocument;
-    //     document.body.innerHTML = doc.body.innerHTML + '<style>margin: 0;</style>';
-  
-    // //     let myiFrame = document.getElementById("iframe-css").ownerWindow;
-    // //     let doc = myiFrame.document;
-    // //     doc.body.innerHTML = doc.body.innerHTML + '<style>._2p3a{width: 100% !important;}</style>';
-    //   };
+      //   window.onload = function() {
+      //     let iframe = document.getElementById("chessBd");
+      //     let doc = iframe.ownerDocument;
+      //     document.body.innerHTML = doc.body.innerHTML + '<style>margin: 0;</style>';
+
+      // //     let myiFrame = document.getElementById("iframe-css").ownerWindow;
+      // //     let doc = myiFrame.document;
+      // //     doc.body.innerHTML = doc.body.innerHTML + '<style>._2p3a{width: 100% !important;}</style>';
+      //   };
 
       this.httpGetAsync(
         `${environment.urls.middlewareURL}/meetings/inMeeting`,
@@ -119,8 +119,8 @@ export class PlayComponent implements OnInit {
           }
           let responseText = JSON.parse(response)[0];
           this.meetingId = responseText.meetingId;
-          
-          this.findMentorName= responseText.studentUsername;
+
+          this.findMentorName = responseText.studentUsername;
           //display web cam styling
           document.getElementById('local_stream').style.display = 'block';
           document.getElementById('remote_stream').style.display = 'block';
@@ -132,30 +132,30 @@ export class PlayComponent implements OnInit {
           document.getElementById('remote_stream').style.cursor = 'move';
           document.getElementById('local_streamName').style.display = 'block';
           document.getElementById('remote_streamName').style.display = 'block';
-          
+
           document.getElementById('draggable').style.position = 'absolute';
           document.getElementById('draggable-remote').style.position = 'absolute';
-          document.getElementById('draggable-remote').style.top = '275px';
-          
+          document.getElementById('draggable-remote').style.top = '400px';
+
 
           // this.dragElement(document.getElementById("local_stream"));
-         
+
 
           document.getElementById('draggable').onmousedown = () => {
             var element = document.getElementById("draggable");
             this._drag_init_Div(element);
             return false;
-          }; 
+          };
 
           document.getElementById('draggable-remote').onmousedown = () => {
             var element = document.getElementById("draggable-remote");
             this._drag_init_Div(element);
             return false;
-          }; 
+          };
 
-        document.onmousemove = this._move_elem;
-        document.onmouseup = this._destroy;
-          
+          document.onmousemove = this._move_elem;
+          document.onmouseup = this._destroy;
+
 
           // Code for webcam
           // -------------------------------------------------------------------------
@@ -277,8 +277,8 @@ export class PlayComponent implements OnInit {
             } else {
               document.getElementById('remote_stream').style.display = 'none';
               document.getElementById('remote_streamName').style.display = 'none';
-              
-              
+
+
             }
           });
 
@@ -308,6 +308,7 @@ export class PlayComponent implements OnInit {
                 document.getElementById('chessBd')
               )).contentWindow;
               // this.getMovesList();
+              console.log("newData.boardState", newData.boardState)
               chessBoard.postMessage(
                 JSON.stringify({
                   boardState: newData.boardState,
@@ -325,7 +326,7 @@ export class PlayComponent implements OnInit {
       //hide web cam styling
       document.getElementById('local_stream').style.display = 'none';
       document.getElementById('remote_stream').style.display = 'none';
-      
+
       document.getElementById('local_streamName').style.display = 'none';
       document.getElementById('remote_streamName').style.display = 'none';
 
@@ -401,7 +402,7 @@ export class PlayComponent implements OnInit {
       },
       false
     );
-  
+
   }
 
   _drag_init_Div(elem) {
@@ -413,81 +414,91 @@ export class PlayComponent implements OnInit {
   }
 
 
- _move_elem(e) {
-  // x_pos = document.all ? window.e.clientX : e.pageX;
-  // y_pos = document.all ? window.e.clientY : e.pageY;
-  x_pos = document.all ?  (window as any).e.clientX : e.pageX;
-  y_pos = document.all ? (window as any).e.clientY : e.pageY;
-  console.log("Selected : ", selected);
-   
-  if (selected !== null) {
+  _move_elem(e) {
+    // x_pos = document.all ? window.e.clientX : e.pageX;
+    // y_pos = document.all ? window.e.clientY : e.pageY;
+    x_pos = document.all ? (window as any).e.clientX : e.pageX;
+    y_pos = document.all ? (window as any).e.clientY : e.pageY;
+
+    if (selected !== null) {
       selected.style.left = (x_pos - x_elem) + 'px';
       selected.style.top = (y_pos - y_elem) + 'px';
-      
-  }
-}
 
-_destroy() {
-  selected = null;
-}
-
- dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    /* if present, the header is where you move the DIV from:*/
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    /* otherwise, move the DIV from anywhere inside the DIV:*/
-    elmnt.onmousedown = dragMouseDown;
+    }
   }
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
+  _destroy() {
+    selected = null;
   }
 
-  
+  dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "header")) {
+      /* if present, the header is where you move the DIV from:*/
+      document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+    } else {
+      /* otherwise, move the DIV from anywhere inside the DIV:*/
+      elmnt.onmousedown = dragMouseDown;
+    }
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-  }
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // call a function whenever the cursor moves:
+      document.onmousemove = elementDrag;
+    }
 
-  function closeDragElement() {
-    /* stop moving when mouse button is released:*/
-    document.onmouseup = null;
-    document.onmousemove = null;
+
+
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      // set the element's new position:
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+      /* stop moving when mouse button is released:*/
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
   }
-}
 
   reload() {
     window.location.reload();
   }
   getMovesList = () => {
+    console.log("this.meetingId", this.meetingId)
+    console.log("righttttttttttt")
     let url: string = '';
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
     this.httpGetAsync(url, 'GET', (response) => {
+      console.log("play component response", response)
       response = JSON.parse(response);
       let finalMove =
         response.moves.length > 0
           ? response.moves[response.moves.length - 1]
           : response.moves;
+      // console.log("finalMove.length",finalMove.length)
+      // if(finalMove.length == 0){
+      //   console.log("length00000000")
+      //   this.displayMoves = [];
+      // }else{
+      console.log("finalMovefinalMove", finalMove)
       this.displayMoves = finalMove || [];
       this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
+      console.log("this.currentStep", this.currentStep)
+      // }
     });
   };
   private sendFromQueue() {
@@ -585,8 +596,8 @@ _destroy() {
       index <= 0
         ? 0
         : index > this.displayMoves.length - 1
-        ? this.displayMoves.length - 1
-        : index;
+          ? this.displayMoves.length - 1
+          : index;
     if (direction != 'backward') {
       if (this.displayMoves.length - 1 === index) {
         this.isStepLast = true;

@@ -74,7 +74,7 @@ eventer(
           onSnapEnd: onSnapEnd,
         };
         board = Chessboard("myBoard", lessonConfig);
-        var overlay = new ChessboardArrows('board_wrapper');
+        // var overlay = new ChessboardArrows('board_wrapper');
         lessonStarted = true;
         game.load(lessonBoard);
       } else {
@@ -416,7 +416,7 @@ var config = {
 
 if (isLesson == false) {
   board = Chessboard("myBoard", config);
-  var overlay = new ChessboardArrows('board_wrapper');
+  // var overlay = new ChessboardArrows('board_wrapper');
 }
 
 $(window).resize(board.resize);

@@ -34,6 +34,7 @@ var selected = null, // Object of the element to be moved
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.scss'],
 })
+
 export class PlayComponent implements OnInit {
   findStudentname = '';
   findMentorName = '';
@@ -83,7 +84,6 @@ export class PlayComponent implements OnInit {
 
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
-      console.log("user context----->", userContent)
       this.findStudentname = userContent.username;
       this.userRole = userContent.role;
 
@@ -127,7 +127,7 @@ export class PlayComponent implements OnInit {
           document.getElementById('local_stream').style.backgroundColor = '#00dff2';
           document.getElementById('remote_stream').style.backgroundColor = '#ff0000';
           document.getElementById('remote_stream').style.marginTop = '0px';
-          document.getElementById('remote_stream').style.height = '175px';
+          document.getElementById('remote_stream').style.height = '215px';
           document.getElementById('local_stream').style.cursor = 'move';
           document.getElementById('remote_stream').style.cursor = 'move';
           document.getElementById('local_streamName').style.display = 'block';
@@ -135,7 +135,7 @@ export class PlayComponent implements OnInit {
 
           document.getElementById('draggable').style.position = 'absolute';
           document.getElementById('draggable-remote').style.position = 'absolute';
-          document.getElementById('draggable-remote').style.top = '400px';
+          document.getElementById('draggable-remote').style.top = '250px';
 
 
           // this.dragElement(document.getElementById("local_stream"));
@@ -176,7 +176,7 @@ export class PlayComponent implements OnInit {
               this.clientUID = uid;
               this.localStream = this.agoraService.createStream({
                 streamID: this.clientUID,
-                audio: false,
+                audio: true,
                 video: true,
                 screen: false,
               });
@@ -212,7 +212,7 @@ export class PlayComponent implements OnInit {
               (uid) => {
                 this.localScreenStream = this.agoraService.createStream({
                   streamID: uid,
-                  audio: false,
+                  audio: true,
                   video: false,
                   screen: true,
                   mediaSource: 'window',

@@ -903,7 +903,19 @@ li, a, button {
 
 @media only screen and (max-width: 992px) {
     .current-chart {
-        height: 285px;
+        height: 385px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .current-chart .cs-right {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .current-chart .cs-right img {
+        width: 110px;
     }
 }
 
@@ -971,8 +983,30 @@ td{
     padding-left: 10px;
 }
 
-.text2 {
-    padding-right: px;
+.text2{
+    font-size: 14px !important;
+}
+
+.border-r {
+    border-right: 4px solid red;
+}
+
+.border-y {
+    border-right: 4px solid #FFD233;
+}
+
+.border-o {
+    border-right: 4px solid #FF8819;
+}
+
+.cs-right img {
+    width: 120px;
+}
+
+.pic2{
+    width: auto;
+    max-width: 65%;
+    height: auto;
 }
 
 .text3 {

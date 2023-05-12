@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
             this.inMatch = false;
           }
         });
-      }, 40000);
+      }, 5000);
     }
 
     // Check to see if they are currently in a game, or not.

@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-student',
+  selector: 'app-play-mentor',
   templateUrl: './play-mentor.component.html',
   styleUrls: ['./play-mentor.component.scss'],
 })

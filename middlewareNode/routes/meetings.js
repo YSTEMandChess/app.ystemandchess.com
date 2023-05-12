@@ -25,7 +25,6 @@ router.get(
   passport.authenticate("jwt"),
   async (req, res) => {
     try {
-      console.log("single recording called");
       console.log(config.get("awsSecretKey"));
       const s3Config = {
         apiVersion: "latest",
@@ -272,7 +271,6 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
       role === "student" ? "mentor" : "student",
       waitingQueue.username
     );
-    console.log("secondResponse: ", secondResponse);
 
     if (
       response === "There are no current meetings with this user." &&
@@ -401,8 +399,8 @@ router.put("/endMeeting", passport.authenticate("jwt"), async (req, res) => {
     const timePlayed = Math.floor(
       (currMeeting.meetingEndTime.getTime() -
         currMeeting.meetingStartTime.getTime()) /
-        1000 /
-        60
+      1000 /
+      60
     );
 
     //Update the student timePlayed field
@@ -464,13 +462,13 @@ const inMeeting = async (role, username) => {
 // changes by riken start
 const deleteUser = async (role, username) => {
   if (role === "student") {
-    const user = await waitingStudents.findOne({username : username})
-    if(user != null){
+    const user = await waitingStudents.findOne({ username: username })
+    if (user != null) {
       user.delete();
     }
-  }else if (role === "mentor") {
-    const mentor = await waitingMentors.findOne({username : username})
-    if(mentor != null){
+  } else if (role === "mentor") {
+    const mentor = await waitingMentors.findOne({ username: username })
+    if (mentor != null) {
       mentor.delete();
     }
   }
@@ -563,7 +561,6 @@ router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { meetingId } = req.query;
     const getBoardStates = await getMoves(meetingId);
-    console.log("getBoardStates",getBoardStates)
     res.status(200).send(getBoardStates);
   } catch (error) {
     console.error(error.message);
@@ -653,10 +650,10 @@ router.post("/newGameStoreMoves", async (req, res) => {
 router.get("/getStoreMoves", async (req, res) => {
   try {
     const { gameId, meetingId } = req.query;
-    if(meetingId){
+    if (meetingId) {
       const getBoardStates = await getMoves(meetingId);
-      res.status(200).send(getBoardStates);  
-    }else{
+      res.status(200).send(getBoardStates);
+    } else {
       const getBoardStates = await getMovesByGameId(gameId);
       res.status(200).send(getBoardStates);
     }
@@ -669,12 +666,10 @@ router.get("/getStoreMoves", async (req, res) => {
 router.post("/undoMeetingMoves", async (req, res) => {
   try {
     const { meetingId } = req.query;
-    console.log('meetingId', meetingId)
     const getBoardState = await getMoves(meetingId);
     const movesData = getBoardState.moves;
-    console.log("movesData",movesData)
     const newData = movesData[movesData.length - 1];
-    const finalData = newData.splice(-2, 2);
+    const finalData = newData.splice(-2);
     const deletedData = await deleteMovesByMeetingId(meetingId, movesData);
     res.status(200).send(deletedData);
   } catch (error) {
@@ -687,15 +682,13 @@ const deleteMovesByMeetingId = async (meetingId, movesData) => {
   const deletedMove = await meetings.findOneAndUpdate(
     { meetingId: meetingId },
     { moves: movesData }
-    );
-    console.log("deletedMove",deletedMove.moves)
+  );
   return deletedMove;
 };
 
 router.post("/undoMoves", async (req, res) => {
   try {
     const { gameId } = req.query;
-    console.log('gameId', gameId)
     const getBoardState = await getMovesByGameId(gameId);
     const movesData = getBoardState.moves;
     const newData = movesData[movesData.length - 1];

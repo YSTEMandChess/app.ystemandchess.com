@@ -11,13 +11,27 @@ html {
     height:100%;
 }
 img {
-    width: 50%;
+    width: auto;
     object-fit: contain;
   }
 
-  @media screen and (max-width: 767px) {
-    img {
-        width: 35%;
+  @media screen and (max-width: 768px) {
+    ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+  }
+
+  @media screen and (max-width: 426px) {
+    ul li img {
+       width: 65%;
+    }
+  }
+
+  @media screen and (max-width: 769px) {
+    .partner-ul {
+        display: grid!important;
     }
   }
 

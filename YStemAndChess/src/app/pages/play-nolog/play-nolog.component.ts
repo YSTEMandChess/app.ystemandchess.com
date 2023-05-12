@@ -41,6 +41,7 @@ export class PlayNologComponent implements OnInit {
     var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/storeMoves`,
+      'POST',
       (response) => {
         let result = JSON.parse(response);
         this.newGameId = result.gameId;
@@ -76,6 +77,7 @@ export class PlayNologComponent implements OnInit {
               else if (this.level >= 30) this.level = 30;
               this.httpGetAsync(
                 `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,
+                'POST',
                 (response) => {
                   response = JSON.parse(response);
                   let finalMove =
@@ -93,6 +95,7 @@ export class PlayNologComponent implements OnInit {
                   if (response) {
                     this.httpGetAsync(
                       `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+                      'POST',
                       (response) => {
                         console.log('response from stockfish: ', response);
                         var fen = response.split(' move:')[0];
@@ -111,6 +114,7 @@ export class PlayNologComponent implements OnInit {
                           );
                           this.httpGetAsync(
                             `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,
+                            'POST',
                             (response) => {
                               response = JSON.parse(response);
                               let finalMove =
@@ -167,6 +171,7 @@ export class PlayNologComponent implements OnInit {
               else if (this.level >= 30) this.level = 30;
               this.httpGetAsync(
                 `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,
+                'POST',
                 (response) => {
                   response = JSON.parse(response);
                   let finalMove =
@@ -184,6 +189,7 @@ export class PlayNologComponent implements OnInit {
                   if (response) {
                     this.httpGetAsync(
                       `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+                      'POST',
                       (response) => {
                         console.log('response from stockfish: ', response);
                         var fen = response.split(' move:')[0];
@@ -202,6 +208,7 @@ export class PlayNologComponent implements OnInit {
                           );
                           this.httpGetAsync(
                             `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,
+                            'POST',
                             (response) => {
                               response = JSON.parse(response);
                               let finalMove =
@@ -266,6 +273,7 @@ export class PlayNologComponent implements OnInit {
     )).getAttribute('src');
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/getStoreMoves?gameId=${this.newGameId}`,
+      'GET',
       (response) => {
         let getMoves = JSON.parse(response);
         let finalMove =
@@ -298,6 +306,7 @@ export class PlayNologComponent implements OnInit {
     console.log('New game init called');
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/newGameStoreMoves?gameId=${this.newGameId}`,
+      'POST',
       (response) => {
         this.getMovesList();
       }
@@ -330,10 +339,12 @@ export class PlayNologComponent implements OnInit {
       else if (this.level >= 10) this.level = 10;
       this.httpGetAsync(
         `${environment.urls.middlewareURL}/meetings/newGameStoreMoves?gameId=${this.newGameId}`,
+        'POST',
         (response) => {
           if (response) {
             this.httpGetAsync(
               `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+              'POST',
               (response) => {
                 var fen = response.split(' move:')[0];
                 var move = response.split(' move:')[1].slice(0, 2);
@@ -348,8 +359,8 @@ export class PlayNologComponent implements OnInit {
                   );
                   this.httpGetAsync(
                     `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${fen}&pos=${pos}&image=${move}`,
+                    'POST',
                     (response) => {
-                      
                       response = JSON.parse(response);
                       let finalMove =
                         response.moves.length > 0
@@ -381,6 +392,7 @@ export class PlayNologComponent implements OnInit {
   public undoPrevMove() {
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/undoMoves?gameId=${this.newGameId}`,
+      'POST',
       (response) => {
         if (response) {
           response = JSON.parse(response);
@@ -414,18 +426,10 @@ export class PlayNologComponent implements OnInit {
     );
   }
 
-  private httpGetAsync(theUrl: string, callback) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-        callback(xmlHttp.responseText);
-    };
-    xmlHttp.open('POST', theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
-  }
   getMovesList = () => {
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/getStoreMoves?gameId=${this.newGameId}`,
+      'GET',
       (response) => {
         response = JSON.parse(response);
         let finalMove =
@@ -509,5 +513,14 @@ export class PlayNologComponent implements OnInit {
 
   private gameOverAlert() {
     alert('Game over.');
+  }
+  private httpGetAsync(theUrl: string, method: string = 'POST', callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        callback(xmlHttp.responseText);
+    };
+    xmlHttp.open(method, theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
   }
 }

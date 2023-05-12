@@ -308,6 +308,7 @@ export class PlayComponent implements OnInit {
                 document.getElementById('chessBd')
               )).contentWindow;
               // this.getMovesList();
+              console.log("newData.boardState", newData.boardState)
               chessBoard.postMessage(
                 JSON.stringify({
                   boardState: newData.boardState,
@@ -477,16 +478,27 @@ export class PlayComponent implements OnInit {
     window.location.reload();
   }
   getMovesList = () => {
+    console.log("this.meetingId", this.meetingId)
+    console.log("righttttttttttt")
     let url: string = '';
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
     this.httpGetAsync(url, 'GET', (response) => {
+      console.log("play component response", response)
       response = JSON.parse(response);
       let finalMove =
         response.moves.length > 0
           ? response.moves[response.moves.length - 1]
           : response.moves;
+      // console.log("finalMove.length",finalMove.length)
+      // if(finalMove.length == 0){
+      //   console.log("length00000000")
+      //   this.displayMoves = [];
+      // }else{
+      console.log("finalMovefinalMove", finalMove)
       this.displayMoves = finalMove || [];
       this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
+      console.log("this.currentStep", this.currentStep)
+      // }
     });
   };
   private sendFromQueue() {

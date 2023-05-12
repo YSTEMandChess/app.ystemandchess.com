@@ -561,6 +561,7 @@ router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { meetingId } = req.query;
     const getBoardStates = await getMoves(meetingId);
+    console.log("getBoardStates",getBoardStates)
     res.status(200).send(getBoardStates);
   } catch (error) {
     console.error(error.message);

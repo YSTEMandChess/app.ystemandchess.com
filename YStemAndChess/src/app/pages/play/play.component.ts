@@ -308,7 +308,6 @@ export class PlayComponent implements OnInit {
                 document.getElementById('chessBd')
               )).contentWindow;
               // this.getMovesList();
-              console.log("newData.boardState", newData.boardState)
               chessBoard.postMessage(
                 JSON.stringify({
                   boardState: newData.boardState,

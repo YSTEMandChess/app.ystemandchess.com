@@ -93,45 +93,7 @@ export class UserProfileComponent implements OnInit {
   public barChartColor: Color[] = [{backgroundColor: '#7fcc26'}, {backgroundColor: '#c8b4ff'}, {backgroundColor: '#0fdff2'}, {backgroundColor: '#f24598'}, {backgroundColor: '#fd8e4f'}]
 
 
-
-  // chartOptions = {
-  //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-  // }
-
-  // labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-  // // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  // chartData = [
-  //   {
-  //     label: '1st Year',
-  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-  //   },
-  //   { 
-  //     label: '2nd Year',
-  //     data: [47, 9, 28, 54, 77, 51, 24]
-  //   }
-  // ];
-
-  // // CHART COLOR.
-  // colors = [
-  //   { // 1st Year.
-  //     backgroundColor: 'rgba(77,83,96,0.2)'
-  //   },
-  //   { // 2nd Year.
-  //     backgroundColor: 'rgba(30, 169, 224, 0.8)'
-  //   }
-  // ]
-  
-  // // CHART CLICK EVENT.
-  // onChartClick(event) {
-  //   console.log(event);
-  // }
-
-
-  async ngOnInit() {
-
-
-    
+  async ngOnInit() {    
     
     this.numStudents.push(0);
     this.numNewStudents++;
@@ -144,7 +106,7 @@ export class UserProfileComponent implements OnInit {
     this.accountCreatedAt = uInfo['accountCreatedAt'];
     this.role = uInfo['role'];
 
-    document.getElementById("defaultOpen").click();
+    // document.getElementById("defaultOpen").click();
 
     if (uInfo['error'] == undefined) {
       pLevel = uInfo.role;
@@ -159,7 +121,7 @@ export class UserProfileComponent implements OnInit {
       this.role = uInfo['role'];
       if (this.role === 'student') {
         this.playLink = 'student';
-      } else if (this.role === 'mentor') {
+      } else if (this.role === 'm entor') {
         this.playLink = 'play-mentor';
       }
     }
@@ -174,9 +136,6 @@ export class UserProfileComponent implements OnInit {
       // }, 1500);
     }
     if (this.role == 'student'){
-      await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
-      this.getTimeTrackingStatByMonth(this.username);
-      // this.createStudentChart();
       await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
       this.getTimeTrackingStatByMonth(this.username);
       // this.createStudentChart();

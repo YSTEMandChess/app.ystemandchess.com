@@ -57,9 +57,9 @@ export class ParentProfileComponent implements OnInit {
     this.accountCreatedAt = uInfo['accountCreatedAt'];
     this.role = uInfo['role'];
 
-    document.getElementById("defaultOpen").click();
-    document.getElementById("student3").click();
-    document.getElementById("defaultOpen2").click();
+    // document.getElementById("defaultOpen").click();
+    // document.getElementById("student3").click();
+    // document.getElementById("defaultOpen2").click();
     
     
     document.getElementById("defaultOpenStudent").click();

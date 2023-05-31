@@ -47,7 +47,7 @@ export class LessonsService {
       name: 'Bishop - It moves diagonally ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/7p/8/8/4p3/8/6B1/8 w - - 0 1',
           info: 'Grab all the black pawns! ',
         },
@@ -82,7 +82,7 @@ export class LessonsService {
       name: 'Knight - It moves in an L shape ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/3p4/8/2p5/4N3/8/8/8 w - - 0 1',
           info: `Knights have a fancy way of jumping around!`,
         },
@@ -117,7 +117,7 @@ export class LessonsService {
       name: 'Rook - It moves in straight lines ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/8/4p3/8/8/8/4R3/8 w - - 0 1',
           info: `Click on the rook to bring it to the pawn!`,
         },
@@ -152,7 +152,7 @@ export class LessonsService {
       name: 'Queen - Queen = rook + bishop  ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/2p5/8/4p3/8/8/4Q3/8 w - - 0 1',
           info: `Grab all the pawns!`,
         },
@@ -182,7 +182,7 @@ export class LessonsService {
       name: 'King - The most important piece ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/8/3p4/8/8/8/3K4/8 w - - 0 1',
           info: 'The king is slow.  ',
         },
@@ -246,7 +246,7 @@ export class LessonsService {
       name: 'Bishop - It moves diagonally ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/7p/8/8/4p3/8/6B1/8 w - - 0 1',
           info: 'Grab all the black pawns! ',
         },
@@ -284,7 +284,7 @@ export class LessonsService {
       name: 'Knight - It moves in an L shape ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/3p4/8/2p5/4N3/8/8/8 w - - 0 1',
           info: `Knights have a fancy way of jumping around!`,
         },
@@ -322,7 +322,7 @@ export class LessonsService {
       name: 'Rook - It moves in straight lines ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/8/4p3/8/8/8/4R3/8 w - - 0 1',
           info: `Click on the rook to bring it to the pawn!`,
         },
@@ -360,7 +360,7 @@ export class LessonsService {
       name: 'Queen - Queen = rook + bishop  ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/2p5/8/4p3/8/8/4Q3/8 w - - 0 1',
           info: `Grab all the pawns!`,
         },
@@ -393,7 +393,7 @@ export class LessonsService {
       name: 'King - The most important piece ',
       subSections: [
         {
-          name: 'The Basic',
+          name: 'Basic',
           fen: '8/8/3p4/8/8/8/3K4/8 w - - 0 1',
           info: 'The king is slow.  ',
         },

@@ -19,6 +19,7 @@ router.post("/start", passport.authenticate("jwt"), async (req, res) => {
           eventType: eventType,
           eventId: eventId,
           startTime: new Date(),
+          totalTime: 0
         });
   
       return res.status(200).json(newEvent);
@@ -35,7 +36,7 @@ router.post("/start", passport.authenticate("jwt"), async (req, res) => {
 router.put("/update", passport.authenticate("jwt"), async (req, res) => {
     try{
         const {username, eventType, eventId, totalTime} = req.query
-        let filters = {username: username, eventID: eventId, eventType: eventType}
+        let filters = {username: username, eventId: eventId, eventType: eventType}
         const currEvent = await timeTracking.findOne(filters);
 
         //Error checking to ensure the event exist
@@ -43,8 +44,10 @@ router.put("/update", passport.authenticate("jwt"), async (req, res) => {
           return res.status(400).json("This event does not exist!")
         }
         // Saving to DB
+        
         currEvent.endTime = new Date();
-        currEvent.totalTime = totalTime;
+        let time = currEvent.totalTime + parseInt(totalTime)
+        currEvent.totalTime = time;
         await currEvent.save();
 
         return res.status(200).json("Timetracking for event updated");

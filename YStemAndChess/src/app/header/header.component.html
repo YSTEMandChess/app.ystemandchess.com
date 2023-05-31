@@ -1,32 +1,14 @@
-
-
-
 <nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="">
-    <img src="../../assets/images/Logo/YStemLogoWhite.png" alt="logo" width="260px" height="109px" />
+  <a class="navbar-brand" routerLink="/">
+    <img class="logo-img" src="../../assets/images/Logo/YStemLogoWhite.png" alt="logo" width="260px" height="109px" />
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-    <ul class="navbar-nav">
-
-      <!-- <li class="nav-item display-flex">
-        <a class="nav-link hvr-underline-from-left" href="{{ playLink }}"
-          >Play</a
-        >
-      </li> -->
-
-      <!-- <li class="nav-item display-flex">
-        <a class="nav-link hvr-underline-from-left" routerLink="/learnings"
-          >Lessons/Play</a
-        >
-      </li> -->
-
-
-
-      <li class="nav-item display-flex">
+    <ul class="navbar-nav align-items-lg-center">
+      <li class="nav-item">
         <div *ngIf="(role === 'mentor' || role === 'student') && !inMatch">
           <a class="nav-link hvr-underline-from-left" (click)="openModal('find-game')" (click)="findGame()">Find a
             Game</a>
@@ -45,34 +27,141 @@
             </button>
           </jw-modal>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link hvr-underline-from-left" routerLink="/programs">Programs</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+          About Us<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/online-expansion">Online
+              Expansion</a></li>
+          
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/benefit-of-computer-science">Benefit of Computer
+          Science</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/benefit-of-chess">Benefit of Chess</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/benefit-of-math-tutoring">Benefit of Math Tutoring</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/benefit-of-mentoring">Benefit of Mentoring</a></li>
+
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/about-us">About us</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/mission">Mission</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/financial">Financial</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/board">Board</a></li>
+
+        </ul>
+      </li>
+      <li class="nav-item" *ngIf="role !== 'mentor' && role !== 'student'">
+        <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Mentor</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link hvr-underline-from-left" routerLink="/learnings">Lessons/Play</a>
+      </li>
+      <li class="nav-item" *ngIf="!logged">
+        <a routerLink="/login" id="login" class="nav-link hvr-underline-from-left" tabindex="-1" role="button"
+          aria-disabled="true">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="inMatch && role !== 'parent'">
+        <a class="nav-link hvr-underline-from-left" (click)="leaveMatch()">Leave Meeting</a>
+      </li>
+      <!-- <li class="nav-item" *ngIf="!logged">
+        <a routerLink="/signup" id="login" class="btn btn-lg login lesson-btn sign-btn" tabindex="-1" role="button"
+          aria-disabled="true">Sign up</a>
+      </li> -->
+      <li class="nav-item" *ngIf="logged">
+        <div class="btn-group">
+          <button class="btn btn-secondary btn-lg dropdown-toggle login hvr-fade-2" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ username }}
+          </button>
+          <div class="dropdown-menu dropdown-menu-right">
+            <div *ngIf="role === 'student'">
+              <a class="dropdown-item" routerLink="/user-profile">Profile</a>
+            </div>
+            <div *ngIf="role === 'mentor'">
+              <a class="dropdown-item" routerLink="/mentor-profile">Profile</a>
+            </div>
+
+            <div *ngIf="role === 'parent'">
+              <a class="dropdown-item" routerLink="/parent-profile">Profile</a>
+            </div>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
+            <div *ngIf="role === 'parent'">
+
+              <a class="dropdown-item" routerLink="/parent-add-student">Add Student</a>
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- <li class="nav-item display-flex">
+        <a class="nav-link hvr-underline-from-left" href="{{ playLink }}"
+          >Play</a
+        >
+      </li> -->
+
+      <!-- <li class="nav-item display-flex">
+        <a class="nav-link hvr-underline-from-left" routerLink="/learnings"
+          >Lessons/Play</a
+        >
+      </li> -->
 
 
-       
-          <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a>
 
-       
-        
-        <div> <li class="dropdown">
-          <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
-            About Us<span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/online-expansion-article">Online Expansion Article</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/computer-science-article">Computer Science Benefit Article</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/chess-benefit-article">Chess Benefit Article</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/math-article">Math Tutoring Benefit Article</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/mentoring-article">Mentoring Benefit Article</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/about-us">About us</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/mission-hifi">Mission</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/financial-hifi">Financial</a></li>
-            <li class = "menu-item-li"><a href="#" class = "menu-item-div" routerLink="/board-hifi">Board</a></li>  
-
-          </ul>
-        </li></div>
+      <!-- <li class="nav-item display-flex"> -->
+        <!-- <div *ngIf="(role === 'mentor' || role === 'student') && !inMatch">
+          <a class="nav-link hvr-underline-from-left" (click)="openModal('find-game')" (click)="findGame()">Find a
+            Game</a>
+          <jw-modal id="find-game">
+            <h1>Finding a game please wait</h1>
+            <br />
+            <h6 class="red-text">
+              Note : Please don't use other video conferencing application while
+              playing the game for better performance
+            </h6>
+            <br /><br />
+            <div class="loader"></div>
+            <br />
+            <button (click)="removeFromWaiting()" (click)="closeModal('find-game')">
+              X
+            </button>
+          </jw-modal>
+        </div> -->
 
 
 
-        <!-- <ul class="navbar-nav">
+        <!-- <a class="nav-link hvr-underline-from-left" href="/programs">Programs</a> -->
+
+
+
+        <!-- <div> -->
+      <!-- <li class="dropdown">
+        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+          About Us<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/online-expansion-article">Online
+              Expansion Article</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/computer-science-article">Computer
+              Science Benefit Article</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/chess-benefit-article">Chess Benefit
+              Article</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/math-article">Math Tutoring Benefit
+              Article</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/mentoring-article">Mentoring Benefit
+              Article</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/about-us">About us</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/mission">Mission</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/financial">Financial</a></li>
+          <li class="menu-item-li"><a href="#" class="menu-item-div" routerLink="/board">Board</a></li>
+
+        </ul>
+      </li> -->
+  <!-- </div> -->
+
+
+
+  <!-- <ul class="navbar-nav">
          
           <li mdbDropdown class="nav-item dropdown">
             <a
@@ -102,19 +191,19 @@
 
 
 
-        <div *ngIf="role !== 'mentor' && role !== 'student'">
-          <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Mentor</a>
-        </div>
+  <!-- <div *ngIf="role !== 'mentor' && role !== 'student'">
+    <a class="nav-link hvr-underline-from-left" routerLink="/be-amentor">Mentor</a>
+  </div>
 
-        <div> <a class="nav-link hvr-underline-from-left" routerLink="/learnings">Lessons/Play</a></div>
+  <div> <a class="nav-link hvr-underline-from-left" routerLink="/learnings">Lessons/Play</a></div> -->
 
 
-        <!-- <div *ngIf="role !== 'student'">
+  <!-- <div *ngIf="role !== 'student'">
           <a class="nav-link hvr-underline-from-left" href="/programs"
             >Lesson/play</a
           >
         </div> -->
-        <!-- <div *ngIf="role !== 'student'">
+  <!-- <div *ngIf="role !== 'student'">
           <a routerLink="/login"
           id="login" class="nav-link hvr-underline-from-left"  role="button"
           aria-disabled="true"
@@ -122,12 +211,12 @@
           >
         </div> -->
 
-        <div *ngIf="!logged">
-          <a routerLink="/login" id="login" class="nav-link hvr-underline-from-left" tabindex="-1" role="button"
-            aria-disabled="true">Login</a>
-        </div>
+  <!-- <div *ngIf="!logged">
+    <a routerLink="/login" id="login" class="nav-link hvr-underline-from-left" tabindex="-1" role="button"
+      aria-disabled="true">Login</a>
+  </div> -->
 
-        <!-- <a
+  <!-- <a
           routerLink="/login"
           id="login"
           class="btn btn-lg login lesson-btn sign-btn"
@@ -137,27 +226,27 @@
           > -->
 
 
-        <div *ngIf="inMatch && role !== 'parent'">
-          <a class="nav-link hvr-underline-from-left" (click)="leaveMatch()">Leave Meeting</a>
-        </div>
-      </li>
-
-     
+  <!-- <div *ngIf="inMatch && role !== 'parent'">
+    <a class="nav-link hvr-underline-from-left" (click)="leaveMatch()">Leave Meeting</a>
+  </div>
+  </li> -->
 
 
-      <!-- <li class="nav-item display-flex">
+
+
+  <!-- <li class="nav-item display-flex">
         <div *ngIf="role === 'student'">
           <a class="nav-link hvr-underline-from-left" href="/lessons">Lessons</a>
         </div>
         
       </li> -->
-      <!-- <li class="nav-item display-flex">
+  <!-- <li class="nav-item display-flex">
         <a class="nav-link hvr-underline-from-left" href="/contact">Contact</a>
       </li>
       <li class="nav-item display-flex">
         <a class="nav-link hvr-underline-from-left" href="/why-chess">FAQ</a>
       </li> -->
-      <!-- <li class="nav-item display-flex">
+  <!-- <li class="nav-item display-flex">
         <a
           routerLink="/donate"
           class="btn btn-lg donate hvr-fade-1"
@@ -167,31 +256,35 @@
           >Donate</a
         >
       </li> -->
-      <li class="nav-item display-flex" *ngIf="!logged">
-        <a routerLink="/login" id="login" class="btn btn-lg login lesson-btn sign-btn" tabindex="-1" role="button"
-          aria-disabled="true">Sign up</a>
-      </li>
-      <li class="nav-item display-flex" *ngIf="logged">
-        <div class="btn-group">
-          <button class="btn btn-secondary btn-lg dropdown-toggle login hvr-fade-2" type="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            {{ username }}
-          </button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div *ngIf="role === 'student'">
-              <a class="dropdown-item" routerLink="/user-profile">Profile</a>
-            </div>
-            <div *ngIf="role === 'mentor'">
-              <a class="dropdown-item" routerLink="/mentor-profile">Profile</a>
-            </div>
-            <a class="dropdown-item" (click)="logout()">Logout</a>
-            <div *ngIf="role === 'parent'">
-            
-              <a class="dropdown-item" routerLink="/parent-add-student">Add Student</a>
-            </div>
-          </div>
+  <!-- <li class="nav-item display-flex" *ngIf="!logged">
+    <a routerLink="/login" id="login" class="btn btn-lg login lesson-btn sign-btn" tabindex="-1" role="button"
+      aria-disabled="true">Sign up</a>
+  </li>
+  <li class="nav-item display-flex" *ngIf="logged">
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-lg dropdown-toggle login hvr-fade-2" type="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{ username }}
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <div *ngIf="role === 'student'">
+          <a class="dropdown-item" routerLink="/user-profile">Profile</a>
         </div>
-      </li>
-    </ul>
+        <div *ngIf="role === 'mentor'">
+          <a class="dropdown-item" routerLink="/mentor-profile">Profile</a>
+        </div>
+
+        <div *ngIf="role === 'parent'">
+          <a class="dropdown-item" routerLink="/parent-profile">Profile</a>
+        </div>
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+        <div *ngIf="role === 'parent'">
+
+          <a class="dropdown-item" routerLink="/parent-add-student">Add Student</a>
+        </div>
+      </div>
+    </div>
+  </li> -->
+  </ul>
   </div>
 </nav>

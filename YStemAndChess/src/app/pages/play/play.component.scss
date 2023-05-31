@@ -1,14 +1,14 @@
 .game_wrapper {
-  display: flex;
-  justify-content: space-around;
+  // display: flex;
+  // justify-content: space-around;
   .chess {
     width: 100%;
-    display: flex;
-    justify-content: center;
+    // display: flex;
+    // justify-content: center;
 
     iframe {
-      min-width: 700px;
-      min-height: 700px;
+      min-width: 100%;
+      min-height: 100%;
 
       #document html {
         height: 690px;
@@ -21,17 +21,21 @@
   pointer-events: none;
 }
 
+.chessboard {
+  height: 35rem;
+}
+
 .stream_wrapper {
   display: flex;
-  width: 335px;
+  // width: 335px;
   margin-top: 8px;
   position: relative;
   // justify-content: flex-end;
   flex-direction: column;
   .jitsi {
     display: flex;
-    width: 325px;
-    height: 310px;
+    width: 250px;
+    height: 175px!important;
     padding: 6px 3px
   }
 }
@@ -72,7 +76,7 @@
 }
 .display-step {
   display: block;
-  height: 41rem;
+  height: 33rem;
   overflow: hidden scroll;
   cursor: pointer;
   margin-left: 25px;
@@ -189,16 +193,123 @@ td {
 @media only screen and (max-width: 1024px) {
   .chess {
     overflow: scroll;
-    height: 75vh;
-    width: 60vw;
+    // height: 75vh;
+    // width: 60vw;
 
     iframe {
-      min-width: 200px;
-      min-height: 200px;
+      min-width: 100%;
+      min-height: 100%;
 
       width: 100%;
       height: 100%;
     }
+  }
+
+  .stream_wrapper .jitsi {
+    width: 210px;
+    height: 135px !important;
+  }
+
+  #draggable-remote {
+    top: 225px!important;
+  }
+
+  .chessboard {
+    height: 27rem;
+  }
+
+  .display-step {
+    margin-left: 0;
+    height: 27rem;
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .chessboard {
+    height: 44rem;
+  }
+  .display-none{
+    display: none;
+  }
+
+  .stream_wrapper .jitsi {
+    width: 275px;
+    height: 175px !important;
+  }
+
+  #draggable-remote {
+    top: 270px!important;
+  }
+
+  .video-col {
+    height: 32rem;
+  }
+
+  .display-step {
+    margin-left: 0;
+    height: 32rem;
+    width: auto;
+  }
+}
+
+@media only screen and (max-width:426px) {
+  .video-col {
+    height: 40rem;
+  }
+
+  .stream_wrapper .jitsi {
+    width: 380px;
+    height: 225px !important;
+  }
+
+  #draggable-remote {
+    top: 316px !important;
+}
+
+  .video-student {
+    height: 19rem;
+  }
+
+  .display-step {
+    margin-left: 0;
+    height: 32rem;
+    width: auto;
+  }
+
+  .chessboard {
+    height: 25rem;
+  }
+}
+
+@media only screen and (min-width:321px) and (max-width:376px) {
+  .stream_wrapper .jitsi{
+    width: 330px;
+  }
+}
+
+@media only screen and (max-width:321px) {
+  .video-col {
+    height: 39rem;
+  }
+
+  .stream_wrapper .jitsi{
+    width: 275px;
+    height: 190px;
+  }
+
+  .video-student {
+    height: 20rem;
+  }
+
+  .display-step {
+    margin-left: 0;
+    height: 32rem;
+    width: auto;
+  }
+
+  .chessboard {
+    height: 20rem;
   }
 }
 
@@ -206,14 +317,10 @@ td {
   .chess {
     // border: 2px solid black;
     overflow: scroll;
-    min-height: 37vh;
-    width: 100vw;
 
     iframe {
-      min-width: 200px;
-      min-height: 200px;
-      max-width: 100%;
-      max-height: 100%;
+      min-width: 100%;
+      min-height: 100%;
     }
   }
 }

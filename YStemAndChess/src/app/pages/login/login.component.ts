@@ -63,10 +63,10 @@ export class LoginComponent implements OnInit {
         console.log(payload,true);
         switch (payload['role']) {
           case 'student':
-            window.location.pathname = '/student';
+            window.location.pathname = '/user-profile';
             break;
           case 'parent':
-            window.location.pathname = '/parent';
+            window.location.pathname = '/parent-profile';
             break;
           case 'mentor':
             window.location.pathname = '/mentor-profile';

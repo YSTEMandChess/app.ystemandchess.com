@@ -617,12 +617,12 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
-*{
-    box-sizing: border-box;
-    margin: 0 !important;
-    padding: 0;
-    background-color: #ffffff;
-}
+// *{
+//     box-sizing: border-box;
+//     margin: 0 !important;
+//     padding: 0;
+//     background-color: #ffffff;
+// }
 
 li, a, button {
     font-family: "Roboto", sans-serif;
@@ -630,6 +630,33 @@ li, a, button {
     font-size: 16px;
     color: #000000;
     text-decoration: none;
+}
+.home_pld_div{
+    background-image: url('../../../assets/images/homePage/chess_piece.png');
+    background-repeat: repeat;
+    background-color: #ddeacf;
+    padding: 5% 0%;
+
+    .container{
+        background-color: #bcd9a0;
+        padding: 50px 0px;
+
+        .card{
+            text-align: center;
+            align-items: center;
+            background: transparent;
+            border: none;
+
+            .card-title
+            {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.linktext:hover{
+color: #257d96;
 }
 
 // header {
@@ -677,17 +704,123 @@ li, a, button {
     height: 100px;
 }
 
-.container{
-    display: flex;
-    position: relative;
-    // top: 30px;
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 3rem;
-    z-index: 10;
-    padding-top: 60px;
-    justify-content: center;
+// .container{
+//     display: flex;
+//     position: relative;
+//     // top: 30px;
+//     max-width: 100%;
+//     width: 100%;
+//     margin: 0 auto;
+//     padding: 0 3rem;
+//     z-index: 10;
+//     padding-top: 60px;
+//     justify-content: center;
+// }
+
+.donate-btn {
+    padding: 10px 60px;
+    background: #D4DDDD;
+    color: black;
+    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 600;
+    box-shadow: 8px 9px 3px 0px #7fcc26;
+}
+
+.first-pic img {
+    width: -webkit-fill-available;
+}
+
+.free-card {
+    align-items: center;
+    border-radius: 12px;
+    background: #78ce2d;
+    border: none;
+    box-shadow: 20px 25px 3px 0px #EAD94C;
+
+    .main-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .free-title{
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .free-card-text {
+        text-align: center;
+        font-size: 26px;
+        margin-bottom: 97px;
+    }
+
+    .free-btn {
+        padding: 10px 60px;
+        background: #EAD94C;
+        color: black;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 8px 9px 3px 0px #d4dddd;
+    }
+
+}
+
+.join-btn {
+    padding: 10px 60px;
+        background: #EAD94C;
+        color: black;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 8px 9px 3px 0px #d4dddd;
+}
+.join-btn:hover,.donate-btn:hover,.free-btn:hover{
+    border:2px solid black
+}
+.Premium-card {
+    align-items: center;
+    border-radius: 12px;
+    background: white;
+    border: 4px solid #78ce2d;
+    box-shadow: 20px 25px 3px 0px #78ce2d;
+
+    .main-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .free-title{
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .free-card-text {
+        text-align: center;
+        font-size: 26px;
+        margin-bottom: 50px;
+    }
+
+    .free-btn {
+        padding: 10px 60px;
+        background: #d3dddd;
+        color: black;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 8px 9px 3px 0px #78ce2d;
+    }
+
+}
+
+.donate-btn {
+    padding: 10px 60px;
+        background: #d3dddd;
+        color: black;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        box-shadow: 8px 9px 3px 0px #78ce2d;
 }
 
 .everyone{
@@ -696,21 +829,21 @@ li, a, button {
 
 .first-head {
     font-family: "Lato", sans-serif;
-    font-size: 24px;
+    // font-size: 24px;
     font-weight: bold;
-    height: 96px;
-    width: 550px;
+    // height: 96px;
+    // width: 550px;
     // padding-left: 80px;
-    padding-top: 50px;
+    // padding-top: 50px;
     
 }
 .first-text {
-    height: 84px;
-    width: 549px;
+    // height: 84px;
+    // width: 549px;
     font-family: "Roboto", sans-serif;
     font-size: 20px; 
     // padding-left: 80px;
-    padding-top: 50px;
+    // padding-top: 50px;
 }
 
 // .chess-image {
@@ -730,10 +863,10 @@ li, a, button {
     
 }
 
-.block1 {
-    padding-top: 125px;
-    padding-left: 100px;
-}
+// .block1 {
+//     padding-top: 125px;
+//     padding-left: 100px;
+// }
 
 .divider {
     display: flex;
@@ -742,32 +875,38 @@ li, a, button {
     max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    padding: 0 9rem;
+    padding: 0;
     z-index: 10;
     padding-top: 0px;
     justify-content: center;
 }
 
+@media only screen and (min-width:768px) and (max-width:900px) {
+    .free-card .free-card-text {
+        margin-bottom: 130px;
+    }
+}
+
 .second-head {
     font-family: "Lato", sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    height: 38px;
-    width: 100%;
-    justify-content: space-around;
-    padding-left: 11rem;
+    // font-size: 24px;
+    // font-weight: bold;
+    // height: 38px;
+    // width: 100%;
+    // justify-content: space-around;
+    // padding-left: 11rem;
     padding-top: 2rem;
 }
 
 .third-head {
     font-family: "Lato", sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    height: 38px;
-    width: 100%;
-    justify-content: space-around;
-    padding-left: 11rem;
-    padding-top: 25px;
+    // font-size: 24px;
+    // font-weight: bold;
+    // height: 38px;
+    // width: 100%;
+    // justify-content: space-around;
+    // padding-left: 11rem;
+    // padding-top: 25px;
 }
 
 // .container2 {
@@ -852,46 +991,28 @@ li, a, button {
 }
 
 .border {
-    width: 1000px;
-    height: 450px;
     border: 3px solid rgb(122, 214, 47) !important;
     border-radius: 4px;
-    position: absolute;
-}
-
-.content   {
-    padding-left: 280px;
-    padding-top: 120px;
 }
 
 .group47 {
-    width: 300px;
-    height: 100px;
-    padding-left: 70px;
-    padding-bottom: 20px;
-
+    width: auto;
 }
 
-.text1 {
-    padding-left: 10px;
+@media screen and (max-width:460px) {
+    .group47 {
+        width: -webkit-fill-available;
+    }
 }
 
-.text2 {
-    padding-right: px;
-}
-
-.text3 {
-    padding-left: 130px;
-}
-
-.joinnow {
-    display: flex;
-    width: 400px;
-    height: 80px;
-    padding-left: 85px;
-    padding-top: 40px;
-    cursor: pointer;
-}
+// .joinnow {
+//     display: flex;
+//     width: 400px;
+//     height: 80px;
+//     padding-left: 85px;
+//     padding-top: 40px;
+//     cursor: pointer;
+// }
 
 .footer {
     width: 100%;
@@ -900,6 +1021,21 @@ li, a, button {
     position: absolute;
     overflow-x: hidden;
     height: 250px; 
+}
+
+@media only screen and (max-width:426px) {
+    .center {
+        text-align: center;
+    }
+    .margin-0 {
+        margin-left: 0!important;
+    }
+
+    .home_pld_div{
+        .container{
+            width: 90% !important;
+        }
+    }
 }
 
 

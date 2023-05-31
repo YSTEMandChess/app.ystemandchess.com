@@ -5,12 +5,13 @@ const jwt = require("jsonwebtoken");
 const AWS = require("aws-sdk");
 const axios = require("axios");
 const config = require("config");
+const requestIp = require("request-ip");
 const { v4: uuidv4 } = require("uuid");
 const router = express.Router();
 const { check, validationResult, query } = require("express-validator");
 const { waitingStudents, waitingMentors } = require("../models/waiting");
 const meetings = require("../models/meetings");
-const timeTracking = require("../models/timeTracking");
+const movesList = require("../models/moves");
 const { startRecording, stopRecording } = require("../utils/recordings");
 
 var isBusy = false; //State variable to see if a query is already running.
@@ -18,14 +19,12 @@ var isBusy = false; //State variable to see if a query is already running.
 // @route   GET /meetings/singleRecording
 // @desc    GET a presigned URL from AWS S3
 // @access  Public with jwt Authentication
-console.log("meeting JS called");
 router.get(
   "/singleRecording",
   [check("filename", "The filename is required").not().isEmpty()],
   passport.authenticate("jwt"),
   async (req, res) => {
     try {
-      console.log("single recording called");
       console.log(config.get("awsSecretKey"));
       const s3Config = {
         apiVersion: "latest",
@@ -272,7 +271,6 @@ router.post("/pairUp", passport.authenticate("jwt"), async (req, res) => {
       role === "student" ? "mentor" : "student",
       waitingQueue.username
     );
-    console.log("secondResponse: ", secondResponse);
 
     if (
       response === "There are no current meetings with this user." &&
@@ -401,8 +399,8 @@ router.put("/endMeeting", passport.authenticate("jwt"), async (req, res) => {
     const timePlayed = Math.floor(
       (currMeeting.meetingEndTime.getTime() -
         currMeeting.meetingStartTime.getTime()) /
-        1000 /
-        60
+      1000 /
+      60
     );
 
     //Update the student timePlayed field
@@ -461,46 +459,57 @@ const inMeeting = async (role, username) => {
 };
 
 //Async function to delete a user from the waitingStudents or waitingMentors collection
+// changes by riken start
 const deleteUser = async (role, username) => {
   if (role === "student") {
-    await waitingStudents.findOneAndDelete(
-      {
-        username,
-      },
-      function (error, doc) {
-        if (error) return false;
-      }
-    );
+    const user = await waitingStudents.findOne({ username: username })
+    if (user != null) {
+      user.delete();
+    }
   } else if (role === "mentor") {
-    await waitingMentors.findOneAndDelete(
-      {
-        username,
-      },
-      function (error, doc) {
-        if (error) return false;
-      }
-    );
+    const mentor = await waitingMentors.findOne({ username: username })
+    if (mentor != null) {
+      mentor.delete();
+    }
   }
+  //   await waitingStudents.findOneAndDelete(
+  //     {
+  //       username,
+  //     },
+  //     function (error, doc) {
+  //       if (error) return false;
+  //     }
+  //   );
+  // } else if (role === "mentor") {
+  //   await waitingMentors.findOneAndDelete(
+  //     {
+  //       username,
+  //     },
+  //     function (error, doc) {
+  //       if (error) return false;
+  //     }
+  //   );
+  // }
+  // changes by riken end
+
   return true;
 };
-
 //Async function to create and start an agora recording session
 
-//Async function to update the time played for a user 
+//Async function to update the time played for a user
 const updateTimePlayed = async (username, firstName, lastName, timePlayed) => {
   //Find the user in question
-  const timeTracking = await timeTracking.findOne({
+  const user = await users.findOne({
     username: username,
     firstName: firstName,
     lastName: lastName,
   });
-  if (!timeTracking) {
+  if (!user) {
     return "Could not find user";
   }
-  
-  timeTracking.timePlayed += timePlayed; //Update the total time played 
-  timeTracking.mentorLessonTime += timePlayed; // Update time played with mentors
-  await timeTracking.save(); //Save the new time played
+
+  user.timePlayed += timePlayed; //Update the time played
+  await user.save(); //Save the new time played
   return "Saved";
 };
 //Async function to get moves from the database
@@ -552,6 +561,7 @@ router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { meetingId } = req.query;
     const getBoardStates = await getMoves(meetingId);
+    console.log("getBoardStates",getBoardStates)
     res.status(200).send(getBoardStates);
   } catch (error) {
     console.error(error.message);
@@ -578,5 +588,139 @@ router.post(
     }
   }
 );
+
+router.post("/storeMoves", async (req, res) => {
+  try {
+    const { gameId, fen, pos, image } = req.query;
+    if (gameId) {
+      const getbyId = await getMovesByGameId(gameId);
+      let moveArray = getbyId.moves;
+      let oldMovesArr = [];
+      let moveArrayLength = moveArray.length;
+      if (moveArray.length > 0) {
+        oldMovesArr = moveArray[moveArrayLength - 1];
+        moveArrayLength = moveArray.length - 1;
+      }
+      if (
+        oldMovesArr.length === 0 ||
+        oldMovesArr[oldMovesArr.length - 1]?.fen !== fen
+      ) {
+        fen && oldMovesArr.push({ fen, pos, image });
+        moveArray[moveArrayLength] = oldMovesArr;
+        let updatedMove = await updateMoveByGameId(gameId, moveArray);
+        res.status(200).send(updatedMove);
+      } else {
+        res.status(202).send(oldMovesArr);
+      }
+    } else {
+      const newGameId = uuidv4();
+      const ipAddress = requestIp.getClientIp(req);
+      const { userId } = req?.query || null;
+      const moves = [];
+      // await movesList.find().populate("userId");
+      let response = await movesList.create({
+        gameId: newGameId,
+        userId: userId,
+        moves: moves,
+        ipAddress: ipAddress,
+      });
+      res.status(200).send(response);
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.post("/newGameStoreMoves", async (req, res) => {
+  try {
+    const { gameId } = req.query;
+    let meeting = await getMovesByGameId(gameId);
+    let moveArray = meeting.moves;
+    let oldMovesArr = [];
+    let moveArrayLength = moveArray.length;
+    moveArray[moveArrayLength] = oldMovesArr;
+    let updatedMove = await updateMoveByGameId(gameId, moveArray);
+    res.status(200).send(updatedMove);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.get("/getStoreMoves", async (req, res) => {
+  try {
+    const { gameId, meetingId } = req.query;
+    if (meetingId) {
+      const getBoardStates = await getMoves(meetingId);
+      res.status(200).send(getBoardStates);
+    } else {
+      const getBoardStates = await getMovesByGameId(gameId);
+      res.status(200).send(getBoardStates);
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server error");
+  }
+});
+
+router.post("/undoMeetingMoves", async (req, res) => {
+  try {
+    const { meetingId } = req.query;
+    const getBoardState = await getMoves(meetingId);
+    const movesData = getBoardState.moves;
+    const newData = movesData[movesData.length - 1];
+    const finalData = newData.splice(-2);
+    const deletedData = await deleteMovesByMeetingId(meetingId, movesData);
+    res.status(200).send(deletedData);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("server error");
+  }
+});
+
+const deleteMovesByMeetingId = async (meetingId, movesData) => {
+  const deletedMove = await meetings.findOneAndUpdate(
+    { meetingId: meetingId },
+    { moves: movesData }
+  );
+  return deletedMove;
+};
+
+router.post("/undoMoves", async (req, res) => {
+  try {
+    const { gameId } = req.query;
+    const getBoardState = await getMovesByGameId(gameId);
+    const movesData = getBoardState.moves;
+    const newData = movesData[movesData.length - 1];
+    const finalData = newData.splice(-2, 2);
+    const deletedData = await deleteMovesByGameId(gameId, movesData);
+    res.status(200).send(deletedData);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("server error");
+  }
+});
+
+const deleteMovesByGameId = async (gameId, deletedData) => {
+  const deletedMove = await movesList.findOneAndUpdate(
+    { gameId: gameId },
+    { moves: deletedData }
+  );
+  return deletedMove;
+};
+const getMovesByGameId = async (gameId) => {
+  const getMoves = await movesList.findOne({
+    gameId: gameId,
+  });
+  return getMoves;
+};
+const updateMoveByGameId = async (gameId, oldMovesArr) => {
+  const getMoves = await movesList.findOneAndUpdate(
+    { gameId: gameId },
+    { moves: oldMovesArr }
+  );
+  return getMoves;
+};
 
 module.exports = router;

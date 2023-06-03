@@ -12,17 +12,26 @@
 
 <body>
   <div class="userProfileDiv">
+       
     <div class="container">
-      <div class="myDiv text-center mb-4">
-        <img class="user-img" src="../../../assets/images/mentor-profile/user.PNG" />
-        <h2>Hello, {{ firstName | titlecase }} {{ lastName | titlecase}}!</h2>
 
+<div class="myDiv text-center mb-4">
+     
+<img class="user-img" src="../../../assets/images/mentor-profile/user.PNG" />
+        <h2>Hello, {{ firstName | titlecase }} {{ lastName | titlecase}}!</h2>
+    
       </div>
-      <div class="col-12" align="center">
-        <iframe class="iframe" src="https://www.ystemandchess.com/play-mentor"></iframe>
+      <div class="col-12" align="center"> 
+        <iframe id="profile-iframe" class="iframe" src="https://www.ystemandchess.com/play-mentor"></iframe>
+ 	
       </div>
     </div>
-
+ 	<script>    
+          const iframe = document.getElementById('profile-iframe');
+          document.body.addEventListener('click', () => {
+             iframe.src = 'https://www.ystemandchess.com/play-mentor';
+          });
+       </script> 
 
     <div class="container">
 

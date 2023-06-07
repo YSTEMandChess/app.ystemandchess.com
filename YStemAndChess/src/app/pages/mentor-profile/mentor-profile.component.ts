@@ -17,6 +17,8 @@ export class MentorProfileComponent implements OnInit {
   newStudentFlag: boolean = false;
   numNewStudents: number = 0;
  
+  public iframeCheck = 'dev'; //live or dev
+  public iframeLink = '';
   public chart: any;
   public username = '';
   public firstName = '';
@@ -47,7 +49,6 @@ export class MentorProfileComponent implements OnInit {
       });
   });
     
-    
     this.numStudents.push(0);
     this.numNewStudents++;
     let pLevel = 'nLogged';
@@ -63,7 +64,23 @@ export class MentorProfileComponent implements OnInit {
     // document.getElementById("student3").click();
     // document.getElementById("defaultOpen2").click();
     
-    
+     	 
+    const iframe = document.getElementById('profile-iframe') as HTMLIFrameElement;
+    if (this.iframeCheck == "live"){   
+      this.iframeLink = "http://www.ystemandchess.com/play-mentor";
+    } else {
+      this.iframeLink = "http://localhost:4200/play-mentor";
+    }
+    iframe.src = this.iframeLink
+    document.body.addEventListener('click', () => {
+      if (this.iframeCheck == "live"){ 
+        this.iframeLink = "http://www.ystemandchess.com/play-mentor";
+      } else {
+        this.iframeLink = "http://localhost:4200/play-mentor";
+      }
+      iframe.src = this.iframeLink
+      });
+       
     document.getElementById("defaultOpenStudent").click();
 
     if (uInfo['error'] == undefined) {

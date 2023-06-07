@@ -20,6 +20,8 @@ export class UserProfileComponent implements OnInit {
   newStudentFlag: boolean = false;
   numNewStudents: number = 0;
  
+  public iframeCheck = 'dev'; //live or dev
+  public iframeLink = '';
   public chart: any;
   public username = '';
   public firstName = '';
@@ -107,6 +109,21 @@ export class UserProfileComponent implements OnInit {
     this.role = uInfo['role'];
 
     // document.getElementById("defaultOpen").click();
+    const iframe = document.getElementById('profile-iframe') as HTMLIFrameElement;
+      if (this.iframeCheck == "live"){   
+        this.iframeLink = "http://www.ystemandchess.com/student";
+      } else {
+        this.iframeLink = "http://localhost:4200/student";
+      }
+      iframe.src = this.iframeLink
+      document.body.addEventListener('click', () => {
+        if (this.iframeCheck == "live"){ 
+          this.iframeLink = "http://www.ystemandchess.com/student";
+        } else {
+          this.iframeLink = "http://localhost:4200/student";
+        }
+        iframe.src = this.iframeLink
+        });
 
     if (uInfo['error'] == undefined) {
       pLevel = uInfo.role;

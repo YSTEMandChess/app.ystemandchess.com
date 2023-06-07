@@ -138,7 +138,7 @@ export class UserProfileComponent implements OnInit {
       this.role = uInfo['role'];
       if (this.role === 'student') {
         this.playLink = 'student';
-      } else if (this.role === 'm entor') {
+      } else if (this.role === 'mentor') {
         this.playLink = 'play-mentor';
       }
     }

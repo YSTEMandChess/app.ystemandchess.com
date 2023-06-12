@@ -57,3 +57,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+chessClient/package-lock.json
+middlewareNode/package-lock.json
+stockfishServer/package-lock.json
+YStemAndChess/package-lock.json
+YStemAndChess/src/app/pages/mentor-profile/mentor-profile.component.html

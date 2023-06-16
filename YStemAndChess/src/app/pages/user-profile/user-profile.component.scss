@@ -21,6 +21,13 @@ body {
   width: -webkit-fill-available;
 }
 
+.iframe{
+  width: 1110px;
+  height: 825px;
+  display: block;
+  margin-bottom: 50px;
+}
+
 .lesson::before{
   position: absolute;
     left: -16px;

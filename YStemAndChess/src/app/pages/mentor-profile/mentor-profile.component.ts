@@ -63,7 +63,7 @@ export class MentorProfileComponent implements OnInit {
     // document.getElementById("defaultOpen").click();
     // document.getElementById("student3").click();
     // document.getElementById("defaultOpen2").click();
-    
+
      	 
     const iframe = document.getElementById('profile-iframe') as HTMLIFrameElement;
     if (this.iframeCheck == "live"){   

@@ -109,6 +109,7 @@ export class UserProfileComponent implements OnInit {
     this.role = uInfo['role'];
 
     // document.getElementById("defaultOpen").click();
+
     const iframe = document.getElementById('profile-iframe') as HTMLIFrameElement;
       if (this.iframeCheck == "live"){   
         this.iframeLink = "http://www.ystemandchess.com/student";
@@ -125,6 +126,7 @@ export class UserProfileComponent implements OnInit {
         iframe.src = this.iframeLink
         });
 
+
     if (uInfo['error'] == undefined) {
       pLevel = uInfo.role;
       this.username = uInfo.username;
@@ -138,7 +140,7 @@ export class UserProfileComponent implements OnInit {
       this.role = uInfo['role'];
       if (this.role === 'student') {
         this.playLink = 'student';
-      } else if (this.role === 'mentor') {
+      } else if (this.role === 'm entor') {
         this.playLink = 'play-mentor';
       }
     }

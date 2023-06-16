@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   newStudentFlag: boolean = false;
   numNewStudents: number = 0;
  
-  public iframeCheck = 'dev'; //live or dev
+  public iframeCheck = 'live'; //live or dev
   public iframeLink = '';
   public chart: any;
   public username = '';

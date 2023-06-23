@@ -57,6 +57,7 @@ import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.comp
 import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
 
 import { PuzzlesComponent } from "./pages/puzzles/puzzles.component";
+import { PuzzlesService } from './services/puzzles/puzzles.service';
 
 
 const agoraConfig: AgoraConfig = {

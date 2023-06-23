@@ -56,6 +56,8 @@ import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
 import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component";
 import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
 
+import { PuzzlesComponent } from "./pages/puzzles/puzzles.component";
+
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -104,7 +106,8 @@ const agoraConfig: AgoraConfig = {
     MentoringBenefitArticleComponent,
     AboutUsComponent,
     MentorProfileComponent,
-    ParentProfileComponent
+    ParentProfileComponent,
+    PuzzlesComponent
   ],
   imports: [
     BrowserModule,

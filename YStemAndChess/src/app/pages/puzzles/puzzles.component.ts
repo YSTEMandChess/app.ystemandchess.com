@@ -16,6 +16,8 @@ export class PuzzlesComponent implements OnInit{
     chessSrc;
     info = "Welcome to puzzles"
     currentFen;
+    public dbIndex=0;
+    
     activeState = {
         theme: 'advantage fork long opening',
         fen: 'r2qkb1r/pQ3ppp/2p2n2/3b4/2BP4/8/PP3PPP/RNB1K2R b KQkq - 0 11',
@@ -24,19 +26,29 @@ export class PuzzlesComponent implements OnInit{
     };
 
     constructor(private ps: PuzzlesService, private sanitization: DomSanitizer) { 
-        this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
+	    this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
             environment.urls.chessClientURL
           );
           this.chess = new Chess('chessBoard', true);
-         
-        //   this.loadLessons();
+	//   this.loadLessons();
     }
 
-    ngOnInit(): void {
+    ngOnInit(): void {  
+ 
         this.setStateAsActive(this.ps.puzzleArray[0]);
         this.activeState = this.ps.puzzleArray[0];
-
-    }
+	  const button = document.getElementById('newPuzzle') as HTMLElement;
+        
+	  button.addEventListener('click', () => { 
+	  	this.dbIndex = this.dbIndex+1;
+    	  	if (this.dbIndex==3){
+			this.dbIndex=0;	
+    	  	}
+	  	this.setStateAsActive(this.ps.puzzleArray[this.dbIndex]);
+    	  	this.activeState = this.ps.puzzleArray[this.dbIndex];
+	 	});            
+	  }
+	  
 
     setStateAsActive(state) {
         console.log("click state---->", state)
@@ -46,49 +58,49 @@ export class PuzzlesComponent implements OnInit{
           'event':''
         };
         console.log("first obj---->", firstObj)
-        
+
         setTimeout(() => {
           // this.chess.newGameInit(state.fen);
           this.activeState = state;
           this.startLesson(firstObj);
         }, 500);
-          
-      
-          
+
+
+
         }
-      
+
         // loadNextLesson(){
         //   this.lessonNumber = this.lessonNumber+1;
         //   this.loadLessons();
         // }
-      
+
         // loadPrevLesson(){
         //   this.lessonNumber = this.lessonNumber-1;
         //   this.loadLessons();
         // }
-      
+
         // loadLessons(){
-          
+
         //   this.sections = this.ls.getLearnings(this.lessonNumber);
         // }
-      
+
         refresh() {
           this.chess.newGameInit(this.currentFen);
         }
-        
-      
+
+
         // showSubSection(event): void {
-      
-          
-          
+
+
+
         //   /* chaging the +  and -,
         //   to highlight the button that controls the panel */
         //   /* Toggle between hiding and showing the active panel */
-      
+
         //   let elText = event.srcElement.textContent;
         //   let panel = event.srcElement.nextElementSibling;
         //   const index = elText.split('').indexOf('+');
-      
+
         //   if (index > -1 && index < 4) {
         //     elText = `[-] ${elText.substring(4)}`;
         //     panel.style.display = 'block';
@@ -98,12 +110,12 @@ export class PuzzlesComponent implements OnInit{
         //   }
         //   event.srcElement.textContent = elText;
         // }
-      
+
         startLesson({ theme, fen,event }): void {
         console.log("start lesson call---->", theme)
           this.info = this.info;
           this.chess.newGameInit(fen);
           this.currentFen = fen;
-          
+
         }
 }

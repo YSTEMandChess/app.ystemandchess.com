@@ -6,6 +6,15 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+	<style>
+        .button-container {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+    </style>
+
     </head>
     <header>
         <app-header></app-header>
@@ -14,8 +23,11 @@
         <div class="container">
             <div class="chess">
                 <iframe id="chessBoard" [src]="chessSrc"></iframe>
-            </div> 
-        </div>
+			<div class="button-container">
+       <button id="newPuzzle">Get New Puzzle</button>
+	     </div>
+        </div> 
+       </div> 		
     </body>
     <footer>
         <app-footer></app-footer>

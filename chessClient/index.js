@@ -160,6 +160,10 @@ function onDrop(source, target, draggedPieceSource) {
 
   updateStatus();
   sendToParent(`piece-${draggedPieceSource}`);
+  sendToParent(JSON.stringify({
+    from: source,
+    to: target
+  }));
   sendToParent(`target:${move.to}`);
   sendToParent(game.fen());
 }

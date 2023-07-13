@@ -118,7 +118,6 @@ export class PuzzlesComponent implements OnInit{
 
                 // if the move doesn't match, revert the move, add the move back to move list
                 this.moveList.unshift(move[0] + move[1]);
-                console.log(this.moveList); // debug
                 
                 // reset the fen to previous fen and post message
                 this.currentFen = this.prevFen;
@@ -130,8 +129,6 @@ export class PuzzlesComponent implements OnInit{
                 );
               }
               else{
-                // debug: print move list
-                console.log(this.moveList);
                 
                 if (this.moveList.length == 0){
                   setTimeout(() => {

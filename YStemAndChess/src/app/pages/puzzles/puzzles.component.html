@@ -13,8 +13,10 @@
             right: 20px;
             transform: translateY(-50%);
         }
+		.hidden {
+      		display: none;
+    		}
     </style>
-
     </head>
     <header>
         <app-header></app-header>
@@ -22,6 +24,11 @@
     <body>
         <div class="container">
             <div class="chess">
+<button onclick="openDialog()">Open Dialog</button>
+
+  <dialog id="myDialog" class="hidden">
+    <button onclick="closeDialog()">Close</button>
+  </dialog>
                 <iframe id="chessBoard" [src]="chessSrc"></iframe>
 			<div class="button-container">
        <button id="newPuzzle">Get New Puzzle</button>

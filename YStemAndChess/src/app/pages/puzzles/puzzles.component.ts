@@ -17,8 +17,10 @@ export class PuzzlesComponent implements OnInit{
     chessSrc;
     info = "Welcome to puzzles"
     currentFen;
+    prevFen;
     moveList;
     playerColor;
+    playerMove = [];
     public dbIndex=0;
     
     activeState = {
@@ -70,64 +72,91 @@ export class PuzzlesComponent implements OnInit{
           // store the data as info
           let info = e.data;
 
-          // if it exists and is not an object, then it should be a FEN string
-          if (info && typeof info !== "object"){
-            // update the current FEN and color
-            this.currentFen = info;
-          
-            // get the chessBoard
-            var chessBoard = (<HTMLFrameElement>(
-              document.getElementById('chessBoard')
-            )).contentWindow;
+          if (info[0] === "{"){
+            let jsonInfo = JSON.parse(info)
 
-            // post the new FEN and color so board is updated
-            // note that we are posting the message to the chessClient
-            chessBoard.postMessage(
-              JSON.stringify({
-                boardState: this.currentFen
-              }),
-              environment.urls.chessClientURL
-            );
+            // store the move info if it was a player move
+            if ("from" in jsonInfo && "to" in jsonInfo){
+              this.playerMove[0] = jsonInfo.from;
+              this.playerMove[1] = jsonInfo.to;
+            }
+          }
+
+          // if it exists and is not an object
+          if (info && typeof info !== "object"){
+            if (this.isFen(info)){
+              this.prevFen = this.currentFen;
+              // update the current FEN and color
+              this.currentFen = info;
+            
+              // get the chessBoard
+              var chessBoard = (<HTMLFrameElement>(
+                document.getElementById('chessBoard')
+              )).contentWindow;
+
+              // post the new FEN and color so board is updated
+              // note that we are posting the message to the chessClient
+              chessBoard.postMessage(
+                JSON.stringify({
+                  boardState: this.currentFen
+                }),
+                environment.urls.chessClientURL
+              );
+            }
 
             // if the user have just moved, the computer should move
             // check if it is the computer's move
             var activeColor = this.currentFen.split(" ")[1];
-            console.log("active color --->", activeColor);
-            console.log("player color --->", this.playerColor);
 
             // make sure that activeColor actually exists (not undefined)
             // otherwise we would be incorrectly calling shift() on moveList
             if (activeColor && activeColor !== this.playerColor){
               
-              // debug: print move list
-              console.log(this.moveList);
-              
-              if (this.moveList.length == 0){
-                setTimeout(() => {
-                  Swal.fire('Puzzle completed', 'Good Job', 'success').then(function(){
-                    const button = document.getElementById('newPuzzle') as HTMLElement;
-                    button.click();
-                  });
-                }, 200);
+              // before the computer moves, first check if the user's move was correct
+              var move = this.getMove();
+              if (move[0] !== this.playerMove[0] || move[1] !== this.playerMove[1]){
+
+                // if the move doesn't match, revert the move, add the move back to move list
+                this.moveList.unshift(move[0] + move[1]);
+                console.log(this.moveList); // debug
+                
+                // reset the fen to previous fen and post message
+                this.currentFen = this.prevFen;
+                chessBoard.postMessage(
+                  JSON.stringify({
+                    boardState: this.currentFen
+                  }),
+                  environment.urls.chessClientURL
+                );
               }
               else{
-                // get the move and parse it into useable form
-                var move = this.moveList.shift();
-                var moveFrom = move.slice(0,2);
-                var moveTo = move.slice(2,4);
+                // debug: print move list
+                console.log(this.moveList);
                 
-                // shift again because the next move is player's move
-                this.moveList.shift();
-                
-                setTimeout(() => {
-                  chessBoard.postMessage(
-                    JSON.stringify({
-                      from: moveFrom,
-                      to: moveTo
-                    }),
-                    environment.urls.chessClientURL
-                  );
-                }, 500);
+                if (this.moveList.length == 0){
+                  setTimeout(() => {
+                    Swal.fire('Puzzle completed', 'Good Job', 'success').then(function(){
+                      const button = document.getElementById('newPuzzle') as HTMLElement;
+                      button.click();
+                    });
+                  }, 200);
+                }
+                else{
+                  // get the move and parse it into useable form
+                  var move = this.getMove();
+                  var moveFrom = move[0];
+                  var moveTo = move[1];
+                  
+                  setTimeout(() => {
+                    chessBoard.postMessage(
+                      JSON.stringify({
+                        from: moveFrom,
+                        to: moveTo
+                      }),
+                      environment.urls.chessClientURL
+                    );
+                  }, 500);
+                }
               }
             }
           }
@@ -191,17 +220,10 @@ export class PuzzlesComponent implements OnInit{
         document.getElementById('chessBoard')
       )).contentWindow;
           
-      console.log("posting move");
-          
       // get the first move from the list
-      var firstMove = this.moveList.shift();
-      // from: first two characters of a move
-      var firstMoveFrom = firstMove.slice(0,2);
-      // to: last two characters of a move
-      var firstMoveTo = firstMove.slice(2,4);
-
-      // shift again because the next move is player's move
-      this.moveList.shift();
+      var move = this.getMove();
+      var firstMoveFrom = move[0];
+      var firstMoveTo = move[1];
           
       setTimeout(() => {
         chessBoard.postMessage(
@@ -213,5 +235,21 @@ export class PuzzlesComponent implements OnInit{
         );
       }, 500)
 
+    }
+
+    getMove() {
+      // get the first move from the list
+      var move = this.moveList.shift();
+      // from: first two characters of a move
+      var moveFrom = move.slice(0,2);
+      // to: last two characters of a move
+      var moveTo = move.slice(2,4);
+
+      return [moveFrom, moveTo];
+    }
+
+    // basic check for if a string is a fen
+    isFen(fen){
+      return fen.split("/").length == 8;
     }
 }

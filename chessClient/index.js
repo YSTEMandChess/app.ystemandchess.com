@@ -51,6 +51,13 @@ eventer(
       isLesson = true;
     }
 
+    // move a piece if it's a move message
+    if ("from" in data && "to" in data){
+      game.move({from: data.from, to: data.to});
+      updateStatus();
+      sendToParent(game.fen());
+    }
+
     if (isLesson == true) {
       endSquare = data.endSquare;
       lessonBoard = data.boardState;

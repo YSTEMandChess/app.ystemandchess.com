@@ -54,7 +54,7 @@ export class PuzzlesComponent implements OnInit{
 
 		openDialog() {
 		const dialog = document.getElementById('myDialog') as HTMLDialogElement;
- 			 dialog.showModal();
+ 			 //dialog.showModal();
 		}
 
 		closeDialog() {

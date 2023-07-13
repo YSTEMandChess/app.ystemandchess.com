@@ -50,7 +50,17 @@ export class PuzzlesComponent implements OnInit{
     	  	this.activeState = this.ps.puzzleArray[this.dbIndex];
 	 	});            
 	  }
-	  
+	
+
+		openDialog() {
+		const dialog = document.getElementById('myDialog') as HTMLDialogElement;
+ 			 dialog.showModal();
+		}
+
+		closeDialog() {
+		const dialog = document.getElementById('myDialog') as HTMLDialogElement;
+  			dialog.close();
+		}  
 
     setStateAsActive(state) {
         console.log("click state---->", state)

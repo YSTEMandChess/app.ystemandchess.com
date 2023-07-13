@@ -5,6 +5,7 @@ import { Chess } from 'src/app/models/Chess';
 import { environment } from 'src/environments/environment';
 import { setPermissionLevel } from '../../globals';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-puzzles',
@@ -17,6 +18,7 @@ export class PuzzlesComponent implements OnInit{
     info = "Welcome to puzzles"
     currentFen;
     moveList;
+    playerColor;
     public dbIndex=0;
     
     activeState = {
@@ -86,6 +88,47 @@ export class PuzzlesComponent implements OnInit{
               }),
               environment.urls.chessClientURL
             );
+
+            // if the user have just moved, the computer should move
+            // check if it is the computer's move
+            var activeColor = this.currentFen.split(" ")[1];
+            console.log("active color --->", activeColor);
+            console.log("player color --->", this.playerColor);
+            // make sure that activeColor actually exists (not undefined)
+            // otherwise we would be incorrectly calling shift() on moveList
+            if (activeColor && activeColor !== this.playerColor){
+              
+              // debug: print move list
+              console.log(this.moveList);
+              
+              if (this.moveList.length == 0){
+                setTimeout(() => {
+                  Swal.fire('Puzzle completed', 'Good Job', 'success').then(function(){
+                    const button = document.getElementById('newPuzzle') as HTMLElement;
+                    button.click();
+                  });
+                }, 200);
+              }
+              else{
+                // get the move and parse it into useable form
+                var move = this.moveList.shift();
+                var moveFrom = move.slice(0,2);
+                var moveTo = move.slice(2,4);
+                
+                // shift again because the next move is player's move
+                this.moveList.shift();
+                
+                setTimeout(() => {
+                  chessBoard.postMessage(
+                    JSON.stringify({
+                      from: moveFrom,
+                      to: moveTo
+                    }),
+                    environment.urls.chessClientURL
+                  );
+                }, 500);
+              }
+            }
           }
         }
       )
@@ -103,21 +146,23 @@ export class PuzzlesComponent implements OnInit{
     
     setStateAsActive(state) {
         console.log("click state---->", state)
-        var playerColor = state.fen.split(" ")[1];
-        
+        this.playerColor = state.fen.split(" ")[1];
+        var color;
         // this is backwards because the first move is the computer's
         // so if the active color is black, then player is white, and vice versa
-        if (playerColor === "b"){
-          playerColor = "white";
+        if (this.playerColor === "b"){
+          this.playerColor = "w";
+          color = "white";
         }
         else{
-          playerColor = "black";
+          this.playerColor = 'b';
+          color = "black";
         }
 
         var firstObj = {
           'theme': state.theme,
           'fen': state.fen,
-          'color': playerColor,
+          'color': color,
           'event':''
         };
         console.log("first obj---->", firstObj)
@@ -194,6 +239,9 @@ export class PuzzlesComponent implements OnInit{
           var firstMoveFrom = firstMove.slice(0,2);
           // to: last two characters of a move
           var firstMoveTo = firstMove.slice(2,4);
+
+          // shift again because the next move is player's move
+          this.moveList.shift();
           
           setTimeout(() => {
             chessBoard.postMessage(

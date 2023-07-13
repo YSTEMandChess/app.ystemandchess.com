@@ -94,6 +94,7 @@ export class PuzzlesComponent implements OnInit{
             var activeColor = this.currentFen.split(" ")[1];
             console.log("active color --->", activeColor);
             console.log("player color --->", this.playerColor);
+
             // make sure that activeColor actually exists (not undefined)
             // otherwise we would be incorrectly calling shift() on moveList
             if (activeColor && activeColor !== this.playerColor){
@@ -172,86 +173,45 @@ export class PuzzlesComponent implements OnInit{
           this.activeState = state;
           this.startLesson(firstObj);
         }, 500);
+    }
 
+    refresh() {
+      this.chess.newGameInit(this.currentFen);
+    }
 
+    startLesson({ theme, fen, event }): void {
+      console.log("start lesson call---->", theme)
+      this.info = this.info;
+      this.chess.newGameInit(fen);
+      this.currentFen = fen;
 
-        }
-
-        // loadNextLesson(){
-        //   this.lessonNumber = this.lessonNumber+1;
-        //   this.loadLessons();
-        // }
-
-        // loadPrevLesson(){
-        //   this.lessonNumber = this.lessonNumber-1;
-        //   this.loadLessons();
-        // }
-
-        // loadLessons(){
-
-        //   this.sections = this.ls.getLearnings(this.lessonNumber);
-        // }
-
-        refresh() {
-          this.chess.newGameInit(this.currentFen);
-        }
-
-
-        // showSubSection(event): void {
-
-
-
-        //   /* chaging the +  and -,
-        //   to highlight the button that controls the panel */
-        //   /* Toggle between hiding and showing the active panel */
-
-        //   let elText = event.srcElement.textContent;
-        //   let panel = event.srcElement.nextElementSibling;
-        //   const index = elText.split('').indexOf('+');
-
-        //   if (index > -1 && index < 4) {
-        //     elText = `[-] ${elText.substring(4)}`;
-        //     panel.style.display = 'block';
-        //   } else {
-        //     elText = `[+] ${elText.substring(4)}`;
-        //     panel.style.display = 'none';
-        //   }
-        //   event.srcElement.textContent = elText;
-        // }
-
-        startLesson({ theme, fen, event }): void {
-          console.log("start lesson call---->", theme)
-          this.info = this.info;
-          this.chess.newGameInit(fen);
-          this.currentFen = fen;
-
-          // testing: trying to get a piece to move by itself
-          // get the chessBoard
-          var chessBoard = (<HTMLFrameElement>(
-            document.getElementById('chessBoard')
-          )).contentWindow;
+      // testing: trying to get a piece to move by itself
+      // get the chessBoard
+      var chessBoard = (<HTMLFrameElement>(
+        document.getElementById('chessBoard')
+      )).contentWindow;
           
-          console.log("posting move");
+      console.log("posting move");
           
-          // get the first move from the list
-          var firstMove = this.moveList.shift();
-          // from: first two characters of a move
-          var firstMoveFrom = firstMove.slice(0,2);
-          // to: last two characters of a move
-          var firstMoveTo = firstMove.slice(2,4);
+      // get the first move from the list
+      var firstMove = this.moveList.shift();
+      // from: first two characters of a move
+      var firstMoveFrom = firstMove.slice(0,2);
+      // to: last two characters of a move
+      var firstMoveTo = firstMove.slice(2,4);
 
-          // shift again because the next move is player's move
-          this.moveList.shift();
+      // shift again because the next move is player's move
+      this.moveList.shift();
           
-          setTimeout(() => {
-            chessBoard.postMessage(
-              JSON.stringify({
-                from: firstMoveFrom,
-                to: firstMoveTo
-              }),
-              environment.urls.chessClientURL
-            );
-          }, 500)
+      setTimeout(() => {
+        chessBoard.postMessage(
+          JSON.stringify({
+            from: firstMoveFrom,
+            to: firstMoveTo
+          }),
+          environment.urls.chessClientURL
+        );
+      }, 500)
 
-        }
+    }
 }

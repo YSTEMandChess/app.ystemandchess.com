@@ -17,10 +17,11 @@ export class PuzzlesComponent implements OnInit{
     chessSrc;
     info = "Welcome to puzzles"
     currentFen;
-    prevFen;
+    prevFen; // used to rollback on incorrect player moves
     moveList;
     playerColor;
-    playerMove = [];
+    playerMove = []; // used to check player move against the correct move
+    prevMove = []; // used to rollback highlights for the previous computer move
     public dbIndex=0;
     
     activeState = {
@@ -118,7 +119,7 @@ export class PuzzlesComponent implements OnInit{
 
                 // if the move doesn't match, revert the move, add the move back to move list
                 this.moveList.unshift(move[0] + move[1]);
-                
+
                 // reset the fen to previous fen and post message
                 this.currentFen = this.prevFen;
                 chessBoard.postMessage(
@@ -127,22 +128,42 @@ export class PuzzlesComponent implements OnInit{
                   }),
                   environment.urls.chessClientURL
                 );
+                
+                // since we reverted the board state, we also need to revert the highlight
+                chessBoard.postMessage(
+                  JSON.stringify({
+                    highlightFrom: this.prevMove[0],
+                    highlightTo: this.prevMove[1]
+                  }),
+                  environment.urls.chessClientURL
+                );
+
               }
               else{
-                
+                // if the user move is valid
+                // first check if we're at the end of puzzle
                 if (this.moveList.length == 0){
+                  // if we're at the end, send a pop up to notify user that puzzle is completed
                   setTimeout(() => {
-                    Swal.fire('Puzzle completed', 'Good Job', 'success').then(function(){
-                      const button = document.getElementById('newPuzzle') as HTMLElement;
-                      button.click();
-                    });
+                    Swal.fire('Puzzle completed', 'Good Job', 'success').then(                  
+                      // clicking ok on the pop up will simulate a click on the "Get New Puzzle" button
+                      function(){
+                        const button = document.getElementById('newPuzzle') as HTMLElement;
+                        button.click();
+                      }
+                    );
                   }, 200);
                 }
                 else{
+                  // if we're not at the end, computer should move
                   // get the move and parse it into useable form
                   var move = this.getMove();
                   var moveFrom = move[0];
                   var moveTo = move[1];
+                  
+                  // the computer just moved, update prevMove
+                  this.prevMove[0] = move[0];
+                  this.prevMove[1] = move[1];
                   
                   setTimeout(() => {
                     chessBoard.postMessage(
@@ -221,6 +242,10 @@ export class PuzzlesComponent implements OnInit{
       var move = this.getMove();
       var firstMoveFrom = move[0];
       var firstMoveTo = move[1];
+
+      // the computer just moved, update prevMove
+      this.prevMove[0] = move[0];
+      this.prevMove[1] = move[1];
           
       setTimeout(() => {
         chessBoard.postMessage(

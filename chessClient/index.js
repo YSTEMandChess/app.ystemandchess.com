@@ -120,8 +120,10 @@ eventer(
 
 function highlightMove(from, to){
   $board.find('.' + squareClass).removeClass('highlight');
-  $board.find('.square-' + from).addClass('highlight');
-  $board.find('.square-' + to).addClass('highlight');
+  if (from !== "remove" || to !== "remove"){
+    $board.find('.square-' + from).addClass('highlight');
+    $board.find('.square-' + to).addClass('highlight');
+  }
 }
 
 function flip() {

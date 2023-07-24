@@ -46,6 +46,15 @@ export class Chess {
     this.stopTheGameFlag = false;
     const msg = this.createAmessage(FEN, this.color);
     this.chessBoard.postMessage(msg, environment.urls.chessClientURL);
+    
+    // remove any previous move highlights since we are starting a new game
+    this.chessBoard.postMessage(
+      JSON.stringify({
+        highlightFrom: "remove",
+        highlightTo: "remove"
+      }),
+      environment.urls.chessClientURL
+    );
   }
 
   private dataTransform(data) {

@@ -18,7 +18,14 @@ li, a, button {
     text-decoration: none;
 }
 
+// header {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 30px 5%;
+//     background-color: #ffffff;
 
+// }
 
 .logo, .signup {
     cursor: pointer;
@@ -57,12 +64,55 @@ li, a, button {
 }
 
 .text1 {
-    font-family: Lato,sans-serif;
-    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lato", sans-serif;
+    // font-size: 15px !important;
+    font-weight: bold;
+    padding-bottom: 16px;
+    padding-top: 70px;
 }
 
-.bg-main{
+.picture1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pic1 {
+    width: 850px;
+    height: 450px;
+}
+
+.text2{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 10px; 
+}
+
+.text3{
+    padding: 0 143px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px; 
+    padding-bottom: 3px;
+    text-indent: 20px;
+}
+
+.text4{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-indent: 20px; 
+}
+
+.rectdiv2{
     background-color: #BFD99E;
+    width: 100%;
+    height: 165px;
+    margin-bottom: 30px;
 }
 
 
@@ -74,42 +124,75 @@ li, a, button {
     // height:200px;
     text-align: center;
     font-size: 32px;
-    // padding: 0 27rem;
-    // padding-top: 45px;
+    padding: 0 27rem;
+    padding-top: 45px;
     line-height: 38px;
     font-weight: 500;
 
 }
 
-.txt-h {
-    font-family: Lato,sans-serif;
-    font-weight: 700;
+.text5{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-indent: 20px; 
+   
+}
+
+.text6{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-indent: 20px; 
+}
+
+.text10{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-indent: 20px; 
+}
+
+.text7{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-indent: 20px;  
 }
 
 .txt-p{
-    text-align: left;
-    font-family: Roboto,sans-serif;
-    font-size: 16px;
-    text-align:justify;
-
-    p {
-        text-indent: 12px;
-    };
-}
-
-.text2{
-    font-size: 14px !important;
-    
-}
-
-.pic1 {
-    width: -webkit-fill-available;
+    text-align: justify;
 }
 
 .pic2{
-    width: auto;
-    max-width: 65%;
-    height: auto;
+    padding-left: 381px;
+}
+
+.text8{
+    padding-left: 382px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px; 
+}
+
+.text9{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-indent: 20px; 
+}
+
+.text10{
+    padding: 0 143px;
+    padding-bottom: 3px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-indent: 20px; 
 }
 
 // .footer{

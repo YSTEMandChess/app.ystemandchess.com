@@ -1,17 +1,19 @@
 import { SocketService } from '../services/socket/socket.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { setPermissionLevel } from '../globals';
 import { allowedNodeEnvironmentFlags } from 'process';
 import { ModalService } from '../_modal';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
+
 export class HeaderComponent implements OnInit {
   public username = '';
   public role = '';
@@ -21,27 +23,110 @@ export class HeaderComponent implements OnInit {
   private endFlag = false;
   public playLink = 'play-nolog';
   public inMatch = false;
-
+  public websiteTracker = 0;
+  public webTracker;
+  public websiteIdeal = 0;
+  public webIdeal;
+  public buttonClicked = false;
   constructor(
     private cookie: CookieService,
     private modalService: ModalService,
-    private socket: SocketService
-  ) {}
+    private socket: SocketService,
+    private router: Router
+  ) { }
 
+  redirectToURL() {
+    this.router.navigateByUrl('/login');
+  }
   async ngOnInit() {
+    this.link = '/';
+    this.checkSessionInfo();
+    setInterval(async () => {
+      let uInfo = await setPermissionLevel(this.cookie);
+      if (uInfo.error == "User is not logged in" && (this.router.url == "/student" || this.router.url == "/mentor-profile" || this.router.url == "/play-mentor")) {
+        this.redirectToURL();
+      }
+    }, 600000)
+  }
+
+  async checkSessionInfo() {
     let pLevel = 'nLogged';
     let uInfo = await setPermissionLevel(this.cookie);
+
     if (uInfo['error'] == undefined) {
       this.logged = true;
       pLevel = uInfo['role'];
       this.username = uInfo['username'];
       this.role = uInfo['role'];
+
+      const eventId = this.cookie.get('eventId');
+      const timerStatus = this.cookie.get('timerStatus');
+
+      // Delete the cookie
+      const currentDate = new Date();
+      if (eventId && new Date(eventId) < currentDate) {
+        this.cookie.delete('eventId');
+      }
+      if (eventId == '') {
+        let url: string;
+        url = `${environment.urls.middlewareURL}/timeTracking/start?username=${this.username}&eventType=${"website"}`;
+        this.httpGetAsync(url, 'POST', (response) => {
+          response = JSON.parse(response);
+          this.cookie.set('eventId', response.eventId);
+
+          let eventId = response.eventId;
+          this.webTracker = setInterval(() => {
+            this.cookie.set('timerStatus', "yes");
+            this.websiteTracker = this.websiteTracker + 2;
+            let totalTime = this.websiteTracker
+            if (totalTime >= 20) {
+              this.updateTrackingTime(eventId, totalTime);
+            }
+          }, 2000);
+        });
+      }
+      else {
+        if (timerStatus == 'yes') {
+        } else {
+          this.webTracker = setInterval(() => {
+            this.cookie.set('timerStatus', "yes");
+            this.websiteTracker = this.websiteTracker + 2;
+            let totalTime = this.websiteTracker
+            if (totalTime >= 20) {
+              this.updateTrackingTime(eventId, totalTime);
+            }
+          }, 2000);
+        }
+      }
+
       if (this.role === 'student') {
         this.playLink = 'student';
       } else if (this.role === 'mentor') {
         this.playLink = 'play-mentor';
       }
+    } else {
+      console.log('No tracker started');
     }
+
+    // if (this.role == 'student' || this.role == 'mentor') {
+    //   setInterval(() => {
+    //     let url = `${environment.urls.middlewareURL}/meetings/inMeeting`;
+    //     //change rest
+    //     this.httpGetAsync(url, 'GET', (response) => {
+    //       if (
+    //         JSON.parse(response) ===
+    //         'There are no current meetings with this user.'
+    //       ) {
+    //         if (this.inMatch) {
+    //           window.location.pathname = '/';
+    //           this.cookie.delete('this.buttonClicked');
+    //           this.cookie.delete('this.meetingId');
+    //         }
+    //         this.inMatch = false;
+    //       }
+    //     });
+    //   }, 5000);
+    // }
 
     if (this.role == 'student' || this.role == 'mentor') {
       setInterval(() => {
@@ -53,12 +138,20 @@ export class HeaderComponent implements OnInit {
             'There are no current meetings with this user.'
           ) {
             if (this.inMatch) {
-              window.location.pathname = '/';
+              if (this.role == 'student') {
+                window.location.pathname = '/student';
+                this.cookie.delete('this.buttonClicked');
+                this.cookie.delete('this.meetingId');
+              } else {
+                window.location.pathname = '/play-mentor';
+                this.cookie.delete('this.buttonClicked');
+                this.cookie.delete('this.meetingId');
+              }
             }
             this.inMatch = false;
           }
         });
-      }, 5000);
+      }, 1000);
     }
 
     // Check to see if they are currently in a game, or not.
@@ -68,7 +161,7 @@ export class HeaderComponent implements OnInit {
       // They are currently in a meeting. So set it up.
       if (
         JSON.parse(response) ==
-          'There are no current meetings with this user.' ||
+        'There are no current meetings with this user.' ||
         pLevel == 'nLogged'
       ) {
         this.inMatch = false;
@@ -78,6 +171,25 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  @HostListener('document:visibilitychange')
+  appVisibility() {
+    if (this.username != '') {
+      if (document.hidden) {
+        clearInterval(this.webTracker);
+        this.cookie.set('timerStatus', "no");
+
+        this.webIdeal = setInterval(() => {
+          this.websiteIdeal = this.websiteIdeal + 2;
+        }, 2000);
+      } else {
+        clearInterval(this.webIdeal);
+
+        this.webTracker = setInterval(() => {
+          this.websiteTracker = this.websiteTracker + 2;
+        }, 2000);
+      }
+    }
+  }
   openModal(id: string) {
     this.modalService.open(id);
   }
@@ -88,7 +200,7 @@ export class HeaderComponent implements OnInit {
 
   public removeFromWaiting() {
     let url = `${environment.urls.middlewareURL}/meetings/dequeue`;
-    this.httpGetAsync(url, 'DELETE', (response) => {});
+    this.httpGetAsync(url, 'DELETE', (response) => { });
     this.endFlag = true;
   }
 
@@ -171,7 +283,7 @@ export class HeaderComponent implements OnInit {
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/endMeeting`,
       'PUT',
-      (response) => {}
+      (response) => { }
     );
     this.endGame();
   }
@@ -183,4 +295,26 @@ export class HeaderComponent implements OnInit {
       JSON.stringify({ username: userContent.username })
     );
   }
+
+  updateTrackingTime = (eventId: any, totalTime: any) => {
+    let url: string = '';
+    url = `${environment.urls.middlewareURL}/timeTracking/update?username=${this.username}&eventType=${"website"}&eventId=${eventId}&totalTime=${totalTime}`;
+    this.httpGetAsync(url, 'PUT', (response) => {
+      response = JSON.parse(response);
+      this.websiteTracker = 0;
+    }
+    )
+  };
+
+  deleteNewGameCookie(): void {
+    this.cookie.delete('this.newGameId');
+  }
+  handleFindGameButtonClick(): void {
+    this.buttonClicked = true;
+    this.cookie.set('this.buttonClicked', 'true');
+  }
 }
+function redirectToURL() {
+  throw new Error('Function not implemented.');
+}
+

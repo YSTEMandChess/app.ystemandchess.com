@@ -50,17 +50,10 @@ html, body {
   padding: 0;
 }
 
-.divider {
-  display: flex;
-  position: relative;
-  top: 30px;
-  max-width: 100%;
+.footer {
   width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  z-index: 10;
-  padding-top: 0px;
-  justify-content: center;
+  background-color: rgb(169, 208, 159) !important;
+  overflow: auto;
 }
 
 .table {

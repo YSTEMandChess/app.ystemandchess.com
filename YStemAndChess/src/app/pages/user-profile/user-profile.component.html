@@ -13,7 +13,7 @@
         <div class="userProfileDiv">
           <div class="container">
             <div class="myDiv">
-              <h2 class="font-weight-bold ml-5">{{ firstName | titlecase }} {{ lastName | titlecase}}</h2>
+              <h2>{{ firstName | titlecase }} {{ lastName | titlecase}}</h2>
              <!-- <p class="lastLoginTime"><img src="https://cdn.iconscout.com/icon/free/png-256/time-3250679-2706281.png" srcset="https://cdn.iconscout.com/icon/free/png-512/time-3250679-2706281.png 2x" alt="Time Icon" width="13"> &nbsp;Active 1 hour ago</p>
              <hr> -->
             </div>
@@ -37,7 +37,7 @@
                                   (chartClick)="onChartClick($event)">
                               </canvas>
                             </div> -->
-                            <img class="chart-img" src="../../../assets/images/student/chart.PNG" />
+                            <img src="../../../assets/images/student/chart.PNG" />
                         <!-- </div> -->
                     </div>
                     
@@ -47,24 +47,24 @@
                       <!-- <p style="font-size: 25px;"><strong>{{ firstName | titlecase }} {{ lastName | titlecase}} </strong></p>
                       <p><img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/time-138-97129.png" srcset="https://cdn.iconscout.com/icon/premium/png-512-thumb/time-138-97129.png 2x" alt="Time Icon" width="20">&nbsp; Member since <strong>{{ accountCreatedAt  }} </strong></p>
                       <p>&nbsp;</p> -->
-                      <h4 class=" my-4 font-weight-bold">Time Spent :</h4>
+                      <p style="font-size: 24px;margin-bottom: 2px;"><strong>Time Spent :</strong></p>
                       <!-- <hr> -->
 
-                      <div class="row mb-4">
-                      <div class="col-md-4 col-sm-6 col-12">
-                        <p> <span class="website-icon"></span>&nbsp; Website : <strong>45 minutes</strong></p>
+                      <div class="row" style="margin-bottom: 20px">
+                      <div class="col-4">
+                        <p style="margin-left:20px"> <span class="website-icon"></span>&nbsp; Website : <strong>45 minutes</strong></p>
                       </div>
-                      <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="lesson"></span>&nbsp; Lesson : <strong>10 minutes</strong></p>
+                      <div class="col-4">
+                        <p style="margin-left:20px"><span class="lesson"></span>&nbsp; Lesson : <strong>10 minutes</strong></p>
                       </div>
-                      <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="puzzle"></span> &nbsp; Puzzle : <strong>5 minutes</strong></p>
+                      <div class="col-4">
+                        <p style="margin-left:20px"><span class="puzzle"></span> &nbsp; Puzzle : <strong>5 minutes</strong></p>
                       </div>
-                      <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="playing"></span>&nbsp; Playing : <strong>15 minutes</strong></p>
+                      <div class="col-4">
+                        <p style="margin-left:20px"><span class="playing"></span>&nbsp; Playing : <strong>15 minutes</strong></p>
                       </div>
-                      <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="mentoring"></span>&nbsp; Mentoring : <strong>15 minutes</strong></p>
+                      <div class="col-4">
+                        <p style="margin-left:20px"><span class="mentoring"></span>&nbsp; Mentoring : <strong>15 minutes</strong></p>
                       </div>
                       
                       
@@ -140,94 +140,98 @@
                     
                 </div> -->
 
-                <div>
-                  <div class="tab">
-                    <button class="tablinks tab1" (click)="openCity($event, 'Activity')" id="defaultOpen"><img src="../../../assets/images/student/activity_tab.png" class="tab-image" /></button>
-                    <button class="tablinks tab2" (click)="openCity($event, 'Mentor_Session')"><img src="../../../assets/images/student/mento_tab.PNG" class="tab-image2" /></button>
-                    <button class="tablinks tab2" (click)="openCity($event, 'Professional_Development')"><img src="../../../assets/images/student/prodev_tab.PNG" class="tab-image2" /></button>
-                    <button class="tablinks tab2" (click)="openCity($event, 'Chess_Lession')"><img src="../../../assets/images/student/chess_tab.PNG" class="tab-image2" /></button>
-                    <button class="tablinks tab2" (click)="openCity($event, 'Games')"><img src="../../../assets/images/student/games_tab.PNG" class="tab-image2" /></button>
-                    <button class="tablinks tab2" (click)="openCity($event, 'Puzzles')"><img src="../../../assets/images/student/puzzles_tab.PNG" class="tab-image2" /></button>
-                    <button class="tablinks tab2" (click)="openCity($event, 'computer')"><img src="../../../assets/images/student/play_tab.PNG" class="tab-image2" /></button>
-                    <button class="tablinks tab3" (click)="openCity($event, 'Recordings')"><img src="../../../assets/images/student/recordings_tab.PNG" class="tab-image3" /></button>
-                    
-                  </div>
-                  <div id="Activity" class="tabcontent">
-                    <div class="rightbox">
-                      <div class="rb-container">
-                        <ul class="rb">
-                          <li class="rb-item" ng-repeat="itembx">
-                            <div class="timestamp">
-                              23rd July 2022<br> 7:00 PM
-                            </div>
-                            <div class="item-title">Solved 2 tactical puzzles</div>
+
+                <div class="tab">
+                  <button class="tablinks tab1" (click)="openCity($event, 'Activity')" id="defaultOpen"><img src="../../../assets/images/student/activity_tab.png" class="tab-image" /></button>
+                  <button class="tablinks tab2" (click)="openCity($event, 'Mentor_Session')"><img src="../../../assets/images/student/mento_tab.PNG" class="tab-image2" /></button>
+                  <button class="tablinks tab2" (click)="openCity($event, 'Professional_Development')"><img src="../../../assets/images/student/prodev_tab.PNG" class="tab-image2" /></button>
+                  <button class="tablinks tab2" (click)="openCity($event, 'Chess_Lession')"><img src="../../../assets/images/student/chess_tab.PNG" class="tab-image2" /></button>
+                  <button class="tablinks tab2" (click)="openCity($event, 'Games')"><img src="../../../assets/images/student/games_tab.PNG" class="tab-image2" /></button>
+                  <button class="tablinks tab2" (click)="openCity($event, 'Puzzles')"><img src="../../../assets/images/student/puzzles_tab.PNG" class="tab-image2" /></button>
+                  <button class="tablinks tab2" (click)="openCity($event, 'computer')"><img src="../../../assets/images/student/play_tab.PNG" class="tab-image2" /></button>
+                  <button class="tablinks tab3" (click)="openCity($event, 'Recordings')"><img src="../../../assets/images/student/recordings_tab.PNG" class="tab-image3" /></button>
                   
-                          </li>
-                          <li class="rb-item" ng-repeat="itembx">
-                            <div class="timestamp">
-                              19th July 2022<br> 3:00 PM
-                            </div>
-                            <div class="item-title">Practiced 7 positions on <a href="/learnings">Piece Checkmates I</a></div>
-                  
-                          </li>
-                  
-                          <li class="rb-item" ng-repeat="itembx">
-                            <div class="timestamp">
-                              17st July 2022<br> 7:00 PM
-                            </div>
-                            <div class="item-title">Signed up to <a target="_blank" href="http://ystemandchess.com/">ystemandchess.com</a></div>
-                  
-                          </li>
-                  
-                        </ul>
-                  
-                      </div>
-                  </div>  
-                  </div>
-                  
-                  <div id="Mentor_Session" class="tabcontent">
-                    <h3>Mentor Session</h3>
-                    
-                  </div>
-                  
-                  <div id="Professional_Development" class="tabcontent">
-                    <h3>Professional Development</h3>
-                  
-                  </div>
-  
-                  <div id="Chess_Lession" class="tabcontent">
-                    <h3>Chess Lession</h3>
-                    
-                  </div>
-  
-                  <div id="Games" class="tabcontent">
-                    <h3>Games</h3>
-                  
-                  </div>
-  
-                  <div id="Puzzles" class="tabcontent">
-                    <h3>Puzzles</h3>
-                    
-                  </div>
-  
-                  <div id="computer" class="tabcontent">
-                    <h3>Computer</h3>
-                   
-                  </div>
-  
-                  <div id="Recordings" class="tabcontent">
-                    <h3>Recordings</h3>
-                    <p></p>
-                    <hr>
-                    <p></p>
-                    <p *ngFor="let screenRecord of recordingList;">
-                      <img src="https://cdn.iconscout.com/icon/free/png-256/play-circle-round-player-music-30547.png" srcset="https://cdn.iconscout.com/icon/free/png-512/play-circle-round-player-music-30547.png 2x" alt="Play Icon" width="20">&nbsp;
-                        <strong>
-                          <a style="color:#007bff;cursor: pointer;" title="Click to see the recording" target="_blank" (click)="getPresignURL(screenRecord.sid,screenRecord.meetingId)" >{{ screenRecord.sid}}_{{screenRecord.meetingId }}_0.mp4 </a>
-                        </strong>&nbsp; - {{ screenRecord.meetingStartTime }}
-                      </p>
-                  </div>
                 </div>
+                
+                <div id="Activity" class="tabcontent">
+                  <div class="rightbox">
+                    <div class="rb-container">
+                      <ul class="rb">
+                        <li class="rb-item" ng-repeat="itembx">
+                          <div class="timestamp">
+                            23rd July 2022<br> 7:00 PM
+                          </div>
+                          <div class="item-title">Solved 2 tactical puzzles</div>
+                
+                        </li>
+                        <li class="rb-item" ng-repeat="itembx">
+                          <div class="timestamp">
+                            19th July 2022<br> 3:00 PM
+                          </div>
+                          <div class="item-title">Practiced 7 positions on <a href="/learnings">Piece Checkmates I</a></div>
+                
+                        </li>
+                
+                        <li class="rb-item" ng-repeat="itembx">
+                          <div class="timestamp">
+                            17st July 2022<br> 7:00 PM
+                          </div>
+                          <div class="item-title">Signed up to <a target="_blank" href="http://ystemandchess.com/">ystemandchess.com</a></div>
+                
+                        </li>
+                
+                      </ul>
+                
+                    </div>
+                </div>  
+                </div>
+                
+                <div id="Mentor_Session" class="tabcontent">
+                  <h3>Mentor Session</h3>
+                  
+                </div>
+                
+                <div id="Professional_Development" class="tabcontent">
+                  <h3>Professional Development</h3>
+                
+                </div>
+
+                <div id="Chess_Lession" class="tabcontent">
+                  <h3>Chess Lession</h3>
+                  
+                </div>
+
+                <div id="Games" class="tabcontent">
+                  <h3>Games</h3>
+                
+                </div>
+
+                <div id="Puzzles" class="tabcontent">
+                  <h3>Puzzles</h3>
+                  
+                </div>
+
+                <div id="computer" class="tabcontent">
+                  <h3>Computer</h3>
+                 
+                </div>
+
+                <div id="Recordings" class="tabcontent">
+                  <h3>Recordings</h3>
+                  <p></p>
+                  <hr>
+                  <p></p>
+                  <p *ngFor="let screenRecord of recordingList;">
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/play-circle-round-player-music-30547.png" srcset="https://cdn.iconscout.com/icon/free/png-512/play-circle-round-player-music-30547.png 2x" alt="Play Icon" width="20">&nbsp;
+                      <strong>
+                        <a style="color:#007bff;cursor: pointer;" title="Click to see the recording" target="_blank" (click)="getPresignURL(screenRecord.sid,screenRecord.meetingId)" >{{ screenRecord.sid}}_{{screenRecord.meetingId }}_0.mp4 </a>
+                      </strong>&nbsp; - {{ screenRecord.meetingStartTime }}
+                    </p>
+                </div>
+              
+
+
+               
                 <div class="row">
                   <div id='pdf-div' class='pdf-view'></div>
                 </div>  

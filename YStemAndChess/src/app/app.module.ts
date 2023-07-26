@@ -7,7 +7,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalModule } from './_modal/modal.module';
 import { NgxAgoraModule, AgoraConfig } from 'ngx-agora';
-import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -113,7 +112,6 @@ const agoraConfig: AgoraConfig = {
     ModalModule,
     NgxAgoraModule.forRoot(agoraConfig),
     FormsModule,
-    ChartsModule
   ],
   providers: [CookieService, SocketService, LoginGuardService],
   bootstrap: [AppComponent],

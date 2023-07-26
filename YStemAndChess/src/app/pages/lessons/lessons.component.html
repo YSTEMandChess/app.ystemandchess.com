@@ -1,53 +1,55 @@
 <html>
-    <head>
-    </head>
 
-    <header>
-        <app-header></app-header>
-    </header>
+<head>
+</head>
 
-    <body>
-        <!--Lessons container-->
-        <div id="lessons">
-            <div id="pawn-lessons">
-                <a href="/piece-lessons" (click)="assignPawn()">
-                    <p>Pawn</p>
-                </a>
-            </div>
+<header>
+    <app-header></app-header>
+</header>
 
-            <div id="rook-lessons">
-                <a href="/piece-lessons" (click)="assignRook()">
-                    <p>Rook</p>
-                </a>
-            </div>
-
-            <div id="bishop-lessons">
-                <a href="/piece-lessons" (click)="assignBishop()">
-                    <p>Bishop</p>
-                </a>
-            </div>
-
-            <div id="horse-lessons" (click)="assignHorse()">
-                <a href="/piece-lessons">
-                    <p>Horse</p>
-                </a>
-            </div>
-
-            <div id="queen-lessons" (click)="assignQueen()">
-                <a href="/piece-lessons">
-                    <p>Queen</p>
-                </a>
-            </div>
-
-            <div id="king-lessons" (click)="assignKing()">
-                <a href="/piece-lessons">
-                    <p>King</p>
-                </a>
-            </div>
+<body>
+    <!--Lessons container-->
+    <div id="lessons">
+        <div id="pawn-lessons">
+            <a href="/piece-lessons" (click)="assignPawn()">
+                <p>Pawn</p>
+            </a>
         </div>
-    </body>
 
-    <footer style="margin-top:20px">
-        <app-footer></app-footer>
-    </footer>
+        <div id="rook-lessons">
+            <a href="/piece-lessons" (click)="assignRook()">
+                <p>Rook</p>
+            </a>
+        </div>
+
+        <div id="bishop-lessons">
+            <a href="/piece-lessons" (click)="assignBishop()">
+                <p>Bishop</p>
+            </a>
+        </div>
+
+        <div id="horse-lessons" (click)="assignHorse()">
+            <a href="/piece-lessons">
+                <p>Horse</p>
+            </a>
+        </div>
+
+        <div id="queen-lessons" (click)="assignQueen()">
+            <a href="/piece-lessons">
+                <p>Queen</p>
+            </a>
+        </div>
+
+        <div id="king-lessons" (click)="assignKing()">
+            <a href="/piece-lessons">
+                <p>King</p>
+            </a>
+        </div>
+    </div>
+</body>
+
+<footer style="margin-top:20px">
+    <app-footer></app-footer>
+</footer>
+
 </html>

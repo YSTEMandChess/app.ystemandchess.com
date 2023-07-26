@@ -40,8 +40,7 @@ import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
 import {MissionHifiComponent} from "./pages/mission-hifi/mission-hifi.component"
 import {FinancialsHifiComponent} from "./pages/financials/financials-hifi.component";
 import {BoardHifiComponent} from "./pages/board/board-hifi.component";
-import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component";
-import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
+import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component"
 
 
 const routes: Routes = [
@@ -153,20 +152,14 @@ const routes: Routes = [
   { path: 'benefit-of-chess', component: ChessBenefitArticleComponent },
   { path: 'benefit-of-computer-science', component: ComputerBenefitArticleComponent },
   { path: 'about-us', component: AboutUsComponent },
-  { path: 'mission', component: MissionHifiComponent },
-  { path: 'financial', component: FinancialsHifiComponent },
-  { path: 'board', component: BoardHifiComponent },
+  { path: 'mission-hifi', component: MissionHifiComponent },
+  { path: 'financial-hifi', component: FinancialsHifiComponent },
+  { path: 'board-hifi', component: BoardHifiComponent },
   
   {
     path: 'mentor-profile',
     component: MentorProfileComponent,
     data: { roles: ['mentor'] },
-    canActivate: [LoginGuardService],
-  },
-  {
-    path: 'parent-profile',
-    component: ParentProfileComponent,
-    data: { roles: ['parent'] },
     canActivate: [LoginGuardService],
   },
 

@@ -1,9 +1,9 @@
 <html>
-  
 
-  <!-- <header> -->
-    <!-- <app-header></app-header> -->
-    <!-- <link
+
+<header>
+  <app-header></app-header>
+  <!-- <link
       href="https://fonts.googleapis.com/css?family=Roboto"
       rel="stylesheet"
     />
@@ -11,84 +11,38 @@
       href="https://fonts.googleapis.com/css?family=Lato"
       rel="stylesheet"
     /> -->
-  <!-- </header> -->
+</header>
 
-  <body>
-    <!-- start of welcome container  -->
-    <!-- <div id="welcome-container">
-      <div id="welcome-header">
-        <h3>Welcome Robert</h3>
-        <h4>Not Robert? &#9658;</h4>
-      </div>
-      <div id="welcome-statement">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
-          enim incidunt excepturi assumenda quod accusantium inventore,
-          dignissimos ad, cumque labore, perspiciatis at architecto quisquam
-          delectus. Rerum aspernatur ea accusamus officiis!
-        </p>
-      </div>
-    </div> -->
-    <!-- end of welcome container -->
-
-    <!-- start of mentor-container -->
-    <div class="mentor-bg" >
-      <div id="mentor-container">
+<body>
+  <div class="mentor-bg">
+    <div id="mentor-container">
       <div id="top"></div>
-      <!-- 
-                    <div class="turn-indicator">
-                        
-                    </div>
-                    <p>Emily Cob</p>
-                    
-                    <div class="turn-indicator">
-
-                    </div>
-                    <p>Robert</p>
-
-                    <button type="button">&#9742; Talk</button>
-                </div>
-                <div id="lichess-board">
-                    <iframe src="http://chessclient:9663/" allowfullscreen></iframe>
-                </div>
-            -->
-           
       <div class="gameclass">
-        
         <div [ngClass]="{ 'disable-board': !isStepLast }">
           <app-play></app-play>
         </div>
-        <div class="game_wrapper">
-          <div class="chess">
-            <div *ngIf="displayMoves.length > 0" class="steps-div"> 
-             
-              
-              <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
-                <div class="text-center">
-                  <span>Steps</span>
-                  <hr class="steps-decoration">
-                </div>
-                <div class="table-moves" #item>
-                  
-                  <div style="width: 100px">
-                    <div
-                      *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                    >
-                      <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
-                        <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
-                      </p>
-                    </div>
+        <div *ngIf="displayMoves.length > 0" class="steps-stud-div">
+          <div class="steps-div">
+            <div class="display-step">
+              <div class="text-center">
+                <span>Steps</span>
+                <hr class="steps-decoration">
+              </div>
+              <div class="table-moves" #item (scroll)="scrolled($event)" #scrollframe>
+                <div style="width: 100px">
+                  <div *ngFor="let item of displayMoves; let i = index" (click)="setMove(i,'direct')"
+                    style=" background-color: #b5d6e1;">
+                    <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
+                      <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
+                    </p>
                   </div>
-                  <div style="width: 100px">
-                    <div
-                      *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                    >
-                      <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
-                        <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
-                      </p>
-                    </div>
+                </div>
+                <div style="width: 100px">
+                  <div *ngFor="let item of displayMoves; let i = index" (click)="setMove(i,'direct')"
+                    style=" background-color: #b5d6e1;">
+                    <p *ngIf="i % 2 !== 0" [class.tableMove-selected]="i == currentStep">
+                      <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -101,7 +55,7 @@
           <button type="button" id="flip-board" (click)="flipBoard()">
             Flip Board
           </button>
-          <button type="button" id="new-game" (click)="newGame()">
+          <button type="button" id="new-game" (click)="CheckGame()">
             New Game
           </button>
           <button type="button" id="undo-move" (click)="undoPrevMove()">
@@ -111,37 +65,19 @@
             Play With Computer
           </button>
         </div>
-        <!-- <div class="outer-new-game">
-        
-        </div> -->
       </div>
       <div class="movesAhead">
         <p id="tag" class="pb-3">
           The computer will think
-          <input
-            type="number"
-            min="1"
-            step="1"
-            max="30"
-            value="5"
-            id="movesAhead"
-            (keypress)="numberOnly($event)"
-          />
+          <input type="number" min="1" step="1" max="30" value="5" id="movesAhead" (keypress)="numberOnly($event)" />
           moves ahead.
         </p>
-
-       
       </div>
-     
     </div>
   </div>
-  <!-- <button id="pipBtn" class="btn btn-lg btn-primary hidden" disabled>Enter Picture-in-Picture mode</button> -->
+</body>
+<footer>
+  <app-footer></app-footer>
+</footer>
 
-    
-    <!-- end of mentor container -->
-  </body>
-
-  <!-- <footer>
-    <app-footer></app-footer>
-  </footer> -->
 </html>

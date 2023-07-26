@@ -208,6 +208,8 @@ export class HeaderComponent implements OnInit {
     let url = `${environment.urls.middlewareURL}/meetings/queue`;
     this.httpGetAsync(url, 'POST', (response) => {
       if (JSON.parse(response) === 'Person Added Successfully.') {
+        this.cookie.delete('this.newGameId');
+        this.cookie.delete('gameOverMsg');
         url = `${environment.urls.middlewareURL}/meetings/inMeeting`;
         let meeting = setInterval(() => {
           this.gameFound(url);

@@ -838,11 +838,12 @@ export class PlayMentorComponent implements OnInit {
     }
   }
   public gameOverAlert() {
-    if (this.gameOverMsg == true) {
-      Swal.fire('Game Over', 'Oops! You Lost the game', 'info');
-    } else {
-      Swal.fire('Game Over', 'Hurray! You Win the game', 'info');
-    }
+    // if (this.gameOverMsg == true) {
+    //   Swal.fire('Game Over', 'Oops! You Lost the game', 'info');
+    // } else {
+    //   Swal.fire('Game Over', 'Hurray! You Win the game', 'info');
+    // }
+    Swal.fire('Game Over', '', 'info');
   }
   public undoPermissionAlert() {
     alert('You can not do undo!');

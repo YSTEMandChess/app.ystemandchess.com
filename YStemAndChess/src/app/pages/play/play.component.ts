@@ -385,8 +385,8 @@ export class PlayComponent implements OnInit {
             } else if (info == 'checkmate') {
               const gameOverMsg = this.cookie.get('gameOverMsg');
               if (gameOverMsg == "") {
-                this.cookie.set('gameOverMsg', "'Oops! You Lost the game'");
-                this.gameOverMsg = "'Oops! You Lost the game'"
+                this.cookie.set('gameOverMsg', "Oops! You Lost the game");
+                this.gameOverMsg = "Oops! You Lost the game"
               } else {
                 this.gameOverMsg = gameOverMsg
               }
@@ -428,8 +428,8 @@ export class PlayComponent implements OnInit {
             } else if (info == 'checkmate') {
               const gameOverMsg = this.cookie.get('gameOverMsg');
               if (gameOverMsg == "") {
-                this.cookie.set('gameOverMsg', "'Oops! You Lost the game'");
-                this.gameOverMsg = "'Oops! You Lost the game'"
+                this.cookie.set('gameOverMsg', "Oops! You Lost the game");
+                this.gameOverMsg = "Oops! You Lost the game"
               } else {
                 this.gameOverMsg = gameOverMsg
               }

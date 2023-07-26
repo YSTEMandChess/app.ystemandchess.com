@@ -344,10 +344,11 @@ export class PlayComponent implements OnInit {
 
     this.socket.listen('gameOver').subscribe((data) => {
       const gameOverMsg = this.cookie.get('gameOverMsg');
-      if (gameOverMsg != "") {
-        Swal.fire('Game Over', gameOverMsg, 'info');
-      }
-      Swal.fire('Game Over', this.gameOverMsg, 'info');
+      // if (gameOverMsg != "") {
+      //   Swal.fire('Game Over', gameOverMsg, 'info');
+      // }
+      // Swal.fire('Game Over', this.gameOverMsg, 'info');
+      Swal.fire('Game Over', '', 'info');
     });
 
     this.socket.listen('deleteCookies').subscribe((data) => {

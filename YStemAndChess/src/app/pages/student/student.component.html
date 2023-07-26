@@ -1,105 +1,67 @@
 <html>
-  
+<header>
+  <app-header></app-header>
+</header>
 
-  <!-- <header>
-    <app-header></app-header>
-  </header> -->
+<body>
+  <div class="bigCont">
+    <div id="mentor-container">
+      <div id="top"></div>
+      <div class="gameclass">
+        <div [ngClass]="{ 'disable-board': !isStepLast }">
+          <app-play></app-play>
+        </div>
+        <div *ngIf="displayMoves.length > 0" class="steps-stud-div">
+          <div class="steps-div">
 
-  <body>
-    <!-- <div class="container"
-      <div class="row"> -->
-        <!-- <div class="col-md"> -->
-        <!-- <h1>Welcome Emily</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Aliquet bibendum enim facilisis gravida neque convallis a. Sapien et ligula
-                        ullamcorper malesuada proin libero nunc consequat. Posuere sollicitudin aliquam ultrices sagittis orci a
-                        scelerisque purus.</p> -->
-        <!-- <a href="/student-recording">
-          <h1>View Previous Lessons</h1>
-        </a> -->
-        <!-- </div> -->
-        <!-- <div class="col-sm">
-                    <div class="containing">
-                        <div class="row">
-                             <img src="../../../assets/images/student/pupil.svg">
-                            <h2>Congrats Emily!<br>You're in a new level</h2>
-                        </div>
-                    </div> -->
-      <!-- </div>
-    </div> -->
-    <div class="bigCont">
-      <div id="mentor-container">
-        <div id="top"></div>
-        <div class="gameclass">
-          <div [ngClass]="{ 'disable-board': !isStepLast }">
-            <app-play></app-play>
-          </div>
-          <div *ngIf="displayMoves.length > 0" class="col-lg-3 col-md-6 col-12 order-2 order-sm-2 mt-sm-4 mt-lg-0">
-            <div  class="steps-div">
-              
-              <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
-                <div class="text-center">
-                  <span>Steps</span>
-                  <hr class="steps-decoration">
-                </div>
-                <div class="table-moves" #item>
-                
-                  <div style="width: 100px">
-                    <div
-                      *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                    >
-                      <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
-                        <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
-                      </p>
-                    </div>
+            <div class="display-step">
+              <div class="text-center">
+                <span>Steps</span>
+                <hr class="steps-decoration">
+              </div>
+              <div class="table-moves" #item (scroll)="scrolled($event)" #scrollframe>
+                <div style="width: 100px">
+                  <div *ngFor="let item of displayMoves; let i = index" (click)="setMove(i,'direct')"
+                    style=" background-color: #b5d6e1;">
+                    <p *ngIf="i % 2 === 0" [class.tableMove-selected]="i == currentStep">
+                      <img [src]="imgPos(i)" alt="" class="imgRes" /> {{ item.pos }}
+                    </p>
                   </div>
-                  <div style="width: 100px">
-                    <div
-                      *ngFor="let item of displayMoves; let i = index"
-                      (click)="setMove(i,'direct')" style=" background-color: #b5d6e1;"
-                    >
-                      <p *ngIf="i % 2 !== 0"  [class.tableMove-selected]="i == currentStep">
-                        <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
-                      </p>
-                    </div>
+                </div>
+                <div style="width: 100px">
+                  <div *ngFor="let item of displayMoves; let i = index" (click)="setMove(i,'direct')"
+                    style=" background-color: #b5d6e1;">
+                    <p *ngIf="i % 2 !== 0" [class.tableMove-selected]="i == currentStep">
+                      <img [src]="imgPos(i)" alt="" class="imgRes" />{{ item.pos }}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="container">
-          <div class="btns row">
-            <div class="new-game" (click)="CheckGame()">New Game</div>
-            <div class="play-cpu-game" (click)="playWithComputer()">
-              Play with a computer
-            </div>
-            <div class="curr-game" (click)="undoPrevMove()">Undo</div>
+      </div>
+      <div class="container">
+        <div class="btns row">
+          <div class="new-game" (click)="CheckGame()">New Game</div>
+          <div class="play-cpu-game" (click)="playWithComputer()">
+            Play with a computer
           </div>
-          <div class="movesAhead">
-            <p id="tag" class="pb-3">
-              The computer will think
-              <input
-                type="number"
-                min="1"
-                step="1"
-                max="30"
-                value="5"
-                id="movesAhead"
-                (keypress)="numberOnly($event)"
-              />
-              moves ahead.
-            </p>
-          </div>
+          <div class="curr-game" (click)="undoPrevMove()">Undo</div>
         </div>
+        <div class="movesAhead">
+          <p id="tag" class="pb-3">
+            The computer will think
+            <input type="number" min="1" step="1" max="30" value="5" id="movesAhead" (keypress)="numberOnly($event)" />
+            moves ahead.
+          </p>
         </div>
-      
-      
+      </div>
     </div>
-  </body>
+  </div>
+</body>
+<footer>
+  <app-footer></app-footer>
+</footer>
 
-  <!-- <footer>
-    <app-footer></app-footer>
-  </footer> -->
 </html>

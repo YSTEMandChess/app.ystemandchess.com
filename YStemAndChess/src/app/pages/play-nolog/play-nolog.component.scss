@@ -53,13 +53,13 @@
     }
 
     #new-game:hover {
-     
+
       background-color: #0046fd;
       box-shadow: 3px 4px #ead94c;
     }
 
     #undo:hover {
-      
+
       background-color: #0046fd;
       box-shadow: 3px 4px #ead94c;
     }
@@ -84,6 +84,7 @@
 
 .chess {
   height: 46rem !important;
+
   iframe {
     min-width: 100%;
     min-height: 100%;
@@ -156,7 +157,7 @@ iframe {
   // width: fit-content;
   display: block;
   height: 45rem;
-  overflow: hidden scroll;
+  // overflow: hidden scroll;
   cursor: pointer;
   margin-left: 25px;
   // background-color: lightgray;
@@ -179,6 +180,8 @@ iframe {
 .table-moves {
   display: flex;
   gap: 0.5rem;
+  height: 25rem;
+  overflow: hidden scroll;
   justify-content: space-around;
 }
 
@@ -191,7 +194,7 @@ iframe {
   align-items: center;
 }
 
-.display-step::-webkit-scrollbar {
+.table-moves::-webkit-scrollbar {
   display: none;
 }
 
@@ -212,7 +215,7 @@ iframe {
 
 .game_wrapper {
   text-align: -webkit-center;
-  
+
 }
 
 @media only screen and (max-width: 321px) {
@@ -229,6 +232,7 @@ iframe {
     padding-top: 60px;
   }
 }
+
 @media only screen and (min-width: 321px) and (max-width:376px) {
   .chess {
     height: 24rem !important;

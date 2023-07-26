@@ -18,8 +18,10 @@
     background-color: #ccc;
   }
 }
+
 .chess {
   height: 46rem;
+
   iframe {
     min-width: 100%;
     min-height: 100%;
@@ -32,6 +34,7 @@
   font-size: 3vw; // //262.5% // 3vw
   line-height: 250%;
 }
+
 #instructions-paragraph {
   align-items: left;
   font-style: normal;
@@ -62,36 +65,36 @@
   overflow: hidden;
 }
 
-.lesson-btn{
-    background-color: #EAD94C !important;
-    border: none;
-    box-shadow: 3px 4px #D4DDDD;
-    width: 100px;
-    padding: 6px;
-    border-radius: 5px;
-    font-weight: bold;
+.lesson-btn {
+  background-color: #EAD94C !important;
+  border: none;
+  box-shadow: 3px 4px #D4DDDD;
+  width: 100px;
+  padding: 6px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-.play-btn{
-    background-color: #D4DDDD;
-    border: none;
-    box-shadow: 3px 4px #74cc33;
-    width: 100px;
-    padding: 6px;
-    border-radius: 5px;
-    font-weight: bold;
+.play-btn {
+  background-color: #D4DDDD;
+  border: none;
+  box-shadow: 3px 4px #74cc33;
+  width: 100px;
+  padding: 6px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-.next-btn{
-    background-color: #74cc33 !important;
-    border: none;
-    box-shadow: 3px 4px #EAD94C;
-    width: 100px;
-    padding: 6px;
-    border-radius: 5px;
+.next-btn {
+  background-color: #74cc33 !important;
+  border: none;
+  box-shadow: 3px 4px #EAD94C;
+  width: 100px;
+  padding: 6px;
+  border-radius: 5px;
 }
 
-.refresh-btn{
+.refresh-btn {
   background-color: #74cc33 !important;
   border: none;
   box-shadow: 3px 4px #EAD94C;
@@ -101,19 +104,19 @@
 }
 
 
-.icon-size{
+.icon-size {
   font-size: 20px;
-} 
-
-
-
-.btn-div{
-  display: flex;
-  justify-content: space-between;
-  padding:5px 10px
 }
 
-.subsection-section{
+
+
+.btn-div {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px
+}
+
+.subsection-section {
   background-color: #D4DDDD;
   box-shadow: 3px 4px green;
 }
@@ -121,45 +124,45 @@
 .tab button {
   background-color: #D4DDDD;
   float: left;
-  border:none;
-  border-right:1px solid black;
+  border: none;
+  border-right: 1px solid black;
   // border-radius:5px;
   outline: none;
   cursor: pointer;
   box-shadow: 3px 4px #74cc33;
- 
+
 }
 
 .active {
-  background-color:  #EAD94C !important;
+  background-color: #EAD94C !important;
 }
 
-.basic{
+.basic {
   border-radius: 5px 0 0 5px;
 }
 
-.special{
+.special {
   border-radius: 0 5px 5px 0;
 }
 
-.lesson-instruction-section{
+.lesson-instruction-section {
   background-color: #bcd9a0;
-  padding:25px 0 0 0;
-  border-radius:4px;
+  padding: 25px 0 0 0;
+  border-radius: 4px;
   box-shadow: 8px 8px #D4DDDD;
 }
 
-.lesson-instruction{
-  font-size:20px;
+.lesson-instruction {
+  font-size: 20px;
   font-weight: bold;
 }
 
 
-.lesson-play-section{
-  margin-top:45px;
+.lesson-play-section {
+  margin-top: 45px;
 }
 
-.instruction-detail{
+.instruction-detail {
   padding: 0px 25px 0px 80px;
 }
 
@@ -201,207 +204,3 @@
     height: 27rem;
   }
 }
-/*
-@media (max-width: 1400px) {
-  #content-container {
-    margin: 0 auto;
-    max-width: 90%;
-    margin-left: 5%;
-    padding-bottom: 3%;
-  }
-  #chess-play {
-    // position: relative;
-    float: right;
-    margin-top: -18%;
-    margin-right: 10%;
-    width: 30%;
-  }
-
-  #instructions-header {
-    display: flex;
-    flex-direction: row;
-    h3 {
-      margin-top: 3%;
-      // margin-left: -9.5%;
-      font-weight: 500;
-      font-size: 3vw;
-    }
-
-    #links {
-      margin-top: 6%;
-      padding-bottom: 0;
-    }
-  }
-  #instructions-paragraph {
-    p {
-      margin-left: 2.5%;
-      width: 65%;
-      font-family: "Roboto";
-      font-style: bold;
-      font-weight: 400;
-      font-size: 1.4vw; //22px
-      line-height: 117.1%;
-      letter-spacing: 0.01em;
-      color: #ffffff;
-    }
-    #links {
-      margin-top: 6%;
-      padding-bottom: 0;
-    }
-  }
-  #lessons-menu-container {
-    position: relative;
-    // float:left;
-    margin-left: -7%;
-    width: 40%;
-    h5 {
-      color: #ffffff;
-    }
-  }
-}
-
-@media (max-width: 950px) {
-  #content-container {
-    margin: 0 auto;
-    max-width: 90%;
-    // padding-bottom: 8%;
-  }
-  #chess-play {
-    width: 100%;
-    margin-right: -13%;
-    margin-bottom: 5%;
-  }
-
-  #instructions-header h3 {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  #lessons-menu-container {
-    position: relative;
-    align-items: center;
-    margin-left: 8%;
-    width: 85%;
-    h3 {
-      color: #ffffff;
-    }
-  }
-}
-
-@media (max-width: 860px) {
-  #content-container {
-    margin: 0 auto;
-    width: 90%;
-    margin-left: 5%;
-    // padding-bottom: 8%;
-  }
-
-  #chess-play {
-    position: relative;
-    width: 90%;
-    justify-content: center;
-    align-items: center;
-    padding-right: 5%;
-  }
-
-  #instructions-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    h3 {
-      margin-top: 3%;
-      font-size: 3vw;
-    }
-
-    #links {
-      margin-top: 6%;
-      padding-bottom: 0;
-    }
-  }
-  #instructions-paragraph {
-    p {
-      display: flex;
-      flex-direction: row;
-      justify-content: left;
-      align-items: left;
-      margin: 0 auto;
-    }
-    #links {
-      margin-top: 6%;
-      padding-bottom: 0;
-    }
-  }
-
-  #lessons-menu-container {
-    width: 90%;
-    float: left;
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-}
-#lessons-menu-paragraph {
-  margin-left: 16.5%; //75px
-  width: 66%;
-  font-family: "Roboto";
-  font-style: bold;
-  font-weight: 500;
-  font-size: 1.4vw; //22px
-  line-height: 117.1%;
-  letter-spacing: 0.01em;
-  color: #000000;
-}
-
-@media (min-width: 768px) {
-  #content-container {
-    margin: 0 auto;
-    width: 90%;
-    margin-left: 5%;
-    padding-bottom: 8%;
-  }
-
-  #chess-play {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    max-width: 100%;
-    max-height: 100%;
-    justify-content: center;
-    align-items: center;
-    // margin-bottom: 40%;
-  }
-
-  #instructions-header h3 {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    h3 {
-      margin-top: 3%;
-      width: 100%;
-    }
-
-    #links {
-      margin-top: 6%;
-      padding-bottom: 0;
-    }
-  }
-  #instructions-paragraph p {
-    p {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      margin: 0 auto;
-      width: 100%;
-    }
-    #links {
-      margin-top: 6%;
-      padding-bottom: 0;
-    }
-  }
-}
-#lessons-menu-container {
-  float: left;
-  padding-bottom: 50px;
-}
-*/

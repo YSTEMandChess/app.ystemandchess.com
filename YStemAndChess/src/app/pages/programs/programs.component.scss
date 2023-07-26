@@ -91,7 +91,7 @@ body {
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 500;
-        font-size: 14px; //22px
+        font-size: 0.9vw; //22px
         line-height: 117.1%;
         letter-spacing: 0.01em;
         color: #FFFFFF;
@@ -308,7 +308,6 @@ body {
         }
     }
 
-
     @media screen and (max-width:535px) {
 
         #our-programs-container {
@@ -359,11 +358,5 @@ body {
                 font-size: 3.8vw; //22px
             }
         }
-    }
-}
-
-@media only screen and (max-width:321px) {
-    #our-programs-statement ul {
-        font-size: 13px!important;
     }
 }

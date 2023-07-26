@@ -1,12 +1,11 @@
-import { Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { setPermissionLevel } from '../../globals';
 import { environment } from '../../../environments/environment';
 import { ViewSDKClient } from '../../view-sdk.service';
-// import { Chart } from 'chart.js';
-// import { Chart, registerables } from 'chart.js';
-// Chart.register(...registerables);
-
+import { Chart, ChartConfiguration, ChartItem, registerables} from 'node_modules/chart.js';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { BaseChartDirective, Color, Label } from 'ng2-charts';
 
 
 @Component({
@@ -21,6 +20,8 @@ export class UserProfileComponent implements OnInit {
   newStudentFlag: boolean = false;
   numNewStudents: number = 0;
  
+  public iframeCheck = 'live'; //live or dev
+  public iframeLink = '';
   public chart: any;
   public username = '';
   public firstName = '';
@@ -41,45 +42,60 @@ export class UserProfileComponent implements OnInit {
   constructor(private cookie: CookieService,private viewSDKClient: ViewSDKClient) {}
 
 
+  public timeTrackingStat = {
+    "username": "",
+    "mentor": 0,
+    "lesson": 0,
+    "play": 0,
+    "puzzle": 0,
+    "website": 0
+  }
 
-  // chartOptions = {
-  //   responsive: true    // THIS WILL MAKE THE CHART RESPONSIVE (VISIBLE IN ANY DEVICE).
-  // }
+  @ViewChild(BaseChartDirective)
+  public userChart: BaseChartDirective;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: (1|1),
 
-  // labels =  ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    scales: { 
+      xAxes: [{
+        gridLines: {
+          display: false,
+        }
+      }], 
+      yAxes: [{
+        gridLines: {
+          display: false,
+        },
+        ticks: {
+          stepSize: 30,
+          precision: 0,
+          beginAtZero: true
+        } 
+      }] 
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
+  public barChartType: ChartType = 'bar';
 
-  // // STATIC DATA FOR THE CHART IN JSON FORMAT.
-  // chartData = [
-  //   {
-  //     label: '1st Year',
-  //     data: [21, 56, 4, 31, 45, 15, 57, 61, 9, 17, 24, 59] 
-  //   },
-  //   { 
-  //     label: '2nd Year',
-  //     data: [47, 9, 28, 54, 77, 51, 24]
-  //   }
-  // ];
-
-  // // CHART COLOR.
-  // colors = [
-  //   { // 1st Year.
-  //     backgroundColor: 'rgba(77,83,96,0.2)'
-  //   },
-  //   { // 2nd Year.
-  //     backgroundColor: 'rgba(30, 169, 224, 0.8)'
-  //   }
-  // ]
-  
-  // // CHART CLICK EVENT.
-  // onChartClick(event) {
-  //   console.log(event);
-  // }
+  public barChartData: ChartDataSets[] = [
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Website' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Lesson' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Puzzle' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Playing' },
+    { data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], label: 'Mentoring' },
+  ];
+  public barChartColor: Color[] = [{backgroundColor: '#7fcc26'}, {backgroundColor: '#c8b4ff'}, {backgroundColor: '#0fdff2'}, {backgroundColor: '#f24598'}, {backgroundColor: '#fd8e4f'}]
 
 
-  async ngOnInit() {
-
-
-    
+  async ngOnInit() {    
     
     this.numStudents.push(0);
     this.numNewStudents++;
@@ -92,7 +108,24 @@ export class UserProfileComponent implements OnInit {
     this.accountCreatedAt = uInfo['accountCreatedAt'];
     this.role = uInfo['role'];
 
-    document.getElementById("defaultOpen").click();
+    // document.getElementById("defaultOpen").click();
+
+    const iframe = document.getElementById('profile-iframe') as HTMLIFrameElement;
+      if (this.iframeCheck == "live"){   
+        this.iframeLink = "http://www.ystemandchess.com/student";
+      } else {
+        this.iframeLink = "http://localhost:4200/student";
+      }
+      iframe.src = this.iframeLink
+      document.body.addEventListener('click', () => {
+        if (this.iframeCheck == "live"){ 
+          this.iframeLink = "http://www.ystemandchess.com/student";
+        } else {
+          this.iframeLink = "http://localhost:4200/student";
+        }
+        iframe.src = this.iframeLink
+        });
+
 
     if (uInfo['error'] == undefined) {
       pLevel = uInfo.role;
@@ -107,7 +140,7 @@ export class UserProfileComponent implements OnInit {
       this.role = uInfo['role'];
       if (this.role === 'student') {
         this.playLink = 'student';
-      } else if (this.role === 'mentor') {
+      } else if (this.role === 'm entor') {
         this.playLink = 'play-mentor';
       }
     }
@@ -121,8 +154,13 @@ export class UserProfileComponent implements OnInit {
         });
       // }, 1500);
     }
-    
-    
+    if (this.role == 'student'){
+      await this.getTimeTrackingStat(this.username, new Date(1970, 0, 1), new Date(new Date().getFullYear(), 11, 31)).then((data) => {this.timeTrackingStat = data;});
+      this.getTimeTrackingStatByMonth(this.username);
+      // this.createStudentChart();
+    }
+
+
     this.categoryList = [
       {'id':'1','name':'Mantra'},
       {'id':'2','name':'Exercise'},
@@ -133,36 +171,39 @@ export class UserProfileComponent implements OnInit {
     // this.categoryList = categoryList;
 
   }
-
-  // createChart(){
   
-  //   this.chart = new Chart("MyChart", {
-  //     type: 'bar', //this denotes tha type of chart
+  public async getTimeTrackingStat(username, startDate, endDate){
+    let url = `${environment.urls.middlewareURL}/timeTracking/statistics?username=${username}&startDate=${startDate}&endDate=${endDate}`;
+    let authToken = this.cookie.get('login');
+    const headers = new Headers ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    })
+    const response = await fetch(url, { method: 'GET', headers: headers });
+    return await response.json();
 
-  //     data: {// values on X-Axis
-  //       labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-	// 							 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ], 
-	//        datasets: [
-  //         {
-  //           label: "Sales",
-  //           data: ['467','576', '572', '79', '92',
-	// 							 '574', '573', '576'],
-  //           backgroundColor: 'blue'
-  //         },
-  //         {
-  //           label: "Profit",
-  //           data: ['542', '542', '536', '327', '17',
-	// 								 '0.00', '538', '541'],
-  //           backgroundColor: 'limegreen'
-  //         }  
-  //       ]
-  //     },
-  //     options: {
-  //       aspectRatio:2.5
-  //     }
-      
-  //   });
-  // }
+    // return fetch(url, { method: 'GET', headers: headers }).then((response) => {
+    //   return response.json();
+    // });
+  }
+
+
+  public getTimeTrackingStatByMonth(username){
+    let promiseList = [];
+    for (let i = 0; i < 12; i++){
+      const promiseThisMonth = this.getTimeTrackingStat(username, new Date(new Date().getFullYear(), i, 1), new Date(new Date().getFullYear(), i+1, 1))
+      promiseList.push(promiseThisMonth);
+    }
+    Promise.all(promiseList).then(data=>{
+      for (const key in data){
+        for (const d of this.barChartData){
+          d.data[key] = data[key][d.label.toLowerCase().replace('ing','')];
+        }
+      }
+      this.userChart.chart.update();
+    })
+  }
+
 
   public openCity(evt, cityName) {
     console.log("cityname--->", cityName)

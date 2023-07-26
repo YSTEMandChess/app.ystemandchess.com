@@ -1,3 +1,4 @@
+
 <html>
     <head>
       <script type='text/javascript' src='https://documentcloud.adobe.com/view-sdk/main.js'></script>
@@ -21,27 +22,26 @@
             
             
             <div class="container">
-                <div class="row ">
-                    <div class="col-12">
+              <iframe id="profile-iframe" class="iframe" src=""></iframe>
+                <div class="row ">			
+                    <div class="col-12" style="min-height: 200px;">
                         <!-- <div class="progressInfo"> -->
                             <!-- <span>Progress bar here</span> -->
-                            <!-- <div>
-                              <canvas
-                                  baseChart
-                                  [chartType]="'bar'"
-                                  [datasets]="chartData"
-                                  [labels]="labels"
-                                  [options]="chartOptions"
-                                  [legend]="true"
-                                  [colors]="colors"
-                                  (chartClick)="onChartClick($event)">
+                            <!-- <img src="../../../assets/images/student/chart.PNG" /> -->
+                            <div class="chart-container">
+                              <canvas baseChart
+                                [datasets]="barChartData"
+                                [labels]="barChartLabels"
+                                [options]="barChartOptions"
+                                [legend]="true"
+                                chartType="bar"
+                                [colors]="barChartColor">
                               </canvas>
-                            </div> -->
-                            <img class="chart-img" src="../../../assets/images/student/chart.PNG" />
+                            </div>
                         <!-- </div> -->
                     </div>
-                    
-                </div>
+                  </div>
+
                 <div class="col-12">
                   
                       <!-- <p style="font-size: 25px;"><strong>{{ firstName | titlecase }} {{ lastName | titlecase}} </strong></p>
@@ -52,19 +52,19 @@
 
                       <div class="row mb-4">
                       <div class="col-md-4 col-sm-6 col-12">
-                        <p> <span class="website-icon"></span>&nbsp; Website : <strong>45 minutes</strong></p>
+                        <p style="margin-left:20px"> <span class="website-icon"></span>&nbsp; Website : <strong>{{timeTrackingStat.website}} minutes</strong></p>
                       </div>
                       <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="lesson"></span>&nbsp; Lesson : <strong>10 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="lesson"></span>&nbsp; Lesson : <strong>{{timeTrackingStat.lesson}} minutes</strong></p>
                       </div>
                       <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="puzzle"></span> &nbsp; Puzzle : <strong>5 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="puzzle"></span> &nbsp; Puzzle : <strong>{{timeTrackingStat.puzzle}} minutes</strong></p>
                       </div>
                       <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="playing"></span>&nbsp; Playing : <strong>15 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="playing"></span>&nbsp; Playing : <strong>{{timeTrackingStat.play}} minutes</strong></p>
                       </div>
                       <div class="col-md-4 col-sm-6 col-12">
-                        <p><span class="mentoring"></span>&nbsp; Mentoring : <strong>15 minutes</strong></p>
+                        <p style="margin-left:20px"><span class="mentoring"></span>&nbsp; Mentoring : <strong>{{timeTrackingStat.mentor}} minutes</strong></p>
                       </div>
                       
                       
@@ -140,7 +140,8 @@
                     
                 </div> -->
 
-                <div>
+                <!-- Activity Section -->
+                <!-- <div>
                   <div class="tab">
                     <button class="tablinks tab1" (click)="openCity($event, 'Activity')" id="defaultOpen"><img src="../../../assets/images/student/activity_tab.png" class="tab-image" /></button>
                     <button class="tablinks tab2" (click)="openCity($event, 'Mentor_Session')"><img src="../../../assets/images/student/mento_tab.PNG" class="tab-image2" /></button>
@@ -227,7 +228,7 @@
                         </strong>&nbsp; - {{ screenRecord.meetingStartTime }}
                       </p>
                   </div>
-                </div>
+                </div> -->
                 <div class="row">
                   <div id='pdf-div' class='pdf-view'></div>
                 </div>  
@@ -252,3 +253,4 @@
    
     
 </html>
+

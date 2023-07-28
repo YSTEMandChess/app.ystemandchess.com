@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Slides</title>
+    <link rel="stylesheet" href="welcome-page.component.scss">
+</head>
+<header>
+    <app-header></app-header>
+</header>
+
+<body>
+    <div class="container">
+        <div class="carousel">
+            <ng-container *ngFor="let slide of slides; let i = index">
+                <img *ngIf="i === currentSlide" [src]="slide.src" class="slide">
+            </ng-container>
+            <!--arrows-->
+            <button class="cntrl prev" (click)="onPreviousClick()">
+                <img src="../../../assets/images/welcome-slides/Vectorleft-arrow.png" class="arrow left" alt="" *ngIf="currentSlide !== 0">
+            </button>
+            <button class="cntrl next" (click)="onNextClick()">
+                <img src="../../../assets/images/welcome-slides/Vectorright-arrow.png" class="arrow right" alt="" *ngIf="currentSlide !== 13">
+            </button>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>

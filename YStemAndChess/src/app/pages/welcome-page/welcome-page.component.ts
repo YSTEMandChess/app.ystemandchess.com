@@ -30,12 +30,22 @@ export class WelcomePageComponent implements OnInit {
 
   onPreviousClick() {
     const previous = this.currentSlide - 1;
-    this.currentSlide = previous < 0 ? this.slides.length - 1 : previous;
+    this.currentSlide = previous < 0 ? 0 : previous;
   }
 
   onNextClick() {
     const next = this.currentSlide + 1;
-    this.currentSlide = next === this.slides.length ? 0 : next;
+    //this.slides.length - 1 
+    this.currentSlide = next === this.slides.length ? 13 : next;
+  }
+
+  ngAfterViewInit() {
+    const autoscroll = setInterval(() => {
+      if(this.currentSlide === this.slides.length-2){
+        clearInterval(autoscroll);
+      }
+      this.onNextClick();
+    }, 4000)
   }
 
   ngOnInit(): void {

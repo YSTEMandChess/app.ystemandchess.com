@@ -27,6 +27,7 @@ import { BoardEditorComponent } from './pages/board-editor/board-editor.componen
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { LoginGuardService } from './services/login-guard/login-guard.service';
 import { BoardAnalyzerComponent } from './pages/board-analyzer/board-analyzer.component';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
@@ -145,6 +146,7 @@ const routes: Routes = [
   { path: 'board-editor', component: BoardEditorComponent },
   { path: 'landing-page', component: LandingPageComponent },
   { path: 'board-analyzer', component: BoardAnalyzerComponent },
+  { path: 'welcome-page', component: WelcomePageComponent},
   { path: 'why-chess', component: WhyChessComponent },
 
   { path: 'benefit-of-math-tutoring', component: MathArticleComponent },

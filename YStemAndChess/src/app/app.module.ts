@@ -55,6 +55,7 @@ import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-articl
 import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
 import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component";
 import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 
 
 const agoraConfig: AgoraConfig = {
@@ -90,6 +91,7 @@ const agoraConfig: AgoraConfig = {
     BoardEditorComponent,
     LandingPageComponent,
     BoardAnalyzerComponent,
+    WelcomePageComponent,
     WhyChessComponent,
     ResetPasswordComponent,
     SetPasswordComponent,
@@ -104,7 +106,8 @@ const agoraConfig: AgoraConfig = {
     MentoringBenefitArticleComponent,
     AboutUsComponent,
     MentorProfileComponent,
-    ParentProfileComponent
+    ParentProfileComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

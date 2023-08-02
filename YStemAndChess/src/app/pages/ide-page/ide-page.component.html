@@ -1,1 +1,52 @@
-<p>ide-page works!</p>
+<!DOCTYPE html>
+<html>
+
+<header>
+    <app-header></app-header>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+      
+</header>
+
+<head>
+    <title>ide-page</title>
+</head>
+<body>
+    <h1>Test Button</h1>
+    <button onclick="sendHelloToServer()">Send "Hello" to Server</button>
+
+    <!-- JupyterLite Frame -->
+    <div style="display: flex; padding: 0 20px">
+        <div style="flex: 2; margin-left: 50px;">
+            <iframe src="https://jupyterlite.github.io/demo/repl/index.html?kernel=python&toolbar=1" width="75%" height="400px" id="jupyter-iframe"></iframe>
+            <button onclick="getContentFromJupyterLite()">Get Content from JupyterLite</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io();
+
+        // Function to send "hello" to the server
+        function sendHelloToServer() {
+            socket.emit('hello-button-clicked');
+        }
+
+        // Function to fetch content from the JupyterLite code block
+        function getContentFromJupyterLite() {
+            console.log("Getting content from JupyterLite...")
+            const jupyterWindow = document.getElementById('jupyter-iframe').contentWindow;
+            const codeInput = jupyterWindow.document.querySelector('.CodeMirror textarea');
+            const codeContent = codeInput.value;
+            console.log('Content from JupyterLite:', codeContent);
+        }
+    </script>
+</body>
+
+<footer>
+    <app-footer></app-footer>
+</footer>
+
+</html>

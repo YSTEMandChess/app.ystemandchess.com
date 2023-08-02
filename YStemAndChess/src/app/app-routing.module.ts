@@ -41,6 +41,7 @@ import {MissionHifiComponent} from "./pages/mission-hifi/mission-hifi.component"
 import {FinancialsHifiComponent} from "./pages/financials/financials-hifi.component";
 import {BoardHifiComponent} from "./pages/board/board-hifi.component";
 import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component"
+import { IdePageComponent } from './pages/ide-page/ide-page.component';
 
 
 const routes: Routes = [
@@ -138,6 +139,10 @@ const routes: Routes = [
     component: PieceLessonsComponent,
     data: { roles: ['student', 'admin'] },
     canActivate: [LoginGuardService],
+  },
+  {
+    path: 'ide',
+    component: IdePageComponent
   },
   { path: 'play-lesson', component: PlayLessonComponent },
   { path: 'contact', component: ContactComponent },

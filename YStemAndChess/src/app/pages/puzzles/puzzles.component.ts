@@ -25,12 +25,15 @@ export class PuzzlesComponent implements OnInit{
     public dbIndex=0;
     
     activeState = {
-        theme: 'advantage fork long opening',
-        fen: 'r2qkb1r/pQ3ppp/2p2n2/3b4/2BP4/8/PP3PPP/RNB1K2R b KQkq - 0 11',
-        moves: 'd5c4 b7c6 f6d7 c6c4 a8c8 c4e2',
-        rating: '1313',
-	score: 0,
-	time: 0 
+      "PuzzleId": "lliIw",
+      "FEN": "r2qkb1r/pQ3ppp/2p2n2/3b4/2BP4/8/PP3PPP/RNB1K2R b KQkq - 0 11",
+      "Moves": "d5c4 b7c6 f6d7 c6c4 a8c8 c4e2",
+      "Rating": 1313,
+      "RatingDeviation": 74,
+      "Popularity": 95,
+      "NbPlays": 11404,
+      "Themes": "advantage fork long opening",
+      "GameUrl": "https://lichess.org/06Fl2Wl7/black#22"
     };
 
     constructor(private ps: PuzzlesService, private sanitization: DomSanitizer) { 
@@ -46,7 +49,7 @@ export class PuzzlesComponent implements OnInit{
       this.setStateAsActive(this.ps.puzzleArray[0]);
       this.activeState = this.ps.puzzleArray[0];
       // getting the move list of the puzzle when we start up
-      this.moveList = this.activeState.moves.split(" ");
+      this.moveList = this.activeState.Moves.split(" ");
 
       // get elements
 	    const newPuzzle = document.getElementById('newPuzzle') as HTMLElement;
@@ -56,13 +59,14 @@ export class PuzzlesComponent implements OnInit{
       // add event listener to buttons
 	    newPuzzle.addEventListener('click', () => { 
         this.dbIndex = this.dbIndex+1;
-        if (this.dbIndex==3){
+        // loop back to start if we reached the end of the array
+        if (this.dbIndex==this.ps.puzzleArray.length){
           this.dbIndex=0;	
         }
         this.setStateAsActive(this.ps.puzzleArray[this.dbIndex]);
         this.activeState = this.ps.puzzleArray[this.dbIndex];
         // getting the move list for the puzzle whenever we update the active state
-        this.moveList = this.activeState.moves.split(" ");
+        this.moveList = this.activeState.Moves.split(" ");
 	 	  });
 
       openDialog.addEventListener('click', () => this.openDialog());
@@ -205,23 +209,11 @@ export class PuzzlesComponent implements OnInit{
 
     setStateAsActive(state) {
         console.log("click state---->", state)
-        this.playerColor = state.fen.split(" ")[1];
-        var color;
-        // this is backwards because the first move is the computer's
-        // so if the active color is black, then player is white, and vice versa
-        if (this.playerColor === "b"){
-          this.playerColor = "w";
-          color = "white";
-        }
-        else{
-          this.playerColor = 'b';
-          color = "black";
-        }
+        this.playerColor = state.FEN.split(" ")[1];
 
         var firstObj = {
-          'theme': state.theme,
-          'fen': state.fen,
-          'color': color,
+          'theme': state.Themes,
+          'fen': state.FEN,
           'event':''
         };
         console.log("first obj---->", firstObj)
@@ -240,7 +232,20 @@ export class PuzzlesComponent implements OnInit{
     startLesson({ theme, fen, event }): void {
       console.log("start lesson call---->", theme)
       this.info = this.info;
-      this.chess.newGameInit(fen);
+
+      var color;
+      // this is backwards because the first move is the computer's
+      // so if the active color is black, then player is white, and vice versa
+      if (this.playerColor === "b"){
+        this.playerColor = "w";
+        color = "white";
+      }
+      else{
+        this.playerColor = 'b';
+        color = "black";
+      }
+
+      this.chess.newGameInit(fen, color);
       this.currentFen = fen;
 
       // testing: trying to get a piece to move by itself

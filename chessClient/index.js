@@ -72,9 +72,16 @@ eventer(
       endSquare = data.endSquare;
       lessonBoard = data.boardState;
       lessonEnd = data.endState;
-      playerColor = data.color;
-      previousEndSquare = data.previousEndSquare;
 
+      if ((data.color === "black" || data.color === "white") && data.color !== playerColor){
+        playerColor = data.color;
+        console.log("data.color: " + data.color)
+        console.log("setting orientation to: " + playerColor);
+        board.orientation(playerColor);
+      }
+
+      previousEndSquare = data.previousEndSquare;
+      
       if (previousEndSquare !== "") {
         $board.find(".square-" + previousEndSquare).removeClass("highlight");
       }

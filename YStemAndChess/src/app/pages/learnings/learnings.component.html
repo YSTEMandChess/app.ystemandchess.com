@@ -84,16 +84,20 @@
 
 </div>
 
+<div>Hey there!</div>
+
   <div style="width: 600px; height: 550px;" id="wt-container"></div>
 
   <script src="https://www.whiteboard.team/dist/api.js"></script>
   <script type="text/javascript">
       var wt = new api.WhiteboardTeam('#wt-container', {
           clientId: '1d22a439bab9fd8f6006b152611b019f',
-          boardCode: 'shs5678jskddksksn'
+          boardCode: 'shs5678jskddksksn',
+          board: {
+            bg : 'Small grid'
+          }
       });
-      wt.addListener("ready", ctx => console.log("The whiteboard is ready and user is: ", ctx.uid ))
-      new api.WhiteboardTeam(element, {options})
+      wt.addListener("ready", ctx => console.log("The whiteboard is ready and user is: ", ctx.uid ));
   </script>
 
 <footer>

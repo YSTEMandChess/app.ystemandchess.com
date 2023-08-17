@@ -30,21 +30,25 @@
     </header>
     <body>
         <div class="container">
-            <div class="chess">
+            <div id="mainElements">
                 <iframe id="chessBoard" [src]="chessSrc"></iframe>
+
+                <div id="hintMenu">
+
+                    <div class="dialog-container">
+                        <dialog id="myDialog">
+                            <h1>This is a place holder header</h1>
+                            <p>This is a dialog place holder text</p>
+                            <button id='closeDialog'>Close</button>
+                        </dialog>
+                    </div>
+
+                    <button id="newPuzzle">Get New Puzzle</button>
+
+                    <button id='openDialog'>Open Dialog</button>
+
+                </div>
             </div>
-            <div class="dialog-container">
-                <dialog id="myDialog">
-                    <h1>This is a place holder header</h1>
-                    <p>This is a dialog place holder text</p>
-                    <button id='closeDialog'>Close</button>
-                </dialog>
-	        </div>
-            <div class="button-container">
-                <button id="newPuzzle">Get New Puzzle</button>
-            </div>
-            <button id='openDialog'>Open Dialog</button>
-            
         </div>		
     </body>
     <footer>

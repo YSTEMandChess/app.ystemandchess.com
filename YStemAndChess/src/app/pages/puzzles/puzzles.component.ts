@@ -19,6 +19,7 @@ export class PuzzlesComponent implements OnInit{
     currentFen;
     prevFen; // used to rollback on incorrect player moves
     moveList;
+    themeList;
     playerColor;
     playerMove = []; // used to check player move against the correct move
     prevMove = []; // used to rollback highlights for the previous computer move
@@ -48,8 +49,10 @@ export class PuzzlesComponent implements OnInit{
  
       this.setStateAsActive(this.ps.puzzleArray[0]);
       this.activeState = this.ps.puzzleArray[0];
-      // getting the move list of the puzzle when we start up
+      // getting the move list and theme list of the puzzle when we start up
       this.moveList = this.activeState.Moves.split(" ");
+      this.themeList = this.activeState.Themes.split(" ");
+      this.updateInfoBox();
 
       // get elements
 	    const newPuzzle = document.getElementById('newPuzzle') as HTMLElement;
@@ -65,8 +68,10 @@ export class PuzzlesComponent implements OnInit{
         }
         this.setStateAsActive(this.ps.puzzleArray[this.dbIndex]);
         this.activeState = this.ps.puzzleArray[this.dbIndex];
-        // getting the move list for the puzzle whenever we update the active state
+        // getting the move list and theme list of the puzzle whenever we update the active state
         this.moveList = this.activeState.Moves.split(" ");
+        this.themeList = this.activeState.Themes.split(" ");
+        this.updateInfoBox();
 	 	  });
 
       openDialog.addEventListener('click', () => this.openDialog());
@@ -284,6 +289,22 @@ export class PuzzlesComponent implements OnInit{
       var moveTo = move.slice(2,4);
 
       return [moveFrom, moveTo];
+    }
+
+    updateInfoBox(){
+      // this function only gets the info currently
+      // TODO: actually update the info box with the info we get
+      var hints = ""; 
+
+      for (var i = 0; i < this.themeList.length; i++){
+        hints += this.ps.themesName[this.themeList[i]] + ": " + this.ps.themesDescription[this.themeList[i]]
+        if (i != this.themeList.length-1){
+          hints += "\n"
+        }
+      }
+
+      console.log("<--- hints --->\n" + hints);
+
     }
 
     // basic check for if a string is a fen

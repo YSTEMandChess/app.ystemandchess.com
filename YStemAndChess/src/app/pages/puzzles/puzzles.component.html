@@ -23,6 +23,11 @@
         .chess {
             text-align: center;
         }
+        .hint {
+            padding: 15px;
+            display: none;
+            white-space: pre-wrap;
+        }
     </style>
     </head>
     <header>
@@ -45,7 +50,9 @@
 
                     <button id="newPuzzle">Get New Puzzle</button>
 
-                    <button id='openDialog'>Open Dialog</button>
+                    <button id='openDialog'>Show Hint</button>
+
+                    <p id="hint-text" class="hint">Hints will show here</p>
 
                 </div>
             </div>

@@ -43,10 +43,8 @@ export class Chess {
   }
 
   public newGameInit(FEN: string, color? : string) {
-    console.log("<--- newGameInit called --->")
     this.stopTheGameFlag = false;
     if (color){
-      console.log("newGameInit ---> color: " + color);
       this.color = color;  
     }
     const msg = this.createAmessage(FEN, this.color);

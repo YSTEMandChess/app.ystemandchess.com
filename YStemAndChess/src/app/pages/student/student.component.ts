@@ -42,6 +42,11 @@ export class StudentComponent implements OnInit {
     this.getData();
     this.newGameId = this.cookie.get('this.newGameId');
     this.buttonClicked = this.cookie.get('this.buttonClicked');
+    if (this.meetingId == '') {
+      setTimeout(() => {
+        this.playWithComputer();
+      }, 1000);;
+    };
     if (this.buttonClicked != 'true') {
       setTimeout(() => {
         this.playWithComputer();
@@ -63,6 +68,9 @@ export class StudentComponent implements OnInit {
       false
     );
     this.socket.listen('isStepLast').subscribe((data) => {
+      this.isStepLast = data
+    });
+    this.socket.listen('isStepLastUpdate').subscribe((data) => {
       this.isStepLast = data
     });
     this.socket.listen('preventUndoAfterGameOver').subscribe((data: any) => {
@@ -189,9 +197,6 @@ export class StudentComponent implements OnInit {
                       (response) => {
                         if (response == '') {
                           this.displayMoves = [];
-                          // setTimeout(() => {
-                          //   Swal.fire('Game Over', 'Good Job', 'info');
-                          // }, 200);
                           this.newGameInit();
                         }
                         var fen = response.split(' move:')[0];
@@ -453,7 +458,6 @@ export class StudentComponent implements OnInit {
   }
 
   public newGameInit() {
-    this.cookie.delete('undoAfterGameOver');
     this.gameOverMsg = false
     this.isStepLast = true
     this.socket.emitMessage(
@@ -618,9 +622,7 @@ export class StudentComponent implements OnInit {
             }
           }
         });
-      } else {
-        console.log("undo else else call")
-      }
+      } else { }
     }
     // this.httpGetAsync(apiurl, 'POST', (response) => {
     //   if (response) {
@@ -744,7 +746,6 @@ export class StudentComponent implements OnInit {
     }
   }
   public newGame() {
-    console.log("new game() call")
     this.gameOverMsg = false
     this.isStepLast = true
     this.socket.emitMessage(
@@ -806,12 +807,11 @@ export class StudentComponent implements OnInit {
     this.isNearBottom = this.isUserNearBottom();
   }
   public gameOverAlert() {
-    // if (this.gameOverMsg == true) {
-    //   Swal.fire('Game Over', 'Oops! You Lost the game', 'info');
-    // } else {
-    //   Swal.fire('Game Over', 'Hurray! You Win the game', 'info');
-    // }
-    Swal.fire('Game Over', '', 'info');
+    if (this.gameOverMsg == true) {
+      Swal.fire('Game Over', 'Oops! You Lost the game', 'info');
+    } else {
+      Swal.fire('Game Over', 'Hurray! You Win the game', 'info');
+    }
   }
   public undoPermissionAlert() {
     alert('You can not do undo!');

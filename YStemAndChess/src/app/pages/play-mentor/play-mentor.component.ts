@@ -42,6 +42,11 @@ export class PlayMentorComponent implements OnInit {
     this.getData();
     this.newGameId = this.cookie.get('this.newGameId');
     this.buttonClicked = this.cookie.get('this.buttonClicked');
+    if (this.meetingId == '') {
+      setTimeout(() => {
+        this.playWithComputer();
+      }, 1000);;
+    };
     if (this.buttonClicked != 'true') {
       setTimeout(() => {
         this.playWithComputer();
@@ -72,6 +77,9 @@ export class PlayMentorComponent implements OnInit {
     );
 
     this.socket.listen('isStepLast').subscribe((data) => {
+      this.isStepLast = data
+    });
+    this.socket.listen('isStepLastUpdate').subscribe((data) => {
       this.isStepLast = data
     });
     this.socket.listen('preventUndoAfterGameOver').subscribe((data: any) => {
@@ -160,25 +168,6 @@ export class PlayMentorComponent implements OnInit {
       this.displayMoves = [];
     });
   }
-  // public newGame() {
-  //   if (this.meetingId) {
-  //     let userContent = JSON.parse(
-  //       atob(this.cookie.get('login').split('.')[1])
-  //     );
-  //     this.socket.emitMessage(
-  //       'createNewGame',
-  //       JSON.stringify({ username: userContent.username })
-  //     );
-  //     let url: string;
-  //     url = `${environment.urls.middlewareURL}/meetings/newBoardState?meetingId=${this.meetingId}`;
-  //     this.httpGetAsync(url, 'POST', (response) => {
-  //       response = JSON.parse(response);
-  //       this.displayMoves = [];
-  //     });
-  //   } else {
-  //     this.newGameInit();
-  //   }
-  // }
 
   public playWithComputer() {
     if (this.meetingId) {
@@ -472,6 +461,8 @@ export class PlayMentorComponent implements OnInit {
   public newGameInit() {
     this.gameOverMsg = false
     this.isStepLast = true
+    this.cookie.delete('gameOverMsg');
+    this.cookie.delete('undoAfterGameOver');
     this.socket.emitMessage(
       'isStepLastUpdate',
       JSON.stringify(this.isStepLast)
@@ -609,7 +600,8 @@ export class PlayMentorComponent implements OnInit {
   public undoPrevMove() {
     var apiurl = "";
     let undoAfterGameOver = this.cookie.get('undoAfterGameOver');
-    if (this.meetingId != undefined && this.meetingId != '' && undoAfterGameOver != "true") {
+    console.log("this.isStepLast", this.isStepLast)
+    if (this.isStepLast == true && this.meetingId != undefined && this.meetingId != '' && undoAfterGameOver != "true") {
       apiurl = `${environment.urls.middlewareURL}/meetings/checkUndoPermission?meetingId=${this.meetingId}`;
       this.httpGetAsync(apiurl, 'POST', (response) => {
         if (response) {
@@ -642,13 +634,13 @@ export class PlayMentorComponent implements OnInit {
           }
         }
       })
-
     } else {
       if (this.isStepLast == true && this.gameOverMsg == false) {
         apiurl = `${environment.urls.middlewareURL}/meetings/undoMoves?gameId=${this.newGameId}`;
         this.httpGetAsync(apiurl, 'POST', (response) => {
           if (response) {
             response = JSON.parse(response);
+            console.log("response-----", response)
             this.getMovesLists();
             const getFEN = response.moves[response.moves.length - 1];
             const finalFEN = response.moves[response.moves.length - 1];
@@ -838,12 +830,11 @@ export class PlayMentorComponent implements OnInit {
     }
   }
   public gameOverAlert() {
-    // if (this.gameOverMsg == true) {
-    //   Swal.fire('Game Over', 'Oops! You Lost the game', 'info');
-    // } else {
-    //   Swal.fire('Game Over', 'Hurray! You Win the game', 'info');
-    // }
-    Swal.fire('Game Over', '', 'info');
+    if (this.gameOverMsg == true) {
+      Swal.fire('Game Over', 'Oops! You Lost the game', 'info');
+    } else {
+      Swal.fire('Game Over', 'Hurray! You Win the game', 'info');
+    }
   }
   public undoPermissionAlert() {
     alert('You can not do undo!');

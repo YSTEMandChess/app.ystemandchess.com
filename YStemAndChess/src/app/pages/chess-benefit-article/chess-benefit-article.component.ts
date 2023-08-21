@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-chess-benefit-article',
   templateUrl: './chess-benefit-article.component.html',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChessBenefitArticleComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookie: CookieService) { }
 
   ngOnInit(): void {
+    this.cookie.delete('this.newGameId');
   }
 
 }

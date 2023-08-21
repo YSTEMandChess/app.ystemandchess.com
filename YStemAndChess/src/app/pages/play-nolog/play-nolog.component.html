@@ -18,13 +18,16 @@
 
     <div id="play-container">
       <div id="chess-board" class="row">
-        <div class="chess col-12 col-lg-8" [ngClass]="{ 'disable-board': !isStepLast }">
+        <div class="col-12 col-lg-3">
+
+        </div>
+        <div class="chess col-12 col-lg-6" [ngClass]="{ 'disable-board': !isStepLast }">
           <iframe [src]="chessSrc" id="chessBd"></iframe>
         </div>
-        <div class="game_wrapper col-12 col-lg-4 mt-2">
-          <div class="chess-steps">
-            <div class="steps-div">
-              <!-- <div class="text-center">
+        <div class="game_wrapper col-12 col-lg-3 mt-2">
+          <!-- <div class="chess-steps">
+            <div class="steps-div"> -->
+          <!-- <div class="text-center">
                   <span>Steps</span>
                 </div>
                 <div class="fwd-btns">
@@ -65,13 +68,14 @@
                     />
                   </p>
                 </div> -->
-
-              <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
+          <div *ngIf="displayMoves.length > 0" class="steps-stud-div">
+            <div class="steps-div">
+              <div class="display-step">
                 <div class="text-center">
                   <span>Steps</span>
                   <hr class="steps-decoration">
                 </div>
-                <div class="table-moves" #item>
+                <div class="table-moves" #item (scroll)="scrolled($event)" #scrollframe>
 
                   <div style="width: 100px">
                     <div *ngFor="let item of displayMoves; let i = index" (click)="setMove(i,'direct')"
@@ -91,9 +95,10 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
+          <!-- </div>
+          </div> -->
         </div>
       </div>
       <div id="bottom" class="newGameUndo">

@@ -10,7 +10,9 @@ export class ComputerBenefitArticleComponent implements OnInit {
   constructor(private cookie: CookieService) { }
 
   ngOnInit(): void {
-    this.cookie.delete('this.newGameId');
+
+    this.cookie.delete('this.newGameId'); // remove new game id from other component
+
   }
 
 }

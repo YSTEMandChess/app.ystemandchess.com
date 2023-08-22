@@ -42,11 +42,11 @@ export class PlayMentorComponent implements OnInit {
     this.getData();
     this.newGameId = this.cookie.get('this.newGameId');
     this.buttonClicked = this.cookie.get('this.buttonClicked');
-    if (this.meetingId == '') {
-      setTimeout(() => {
-        this.playWithComputer();
-      }, 1000);;
-    };
+    // if (this.meetingId == '') {
+    //   setTimeout(() => {
+    //     this.playWithComputer();
+    //   }, 1000);;
+    // };
     if (this.buttonClicked != 'true') {
       setTimeout(() => {
         this.playWithComputer();

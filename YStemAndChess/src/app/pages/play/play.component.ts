@@ -84,7 +84,6 @@ export class PlayComponent implements OnInit {
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
   ngOnInit() {
-    console.log("this.isStepLast ngOnInit.", this.isStepLast)
     let userContent;
     this.socket.listen('undoMoves').subscribe((data: any) => {
       const undoData = JSON.parse(data);
@@ -345,10 +344,11 @@ export class PlayComponent implements OnInit {
 
     this.socket.listen('gameOver').subscribe((data) => {
       const gameOverMsg = this.cookie.get('gameOverMsg');
-      if (gameOverMsg != "") {
-        Swal.fire('Game Over', gameOverMsg, 'info');
-      }
-      Swal.fire('Game Over', this.gameOverMsg, 'info');
+      // if (gameOverMsg != "") {
+      //   Swal.fire('Game Over', gameOverMsg, 'info');
+      // }
+      // Swal.fire('Game Over', this.gameOverMsg, 'info');
+      Swal.fire('Game Over', '', 'info');
     });
 
     this.socket.listen('deleteCookies').subscribe((data) => {
@@ -429,8 +429,8 @@ export class PlayComponent implements OnInit {
             } else if (info == 'checkmate') {
               const gameOverMsg = this.cookie.get('gameOverMsg');
               if (gameOverMsg == "") {
-                this.cookie.set('gameOverMsg', "'Oops! You Lost the game'");
-                this.gameOverMsg = "'Oops! You Lost the game'"
+                this.cookie.set('gameOverMsg', "Oops! You Lost the game");
+                this.gameOverMsg = "Oops! You Lost the game"
               } else {
                 this.gameOverMsg = gameOverMsg
               }
@@ -532,7 +532,7 @@ export class PlayComponent implements OnInit {
   reload() {
     window.location.reload();
   }
-  getMovesList = () => {
+  public getMovesList = () => {
     let url: string = '';
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
     this.httpGetAsync(url, 'GET', (response) => {
@@ -642,7 +642,6 @@ export class PlayComponent implements OnInit {
         : index > this.displayMoves.length - 1
           ? this.displayMoves.length - 1
           : index;
-    let lastStepClick
     if (direction != 'backward') {
       if (this.displayMoves.length - 1 === index) {
         this.isStepLast = true;
@@ -658,12 +657,6 @@ export class PlayComponent implements OnInit {
         this.isStepLast = false;
       }
     }
-    lastStepClick = this.isStepLast
-    console.log("lastStepClick", lastStepClick)
-    this.socket.emitMessage(
-      'isStepLastUpdate',
-      lastStepClick
-    );
     let movePos = 0;
     if (index <= 0) {
       movePos = 0;
@@ -674,7 +667,6 @@ export class PlayComponent implements OnInit {
     if (this.isNearBottom) {
       this.scrollToBottom();
     }
-
   }
   imgPos(index) {
     return (

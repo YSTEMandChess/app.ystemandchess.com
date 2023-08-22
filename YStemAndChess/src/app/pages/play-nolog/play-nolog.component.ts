@@ -1,8 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-play-nolog',
@@ -24,74 +22,48 @@ export class PlayNologComponent implements OnInit {
   public pieceImage;
   newGameId: any;
   FEN;
-  gameOverMsg: unknown = false;
-  undoAfterGameOver: unknown = false;
   private currentFEN: String =
     'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
   private prevFEN: String = this.currentFEN;
 
-  constructor(private sanitization: DomSanitizer,
-    private cookie: CookieService
-  ) {
+  constructor(private sanitization: DomSanitizer) {
     this.chessSrc = sanitization.bypassSecurityTrustResourceUrl(
-      environment.urls.chessClientURL,
+      environment.urls.chessClientURL
     );
   }
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
 
   ngOnInit(): void {
-    console.log("[][][][][][]")
-    this.getData();
-    this.getMovesList();
     var eventMethod = window.addEventListener
       ? 'addEventListener'
       : 'attachEvent';
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
-    // this.httpGetAsync(
-    //   `${environment.urls.middlewareURL}/meetings/storeMoves`,
-    //   'POST',
-    //   (response) => {
-    //     let result = JSON.parse(response);
-    //     this.newGameId = result.gameId;
-    //   }
-    // );
+    this.httpGetAsync(
+      `${environment.urls.middlewareURL}/meetings/storeMoves`,
+      'POST',
+      (response) => {
+        let result = JSON.parse(response);
+        this.newGameId = result.gameId;
+      }
+    );
 
     // Listen to message from child window
     eventer(
       messageEvent,
       (e) => {
+        console.log('e: ', e);
         // Means that there is the board state and whatnot
 
         if (environment.productionType === 'development') {
           if (e.origin == environment.urls.chessClientURL) {
             this.prevFEN = this.currentFEN;
-            const parts = this.prevFEN.split(' ');
-            const activeColor = parts[1];
             let info = e.data;
             const temp = info.split(':');
             const piece = info.split('-');
             if (info == 'ReadyToRecieve') {
               this.isReady = true;
               this.sendFromQueue();
-            } else if (info == 'checkmate') {
-              if (activeColor == "w") {
-                this.gameOverMsg = true
-              }
-              this.cookie.set('undoAfterGameOver', "true");
-              this.gameOverAlert();
-            } else if (info == 'draw') {
-              if (activeColor == "w") {
-                this.gameOverMsg = true
-              }
-              this.cookie.set('undoAfterGameOver', "true");
-              this.gameOverAlert();
-            } else if (info == 'gameOver') {
-              if (activeColor == "w") {
-                this.gameOverMsg = true
-              }
-              this.cookie.set('undoAfterGameOver', "true");
-              this.gameOverAlert();
             } else if (temp?.length > 1 && temp[0] === 'target') {
               this.move = temp[1];
             } else if (piece?.length > 1 && piece[0] === 'piece') {
@@ -103,8 +75,6 @@ export class PlayNologComponent implements OnInit {
               );
               if (this.level <= 1) this.level = 1;
               else if (this.level >= 30) this.level = 30;
-              console.log("++++++++++++++++123")
-
               this.httpGetAsync(
                 `${environment.urls.middlewareURL}/meetings/storeMoves?gameId=${this.newGameId}&fen=${this.currentFEN}&pos=${this.move}&image=${this.pieceImage}`,
                 'POST',
@@ -118,7 +88,6 @@ export class PlayNologComponent implements OnInit {
                   this.scrollToBottom();
                   setTimeout(() => {
                     this.getMovesList();
-                    console.log("---------------------111111")
                     setTimeout(() => {
                       this.scrollToBottom();
                     }, 500);
@@ -129,10 +98,6 @@ export class PlayNologComponent implements OnInit {
                       'POST',
                       (response) => {
                         console.log('response from stockfish: ', response);
-                        if (response == '') {
-                          this.displayMoves = [];
-                          this.newGameInit();
-                        }
                         var fen = response.split(' move:')[0];
                         var move = response.split(' move:')[1].slice(0, 2);
                         var pos = response.split('target:')[1];
@@ -158,13 +123,12 @@ export class PlayNologComponent implements OnInit {
                                   : response.moves;
                               this.displayMoves = finalMove || [];
                               this.scrollToBottom();
-                              // setTimeout(() => {
-                              //   // this.getMovesList();
-                              //   console.log("---------------------111222")
-                              //   setTimeout(() => {
-                              //     // this.scrollToBottom();
-                              //   }, 500);
-                              // }, 500);
+                              setTimeout(() => {
+                                this.getMovesList();
+                                setTimeout(() => {
+                                  this.scrollToBottom();
+                                }, 500);
+                              }, 1000);
                             }
                           );
                         } else {
@@ -188,29 +152,12 @@ export class PlayNologComponent implements OnInit {
         } else {
           if (e.origin != environment.urls.chessClientURL) {
             this.prevFEN = this.currentFEN;
-            const parts = this.prevFEN.split(' ');
-            const activeColor = parts[1];
             let info = e.data;
             const temp = info.split(':');
             const piece = info.split('-');
             if (info == 'ReadyToRecieve') {
               this.isReady = true;
               this.sendFromQueue();
-            } else if (info == 'checkmate') {
-              if (activeColor == "w") {
-                this.gameOverMsg = true
-              }
-              this.gameOverAlert();
-            } else if (info == 'draw') {
-              if (activeColor == "w") {
-                this.gameOverMsg = true
-              }
-              this.gameOverAlert();
-            } else if (info == 'gameOver') {
-              if (activeColor == "w") {
-                this.gameOverMsg = true
-              }
-              this.gameOverAlert();
             } else if (temp?.length > 1 && temp[0] === 'target') {
               this.move = temp[1];
             } else if (piece?.length > 1 && piece[0] === 'piece') {
@@ -235,11 +182,10 @@ export class PlayNologComponent implements OnInit {
                   this.scrollToBottom();
                   setTimeout(() => {
                     this.getMovesList();
-                    console.log("---------------------111333")
                     setTimeout(() => {
                       this.scrollToBottom();
                     }, 500);
-                  }, 500);
+                  }, 1000);
                   if (response) {
                     this.httpGetAsync(
                       `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
@@ -271,12 +217,12 @@ export class PlayNologComponent implements OnInit {
                                   : response.moves;
                               this.displayMoves = finalMove || [];
                               this.scrollToBottom();
-                              // setTimeout(() => {
-                              //   this.getMovesList();
-                              //   setTimeout(() => {
-                              //     this.scrollToBottom();
-                              //   }, 500);
-                              // }, 500);
+                              setTimeout(() => {
+                                this.getMovesList();
+                                setTimeout(() => {
+                                  this.scrollToBottom();
+                                }, 500);
+                              }, 1000);
                             }
                           );
                         } else {
@@ -302,22 +248,6 @@ export class PlayNologComponent implements OnInit {
       false
     );
   }
-  getData() {
-    this.newGameId = this.cookie.get('this.newGameId');
-    if (!this.newGameId) {
-      console.log("this.newGameId", this.newGameId)
-      this.httpGetAsync(
-        `${environment.urls.middlewareURL}/meetings/storeMoves?userId=${'guest'}`,
-        'POST',
-        (response) => {
-          let result = JSON.parse(response);
-          this.newGameId = result.gameId;
-          this.cookie.set('this.newGameId', this.newGameId);
-        }
-      );
-    }
-  }
-
   numberOnly(event): boolean {
     var data = (<HTMLInputElement>document.getElementById('movesAhead')).value;
     const charCode = event.which ? event.which : event.keyCode;
@@ -345,13 +275,11 @@ export class PlayNologComponent implements OnInit {
       `${environment.urls.middlewareURL}/meetings/getStoreMoves?gameId=${this.newGameId}`,
       'GET',
       (response) => {
-        console.log("---------------------22222")
         let getMoves = JSON.parse(response);
         let finalMove =
           getMoves.moves.length > 0
             ? getMoves.moves[getMoves.moves.length - 1]
             : getMoves.moves;
-        console.log("finalMove", finalMove)
         this.displayMoves = finalMove || [];
         this.FEN = finalMove[finalMove.length - 1].fen;
         this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
@@ -364,10 +292,7 @@ export class PlayNologComponent implements OnInit {
             JSON.stringify({ boardState: this.FEN, color: this.color }),
             environment.urls.chessClientURL
           );
-          setTimeout(() => {
-            this.scrollToBottom();
-          }, 500);
-        }, 500);
+        }, 1000);
 
         (<HTMLFrameElement>document.getElementById('chessBd')).setAttribute(
           'src',
@@ -379,7 +304,6 @@ export class PlayNologComponent implements OnInit {
 
   public newGameInit() {
     console.log('New game init called');
-    this.cookie.delete('undoAfterGameOver');
     this.httpGetAsync(
       `${environment.urls.middlewareURL}/meetings/newGameStoreMoves?gameId=${this.newGameId}`,
       'POST',
@@ -387,8 +311,7 @@ export class PlayNologComponent implements OnInit {
         this.getMovesList();
       }
     );
-    // this.color = Math.random() > 0.5 ? 'white' : 'black';
-    this.color = 'white';
+    this.color = Math.random() > 0.5 ? 'white' : 'black';
     this.currentFEN =
       'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
     this.prevFEN = this.currentFEN;
@@ -450,7 +373,7 @@ export class PlayNologComponent implements OnInit {
                         setTimeout(() => {
                           this.scrollToBottom();
                         }, 500);
-                      }, 500);
+                      }, 1000);
                     }
                   );
                 } else {
@@ -467,68 +390,40 @@ export class PlayNologComponent implements OnInit {
   }
 
   public undoPrevMove() {
-    let undoAfterGameOver = this.cookie.get('undoAfterGameOver');
-    if (undoAfterGameOver == "true") { }
-    else {
-      this.httpGetAsync(
-        `${environment.urls.middlewareURL}/meetings/undoMoves?gameId=${this.newGameId}`,
-        'POST',
-        (response) => {
-          if (response) {
-            response = JSON.parse(response);
-            this.getMovesList();
-            const getFEN = response.moves[response.moves.length - 1];
-            const finalFEN = response.moves[response.moves.length - 1];
-            const sliceFEN = finalFEN.splice(-2);
-            let FEN = '';
-            if (finalFEN.length > 0) {
-              FEN = finalFEN[finalFEN.length - 1].fen;
-            }
-            if (getFEN.length === 0) {
-              let chessBoard = (<HTMLFrameElement>(document.getElementById('chessBd'))).contentWindow;
-              chessBoard.postMessage(JSON.stringify({
+    this.httpGetAsync(
+      `${environment.urls.middlewareURL}/meetings/undoMoves?gameId=${this.newGameId}`,
+      'POST',
+      (response) => {
+        if (response) {
+          response = JSON.parse(response);
+          this.getMovesList();
+          const finalFEN = response.moves[response.moves.length - 1];
+          const FEN = finalFEN[finalFEN.length - 2].fen;
+          if (finalFEN.length === 2) {
+            let chessBoard = (<HTMLFrameElement>(
+              document.getElementById('chessBd')
+            )).contentWindow;
+            chessBoard.postMessage(
+              JSON.stringify({
                 boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-              }), environment.urls.chessClientURL);
-            } else {
-              var chessBoard = (<HTMLFrameElement>(document.getElementById('chessBd'))).contentWindow;
-              chessBoard.postMessage(JSON.stringify({
+              }),
+              environment.urls.chessClientURL
+            );
+          } else {
+            var chessBoard = (<HTMLFrameElement>(
+              document.getElementById('chessBd')
+            )).contentWindow;
+            chessBoard.postMessage(
+              JSON.stringify({
                 boardState: FEN,
                 color: this.color,
-              }), environment.urls.chessClientURL);
-            }
+              }),
+              environment.urls.chessClientURL
+            );
           }
-          // if (response) {
-          //   response = JSON.parse(response);
-          //   this.getMovesList();
-          //   const finalFEN = response.moves[response.moves.length - 1];
-          //   const FEN = finalFEN[finalFEN.length - 2].fen;
-          //   if (finalFEN.length === 2) {
-          //     let chessBoard = (<HTMLFrameElement>(
-          //       document.getElementById('chessBd')
-          //     )).contentWindow;
-          //     chessBoard.postMessage(
-          //       JSON.stringify({
-          //         boardState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-          //       }),
-          //       environment.urls.chessClientURL
-          //     );
-          //   } else {
-          //     var chessBoard = (<HTMLFrameElement>(
-          //       document.getElementById('chessBd')
-          //     )).contentWindow;
-          //     chessBoard.postMessage(
-          //       JSON.stringify({
-          //         boardState: FEN,
-          //         color: this.color,
-          //       }),
-          //       environment.urls.chessClientURL
-          //     );
-          //   }
-          // }
         }
-      );
-    }
-
+      }
+    );
   }
 
   getMovesList = () => {
@@ -541,35 +436,8 @@ export class PlayNologComponent implements OnInit {
           response.moves.length > 0
             ? response.moves[response.moves.length - 1]
             : response.moves;
-        console.log("finalMove-----", finalMove)
         this.displayMoves = finalMove || [];
         this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
-        if (this.currentStep == 0) {
-          let chessBoard = (<HTMLFrameElement>(document.getElementById('chessBd'))).contentWindow;
-          let FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
-          chessBoard.postMessage(JSON.stringify({
-            boardState: FEN,
-            color: this.color,
-          }), environment.urls.chessClientURL);
-        } else {
-          const finalFEN = response.moves[response.moves.length - 1];
-          let FEN = finalFEN[finalFEN.length - 1].fen;
-          if (FEN == 'gameOver') {
-            this.gameOverMsg = true
-            this.gameOverAlert()
-          }
-          let chessBoard = (<HTMLFrameElement>(document.getElementById('chessBd'))).contentWindow;
-          chessBoard.postMessage(JSON.stringify({
-            boardState: FEN,
-            color: this.color,
-          }), environment.urls.chessClientURL);
-          if (!response) {
-            this.newGameInit();
-          }
-        }
-        setTimeout(() => {
-          this.scrollToBottom();
-        }, 500);
       }
     );
   };
@@ -578,8 +446,8 @@ export class PlayNologComponent implements OnInit {
       index <= 0
         ? 0
         : index > this.displayMoves.length - 1
-          ? this.displayMoves.length - 1
-          : index;
+        ? this.displayMoves.length - 1
+        : index;
     if (direction != 'backward') {
       if (this.displayMoves.length - 1 === index) {
         this.isStepLast = true;
@@ -643,9 +511,9 @@ export class PlayNologComponent implements OnInit {
     this.isNearBottom = this.isUserNearBottom();
   }
 
-  // private gameOverAlert() {
-  //   alert('Game over.');
-  // }
+  private gameOverAlert() {
+    alert('Game over.');
+  }
   private httpGetAsync(theUrl: string, method: string = 'POST', callback) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function () {
@@ -654,11 +522,5 @@ export class PlayNologComponent implements OnInit {
     };
     xmlHttp.open(method, theUrl, true); // true for asynchronous
     xmlHttp.send(null);
-  }
-
-  public gameOverAlert() {
-    if (this.gameOverMsg == true) {
-      Swal.fire('Game Over', '', 'info');
-    }
   }
 }

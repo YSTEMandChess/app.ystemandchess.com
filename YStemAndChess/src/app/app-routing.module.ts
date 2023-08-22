@@ -31,16 +31,16 @@ import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
 
-import { MathArticleComponent } from "./pages/math-article/math-article.component";
-import { OnlineArticleComponent } from "./pages/Online-expansion-article/online-article.component";
-import { ComputerBenefitArticleComponent } from "./pages/computer-science-benefit-article/computer-benefit-article.component"
-import { ChessBenefitArticleComponent } from "./pages/chess-benefit-article/chess-benefit-article.component";
-import { MentoringBenefitArticleComponent } from "./pages/mentoring-benefit-article/mentoring-benefit-article.component";
-import { AboutUsComponent } from "./pages/aboutUs/about-us.component"
-import { MissionHifiComponent } from "./pages/mission-hifi/mission-hifi.component"
-import { FinancialsHifiComponent } from "./pages/financials/financials-hifi.component";
-import { BoardHifiComponent } from "./pages/board/board-hifi.component";
-import { MentorProfileComponent } from "./pages/mentor-profile/mentor-profile.component"
+import {MathArticleComponent} from "./pages/math-article/math-article.component";
+import {OnlineArticleComponent} from "./pages/Online-expansion-article/online-article.component";
+import {ComputerBenefitArticleComponent} from "./pages/computer-science-benefit-article/computer-benefit-article.component"
+import {ChessBenefitArticleComponent} from "./pages/chess-benefit-article/chess-benefit-article.component";
+import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-article/mentoring-benefit-article.component";
+import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
+import {MissionHifiComponent} from "./pages/mission-hifi/mission-hifi.component"
+import {FinancialsHifiComponent} from "./pages/financials/financials-hifi.component";
+import {BoardHifiComponent} from "./pages/board/board-hifi.component";
+import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component"
 
 
 const routes: Routes = [
@@ -152,10 +152,10 @@ const routes: Routes = [
   { path: 'benefit-of-chess', component: ChessBenefitArticleComponent },
   { path: 'benefit-of-computer-science', component: ComputerBenefitArticleComponent },
   { path: 'about-us', component: AboutUsComponent },
-  { path: 'mission', component: MissionHifiComponent },
-  { path: 'financial', component: FinancialsHifiComponent },
-  { path: 'board', component: BoardHifiComponent },
-
+  { path: 'mission-hifi', component: MissionHifiComponent },
+  { path: 'financial-hifi', component: FinancialsHifiComponent },
+  { path: 'board-hifi', component: BoardHifiComponent },
+  
   {
     path: 'mentor-profile',
     component: MentorProfileComponent,
@@ -170,4 +170,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [HeaderComponent, LoginGuardService],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

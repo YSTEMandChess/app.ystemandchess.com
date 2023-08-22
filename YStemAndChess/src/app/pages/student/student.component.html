@@ -8,7 +8,7 @@
     <div id="mentor-container">
       <div id="top"></div>
       <div class="gameclass">
-        <div [ngClass]="{ 'disable-board': !isStepLast}">
+        <div [ngClass]="{ 'disable-board': !isStepLast }">
           <app-play></app-play>
         </div>
         <div *ngIf="displayMoves.length > 0" class="steps-stud-div">

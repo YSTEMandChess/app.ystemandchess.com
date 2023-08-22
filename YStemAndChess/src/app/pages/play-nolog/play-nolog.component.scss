@@ -83,7 +83,7 @@
 }
 
 .chess {
-  height: 35rem !important;
+  height: 46rem !important;
 
   iframe {
     min-width: 100%;
@@ -156,10 +156,10 @@ iframe {
   // padding: 7%;
   // width: fit-content;
   display: block;
-  height: 33rem;
+  height: 45rem;
   // overflow: hidden scroll;
   cursor: pointer;
-  margin-left: 0px;
+  margin-left: 25px;
   // background-color: lightgray;
   border: 4px solid #257d96;
   padding: 7%;
@@ -269,7 +269,7 @@ iframe {
   }
 
   .display-step {
-    height: auto;
+    height: 37rem;
   }
 }
 

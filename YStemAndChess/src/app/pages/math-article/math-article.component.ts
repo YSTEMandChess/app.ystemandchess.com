@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-math-article',
   templateUrl: './math-article.component.html',
@@ -7,10 +7,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class MathArticleComponent implements OnInit {
 
-  constructor(private cookie: CookieService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.cookie.delete('this.newGameId');
   }
 
 }

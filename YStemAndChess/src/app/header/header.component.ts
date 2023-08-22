@@ -133,11 +133,6 @@ export class HeaderComponent implements OnInit {
         let url = `${environment.urls.middlewareURL}/meetings/inMeeting`;
         //change rest
         this.httpGetAsync(url, 'GET', (response) => {
-          let response1 = JSON.parse(response);
-          if (response1[0].meetingId) {
-            this.cookie.delete('this.newGameId');
-            console.log("==================================", response1[0].meetingId)
-          }
           if (
             JSON.parse(response) ===
             'There are no current meetings with this user.'
@@ -147,12 +142,10 @@ export class HeaderComponent implements OnInit {
                 window.location.pathname = '/student';
                 this.cookie.delete('this.buttonClicked');
                 this.cookie.delete('this.meetingId');
-                this.cookie.delete('this.newGameId');
               } else {
                 window.location.pathname = '/play-mentor';
                 this.cookie.delete('this.buttonClicked');
                 this.cookie.delete('this.meetingId');
-                this.cookie.delete('this.newGameId');
               }
             }
             this.inMatch = false;

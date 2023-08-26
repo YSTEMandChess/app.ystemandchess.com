@@ -47,9 +47,14 @@ export class PuzzlesComponent implements OnInit{
       this.activeState = this.ps.puzzleArray[0];
       // getting the move list of the puzzle when we start up
       this.moveList = this.activeState.moves.split(" ");
-	    const button = document.getElementById('newPuzzle') as HTMLElement;
+
+      // get elements
+	    const newPuzzle = document.getElementById('newPuzzle') as HTMLElement;
+      const openDialog = document.getElementById('openDialog') as HTMLElement;
+      const closeDialog = document.getElementById('closeDialog') as HTMLElement;
       
-	    button.addEventListener('click', () => { 
+      // add event listener to buttons
+	    newPuzzle.addEventListener('click', () => { 
         this.dbIndex = this.dbIndex+1;
         if (this.dbIndex==3){
           this.dbIndex=0;	
@@ -59,6 +64,9 @@ export class PuzzlesComponent implements OnInit{
         // getting the move list for the puzzle whenever we update the active state
         this.moveList = this.activeState.moves.split(" ");
 	 	  });
+
+      openDialog.addEventListener('click', () => this.openDialog());
+      closeDialog.addEventListener('click', () => this.closeDialog());
 
 
       // Listen to message from child window, originally from play-nolog.component.ts, adjusted
@@ -181,17 +189,20 @@ export class PuzzlesComponent implements OnInit{
         }
       )
     }
+	
 
-		openDialog() {
+    openDialog() {
+      console.log("open dialog clicked");
       const dialog = document.getElementById('myDialog') as HTMLDialogElement;
-      //dialog.showModal();
+      dialog.open = true;
+      // dialog.showModal();
     }
   
     closeDialog() {
       const dialog = document.getElementById('myDialog') as HTMLDialogElement;
       dialog.close();
-    }
-    
+    } 
+
     setStateAsActive(state) {
         console.log("click state---->", state)
         this.playerColor = state.fen.split(" ")[1];

@@ -16,6 +16,7 @@ export class PuzzlesComponent implements OnInit{
     chessSrc;
     info = "Welcome to puzzles"
     currentFen;
+    moveList;
     public dbIndex=0;
     
     activeState = {
@@ -37,36 +38,86 @@ export class PuzzlesComponent implements OnInit{
 
     ngOnInit(): void {  
  
-        this.setStateAsActive(this.ps.puzzleArray[0]);
-        this.activeState = this.ps.puzzleArray[0];
-	  const button = document.getElementById('newPuzzle') as HTMLElement;
-        
-	  button.addEventListener('click', () => { 
-	  	this.dbIndex = this.dbIndex+1;
-    	  	if (this.dbIndex==3){
-			this.dbIndex=0;	
-    	  	}
-	  	this.setStateAsActive(this.ps.puzzleArray[this.dbIndex]);
-    	  	this.activeState = this.ps.puzzleArray[this.dbIndex];
-	 	});            
-	  }
-	
+      this.setStateAsActive(this.ps.puzzleArray[0]);
+      this.activeState = this.ps.puzzleArray[0];
+      // getting the move list of the puzzle when we start up
+      this.moveList = this.activeState.moves.split(" ");
+	    const button = document.getElementById('newPuzzle') as HTMLElement;
+      
+	    button.addEventListener('click', () => { 
+        this.dbIndex = this.dbIndex+1;
+        if (this.dbIndex==3){
+          this.dbIndex=0;	
+        }
+        this.setStateAsActive(this.ps.puzzleArray[this.dbIndex]);
+        this.activeState = this.ps.puzzleArray[this.dbIndex];
+        // getting the move list for the puzzle whenever we update the active state
+        this.moveList = this.activeState.moves.split(" ");
+	 	  });
+
+
+      // Listen to message from child window, originally from play-nolog.component.ts, adjusted
+      var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent';
+      var eventer = window[eventMethod];
+      var messageEvent = eventMethod == 'attachEvent' ? 'onmessage' : 'message';
+      eventer(
+        messageEvent,
+        (e) => {
+          // print out event e
+          console.log('e: ', e);
+          // store the data as info
+          let info = e.data;
+
+          // if it exists and is not an object, then it should be a FEN string
+          if (info && typeof info !== "object"){
+            // update the current FEN and color
+            this.currentFen = info;
+          
+            // get the chessBoard
+            var chessBoard = (<HTMLFrameElement>(
+              document.getElementById('chessBoard')
+            )).contentWindow;
+
+            // post the new FEN and color so board is updated
+            // note that we are posting the message to the chessClient
+            chessBoard.postMessage(
+              JSON.stringify({
+                boardState: this.currentFen
+              }),
+              environment.urls.chessClientURL
+            );
+          }
+        }
+      )
+    }
 
 		openDialog() {
-		const dialog = document.getElementById('myDialog') as HTMLDialogElement;
- 			 //dialog.showModal();
-		}
-
-		closeDialog() {
-		const dialog = document.getElementById('myDialog') as HTMLDialogElement;
-  			dialog.close();
-		}  
-
+      const dialog = document.getElementById('myDialog') as HTMLDialogElement;
+      //dialog.showModal();
+    }
+  
+    closeDialog() {
+      const dialog = document.getElementById('myDialog') as HTMLDialogElement;
+      dialog.close();
+    }
+    
     setStateAsActive(state) {
         console.log("click state---->", state)
+        var playerColor = state.fen.split(" ")[1];
+        
+        // this is backwards because the first move is the computer's
+        // so if the active color is black, then player is white, and vice versa
+        if (playerColor === "b"){
+          playerColor = "white";
+        }
+        else{
+          playerColor = "black";
+        }
+
         var firstObj = {
           'theme': state.theme,
           'fen': state.fen,
+          'color': playerColor,
           'event':''
         };
         console.log("first obj---->", firstObj)
@@ -123,11 +174,36 @@ export class PuzzlesComponent implements OnInit{
         //   event.srcElement.textContent = elText;
         // }
 
-        startLesson({ theme, fen,event }): void {
-        console.log("start lesson call---->", theme)
+        startLesson({ theme, fen, event }): void {
+          console.log("start lesson call---->", theme)
           this.info = this.info;
           this.chess.newGameInit(fen);
           this.currentFen = fen;
+
+          // testing: trying to get a piece to move by itself
+          // get the chessBoard
+          var chessBoard = (<HTMLFrameElement>(
+            document.getElementById('chessBoard')
+          )).contentWindow;
+          
+          console.log("posting move");
+          
+          // get the first move from the list
+          var firstMove = this.moveList.shift();
+          // from: first two characters of a move
+          var firstMoveFrom = firstMove.slice(0,2);
+          // to: last two characters of a move
+          var firstMoveTo = firstMove.slice(2,4);
+          
+          setTimeout(() => {
+            chessBoard.postMessage(
+              JSON.stringify({
+                from: firstMoveFrom,
+                to: firstMoveTo
+              }),
+              environment.urls.chessClientURL
+            );
+          }, 500)
 
         }
 }

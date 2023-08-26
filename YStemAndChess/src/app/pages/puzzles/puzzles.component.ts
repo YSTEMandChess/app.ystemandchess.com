@@ -26,15 +26,15 @@ export class PuzzlesComponent implements OnInit{
     public dbIndex=0;
     
     activeState = {
-      "PuzzleId": "lliIw",
-      "FEN": "r2qkb1r/pQ3ppp/2p2n2/3b4/2BP4/8/PP3PPP/RNB1K2R b KQkq - 0 11",
-      "Moves": "d5c4 b7c6 f6d7 c6c4 a8c8 c4e2",
-      "Rating": 1313,
-      "RatingDeviation": 74,
-      "Popularity": 95,
-      "NbPlays": 11404,
-      "Themes": "advantage fork long opening",
-      "GameUrl": "https://lichess.org/06Fl2Wl7/black#22"
+      "PuzzleId":"YzaYa",
+      "FEN":"2kr3r/1pp2ppp/p1pb1n2/4q3/NPP1P3/P2P1P1P/5P2/R1BQ1RK1 w - - 1 16",
+      "Moves":"d3d4 e5h2",
+      "Rating":910,
+      "RatingDeviation":76,
+      "Popularity":96,
+      "NbPlays":128,
+      "Themes":"mate mateIn1 middlegame oneMove",
+      "GameUrl":"https://lichess.org/nPeulvcd#31"
     };
 
     constructor(private ps: PuzzlesService, private sanitization: DomSanitizer) { 
@@ -45,8 +45,9 @@ export class PuzzlesComponent implements OnInit{
 	//   this.loadLessons();
     }
 
-    ngOnInit(): void {  
- 
+    ngOnInit(): void {
+      this.shuffleArray(this.ps.puzzleArray);
+
       this.setStateAsActive(this.ps.puzzleArray[0]);
       this.activeState = this.ps.puzzleArray[0];
       // getting the move list and theme list of the puzzle when we start up
@@ -201,10 +202,17 @@ export class PuzzlesComponent implements OnInit{
 	
 
     openDialog() {
-      console.log("open dialog clicked");
-      const dialog = document.getElementById('myDialog') as HTMLDialogElement;
-      dialog.open = true;
+      //console.log("open dialog clicked");
+      //const dialog = document.getElementById('myDialog') as HTMLDialogElement;
+      //dialog.open = true;
       // dialog.showModal();
+      var hintText = document.getElementById('hint-text');
+      if (hintText.style.display === "block") {
+        document.getElementById('hint-text').style.display = "none";
+      }
+      else {
+        document.getElementById('hint-text').style.display = "block";
+      }
     }
   
     closeDialog() {
@@ -293,17 +301,18 @@ export class PuzzlesComponent implements OnInit{
 
     updateInfoBox(){
       // this function only gets the info currently
-      // TODO: actually update the info box with the info we get
       var hints = ""; 
 
       for (var i = 0; i < this.themeList.length; i++){
-        hints += this.ps.themesName[this.themeList[i]] + ": " + this.ps.themesDescription[this.themeList[i]]
+        hints += "<b>" + this.ps.themesName[this.themeList[i]] + "</b>" + ": \n" + this.ps.themesDescription[this.themeList[i]]
         if (i != this.themeList.length-1){
-          hints += "\n"
+          hints += "\n\n"
         }
       }
 
-      console.log("<--- hints --->\n" + hints);
+      var hintText = document.getElementById("hint-text");
+      hintText.style.display = "none"
+      hintText.innerHTML = hints;
 
     }
 
@@ -311,4 +320,13 @@ export class PuzzlesComponent implements OnInit{
     isFen(fen){
       return fen.split("/").length == 8;
     }
+
+    // shuffle array function referenced from stack overflow
+    // for randomizing the puzzle array at start up so you don't always get the same order of puzzles
+    shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+      }
+  }
 }

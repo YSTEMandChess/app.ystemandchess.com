@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+	<style>
+        .button-container {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+        .dialog-container {
+            position: absolute;
+            top: 50%;
+        }
+	    .hidden {
+      	    display: none;
+    	}
+        .chess {
+            text-align: center;
+        }
+        .hint {
+            padding: 15px;
+            display: none;
+            white-space: pre-wrap;
+        }
+    </style>
+    </head>
+    <header>
+        <app-header></app-header>
+    </header>
+    <body>
+        <div class="container">
+            <div id="mainElements">
+                <iframe id="chessBoard" [src]="chessSrc"></iframe>
+
+                <div id="hintMenu">
+
+                    <div class="dialog-container">
+                        <dialog id="myDialog">
+                            <h1>This is a place holder header</h1>
+                            <p>This is a dialog place holder text</p>
+                            <button id='closeDialog'>Close</button>
+                        </dialog>
+                    </div>
+
+                    <button id="newPuzzle">Get New Puzzle</button>
+
+                    <button id='openDialog'>Show Hint</button>
+
+                    <p id="hint-text" class="hint">Hints will show here</p>
+
+                </div>
+            </div>
+        </div>		
+    </body>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

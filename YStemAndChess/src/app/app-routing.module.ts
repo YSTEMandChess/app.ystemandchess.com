@@ -42,6 +42,8 @@ import { FinancialsHifiComponent } from "./pages/financials/financials-hifi.comp
 import { BoardHifiComponent } from "./pages/board/board-hifi.component";
 import { MentorProfileComponent } from "./pages/mentor-profile/mentor-profile.component"
 
+import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -155,7 +157,7 @@ const routes: Routes = [
   { path: 'mission', component: MissionHifiComponent },
   { path: 'financial', component: FinancialsHifiComponent },
   { path: 'board', component: BoardHifiComponent },
-
+  { path: 'puzzles', component: PuzzlesComponent },
   {
     path: 'mentor-profile',
     component: MentorProfileComponent,

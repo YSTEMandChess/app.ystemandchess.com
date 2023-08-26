@@ -1,0 +1,28 @@
+body {
+    background-color: #E5F3D2;
+    background-image: url("../../../assets/images/homePage/chess_piece.png");
+}
+#mainElements {
+    height: 46rem;
+    iframe {
+        min-width: 700px;
+        min-height: 100%;
+        overflow: visible;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DEEACE;
+}
+#hintMenu {
+    padding: 20px 0px 20px 0px;
+    height: 700px;
+    width: 400px;
+    background-color: #BFD99E;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    flex-wrap: wrap;
+}

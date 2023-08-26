@@ -45,19 +45,43 @@ function greySquare (square) {
 eventer(
   messageEvent,
   (e) => {
+    // console.log("client evenet: ", e); // uncomment for debugging
     let data = JSON.parse(e.data);
     lessonFlag = data.lessonFlag;
     if (lessonFlag == true) {
       isLesson = true;
     }
 
+    // move a piece if it's a move message
+    if ("from" in data && "to" in data){
+      game.move({from: data.from, to: data.to});
+      
+      // move highlight
+      highlightMove(data.from, data.to);
+
+      updateStatus();
+      sendToParent(game.fen());
+    }
+
+    // highlight message
+    if ("highlightFrom" in data && "highlightTo" in data){
+      highlightMove(data.highlightFrom, data.highlightTo);
+    }
+
     if (isLesson == true) {
       endSquare = data.endSquare;
       lessonBoard = data.boardState;
       lessonEnd = data.endState;
-      playerColor = data.color;
-      previousEndSquare = data.previousEndSquare;
 
+      if ((data.color === "black" || data.color === "white") && data.color !== playerColor){
+        playerColor = data.color;
+        console.log("data.color: " + data.color)
+        console.log("setting orientation to: " + playerColor);
+        board.orientation(playerColor);
+      }
+
+      previousEndSquare = data.previousEndSquare;
+      
       if (previousEndSquare !== "") {
         $board.find(".square-" + previousEndSquare).removeClass("highlight");
       }
@@ -77,14 +101,16 @@ eventer(
         // var overlay = new ChessboardArrows('board_wrapper');
         lessonStarted = true;
         game.load(lessonBoard);
-      } else {
+      }
+      else {
         board.position(data.boardState);
         game.load(data.boardState);
         updateStatus();
       }
 
       $board.find(".square-" + endSquare).addClass("highlight");
-    } else if (data.boardState == startFEN) {
+    }
+    else if (data.boardState == startFEN) {
       game = new Chess();
     }
     if (isLesson == false) {
@@ -94,9 +120,18 @@ eventer(
       board.position(data.boardState);
       updateStatus();
     }
+    
   },
   false
 );
+
+function highlightMove(from, to){
+  $board.find('.' + squareClass).removeClass('highlight');
+  if (from !== "remove" || to !== "remove"){
+    $board.find('.square-' + from).addClass('highlight');
+    $board.find('.square-' + to).addClass('highlight');
+  }
+}
 
 function flip() {
   board.flip();
@@ -151,8 +186,15 @@ function onDrop(source, target, draggedPieceSource) {
     }
   }
 
+  // move highlight
+  highlightMove(source, target);
+
   updateStatus();
   sendToParent(`piece-${draggedPieceSource}`);
+  sendToParent(JSON.stringify({
+                from: source,
+                to: target
+              }));
   sendToParent(`target:${move.to}`);
   sendToParent(game.fen());
 }

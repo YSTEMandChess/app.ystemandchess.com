@@ -42,10 +42,22 @@ export class Chess {
     );
   }
 
-  public newGameInit(FEN: string) {
+  public newGameInit(FEN: string, color? : string) {
     this.stopTheGameFlag = false;
+    if (color){
+      this.color = color;  
+    }
     const msg = this.createAmessage(FEN, this.color);
     this.chessBoard.postMessage(msg, environment.urls.chessClientURL);
+    
+    // remove any previous move highlights since we are starting a new game
+    this.chessBoard.postMessage(
+      JSON.stringify({
+        highlightFrom: "remove",
+        highlightTo: "remove"
+      }),
+      environment.urls.chessClientURL
+    );
   }
 
   private dataTransform(data) {

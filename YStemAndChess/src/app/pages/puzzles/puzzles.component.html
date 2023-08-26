@@ -13,9 +13,16 @@
             right: 20px;
             transform: translateY(-50%);
         }
-	.hidden {
+        .dialog-container {
+            position: absolute;
+            top: 50%;
+        }
+	    .hidden {
       	    display: none;
     	}
+        .chess {
+            text-align: center;
+        }
     </style>
     </head>
     <header>
@@ -24,17 +31,21 @@
     <body>
         <div class="container">
             <div class="chess">
-		<button onclick="openDialog()">Open Dialog</button>
-
-  		<dialog id="myDialog" class="hidden">
-    			<button onclick="closeDialog()">Close</button>
-  		</dialog>
                 <iframe id="chessBoard" [src]="chessSrc"></iframe>
-			<div class="button-container">
-       <button id="newPuzzle">Get New Puzzle</button>
-	     </div>
-        </div> 
-       </div> 		
+            </div>
+            <div class="dialog-container">
+                <dialog id="myDialog">
+                    <h1>This is a place holder header</h1>
+                    <p>This is a dialog place holder text</p>
+                    <button id='closeDialog'>Close</button>
+                </dialog>
+	        </div>
+            <div class="button-container">
+                <button id="newPuzzle">Get New Puzzle</button>
+            </div>
+            <button id='openDialog'>Open Dialog</button>
+            
+        </div>		
     </body>
     <footer>
         <app-footer></app-footer>

@@ -12,6 +12,7 @@ const { check, validationResult, query } = require("express-validator");
 const { waitingStudents, waitingMentors } = require("../models/waiting");
 const meetings = require("../models/meetings");
 const movesList = require("../models/moves");
+const undoPermission = require("../models/undoPermission");
 const { startRecording, stopRecording } = require("../utils/recordings");
 
 var isBusy = false; //State variable to see if a query is already running.
@@ -520,6 +521,7 @@ const getMoves = async (meetingId) => {
   });
   return moves;
 };
+
 //Async function to store moves in the database
 const updateMoves = async (meetingId, oldMovesArr) => {
   const newdata = await meetings.findOneAndUpdate(
@@ -529,27 +531,58 @@ const updateMoves = async (meetingId, oldMovesArr) => {
   return newdata;
 };
 
+//Async function to update undo permission in the database
+const updateUndoPermission = async (meetingId, value) => {
+  if (value == "student") {
+    const newdata = await undoPermission.findOne({ meetingId: meetingId });
+    if (!newdata) {
+      await undoPermission.create({
+        meetingId: meetingId,
+        permission: true
+      });
+    } else {
+      await undoPermission.findOneAndUpdate(
+        { meetingId: meetingId },
+        { permission: true }
+      );
+    }
+  } else {
+    await undoPermission.findOneAndUpdate(
+      { meetingId: meetingId },
+      { permission: false }
+    );
+  }
+
+
+  // return newdata;
+};
+
 router.post("/boardState", passport.authenticate("jwt"), async (req, res) => {
   try {
-    const { meetingId, fen, pos, image } = req.query;
-    let meeting = await getMoves(meetingId);
-    let moveArray = meeting.moves;
-    let oldMovesArr = [];
-    let moveArrayLength = moveArray.length;
-    if (moveArray.length > 0) {
-      oldMovesArr = moveArray[moveArrayLength - 1];
-      moveArrayLength = moveArray.length - 1;
-    }
-    if (
-      oldMovesArr.length === 0 ||
-      oldMovesArr[oldMovesArr.length - 1]?.fen !== fen
-    ) {
-      fen && oldMovesArr.push({ fen, pos, image });
-      moveArray[moveArrayLength] = oldMovesArr;
-      let updatedMove = await updateMoves(meetingId, moveArray);
-      res.status(200).send(updatedMove);
+    const { meetingId, fen, pos, image, role } = req.query;
+    if (pos == '') {
+      // do nothing
     } else {
-      res.status(202).send(oldMovesArr);
+      let meeting = await getMoves(meetingId);
+      let moveArray = meeting.moves;
+      let oldMovesArr = [];
+      let moveArrayLength = moveArray.length;
+      if (moveArray.length > 0) {
+        oldMovesArr = moveArray[moveArrayLength - 1];
+        moveArrayLength = moveArray.length - 1;
+      }
+      if (
+        oldMovesArr.length === 0 ||
+        oldMovesArr[oldMovesArr.length - 1]?.fen !== fen
+      ) {
+        fen && oldMovesArr.push({ fen, pos, image });
+        moveArray[moveArrayLength] = oldMovesArr;
+        let updatedMove = await updateMoves(meetingId, moveArray);
+        await updateUndoPermission(meetingId, role);
+        res.status(200).send(updatedMove);
+      } else {
+        res.status(202).send(oldMovesArr);
+      }
     }
   } catch (error) {
     console.error(error.message);
@@ -561,7 +594,6 @@ router.get("/getBoardState", passport.authenticate("jwt"), async (req, res) => {
   try {
     const { meetingId } = req.query;
     const getBoardStates = await getMoves(meetingId);
-    console.log("getBoardStates",getBoardStates)
     res.status(200).send(getBoardStates);
   } catch (error) {
     console.error(error.message);
@@ -664,13 +696,24 @@ router.get("/getStoreMoves", async (req, res) => {
   }
 });
 
+router.post("/checkUndoPermission", async (req, res) => {
+  try {
+    const { meetingId } = req.query;
+    const checkPermission = await undoPermission.findOne({ meetingId: meetingId });
+    res.status(200).send(checkPermission);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("server error");
+  }
+});
+
 router.post("/undoMeetingMoves", async (req, res) => {
   try {
     const { meetingId } = req.query;
     const getBoardState = await getMoves(meetingId);
     const movesData = getBoardState.moves;
     const newData = movesData[movesData.length - 1];
-    const finalData = newData.splice(-2);
+    const finalData = newData.splice(-2, 2);
     const deletedData = await deleteMovesByMeetingId(meetingId, movesData);
     res.status(200).send(deletedData);
   } catch (error) {
@@ -679,10 +722,10 @@ router.post("/undoMeetingMoves", async (req, res) => {
   }
 });
 
-const deleteMovesByMeetingId = async (meetingId, movesData) => {
+const deleteMovesByMeetingId = async (meetingId, deletedData) => {
   const deletedMove = await meetings.findOneAndUpdate(
     { meetingId: meetingId },
-    { moves: movesData }
+    { moves: deletedData }
   );
   return deletedMove;
 };

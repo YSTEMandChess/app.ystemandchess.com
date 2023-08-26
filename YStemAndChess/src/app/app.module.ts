@@ -7,7 +7,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalModule } from './_modal/modal.module';
 import { NgxAgoraModule, AgoraConfig } from 'ngx-agora';
-import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,10 +54,8 @@ import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-articl
 import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
 import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component";
 import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
-
 import { PuzzlesComponent } from "./pages/puzzles/puzzles.component";
 import { PuzzlesService } from './services/puzzles/puzzles.service';
-
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -118,7 +115,6 @@ const agoraConfig: AgoraConfig = {
     ModalModule,
     NgxAgoraModule.forRoot(agoraConfig),
     FormsModule,
-    ChartsModule
   ],
   providers: [CookieService, SocketService, LoginGuardService],
   bootstrap: [AppComponent],

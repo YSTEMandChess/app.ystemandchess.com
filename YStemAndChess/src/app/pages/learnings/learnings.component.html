@@ -81,6 +81,22 @@
 
     </div>
   </div>
+  <div style="width: 1200px; height: 1200px; border: 1px solid black">
+    <div>
+      <button (click)="saveToStorage()">saveToStorage</button>
+      <button (click)="loadFromStorage()">Load from storage</button>
+      <button (click)="changeOptions()">Update canvas options</button>  
+    </div>
+    <canvas-whiteboard #canvasWhiteboard
+    [options]="canvasOptions" [drawButtonClass]="'drawButtonClass'"
+		[drawButtonText]="'Draw'" [clearButtonClass]="'clearButtonClass'" [clearButtonText]="'Clear'"
+		[undoButtonText]="'Undo'" [undoButtonEnabled]="true" [redoButtonText]="'Redo'" [redoButtonEnabled]="true"
+		[fillColorPickerText]="'Filled'" [strokeColorPickerText]="'Stroked'" [colorPickerEnabled]="true"
+		[strokeColorPickerEnabled]="true" [saveDataButtonEnabled]="true" [saveDataButtonText]="'Save'" [lineWidth]="5"
+		[strokeColor]="'rgb(0,0,0)'" [shouldDownloadDrawing]="true">
+    </canvas-whiteboard>  
+  </div>
+
 
 </div>
 <footer>

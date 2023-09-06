@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { createAotUrlResolver } from '@angular/compiler';
 import { isString } from 'util';
 import { HttpClient } from '@angular/common/http';
-import { stringify } from 'querystring';
+import { stringify } from 'querystringify';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from 'src/app/app.component';
 

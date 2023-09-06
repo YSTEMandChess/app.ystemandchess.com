@@ -56,6 +56,7 @@ import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.comp
 import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
 import { PuzzlesComponent } from "./pages/puzzles/puzzles.component";
 import { PuzzlesService } from './services/puzzles/puzzles.service';
+import { CanvasWhiteboardModule } from "ng2-canvas-whiteboard";
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -115,6 +116,7 @@ const agoraConfig: AgoraConfig = {
     ModalModule,
     NgxAgoraModule.forRoot(agoraConfig),
     FormsModule,
+    CanvasWhiteboardModule,
   ],
   providers: [CookieService, SocketService, LoginGuardService],
   bootstrap: [AppComponent],

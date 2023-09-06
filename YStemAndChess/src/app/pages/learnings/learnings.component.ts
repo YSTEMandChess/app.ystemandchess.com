@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild, ChangeDetectionStrategy  } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LessonsService } from 'src/app/lessons.service';
 import { Chess } from 'src/app/models/Chess';
 import { environment } from 'src/environments/environment';
 import { setPermissionLevel } from '../../globals';
 import { CookieService } from 'ngx-cookie-service';
+import { CanvasWhiteboardComponent, CanvasWhiteboardService,
+  CanvasWhiteboardUpdate,
+  CanvasWhiteboardOptions,
+  CanvasWhiteboardShapeService,
+  CircleShape,
+  SmileyShape,
+  StarShape,
+  LineShape,
+  RectangleShape } from 'ng2-canvas-whiteboard';
 
 @Component({
   selector: 'app-learnings',
   templateUrl: './learnings.component.html',
   styleUrls: ['./learnings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LearningsComponent {
   public playLink = 'play-nolog';
@@ -32,8 +42,12 @@ export class LearningsComponent {
   lessonNumber = 0;
   activeTabIndex = 0
 
-
-  constructor(private ls: LessonsService, private sanitization: DomSanitizer, private cookie: CookieService) {
+  canvasOptions: CanvasWhiteboardOptions = {};
+  @ViewChild(CanvasWhiteboardComponent)
+  canvasWhiteboardComponent: CanvasWhiteboardComponent;
+  constructor(private ls: LessonsService, private sanitization: DomSanitizer, private cookie: CookieService,
+              private canvasWhiteboardService: CanvasWhiteboardService,
+              private canvasWhiteboardShapeService: CanvasWhiteboardShapeService) {
 
     this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
@@ -42,6 +56,14 @@ export class LearningsComponent {
 
     this.loadLessons();
     // this.setStateAsActive(this.ls.learningsArray[0].subSections[0].fen);
+
+    this.canvasWhiteboardShapeService.registerShapes([
+      CircleShape,
+      SmileyShape,
+      StarShape,
+      LineShape,
+      RectangleShape
+    ]);
   }
 
 
@@ -136,5 +158,53 @@ export class LearningsComponent {
       this.chess.newGameInit(fen);
       this.currentFen = fen;
     }, 2000)
+  }
+
+  saveToStorage(): void {
+    // Get the current full update history
+    const updates: Array<
+      CanvasWhiteboardUpdate
+    > = this.canvasWhiteboardComponent.getDrawingHistory();
+    // Stringify the updates, which will return an Array<string>
+    const stringifiedUpdatesArray: Array<string> = updates.map(update =>
+      update.stringify()
+    );
+    // Stringify the Array<string> to get a "string", so we are now ready to put this item in the storage
+    const stringifiedStorageUpdates: string = JSON.stringify(
+      stringifiedUpdatesArray
+    );
+    // Save the item in storage of choice
+    sessionStorage.setItem(
+      "canvasWhiteboardDrawings",
+      stringifiedStorageUpdates
+    );
+  }
+
+  loadFromStorage(): void {
+    // Get the "string" from the storage
+    const canvasDrawingsJson: string = sessionStorage.getItem(
+      "canvasWhiteboardDrawings"
+    );
+    // Null check
+    if (canvasDrawingsJson != null) {
+      // Parse the string, and get an Array<string>
+      const parsedStorageUpdates: Array<string> = JSON.parse(
+        canvasDrawingsJson
+      );
+      // Parse each string inside the Array<string>, and get an Array<CanvasWhiteboardUpdate>
+      const updates: Array<CanvasWhiteboardUpdate> = parsedStorageUpdates.map(
+        updateJSON => CanvasWhiteboardUpdate.deserializeJson(updateJSON)
+      );
+      // Draw the updates onto the canvas
+      this.canvasWhiteboardService.drawCanvas(updates);
+    }
+  }
+
+  public changeOptions(): void {
+    this.canvasOptions = {
+      ...this.canvasOptions,
+      fillColorPickerEnabled: true,
+      colorPickerEnabled: true
+    };
   }
 }

@@ -7,8 +7,7 @@ var http = require("http")
   );
 var io = require("socket.io")(http, {
   cors: true,
-    origins: ["https://ystemandchess.com"],
-  // origins: ["http://localhost:4200"],
+  origins: [process.env.URL],
   credentials: true,
 });
 
@@ -102,6 +101,50 @@ io.sockets.on("connection", (socket) => {
       }
       index++;
     });
+    io.emit(
+      "deleteCookies",
+      JSON.stringify(msg)
+    );
+  });
+
+  socket.on("undoMoves", (data) => {
+    const moves = JSON.parse(data);
+    io.emit(
+      "undoMoves",
+      JSON.stringify(moves)
+    );
+  });
+
+  socket.on("isStepLastUpdate", (data) => {
+    const isStepLast = JSON.parse(data);
+    io.emit(
+      "isStepLastUpdate",
+      isStepLast
+    );
+  });
+
+  socket.on("isStepLast", (data) => {
+    const isStepLast = JSON.parse(data);
+    io.emit(
+      "isStepLast",
+      isStepLast
+    );
+  });
+
+  socket.on("lastMoveInfo", (data) => {
+    const moves = JSON.parse(data);
+    io.emit(
+      "lastMoveInfo",
+      JSON.stringify(moves)
+    );
+  });
+
+  socket.on("preventUndoAfterGameOver", (data) => {
+    const info = JSON.parse(data);
+    io.emit(
+      "preventUndoAfterGameOver",
+      JSON.stringify(info)
+    );
   });
 
   socket.on("newState", (msg) => {
@@ -135,6 +178,14 @@ io.sockets.on("connection", (socket) => {
 
   socket.on("createNewGame", (msg) => {
     //msg contains boardstate, find boardstate
+    io.emit(
+      "gameOverMsg",
+      JSON.stringify(msg)
+    );
+    io.emit(
+      "undoAfterGameOver",
+      JSON.stringify(msg)
+    );
     let colors;
     if (Math.random() > 0.5) {
       colors = ["black", "white"];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-financials-hifi',
   templateUrl: './financials-hifi.component.html',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinancialsHifiComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cookie: CookieService) { }
 
-  ngOnInit ( ) : void  {
+  ngOnInit(): void {
+    this.cookie.delete('this.newGameId'); // remove new game id from other component
   }
 
 }
+

@@ -14,20 +14,24 @@ http.on("request", (req, res) => {
   const engine = Stockfish(); // Initialize stockfish server
 
   let params = querystring.parse(url.parse(req.url, true).search?.substring(1));
-
+  console.log("params -> ",params)
   var maxLevel = 30;
   var lines = [];
 
   engine.onmessage = function (line) {
+    console.log("line -> ",line)
     if (params.info) {
       lines.push(line);
       if (line.substring(0, 4) == "best") {
+        console.log("lines -> ",lines)
         res.write(JSON.stringify(lines));
         res.end();
       }
     } else if (line.substring(0, 4) == "best") {
+      console.log("paramsssss -> ",params)
       const game = new chess.Chess(params.fen);
       const result = game.move(line.split(" ")[1], { sloppy: true });
+      console.log("result -> ",result)
       // check for the result exist or not
       if(result)
       {
@@ -42,6 +46,7 @@ http.on("request", (req, res) => {
       }
       else
       {
+        console.log("Else called");
         res.end();
       }
     }
@@ -51,7 +56,7 @@ http.on("request", (req, res) => {
   if (params.level > maxLevel) {
     params.level = maxLevel;
   }
-  //console.log(`position fen ${params.fen} moves ${params.move}`);
+  console.log(`position fen ${params.fen} moves ${params.move}`);
   engine.postMessage(`position fen ${params.fen} moves ${params.move}`);
   engine.postMessage(`go depth ${params.level}`);
   // process.removeAllListeners();

@@ -53,6 +53,7 @@ export class PuzzlesComponent implements OnInit{
       this.shuffleArray(this.ps.puzzleArray);
 
       console.log("settiing state active: " + this.ps.puzzleArray[0])
+
       this.setStateAsActive(this.ps.puzzleArray[0]);
       this.activeState = this.ps.puzzleArray[0];
       // getting the move list and theme list of the puzzle when we start up
@@ -67,7 +68,9 @@ export class PuzzlesComponent implements OnInit{
       
       // add event listener to buttons
 	    newPuzzle.addEventListener('click', () => { 
+
         console.log("getting new puzzle...")
+
         this.dbIndex = this.dbIndex+1;
         // loop back to start if we reached the end of the array
         if (this.dbIndex==this.ps.puzzleArray.length){

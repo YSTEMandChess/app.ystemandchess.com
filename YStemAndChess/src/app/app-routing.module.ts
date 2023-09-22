@@ -31,17 +31,18 @@ import { WhyChessComponent } from './pages/why-chess/why-chess.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
 
-import {MathArticleComponent} from "./pages/math-article/math-article.component";
-import {OnlineArticleComponent} from "./pages/Online-expansion-article/online-article.component";
-import {ComputerBenefitArticleComponent} from "./pages/computer-science-benefit-article/computer-benefit-article.component"
-import {ChessBenefitArticleComponent} from "./pages/chess-benefit-article/chess-benefit-article.component";
-import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-article/mentoring-benefit-article.component";
-import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
-import {MissionHifiComponent} from "./pages/mission-hifi/mission-hifi.component"
-import {FinancialsHifiComponent} from "./pages/financials/financials-hifi.component";
-import {BoardHifiComponent} from "./pages/board/board-hifi.component";
-import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component";
-import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
+import { MathArticleComponent } from "./pages/math-article/math-article.component";
+import { OnlineArticleComponent } from "./pages/Online-expansion-article/online-article.component";
+import { ComputerBenefitArticleComponent } from "./pages/computer-science-benefit-article/computer-benefit-article.component"
+import { ChessBenefitArticleComponent } from "./pages/chess-benefit-article/chess-benefit-article.component";
+import { MentoringBenefitArticleComponent } from "./pages/mentoring-benefit-article/mentoring-benefit-article.component";
+import { AboutUsComponent } from "./pages/aboutUs/about-us.component"
+import { MissionHifiComponent } from "./pages/mission-hifi/mission-hifi.component"
+import { FinancialsHifiComponent } from "./pages/financials/financials-hifi.component";
+import { BoardHifiComponent } from "./pages/board/board-hifi.component";
+import { MentorProfileComponent } from "./pages/mentor-profile/mentor-profile.component"
+
+import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
 
 import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
 
@@ -166,12 +167,6 @@ const routes: Routes = [
     data: { roles: ['mentor'] },
     canActivate: [LoginGuardService],
   },
-  {
-    path: 'parent-profile',
-    component: ParentProfileComponent,
-    data: { roles: ['parent'] },
-    canActivate: [LoginGuardService],
-  },
 
 ];
 
@@ -180,4 +175,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [HeaderComponent, LoginGuardService],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

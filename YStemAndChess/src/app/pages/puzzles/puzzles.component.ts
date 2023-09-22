@@ -46,7 +46,13 @@ export class PuzzlesComponent implements OnInit{
     }
 
     ngOnInit(): void {
+      // bug: for some reason the rest of the code doesn't wait for initPuzzleArray to finish before running
+      // this is why the list of puzzles are still there in the service file, we're using them as initial puzzles (list of first possible puzzle)
+      // by the time users get to their second puzzle, the full puzzle array should have finished loading, and everything should work as intended
+      this.initPuzzleArray();
       this.shuffleArray(this.ps.puzzleArray);
+
+      console.log("settiing state active: " + this.ps.puzzleArray[0])
 
       this.setStateAsActive(this.ps.puzzleArray[0]);
       this.activeState = this.ps.puzzleArray[0];
@@ -62,6 +68,9 @@ export class PuzzlesComponent implements OnInit{
       
       // add event listener to buttons
 	    newPuzzle.addEventListener('click', () => { 
+
+        console.log("getting new puzzle...")
+
         this.dbIndex = this.dbIndex+1;
         // loop back to start if we reached the end of the array
         if (this.dbIndex==this.ps.puzzleArray.length){
@@ -199,7 +208,33 @@ export class PuzzlesComponent implements OnInit{
         }
       )
     }
-	
+    
+    initPuzzleArray(){
+        this.httpGetAsync(
+          `${environment.urls.middlewareURL}/puzzles/list`,
+          'GET',
+          (response) => {
+            var response = JSON.parse(response);
+            var jsonData = []
+            for (var i = 0; i < response.length; i++) {
+              jsonData.push(response[i]);
+            }
+            this.ps.puzzleArray = jsonData;
+            this.shuffleArray(this.ps.puzzleArray);
+          }
+        )
+        
+    }
+
+    private httpGetAsync(theUrl: string, method: string = 'POST', callback) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function () {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+          callback(xmlHttp.responseText);
+      };
+      xmlHttp.open(method, theUrl, true); // true for asynchronous
+      xmlHttp.send(null);
+    }
 
     openDialog() {
       //console.log("open dialog clicked");

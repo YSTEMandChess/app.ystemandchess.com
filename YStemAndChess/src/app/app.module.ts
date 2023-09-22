@@ -54,6 +54,7 @@ import {MentoringBenefitArticleComponent} from "./pages/mentoring-benefit-articl
 import {AboutUsComponent} from "./pages/aboutUs/about-us.component"
 import {MentorProfileComponent} from "./pages/mentor-profile/mentor-profile.component";
 import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.component";
+
 import { PuzzlesComponent } from "./pages/puzzles/puzzles.component";
 import { PuzzlesService } from './services/puzzles/puzzles.service';
 

@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 // Schema with the attributes matching data provided by the lichess puzzles API
 const puzzleSchema = new mongoose.Schema(
   {
-    puzzleId: {
+    PuzzleId: {
         type: String,
         required: true,
     },
@@ -12,26 +12,26 @@ const puzzleSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
-    moves: {
+    Moves: {
         type: String,
         required: true
     },
-    rating: {
+    Rating: {
         type: Number,
     },
-    ratingDeviation: {
+    RatingDeviation: {
         type: Number,
     },
-    popularity: {
+    Popularity: {
         type: Number,
     },
-    nbPlays: {
+    NbPlays: {
         type: Number,
     },
-    themes: {
+    Themes: {
         type: String,
     },
-    gameUrl: {
+    GameUrl: {
         type: String,
     },
     openingTags: {

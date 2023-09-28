@@ -44,8 +44,6 @@ import { MentorProfileComponent } from "./pages/mentor-profile/mentor-profile.co
 
 import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
 
-import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
-
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

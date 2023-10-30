@@ -57,6 +57,7 @@ import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.comp
 
 import { PuzzlesComponent } from "./pages/puzzles/puzzles.component";
 import { PuzzlesService } from './services/puzzles/puzzles.service';
+import { BackpackPageComponent } from './backpack-page/backpack-page.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -106,7 +107,8 @@ const agoraConfig: AgoraConfig = {
     AboutUsComponent,
     MentorProfileComponent,
     ParentProfileComponent,
-    PuzzlesComponent
+    PuzzlesComponent,
+    BackpackPageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,115 @@
-<p>backpack-page works!</p>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+	<style>
+        .container {
+            min-height: 60%;
+            max-height: 60%;
+            min-width: 80%;
+            max-width: 80%;
+            /* border: 2px solid red; debug use */
+        }
+        .container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        #backpack {
+            display:inline-block;
+            width: 50%;
+            height: 50%;
+            padding-top: 5%;
+            padding-right: 10%;
+        }
+        #title {
+            display:inline;
+            vertical-align: middle;
+            width: 70%;
+            background-color: #eada4b;
+            border-radius: 50px;
+        }
+        #titleText {
+            margin-left: 10%;
+            margin-top: 25px;
+        }
+        #profile {
+            display:inline;
+            margin-left: 5%;
+        }
+        #leaderboard {
+            display:inline;
+            margin-left: 5%;
+        }
+        #list {
+            display:inline-block;
+            height: 60%;
+            object-fit: contain;
+        }
+        #toprow {
+            display: flex;
+        }
+        #botrow {
+            display: flex;
+        }
+    </style>
+    </head>
+    <header>
+        <app-header></app-header>
+    </header>
+    <body>
+        <div class="container">
+            <div id="toprow">
+                <div id="title">
+                    
+                    <h1 id="titleText">User's Backpack</h1>
+                </div>
+                <div id="profile">
+                    <img class="mb-2" src = "../../assets/images/backpackPage/Profile.png">
+                </div>
+                <div id="leaderboard">
+                    <img class="mb-2" src = "../../assets/images/backpackPage/Leaderboard.png">
+                </div>
+            </div>
+
+            <br>
+            
+            <div id="botrow">
+                <div id="backpack">
+                    <img class="mb-2" src = "../../assets/images/backpackPage/backpack.png">
+                </div>
+                <div id="list">
+                <ul>
+                    <li>
+                        <div id="streakprogress">
+                            <img class="mb-2" src = "../../assets/images/backpackPage/StreakProgress.png">
+                        </div>
+                    </li>
+                    <li>    
+                        <div id="growthquests">
+                            <img class="mb-2" src = "../../assets/images/backpackPage/GrowthQuests.png">
+                        </div>
+                    </li>
+                    <li>    
+                        <div id="chessboards">
+                            <img class="mb-2" src = "../../assets/images/backpackPage/ChessBoards.png">
+                        </div>
+                    </li>
+                    <li>    
+                        <div id="achievements">
+                            <img class="mb-2" src = "../../assets/images/backpackPage/Achievements.png">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

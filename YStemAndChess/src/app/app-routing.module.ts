@@ -43,7 +43,7 @@ import { BoardHifiComponent } from "./pages/board/board-hifi.component";
 import { MentorProfileComponent } from "./pages/mentor-profile/mentor-profile.component"
 
 import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
-import { BackpackPageComponent } from './backpack-page/backpack-page.component';
+import { BackpackPageComponent } from './pages/backpack-page/backpack-page.component';
 
 
 const routes: Routes = [

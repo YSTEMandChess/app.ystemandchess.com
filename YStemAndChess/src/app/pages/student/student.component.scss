@@ -13,6 +13,7 @@
   border-radius: 0px 66px 66px 66px;
   margin: 10px;
   padding-left: 16px;
+
   h2 {
     padding: 30px;
     font-family: "Lato";
@@ -35,9 +36,11 @@
   position: relative;
   text-align: center;
 }
+
 #movesAhead {
   width: 47px;
 }
+
 .btns {
   justify-content: center;
   padding: 5px;
@@ -56,8 +59,8 @@
 
     padding: 10px;
     margin: 10px;
-    max-height:45px;
-    height:auto;
+    max-height: 45px;
+    height: auto;
 
     border: 1px #0046fd solid;
     background-color: #0046fd;
@@ -67,6 +70,7 @@
     transition: 0.3s;
     cursor: pointer;
   }
+
   // .new-game:hover {
   //   color: #ff8503;
   //   background-color: white;
@@ -84,7 +88,7 @@
 
     padding: 10px;
     margin: 10px;
-    width:200px;
+    width: 200px;
     max-height: 65px;
     height: auto;
     border: 1px #0046fd solid;
@@ -94,10 +98,15 @@
     transition: 0.3s;
     cursor: pointer;
   }
+
   // .play-cpu-game:hover {
   //   color: #51aa00;
   //   background-color: white;
   // }
+  .disable-board {
+    filter: grayscale(1);
+    pointer-events: none;
+  }
 
   .curr-game {
     font-family: "Lato";
@@ -112,9 +121,9 @@
 
     padding: 10px;
     margin: 10px;
-    width:200px;
-    max-height:45px;
-    height:auto;
+    width: 200px;
+    max-height: 45px;
+    height: auto;
     border: 1px #0046fd solid;
     background-color: #0046fd;
     box-shadow: 3px 4px #EAD94C;
@@ -122,6 +131,7 @@
     transition: 0.3s;
     cursor: pointer;
   }
+
   // .curr-game:hover {
   //   color: #3a7cca;
   //   background-color: white;
@@ -135,9 +145,11 @@
   background-image: url('../../../assets/images/student/bg-image.jpg');
   background-size: cover;
 }
+
 .game_wrapper {
   display: flex;
   justify-content: space-around;
+
   .chess {
     width: 100%;
     display: flex;
@@ -149,27 +161,37 @@
     }
   }
 }
+
 #chess-board {
   display: flex;
   justify-content: center;
 }
+
 .steps-div span {
   font-weight: 500;
   font-size: xx-large;
 }
+
+.steps-div {
+  text-align: -webkit-center;
+}
+
 .fwd-btns {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
 }
+
 .fwd-btns img {
   height: 25px;
 }
+
 .isBlur {
   opacity: 50%;
   pointer-events: none;
 }
+
 .display-step {
   // display: block;
   // height: 20rem;
@@ -179,32 +201,36 @@
   // padding: 7%;
   // width: fit-content;
   display: block;
-  height: 41rem;
-  overflow: hidden scroll;
+  height: 33rem;
+  // overflow: hidden scroll;
   cursor: pointer;
-  margin-left: 25px;
+  margin-left: 0px;
   // background-color: lightgray;
-  border:4px solid #257d96;
+  border: 4px solid #257d96;
   padding: 7%;
   width: fit-content;
   background-image: url('../../../assets/images/student/STEMy_Mascot.png');
-  background-size: auto; 
+  background-size: auto;
   background-color: white;
   background-repeat: no-repeat;
   background-position: bottom;
-  margin-top:30px;
 }
 
-.steps-decoration{
+.steps-decoration {
   margin-top: 2px;
   width: 80px;
   background-color: black;
 }
+
 .table-moves {
   display: flex;
   gap: 0.5rem;
+  height: 25rem;
+  overflow: auto;
+  scroll-behavior: smooth;
   justify-content: space-around;
 }
+
 .table-moves div p {
   border: 2px solid black;
   padding: 0.2rem;
@@ -213,27 +239,31 @@
   justify-content: center;
   align-items: center;
 }
-.display-step::-webkit-scrollbar {
+
+.table-moves::-webkit-scrollbar {
   display: none;
 }
+
 .tableMove-selected {
   background-color: white !important;
 }
+
 .imgRes {
   height: 30px !important;
   width: 30px !important;
   margin: 0px 0px 8px;
   padding: 3.2px;
 }
+
 // .gameclass {
 //   display: flex;
 //   justify-content: space-between;
-  
+
 // }
 app-play {
   padding: 150px;
 }
- 
+
 
 #mentor-container {
   width: 100%;
@@ -294,6 +324,7 @@ app-play {
 
   #lichess-board {
     overflow: hidden;
+
     iframe {
       overflow: hidden;
       border: 0;
@@ -320,11 +351,11 @@ app-play {
       letter-spacing: 0.01em;
       color: white;
       margin: 10px;
-      width:200px;
-      border:none;
+      width: 200px;
+      border: none;
       background-color: #0046fd;
       box-shadow: 3px 4px #ead94c;
-    
+
 
       //push new game button away
     }
@@ -348,13 +379,14 @@ app-play {
       border-radius: 6px;
       margin: 10px;
       color: #fff;
-      width:200px;
-      border:none;
+      width: 200px;
+      border: none;
       background-color: #0046fd;
       box-shadow: 3px 4px #ead94c;
 
       //push lesson prep button away
     }
+
     #undo-move {
       outline-style: none;
       padding-top: 1%;
@@ -368,8 +400,8 @@ app-play {
       letter-spacing: 0.01em;
       margin: 10px;
       border-radius: 6px;
-      width:200px;
-      border:none;
+      width: 200px;
+      border: none;
       background-color: #0046fd;
       box-shadow: 3px 4px #ead94c;
       color: #fff;
@@ -396,11 +428,11 @@ app-play {
       border-radius: 6px;
       margin: 10px;
       color: #fff;
-      width:200px;
-      border:none;
+      width: 200px;
+      border: none;
       background-color: #0046fd;
       box-shadow: 3px 4px #ead94c;
-      width:265px;
+      width: 265px;
     }
 
     #lesson-prep:hover {
@@ -411,10 +443,11 @@ app-play {
 }
 
 @media only screen and (max-width:321px) {
-  
+
   footer {
     margin-top: -28px;
   }
+
 }
 
 @media only screen and (max-width:426px) {
@@ -423,55 +456,111 @@ app-play {
     justify-items: center;
 
     button {
-      width: 100%!important;
+      width: 100% !important;
+    }
+  }
+}
+
+@media only screen and (min-width:992px) and (max-width:1025px) {
+  .steps-stud-div {
+    position: absolute;
+    top: 215px;
+    right: 5%;
+
+    .display-step {
+      margin-top: 0;
+      margin-right: 0;
+      height: 27rem;
+    }
+  }
+}
+
+@media only screen and (min-width:1025px) and (max-width:1600px) {
+  .steps-stud-div {
+    position: absolute;
+    top: 230px;
+    right: 15%;
+
+    .display-step {
+      margin-top: 0;
+      margin-right: 0;
+      height: 33rem;
+    }
+  }
+}
+
+@media only screen and (min-width:1600px) and (max-width:2000px) {
+  .steps-stud-div {
+    position: absolute;
+    top: 235px;
+    right: 18%;
+
+    .display-step {
+      margin-top: 0;
+      margin-right: 0;
+      height: 33rem;
+    }
+  }
+}
+
+@media only screen and (min-width:2000px) {
+  .steps-stud-div {
+    position: absolute;
+    top: 270px;
+    right: 29%;
+
+    .display-step {
+      margin-top: 0;
+      margin-right: 0;
+      height: 33rem;
     }
   }
 }
 
 @media only screen and (min-width:321px) and (max-width:376px) {
   footer {
-    margin-top: -30px;
-    margin-bottom: -38px;
+    margin-top: -33px;
   }
 }
 
-@media only screen and  (min-width:376px) and (max-width:426px) {
+@media only screen and (min-width:376px) and (max-width:426px) {
   footer {
-    margin-top: -30px;
-    margin-bottom: -30px;
+    margin-top: -22px;
   }
 }
 
-@media only screen and  (min-width:426px) and (max-width:769px) {
+@media only screen and (min-width:426px) and (max-width:769px) {
   footer {
-    margin-top: -38px;
-    margin-bottom: -38px;
+    margin-top: -40px;
   }
 }
 
-@media only screen and  (min-width:769px) and (max-width:1025px) {
+@media only screen and (min-width:769px) and (max-width:1025px) {
   footer {
-    margin-top: -50px;
-    margin-bottom: -50px;
+    margin-top: -52px;
   }
 }
 
-@media only screen and  (min-width:1025px) and (max-width:1441px) {
+@media only screen and (min-width:1025px) and (max-width:1441px) {
   footer {
-    margin-top: -65px;
-    margin-bottom: -65px;
-  }
-}
-@media only screen and  (min-width:1441px) and (max-width:1600px) {
-  footer {
-    margin-top: -100px;
-    margin-bottom: -100px;
+    margin-top: -72px;
   }
 }
 
-@media only screen and  (min-width:1600px) and (max-width:2560px) {
+@media only screen and (min-width:1441px) and (max-width:1600px) {
   footer {
-    margin-top: -100px;
-    margin-bottom: -100px;
+    margin-top: -77px;
+  }
+}
+
+@media only screen and (min-width:1600px) and (max-width:2000px) {
+  footer {
+    margin-top: -82px;
+  }
+}
+
+@media only screen and (min-width:2000px) and (max-width:2560px) {
+  footer {
+    margin-top: -128px;
   }
 }

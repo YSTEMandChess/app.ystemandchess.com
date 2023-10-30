@@ -75,15 +75,3 @@ a{
   gap: 1.5rem;
   justify-content: center;
 }
-
-@media only screen and (max-width:430px){
-  .input-container button {
-    width: -webkit-fill-available;
-    margin: 10px 60px;
-    margin-top: 20px;
-  }
-
-  .links {
-    display: grid;
-  }
-}

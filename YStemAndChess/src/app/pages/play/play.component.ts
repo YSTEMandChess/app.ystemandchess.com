@@ -21,7 +21,7 @@ import {
 } from 'ngx-agora';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import Swal from 'sweetalert2';
 //import * as JitsiMeetExternalAPI from "../../../../src/assets/external_api.js";
 
 var selected = null, // Object of the element to be moved
@@ -56,8 +56,10 @@ export class PlayComponent implements OnInit {
   meetingId: string;
   boardstate: string;
   displayMoves = [];
-  isStepLast: boolean = true;
+  isStepLast: unknown = true;
   currentStep: number;
+  currentFen = '';
+  gameOverMsg = '';
 
   constructor(
     private cookie: CookieService,
@@ -68,19 +70,28 @@ export class PlayComponent implements OnInit {
     this.chessSrc = sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
+
+    this.socket.listen('isStepLastUpdate').subscribe((data) => {
+      this.isStepLast = data
+    });
+
+    this.socket.emitMessage(
+      'isStepLast',
+      JSON.stringify(this.isStepLast)
+    );
   }
 
   @ViewChild('scrollframe', { static: false }) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
   ngOnInit() {
+    console.log("this.isStepLast ngOnInit.", this.isStepLast)
     let userContent;
-
-    // let uInfo = await setPermissionLevel(this.cookie);
-    // if (uInfo['error'] == undefined) {
-    //   this.findStudentname = uInfo['username'];
-    //   this.userRole = uInfo['role']
-
-    // }
+    this.socket.listen('undoMoves').subscribe((data: any) => {
+      const undoData = JSON.parse(data);
+      this.move = ""; // updated move
+      this.pieceImage = ""; // updated move
+      this.updateBoardState(undoData.data)
+    });
 
     if (this.cookie.check('login')) {
       userContent = JSON.parse(atob(this.cookie.get('login').split('.')[1]));
@@ -308,7 +319,6 @@ export class PlayComponent implements OnInit {
                 document.getElementById('chessBd')
               )).contentWindow;
               // this.getMovesList();
-              console.log("newData.boardState", newData.boardState)
               chessBoard.postMessage(
                 JSON.stringify({
                   boardState: newData.boardState,
@@ -334,7 +344,23 @@ export class PlayComponent implements OnInit {
     }
 
     this.socket.listen('gameOver').subscribe((data) => {
-      alert('game over ');
+      const gameOverMsg = this.cookie.get('gameOverMsg');
+      if (gameOverMsg != "") {
+        Swal.fire('Game Over', gameOverMsg, 'info');
+      }
+      Swal.fire('Game Over', this.gameOverMsg, 'info');
+    });
+
+    this.socket.listen('deleteCookies').subscribe((data) => {
+      this.cookie.delete('this.meetingId');
+    });
+
+    this.socket.listen('gameOverMsg').subscribe((data) => {
+      this.cookie.delete('gameOverMsg');
+    });
+
+    this.socket.listen('undoAfterGameOver').subscribe((data) => {
+      this.cookie.delete('undoAfterGameOver');
     });
 
     var eventMethod = window.addEventListener
@@ -348,26 +374,44 @@ export class PlayComponent implements OnInit {
       messageEvent,
       (e) => {
         if (environment.productionType === 'development') {
+
           if (e.origin == environment.urls.chessClientURL) {
             // Means that there is the board state and whatnot
             let info = e.data;
             const temp = info.split(':');
             const piece = info.split('-');
-
             if (info == 'ReadyToRecieve') {
               this.isReady = true;
               this.sendFromQueue();
             } else if (info == 'checkmate') {
+              const gameOverMsg = this.cookie.get('gameOverMsg');
+              if (gameOverMsg == "") {
+                this.cookie.set('gameOverMsg', "Oops! You Lost the game");
+                this.gameOverMsg = "Oops! You Lost the game"
+              } else {
+                this.gameOverMsg = gameOverMsg
+              }
               this.gameOverAlert();
+              this.socket.emitMessage(
+                'preventUndoAfterGameOver',
+                JSON.stringify(info)
+              );
             } else if (info == 'draw') {
               this.gameOverAlert();
             } else if (info == 'gameOver') {
+              this.cookie.set('gameOverMsg', "Hurray! You Win the game");
+              this.gameOverMsg = "Hurray! You Win the game"
               this.gameOverAlert();
+              this.socket.emitMessage(
+                'preventUndoAfterGameOver',
+                JSON.stringify(info)
+              );
             } else if (temp?.length > 1 && temp[0] === 'target') {
               this.move = temp[1];
             } else if (piece?.length > 1 && piece[0] === 'piece') {
               this.pieceImage = piece[1];
             } else {
+              this.currentFen = temp[0]
               this.updateBoardState(info);
             }
           } else {
@@ -383,16 +427,27 @@ export class PlayComponent implements OnInit {
               this.isReady = true;
               this.sendFromQueue();
             } else if (info == 'checkmate') {
+              const gameOverMsg = this.cookie.get('gameOverMsg');
+              if (gameOverMsg == "") {
+                this.cookie.set('gameOverMsg', "'Oops! You Lost the game'");
+                this.gameOverMsg = "'Oops! You Lost the game'"
+              } else {
+                this.gameOverMsg = gameOverMsg
+              }
               this.gameOverAlert();
             } else if (info == 'draw') {
               this.gameOverAlert();
             } else if (info == 'gameOver') {
+              this.cookie.set('gameOverMsg', "Hurray! You Win the game");
+              this.gameOverMsg = "Hurray! You Win the game"
               this.gameOverAlert();
             } else if (temp?.length > 1 && temp[0] === 'target') {
+
               this.move = temp[1];
             } else if (piece?.length > 1 && piece[0] === 'piece') {
               this.pieceImage = piece[1];
             } else {
+              this.currentFen = temp[0]
               this.updateBoardState(info);
             }
           } else {
@@ -478,27 +533,16 @@ export class PlayComponent implements OnInit {
     window.location.reload();
   }
   getMovesList = () => {
-    console.log("this.meetingId", this.meetingId)
-    console.log("righttttttttttt")
     let url: string = '';
     url = `${environment.urls.middlewareURL}/meetings/getBoardState?meetingId=${this.meetingId}`;
     this.httpGetAsync(url, 'GET', (response) => {
-      console.log("play component response", response)
       response = JSON.parse(response);
       let finalMove =
         response.moves.length > 0
           ? response.moves[response.moves.length - 1]
           : response.moves;
-      // console.log("finalMove.length",finalMove.length)
-      // if(finalMove.length == 0){
-      //   console.log("length00000000")
-      //   this.displayMoves = [];
-      // }else{
-      console.log("finalMovefinalMove", finalMove)
       this.displayMoves = finalMove || [];
       this.currentStep = finalMove.length > 0 ? finalMove.length - 1 : 0;
-      console.log("this.currentStep", this.currentStep)
-      // }
     });
   };
   private sendFromQueue() {
@@ -553,11 +597,10 @@ export class PlayComponent implements OnInit {
       'newState',
       JSON.stringify({ boardState: data, username: userContent.username })
     );
-    // this.getMovesList();
     if (this.meetingId == undefined) {
     } else {
       let url: string;
-      url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}`;
+      url = `${environment.urls.middlewareURL}/meetings/boardState?meetingId=${this.meetingId}&fen=${data}&pos=${this.move}&image=${this.pieceImage}&role=${this.userRole}`;
       this.httpGetAsync(url, 'POST', (response) => {
         response = JSON.parse(response);
         let finalMove =
@@ -591,6 +634,7 @@ export class PlayComponent implements OnInit {
       JSON.stringify({ username: userContent.username })
     );
   }
+
   setMove(index, direction) {
     this.currentStep =
       index <= 0
@@ -598,6 +642,7 @@ export class PlayComponent implements OnInit {
         : index > this.displayMoves.length - 1
           ? this.displayMoves.length - 1
           : index;
+    let lastStepClick
     if (direction != 'backward') {
       if (this.displayMoves.length - 1 === index) {
         this.isStepLast = true;
@@ -613,6 +658,12 @@ export class PlayComponent implements OnInit {
         this.isStepLast = false;
       }
     }
+    lastStepClick = this.isStepLast
+    console.log("lastStepClick", lastStepClick)
+    this.socket.emitMessage(
+      'isStepLastUpdate',
+      lastStepClick
+    );
     let movePos = 0;
     if (index <= 0) {
       movePos = 0;
@@ -623,6 +674,7 @@ export class PlayComponent implements OnInit {
     if (this.isNearBottom) {
       this.scrollToBottom();
     }
+
   }
   imgPos(index) {
     return (

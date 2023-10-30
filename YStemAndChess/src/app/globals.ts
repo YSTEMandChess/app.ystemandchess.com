@@ -31,6 +31,7 @@ async function setPermissionLevel(cookie: CookieService) {
       return information;
     }
   } else {
+    console.log("errrrrrrrrrrr")
     return { error: 'User is not logged in' };
   }
 }

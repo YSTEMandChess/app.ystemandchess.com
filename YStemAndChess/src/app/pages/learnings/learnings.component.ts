@@ -31,26 +31,26 @@ export class LearningsComponent {
   };
   lessonNumber = 0;
   activeTabIndex = 0
-  
 
-  constructor(private ls: LessonsService, private sanitization: DomSanitizer,private cookie: CookieService) {
-   
+
+  constructor(private ls: LessonsService, private sanitization: DomSanitizer, private cookie: CookieService) {
+
     this.chessSrc = this.sanitization.bypassSecurityTrustResourceUrl(
       environment.urls.chessClientURL
     );
     this.chess = new Chess('chessBd', true);
-   
+
     this.loadLessons();
     // this.setStateAsActive(this.ls.learningsArray[0].subSections[0].fen);
   }
 
-  
+
 
   async ngOnInit() {
     let pLevel = 'nLogged';
     this.setStateAsActive(this.ls.learningsArray[0].subSections[0]);
     this.activeState = this.ls.learningsArray[0].subSections[0];
-    
+
     console.log("active state--->", this.activeState)
     let uInfo = await setPermissionLevel(this.cookie);
     if (uInfo['error'] == undefined) {
@@ -69,48 +69,48 @@ export class LearningsComponent {
   }
 
   setStateAsActive(state) {
-  console.log("click state---->", state)
-  var firstObj = {
-    'info': state.info,
-    'fen': state.fen,
-    'event':''
-  };
-  console.log("first obj---->", firstObj)
-  
-  setTimeout(() => {
-    // this.chess.newGameInit(state.fen);
-    this.activeState = state;
-    this.startLesson(firstObj);
-  }, 500);
-    
+    console.log("click state---->", state)
+    var firstObj = {
+      'info': state.info,
+      'fen': state.fen,
+      'event': ''
+    };
+    console.log("first obj---->", firstObj)
 
-    
+    setTimeout(() => {
+      // this.chess.newGameInit(state.fen);
+      this.activeState = state;
+      this.startLesson(firstObj);
+    }, 500);
+
+
+
   }
 
-  loadNextLesson(){
-    this.lessonNumber = this.lessonNumber+1;
+  loadNextLesson() {
+    this.lessonNumber = this.lessonNumber + 1;
     this.loadLessons();
   }
 
-  loadPrevLesson(){
-    this.lessonNumber = this.lessonNumber-1;
+  loadPrevLesson() {
+    this.lessonNumber = this.lessonNumber - 1;
     this.loadLessons();
   }
 
-  loadLessons(){
-    
+  loadLessons() {
+
     this.sections = this.ls.getLearnings(this.lessonNumber);
   }
 
   refresh() {
     this.chess.newGameInit(this.currentFen);
   }
-  
+
 
   showSubSection(event): void {
 
-    
-    
+
+
     /* chaging the +  and -,
     to highlight the button that controls the panel */
     /* Toggle between hiding and showing the active panel */
@@ -129,11 +129,12 @@ export class LearningsComponent {
     event.srcElement.textContent = elText;
   }
 
-  startLesson({ info, fen,event }): void {
-  console.log("start lesson call---->", info)
-    this.info = info;
-    this.chess.newGameInit(fen);
-    this.currentFen = fen;
-    
+  startLesson({ info, fen, event }): void {
+    console.log("start lesson call---->", info)
+    setTimeout(() => {
+      this.info = info;
+      this.chess.newGameInit(fen);
+      this.currentFen = fen;
+    }, 2000)
   }
 }

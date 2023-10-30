@@ -24,14 +24,14 @@
             </div>
           </div>
           <div *ngIf="displayMoves.length > 0" class="col-lg-3 col-md-6 col-12 order-2 order-sm-2 mt-sm-4 mt-lg-0">
-            <div  class="steps-div">
-             
-              <div class="display-step" (scroll)="scrolled($event)" #scrollframe>
+            <div class="steps-div">
+
+              <div class="display-step">
                 <div class="text-center">
                   <span>Steps</span>
                   <hr class="steps-decoration">
                 </div>
-                <div class="table-moves" #item>
+                <div class="table-moves" #item (scroll)="scrolled($event)" #scrollframe>
 
                   <div style="width: 100px">
                     <div *ngFor="let item of displayMoves; let i = index" (click)="setMove(i,'direct')"

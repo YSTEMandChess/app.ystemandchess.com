@@ -57,7 +57,12 @@ import {ParentProfileComponent} from "./pages/parent-profile/parent-profile.comp
 
 import { PuzzlesComponent } from "./pages/puzzles/puzzles.component";
 import { PuzzlesService } from './services/puzzles/puzzles.service';
-import { BackpackPageComponent } from './pages/backpack-page/backpack-page.component';
+import { BackpackPageComponent } from './pages/gamification/backpack-page/backpack-page.component';
+import { StreakprogressComponent } from './pages/gamification/streakprogress/streakprogress.component';
+import { GrowthquestsComponent } from './pages/gamification/growthquests/growthquests.component';
+import { ChessboardsComponent } from './pages/gamification/chessboards/chessboards.component';
+import { AchievementsComponent } from './pages/gamification/achievements/achievements.component';
+import { LeaderboardComponent } from './pages/gamification/leaderboard/leaderboard.component';
 
 const agoraConfig: AgoraConfig = {
   AppID: '6c368b93b82a4b3e9fb8e57da830f2a4',
@@ -108,7 +113,12 @@ const agoraConfig: AgoraConfig = {
     MentorProfileComponent,
     ParentProfileComponent,
     PuzzlesComponent,
-    BackpackPageComponent
+    BackpackPageComponent,
+    StreakprogressComponent,
+    GrowthquestsComponent,
+    ChessboardsComponent,
+    AchievementsComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,

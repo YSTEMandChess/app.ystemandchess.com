@@ -43,7 +43,13 @@ import { BoardHifiComponent } from "./pages/board/board-hifi.component";
 import { MentorProfileComponent } from "./pages/mentor-profile/mentor-profile.component"
 
 import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
-import { BackpackPageComponent } from './pages/backpack-page/backpack-page.component';
+import { BackpackPageComponent } from './pages/gamification/backpack-page/backpack-page.component';
+import { StreakprogressComponent } from './pages/gamification/streakprogress/streakprogress.component';
+import { GrowthquestsComponent } from './pages/gamification/growthquests/growthquests.component';
+import { ChessboardsComponent } from './pages/gamification/chessboards/chessboards.component';
+import { AchievementsComponent } from './pages/gamification/achievements/achievements.component';
+import { leadingComment } from '@angular/compiler';
+import { LeaderboardComponent } from './pages/gamification/leaderboard/leaderboard.component';
 
 
 const routes: Routes = [
@@ -160,6 +166,11 @@ const routes: Routes = [
   { path: 'board', component: BoardHifiComponent },
   { path: 'puzzles', component: PuzzlesComponent },
   { path: 'backpack', component: BackpackPageComponent},
+  { path: 'backpack/streakprogress', component: StreakprogressComponent},
+  { path: 'backpack/growthquests', component: GrowthquestsComponent},
+  { path: 'backpack/chessboards', component: ChessboardsComponent},
+  { path: 'backpack/achievements', component: AchievementsComponent},
+  { path: 'backpack/leaderboard', component:LeaderboardComponent},
   
   {
     path: 'mentor-profile',

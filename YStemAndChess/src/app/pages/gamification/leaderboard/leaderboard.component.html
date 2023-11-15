@@ -109,20 +109,35 @@
         }
 
         .row:nth-child(odd) {
-        background: #91A725;
+            background: #91A725;
         }
 
         .row:nth-child(even) {
-        background: #C4DA58;
+            background: #C4DA58;
         }
 
         .row:nth-child(1) {
-        border-radius: 25px 25px 0 0;
+            border-radius: 25px 25px 0 0;
         }
 
         .row:nth-child(10) {
-        border-radius: 0 0 25px 25px;
+            border-radius: 0 0 25px 25px;
         }
+
+        #load {
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 2%;
+            display: block;
+            border: none;
+        }
+
+        #loadmore {
+            width: 100%;
+            height: 100%
+        }
+        
     </style>
     </head>
     <header>
@@ -216,6 +231,10 @@
             <div class="rank">10</div><div class="name">User10</div><div class="school">school</div><div class="score">1000</div>
         </div>
     </div>
+
+    <button id="load">
+        <img id="loadmore" src = "../../assets/images/backpackPage/loadmore.png">
+    </button>
 
     </body>
     <footer>

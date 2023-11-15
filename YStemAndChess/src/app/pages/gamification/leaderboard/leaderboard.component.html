@@ -1,1 +1,224 @@
-<p>leaderboard works!</p>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+	<style>
+        #title {
+            min-width: 100%;
+            max-width: 100%;
+            display: flex;
+            object-fit: contain;
+            margin-left: 20%;
+            margin-bottom: 1%;
+        }
+
+        #back {
+            height: 130px;
+            width: 130px;
+            border: none;
+            background: url("../../assets/images/backpackPage/back.png") no-repeat;
+            background-size: contain;
+            display: inline-block;
+        }
+
+        #back:hover {
+            background: url("../../assets/images/backpackPage/back_hover.png") no-repeat;
+            background-size: contain;
+        }
+
+        .banner img {
+            height: 150px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .dropdown-container {
+            display: flex;
+            object-fit: contain;
+            margin-left: 30%;
+            margin-bottom: 2%;
+            gap: 50px;
+        }
+        
+        select {
+            height: 50px;
+            width: 200px;
+            font-size: large;
+            border-radius: 10px;
+        }
+
+        #row-container {
+            width: auto;
+            height: auto;
+            font-size: xx-large;
+            border-radius: 25px;
+        }
+
+        #toprow {
+            position: relative;
+            display: block;
+            width: 80%;
+            height: 80px;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-bottom: 10px;
+            padding-top: 1%;
+            font-size: xx-large;
+            background: #EAD94C;
+            border-radius: 25px;
+        }
+
+        .row {
+            position: relative;
+            display: block;
+            width: 80%;
+            height: 80px;
+            margin-left: 10%;
+            margin-right: 10%;
+            padding-top: 1%;
+        }
+
+        .rank {
+            position: relative;
+            display: inline-block;
+            width: 20%;
+            line-height: 45px;
+            padding-left: 3%;    
+        }
+
+        .name {
+            position: relative;
+            display: inline-block;
+            width: 30%;
+        }
+
+        .school {
+            position: relative;
+            display: inline-block;
+            width: 30%;
+        }
+
+        .score {
+            position: relative;
+            display: inline-block;
+            width: 20%;
+        }
+
+        .row:nth-child(odd) {
+        background: #91A725;
+        }
+
+        .row:nth-child(even) {
+        background: #C4DA58;
+        }
+
+        .row:nth-child(1) {
+        border-radius: 25px 25px 0 0;
+        }
+
+        .row:nth-child(10) {
+        border-radius: 0 0 25px 25px;
+        }
+    </style>
+    </head>
+    <header>
+        <app-header></app-header>
+    </header>
+    <body>
+
+    <div id="title">
+        <div class="back-button">
+            <a routerLink="/backpack">
+                <button id="back"></button>
+            </a>
+        </div>
+        <div class="banner">
+            <img class="mb-2" src = "../../assets/images/backpackPage/Leaderboard_wide.png">
+        </div>
+    </div>
+
+
+    <div class="dropdown-container">
+        <select id="country">
+            <option value="Country">Country</option>
+            <option value="US">United States</option>
+            <option value="opt1">option1</option>
+            <option value="opt2">option2</option>
+            <option value="opt3">option3</option>
+            <option value="opt4">option4</option>
+        </select>
+
+        <select id="state">
+            <option value="State">State</option>
+            <option value="NY">New York</option>
+            <option value="opt1">option1</option>
+            <option value="opt2">option2</option>
+            <option value="opt3">option3</option>
+            <option value="opt4">option4</option>
+        </select>
+
+        <select id="school">
+            <option value="School">School</option>
+            <option value="US">Jefferson Middle</option>
+            <option value="opt1">option1</option>
+            <option value="opt2">option2</option>
+            <option value="opt3">option3</option>
+            <option value="opt4">option4</option>
+        </select>
+    </div>
+
+    <div id="toprow">
+        <div class="rank">Rank</div><div class="name">Name</div><div class="school">School</div><div class="score">Score</div>
+    </div>
+
+    <div id="row-container">
+        <div class="row">
+            <div class="rank">1</div><div class="name">User1</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">2</div><div class="name">User2</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">3</div><div class="name">User3</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">4</div><div class="name">User4</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">5</div><div class="name">User5</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+
+        <div class="row">
+            <div class="rank">6</div><div class="name">User6</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">7</div><div class="name">User7</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">8</div><div class="name">User8</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">9</div><div class="name">User9</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+        
+        <div class="row">
+            <div class="rank">10</div><div class="name">User10</div><div class="school">school</div><div class="score">1000</div>
+        </div>
+    </div>
+
+    </body>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</html>

@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LeaderboardComponent implements OnInit {
   rankCounter = 1;
+  sliceCounter = 1;
   data = [];
 
   constructor() { }
@@ -27,16 +28,53 @@ export class LeaderboardComponent implements OnInit {
         for (var i = 0; i < response.length; i++) {
           jsonData.push(response[i]);
         }
-        this.data = jsonData;
-
         // add rank number to each entries
-        this.data.forEach(e => {
+        jsonData.forEach(e => {
           e.rank = this.rankCounter;
           this.rankCounter++;
         });
+
+        this.data = this.data.concat(jsonData);
       }
     );
     
+    // set up the load button
+    const loadButton = document.getElementById('load') as HTMLElement;
+    // add event listener
+	  loadButton.addEventListener('click', () => {
+      this.httpGetAsync(
+        `${environment.urls.middlewareURL}/leaderboard/slice/?id=` + this.sliceCounter,
+        'GET',
+        (response) => {
+          // parse the response and store it into the data array
+          var response = JSON.parse(response);
+          var jsonData = [];
+          for (var i = 0; i < response.length; i++) {
+            jsonData.push(response[i]);
+          }
+          // add rank number to each entries
+          jsonData.forEach(e => {
+            e.rank = this.rankCounter;
+            this.rankCounter++;
+          });
+
+          // if we got data back, add it to the leaderboard
+          // increase the slice counter
+          if (jsonData.length != 0){
+            this.data = this.data.concat(jsonData);
+            this.sliceCounter++;
+          }
+          // if not, there's no data left, hide the load button
+          // show "no more to load" text
+          else {
+            loadButton.style.display = 'none';
+            const endText = document.getElementById('endText') as HTMLElement;
+            endText.style.display = 'block';
+          }
+        }
+      );
+    });
+
   }
 
   // convert list of json object to list of html row for the leaderboard

@@ -52,10 +52,10 @@
         }
 
         #row-container {
-            width: auto;
-            height: auto;
-            font-size: xx-large;
-            border-radius: 25px;
+        width: auto;
+        height: auto;
+        font-size: x-large;
+        border-radius: 25px;
         }
 
         #toprow {
@@ -120,7 +120,7 @@
             border-radius: 25px 25px 0 0;
         }
 
-        .row:nth-child(10) {
+        .row:nth-last-child(1) {
             border-radius: 0 0 25px 25px;
         }
 
@@ -191,44 +191,8 @@
     </div>
 
     <div id="row-container">
-        <div class="row">
-            <div class="rank">1</div><div class="name">User1</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">2</div><div class="name">User2</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">3</div><div class="name">User3</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">4</div><div class="name">User4</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">5</div><div class="name">User5</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-
-        <div class="row">
-            <div class="rank">6</div><div class="name">User6</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">7</div><div class="name">User7</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">8</div><div class="name">User8</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">9</div><div class="name">User9</div><div class="school">school</div><div class="score">1000</div>
-        </div>
-        
-        <div class="row">
-            <div class="rank">10</div><div class="name">User10</div><div class="school">school</div><div class="score">1000</div>
+        <div class = "row" *ngFor="let obj of data">
+            <div class="rank">{{obj.rank}}</div><div class="name">{{obj.username}}</div><div class="school">{{obj.school}}</div><div class="score">{{obj.score}}</div>
         </div>
     </div>
 

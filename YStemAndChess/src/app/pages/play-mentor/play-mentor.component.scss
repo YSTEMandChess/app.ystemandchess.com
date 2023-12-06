@@ -150,103 +150,36 @@ video {
     padding-top: 2%;
     padding-bottom: 2%;
 
-    #flip-board {
-      outline-style: none;
-      padding-top: 1%;
-      padding-bottom: 1%;
-      padding-left: 3%;
-      padding-right: 3%;
-      border-radius: 6px;
-      font-family: "Lato";
-      font-weight: 900;
-      font-size: 18px; //22px
-      line-height: 117.1%;
-      letter-spacing: 0.01em;
-      color: white;
-      margin: 10px;
-      width: 200px;
-      border: none;
-      background-color: #0046fd;
-      box-shadow: 3px 4px #ead94c;
-
-
-      //push new game button away
-    }
-
     // #flip-board:hover {
     //   color: #f2c94c;
     //   background-color: #000;
     // }
 
-    #new-game {
-      outline-style: none;
-      padding-top: 1%;
-      padding-bottom: 1%;
-      padding-left: 2%;
-      padding-right: 2%;
+    .botm-btn {
       font-family: "Lato";
-      font-weight: 900;
-      font-size: 18px; //22px
-      line-height: 117.1%;
-      letter-spacing: 0.01em;
-      border-radius: 6px;
-      margin: 10px;
-      color: #fff;
-      width: 200px;
-      border: none;
-      background-color: #0046fd;
-      box-shadow: 3px 4px #ead94c;
-
-      //push lesson prep button away
+    font-size: 18px;
+    line-height: 117.1%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    padding: 10px;
+    margin: 10px;
+    max-height: 45px;
+    height: auto;
+    border: 1px #0046fd solid;
+    background-color: #0046fd;
+    box-shadow: 3px 4px #EAD94C;
+    border-radius: 6px;
+    width: 200px;
+    transition: 0.3s;
+    cursor: pointer;
     }
 
-    #undo-move {
-      outline-style: none;
-      padding-top: 1%;
-      padding-bottom: 1%;
-      padding-left: 2%;
-      padding-right: 2%;
-      font-family: "Lato";
-      font-weight: 900;
-      font-size: 18px; //22px
-      line-height: 117.1%;
-      letter-spacing: 0.01em;
-      margin: 10px;
-      border-radius: 6px;
-      width: 200px;
-      border: none;
-      background-color: #0046fd;
-      box-shadow: 3px 4px #ead94c;
-      color: #fff;
-      //push lesson prep button away
-    }
 
     // #new-game:hover {
     //   color: #ff8503;
     //   background-color: #fff;
     // }
-
-    #lesson-prep {
-      outline-style: none;
-      padding-top: 1%;
-      padding-bottom: 1%;
-      padding-left: 2.5%;
-      padding-right: 2.5%;
-      font-family: "Lato";
-      font-style: normal;
-      font-weight: 900;
-      font-size: 18px; //22px
-      line-height: 117.1%;
-      letter-spacing: 0.01em;
-      border-radius: 6px;
-      margin: 10px;
-      color: #fff;
-      width: 200px;
-      border: none;
-      background-color: #0046fd;
-      box-shadow: 3px 4px #ead94c;
-      width: 265px;
-    }
 
     #lesson-prep:hover {
       background-color: #0046fd;

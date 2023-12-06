@@ -192,7 +192,7 @@ export class StudentComponent implements OnInit {
                   }, 500);
                   if (response) {
                     this.httpGetAsync(
-                      `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+                      `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}&move=${this.move}`,
                       'POST',
                       (response) => {
                         if (response == '') {
@@ -306,7 +306,7 @@ export class StudentComponent implements OnInit {
                   }, 500);
                   if (response) {
                     this.httpGetAsync(
-                      `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+                      `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}&move=${this.move}`,
                       'POST',
                       (response) => {
                         var fen = response.split(' move:')[0];
@@ -505,7 +505,7 @@ export class StudentComponent implements OnInit {
         (response) => {
           if (response) {
             this.httpGetAsync(
-              `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}`,
+              `${environment.urls.stockFishURL}/?level=${this.level}&fen=${this.currentFEN}&move=${this.move}`,
               'POST',
               (response) => {
                 var fen = response.split(' move:')[0];

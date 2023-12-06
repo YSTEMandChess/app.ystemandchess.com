@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderComponent } from 'src/app/header';
 
 @Component({
   selector: 'app-backpack-page',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackpackPageComponent implements OnInit {
 
-  constructor() { }
+  user = ''
+
+  constructor(private header: HeaderComponent) { }
 
   ngOnInit(): void {
+
+    // check if user is logged in and update the page if necessary
+    this.header.checkSessionInfo().then(res => {
+      this.user = this.header.username;
+          
+      if (this.user === '') {
+        this.user = 'User';
+      }
+    });
+
   }
 
 }

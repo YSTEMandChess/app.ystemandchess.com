@@ -285,6 +285,8 @@ export class HeaderComponent implements OnInit {
 
   public logout() {
     this.cookie.delete('login');
+    this.cookie.delete('this.newGameId');
+    this.cookie.delete('this.meetingId');
     window.location.reload();
   }
 

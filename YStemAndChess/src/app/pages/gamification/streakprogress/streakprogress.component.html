@@ -63,10 +63,18 @@
         }
 
         #stemmette {
+            /* width and height comes from the image dimensions */
+            width: 363px;
+            height: 644px;
             padding: 0;
             border: none;
-            background: none;
             margin-top: 35%;
+            background: url("../../assets/images/backpackPage/stem1.png") no-repeat;
+            background-size: 100%;
+        }
+
+        #stemmette:hover {
+            background: url("../../assets/images/backpackPage/stem1-hover.png") no-repeat;
         }
 
         .clock {
@@ -118,7 +126,7 @@
             width: 100vw;
             height: 100vh;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            z-index: 2;
             object-fit: contain;
         }
 
@@ -136,6 +144,20 @@
             position: absolute;
             top: 2%;
             right: 25%;
+        }
+
+        #stemmette-text {
+            position: absolute;
+            top: 40%;
+            left: 8%;
+            z-index: 1;
+        }
+
+        #stemmy-text {
+            position: absolute;
+            z-index: 1;
+            right: 2%;
+            top: 95%;
         }
 
     </style>
@@ -165,8 +187,8 @@
         <!--format the content into three columns-->
         <div class="col-container">
             <div class="left">
+                <img id="stemmette-text" src = "../../assets/images/backpackPage/StemmetteText.png">
                 <button id="stemmette">
-                    <img src = "../../assets/images/backpackPage/stem1.png">
                 </button>
             </div>
             <div class="middle">
@@ -204,6 +226,7 @@
             </div>
             <div class="right">
                 <img src = "../../assets/images/backpackPage/stem2.png" style="margin-top: 20%;">
+                <img id="stemmy-text" src = "../../assets/images/backpackPage/{{stemmyText}}.png">
             </div>
         </div>
 

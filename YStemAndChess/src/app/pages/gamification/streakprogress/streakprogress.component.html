@@ -7,16 +7,206 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
 	<style>
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        #title {
+            min-width: 100%;
+            max-width: 100%;
+            display: flex;
+            object-fit: contain;
+            margin-left: 20%;
+            margin-bottom: 1%;
+        }
+
+        #back {
+            height: 130px;
+            width: 130px;
+            border: none;
+            background: url("../../assets/images/backpackPage/back.png") no-repeat;
+            background-size: contain;
+            display: inline-block;
+        }
+
+        #back:hover {
+            background: url("../../assets/images/backpackPage/back_hover.png") no-repeat;
+            background-size: contain;
+        }
+
+        .banner img {
+            height: 150px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .col-container {
+            display: flex;
+            min-width: 100%;
+            max-width: 100%;
+        }
+
+        .left {
+            width: 25%;
+            object-fit: contain;
+        }
+        
+        .middle {
+            width: 55%;
+            object-fit: contain;
+        }
+
+        .right {
+            width: 15%;
+            object-fit: contain;
+        }
+
+        #stemmette {
+            padding: 0;
+            border: none;
+            background: none;
+            margin-top: 35%;
+        }
+
+        .clock {
+            position: relative;
+            text-align: center;
+            margin-bottom: 4%;
+        }
+
+        #streak {
+            position: absolute;
+            /* 
+            left 40.5% for 1 number
+            left 39.5% for 2 numbers
+            left 39% for 3 numbers
+            */
+            left: 40.5%;
+            top: 42%;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        #today {
+            position: absolute;
+            right: 33%;
+            top: 50%;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        .weekly-progress {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 6%;
+        }
+
+        #week-table {
+            margin: auto;
+            margin-top: 2%;
+            width: 60%;
+        }
+
+        .calendar {
+            text-align: center;
+        }
+
+        .fade-wrapper {
+            display: none;
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            object-fit: contain;
+        }
+
+        #stem3 {
+            height: 80%;
+            width: auto;
+            position: absolute;
+            bottom: 2%;
+            left: 15%;
+        }
+
+        #desc {
+            height: 40%;
+            width: auto;
+            position: absolute;
+            top: 2%;
+            right: 25%;
+        }
 
     </style>
     </head>
+    
+    <!-- contain overlay in a fade-wrapper -->
+    <div class="fade-wrapper" id="overlay">
+        <img id='stem3' src='../../assets/images/backpackPage/stem3.png'>
+        <img id='desc' src='../../assets/images/backpackPage/StreakDesc.png'>
+    </div>
+    
     <header>
         <app-header></app-header>
     </header>
     <body>
-        <p>{{user}}</p>
+        <div id="title">
+            <div class="back-button">
+                <a routerLink="/backpack">
+                    <button id="back"></button>
+                </a>
+            </div>
+            <div class="banner">
+                <img src = "../../assets/images/backpackPage/StreakProgress_wide.png">
+            </div>
+        </div>
+        
+        <!--format the content into three columns-->
+        <div class="col-container">
+            <div class="left">
+                <button id="stemmette">
+                    <img src = "../../assets/images/backpackPage/stem1.png">
+                </button>
+            </div>
+            <div class="middle">
+                <div class="clock">
+                    <img src = "../../assets/images/backpackPage/StreakClock.png">
+                    <div id="streak">{{streakNum}}</div>
+                    <div id="today">{{todayDate}}</div>
+                </div>
+                <div class="weekly-progress">
+                    <h2>Weekly Progress</h2>
+                    <table id="week-table">
+                        <tr>
+                            <td>Sun</td>
+                            <td>Mon</td>
+                            <td>Tue</td>
+                            <td>Wed</td>
+                            <td>Thu</td>
+                            <td>Fri</td>
+                            <td>Sat</td>
+                        </tr>
+                        <tr>
+                            <td><img src='../../assets/images/backpackPage/{{weeklyProgressImages[0]}}.png'></td>
+                            <td><img src='../../assets/images/backpackPage/{{weeklyProgressImages[1]}}.png'></td>
+                            <td><img src='../../assets/images/backpackPage/{{weeklyProgressImages[2]}}.png'></td>
+                            <td><img src='../../assets/images/backpackPage/{{weeklyProgressImages[3]}}.png'></td>
+                            <td><img src='../../assets/images/backpackPage/{{weeklyProgressImages[4]}}.png'></td>
+                            <td><img src='../../assets/images/backpackPage/{{weeklyProgressImages[5]}}.png'></td>
+                            <td><img src='../../assets/images/backpackPage/{{weeklyProgressImages[6]}}.png'></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="calendar">
+                    <img src='../../assets/images/backpackPage/CalendarPlaceHolder.png'>
+                </div>
+            </div>
+            <div class="right">
+                <img src = "../../assets/images/backpackPage/stem2.png" style="margin-top: 20%;">
+            </div>
+        </div>
+
     </body>
-    <footer>
-        <app-footer></app-footer>
-    </footer>
+    <app-footer></app-footer>
 </html>

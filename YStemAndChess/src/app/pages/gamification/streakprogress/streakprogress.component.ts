@@ -69,21 +69,37 @@ export class StreakprogressComponent implements OnInit {
     }
     
 
-    // set up button and overlay
+    // set up overlay button
     const overlay = document.getElementById('overlay') as HTMLElement;
-    const button = document.getElementById('stemmette') as HTMLElement;
+    const stemmette = document.getElementById('stemmette') as HTMLElement;
     const text = document.getElementById('stemmette-text') as HTMLElement;
-    button.addEventListener('click', () => {
-      console.log('<--  button clicked -->')
+    stemmette.addEventListener('click', () => {
       overlay.style.display = 'flex';
-      button.style.display = 'none';
+      stemmette.style.display = 'none';
       text.style.display = 'none';
-    })
+    });
     overlay.addEventListener('click', () => {
       overlay.style.display = 'none';
-      button.style.display = 'block';
+      stemmette.style.display = 'block';
       text.style.display = 'block';
-    })
+    });
+
+    // set up calendar button
+    const viewCalendar = document.getElementById('viewCalendar');
+    const calendar = document.getElementById('calendarBody');
+    const container = document.getElementById('calendarDiv');
+    viewCalendar.addEventListener('click', () => {
+      if (calendar.style.display == 'none') {
+        calendar.style.display = 'block';
+        container.style.backgroundColor = '#ead94c';
+        container.style.borderRadius = '5%';
+      }
+      else {
+        calendar.style.display = 'none';
+        container.style.backgroundColor = 'transparent';
+        container.style.borderRadius = '0';
+      }
+    });
 
   }
 

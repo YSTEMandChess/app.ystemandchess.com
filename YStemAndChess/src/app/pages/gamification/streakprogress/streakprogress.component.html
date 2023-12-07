@@ -117,7 +117,48 @@
         }
 
         .calendar {
+            width: 670px;
+            margin: auto;
+            padding-bottom: 2%;
             text-align: center;
+            background-color: #ead94c;
+            border-radius: 5%;
+        }
+
+        .calendar table {
+            width: 90%;
+            margin: auto;
+            margin-top: 2%;
+            font-size: x-large;
+            font-weight: 700;
+        }
+
+        .calendar tr {
+            height: 55px;
+        }
+
+        .calendar td {
+            width: 50px;
+        }
+
+        .month-select {
+            display: flex;
+            justify-content: space-between;
+            margin: 2%;
+            margin-left: 7%;
+            margin-right: 7%;
+            padding: 1%;
+            padding-left: 4%;
+            padding-right: 4%;
+            background-color: #e4f0d2;
+            border-bottom-left-radius: 5% 50%;
+            border-bottom-right-radius: 5% 50%;
+            border-top-left-radius: 5% 50%;
+            border-top-right-radius: 5% 50% ;
+        }
+
+        .month-select h2 {
+            font-weight: bold;
         }
 
         .fade-wrapper {
@@ -220,8 +261,71 @@
                         </tr>
                     </table>
                 </div>
-                <div class="calendar">
-                    <img src='../../assets/images/backpackPage/CalendarPlaceHolder.png'>
+                <div class="calendar" id="calendarDiv">
+                    <button id="viewCalendar" style="padding: 0; border: none; background: none;"><img src='../../assets/images/backpackPage/ViewCalendar.png'></button>
+                    <div id="calendarBody">
+                        <div class="month-select">
+                            <button id="left" style="padding: 0; border: none; background: none;"><img src='../../assets/images/backpackPage/left.png'></button>
+                            <h2>JUNE 2023</h2>
+                            <button id="right" style="padding: 0; border: none; background: none;"><img src='../../assets/images/backpackPage/right.png'></button>
+                        </div>
+                        <table>
+                            <tr>
+                                <td>Sun</td>
+                                <td>Mon</td>
+                                <td>Tue</td>
+                                <td>Wed</td>
+                                <td>Thu</td>
+                                <td>Fri</td>
+                                <td>Sat</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>12</td>
+                                <td>13</td>
+                                <td>14</td>
+                                <td>15</td>
+                                <td>16</td>
+                                <td>17</td>
+                            </tr>
+                            <tr>
+                                <td>18</td>
+                                <td>19</td>
+                                <td>20</td>
+                                <td>21</td>
+                                <td>22</td>
+                                <td>23</td>
+                                <td>24</td>
+                            </tr>
+                            <tr>
+                                <td>25</td>
+                                <td>26</td>
+                                <td>27</td>
+                                <td>28</td>
+                                <td>29</td>
+                                <td>30</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="right">

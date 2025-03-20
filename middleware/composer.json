@@ -1,6 +1,6 @@
 {
     "require": {
-        "firebase/php-jwt": "^5.2",
+        "firebase/php-jwt": "^6.0",
         "mongodb/mongodb": "^1.6",
         "guzzlehttp/guzzle": "^7.0",
         "aws/aws-sdk-php": "^3.148"
